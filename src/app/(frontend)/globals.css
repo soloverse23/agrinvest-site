@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens arrive in Phase 1 (design-system/tokens). Until then the public site
+ * uses Tailwind defaults only; no visual decisions are made here.
+ */
+@import '../../../design-system/tokens/tokens.css';

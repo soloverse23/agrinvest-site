@@ -1,0 +1,104 @@
+﻿keyword,language,audience,cluster,intent,volumeTier,difficulty,potential,priority,plannerVolume,targetUrl,planPage,note
+preț grâu azi,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/grau,/piata/preturi,
+pret grau,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/grau,/piata/preturi,
+preț porumb azi,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/porumb,/piata/preturi,
+preț floarea-soarelui azi,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/floarea-soarelui,/piata/preturi,
+preț rapiță,ro,Farmers (Romanian),Grain prices and selling,I,M,M,H,2,,/preturi/rapita,/piata/preturi,
+preț orz,ro,Farmers (Romanian),Grain prices and selling,I,M,M,M,2,,/preturi/orz,/piata/preturi,
+preț grâu Constanța,ro,Farmers (Romanian),Grain prices and selling,I,M,M,M,2,,/preturi/grau,/piata/preturi,
+bursa cereale,ro,Farmers (Romanian),Grain prices and selling,I,M,H,M,3,,/preturi,/piata,served by the weekly market note (Phase 5) linked from here
+achiziție cereale,ro,Farmers (Romanian),Grain prices and selling,T,M,M,H,1,,/cereale,/cereale,
+achizitie cereale,ro,Farmers (Romanian),Grain prices and selling,T,M,M,H,1,,/cereale,/cereale,
+vând grâu,ro,Farmers (Romanian),Grain prices and selling,T,M,L,H,1,,/cereale/grau,/cereale/grau,
+vând porumb,ro,Farmers (Romanian),Grain prices and selling,T,M,L,H,1,,/cereale/porumb,/cereale/porumb,
+vând floarea-soarelui,ro,Farmers (Romanian),Grain prices and selling,T,L,L,H,2,,/cereale/floarea-soarelui,/cereale/floarea-soarelui,
+cine cumpără cereale,ro,Farmers (Romanian),Grain prices and selling,T,L,L,H,1,,/cereale,/cereale,
+contract vânzare cereale,ro,Farmers (Romanian),Grain prices and selling,C,L,L,M,2,,/cereale,/cereale/contracte,also linked to /finantare/credit-contracte-cereale
+achiziție cereale [județ],ro,Farmers (Romanian),Grain prices and selling,L,L,L,M,3,,/cereale/judet/{judet},/cereale/[judet],only counties with a base
+depozitare cereale,ro,Farmers (Romanian),Storage and drying,T,M,M,H,1,,/depozitare,/depozitare,
+preț depozitare cereale,ro,Farmers (Romanian),Storage and drying,T,L,L,H,1,,/depozitare,/depozitare,
+siloz cereale,ro,Farmers (Romanian),Storage and drying,C,M,M,M,2,,/depozitare,/depozitare,
+uscare porumb preț,ro,Farmers (Romanian),Storage and drying,T,L,L,M,2,,/depozitare/uscare,/depozitare/uscare,
+uscare cereale,ro,Farmers (Romanian),Storage and drying,T,L,L,M,3,,/depozitare/uscare,/depozitare/uscare,
+depozit cereale [județ],ro,Farmers (Romanian),Storage and drying,L,L,L,M,3,,/baze/{baza},/depozitare/[judet],one page per silo base
+semințe porumb,ro,Farmers (Romanian),Seeds,T,H,H,H,1,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy); no porumb seed in the current shop
+hibrizi porumb,ro,Farmers (Romanian),Seeds,C,H,H,H,1,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy); no porumb seed in the current shop
+cel mai bun hibrid de porumb,ro,Farmers (Romanian),Seeds,I,M,M,H,2,,/ghiduri/porumb/cel-mai-bun-hibrid-de-porumb,/ghiduri/hibrizi-porumb,article slug provisional (Phase 6 brief)
+semințe floarea-soarelui,ro,Farmers (Romanian),Seeds,T,H,H,H,1,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy); no floarea-soarelui seed in the current shop
+hibrizi floarea-soarelui,ro,Farmers (Romanian),Seeds,C,M,M,H,2,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy); no floarea-soarelui seed in the current shop
+semințe grâu,ro,Farmers (Romanian),Seeds,T,M,M,M,2,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy)
+semințe rapiță,ro,Farmers (Romanian),Seeds,T,M,M,M,2,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy)
+sămânță certificată grâu,ro,Farmers (Romanian),Seeds,T,L,L,M,3,,/magazin/seminte,shop › semințe,category slug provisional (Phase 3 taxonomy)
+îngrășăminte preț,ro,Farmers (Romanian),Fertilisers,T,H,H,H,1,,/preturi/ingrasaminte,shop › îngrășăminte,price page; product pages are the secondary target
+azotat de amoniu preț,ro,Farmers (Romanian),Fertilisers,T,H,M,H,1,,/preturi/ingrasaminte,shop › îngrășăminte,price page; product pages are the secondary target
+uree preț,ro,Farmers (Romanian),Fertilisers,T,M,M,H,2,,/preturi/ingrasaminte,shop › îngrășăminte,price page; product pages are the secondary target
+NPK 20-20-0 preț,ro,Farmers (Romanian),Fertilisers,T,M,M,M,2,,/preturi/ingrasaminte,shop › îngrășăminte,price page; product pages are the secondary target
+fertilizare grâu,ro,Farmers (Romanian),Fertilisers,I,M,L,M,2,,/ghiduri/grau/fertilizare-grau,/ghiduri/fertilizare-grau,article slug provisional (Phase 6 brief)
+îngrășăminte foliare,ro,Farmers (Romanian),Fertilisers,C,M,M,M,3,,/magazin/fertilizanti-foliare,shop › îngrășăminte,category slug provisional (Phase 3 taxonomy)
+erbicid porumb,ro,Farmers (Romanian),Crop protection and diesel,T,M,M,M,2,,/magazin/erbicide,shop › protecția plantelor,category slug provisional (Phase 3 taxonomy)
+erbicid floarea-soarelui,ro,Farmers (Romanian),Crop protection and diesel,T,M,M,M,2,,/magazin/erbicide,shop › protecția plantelor,category slug provisional (Phase 3 taxonomy)
+fungicid grâu,ro,Farmers (Romanian),Crop protection and diesel,T,M,M,M,2,,/magazin/fungicide,shop › protecția plantelor,category slug provisional (Phase 3 taxonomy)
+insecticid rapiță,ro,Farmers (Romanian),Crop protection and diesel,T,L,L,M,3,,/magazin/insecticide,shop › protecția plantelor,category slug provisional (Phase 3 taxonomy)
+produse fitosanitare,ro,Farmers (Romanian),Crop protection and diesel,C,M,H,M,3,,/magazin/protectia-plantelor,shop › protecția plantelor,category slug provisional (Phase 3 taxonomy)
+tratament sămânță,ro,Farmers (Romanian),Crop protection and diesel,T,L,L,L,3,,/magazin/tratament-samanta,shop › protecția plantelor,category slug provisional (Phase 3 taxonomy)
+motorină agricolă preț,ro,Farmers (Romanian),Crop protection and diesel,T,L,M,M,3,,/motorina,/inputuri/motorina,
+motorină subvenționată agricultură,ro,Farmers (Romanian),Crop protection and diesel,I,M,M,L,3,,/motorina/calculator-acciza,/ghiduri/motorina,excise refund guide + calculator
+credit agricol,ro,Farmers (Romanian),Financing,C,M,H,H,1,,/finantare,/finantare,
+credit fermieri,ro,Farmers (Romanian),Financing,T,M,H,H,1,,/finantare,/finantare,
+finanțare inputuri plata la recoltă,ro,Farmers (Romanian),Financing,T,L,L,H,1,,/finantare/inputuri-plata-la-recolta,/finantare,
+credit pentru inputuri agricole,ro,Farmers (Romanian),Financing,T,L,L,H,1,,/finantare/inputuri-plata-la-recolta,/finantare,
+IFN agricol,ro,Farmers (Romanian),Financing,C,L,L,H,2,,/finantare,/finantare,
+credit capital de lucru agricultură,ro,Farmers (Romanian),Financing,T,L,L,M,2,,/finantare/credit-productie,/finantare,
+avans subvenție APIA,ro,Farmers (Romanian),Financing,I,H,M,M,2,,/finantare/subventii-apia,/ghiduri/apia,depends on IFN APIA-scheme confirmation
+plată subvenții APIA,ro,Farmers (Romanian),Financing,I,H,H,L,3,,/finantare/ghiduri/plata-subventii-apia,/ghiduri/apia,
+umiditate grâu standard,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,M,L,H,1,,/ghiduri/grau/umiditate-grau-standard,/ghiduri/calitate,article slug provisional (Phase 6 brief)
+cum se calculează scăzământul la umiditate,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,L,L,H,1,,/preturi/calculator-pret-net,/ghiduri/calitate,net-price calculator (Phase 5)
+greutate hectolitrică grâu,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,L,L,H,2,,/ghiduri/grau/greutate-hectolitrica-grau,/ghiduri/calitate,article slug provisional (Phase 6 brief)
+calitate grâu panificație,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,L,L,H,2,,/ghiduri/grau/calitate-grau-panificatie,/ghiduri/calitate,article slug provisional (Phase 6 brief)
+documente vânzare cereale,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,L,L,H,2,,/ghiduri/vanzare/documente-vanzare-cereale,/ghiduri/vanzare,article slug provisional (Phase 6 brief)
+producție grâu la hectar,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,M,M,H,2,,/ghiduri/grau/productie-grau-la-hectar,/piata,article slug provisional (Phase 6 brief)
+când se seamănă grâul,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,M,L,M,3,,/ghiduri/grau/cand-se-seamana-graul,/ghiduri/grau,article slug provisional (Phase 6 brief)
+densitate semănat porumb,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,M,L,M,3,,/ghiduri/porumb/densitate-semanat-porumb,/ghiduri/porumb,article slug provisional (Phase 6 brief)
+tehnologia de cultură a porumbului,ro,Farmers (Romanian),Farmers’ questions (source of truth),I,M,L,M,3,,/ghiduri/porumb/tehnologia-de-cultura-a-porumbului,/ghiduri/porumb,article slug provisional (Phase 6 brief)
+distribuitor inputuri agricole,ro,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,1,,/parteneri,/parteneri,
+distribuitor semințe,ro,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,2,,/parteneri,/parteneri,
+distribuitor îngrășăminte,ro,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,2,,/parteneri,/parteneri,
+agricultural input distributor Romania,en,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,1,,/en/partners,/en/partners,
+seed distributor Romania,en,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,1,,/en/partners,/en/partners,
+fertilizer distributor Romania,en,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,2,,/en/partners,/en/partners,
+crop protection distributor Romania,en,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,H,2,,/en/partners,/en/partners,
+biostimulant distributor Romania,en,Potential partners (RO + EN),Manufacturers looking for a distributor,C,L,L,M,3,,/en/partners,/en/partners,
+Romanian wheat supplier,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,M,H,1,,/en/export,/en/export,
+Romanian grain exporter,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,M,H,1,,/en/export,/en/export,
+buy wheat from Romania,en,Potential partners (RO + EN),Export buyers and traders (EN),T,L,M,H,1,,/en/export,/en/export,
+Romanian corn supplier,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,M,H,1,,/en/export/corn,/en/export/corn,
+non-GMO corn supplier Europe,en,Potential partners (RO + EN),Export buyers and traders (EN),C,M,M,H,1,,/en/export/corn,/en/export/corn,
+grain trading company Romania,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,M,H,1,,/en/export,/en/export,
+Black Sea wheat supplier,en,Potential partners (RO + EN),Export buyers and traders (EN),C,M,H,M,2,,/en/export,/en/export,
+sunflower seeds supplier Romania,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,M,M,2,,/en/export/sunflower,/en/export/sunflower,
+rapeseed supplier Romania,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,L,M,2,,/en/export/rapeseed,/en/export/rapeseed,
+milling wheat 12.5% protein,en,Potential partners (RO + EN),Export buyers and traders (EN),T,L,L,M,3,,/en/export,/en/export,
+feed barley supplier Romania,en,Potential partners (RO + EN),Export buyers and traders (EN),C,L,L,M,3,,/en/export,/en/export,
+grain storage Romania,en,Potential partners (RO + EN),"Logistics, financing and farmer partners",C,L,L,M,2,,/en/storage,/en/storage,
+grain logistics Romania,en,Potential partners (RO + EN),"Logistics, financing and farmer partners",C,L,L,M,3,,/en/storage,/en/storage,
+Constanta grain terminal,en,Potential partners (RO + EN),"Logistics, financing and farmer partners",I,M,M,L,3,,/en/storage,/en/storage,
+agricultural lending Romania,en,Potential partners (RO + EN),"Logistics, financing and farmer partners",I,L,L,M,3,,/en/financing,/en/financing,
+parteneriat fermieri,ro,Potential partners (RO + EN),"Logistics, financing and farmer partners",C,L,L,H,2,,/parteneri,/parteneri,
+cooperativă agricolă parteneriat,ro,Potential partners (RO + EN),"Logistics, financing and farmer partners",C,L,L,M,3,,/parteneri,/parteneri,
+recolta de grâu 2027,ro,Press and investors,Market and harvest data,I,H,M,H,1,,/preturi,/piata,served by the weekly market note (Phase 5) linked from here
+producție grâu România 2027,ro,Press and investors,Market and harvest data,I,M,M,H,1,,/preturi,/piata,served by the weekly market note (Phase 5) linked from here
+prețul cerealelor în România,ro,Press and investors,Market and harvest data,I,M,M,H,2,,/preturi,/piata,served by the weekly market note (Phase 5) linked from here
+export grâu România,ro,Press and investors,Market and harvest data,I,M,M,M,2,,/preturi,/piata,served by the weekly market note (Phase 5) linked from here
+Romania wheat harvest 2027,en,Press and investors,Market and harvest data,I,M,M,H,2,,/en/market,/en/market,served by the weekly market note (Phase 5) linked from here
+Romanian wheat price,en,Press and investors,Market and harvest data,I,M,M,H,2,,/en/market,/en/market,served by the weekly market note (Phase 5) linked from here
+Romania corn crop,en,Press and investors,Market and harvest data,I,L,M,M,3,,/en/market,/en/market,served by the weekly market note (Phase 5) linked from here
+cele mai mari companii agricole din România,ro,Press and investors,Companies and investors,I,M,M,M,2,,/despre,/despre,
+largest agricultural companies in Romania,en,Press and investors,Companies and investors,I,M,M,M,1,,/en/about,/en/about,
+agribusiness Romania,en,Press and investors,Companies and investors,I,M,H,M,2,,/en/about,/en/about,
+agriculture investment Romania,en,Press and investors,Companies and investors,I,M,H,L,3,,/en/about,/en/about,
+agrinvest,ro,Brand,Brand searches,B,L,L,H,1,,/,/,
+agrinvest shop,ro,Brand,Brand searches,B,L,L,H,1,,/magazin,shop,
+agrinvest credit,ro,Brand,Brand searches,B,L,L,H,1,,/finantare,/finantare,
+Agrinvest Romania,en,Brand,Brand searches,B,L,L,H,1,,/en,/en,
+agrinvest buzău,ro,Brand,Brand searches,B,L,L,M,2,,/despre,/despre,
+agrinvest cariere,ro,Brand,Brand searches,B,L,L,L,3,,/cariere,/cariere,

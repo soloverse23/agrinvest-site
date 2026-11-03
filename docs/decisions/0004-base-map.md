@@ -19,3 +19,12 @@ The home page, `/depozitare`, `/cereale`, every crop page and every base page sh
 - Until Agrinvest sends the base locations (`agrinvest-inputs.md`), the map shows the tinted counties and a "positions being confirmed" note; the list does the work.
 - When the positions arrive they are data entry in Payload, with no code change.
 - A tile map can still be added later as a click-to-load option on base pages, if directions turn out to be needed.
+
+## Revision (2026-11-03, owner feedback)
+
+The owner found the map too tall and the list beside it unnecessary, and asked for names on the map and interactive counties:
+
+- The map is centred at 48 rem wide, with no list beside it. The counties we work in are named on the map from 768 px.
+- Every county reacts to hover, focus and tap with a card: name, **area** (official INS figures in km²), whether we work there, and Agrinvest's bases and capacity in it once their counties are known. A tap pins the card (with links to the bases); Escape or × closes it. From 768 px the card floats above the county; on phones it sits under the map.
+- `BaseMap` is now a small client component (state for hover and pin). The 17 base links stay as one compact row under the map, so every base page is still linked from the hubs, with or without JavaScript.
+- Area is the county's total surface; per-county farmland would need INS agricultural statistics, a later option.

@@ -151,12 +151,38 @@ test.describe('Core page content', () => {
 
   test('the base map lists every base with a link to its page', async ({ page }) => {
     await page.goto('/depozitare')
-    await expect(page.locator('#baze ul a[href^="/baze/"]')).toHaveCount(17)
+    await expect(page.locator('#baze nav a[href^="/baze/"]')).toHaveCount(17)
   })
 
   test('English pages have their own blocks, not Romanian fallbacks', async ({ page }) => {
     await page.goto('/en/storage')
     await expect(page.getByRole('heading', { name: 'Our storage bases' })).toBeVisible()
     await expect(page.locator('main')).not.toContainText('Bazele de depozitare')
+  })
+})
+
+test.describe('Interactions', () => {
+  test('the mega menu stays open on a diagonal move across a neighbour', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/despre')
+    const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
+    const item = await nav.getByRole('link', { name: 'Vinde cereale' }).boundingBox()
+    await page.mouse.move(item!.x + item!.width / 2, item!.y + item!.height / 2)
+    // Porumb sits right of the item: the path crosses "Depozitare".
+    const target = nav.locator('a[href="/cereale/porumb"]')
+    const box = await target.boundingBox()
+    await page.mouse.move(box!.x + 20, box!.y + 10, { steps: 25 })
+    await expect(target).toBeVisible()
+    await target.click()
+    await expect(page).toHaveURL(/\/cereale\/porumb$/)
+  })
+
+  test('a county shows its name and area on hover', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/depozitare')
+    await page.locator('#baze use[aria-label="Buzău"]').hover()
+    const card = page.locator('#baze [role=status]')
+    await expect(card).toContainText('Buzău')
+    await expect(card).toContainText('6.103 km²')
   })
 })

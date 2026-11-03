@@ -411,7 +411,7 @@ export async function BaseListBlock({
     const county = typeof b.county === 'object' && b.county ? b.county.id : b.county
     return !only.size || (county != null && only.has(county))
   })
-  // One shared marker when every capacity has the same status; per row otherwise.
+  // The base links carry one shared marker when every capacity has the same status.
   const statuses = new Set(shown.map((b) => b.capacityStatus))
   const shared = statuses.size === 1 ? shown[0]?.capacityStatus : undefined
   return (
@@ -420,7 +420,6 @@ export async function BaseListBlock({
       <BaseMap
         locale={ctx.locale}
         current={current}
-        list
         counties={counties.map((c) => c.code)}
         pendingNote={ui[ctx.locale].pendingMap}
         listNote={
@@ -438,20 +437,7 @@ export async function BaseListBlock({
             href: localePath(`/baze/${b.slug}`, 'ro'),
             capacity: b.capacity,
             county: county?.code,
-            countyName: county?.name,
             geo: b.geo,
-            note: (
-              <FactMark
-                figure={{
-                  key: `base:${b.slug}:capacity`,
-                  label: b.name,
-                  value: '',
-                  status: b.capacityStatus,
-                }}
-                locale={ctx.locale}
-                quiet={Boolean(shared)}
-              />
-            ),
           }
         })}
       />

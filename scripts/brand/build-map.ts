@@ -128,6 +128,55 @@ function centroid(coords: number[][]): Point {
   return [Math.round(cx / (3 * a)), Math.round(cy / (3 * a))]
 }
 
+/**
+ * County areas in km², official figures (INS, Anuarul Statistic al României); they add up to
+ * Romania's 238,391 km². Measuring the simplified outlines would be ~2% off.
+ */
+const AREAS: Record<string, number> = {
+  AB: 6242,
+  AR: 7754,
+  AG: 6826,
+  BC: 6621,
+  BH: 7544,
+  BN: 5355,
+  BT: 4986,
+  BV: 5363,
+  BR: 4766,
+  B: 238,
+  BZ: 6103,
+  CS: 8520,
+  CL: 5088,
+  CJ: 6674,
+  CT: 7071,
+  CV: 3710,
+  DB: 4054,
+  DJ: 7414,
+  GL: 4466,
+  GR: 3526,
+  GJ: 5602,
+  HR: 6639,
+  HD: 7063,
+  IL: 4453,
+  IS: 5476,
+  IF: 1583,
+  MM: 6304,
+  MH: 4933,
+  MS: 6714,
+  NT: 5896,
+  OT: 5498,
+  PH: 4716,
+  SM: 4418,
+  SJ: 3864,
+  SB: 5432,
+  SV: 8553,
+  TR: 5790,
+  TM: 8697,
+  TL: 8499,
+  VS: 5318,
+  VL: 5765,
+  VN: 4857,
+}
+
 const { features } = await source()
 const counties = features
   .filter((f) => f.properties.adm0_a3 === 'ROU')
@@ -141,6 +190,7 @@ const counties = features
       name: NAMES[f.properties.iso_3166_2.replace('RO-', '')] ?? f.properties.name,
       d: polygons.map((p) => ring(p[0])).join(''),
       at: centroid(largest),
+      km2: AREAS[f.properties.iso_3166_2.replace('RO-', '')],
     }
   })
   .sort((a, b) => a.code.localeCompare(b.code))
@@ -159,8 +209,8 @@ export const MAP_WIDTH = ${WIDTH}
 export const MAP_HEIGHT = ${HEIGHT}
 export const MAP_SRC = '/maps/romania-counties.svg'
 
-/** Romanian counties (ISO 3166-2 code without "RO-"; B = Bucharest) and their centroids. */
-export const COUNTIES: readonly { code: string; name: string; at: [number, number] }[] = ${JSON.stringify(counties.map(({ code, name, at }) => ({ code, name, at })))}
+/** Romanian counties (ISO 3166-2 code without "RO-"; B = Bucharest): centroid, area (INS). */
+export const COUNTIES: readonly { code: string; name: string; at: [number, number]; km2: number }[] = ${JSON.stringify(counties.map(({ code, name, at, km2 }) => ({ code, name, at, km2 })))}
 `
 await fs.writeFile(out, body)
 console.log(

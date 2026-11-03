@@ -4,10 +4,12 @@ import { localePath, type Locale } from '@/i18n/config'
 import { formatNumber } from '@/lib/format'
 
 import type { CropKey } from '../fixtures/sample'
-import { ArrowRightIcon, ChevronDownIcon, MenuIcon, PhoneIcon } from '../icons/icons'
+import { MenuIcon, PhoneIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
 import { Delta } from '../primitives/Delta'
+import { MegaMenu } from './MegaMenu'
+import { linkBase, linkState } from './nav-styles'
 import { Lockup } from './parts'
 
 export type NavItem = {
@@ -41,17 +43,6 @@ export type SiteHeaderProps = {
     phone: string
   }
 }
-
-const linkBase =
-  'inline-flex h-10 items-center rounded-md px-3.5 text-small font-medium no-underline transition-colors duration-150'
-const linkState = (active: boolean, overlay = false) =>
-  overlay
-    ? active
-      ? 'bg-on-forest/15 text-on-forest'
-      : 'text-on-forest/85 hover:bg-on-forest/10 hover:text-on-forest'
-    : active
-      ? 'bg-accent-soft text-accent'
-      : 'text-muted hover:bg-surface hover:text-ink'
 
 /** Site header: logo, sections, language, one call to action. Mobile menu needs no JavaScript. */
 export function SiteHeader({
@@ -105,27 +96,7 @@ export function SiteHeader({
           <Link href={localePath('/', locale)} className="no-underline" aria-label="Agrinvest">
             <Lockup tone={overlay ? 'light' : 'dark'} />
           </Link>
-          <nav aria-label={labels.main} className="hidden lg:block">
-            <ul className="flex items-center gap-1">
-              {nav.map((item) => (
-                <li key={item.href} className="group">
-                  <Link
-                    href={item.href}
-                    aria-current={item.href === current ? 'page' : undefined}
-                    className={cx(linkBase, linkState(item.href === current, overlay), 'gap-1')}
-                  >
-                    {item.label}
-                    {!!item.children?.length && (
-                      <ChevronDownIcon className="size-4 opacity-60 transition-transform duration-150 group-focus-within:rotate-180 group-hover:rotate-180" />
-                    )}
-                  </Link>
-                  {!!item.children?.length && (
-                    <MenuPanel item={item} phone={phone} labels={labels} />
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <MegaMenu nav={nav} current={current} overlay={overlay} phone={phone} labels={labels} />
           <div className="ml-auto flex items-center gap-3">
             <div
               role="group"
@@ -222,64 +193,6 @@ export function SiteHeader({
           </div>
         </div>
       </header>
-    </div>
-  )
-}
-
-/**
- * Desktop mega menu panel: opens on hover and on keyboard focus (focus-within), so it needs
- * no JavaScript. Sub-pages on the left; the section's one-line answer and a phone on the right.
- */
-function MenuPanel({
-  item,
-  phone,
-  labels,
-}: {
-  item: NavItem
-  phone?: string
-  labels: SiteHeaderProps['labels']
-}) {
-  return (
-    <div className="invisible absolute inset-x-4 top-full z-30 pt-2 opacity-0 transition duration-150 ease-enter group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 md:inset-x-8">
-      <div className="grid grid-cols-12 gap-8 rounded-xl bg-raised p-8 text-ink shadow-floating ring-1 ring-line">
-        <ul className="col-span-8 grid grid-cols-2 content-start gap-1">
-          {item.children?.map((child) => (
-            <li key={child.href}>
-              <Link
-                href={child.href}
-                className="grid gap-0.5 rounded-lg px-4 py-3 no-underline transition-colors duration-150 hover:bg-surface"
-              >
-                <span className="font-semibold text-ink">{child.label}</span>
-                {child.description && (
-                  <span className="text-small text-muted">{child.description}</span>
-                )}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="col-span-4 grid content-start gap-4 rounded-lg bg-surface p-6">
-          {item.blurb && <p className="text-small text-muted">{item.blurb}</p>}
-          <Link
-            href={item.href}
-            className="inline-flex items-center gap-1.5 text-small font-semibold text-accent no-underline hover:underline"
-          >
-            {labels.all ?? item.label}
-            <ArrowRightIcon className="size-4" />
-          </Link>
-          {phone && (
-            <a
-              href={`tel:${phone.replace(/\s/g, '')}`}
-              className="inline-flex items-center gap-2 text-small font-semibold text-ink no-underline hover:text-accent"
-            >
-              <PhoneIcon className="size-4 text-accent" />
-              <span>
-                {labels.call && <span className="font-normal text-muted">{labels.call} </span>}
-                <span className="tabular-nums">{phone}</span>
-              </span>
-            </a>
-          )}
-        </div>
-      </div>
     </div>
   )
 }

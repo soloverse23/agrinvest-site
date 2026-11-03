@@ -234,11 +234,7 @@ export const MapWithPoints: Story = {
           locale={locale}
           counties={sampleCounties}
           current="/baze/pogoanele"
-          bases={sampleBases.map((b, i) => ({
-            ...b,
-            county: counties[i],
-            countyName: counties[i],
-          }))}
+          bases={sampleBases.map((b, i) => ({ ...b, county: counties[i] }))}
         />
       </Page>
     )

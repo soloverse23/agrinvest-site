@@ -44,7 +44,7 @@ Only on the home, brand and story pages. Full-bleed footage, the height of the s
 
 ### Layout
 
-Breakpoints `md` 768, `lg` 1024, `xl` 1440. Page width `max-w-page` (82 rem), reading width `max-w-text` (42 rem). Spacing uses Tailwind's 4 px scale.
+Breakpoints `md` 768, `lg` 1024, `xl` 1440. Page width `max-w-page` (82 rem), reading width `max-w-text` (42 rem); measures `max-w-sm`, `xl`, `2xl`–`5xl` for headlines, leads and panels (the tokens clear Tailwind's defaults, so only these exist). Spacing uses Tailwind's 4 px scale.
 
 ### Motion
 
@@ -70,7 +70,7 @@ Breakpoints `md` 768, `lg` 1024, `xl` 1440. Page width `max-w-page` (82 rem), re
 | Sections   | `SectionHeading`, `Kicker`, `PageHeader`, `Breadcrumbs`, `Updated`, `KeyFacts`, `Accordion` (FAQ), `ServiceGrid`, `Steps`, `CtaBand`, `Callout`, `StorySection`, `ContactCards`, `Toc`                                                          |
 | Pages      | `Pages/Home` sketch                                                                                                                                                                                                                             |
 
-Server components by default. Client components: `SegmentedControl`, `LeadForm` (loaded only on pages with a form, through `LeadFormLazy`) and `VideoEmbed`. The mobile menu uses `<details>`, the mega menu opens on hover and focus with CSS, and the FAQ uses `<details>`: none need JavaScript.
+Server components by default. Client components: `SegmentedControl`, `LeadForm` (loaded only on pages with a form, through `LeadFormLazy`), `VideoEmbed`, `MegaMenu` (desktop navigation with hover intent: a neighbour crossed on the way to a panel does not steal it) and `BaseMap` (county hover and tap cards). The mobile menu and the FAQ use `<details>` and need no JavaScript.
 
 Long text from the CMS uses the `prose-agr` class (tokens.css). Logo and map outlines are static SVG files (`public/brand`, `public/maps`), not inline markup, so pages stay light.
 

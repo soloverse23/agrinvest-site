@@ -53,3 +53,6 @@ node_modules/
 /data/raw/
 /storybook-static/
 /.lighthouseci/
+
+# Design review (screenshots are regenerated; keep only the final set)
+/docs/design-review/shots/

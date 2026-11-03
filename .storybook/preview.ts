@@ -8,6 +8,21 @@ const preview: Preview = {
     a11y: { test: 'error' },
     layout: 'padded',
   },
+  globalTypes: {
+    locale: {
+      description: 'Content language',
+      toolbar: {
+        title: 'Locale',
+        icon: 'globe',
+        items: [
+          { value: 'ro', title: 'Română' },
+          { value: 'en', title: 'English' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  initialGlobals: { locale: 'ro' },
 }
 
 export default preview

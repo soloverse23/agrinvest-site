@@ -1,4 +1,154 @@
 /*
  * Agrinvest design tokens: the single source of colour, type, space, shape and motion.
- * Empty until Phase 1 (design system). Components must never hard-code these values.
+ * Direction: decision 0002 (rev. 2026-11-03). Components use these through Tailwind utilities
+ * (bg-paper, text-ink, rounded-card, shadow-raised…), never raw values.
+ * Tailwind's own palette, fonts, radii and shadows are cleared so only these exist.
  */
+@import '@fontsource-variable/onest/wght.css';
+
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --breakpoint-*: initial;
+  --text-*: initial;
+  --container-*: initial;
+
+  /* Colour: neutrals */
+  --color-paper: #fafaf7; /* page */
+  --color-surface: #f1f4ee; /* tinted, sunken areas: field green-grey */
+  --color-raised: #ffffff; /* cards, inputs */
+  --color-ink: #14231b;
+  --color-muted: #4d5a52; /* secondary text */
+  --color-subtle: #5f6b63; /* captions, placeholders */
+  --color-line: #e2e6de; /* soft dividers, card edges */
+  --color-line-strong: #c5cdc2; /* table rules, separators */
+  --color-field-line: #8a948c; /* input borders: 3:1 on raised */
+
+  /* Colour: brand */
+  --color-accent: #12784a; /* actions, links */
+  --color-accent-hover: #0c6a3f;
+  --color-accent-soft: #e3f0e6;
+  --color-on-accent: #ffffff;
+  --color-forest: #0f3b29; /* brand bands, dark surfaces */
+  --color-forest-raised: #17492f;
+  --color-on-forest: #f3f6ef;
+  --color-on-forest-muted: #b7c8bb;
+  --color-lime: #b9dc5a; /* from the logo; fills and CTAs on forest, never text on paper */
+  --color-lime-hover: #c8e576;
+  --color-lime-soft: #eef6d6;
+
+  /* Colour: data and states */
+  --color-up: #12784a;
+  --color-up-soft: #e3f0e6;
+  --color-down: #b4441f;
+  --color-down-soft: #f9e7df;
+  --color-flat: #4d5a52;
+  --color-flat-soft: #eceee9;
+  --color-warning: #8a5d00;
+  --color-warning-soft: #fbf0d4;
+  --color-info: #1d5d8a;
+  --color-info-soft: #e2edf5;
+  --color-danger: #b4441f;
+  --color-danger-soft: #f9e7df;
+
+  /* Type: one family, Onest, with tabular figures for data */
+  --font-sans: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.5;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.55;
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.6vw, 1.625rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.015em;
+  --text-h2: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h1: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.025em;
+  --text-display: clamp(2.75rem, 1.7rem + 4.4vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-hero: clamp(3rem, 1.4rem + 6.4vw, 7.25rem);
+  --text-hero--line-height: 0.96;
+  --text-hero--letter-spacing: -0.04em;
+  /* Figures */
+  --text-figure: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+  --text-figure--line-height: 1.1;
+  --text-figure--letter-spacing: -0.02em;
+
+  /* Shape: restrained; full rounding only for dots and markers */
+  --radius-xs: 4px; /* tags in dense tables */
+  --radius-sm: 6px; /* badges, chips, small controls */
+  --radius-md: 8px; /* buttons, inputs */
+  --radius-lg: 12px; /* cards, tables */
+  --radius-xl: 16px; /* feature panels */
+  --radius-full: 9999px; /* status dots, step markers */
+
+  /* Elevation: soft, green-tinted, used with restraint */
+  --shadow-soft: 0 1px 2px rgb(20 35 27 / 0.06);
+  --shadow-raised: 0 1px 2px rgb(20 35 27 / 0.05), 0 8px 24px -8px rgb(20 35 27 / 0.12);
+  --shadow-floating: 0 2px 6px rgb(20 35 27 / 0.06), 0 24px 56px -16px rgb(20 35 27 / 0.24);
+
+  /* Layout */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --container-text: 42rem; /* ~68 characters */
+  --container-page: 82rem;
+
+  /* Motion (craft.md) */
+  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-move: cubic-bezier(0.2, 0, 0.2, 1);
+
+  /* Cinematic only (home, brand and story heroes): a slow settle of the photo. */
+  --animate-hero-settle: hero-settle 30s var(--ease-move) both;
+  @keyframes hero-settle {
+    from {
+      transform: scale(1.12);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

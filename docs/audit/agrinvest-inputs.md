@@ -17,6 +17,7 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 4. **Pentru fiecare dintre cele 17 baze:** județ, adresă, coordonate GPS, telefon, persoană de contact, program, servicii (recepție, uscare, curățare, cântărire), fotografii, **tarife orientative de depozitare și uscare** (lei/t/lună). Niciun concurent nu publică tarife, deci este o oportunitate clară în Google.
 5. **Acordul de a folosi materialele video** de pe YouTube (filmul de brand din 2022, seria Golden Relationship, aparițiile Agro TV) pe site.
 6. **Fotografii reale:** baze, echipă, flotă, câmpuri, evenimente. Fără fotografii de stoc.
+   - **Sigla în format vectorial** (SVG, AI sau PDF) și eventualul manual de identitate. Până atunci folosim o retrasare a siglei actuale.
 
 ### Magazinul (faza 3)
 
@@ -55,6 +56,7 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 4. **For each of the 17 bases:** county, address, GPS coordinates, phone, contact person, hours, services (reception, drying, cleaning, weighing), photos, **indicative storage and drying tariffs** (lei/t/month). No competitor publishes tariffs, so this is a clear Google opportunity.
 5. **Permission to use the YouTube videos** (the 2022 brand film, the Golden Relationship series, the Agro TV appearances) on the site.
 6. **Real photos:** bases, team, fleet, fields, events. No stock photos.
+   - **The logo as a vector file** (SVG, AI or PDF) and any brand guidelines. Until then we use a redrawn trace of the current logo.
 
 ### Shop (phase 3)
 

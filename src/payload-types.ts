@@ -67,8 +67,14 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    pages: Page;
+    bases: Base;
+    counties: County;
+    crops: Crop;
+    people: Person;
+    leads: Lead;
     media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +82,14 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    bases: BasesSelect<false> | BasesSelect<true>;
+    counties: CountiesSelect<false> | CountiesSelect<true>;
+    crops: CropsSelect<false> | CropsSelect<true>;
+    people: PeopleSelect<false> | PeopleSelect<true>;
+    leads: LeadsSelect<false> | LeadsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +99,20 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('ro' | 'en') | ('ro' | 'en')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    figures: Figure;
+    navigation: Navigation;
+    footer: Footer;
+    'seo-defaults': SeoDefault;
+    'lead-routing': LeadRouting;
+  };
+  globalsSelect: {
+    figures: FiguresSelect<false> | FiguresSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
+    'lead-routing': LeadRoutingSelect<false> | LeadRoutingSelect<true>;
+  };
   locale: 'ro' | 'en';
   widgets: {
     collections: CollectionsWidget;
@@ -119,6 +143,531 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  /**
+   * The direct answer this page gives, in 1–3 sentences. Shown near the top and used as the default meta description.
+   */
+  summary?: string | null;
+  layout?:
+    | (
+        | HeroBlock
+        | RichTextBlock
+        | FigureStripBlock
+        | ServiceGridBlock
+        | StorySectionBlock
+        | BaseListBlock
+        | CropListBlock
+        | CtaBandBlock
+        | LeadFormBlock
+        | ContactCardsBlock
+        | VideoEmbedBlock
+        | CalloutBlock
+      )[]
+    | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  /**
+   * Built from the parent and slug.
+   */
+  path?: string | null;
+  isHome?: boolean | null;
+  parent?: (number | null) | Page;
+  /**
+   * Languages this page is published in. English pages are business-led, not a mirror; a page in one language has no hreflang pair.
+   */
+  languages: ('ro' | 'en')[];
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock".
+ */
+export interface HeroBlock {
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Part of the title set in the accent colour.
+   */
+  accent?: string | null;
+  lead?: string | null;
+  image?: (number | null) | Media;
+  /**
+   * Optional loop (≤ 8 MB). The image is the poster and the reduced-motion still.
+   */
+  video?: (number | null) | Media;
+  primary?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  secondary?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  caption?: string | null;
+  credit?: string | null;
+  /**
+   * Footage from YouTube or TV stays "pending" until Agrinvest confirms the rights.
+   */
+  rights: 'owned' | 'licensed' | 'pending';
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FigureStripBlock".
+ */
+export interface FigureStripBlock {
+  heading?: string | null;
+  items?:
+    | {
+        /**
+         * Figures register key, e.g. S1 or L1.
+         */
+        figure: string;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  countUp?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'figureStrip';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceGridBlock".
+ */
+export interface ServiceGridBlock {
+  heading?: string | null;
+  items?:
+    | {
+        title: string;
+        body?: string | null;
+        icon?: ('wheat' | 'silo' | 'truck' | 'pin' | 'leaf' | 'cart' | 'phone') | null;
+        link?: {
+          label?: string | null;
+          href?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StorySectionBlock".
+ */
+export interface StorySectionBlock {
+  heading: string;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  media?: (number | null) | Media;
+  quote?: string | null;
+  person?: (number | null) | Person;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'storySection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people".
+ */
+export interface Person {
+  id: number;
+  name: string;
+  role?: string | null;
+  photo?: (number | null) | Media;
+  phone?: string | null;
+  publishPhone?: boolean | null;
+  email?: string | null;
+  publishEmail?: boolean | null;
+  /**
+   * Expert author for guides (author pages come in Phase 6).
+   */
+  isAuthor?: boolean | null;
+  author?: {
+    bio?: string | null;
+    credentials?: string | null;
+    sameAs?:
+      | {
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BaseListBlock".
+ */
+export interface BaseListBlock {
+  heading?: string | null;
+  /**
+   * Empty = all bases.
+   */
+  counties?: (number | County)[] | null;
+  showMap?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'baseList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "counties".
+ */
+export interface County {
+  id: number;
+  /**
+   * With diacritics: Ialomița.
+   */
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  code: string;
+  /**
+   * Used on the map when a base has no GPS yet.
+   */
+  centroid?: {
+    lat?: number | null;
+    lng?: number | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CropListBlock".
+ */
+export interface CropListBlock {
+  heading?: string | null;
+  /**
+   * Empty = all crops.
+   */
+  crops?: (number | Crop)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cropList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "crops".
+ */
+export interface Crop {
+  id: number;
+  name: string;
+  /**
+   * Stable key for icons, prices and data colours.
+   */
+  key: 'wheat' | 'maize' | 'sunflower' | 'rapeseed' | 'barley';
+  intro?: string | null;
+  /**
+   * Reception standards (STAS). To confirm with Agrinvest.
+   */
+  quality?: {
+    /**
+     * Max. %
+     */
+    moisture?: number | null;
+    /**
+     * Max. %
+     */
+    impurities?: number | null;
+    /**
+     * Min. kg/hl
+     */
+    hectolitre?: number | null;
+    notes?: string | null;
+  };
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBandBlock".
+ */
+export interface CtaBandBlock {
+  heading: string;
+  body?: string | null;
+  primary: {
+    label: string;
+    href: string;
+  };
+  secondary?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  tone?: ('forest' | 'surface') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBand';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LeadFormBlock".
+ */
+export interface LeadFormBlock {
+  heading?: string | null;
+  body?: string | null;
+  leadType:
+    'vanzare-cereale' | 'depozitare' | 'inputuri' | 'finantare' | 'logistica' | 'parteneri' | 'cariere' | 'general';
+  extraFields?: ('company' | 'county' | 'base' | 'crop')[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'leadForm';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactCardsBlock".
+ */
+export interface ContactCardsBlock {
+  heading?: string | null;
+  people: (number | Person)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock".
+ */
+export interface VideoEmbedBlock {
+  youtubeId: string;
+  title: string;
+  description?: string | null;
+  poster?: (number | null) | Media;
+  uploadDate?: string | null;
+  /**
+   * ISO 8601, e.g. PT2M30S.
+   */
+  duration?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalloutBlock".
+ */
+export interface CalloutBlock {
+  tone?: ('info' | 'note' | 'warning') | null;
+  title?: string | null;
+  body: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bases".
+ */
+export interface Base {
+  id: number;
+  /**
+   * With diacritics: Crețești.
+   */
+  name: string;
+  intro?: string | null;
+  /**
+   * Tonnes.
+   */
+  capacity?: number | null;
+  capacityStatus: 'to-confirm' | 'conflict' | 'confirmed';
+  services?: ('reception' | 'drying' | 'cleaning' | 'weighing' | 'storage')[] | null;
+  servicesStatus: 'to-confirm' | 'conflict' | 'confirmed';
+  county?: (number | null) | County;
+  locationStatus: 'to-confirm' | 'conflict' | 'confirmed';
+  address?: {
+    street?: string | null;
+    locality?: string | null;
+    postalCode?: string | null;
+  };
+  geo?: {
+    lat?: number | null;
+    lng?: number | null;
+  };
+  phone?: string | null;
+  contact?: (number | null) | Person;
+  contactStatus: 'to-confirm' | 'conflict' | 'confirmed';
+  hours?:
+    | {
+        days: ('Mo' | 'Tu' | 'We' | 'Th' | 'Fr' | 'Sa' | 'Su')[];
+        opens: string;
+        closes: string;
+        id?: string | null;
+      }[]
+    | null;
+  photos?: (number | Media)[] | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads".
+ */
+export interface Lead {
+  id: number;
+  type: 'vanzare-cereale' | 'depozitare' | 'inputuri' | 'finantare' | 'logistica' | 'parteneri' | 'cariere' | 'general';
+  status: 'new' | 'contacted' | 'closed';
+  assignedTo?: (number | null) | Person;
+  name: string;
+  phone: string;
+  email: string;
+  company?: string | null;
+  cui?: string | null;
+  county?: (number | null) | County;
+  base?: (number | null) | Base;
+  crop?: (number | null) | Crop;
+  message?: string | null;
+  meta?: {
+    locale?: ('ro' | 'en') | null;
+    sourcePath?: string | null;
+    consentVersion?: string | null;
+    utmSource?: string | null;
+    utmMedium?: string | null;
+    utmCampaign?: string | null;
+  };
+  /**
+   * Internal notes.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -145,25 +694,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -187,12 +717,36 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'bases';
+        value: number | Base;
+      } | null)
+    | ({
+        relationTo: 'counties';
+        value: number | County;
+      } | null)
+    | ({
+        relationTo: 'crops';
+        value: number | Crop;
+      } | null)
+    | ({
+        relationTo: 'people';
+        value: number | Person;
+      } | null)
+    | ({
+        relationTo: 'leads';
+        value: number | Lead;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,6 +792,427 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  summary?: T;
+  layout?:
+    | T
+    | {
+        hero?: T | HeroBlockSelect<T>;
+        richText?: T | RichTextBlockSelect<T>;
+        figureStrip?: T | FigureStripBlockSelect<T>;
+        serviceGrid?: T | ServiceGridBlockSelect<T>;
+        storySection?: T | StorySectionBlockSelect<T>;
+        baseList?: T | BaseListBlockSelect<T>;
+        cropList?: T | CropListBlockSelect<T>;
+        ctaBand?: T | CtaBandBlockSelect<T>;
+        leadForm?: T | LeadFormBlockSelect<T>;
+        contactCards?: T | ContactCardsBlockSelect<T>;
+        videoEmbed?: T | VideoEmbedBlockSelect<T>;
+        callout?: T | CalloutBlockSelect<T>;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  path?: T;
+  isHome?: T;
+  parent?: T;
+  languages?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock_select".
+ */
+export interface HeroBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  accent?: T;
+  lead?: T;
+  image?: T;
+  video?: T;
+  primary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  secondary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FigureStripBlock_select".
+ */
+export interface FigureStripBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
+    | T
+    | {
+        figure?: T;
+        label?: T;
+        id?: T;
+      };
+  countUp?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceGridBlock_select".
+ */
+export interface ServiceGridBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        icon?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StorySectionBlock_select".
+ */
+export interface StorySectionBlockSelect<T extends boolean = true> {
+  heading?: T;
+  body?: T;
+  media?: T;
+  quote?: T;
+  person?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BaseListBlock_select".
+ */
+export interface BaseListBlockSelect<T extends boolean = true> {
+  heading?: T;
+  counties?: T;
+  showMap?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CropListBlock_select".
+ */
+export interface CropListBlockSelect<T extends boolean = true> {
+  heading?: T;
+  crops?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBandBlock_select".
+ */
+export interface CtaBandBlockSelect<T extends boolean = true> {
+  heading?: T;
+  body?: T;
+  primary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  secondary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  tone?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LeadFormBlock_select".
+ */
+export interface LeadFormBlockSelect<T extends boolean = true> {
+  heading?: T;
+  body?: T;
+  leadType?: T;
+  extraFields?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactCardsBlock_select".
+ */
+export interface ContactCardsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  people?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock_select".
+ */
+export interface VideoEmbedBlockSelect<T extends boolean = true> {
+  youtubeId?: T;
+  title?: T;
+  description?: T;
+  poster?: T;
+  uploadDate?: T;
+  duration?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalloutBlock_select".
+ */
+export interface CalloutBlockSelect<T extends boolean = true> {
+  tone?: T;
+  title?: T;
+  body?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bases_select".
+ */
+export interface BasesSelect<T extends boolean = true> {
+  name?: T;
+  intro?: T;
+  capacity?: T;
+  capacityStatus?: T;
+  services?: T;
+  servicesStatus?: T;
+  county?: T;
+  locationStatus?: T;
+  address?:
+    | T
+    | {
+        street?: T;
+        locality?: T;
+        postalCode?: T;
+      };
+  geo?:
+    | T
+    | {
+        lat?: T;
+        lng?: T;
+      };
+  phone?: T;
+  contact?: T;
+  contactStatus?: T;
+  hours?:
+    | T
+    | {
+        days?: T;
+        opens?: T;
+        closes?: T;
+        id?: T;
+      };
+  photos?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "counties_select".
+ */
+export interface CountiesSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  code?: T;
+  centroid?:
+    | T
+    | {
+        lat?: T;
+        lng?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "crops_select".
+ */
+export interface CropsSelect<T extends boolean = true> {
+  name?: T;
+  key?: T;
+  intro?: T;
+  quality?:
+    | T
+    | {
+        moisture?: T;
+        impurities?: T;
+        hectolitre?: T;
+        notes?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people_select".
+ */
+export interface PeopleSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  photo?: T;
+  phone?: T;
+  publishPhone?: T;
+  email?: T;
+  publishEmail?: T;
+  isAuthor?: T;
+  author?:
+    | T
+    | {
+        bio?: T;
+        credentials?: T;
+        sameAs?:
+          | T
+          | {
+              url?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads_select".
+ */
+export interface LeadsSelect<T extends boolean = true> {
+  type?: T;
+  status?: T;
+  assignedTo?: T;
+  name?: T;
+  phone?: T;
+  email?: T;
+  company?: T;
+  cui?: T;
+  county?: T;
+  base?: T;
+  crop?: T;
+  message?: T;
+  meta?:
+    | T
+    | {
+        locale?: T;
+        sourcePath?: T;
+        consentVersion?: T;
+        utmSource?: T;
+        utmMedium?: T;
+        utmCampaign?: T;
+      };
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  credit?: T;
+  rights?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -258,24 +1233,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -316,6 +1273,288 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "figures".
+ */
+export interface Figure {
+  id: number;
+  rows?:
+    | {
+        key: string;
+        label: string;
+        status: 'to-confirm' | 'conflict' | 'confirmed';
+        /**
+         * As shown on the site: "17", "238.000 t", "imediat după recepție".
+         */
+        value: string;
+        /**
+         * Numeric value, for counters and charts.
+         */
+        number?: number | null;
+        unit?: string | null;
+        source?: string | null;
+        confirmedBy?: string | null;
+        confirmedAt?: string | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  items?:
+    | {
+        link: {
+          label: string;
+          href: string;
+        };
+        children?:
+          | {
+              link: {
+                label: string;
+                href: string;
+              };
+              description?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              link: {
+                label: string;
+                href: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  legal?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo-defaults".
+ */
+export interface SeoDefault {
+  id: number;
+  siteName: string;
+  /**
+   * %s is the page title.
+   */
+  titleTemplate: string;
+  description?: string | null;
+  ogImage?: (number | null) | Media;
+  organization?: {
+    legalName?: string | null;
+    ifnLegalName?: string | null;
+    /**
+     * Official social and directory profiles.
+     */
+    sameAs?:
+      | {
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  verification?: {
+    google?: string | null;
+    bing?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lead-routing".
+ */
+export interface LeadRouting {
+  id: number;
+  routes?:
+    | {
+        type:
+          | 'vanzare-cereale'
+          | 'depozitare'
+          | 'inputuri'
+          | 'finantare'
+          | 'logistica'
+          | 'parteneri'
+          | 'cariere'
+          | 'general';
+        primary: number | Person;
+        fallback?: (number | null) | Person;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "figures_select".
+ */
+export interface FiguresSelect<T extends boolean = true> {
+  rows?:
+    | T
+    | {
+        key?: T;
+        label?: T;
+        status?: T;
+        value?: T;
+        number?: T;
+        unit?: T;
+        source?: T;
+        confirmedBy?: T;
+        confirmedAt?: T;
+        note?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        children?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              description?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  legal?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo-defaults_select".
+ */
+export interface SeoDefaultsSelect<T extends boolean = true> {
+  siteName?: T;
+  titleTemplate?: T;
+  description?: T;
+  ogImage?: T;
+  organization?:
+    | T
+    | {
+        legalName?: T;
+        ifnLegalName?: T;
+        sameAs?:
+          | T
+          | {
+              url?: T;
+              id?: T;
+            };
+      };
+  verification?:
+    | T
+    | {
+        google?: T;
+        bing?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lead-routing_select".
+ */
+export interface LeadRoutingSelect<T extends boolean = true> {
+  routes?:
+    | T
+    | {
+        type?: T;
+        primary?: T;
+        fallback?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

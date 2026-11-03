@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { Locale } from '@/i18n/config'
+import { localePath, type Locale } from '@/i18n/config'
 import { formatNumber } from '@/lib/format'
 
 import type { CropKey } from '../fixtures/sample'
@@ -19,6 +19,11 @@ export type SiteHeaderProps = {
   labels: { menu: string; main: string; language: string }
   /** `overlay`: transparent, light text, for drawing over a hero photo. */
   tone?: 'default' | 'overlay'
+  /**
+   * Public URL of this page in each language. A language without an equivalent page
+   * links to that language's home.
+   */
+  alternates?: Partial<Record<Locale, string>>
   /** Optional strip above the header with today's prices and the phone number. */
   ticker?: {
     crops: { crop: CropKey; name: string; price: number; change: number }[]
@@ -46,6 +51,7 @@ export function SiteHeader({
   labels,
   tone = 'default',
   ticker,
+  alternates = {},
 }: SiteHeaderProps) {
   const overlay = tone === 'overlay'
   return (
@@ -84,7 +90,7 @@ export function SiteHeader({
         className={overlay ? 'border-b border-on-forest/15' : 'border-b border-line bg-paper'}
       >
         <div className="relative mx-auto flex h-18 max-w-page items-center gap-6 px-4 md:px-8">
-          <Link href="/" className="no-underline" aria-label="Agrinvest">
+          <Link href={localePath('/', locale)} className="no-underline" aria-label="Agrinvest">
             <Lockup tone={overlay ? 'light' : 'dark'} />
           </Link>
           <nav aria-label={labels.main} className="hidden lg:block">
@@ -114,7 +120,7 @@ export function SiteHeader({
               {(['ro', 'en'] as const).map((l) => (
                 <Link
                   key={l}
-                  href={l === 'ro' ? '/' : '/en'}
+                  href={alternates[l] ?? localePath('/', l)}
                   lang={l}
                   aria-current={l === locale ? 'true' : undefined}
                   className={cx(

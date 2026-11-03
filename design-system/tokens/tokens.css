@@ -4,8 +4,6 @@
  * (bg-paper, text-ink, rounded-card, shadow-raised…), never raw values.
  * Tailwind's own palette, fonts, radii and shadows are cleared so only these exist.
  */
-@import '@fontsource-variable/onest/wght.css';
-
 @theme {
   --color-*: initial;
   --font-*: initial;
@@ -54,6 +52,8 @@
   --color-danger-soft: #f9e7df;
 
   /* Type: one family, Onest, with tabular figures for data */
+  /* 'Onest Variable' is declared by the site (globals.css, preloaded) and by Storybook
+     (@fontsource); both use the same files. */
   --font-sans: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --text-caption: 0.8125rem;

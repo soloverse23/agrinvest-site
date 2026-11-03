@@ -18,7 +18,14 @@ export function FigureStrip({
   items,
 }: {
   locale: Locale
-  items: readonly { key: string; value: number; unit?: string; label: string }[]
+  items: readonly {
+    key: string
+    value: number
+    unit?: string
+    label: string
+    /** Shown after the value, e.g. a "to confirm" marker. */
+    note?: ReactNode
+  }[]
 }) {
   return (
     <dl className="grid divide-y divide-line border-y border-line md:grid-cols-3 md:divide-x md:divide-y-0">
@@ -38,6 +45,7 @@ export function FigureStrip({
             {item.unit && (
               <span className="ml-1.5 text-h3 font-medium text-muted">{item.unit}</span>
             )}
+            {item.note}
           </dd>
         </div>
       ))}

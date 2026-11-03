@@ -1,6 +1,6 @@
 # Phase 2: content model and core site
 
-Status: **planned and approved 2026-11-03; 2.1 next.**
+Status: **2.1 built (2026-11-03), waiting for the owner review; 2.2 next.** Plan approved 2026-11-03.
 
 ## Context
 
@@ -84,6 +84,41 @@ After the model changes: `npm run generate:types` and `npm run generate:importma
 - A keyword-cluster check reads `keyword-map.csv`: every built target URL exists and links to at least one page in its cluster (warnings at first).
 
 **2.1 exit:** the model is in the admin with seeded data; a smoke page renders with full metadata and JSON-LD; `check:seo` runs in CI; integration tests cover routing, hreflang, figures and lead creation.
+
+## 2.1 progress (2026-11-03)
+
+**Built**
+
+- Content model: Pages (blocks, localized paths, `languages`, drafts), Bases, Counties, Crops, People, Leads, Media (alt, credit, rights); globals Figures, Lead routing, Navigation, Footer, SEO defaults; 12 page blocks (`src/blocks/`). Shared fields in `src/fields/`, access rules in `src/access/`.
+- Seed (`npm run seed`, idempotent): 23 figures with statuses read from `figures-register.md` (none confirmed; S2 and the IFN address are conflicts), 11 counties, 17 bases with S3 capacities, 5 crops, 6 people (no phone or email public), 3 lead routes, menus, SEO defaults and 13 page shells (RO, plus EN where an equivalent exists) with SEO titles and summaries.
+- Rendering: catch-all route for Pages, `/baze/[slug]`, `/cereale/[crop]`; `SiteShell` (existing SiteHeader + a scaffold footer), `PageHeader`, breadcrumbs, FAQ, "updated on" date; 2.1 block renderers (`src/components/RenderBlocks.tsx`). The language switch goes to the equivalent page, or to the other language's home.
+- Figures: `<Fact>` / `FactMark` tag every value (`data-fact`) and show "de confirmat" while the site is noindex; `npm run check:figures` lists 22 unconfirmed values on pages.
+- SEO: `buildMetadata` (canonical, hreflang + x-default only for real pairs, OG/Twitter, noindex until `SITE_INDEXABLE`), JSON-LD builders (Organization + IFN sub-organization, WebSite, WebPage, BreadcrumbList, LocalBusiness, FAQPage, Person, VideoObject; facts appear only once confirmed), sitemap index + segments (`/sitemaps/{pages,bases,crops}.xml`) with alternates, `robots.txt`, `llms.txt`, IndexNow (key at `/indexnow.txt`, pings only when indexable), draft preview (`/next/preview`, staff only).
+- Leads: `LeadForm` pattern (phone and email required, consent, honeypot, UTM, works without JavaScript) + `submitLead` server action (zod, rate limit in production) → Leads collection, routed by type with a `general` fallback; `notifyLead` is a documented no-op until the owner picks a channel. Privacy page shell for the consent link.
+- Checks: `npm run check:seo` (port of the HamidHosseini checker, crawling the running site: H1, title and description lengths and uniqueness, canonical, reciprocal hreflang, html lang, JSON-LD types per template, broken links, sitemap entries, keyword-cluster links) and `check:figures`; both run in CI after a seed. 27 integration and 34 e2e tests.
+
+**Results**
+
+- `check:seo`: 42 pages, 0 errors; 2 keyword-cluster warnings (`/cereale` → crop pages, `/depozitare` → `/depozitare/uscare`) that the 2.2 content fixes. Keyword map: 16 of 56 target URLs built.
+- Lighthouse (default mobile throttling, 6 URLs): accessibility 1,0, CLS 0, TBT ≈ 0, FCP 0,9–1,2 s, **LCP 2,45–2,6 s, over the 2,0 s budget**. See open items.
+- typecheck, lint, format, `next build`, Storybook build, `test:int` (27), `test:e2e` (34) pass; axe passes on the new stories.
+
+**Deviations from the plan**
+
+- **No PostGIS:** coordinates are `lat`/`lng` number groups instead of `point` fields (the local Postgres image has no PostGIS; "nearest base" over a few dozen points is computed in code).
+- The Pages field is `languages`, not `locales`: a field named `locales` collides with Payload's own `pages_locales` table.
+- Base and crop pages render on the first request and are then cached (ISR), not at build time: their `generateStaticParams` returns the slugs but Next does not prerender them next to the optional catch-all. The layout's `dynamicParams = false` was removed because it made them 404 in production.
+- Onest is served from `public/fonts/` with its own `@font-face` (Latin + Latin Extended unicode ranges) and preloaded, instead of the @fontsource import in `tokens.css` (Storybook keeps @fontsource). `next/font/local` was tried and dropped: it writes no unicode-range, so the Latin Extended file overrode basic Latin.
+- Lead validation is split: `src/lib/leads/state.ts` (client-safe) and `form.ts` (zod, server). Importing the zod module into the form had put 400 KB of JavaScript on every page.
+- The seed clears Next's data cache (`.next/cache/fetch-cache`) at the end, because its writes cannot revalidate cache tags.
+- `lighthouserc.json` no longer uses the `perf` preset, which skipped the accessibility category, so that assertion could never pass. Without it, Lighthouse uses its default (stricter) mobile throttling.
+
+**Open items for 2.2**
+
+- LCP budget: the remaining time is script cost under simulated throttling (182 KB gzipped on a content page, LeadForm's chunk on every CMS page). Load the form only where it renders, and check the 38 KB chunk and the fonts' effect on text LCP.
+- The visual design of blocks, the footer, Accordion, Breadcrumbs and the other folded-in components (the 2.1 renderers are token-styled scaffolds).
+- Base pages: price and weather slots (Phase 5), base pre-selected on its own lead form.
+- Agrinvest inputs added to `docs/audit/agrinvest-inputs.md`: who receives each lead type, and the privacy policy text.
 
 ---
 

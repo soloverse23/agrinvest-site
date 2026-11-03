@@ -32,7 +32,8 @@
     "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed/index.ts",
     "check:seo": "tsx --env-file-if-exists=.env scripts/checks/seo.ts",
     "check:figures": "tsx --env-file-if-exists=.env scripts/checks/figures.ts",
-    "brand:font": "tsx scripts/brand/subset-font.ts"
+    "brand:font": "tsx scripts/brand/subset-font.ts",
+    "brand:map": "tsx scripts/brand/build-map.ts"
   },
   "dependencies": {
     "@fontsource-variable/onest": "^5.3.1",

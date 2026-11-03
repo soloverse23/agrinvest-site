@@ -1,5 +1,5 @@
 /**
- * Core page shells for Phase 2 (content is written in 2.2). Each page has its SEO title
+ * Core pages for Phase 2 (their blocks and FAQ are in content.ts). Each page has its SEO title
  * (30–60 characters) and a summary that doubles as the meta description (70–160).
  * `en` is present only where the English site has a true equivalent.
  */
@@ -11,14 +11,12 @@ export type PageSeed = {
   isHome?: boolean
   ro: L
   en?: L
-  layout?: 'home' | 'contact' | 'grain'
 }
 
 export const pages: PageSeed[] = [
   {
     key: 'home',
     isHome: true,
-    layout: 'home',
     ro: {
       title: 'Agrinvest',
       slug: 'acasa',
@@ -64,7 +62,6 @@ export const pages: PageSeed[] = [
   },
   {
     key: 'cereale',
-    layout: 'grain',
     ro: {
       title: 'Vinde cereale la Agrinvest',
       slug: 'cereale',
@@ -123,9 +120,9 @@ export const pages: PageSeed[] = [
     ro: {
       title: 'Golden Relationship',
       slug: 'golden-relationship',
-      seoTitle: 'Golden Relationship: parteneriat pe termen lung cu fermierii',
+      seoTitle: 'Golden Relationship: redresarea fermelor în dificultate',
       summary:
-        'Golden Relationship este programul Agrinvest de parteneriat pe termen lung cu fermierii: tehnologie, inputuri, consultanță și preluarea recoltei.',
+        'Programul Golden Relationship ajută fermele în dificultate să își revină, cu un plan de redresare făcut împreună cu Agrinvest și sprijin pe termen lung.',
     },
   },
   {
@@ -167,7 +164,6 @@ export const pages: PageSeed[] = [
   },
   {
     key: 'contact',
-    layout: 'contact',
     ro: {
       title: 'Contact',
       slug: 'contact',
@@ -202,20 +198,128 @@ export const pages: PageSeed[] = [
   },
 ]
 
+type Link = { label: string; href: string }
+type MenuItem = Link & { blurb?: string; children?: (Link & { description?: string })[] }
+
 /** Main menu by need; only pages that exist in this phase (shop and prices come later). */
-export const navigation = {
+export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 'en', Link> } = {
   ro: [
-    ['Vinde cereale', '/cereale'],
-    ['Depozitare', '/depozitare'],
-    ['Finanțare', '/finantare'],
-    ['Logistică', '/logistica'],
-    ['Despre', '/despre'],
+    {
+      label: 'Vinde cereale',
+      href: '/cereale',
+      blurb: 'Cumpărăm cereale direct de la fermieri, cu recepție în bazele noastre.',
+      children: [
+        { label: 'Grâu', href: '/cereale/grau', description: 'Recoltă de vară' },
+        { label: 'Porumb', href: '/cereale/porumb', description: 'Recoltă de toamnă' },
+        {
+          label: 'Floarea-soarelui',
+          href: '/cereale/floarea-soarelui',
+          description: 'Recoltă de toamnă',
+        },
+        { label: 'Rapiță', href: '/cereale/rapita', description: 'Recoltă de vară' },
+        { label: 'Orz', href: '/cereale/orz', description: 'Recoltă de vară' },
+      ],
+    },
+    {
+      label: 'Depozitare',
+      href: '/depozitare',
+      blurb: 'Recepție, uscare și depozitare în bazele proprii, cu vânzare direct din stoc.',
+      children: [
+        { label: 'Bazele noastre', href: '/depozitare', description: 'Hartă și capacitate' },
+        {
+          label: 'Uscare și precurățare',
+          href: '/depozitare/uscare',
+          description: 'Marfa adusă la umiditatea de depozitare',
+        },
+      ],
+    },
+    { label: 'Finanțare', href: '/finantare' },
+    { label: 'Logistică', href: '/logistica' },
+    {
+      label: 'Despre',
+      href: '/despre',
+      blurb: 'O companie agricolă cu capital românesc, care lucrează direct cu fermierii.',
+      children: [
+        {
+          label: 'Agrinvest în cifre',
+          href: '/despre/cifre',
+          description: 'Cu sursa fiecărei valori',
+        },
+        {
+          label: 'Golden Relationship',
+          href: '/golden-relationship',
+          description: 'Sprijin pentru fermele în dificultate',
+        },
+        { label: 'Parteneri', href: '/parteneri', description: 'Inputuri, procesare, finanțare' },
+        { label: 'Cariere', href: '/cariere', description: 'Lucrează cu noi' },
+      ],
+    },
   ],
   en: [
-    ['Storage', '/en/storage'],
-    ['Financing', '/en/financing'],
-    ['Partners', '/en/partners'],
-    ['About', '/en/about'],
+    { label: 'Storage', href: '/en/storage' },
+    { label: 'Financing', href: '/en/financing' },
+    { label: 'Partners', href: '/en/partners' },
+    { label: 'About', href: '/en/about' },
   ],
-  cta: { ro: ['Contact', '/contact'], en: ['Contact', '/en/contact'] },
+  cta: {
+    ro: { label: 'Contact', href: '/contact' },
+    en: { label: 'Contact', href: '/en/contact' },
+  },
+}
+
+/** Footer columns per language. */
+export const footer = {
+  ro: {
+    columns: [
+      {
+        title: 'Pentru fermieri',
+        links: [
+          ['Vinde cereale', '/cereale'],
+          ['Depozitare', '/depozitare'],
+          ['Uscare și precurățare', '/depozitare/uscare'],
+          ['Finanțare', '/finantare'],
+          ['Logistică', '/logistica'],
+        ],
+      },
+      {
+        title: 'Companie',
+        links: [
+          ['Despre Agrinvest', '/despre'],
+          ['Agrinvest în cifre', '/despre/cifre'],
+          ['Golden Relationship', '/golden-relationship'],
+          ['Parteneri', '/parteneri'],
+          ['Cariere', '/cariere'],
+        ],
+      },
+      {
+        title: 'Ajutor',
+        links: [
+          ['Contact', '/contact'],
+          ['Confidențialitate', '/confidentialitate'],
+        ],
+      },
+    ],
+    legal: 'Agrinvest SRL și Agrinvest Credit IFN SA, companii cu capital românesc.',
+  },
+  en: {
+    columns: [
+      {
+        title: 'Agrinvest',
+        links: [
+          ['About', '/en/about'],
+          ['Storage', '/en/storage'],
+          ['Financing', '/en/financing'],
+          ['Partners', '/en/partners'],
+        ],
+      },
+      {
+        title: 'Help',
+        links: [
+          ['Contact', '/en/contact'],
+          ['Privacy', '/en/privacy'],
+        ],
+      },
+    ],
+    legal: 'Agrinvest SRL and Agrinvest Credit IFN SA, Romanian-owned companies.',
+  },
 } as const

@@ -1,15 +1,19 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { ArrowRightIcon } from '@ds/icons/icons'
+import { KeyFacts, SectionHeading } from '@ds/patterns/Sections'
+import { Button } from '@ds/primitives/Button'
 import { FactMark } from '@/components/Fact'
+import { schemaFaq } from '@/components/FactText'
 import type { FactStatus } from '@/fields'
 import { JsonLd } from '@/components/JsonLd'
-import { Faq, PageHeader } from '@/components/PageParts'
-import { RenderBlocks } from '@/components/RenderBlocks'
+import { Faq, PageTitle } from '@/components/PageParts'
+import { BaseListBlock, LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import { isLocale, localePath, type Locale } from '@/i18n/config'
 import { ui } from '@/i18n/ui'
-import { getSeoDefaults } from '@/lib/content/globals'
+import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import { getBase, listBases } from '@/lib/content/locations'
 import { getPage, type Alternates } from '@/lib/content/pages'
 import { formatQuantity } from '@/lib/format'
@@ -17,8 +21,9 @@ import { buildMetadata } from '@/lib/seo/metadata'
 import { breadcrumbs, faqPage, localBusiness } from '@/lib/schema'
 
 /**
- * Base pages (`/baze/{slug}`), Romanian only for now. Slots for today's price and local
- * weather are added in Phase 5; until then the page shows only confirmed-or-marked facts.
+ * Base pages (`/baze/{slug}`), Romanian only for now. Today's price and the local weather
+ * are added in Phase 5, in the header's fact card; until then the page shows only
+ * confirmed-or-marked facts.
  */
 type Props = { params: Promise<{ locale: string; slug: string }> }
 
@@ -51,6 +56,23 @@ const titleOf = (name: string) => `Baza ${name}: recepție și depozitare cereal
 const descriptionOf = (name: string) =>
   `Baza Agrinvest ${name}: recepție, cântărire și depozitare de cereale. Vezi capacitatea bazei, serviciile disponibile și cum ne contactezi.`
 
+/** Questions every base page answers; a base's own FAQ (Payload) comes first. */
+const baseFaq = (name: string) => [
+  {
+    question: `Ce cereale pot livra la baza ${name}?`,
+    answer:
+      'Cumpărăm și recepționăm {{C7}}. Sună înainte de livrare ca să confirmi programul și condițiile de recepție.',
+  },
+  {
+    question: `Când primesc banii după livrarea la ${name}?`,
+    answer: 'Plata se face {{C8}}, după cântărire și analiza calității.',
+  },
+  {
+    question: 'Puteți ridica marfa de la fermă?',
+    answer: 'Da. Când ne ceri, transportăm cerealele cu flota proprie de la fermă la bază.',
+  },
+]
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const found = await resolve(props)
   if (!found) return {}
@@ -73,7 +95,10 @@ export default async function BasePage(props: Props) {
   if (!found) notFound()
   const { base, locale, path, alternates } = found
   const t = ui[locale]
-  const parent = (await getPage('/depozitare', locale))?.page
+  const [parent, figures] = await Promise.all([
+    getPage('/depozitare', locale).then((p) => p?.page),
+    getFigures(locale),
+  ])
   const crumbs = [
     ...(parent ? [{ name: parent.title, url: localePath('/depozitare', locale) }] : []),
     { name: `Baza ${base.name}`, url: localePath(path, locale) },
@@ -85,6 +110,39 @@ export default async function BasePage(props: Props) {
       locale={locale}
     />
   )
+  const faq = [...(base.faq ?? []), ...baseFaq(base.name)]
+  const facts = [
+    base.capacity != null && {
+      icon: 'silo' as const,
+      label: t.capacity,
+      value: (
+        <>
+          {formatQuantity(base.capacity, 't', locale)}
+          {mark(base.capacityStatus, `base:${base.slug}:capacity`)}
+        </>
+      ),
+    },
+    county && {
+      icon: 'pin' as const,
+      label: t.county,
+      value: (
+        <>
+          {county.name}
+          {mark(base.locationStatus, `base:${base.slug}:location`)}
+        </>
+      ),
+    },
+    !!base.services?.length && {
+      icon: 'scale' as const,
+      label: t.services,
+      value: (
+        <>
+          {base.services.map((s) => serviceLabels[s]?.[locale] ?? s).join(', ')}
+          {mark(base.servicesStatus, `base:${base.slug}:services`)}
+        </>
+      ),
+    },
+  ].filter(Boolean) as Parameters<typeof KeyFacts>[0]['items']
 
   return (
     <SiteShell locale={locale} alternates={alternates}>
@@ -92,65 +150,56 @@ export default async function BasePage(props: Props) {
         data={[
           localBusiness(base, path),
           breadcrumbs(locale, t.home, crumbs),
-          ...(base.faq?.length ? [faqPage(base.faq)] : []),
+          ...(schemaFaq(faq, figures).length ? [faqPage(schemaFaq(faq, figures))] : []),
         ]}
       />
-      <PageHeader
+      <PageTitle
         locale={locale}
+        kicker="Bază de recepție și depozitare"
         title={`Baza Agrinvest ${base.name}`}
         summary={base.intro || descriptionOf(base.name)}
         updatedAt={base.updatedAt}
         crumbs={crumbs}
+        actions={
+          <>
+            <Button href="#cerere" icon={<ArrowRightIcon />}>
+              {t.bookAt(base.name)}
+            </Button>
+            <Button href="/cereale" variant="secondary">
+              Vinde cereale
+            </Button>
+          </>
+        }
+        aside={facts.length ? <KeyFacts items={facts} /> : undefined}
       />
-      <section className="mx-auto max-w-page px-4 md:px-8">
-        <dl className="grid gap-6 border-y border-line py-8 md:grid-cols-3">
-          {base.capacity != null && (
-            <div className="grid gap-1">
-              <dt className="text-small text-muted">{t.capacity}</dt>
-              <dd className="text-h2 font-semibold tabular-nums">
-                {formatQuantity(base.capacity, 't', locale)}
-                {mark(base.capacityStatus, `base:${base.slug}:capacity`)}
-              </dd>
-            </div>
-          )}
-          {county && (
-            <div className="grid gap-1">
-              <dt className="text-small text-muted">{t.county}</dt>
-              <dd className="text-h3 font-semibold">
-                {county.name}
-                {mark(base.locationStatus, `base:${base.slug}:location`)}
-              </dd>
-            </div>
-          )}
-          {!!base.services?.length && (
-            <div className="grid gap-1">
-              <dt className="text-small text-muted">{t.services}</dt>
-              <dd className="text-body">
-                {base.services.map((s) => serviceLabels[s]?.[locale] ?? s).join(', ')}
-                {mark(base.servicesStatus, `base:${base.slug}:services`)}
-              </dd>
-            </div>
-          )}
-        </dl>
-      </section>
-      <div className="mt-16">
-        <RenderBlocks
-          blocks={[
-            {
-              blockType: 'leadForm',
-              leadType: 'depozitare',
-              extraFields: ['crop'],
-              heading:
-                locale === 'ro'
-                  ? `Programează o livrare la ${base.name}`
-                  : `Book a delivery to ${base.name}`,
-            },
-          ]}
+      <div className="mt-16 grid gap-20 md:mt-24 md:gap-28">
+        <LeadFormBlock
+          block={{
+            leadType: 'depozitare',
+            extraFields: ['crop', 'base'],
+            heading: t.bookAt(base.name),
+            body: 'Spune-ne cultura, cantitatea și când vrei să livrezi. Te contactăm cu programul bazei.',
+          }}
+          preset={{ base: String(base.id) }}
           locale={locale}
           path={path}
         />
+        <BaseListBlock
+          block={{ showMap: true }}
+          ctx={{ locale }}
+          current={localePath(path, locale)}
+          head={
+            <SectionHeading
+              kicker={t.bases}
+              title={t.otherBases}
+              lead="Toate bazele Agrinvest, după capacitate. Baza aceasta este marcată."
+              action={{ href: '/depozitare', label: 'Despre depozitare' }}
+              className="mb-10 md:mb-12"
+            />
+          }
+        />
       </div>
-      <Faq locale={locale} items={base.faq} />
+      <Faq locale={locale} items={faq} />
     </SiteShell>
   )
 }

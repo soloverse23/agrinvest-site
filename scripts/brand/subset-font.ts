@@ -6,9 +6,10 @@
  *    with the weight axis limited to the weights the design system uses (400–700). One file
  *    instead of Fontsource's Latin + Latin Extended pair: Romanian text needs both
  *    (ă â î ș ț live in Latin Extended), so every page fetched two fonts before its text settled.
- * 2. `src/app/(frontend)/fonts.css`: the Onest face plus metric-matched fallback faces. Each
- *    fallback is a system font resized to Onest's widths and line metrics, per weight, so the
- *    swap to the web font moves no text (CLS):
+ * 2. `src/app/(frontend)/fonts.css`: the Onest face (`font-display: optional`: used when the
+ *    preloaded file arrives with the first render, never swapped in later, so text never
+ *    rewraps; decision 0003) plus metric-matched fallback faces, which are what a slow first
+ *    visit shows. Each fallback is a system font resized to Onest's widths and line metrics:
  *    - 'Onest Fallback': Arial (macOS, Windows) or Liberation Sans (Linux; same metrics as Arial).
  *    - 'Onest Fallback Roboto': Roboto (Android).
  *
@@ -120,7 +121,7 @@ const faces = [
   `@font-face {
   font-family: 'Onest Variable';
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
   font-weight: 400 700;
   src: url('/fonts/onest-ro-wght.woff2') format('woff2-variations');
   unicode-range: ${unicodeRange.join(', ')};

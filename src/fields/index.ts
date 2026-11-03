@@ -1,4 +1,10 @@
-import { slugField, type Field, type GroupField, type RowField, type SelectField } from 'payload'
+import {
+  slugField,
+  type ArrayField,
+  type GroupField,
+  type RowField,
+  type SelectField,
+} from 'payload'
 
 import { slugify } from '@/lib/slugify'
 
@@ -51,7 +57,7 @@ export const link = (name: string, required = false): GroupField => ({
 })
 
 /** Question and answer pairs; rendered as an FAQ section with FAQPage JSON-LD. */
-export const faq: Field = {
+export const faq: ArrayField = {
   name: 'faq',
   type: 'array',
   labels: { singular: 'Question', plural: 'FAQ' },

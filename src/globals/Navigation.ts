@@ -18,6 +18,11 @@ export const Navigation: GlobalConfig = {
       fields: [
         link('link', true),
         {
+          name: 'blurb',
+          type: 'textarea',
+          admin: { description: 'One sentence shown in the menu panel next to the sub-pages.' },
+        },
+        {
           name: 'children',
           type: 'array',
           fields: [link('link', true), { name: 'description', type: 'text' }],

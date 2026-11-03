@@ -4,19 +4,30 @@ import { localePath, type Locale } from '@/i18n/config'
 import { formatNumber } from '@/lib/format'
 
 import type { CropKey } from '../fixtures/sample'
-import { MenuIcon, PhoneIcon } from '../icons/icons'
+import { ArrowRightIcon, ChevronDownIcon, MenuIcon, PhoneIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
 import { Delta } from '../primitives/Delta'
 import { Lockup } from './parts'
 
+export type NavItem = {
+  href: string
+  label: string
+  /** One sentence for the menu panel. */
+  blurb?: string | null
+  /** Sub-pages: shown in the desktop panel and indented in the mobile menu. */
+  children?: { href: string; label: string; description?: string | null }[]
+}
+
 export type SiteHeaderProps = {
   locale: Locale
-  nav: { href: string; label: string }[]
+  nav: NavItem[]
   /** href of the current section, marked with aria-current. */
   current?: string
   cta: { href: string; label: string }
-  labels: { menu: string; main: string; language: string }
+  labels: { menu: string; main: string; language: string; all?: string; call?: string }
+  /** Phone in the menu panels ("call us"), from the figures register. */
+  phone?: string
   /** `overlay`: transparent, light text, for drawing over a hero photo. */
   tone?: 'default' | 'overlay'
   /**
@@ -52,6 +63,7 @@ export function SiteHeader({
   tone = 'default',
   ticker,
   alternates = {},
+  phone,
 }: SiteHeaderProps) {
   const overlay = tone === 'overlay'
   return (
@@ -96,14 +108,20 @@ export function SiteHeader({
           <nav aria-label={labels.main} className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {nav.map((item) => (
-                <li key={item.href}>
+                <li key={item.href} className="group">
                   <Link
                     href={item.href}
                     aria-current={item.href === current ? 'page' : undefined}
-                    className={cx(linkBase, linkState(item.href === current, overlay))}
+                    className={cx(linkBase, linkState(item.href === current, overlay), 'gap-1')}
                   >
                     {item.label}
+                    {!!item.children?.length && (
+                      <ChevronDownIcon className="size-4 opacity-60 transition-transform duration-150 group-focus-within:rotate-180 group-hover:rotate-180" />
+                    )}
                   </Link>
+                  {!!item.children?.length && (
+                    <MenuPanel item={item} phone={phone} labels={labels} />
+                  )}
                 </li>
               ))}
             </ul>
@@ -174,6 +192,25 @@ export function SiteHeader({
                       >
                         {item.label}
                       </Link>
+                      {!!item.children?.length && (
+                        <ul className="mb-1 ml-3.5 grid border-l border-line pl-2">
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                aria-current={child.href === current ? 'page' : undefined}
+                                className={cx(
+                                  linkBase,
+                                  linkState(child.href === current),
+                                  'h-11 w-full',
+                                )}
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -185,6 +222,64 @@ export function SiteHeader({
           </div>
         </div>
       </header>
+    </div>
+  )
+}
+
+/**
+ * Desktop mega menu panel: opens on hover and on keyboard focus (focus-within), so it needs
+ * no JavaScript. Sub-pages on the left; the section's one-line answer and a phone on the right.
+ */
+function MenuPanel({
+  item,
+  phone,
+  labels,
+}: {
+  item: NavItem
+  phone?: string
+  labels: SiteHeaderProps['labels']
+}) {
+  return (
+    <div className="invisible absolute inset-x-4 top-full z-30 pt-2 opacity-0 transition duration-150 ease-enter group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 md:inset-x-8">
+      <div className="grid grid-cols-12 gap-8 rounded-xl bg-raised p-8 text-ink shadow-floating ring-1 ring-line">
+        <ul className="col-span-8 grid grid-cols-2 content-start gap-1">
+          {item.children?.map((child) => (
+            <li key={child.href}>
+              <Link
+                href={child.href}
+                className="grid gap-0.5 rounded-lg px-4 py-3 no-underline transition-colors duration-150 hover:bg-surface"
+              >
+                <span className="font-semibold text-ink">{child.label}</span>
+                {child.description && (
+                  <span className="text-small text-muted">{child.description}</span>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="col-span-4 grid content-start gap-4 rounded-lg bg-surface p-6">
+          {item.blurb && <p className="text-small text-muted">{item.blurb}</p>}
+          <Link
+            href={item.href}
+            className="inline-flex items-center gap-1.5 text-small font-semibold text-accent no-underline hover:underline"
+          >
+            {labels.all ?? item.label}
+            <ArrowRightIcon className="size-4" />
+          </Link>
+          {phone && (
+            <a
+              href={`tel:${phone.replace(/\s/g, '')}`}
+              className="inline-flex items-center gap-2 text-small font-semibold text-ink no-underline hover:text-accent"
+            >
+              <PhoneIcon className="size-4 text-accent" />
+              <span>
+                {labels.call && <span className="font-normal text-muted">{labels.call} </span>}
+                <span className="tabular-nums">{phone}</span>
+              </span>
+            </a>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

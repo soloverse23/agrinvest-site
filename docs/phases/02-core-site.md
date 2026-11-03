@@ -1,6 +1,6 @@
 # Phase 2: content model and core site
 
-Status: **2.1 built (2026-11-03); 2.2 in progress (performance done, pages next).** Plan approved 2026-11-03.
+Status: **2.1 built; 2.2 built (2026-11-03), waiting for the owner review; 2.3 next.** Plan approved 2026-11-03.
 
 ## Context
 
@@ -126,13 +126,34 @@ After the model changes: `npm run generate:types` and `npm run generate:importma
 
 ### 2.2 progress (2026-11-03)
 
-**Performance (the LCP open item from 2.1): done.** Decision `0003-lighthouse-measurement.md`.
+**Owner choices (asked before building):** the base map is a server-rendered counties outline (decision `0004-base-map.md`); the desktop menu is a mega menu by need; the core pages get full Romanian draft copy.
 
-- One Onest file cut to Romanian + English with the weight axis 400–700: 29 KB, down from 63 KB in two files. `npm run brand:font` builds it from `design-system/brand/fonts-src/` and also generates `src/app/(frontend)/fonts.css` with metric-matched fallback faces (Arial / Liberation Sans, Roboto for Android). `check:fonts` now checks the served file too.
-- `experimental.inlineCss`: no render-blocking stylesheet.
-- LeadForm loads in its own chunk (`LeadFormLazy`), only on pages with a form.
-- `lighthouserc.json`: applied throttling, 8 templates, budgets for performance (≥ 0,95), accessibility and best practices (1,0), LCP, FCP, CLS, TBT, script ≤ 160 KB, fonts ≤ 32 KB, no external stylesheets, and the SEO audits one by one (the SEO category stays at 66 only because of `noindex`).
-- Result: performance 100 on every template; LCP 1,3–1,4 s, TBT ≤ 20 ms, CLS 0–0,015.
+**Performance** (the LCP open item from 2.1). Decision `0003-lighthouse-measurement.md`.
+
+- One Onest file cut to Romanian + English with the weight axis 400–700: 29 KB, down from 63 KB in two files. `npm run brand:font` builds it from `design-system/brand/fonts-src/` and generates `src/app/(frontend)/fonts.css`: `font-display: optional` and metric-matched fallbacks (Arial / Liberation Sans, Roboto for Android). `check:fonts` checks the served file too.
+- `experimental.inlineCss` (no render-blocking stylesheet); `images.qualities` [60, 75] (the hero photo at 60).
+- LeadForm in its own chunk (`LeadFormLazy`), only on pages with a form. The logo and the county outlines are cached SVG files instead of inline markup, which appeared twice per page (HTML and RSC payload).
+- `lighthouserc.json`: applied throttling, 9 templates, budgets for performance (≥ 0,95), accessibility and best practices (1,0), LCP, FCP, CLS, TBT, script ≤ 160 KB, fonts ≤ 32 KB, no external stylesheets, and the SEO audits one by one (the SEO category stays below 1,0 only because of `noindex`).
+
+**Built**
+
+- **Components** (`design-system/patterns/`, stories in `Patterns/Content`, axe clean at 390 / 768 / 1440 in RO and EN): `SiteHeader` mega menu (CSS only, opens on hover and focus; sub-pages in the mobile menu), `SiteFooter`, `Hero` needs rail (prices take its place in Phase 5) and optional photo, `BaseMap`, `FactTable`, `VideoEmbed` (click to load, youtube-nocookie), and in `Sections.tsx`: `SectionHeading`, `Kicker`, `PageHeader`, `Breadcrumbs`, `Updated`, `KeyFacts`, `Accordion`, `ServiceGrid`, `Steps`, `CtaBand`, `Callout`, `StorySection`, `ContactCards`, `Toc`. New icons: scale, drop, coins, clock, handshake, mail, document, play. `prose-agr` styles long CMS text. Fields take their layout class on the frame (the message field now spans both columns).
+- **Model:** page `layout` and `faq` are per language (the English site is not a mirror, and Romanian text no longer falls back onto English pages). New blocks: Steps, FinanceBand, FigureTable; section heading fields (kicker, heading, lead) on the section blocks; hero `needs`; story `kicker` and `reverse`; ContactCards as person + need. Navigation items have a `blurb` for the menu panel.
+- **Facts in text:** content fields write register facts as `{{KEY}}` (`src/components/FactText.tsx`). They render as `<Fact>` with the "to confirm" marker; FAQPage JSON-LD leaves out any answer that relies on an unconfirmed value. Lists with one shared status show one marker above the list (the rows keep their `data-fact` tags).
+- **Pages:** all RO core pages with draft copy rewritten from the old site (`scripts/seed/content.ts`; the old contact page was Lorem ipsum and the careers page a 404): home (hero with the harvest still, figures, services, base map, how selling works, Golden Relationship story, finance band, contact band, FAQ), `/despre`, `/despre/cifre` (the register as tables with sources), `/cereale`, `/cereale/{crop}` ×5 (key facts, map, form with the crop pre-selected, other crops), `/depozitare`, `/depozitare/uscare`, `/baze/{baza}` ×17 (key facts, form with the base pre-selected, map with the base marked, FAQ), `/finantare` (overview hub), `/golden-relationship` (with a click-to-load video), `/logistica`, `/parteneri`, `/cariere`, `/contact`, `/confidentialitate` (marked as a draft). English pages keep short placeholders until 2.3.
+- **Media:** five stills from the 2022 films are uploaded by the seed when `data/raw/frames` exists, with rights "pending"; without them (CI) pages render without photos.
+- **Tests:** 31 integration (+ facts in text, FAQ filtering, the seed rich-text builder) and 38 e2e (+ menu sub-pages without JavaScript, base pre-selected on its page, all 17 bases on the map list, English pages without Romanian fallbacks).
+
+**Results**
+
+- `check:seo`: 42 pages, 0 errors, 0 warnings (both keyword-cluster warnings fixed). `check:figures`: unconfirmed values listed (warning until launch).
+- Lighthouse, mobile, applied throttling, all 20 core URLs (RO + EN): performance 100, accessibility 100, best practices 100; LCP 1,3–1,4 s; TBT ≤ 10 ms; CLS 0.
+
+**Open items**
+
+- The owner review of the pages and of the draft copy (screenshots in the preview at the 2.3 gate).
+- From Agrinvest (`agrinvest-inputs.md`): base locations (the map plots bases as soon as a county or GPS is entered), reception standards per crop, the IFN instalment calendar, the copy review, footage rights.
+- The screenshot rubric score for the real pages is part of the 2.3 full pass, with the English pages.
 
 **Components folded in from Phase 1.3–1.4** (in `design-system/`, each with a story, its states, an a11y note and RO/EN examples): SiteFooter, MobileNav, LanguageSwitch, MegaMenu (by need), Breadcrumbs, Accordion and FAQ, HeroVideo (poster first, 720p mobile source, scrim, reduced-motion still), CountUp, StorySection, CTA band, ContactPersonCard, LeadForm, BaseCard, **BaseMap** (server-rendered SVG of Romania's counties with base points; county centroid when there is no GPS; decision 0004 records the map approach), VideoEmbed (click to load), Callout, TOC. Extend the existing Hero, FigureStrip, FinanceBand and SiteHeader instead of duplicating them.
 

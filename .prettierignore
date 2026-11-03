@@ -5,3 +5,4 @@ src/app/(payload)/admin/importMap.js
 docs/audit/*.json
 data/
 src/app/(frontend)/fonts.css
+design-system/patterns/map/counties.ts

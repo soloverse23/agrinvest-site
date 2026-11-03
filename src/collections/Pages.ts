@@ -114,8 +114,12 @@ export const Pages: CollectionConfig = {
     {
       type: 'tabs',
       tabs: [
-        { label: 'Content', fields: [{ name: 'layout', type: 'blocks', blocks: pageBlocks }] },
-        { label: 'FAQ', fields: [faq] },
+        {
+          label: 'Content',
+          // Per language: the English site is business-led, not a translation of the Romanian.
+          fields: [{ name: 'layout', type: 'blocks', blocks: pageBlocks, localized: true }],
+        },
+        { label: 'FAQ', fields: [{ ...faq, localized: true }] },
         { label: 'SEO', fields: [seo] },
       ],
     },

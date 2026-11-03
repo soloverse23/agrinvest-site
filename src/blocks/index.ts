@@ -1,5 +1,6 @@
-import type { Block } from 'payload'
+import type { Block, Field } from 'payload'
 
+import { sectionIconKeys } from '@ds/icons/keys'
 import { link } from '@/fields'
 import { leadTypeOptions } from '@/lib/leads/types'
 
@@ -7,6 +8,24 @@ import { leadTypeOptions } from '@/lib/leads/types'
  * Page blocks. Each block maps to one design-system pattern (rendered by
  * `src/components/RenderBlocks.tsx`). Figures are referenced by register key, never typed.
  */
+
+/** Opening of a section: kicker, H2, lead (the SectionHeading pattern). */
+const sectionHead = (required = false): Field[] => [
+  {
+    type: 'row',
+    fields: [
+      { name: 'kicker', type: 'text', localized: true, admin: { width: '35%' } },
+      { name: 'heading', type: 'text', localized: true, required },
+    ],
+  },
+  { name: 'lead', type: 'textarea', localized: true },
+]
+
+const iconField: Field = {
+  name: 'icon',
+  type: 'select',
+  options: [...sectionIconKeys],
+}
 
 export const HeroBlock: Block = {
   slug: 'hero',
@@ -33,6 +52,15 @@ export const HeroBlock: Block = {
     },
     link('primary'),
     link('secondary'),
+    {
+      name: 'needs',
+      type: 'array',
+      maxRows: 4,
+      admin: {
+        description: 'Entry points by need on the bottom rail (replaced by prices in Phase 5).',
+      },
+      fields: [link('link', true), { name: 'hint', type: 'text', localized: true }],
+    },
   ],
 }
 
@@ -46,7 +74,7 @@ export const FigureStripBlock: Block = {
   slug: 'figureStrip',
   interfaceName: 'FigureStripBlock',
   fields: [
-    { name: 'heading', type: 'text', localized: true },
+    ...sectionHead(),
     {
       name: 'items',
       type: 'array',
@@ -70,20 +98,69 @@ export const ServiceGridBlock: Block = {
   slug: 'serviceGrid',
   interfaceName: 'ServiceGridBlock',
   fields: [
-    { name: 'heading', type: 'text', localized: true },
+    ...sectionHead(),
+    { name: 'columns', type: 'select', defaultValue: '3', options: ['2', '3', '4'] },
     {
       name: 'items',
       type: 'array',
       fields: [
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'body', type: 'textarea', localized: true },
-        {
-          name: 'icon',
-          type: 'select',
-          options: ['wheat', 'silo', 'truck', 'pin', 'leaf', 'cart', 'phone'],
-        },
+        iconField,
         link('link'),
       ],
+    },
+  ],
+}
+
+export const StepsBlock: Block = {
+  slug: 'steps',
+  interfaceName: 'StepsBlock',
+  fields: [
+    ...sectionHead(true),
+    {
+      name: 'items',
+      type: 'array',
+      minRows: 2,
+      maxRows: 6,
+      fields: [
+        { name: 'title', type: 'text', localized: true, required: true },
+        { name: 'body', type: 'textarea', localized: true },
+      ],
+    },
+  ],
+}
+
+export const FinanceBandBlock: Block = {
+  slug: 'financeBand',
+  interfaceName: 'FinanceBandBlock',
+  fields: [
+    ...sectionHead(true),
+    link('primary', true),
+    link('secondary'),
+    {
+      name: 'instalments',
+      type: 'array',
+      maxRows: 4,
+      admin: { description: 'The repayment timeline (figures register F5).' },
+      fields: [
+        { name: 'when', type: 'text', localized: true, required: true },
+        { name: 'label', type: 'text', localized: true, required: true },
+      ],
+    },
+  ],
+}
+
+export const FigureTableBlock: Block = {
+  slug: 'figureTable',
+  interfaceName: 'FigureTableBlock',
+  fields: [
+    ...sectionHead(),
+    {
+      name: 'keys',
+      type: 'text',
+      hasMany: true,
+      admin: { description: 'Register keys to show, in order. Empty = the whole register.' },
     },
   ],
 }
@@ -92,7 +169,9 @@ export const StorySectionBlock: Block = {
   slug: 'storySection',
   interfaceName: 'StorySectionBlock',
   fields: [
+    { name: 'kicker', type: 'text', localized: true },
     { name: 'heading', type: 'text', localized: true, required: true },
+    { name: 'reverse', type: 'checkbox', defaultValue: false },
     { name: 'body', type: 'richText', localized: true },
     { name: 'media', type: 'upload', relationTo: 'media' },
     { name: 'quote', type: 'textarea', localized: true },
@@ -104,7 +183,7 @@ export const BaseListBlock: Block = {
   slug: 'baseList',
   interfaceName: 'BaseListBlock',
   fields: [
-    { name: 'heading', type: 'text', localized: true },
+    ...sectionHead(),
     {
       name: 'counties',
       type: 'relationship',
@@ -120,7 +199,7 @@ export const CropListBlock: Block = {
   slug: 'cropList',
   interfaceName: 'CropListBlock',
   fields: [
-    { name: 'heading', type: 'text', localized: true },
+    ...sectionHead(),
     {
       name: 'crops',
       type: 'relationship',
@@ -135,6 +214,7 @@ export const CtaBandBlock: Block = {
   slug: 'ctaBand',
   interfaceName: 'CtaBandBlock',
   fields: [
+    { name: 'kicker', type: 'text', localized: true },
     { name: 'heading', type: 'text', localized: true, required: true },
     { name: 'body', type: 'textarea', localized: true },
     link('primary', true),
@@ -168,8 +248,21 @@ export const ContactCardsBlock: Block = {
   slug: 'contactCards',
   interfaceName: 'ContactCardsBlock',
   fields: [
-    { name: 'heading', type: 'text', localized: true },
-    { name: 'people', type: 'relationship', relationTo: 'people', hasMany: true, required: true },
+    ...sectionHead(),
+    {
+      name: 'cards',
+      type: 'array',
+      minRows: 1,
+      fields: [
+        { name: 'person', type: 'relationship', relationTo: 'people', required: true },
+        {
+          name: 'need',
+          type: 'text',
+          localized: true,
+          admin: { description: 'What to contact this person about, e.g. "Vânzare cereale".' },
+        },
+      ],
+    },
   ],
 }
 
@@ -177,6 +270,7 @@ export const VideoEmbedBlock: Block = {
   slug: 'videoEmbed',
   interfaceName: 'VideoEmbedBlock',
   fields: [
+    ...sectionHead(),
     { name: 'youtubeId', type: 'text', required: true },
     { name: 'title', type: 'text', localized: true, required: true },
     { name: 'description', type: 'textarea', localized: true },
@@ -200,7 +294,10 @@ export const pageBlocks: Block[] = [
   HeroBlock,
   RichTextBlock,
   FigureStripBlock,
+  FigureTableBlock,
   ServiceGridBlock,
+  StepsBlock,
+  FinanceBandBlock,
   StorySectionBlock,
   BaseListBlock,
   CropListBlock,

@@ -27,7 +27,7 @@ Code: `design-system/` (Storybook: `npm run storybook`). Direction: `docs/decisi
 
 ### Type
 
-- **Onest** (variable, OFL, self-hosted via `@fontsource-variable/onest`), for headings, text and figures. Chosen for legibility: large x-height, open shapes, clear `Il1` and `0O`; checked for ș ț with comma below and tabular figures (`npm run check:fonts`).
+- **Onest** (variable, OFL), for headings, text and figures. The site serves one file cut to Romanian + English (`npm run brand:font`, 29 KB) with metric-matched fallbacks; Storybook uses `@fontsource-variable/onest`. Chosen for legibility: large x-height, open shapes, clear `Il1` and `0O`; checked for ș ț with comma below and tabular figures (`npm run check:fonts`).
 - Scale: `display`, `h1`–`h4`, `lead`, `body` (17 px), `small`, `caption`, and `figure` for big numbers. Headings are fluid between 390 and 1440 px.
 - Weights: 400 text, 500 labels, 600 headings, figures and buttons.
 - `tabular-nums` on every number that is compared or updates (prices, tables, stats).
@@ -61,15 +61,18 @@ Breakpoints `md` 768, `lg` 1024, `xl` 1440. Page width `max-w-page` (82 rem), re
 
 ## Components
 
-| Layer      | Components                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Brand      | `LogoMark` (colour, mono), `Lockup`                                                                                                                             |
-| Icons      | Crops (wheat, barley, maize, sunflower, rapeseed); UI (arrow, chevron, menu, check, phone, cart); operations (silo, truck, pin, leaf). 24 px grid, 1.75 stroke. |
-| Primitives | `Button` (primary, secondary, ghost, lime, on-dark; sm/md/lg), `Badge`, `Delta`, `TextField`, `SelectField`, `SegmentedControl`                                 |
-| Patterns   | `SiteHeader` (with price ticker), `Hero` (with today's prices), `PriceTile`, `PriceTable`, `ProductCard`, `FigureStrip`, `FinanceBand`                          |
-| Pages      | `Pages/Home` sketch                                                                                                                                             |
+| Layer      | Components                                                                                                                                                                                                                                      |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Brand      | `LogoMark` (colour, mono), `Lockup`                                                                                                                                                                                                             |
+| Icons      | Crops (wheat, barley, maize, sunflower, rapeseed); UI (arrow, chevron, menu, check, phone, cart); operations (silo, truck, pin, leaf). 24 px grid, 1.75 stroke.                                                                                 |
+| Primitives | `Button` (primary, secondary, ghost, lime, on-dark; sm/md/lg), `Badge`, `Delta`, `TextField`, `SelectField`, `SegmentedControl`                                                                                                                 |
+| Patterns   | `SiteHeader` (price ticker, mega menu by need), `SiteFooter`, `Hero` (prices or entry points by need), `PriceTile`, `PriceTable`, `ProductCard`, `FigureStrip`, `FinanceBand`, `BaseMap`, `FactTable`, `LeadForm`, `VideoEmbed` (click to load) |
+| Sections   | `SectionHeading`, `Kicker`, `PageHeader`, `Breadcrumbs`, `Updated`, `KeyFacts`, `Accordion` (FAQ), `ServiceGrid`, `Steps`, `CtaBand`, `Callout`, `StorySection`, `ContactCards`, `Toc`                                                          |
+| Pages      | `Pages/Home` sketch                                                                                                                                                                                                                             |
 
-Server components by default. `SegmentedControl` is the only client component; the mobile menu uses `<details>` and needs no JavaScript.
+Server components by default. Client components: `SegmentedControl`, `LeadForm` (loaded only on pages with a form, through `LeadFormLazy`) and `VideoEmbed`. The mobile menu uses `<details>`, the mega menu opens on hover and focus with CSS, and the FAQ uses `<details>`: none need JavaScript.
+
+Long text from the CMS uses the `prose-agr` class (tokens.css). Logo and map outlines are static SVG files (`public/brand`, `public/maps`), not inline markup, so pages stay light.
 
 ## Imagery
 

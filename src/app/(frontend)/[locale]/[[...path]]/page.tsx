@@ -3,7 +3,8 @@ import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import type { Thing, WithContext } from 'schema-dts'
 
-import { Faq, PageHeader } from '@/components/PageParts'
+import { schemaFaq } from '@/components/FactText'
+import { Faq, PageTitle } from '@/components/PageParts'
 import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
@@ -60,10 +61,10 @@ export default async function CmsPage(props: Props) {
   const heroFirst = page.layout?.[0]?.blockType === 'hero'
 
   return (
-    <SiteShell locale={locale} alternates={alternates}>
+    <SiteShell locale={locale} alternates={alternates} overlay={heroFirst}>
       <PageJsonLd page={page} locale={locale} url={url} crumbs={crumbs} />
       {!heroFirst && (
-        <PageHeader
+        <PageTitle
           locale={locale}
           title={page.title}
           summary={page.summary}
@@ -71,7 +72,9 @@ export default async function CmsPage(props: Props) {
           crumbs={crumbs}
         />
       )}
-      <RenderBlocks blocks={page.layout} locale={locale} path={pagePath} />
+      <div className={heroFirst ? undefined : 'mt-16 md:mt-24'}>
+        <RenderBlocks blocks={page.layout} locale={locale} path={pagePath} />
+      </div>
       <Faq locale={locale} items={page.faq} />
     </SiteShell>
   )
@@ -88,6 +91,7 @@ async function PageJsonLd({
   url: string
   crumbs: { name: string; url: string }[]
 }) {
+  const figures = await getFigures(locale)
   const data: WithContext<Thing>[] = [
     webPage({
       url,
@@ -98,7 +102,7 @@ async function PageJsonLd({
     }),
   ]
   if (page.isHome) {
-    const [figures, seo] = await Promise.all([getFigures(locale), getSeoDefaults(locale)])
+    const seo = await getSeoDefaults(locale)
     data.push(
       organization({
         figures,
@@ -111,6 +115,7 @@ async function PageJsonLd({
   } else {
     data.push(breadcrumbs(locale, ui[locale].home, crumbs))
   }
-  if (page.faq?.length) data.push(faqPage(page.faq))
+  const faq = schemaFaq(page.faq, figures)
+  if (faq.length) data.push(faqPage(faq))
   return <JsonLd data={data} />
 }

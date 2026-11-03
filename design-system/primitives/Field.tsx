@@ -31,10 +31,11 @@ function Frame({
   label,
   hint,
   error,
+  className,
   children,
-}: FieldFrame & { id: string; children: ReactNode }) {
+}: FieldFrame & { id: string; className?: string; children: ReactNode }) {
   return (
-    <div className="grid gap-1.5">
+    <div className={cx('grid content-start gap-1.5', className)}>
       <label htmlFor={id} className="text-small font-medium text-ink">
         {label}
       </label>
@@ -66,8 +67,8 @@ export function TextField({
 }: FieldFrame & Omit<InputHTMLAttributes<HTMLInputElement>, 'children'>) {
   const id = useId()
   return (
-    <Frame id={id} label={label} hint={hint} error={error}>
-      <div className={cx('relative', className)}>
+    <Frame id={id} label={label} hint={hint} error={error} className={className}>
+      <div className="relative">
         <input
           id={id}
           aria-invalid={error ? true : undefined}
@@ -103,8 +104,8 @@ export function SelectField({
   >) {
   const id = useId()
   return (
-    <Frame id={id} label={label} hint={hint} error={error}>
-      <div className={cx('relative', className)}>
+    <Frame id={id} label={label} hint={hint} error={error} className={className}>
+      <div className="relative">
         <select
           id={id}
           aria-invalid={error ? true : undefined}
@@ -134,13 +135,13 @@ export function TextAreaField({
 }: Omit<FieldFrame, 'suffix'> & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'children'>) {
   const id = useId()
   return (
-    <Frame id={id} label={label} hint={hint} error={error}>
+    <Frame id={id} label={label} hint={hint} error={error} className={className}>
       <textarea
         id={id}
         rows={rows}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy(id, hint, error)}
-        className={cx(control, controlState(error), 'h-auto py-3', className)}
+        className={cx(control, controlState(error), 'h-auto py-3')}
         {...props}
       />
     </Frame>

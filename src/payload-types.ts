@@ -157,7 +157,10 @@ export interface Page {
         | HeroBlock
         | RichTextBlock
         | FigureStripBlock
+        | FigureTableBlock
         | ServiceGridBlock
+        | StepsBlock
+        | FinanceBandBlock
         | StorySectionBlock
         | BaseListBlock
         | CropListBlock
@@ -228,6 +231,19 @@ export interface HeroBlock {
     label?: string | null;
     href?: string | null;
   };
+  /**
+   * Entry points by need on the bottom rail (replaced by prices in Phase 5).
+   */
+  needs?:
+    | {
+        link: {
+          label: string;
+          href: string;
+        };
+        hint?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -286,7 +302,9 @@ export interface RichTextBlock {
  * via the `definition` "FigureStripBlock".
  */
 export interface FigureStripBlock {
+  kicker?: string | null;
   heading?: string | null;
+  lead?: string | null;
   items?:
     | {
         /**
@@ -304,15 +322,54 @@ export interface FigureStripBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FigureTableBlock".
+ */
+export interface FigureTableBlock {
+  kicker?: string | null;
+  heading?: string | null;
+  lead?: string | null;
+  /**
+   * Register keys to show, in order. Empty = the whole register.
+   */
+  keys?: string[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'figureTable';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ServiceGridBlock".
  */
 export interface ServiceGridBlock {
+  kicker?: string | null;
   heading?: string | null;
+  lead?: string | null;
+  columns?: ('2' | '3' | '4') | null;
   items?:
     | {
         title: string;
         body?: string | null;
-        icon?: ('wheat' | 'silo' | 'truck' | 'pin' | 'leaf' | 'cart' | 'phone') | null;
+        icon?:
+          | (
+              | 'silo'
+              | 'truck'
+              | 'pin'
+              | 'leaf'
+              | 'scale'
+              | 'drop'
+              | 'coins'
+              | 'clock'
+              | 'handshake'
+              | 'document'
+              | 'phone'
+              | 'mail'
+              | 'wheat'
+              | 'maize'
+              | 'sunflower'
+              | 'rapeseed'
+              | 'barley'
+            )
+          | null;
         link?: {
           label?: string | null;
           href?: string | null;
@@ -326,10 +383,61 @@ export interface ServiceGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  kicker?: string | null;
+  heading: string;
+  lead?: string | null;
+  items?:
+    | {
+        title: string;
+        body?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FinanceBandBlock".
+ */
+export interface FinanceBandBlock {
+  kicker?: string | null;
+  heading: string;
+  lead?: string | null;
+  primary: {
+    label: string;
+    href: string;
+  };
+  secondary?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  /**
+   * The repayment timeline (figures register F5).
+   */
+  instalments?:
+    | {
+        when: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'financeBand';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "StorySectionBlock".
  */
 export interface StorySectionBlock {
+  kicker?: string | null;
   heading: string;
+  reverse?: boolean | null;
   body?: {
     root: {
       type: string;
@@ -387,7 +495,9 @@ export interface Person {
  * via the `definition` "BaseListBlock".
  */
 export interface BaseListBlock {
+  kicker?: string | null;
   heading?: string | null;
+  lead?: string | null;
   /**
    * Empty = all bases.
    */
@@ -428,7 +538,9 @@ export interface County {
  * via the `definition` "CropListBlock".
  */
 export interface CropListBlock {
+  kicker?: string | null;
   heading?: string | null;
+  lead?: string | null;
   /**
    * Empty = all crops.
    */
@@ -497,6 +609,7 @@ export interface Crop {
  * via the `definition` "CtaBandBlock".
  */
 export interface CtaBandBlock {
+  kicker?: string | null;
   heading: string;
   body?: string | null;
   primary: {
@@ -531,8 +644,19 @@ export interface LeadFormBlock {
  * via the `definition` "ContactCardsBlock".
  */
 export interface ContactCardsBlock {
+  kicker?: string | null;
   heading?: string | null;
-  people: (number | Person)[];
+  lead?: string | null;
+  cards?:
+    | {
+        person: number | Person;
+        /**
+         * What to contact this person about, e.g. "Vânzare cereale".
+         */
+        need?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactCards';
@@ -542,6 +666,9 @@ export interface ContactCardsBlock {
  * via the `definition` "VideoEmbedBlock".
  */
 export interface VideoEmbedBlock {
+  kicker?: string | null;
+  heading?: string | null;
+  lead?: string | null;
   youtubeId: string;
   title: string;
   description?: string | null;
@@ -803,7 +930,10 @@ export interface PagesSelect<T extends boolean = true> {
         hero?: T | HeroBlockSelect<T>;
         richText?: T | RichTextBlockSelect<T>;
         figureStrip?: T | FigureStripBlockSelect<T>;
+        figureTable?: T | FigureTableBlockSelect<T>;
         serviceGrid?: T | ServiceGridBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        financeBand?: T | FinanceBandBlockSelect<T>;
         storySection?: T | StorySectionBlockSelect<T>;
         baseList?: T | BaseListBlockSelect<T>;
         cropList?: T | CropListBlockSelect<T>;
@@ -861,6 +991,18 @@ export interface HeroBlockSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  needs?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        hint?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -878,7 +1020,9 @@ export interface RichTextBlockSelect<T extends boolean = true> {
  * via the `definition` "FigureStripBlock_select".
  */
 export interface FigureStripBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
+  lead?: T;
   items?:
     | T
     | {
@@ -892,10 +1036,25 @@ export interface FigureStripBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FigureTableBlock_select".
+ */
+export interface FigureTableBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  heading?: T;
+  lead?: T;
+  keys?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ServiceGridBlock_select".
  */
 export interface ServiceGridBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
+  lead?: T;
+  columns?: T;
   items?:
     | T
     | {
@@ -915,10 +1074,60 @@ export interface ServiceGridBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock_select".
+ */
+export interface StepsBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  heading?: T;
+  lead?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FinanceBandBlock_select".
+ */
+export interface FinanceBandBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  heading?: T;
+  lead?: T;
+  primary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  secondary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  instalments?:
+    | T
+    | {
+        when?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "StorySectionBlock_select".
  */
 export interface StorySectionBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
+  reverse?: T;
   body?: T;
   media?: T;
   quote?: T;
@@ -931,7 +1140,9 @@ export interface StorySectionBlockSelect<T extends boolean = true> {
  * via the `definition` "BaseListBlock_select".
  */
 export interface BaseListBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
+  lead?: T;
   counties?: T;
   showMap?: T;
   id?: T;
@@ -942,7 +1153,9 @@ export interface BaseListBlockSelect<T extends boolean = true> {
  * via the `definition` "CropListBlock_select".
  */
 export interface CropListBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
+  lead?: T;
   crops?: T;
   id?: T;
   blockName?: T;
@@ -952,6 +1165,7 @@ export interface CropListBlockSelect<T extends boolean = true> {
  * via the `definition` "CtaBandBlock_select".
  */
 export interface CtaBandBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
   body?: T;
   primary?:
@@ -987,8 +1201,16 @@ export interface LeadFormBlockSelect<T extends boolean = true> {
  * via the `definition` "ContactCardsBlock_select".
  */
 export interface ContactCardsBlockSelect<T extends boolean = true> {
+  kicker?: T;
   heading?: T;
-  people?: T;
+  lead?: T;
+  cards?:
+    | T
+    | {
+        person?: T;
+        need?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -997,6 +1219,9 @@ export interface ContactCardsBlockSelect<T extends boolean = true> {
  * via the `definition` "VideoEmbedBlock_select".
  */
 export interface VideoEmbedBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  heading?: T;
+  lead?: T;
   youtubeId?: T;
   title?: T;
   description?: T;
@@ -1316,6 +1541,10 @@ export interface Navigation {
           label: string;
           href: string;
         };
+        /**
+         * One sentence shown in the menu panel next to the sub-pages.
+         */
+        blurb?: string | null;
         children?:
           | {
               link: {
@@ -1457,6 +1686,7 @@ export interface NavigationSelect<T extends boolean = true> {
               label?: T;
               href?: T;
             };
+        blurb?: T;
         children?:
           | T
           | {

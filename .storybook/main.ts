@@ -9,6 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 // Video frames and product photos are local-only (data/raw/ is gitignored, footage rights are
 // unconfirmed). Serve them when present; boards show a labelled placeholder otherwise.
 const localMedia = [
+  { from: '../public', to: '/' },
   { from: '../data/raw/frames', to: '/frames' },
   { from: '../data/raw/media/products', to: '/products' },
 ].filter(({ from }) => existsSync(path.resolve(root, '.storybook', from)))

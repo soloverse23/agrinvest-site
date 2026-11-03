@@ -11,6 +11,7 @@
         "http://localhost:3100/cereale/grau",
         "http://localhost:3100/depozitare",
         "http://localhost:3100/baze/pogoanele",
+        "http://localhost:3100/finantare",
         "http://localhost:3100/contact"
       ],
       "numberOfRuns": 3,

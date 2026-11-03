@@ -16,9 +16,11 @@ export type Figure = {
   status: FactStatus
 }
 
+export type Figures = Record<string, Figure>
+
 /** The figures register for one locale, keyed by register key. */
 export const getFigures = unstable_cache(
-  async (locale: Locale): Promise<Record<string, Figure>> => {
+  async (locale: Locale): Promise<Figures> => {
     const payload = await payloadClient()
     const global = await payload.findGlobal({ slug: 'figures', locale, depth: 0 })
     return Object.fromEntries(

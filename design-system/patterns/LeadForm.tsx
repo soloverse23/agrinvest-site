@@ -21,6 +21,8 @@ export type LeadFormProps = {
   body?: string | null
   extra?: readonly LeadExtraField[] | null
   options?: Partial<Record<'county' | 'base' | 'crop', Option[]>>
+  /** Pre-selected option values, e.g. the base on its own page. */
+  defaults?: Partial<Record<'county' | 'base' | 'crop', string>>
   /** The page the form is on: stored with the lead and used as the no-JavaScript permalink. */
   sourcePath: string
   privacyHref: string
@@ -93,6 +95,7 @@ export function LeadForm({
   sourcePath,
   privacyHref,
   initialState = initialLeadState,
+  defaults,
 }: LeadFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState, sourcePath)
   const t = copy[locale]
@@ -119,7 +122,7 @@ export function LeadForm({
       <SelectField
         name={f}
         label={t[f]}
-        defaultValue={value(f) ?? ''}
+        defaultValue={value(f) ?? defaults?.[f] ?? ''}
         error={error(f)}
         options={[{ value: '', label: t.choose }, ...options[f]]}
       />

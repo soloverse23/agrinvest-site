@@ -7,7 +7,6 @@ import {
   WheatIcon,
   type IconProps,
 } from '../icons/icons'
-import { LogoMark } from '../brand/LogoMark'
 import { cx } from '../lib/cx'
 
 const cropIcons = {
@@ -74,7 +73,11 @@ export function Sparkline({
   )
 }
 
-/** Logo mark + wordmark. `tone="light"` for dark backgrounds. */
+/**
+ * Logo mark + wordmark. `tone="light"` for dark backgrounds. The mark is an <img> of the
+ * built SVG (public/brand, `npm run brand:logo`): cached once, not repeated inline in every
+ * page's HTML and RSC data. Decorative: the link around it carries the name.
+ */
 export function Lockup({
   tone = 'dark',
   className,
@@ -90,7 +93,14 @@ export function Lockup({
         className,
       )}
     >
-      <LogoMark variant={tone === 'light' ? 'mono' : 'colour'} className="h-8 w-auto" title="" />
+      {/* eslint-disable-next-line @next/next/no-img-element -- a 2 KB SVG; next/image adds nothing */}
+      <img
+        src={tone === 'light' ? '/brand/logo-mark-mono-light.svg' : '/brand/logo-mark.svg'}
+        alt=""
+        width={38}
+        height={32}
+        className="h-8 w-auto"
+      />
       <span className="text-h4 font-semibold tracking-tight">Agrinvest</span>
     </span>
   )

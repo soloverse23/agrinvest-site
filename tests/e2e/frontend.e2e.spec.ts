@@ -131,3 +131,32 @@ test.describe('Lead form', () => {
     await expect(page.getByRole('status')).toContainText('Thank you')
   })
 })
+
+test.describe('Core page content', () => {
+  test('the menu lists sub-pages in the HTML (no JavaScript needed)', async ({ page }) => {
+    await page.goto('/')
+    const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
+    await expect(nav.locator('a[href="/cereale/grau"]')).toHaveCount(1)
+    await expect(nav.locator('a[href="/depozitare/uscare"]')).toHaveCount(1)
+  })
+
+  test('a base page pre-selects its base in the delivery form', async ({ page }) => {
+    await page.goto('/baze/pogoanele')
+    await expect(page.getByLabel('Baza cea mai apropiată')).toHaveValue(/\d+/)
+    const selected = await page
+      .getByLabel('Baza cea mai apropiată')
+      .evaluate((el: HTMLSelectElement) => el.selectedOptions[0]?.textContent)
+    expect(selected).toBe('Pogoanele')
+  })
+
+  test('the base map lists every base with a link to its page', async ({ page }) => {
+    await page.goto('/depozitare')
+    await expect(page.locator('#baze ul a[href^="/baze/"]')).toHaveCount(17)
+  })
+
+  test('English pages have their own blocks, not Romanian fallbacks', async ({ page }) => {
+    await page.goto('/en/storage')
+    await expect(page.getByRole('heading', { name: 'Our storage bases' })).toBeVisible()
+    await expect(page.locator('main')).not.toContainText('Bazele de depozitare')
+  })
+})

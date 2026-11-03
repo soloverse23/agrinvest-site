@@ -43,7 +43,8 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
-  // The one font file (Romanian + English subset), fetched with the HTML rather than after CSS.
+  // The one font file (Romanian + English subset), fetched with the HTML so it is usually in
+  // time for the first render (font-display: optional never swaps it in later).
   preload('/fonts/onest-ro-wght.woff2', {
     as: 'font',
     type: 'font/woff2',

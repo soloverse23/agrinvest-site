@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
     inlineCss: true,
   },
   images: {
+    // 60 for full-bleed photos under a scrim (Hero), 75 (the default) for everything else.
+    qualities: [60, 75],
     localPatterns: [
       {
         pathname: '/api/media/file/**',

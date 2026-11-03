@@ -1,9 +1,10 @@
 /**
  * Seeds the Phase 2 content model: Figures register, counties, bases, crops, people,
- * lead routing, navigation, SEO defaults and the core page shells.
+ * lead routing, media (local footage stills), navigation, footer, SEO defaults and the core
+ * pages with their content (content.ts).
  * Idempotent: every record is upserted by its key or slug. Run with `npm run seed`.
  */
-import { readFileSync, rmSync } from 'node:fs'
+import { existsSync, readFileSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import config from '@payload-config'
@@ -11,10 +12,9 @@ import { getPayload, type Payload, type Where } from 'payload'
 
 import type { FactStatus } from '@/fields'
 import { slugify } from '@/lib/slugify'
-import type { Page } from '@/payload-types'
-
+import { contentFor, cropContent, cropFaq, type Ctx } from './content'
 import { bases, counties, crops, figures, people, routes, sameAs } from './data'
-import { navigation, pages, type PageSeed } from './pages'
+import { footer, navigation, pages } from './pages'
 
 const context = { skipChildren: true }
 
@@ -137,6 +137,8 @@ async function seedLocations(payload: Payload) {
         key: crop.key,
         name: crop.name.ro,
         slug: crop.slug.ro,
+        intro: cropContent[crop.key].intro,
+        faq: cropFaq(crop.name.ro.toLowerCase(), cropContent[crop.key].season),
         _status: 'published',
       },
     )
@@ -189,57 +191,56 @@ async function seedPeople(payload: Payload): Promise<Record<string, number>> {
   return ids
 }
 
-function layoutFor(seed: PageSeed, locale: 'ro' | 'en'): Page['layout'] {
-  const en = locale === 'en'
-  switch (seed.layout) {
-    case 'home':
-      return [
-        {
-          blockType: 'hero',
-          eyebrow: en
-            ? 'Grain · Storage · Inputs · Financing'
-            : 'Cereale · Depozitare · Inputuri · Finanțare',
-          title: en
-            ? 'From sowing to sale, a partner for Romanian farmers'
-            : 'Partenerul fermierului de la semănat până la vânzare',
-          accent: en ? 'From sowing to sale' : 'până la vânzare',
-          lead: en ? seed.en?.summary : seed.ro.summary,
-          primary: en
-            ? { label: 'Grain storage', href: '/en/storage' }
-            : { label: 'Vinde cereale', href: '/cereale' },
-          secondary: en
-            ? { label: 'Contact us', href: '/en/contact' }
-            : { label: 'Contactează-ne', href: '/contact' },
-        },
-        {
-          blockType: 'figureStrip',
-          items: [{ figure: 'S1' }, { figure: 'S2' }, { figure: 'L1' }],
-        },
-        {
-          blockType: 'ctaBand',
-          heading: en ? 'Financing aligned with the harvest' : 'Finanțare cu rate după recoltă',
-          body: en
-            ? 'Agrinvest Credit IFN finances production, investments and grain stocks.'
-            : 'Agrinvest Credit IFN finanțează producția, investițiile și stocurile de cereale.',
-          primary: en
-            ? { label: 'Farm financing', href: '/en/financing' }
-            : { label: 'Vezi finanțarea', href: '/finantare' },
-        },
-      ]
-    case 'contact':
-      return [{ blockType: 'leadForm', leadType: 'general', extraFields: ['company', 'county'] }]
-    case 'grain':
-      return [
-        { blockType: 'leadForm', leadType: 'vanzare-cereale', extraFields: ['county', 'crop'] },
-      ]
-    default:
-      return []
-  }
+/**
+ * Video stills from the 2022 Agrinvest films (data/raw/frames, gitignored). Footage rights
+ * are not confirmed, so they are uploaded as "pending" and only where the files exist
+ * locally; without them (CI) pages render without photos.
+ */
+const frames: Record<string, { ro: string; en: string }> = {
+  'harvest-sunflower': {
+    ro: 'Combină recoltând floarea-soarelui, văzută de sus',
+    en: 'A combine harvesting sunflower, seen from above',
+  },
+  combine: { ro: 'Combină în lanul de grâu', en: 'A combine in a wheat field' },
+  team: { ro: 'Echipa Agrinvest pe teren', en: 'The Agrinvest team in the field' },
+  fleet: { ro: 'Camioane din flota Agrinvest', en: 'Trucks from the Agrinvest fleet' },
+  'grain-reception': {
+    ro: 'Cereale descărcate la recepție, într-o bază Agrinvest',
+    en: 'Grain unloaded at reception in an Agrinvest base',
+  },
 }
 
-async function seedPages(payload: Payload) {
+async function seedMedia(payload: Payload): Promise<Ctx['media']> {
+  const dir = resolve('data/raw/frames')
+  const ids: Ctx['media'] = {}
+  if (!existsSync(dir)) {
+    console.log('media: no local frames (data/raw/frames), pages render without photos')
+    return ids
+  }
+  for (const [name, alt] of Object.entries(frames)) {
+    const filePath = resolve(dir, `${name}.webp`)
+    if (!existsSync(filePath)) continue
+    const found = await payload.find({
+      collection: 'media',
+      where: { filename: { equals: `${name}.webp` } },
+      limit: 1,
+      depth: 0,
+    })
+    const data = { alt: alt.ro, rights: 'pending' as const, credit: 'Agrinvest (YouTube, 2022)' }
+    const doc = found.docs[0]
+      ? await payload.update({ collection: 'media', id: found.docs[0].id, data, locale: 'ro' })
+      : await payload.create({ collection: 'media', data, filePath, locale: 'ro' })
+    await payload.update({ collection: 'media', id: doc.id, data: { alt: alt.en }, locale: 'en' })
+    ids[name] = doc.id
+  }
+  console.log(`media: ${Object.keys(ids).length} frames (rights pending)`)
+  return ids
+}
+
+async function seedPages(payload: Payload, ctx: Ctx) {
   const ids: Record<string, number> = {}
   for (const seed of pages) {
+    const content = contentFor(seed.key, ctx)
     const where: Where = seed.isHome
       ? { isHome: { equals: true } }
       : {
@@ -262,7 +263,8 @@ async function seedPages(payload: Payload) {
       isHome: Boolean(seed.isHome),
       parent: seed.parent ? ids[seed.parent] : null,
       languages: seed.en ? (['ro', 'en'] as const) : (['ro'] as const),
-      layout: layoutFor(seed, 'ro'),
+      layout: content?.ro ?? [],
+      faq: content?.faq?.ro ?? [],
       _status: 'published' as const,
     }
     const doc = found.docs[0]
@@ -276,10 +278,7 @@ async function seedPages(payload: Payload) {
       : await payload.create({ collection: 'pages', data: ro as never, locale: 'ro', context })
     ids[seed.key] = doc.id
     if (seed.en) {
-      // Blocks are shared across locales: reuse the saved rows' ids so the English text
-      // is written onto the same blocks instead of replacing them (which drops Romanian).
-      const ids = (doc.layout ?? []).map((b) => b.id)
-      const enLayout = (layoutFor(seed, 'en') ?? []).map((b, i) => ({ ...b, id: ids[i] }))
+      // Layout and FAQ are per language: the English page has its own blocks.
       await payload.update({
         collection: 'pages',
         id: doc.id,
@@ -290,7 +289,8 @@ async function seedPages(payload: Payload) {
           slug: seed.en.slug,
           summary: seed.en.summary,
           seo: { title: seed.en.seoTitle },
-          layout: enLayout,
+          layout: content?.en ?? [],
+          faq: content?.faq?.en ?? [],
           _status: 'published',
         } as never,
       })
@@ -306,8 +306,27 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        items: navigation[locale].map(([label, href]) => ({ link: { label, href } })),
-        cta: { label: navigation.cta[locale][0], href: navigation.cta[locale][1] },
+        items: navigation[locale].map(({ label, href, blurb, children }) => ({
+          link: { label, href },
+          blurb,
+          children: children?.map((c) => ({
+            link: { label: c.label, href: c.href },
+            description: c.description,
+          })),
+        })),
+        cta: navigation.cta[locale],
+      },
+    })
+    await payload.updateGlobal({
+      slug: 'footer',
+      locale,
+      context,
+      data: {
+        columns: footer[locale].columns.map((col) => ({
+          title: col.title,
+          links: col.links.map(([label, href]) => ({ link: { label, href } })),
+        })),
+        legal: footer[locale].legal,
       },
     })
   }
@@ -336,15 +355,16 @@ async function seedGlobals(payload: Payload) {
         'Agrinvest works directly with Romanian farmers: grain trading, storage, farm inputs, transport and financing through Agrinvest Credit IFN.',
     },
   })
-  console.log('globals: navigation, seo defaults')
+  console.log('globals: navigation, footer, seo defaults')
 }
 
 const payload = await getPayload({ config })
 await seedFigures(payload)
 await seedLocations(payload)
-await seedPeople(payload)
+const peopleIds = await seedPeople(payload)
+const mediaIds = await seedMedia(payload)
 await seedGlobals(payload)
-await seedPages(payload)
+await seedPages(payload, { people: peopleIds, media: mediaIds })
 
 // The seed writes outside Next.js, so its hooks cannot revalidate cache tags. Clear Next's
 // data cache instead, or the next build or dev run serves the pre-seed content.

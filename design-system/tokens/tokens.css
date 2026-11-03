@@ -54,7 +54,7 @@
   /* Type: one family, Onest, with tabular figures for data */
   /* 'Onest Variable' is declared by the site (globals.css, preloaded) and by Storybook
      (@fontsource); both use the same files. */
-  --font-sans: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Onest Variable', 'Onest Fallback', 'Onest Fallback Roboto', system-ui, sans-serif;
 
   --text-caption: 0.8125rem;
   --text-caption--line-height: 1.4;

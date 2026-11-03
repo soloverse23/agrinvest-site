@@ -7,42 +7,40 @@
         "http://localhost:3100/",
         "http://localhost:3100/en",
         "http://localhost:3100/despre",
-        "http://localhost:3100/baze/pogoanele",
+        "http://localhost:3100/cereale",
         "http://localhost:3100/cereale/grau",
+        "http://localhost:3100/depozitare",
+        "http://localhost:3100/baze/pogoanele",
         "http://localhost:3100/contact"
       ],
       "numberOfRuns": 3,
       "settings": {
         "formFactor": "mobile",
-        "onlyCategories": ["performance", "accessibility"]
+        "throttlingMethod": "devtools",
+        "onlyCategories": ["performance", "accessibility", "best-practices", "seo"]
       }
     },
     "assert": {
       "assertions": {
-        "largest-contentful-paint": [
-          "error",
-          {
-            "maxNumericValue": 2000
-          }
-        ],
-        "cumulative-layout-shift": [
-          "error",
-          {
-            "maxNumericValue": 0.05
-          }
-        ],
-        "total-blocking-time": [
-          "warn",
-          {
-            "maxNumericValue": 200
-          }
-        ],
-        "categories:accessibility": [
-          "error",
-          {
-            "minScore": 0.95
-          }
-        ]
+        "categories:performance": ["error", { "minScore": 0.95 }],
+        "categories:accessibility": ["error", { "minScore": 1 }],
+        "categories:best-practices": ["error", { "minScore": 1 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2000 }],
+        "first-contentful-paint": ["error", { "maxNumericValue": 1800 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.05 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 200 }],
+        "resource-summary:script:size": ["error", { "maxNumericValue": 160000 }],
+        "resource-summary:font:size": ["error", { "maxNumericValue": 32000 }],
+        "resource-summary:stylesheet:count": ["error", { "maxNumericValue": 0 }],
+        "document-title": "error",
+        "meta-description": "error",
+        "http-status-code": "error",
+        "link-text": "error",
+        "crawlable-anchors": "error",
+        "hreflang": "error",
+        "canonical": "error",
+        "image-alt": "error",
+        "robots-txt": "error"
       }
     },
     "upload": {

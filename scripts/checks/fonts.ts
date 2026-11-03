@@ -2,7 +2,8 @@
  * Checks the design-system fonts for what Agrinvest text needs: Romanian Ș ș Ț ț with comma
  * below (U+0218–U+021B), the rest of the Romanian alphabet, and tabular figures: either a
  * `tnum` feature or digits that are tabular by default (all ten share one advance width).
- * Reads the latin-ext files that Fontsource ships (that subset carries the Romanian letters).
+ * Reads the latin-ext files that Fontsource ships (used by Storybook) and the subset the site
+ * serves (public/fonts, built by `npm run brand:font`).
  *
  * Run: npm run check:fonts
  */
@@ -48,10 +49,20 @@ async function latinFile(pkg: string, extFile: string): Promise<string | undefin
     .catch(() => undefined)
 }
 
-async function check(pkg: string) {
+/** The site's own subset: one file that must carry everything on its own. */
+const SERVED = {
+  label: 'Onest (site subset)',
+  files: [path.join(root, 'public/fonts/onest-ro-wght.woff2')],
+}
+
+async function fontsourceFiles(pkg: string) {
   const ext = await fontFile(pkg)
   const latin = await latinFile(pkg, ext)
-  const fonts = [ext, latin].filter(Boolean).map((f) => fontkit.openSync(f!) as fontkit.Font)
+  return { label: CANDIDATES[pkg], files: [ext, latin].filter((f): f is string => Boolean(f)) }
+}
+
+async function check({ label, files }: { label: string; files: string[] }) {
+  const fonts = files.map((f) => fontkit.openSync(f) as fontkit.Font)
   const has = (cp: number) => fonts.some((font) => font.hasGlyphForCodePoint(cp))
   const features = new Set(fonts.flatMap((font) => font.availableFeatures))
   // Measure digits in the file that has them (the latin-ext subset may not).
@@ -64,13 +75,14 @@ async function check(pkg: string) {
   const missing = [...COMMA_BELOW, ...ROMANIAN, ...BASIC]
     .filter((cp) => !has(cp))
     .map((cp) => String.fromCodePoint(cp))
-  return { pkg, missing, tabular }
+  return { label, missing, tabular }
 }
 
 async function main() {
-  const results = await Promise.all(Object.keys(CANDIDATES).map(check))
+  const sources = [...(await Promise.all(Object.keys(CANDIDATES).map(fontsourceFiles))), SERVED]
+  const results = await Promise.all(sources.map(check))
   let failed = 0
-  for (const { pkg, missing, tabular } of results) {
+  for (const { label, missing, tabular } of results) {
     const ok = !missing.length && tabular
     if (!ok) failed++
     const notes = [
@@ -83,7 +95,7 @@ async function main() {
     ]
       .filter(Boolean)
       .join('; ')
-    console.log(`${ok ? 'PASS' : 'FAIL'}  ${CANDIDATES[pkg].padEnd(28)} ${notes}`)
+    console.log(`${ok ? 'PASS' : 'FAIL'}  ${label.padEnd(28)} ${notes}`)
   }
   console.log(`\n${results.length - failed}/${results.length} fonts pass`)
   if (failed) process.exit(1)

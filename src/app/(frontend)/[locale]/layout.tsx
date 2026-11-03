@@ -43,8 +43,8 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
-  // Both Romanian and English text use the Latin file first; Latin Extended loads on ș ț.
-  preload('/fonts/onest-latin-wght-normal.woff2', {
+  // The one font file (Romanian + English subset), fetched with the HTML rather than after CSS.
+  preload('/fonts/onest-ro-wght.woff2', {
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',

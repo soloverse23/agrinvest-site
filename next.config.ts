@@ -7,6 +7,10 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Tailwind's CSS is small: inlining it removes the render-blocking stylesheet request.
+    inlineCss: true,
+  },
   images: {
     localPatterns: [
       {

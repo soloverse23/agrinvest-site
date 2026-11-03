@@ -1,6 +1,6 @@
 # Phase 2: content model and core site
 
-Status: **2.1 built (2026-11-03), waiting for the owner review; 2.2 next.** Plan approved 2026-11-03.
+Status: **2.1 built (2026-11-03); 2.2 in progress (performance done, pages next).** Plan approved 2026-11-03.
 
 ## Context
 
@@ -124,7 +124,17 @@ After the model changes: `npm run generate:types` and `npm run generate:importma
 
 ## 2.2 Core pages and their components
 
-**Components folded in from Phase 1.3–1.4** (in `design-system/`, each with a story, its states, an a11y note and RO/EN examples): SiteFooter, MobileNav, LanguageSwitch, MegaMenu (by need), Breadcrumbs, Accordion and FAQ, HeroVideo (poster first, 720p mobile source, scrim, reduced-motion still), CountUp, StorySection, CTA band, ContactPersonCard, LeadForm, BaseCard, **BaseMap** (server-rendered SVG of Romania's counties with base points; county centroid when there is no GPS; decision 0003 records the map approach), VideoEmbed (click to load), Callout, TOC. Extend the existing Hero, FigureStrip, FinanceBand and SiteHeader instead of duplicating them.
+### 2.2 progress (2026-11-03)
+
+**Performance (the LCP open item from 2.1): done.** Decision `0003-lighthouse-measurement.md`.
+
+- One Onest file cut to Romanian + English with the weight axis 400–700: 29 KB, down from 63 KB in two files. `npm run brand:font` builds it from `design-system/brand/fonts-src/` and also generates `src/app/(frontend)/fonts.css` with metric-matched fallback faces (Arial / Liberation Sans, Roboto for Android). `check:fonts` now checks the served file too.
+- `experimental.inlineCss`: no render-blocking stylesheet.
+- LeadForm loads in its own chunk (`LeadFormLazy`), only on pages with a form.
+- `lighthouserc.json`: applied throttling, 8 templates, budgets for performance (≥ 0,95), accessibility and best practices (1,0), LCP, FCP, CLS, TBT, script ≤ 160 KB, fonts ≤ 32 KB, no external stylesheets, and the SEO audits one by one (the SEO category stays at 66 only because of `noindex`).
+- Result: performance 100 on every template; LCP 1,3–1,4 s, TBT ≤ 20 ms, CLS 0–0,015.
+
+**Components folded in from Phase 1.3–1.4** (in `design-system/`, each with a story, its states, an a11y note and RO/EN examples): SiteFooter, MobileNav, LanguageSwitch, MegaMenu (by need), Breadcrumbs, Accordion and FAQ, HeroVideo (poster first, 720p mobile source, scrim, reduced-motion still), CountUp, StorySection, CTA band, ContactPersonCard, LeadForm, BaseCard, **BaseMap** (server-rendered SVG of Romania's counties with base points; county centroid when there is no GPS; decision 0004 records the map approach), VideoEmbed (click to load), Callout, TOC. Extend the existing Hero, FigureStrip, FinanceBand and SiteHeader instead of duplicating them.
 
 **Pages** (RO; the target URLs come from the IA and `keyword-map.csv`):
 

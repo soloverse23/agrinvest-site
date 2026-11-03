@@ -4,7 +4,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { FigureStrip } from '@ds/patterns/Bands'
-import { LeadForm } from '@ds/patterns/LeadForm'
+import { LeadFormLazy as LeadForm } from '@ds/patterns/LeadFormLazy'
 import { Button } from '@ds/primitives/Button'
 import { localePath, type Locale } from '@/i18n/config'
 import { fixedUrl, ui } from '@/i18n/ui'

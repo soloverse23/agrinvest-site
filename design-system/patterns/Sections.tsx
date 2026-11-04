@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
@@ -30,6 +29,7 @@ import {
 import type { SectionIcon } from '../icons/keys'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
+import { Photo } from './Photo'
 
 /** Icon keys that content (Payload blocks) can choose for cards and steps. */
 export const sectionIcons = {
@@ -472,7 +472,7 @@ export function StorySection({
       </div>
       {image && (
         <div className="lg:col-span-6">
-          <Image
+          <Photo
             src={image.src}
             alt={image.alt}
             width={image.width}

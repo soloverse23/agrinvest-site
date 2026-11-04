@@ -70,9 +70,9 @@ Breakpoints `md` 768, `lg` 1024, `xl` 1440. Page width `max-w-page` (82 rem), re
 | Sections   | `SectionHeading`, `Kicker`, `PageHeader`, `Breadcrumbs`, `Updated`, `KeyFacts`, `Accordion` (FAQ), `ServiceGrid`, `Steps`, `CtaBand`, `Callout`, `StorySection`, `ContactCards`, `Toc`                                                                           |
 | Pages      | `Pages/Home` sketch                                                                                                                                                                                                                                              |
 
-Server components by default. Client components: `SegmentedControl`, `LeadForm` (loaded only on pages with a form, through `LeadFormLazy`), `VideoEmbed`, `MegaMenu` (desktop navigation with hover intent: a neighbour crossed on the way to a panel does not steal it) and `BaseMap` (county hover and tap cards). The mobile menu and the FAQ use `<details>` and need no JavaScript.
+Server components by default. Client components: `SegmentedControl`, `LeadForm`, `BaseMap` and `VideoEmbed` (each in its own chunk through `patterns/Lazy.tsx`, so only pages that show one download it) and `MegaMenu` (desktop navigation with hover intent: a neighbour crossed on the way to a panel does not steal it). The mobile menu and the FAQ use `<details>` and need no JavaScript.
 
-Long text from the CMS uses the `prose-agr` class (tokens.css). Logo and map outlines are static SVG files (`public/brand`, `public/maps`), not inline markup, so pages stay light.
+Photos use `Photo`, not `next/image`: it writes the optimised srcset on the server, while importing anything from `next/image` adds about 5 KB of client code to every page. Long text from the CMS uses the `prose-agr` class (tokens.css). Logo and map outlines are static SVG files (`public/brand`, `public/maps`), not inline markup, so pages stay light.
 
 ## Imagery
 

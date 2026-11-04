@@ -200,7 +200,7 @@ The content is rewritten from the crawl (`content-inventory.csv`) rather than co
 
 - `check:seo`: 70 pages, 0 errors, 0 warnings; 20 of 56 keyword-map URLs built. `check:aeo`: 32 of 32. `check:figures`: 41 unconfirmed values shown (warning until launch).
 - 36 integration and 48 e2e tests pass; 39 stories pass axe with no overflow at 390 / 768 / 1440 in RO and EN.
-- Lighthouse CI (mobile, applied throttling, 12 templates × 3 runs, RO and EN): performance, accessibility and best practices 100 on every template, LCP about 1,35 s, TBT ≤ 13 ms, CLS 0. That run failed only the script budget (160,6–164,2 KB against 160 KB); Analytics was then moved out of the bundle (`AnalyticsLazy`, about 4 KB less per page). The confirming run was still in progress at this commit.
+- Lighthouse CI (mobile, applied throttling, 12 templates × 3 runs, RO and EN): 0 failed assertions. Performance 98–100, accessibility and best practices 100, LCP ≤ 1,4 s, CLS 0, script 148–156 KB (budget 160). Two earlier runs failed only the script budget; moving Analytics, BaseMap and VideoEmbed into their own chunks and replacing `next/image` with `Photo` fixed it. In the passing run, 5 of 36 runs (on `/`, `/en`, `/despre`) ended with `NO_TTI_CPU_IDLE` and gave no performance score, while the machine was busy; those three pages then ran clean 9 times out of 9 on their own (100, CLS 0). Recheck on the preview.
 
 **Not done (needs a deployed URL)**
 

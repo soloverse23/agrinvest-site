@@ -1,15 +1,14 @@
 'use client'
 
-import Image from 'next/image'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 
 import { PlayIcon } from '../icons/icons'
 
 export type VideoEmbedProps = {
   youtubeId: string
   title: string
-  /** Poster: the CMS image, or YouTube's own thumbnail when there is none. */
-  poster?: { src: string; alt: string } | null
+  /** Poster, rendered on the server (a `Photo`); YouTube's own thumbnail when there is none. */
+  poster?: ReactNode
   caption?: string | null
   labels: { play: string; watch: string }
 }
@@ -22,7 +21,6 @@ export type VideoEmbedProps = {
 export function VideoEmbed({ youtubeId, title, poster, caption, labels }: VideoEmbedProps) {
   const [playing, setPlaying] = useState(false)
   const watchUrl = `https://www.youtube.com/watch?v=${youtubeId}`
-  const thumb = poster ?? { src: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`, alt: '' }
 
   return (
     <figure className="grid gap-3">
@@ -43,14 +41,18 @@ export function VideoEmbed({ youtubeId, title, poster, caption, labels }: VideoE
             }}
             className="group absolute inset-0 block text-on-forest"
           >
-            <Image
-              src={thumb.src}
-              alt={thumb.alt}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              unoptimized={!poster}
-              className="object-cover opacity-85 transition-opacity duration-300 group-hover:opacity-100"
-            />
+            {/* The opacity sits on a wrapper so a server-rendered poster needs no props. */}
+            <span className="absolute inset-0 opacity-85 transition-opacity duration-300 group-hover:opacity-100">
+              {poster ?? (
+                // eslint-disable-next-line @next/next/no-img-element -- third-party thumbnail
+                <img
+                  src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+                  alt=""
+                  loading="lazy"
+                  className="size-full object-cover"
+                />
+              )}
+            </span>
             <span className="absolute inset-0 bg-linear-to-t from-ink/70 to-transparent" />
             <span className="absolute bottom-5 left-5 flex items-center gap-3">
               <span className="inline-flex size-14 items-center justify-center rounded-full bg-lime text-forest transition-transform duration-150 ease-move group-hover:scale-105">

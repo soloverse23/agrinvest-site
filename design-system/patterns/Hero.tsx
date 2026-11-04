@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
@@ -9,6 +8,7 @@ import type { CropKey } from '../fixtures/sample'
 import { ArrowRightIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
+import { Photo } from './Photo'
 import { Delta } from '../primitives/Delta'
 
 export type HeroProps = {
@@ -63,7 +63,7 @@ export function Hero({
   return (
     <section className="relative isolate flex min-h-svh flex-col overflow-hidden bg-ink text-on-forest">
       {photo ? (
-        <Image
+        <Photo
           src={photo.src}
           alt={photo.alt}
           fill

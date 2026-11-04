@@ -3,12 +3,16 @@ import { RichText, type JSXConvertersFunction } from '@payloadcms/richtext-lexic
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { BaseMap } from '@ds/patterns/BaseMap'
 import { FigureStrip, FinanceBand } from '@ds/patterns/Bands'
 import { FactTable } from '@ds/patterns/FactTable'
 import { Hero } from '@ds/patterns/Hero'
-import { LeadFormLazy as LeadForm } from '@ds/patterns/LeadFormLazy'
+import {
+  BaseMapLazy as BaseMap,
+  LeadFormLazy as LeadForm,
+  VideoEmbedLazy as VideoEmbed,
+} from '@ds/patterns/Lazy'
 import { CropBadge } from '@ds/patterns/parts'
+import { Photo } from '@ds/patterns/Photo'
 import {
   Callout,
   ContactCards,
@@ -18,7 +22,6 @@ import {
   Steps,
   StorySection,
 } from '@ds/patterns/Sections'
-import { VideoEmbed } from '@ds/patterns/VideoEmbed'
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { localePath, type Locale } from '@/i18n/config'
 import { basePath, cropPath } from '@/i18n/routes'
@@ -313,7 +316,17 @@ async function renderBlock(block: Block, ctx: Ctx): Promise<ReactNode> {
               youtubeId={block.youtubeId}
               title={block.title}
               caption={block.description}
-              poster={poster ? { src: poster.url as string, alt: poster.alt } : null}
+              poster={
+                poster && (
+                  <Photo
+                    src={poster.url as string}
+                    alt={poster.alt}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                )
+              }
               labels={{ play: ui[ctx.locale].play, watch: ui[ctx.locale].watch }}
             />
           </div>

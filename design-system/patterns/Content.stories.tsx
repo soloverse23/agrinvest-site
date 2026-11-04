@@ -10,6 +10,7 @@ import { BaseMap, type MapBase } from './BaseMap'
 import { ConsentBanner } from './ConsentBanner'
 import { FactTable } from './FactTable'
 import { Hero } from './Hero'
+import { Photo } from './Photo'
 import {
   Accordion,
   Breadcrumbs,
@@ -473,7 +474,7 @@ export const Video: Story = {
           <VideoEmbed
             youtubeId="JOzMUJPyy40"
             title="Agrinvest Golden Relationship – Constanța"
-            poster={{ src: photos.combine.src, alt: '' }}
+            poster={<Photo src={photos.combine.src} alt="" fill className="object-cover" />}
             labels={{
               play: l(locale, 'Pornește video', 'Play video'),
               watch: l(locale, 'Vezi pe YouTube', 'Watch on YouTube'),

@@ -96,6 +96,9 @@ export const ui = {
 export const fixedPaths = {
   privacy: { ro: '/confidentialitate', en: '/privacy' },
   contact: { ro: '/contact', en: '/contact' },
+  terms: { ro: '/termeni-de-vanzare', en: '/terms-of-sale' },
+  delivery: { ro: '/livrare', en: '/delivery' },
+  returns: { ro: '/retur', en: '/returns' },
   storage: { ro: '/depozitare', en: '/storage' },
   grain: { ro: '/cereale', en: '/grain' },
 } satisfies Record<string, Record<Locale, string>>

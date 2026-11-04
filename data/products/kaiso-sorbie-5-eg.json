@@ -8,6 +8,10 @@
   "secondaryCategories": [],
   "crops": [],
   "targets": [],
+  "saleBlock": {
+    "ro": "Omologarea acestui produs a fost retrasă la 31.01.2025. Nu poate fi comandat online.",
+    "en": "The authorisation of this product was withdrawn on 31.01.2025. It cannot be ordered online."
+  },
   "text": {
     "ro": {
       "summary": "Kaiso Sorbie 5 EG este un insecticid cu lambda-cihalotrin 5 %, formulare EG. Atenție: Omologarea produsului KAISO SORBIE 5 EG nu a fost reînnoită și a fost retrasă la 31.01.2025, fără perioadă de grație, conform deciziilor ANF din 31.01.2025. Nu am găsit o omologare nouă.",

@@ -103,6 +103,12 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 27. **Price basis for bulk fertilisers:** the old pages say "price per kilogram" for urea, ammonium nitrate and DAP while the packs are 600–1,000 kg. Are 1,650 / 2,800 / 2,550 lei the price of the whole pack?
 28. **Photos:** the old photos are kept with rights pending; Jolpolt's photo says "Adjuvant".
 
+### Orders (phase 3.4)
+
+29. **Before real orders:** choose how staff are told about a new order (orders appear only in the admin until then).
+30. **GHS06:** tick the box on each product with the GHS06 pictogram; it stops online sale. Nothing is ticked yet.
+31. **Company details** for the legal drafts: CUI, trade register number, address, phone, email, delivery zones.
+
 ### Finance – Agrinvest Credit IFN (phase 4)
 
 12. The current list of credit products, with amounts, terms, guarantees and eligibility (full questions in `ifn.md`).

@@ -8,6 +8,10 @@
   "secondaryCategories": [],
   "crops": [],
   "targets": [],
+  "saleBlock": {
+    "ro": "Din 19.11.2022 produsul este autorizat numai în sere permanente. Vorbește cu un consultant înainte de a-l comanda.",
+    "en": "Since 19.11.2022 the product is authorised only in permanent greenhouses. Talk to a consultant before ordering it."
+  },
   "text": {
     "ro": {
       "summary": "Closer este un insecticid cu sulfoxaflor 120 g/l. Atenție: Din 19.11.2022 certificatul de omologare al produsului CLOSER se menține numai pentru utilizările în sere permanente, conform deciziilor ANF din 23.08.2022; perioadele de grație pentru stocuri s-au încheiat la 19.05.2023. Produsul nu mai are utilizări omologate în câmp.",

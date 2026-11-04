@@ -38,6 +38,7 @@
     "brand:font": "tsx scripts/brand/subset-font.ts",
     "brand:map": "tsx scripts/brand/build-map.ts",
     "check:aeo": "tsx scripts/checks/aeo.ts",
+    "check:anaf": "tsx scripts/checks/anaf.ts",
     "check:products": "tsx --env-file-if-exists=.env scripts/checks/products.ts",
     "audit:verification": "tsx scripts/products/verification-list.ts",
     "apply:products": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/products/run.ts"

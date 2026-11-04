@@ -1,6 +1,6 @@
 # Phase 3: shop
 
-Status: **3.1 and 3.2 merged and live on the Vercel production domain (2026-11-04); 3.3 built on branch `phase-3/enrichment`, not pushed.** Plan approved 2026-11-04. This doc is kept updated per sub-phase. Decisions go in `docs/decisions/0006…`.
+Status: **3.1 and 3.2 merged and live on the Vercel production domain (2026-11-04); 3.3 pushed on `phase-3/enrichment`, not merged; 3.4 built on `phase-3/commerce`.** Plan approved 2026-11-04. This doc is kept updated per sub-phase. Decisions go in `docs/decisions/0006…`.
 
 ## Context
 
@@ -298,6 +298,35 @@ Small typed interfaces, each with a working default:
 ### Legal pages
 
 Terms of sale, delivery and returns pages as marked drafts, with the withdrawal right and ANPC links for review by Agrinvest's lawyer.
+
+### 3.4 progress (2026-11-04)
+
+**Built**
+
+- **Cart:** `Carts` holds a cookie token, SKUs and quantities, never a price. Add to cart, quantity and remove are plain forms with server actions, so they work without JavaScript. The header count is a tiny island that reads a small cookie, so pages stay static (script total 152 KB, budget 160 KB).
+- **Checkout:** one page, person or company, ANAF lookup with manual entry as the fallback, delivery or pickup, certificate for professional-use lines, consultant or proforma, consents. Company and address fields hide with CSS alone. `/cos`, `/en/cart`, `/comanda`, `/en/checkout` are dynamic and noindex.
+- **Orders:** `Orders` with a reference (`AGR-2611-7KQ2M`), a snapshot of lines and prices, buyer, delivery, payment, status, `assignedTo`, staff notes. Staff only. Routed like a lead (`inputuri`, falling back to `general`). The `order` GA4 event carries no personal data.
+- **Quote leads:** `Leads.product`, from the product page and the cart.
+- **Providers (`src/lib/commerce/`):** payment, invoice, delivery and notify, each with its default. No provider or channel was chosen.
+- **Legal pages:** terms of sale, delivery and returns as marked drafts (`data/pages.json`), noindex until the lawyer approves. `apply:products` creates them when missing and never updates them, because the seed does not run on a live site. Footer links, including ANPC, are in `SiteShell` for the same reason.
+
+**Deviations from the plan**
+
+- **Rules added for OUG 53/2025 (`orderBlock` in `rules.ts`), checked again when the order is placed:** no add to cart for a product with a stop reason (`saleBlock`: Tazer, Kaiso Sorbie, Closer), an expired registration, a GHS06 flag or no registration number (adjuvants excepted). The page says why and offers a quote. An 18+ confirmation is required for protection products (art. 40 para. 7).
+- **`protection.ghs06` is off for every product:** no product's GHS06 status is known except Adengo's, which has no such label statement. Staff must set it from the labels before real orders. It is a launch blocker.
+- **The EU online dispute platform is not linked:** it closed in July 2025 (the lawyer should confirm). The pages link ANPC and SAL.
+- **Epoch:** page loaders now carry `ENRICHMENT_EPOCH` too, so new pages reach the data cache on deploy.
+- **ANAF:** version v9 was checked live. `check:anaf` runs on deploy as a warning, not in `next build`, so an ANAF outage cannot stop a deploy.
+
+**Results**
+
+typecheck, lint, format, `next build`, `test:int` (100), `test:e2e` (74), `check:seo` (364 pages, 0 errors), `check:aeo` (39 of 39). `prepare-database.sh` ran clean on an empty local database, and a second apply changed nothing. Checked by hand in a browser: an order with JavaScript off, the ANAF lookup with a real tax ID, mobile layout at 390 px with no overflow.
+
+**Open**
+
+- **Blockers before real orders:** notification channel (orders appear only in the admin), GHS06 flags, the lawyer's check of the licences for online sale and of the legal drafts, company details in square brackets.
+- Old anonymous carts are never deleted; add a cleanup when volume justifies it.
+- Rate limits are per server instance, as for leads.
 
 **3.4 exit:** a test order works end to end in RO and EN, for person and company, and reaches the admin routed to a named person.
 

@@ -2,17 +2,13 @@ import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
 import { isStaff } from '@/access'
 import { locales } from '@/i18n/config'
+import { routedPerson } from '@/lib/leads/routing'
 import { leadTypeOptions } from '@/lib/leads/types'
 
 /** Assigns a new lead to the person set for its type in the Lead routing global. */
 const assign: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
   if (operation !== 'create' || data.assignedTo) return data
-  const routing = await req.payload.findGlobal({ slug: 'lead-routing', depth: 0, req })
-  const route =
-    routing.routes?.find((r) => r.type === data.type) ??
-    routing.routes?.find((r) => r.type === 'general')
-  const person = route?.primary ?? route?.fallback
-  if (person) data.assignedTo = typeof person === 'object' ? person.id : person
+  data.assignedTo = await routedPerson(req, data.type)
   return data
 }
 
@@ -75,6 +71,14 @@ export const Leads: CollectionConfig = {
           filterOptions: { isGrain: { equals: true } },
         },
       ],
+    },
+    {
+      name: 'product',
+      type: 'relationship',
+      relationTo: 'products',
+      hasMany: true,
+      label: { ro: 'Produse', en: 'Products' },
+      admin: { description: 'The product or cart a quote request came from.' },
     },
     { name: 'message', type: 'textarea' },
     {

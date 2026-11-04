@@ -27,6 +27,7 @@ import { slugify } from '../../src/lib/slugify'
 import { planProducts } from '../import/woo-plan'
 import { rt } from '../seed/richtext'
 import { applyHubs, loadHubFiles, type HubReport } from './hubs'
+import { applyPages } from './pages'
 import { productFile, targetsFile, type Dose, type ProductFile, type TargetEntry } from './schema'
 import {
   canon,
@@ -302,6 +303,9 @@ function writeOf(
     }
   } else if (group === 'notes') {
     w.ro.sourceNotes = orNull(wanted.notes as string)
+  } else if (group === 'sale') {
+    w.ro.saleBlock = orNull(file.saleBlock?.ro)
+    w.en.saleBlock = orNull(file.saleBlock?.en)
   }
   return w
 }
@@ -449,6 +453,7 @@ export async function applyEnrichment(
   log: (s: string) => void = console.log,
   from: Sources = {},
 ): Promise<ApplyReport> {
+  if (!from.products) await applyPages(payload, log)
   const files = loadProductFiles(from.products)
   const hubFiles = loadHubFiles(from.hubs)
   const lookup = await lookups(payload)

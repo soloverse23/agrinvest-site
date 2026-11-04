@@ -58,6 +58,7 @@ jobs:
           npm run check:seo
           npm run check:aeo
           npm run check:figures
+          npm run check:products
           kill %1
       - name: Lighthouse (mobile budgets)
         run: npx --yes @lhci/cli@0.15.x autorun

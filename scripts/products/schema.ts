@@ -126,6 +126,8 @@ export const productFile = z
     secondaryCategories: z.array(slug).default([]),
     crops: z.array(z.string()).default([]),
     targets: z.array(slug).default([]),
+    /** Filled in: the product cannot be ordered, and the page gives this reason. */
+    saleBlock: optionalBilingual,
     text: z.object({ ro: localeText, en: localeText }),
     protection: protection.optional(),
     seed: seed.optional(),

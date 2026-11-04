@@ -26,6 +26,8 @@ export type LeadFormProps = {
   /** The page the form is on: stored with the lead and used as the no-JavaScript permalink. */
   sourcePath: string
   privacyHref: string
+  /** Products a quote request is about, stored with the lead. */
+  products?: number[]
   /** Story and test hook; real forms start empty. */
   initialState?: LeadFormState
 }
@@ -96,6 +98,7 @@ export function LeadForm({
   privacyHref,
   initialState = initialLeadState,
   defaults,
+  products,
 }: LeadFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState, sourcePath)
   const t = copy[locale]
@@ -176,6 +179,7 @@ export function LeadForm({
       <input type="hidden" name="type" value={type} />
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="sourcePath" value={sourcePath} />
+      {products?.length ? <input type="hidden" name="product" value={products.join(',')} /> : null}
       <div ref={utm} hidden>
         <input type="hidden" name="utm_source" />
         <input type="hidden" name="utm_medium" />

@@ -235,6 +235,12 @@ const protection: Field = {
     },
     note('safety', 'Toxicitate și siguranță', 'Toxicity and safety'),
     {
+      name: 'ghs06',
+      type: 'checkbox',
+      label: { ro: 'Toxicitate acută 1–3 (pictograma GHS06)', en: 'Acute toxicity 1–3 (GHS06)' },
+      admin: { description: 'OUG 53/2025 art. 40: cannot be sold online.' },
+    },
+    {
       name: 'professionalUse',
       type: 'checkbox',
       defaultValue: true,
@@ -482,6 +488,16 @@ export const Products: CollectionConfig = {
                   label: { ro: 'Ținte', en: 'Targets' },
                 },
               ],
+            },
+            {
+              name: 'saleBlock',
+              type: 'textarea',
+              localized: true,
+              label: { ro: 'Vânzare oprită (motiv)', en: 'Sale stopped (reason)' },
+              admin: {
+                description:
+                  'Filled in: the product cannot be added to the cart and the page shows this reason.',
+              },
             },
             {
               name: 'summary',

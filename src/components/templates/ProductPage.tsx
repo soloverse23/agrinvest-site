@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { AddToCartForm, OrderNotice } from '@ds/patterns/Commerce'
 import { SectionHeading, Updated } from '@ds/patterns/Sections'
 import {
   DocumentList,
@@ -16,16 +17,19 @@ import { JsonLd } from '@/components/JsonLd'
 import { Crumbs, Faq } from '@/components/PageParts'
 import { LeadFormBlock, Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
+import { commerceUi } from '@/i18n/commerce'
 import { type Locale } from '@/i18n/config'
 import { categoryPath, hubPath, productPath, sections, shopPath } from '@/i18n/routes'
 import { fitTitle, shopUi } from '@/i18n/shop'
 import { ui } from '@/i18n/ui'
+import { addToCart } from '@/lib/commerce/actions'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
 import { getProduct, listCategories, listProducts } from '@/lib/content/shop'
 import { formatDate, formatQuantity } from '@/lib/format'
 import { breadcrumbs, faqPage, product as productSchema } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
+import { orderBlock } from '@/lib/shop/rules'
 import { absoluteUrl } from '@/lib/site'
 import type { Crop, Media, ProductDocument } from '@/payload-types'
 
@@ -276,6 +280,8 @@ export async function ProductPage({
     'out-of-stock': t.outOfStock,
   }
   const safety = doc.protection?.safety
+  const c = commerceUi[locale]
+  const block = orderBlock({ ...doc, category: card.category.slug })
   return (
     <SiteShell locale={locale} alternates={alternates}>
       <JsonLd
@@ -320,8 +326,22 @@ export async function ProductPage({
                   ),
                   unitPrice: unitPriceLabel(v, locale),
                   stock: { label: stock[v.stock], available: v.stock === 'in-stock' },
+                  action:
+                    !block && v.stock !== 'out-of-stock' && v.price != null ? (
+                      <AddToCartForm
+                        action={addToCart}
+                        sku={v.sku}
+                        locale={locale}
+                        labels={{ add: c.add, quantity: c.quantity }}
+                      />
+                    ) : undefined,
                 }))}
               />
+              {block && (
+                <OrderNotice title={c.blockTitle}>
+                  {block === 'sale-stopped' ? doc.saleBlock : c.blockReasons[block]}
+                </OrderNotice>
+              )}
               <p className="text-caption text-muted">{t.priceNote}</p>
               <div className="flex flex-wrap gap-3">
                 <Button href="#cerere">{t.requestQuote}</Button>
@@ -398,6 +418,7 @@ export async function ProductPage({
           }}
           locale={locale}
           path={`${sections.shop[locale]}/${card.category.slug}/${slug}`}
+          products={[card.id]}
         />
       </div>
 

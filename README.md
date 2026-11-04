@@ -45,6 +45,8 @@ After the seed, the same script runs `npm run apply:products`: it applies the re
 
 The seed and the apply step run outside Next.js, so they cannot refresh Vercel's data cache, which survives deploys. The shop's cache keys carry a hash of `data/` (`ENRICHMENT_EPOCH`, set in `next.config.ts`), so a deploy with new product data reads the database afresh. For any other seed or import that changes content on a live site, run `vercel cache invalidate --tag products` (or the tag of what changed: see `src/lib/revalidate.ts`). Saving in the admin refreshes the cache by itself.
 
+`check:anaf` runs in the same script as a warning: it tells you when ANAF moves the company service to a new version (`ANAF_URL` in `src/lib/commerce/anaf.ts`).
+
 Preview and Production share one database for now, so a preview build migrates it too. Give previews their own Neon branch before real orders arrive.
 
 ## Documents

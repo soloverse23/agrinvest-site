@@ -66,5 +66,15 @@ export function leadSchema(locale: Locale) {
     message: optionalText(4000),
     consent: z.literal('on', { error: m.consent }),
     sourcePath: z.string().max(300).optional(),
+    product: z
+      .string()
+      .optional()
+      .transform((v) =>
+        (v ?? '')
+          .split(',')
+          .filter((id) => /^\d+$/.test(id))
+          .slice(0, 50)
+          .map(Number),
+      ),
   })
 }

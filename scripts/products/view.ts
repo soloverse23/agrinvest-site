@@ -26,6 +26,7 @@ export const groups = [
   'doses',
   'verification',
   'notes',
+  'sale',
 ] as const
 export type Group = (typeof groups)[number]
 export type View = Record<Group, unknown>
@@ -212,6 +213,7 @@ export function viewOfDoc(doc: Doc, names: Names): View {
     doses,
     verification: { technical: ver('technical'), doses: ver('doses') },
     notes: doc.sourceNotes,
+    sale: loc(doc.saleBlock),
   }
 }
 
@@ -330,6 +332,7 @@ export function viewOfFile(file: ProductFile, type: string): View {
       doses: { status: 'to-confirm', source: sources(file.sources.doses) },
     },
     notes: notesOf(file),
+    sale: pair(file.saleBlock),
   }
 }
 
@@ -398,5 +401,6 @@ export function viewOfPlan(p: PlannedProduct): View {
       doses: { status: 'to-confirm', source: p.source },
     },
     notes: p.issues.join('\n'),
+    sale: {},
   }
 }

@@ -77,6 +77,8 @@ export interface Config {
     'active-ingredients': ActiveIngredient;
     targets: Target;
     'price-history': PriceHistory;
+    carts: Cart;
+    orders: Order;
     people: Person;
     leads: Lead;
     media: Media;
@@ -109,6 +111,8 @@ export interface Config {
     'active-ingredients': ActiveIngredientsSelect<false> | ActiveIngredientsSelect<true>;
     targets: TargetsSelect<false> | TargetsSelect<true>;
     'price-history': PriceHistorySelect<false> | PriceHistorySelect<true>;
+    carts: CartsSelect<false> | CartsSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -874,6 +878,10 @@ export interface Product {
   crops?: (number | Crop)[] | null;
   targets?: (number | Target)[] | null;
   /**
+   * Filled in: the product cannot be added to the cart and the page shows this reason.
+   */
+  saleBlock?: string | null;
+  /**
    * The direct answer shown at the top of the page.
    */
   summary?: string | null;
@@ -948,6 +956,10 @@ export interface Product {
     resistanceGroup?: string | null;
     toxicityClass?: string | null;
     safety?: string | null;
+    /**
+     * OUG 53/2025 art. 40: cannot be sold online.
+     */
+    ghs06?: boolean | null;
     /**
      * Checkout asks for the buyer’s certificate.
      */
@@ -1295,6 +1307,85 @@ export interface PriceHistory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "carts".
+ */
+export interface Cart {
+  id: number;
+  token: string;
+  items?:
+    | {
+        sku: string;
+        quantity: number;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  reference: string;
+  status: 'new' | 'contacted' | 'confirmed' | 'paid' | 'delivered' | 'cancelled';
+  assignedTo?: (number | null) | Person;
+  lines: {
+    sku: string;
+    product?: (number | null) | Product;
+    name: string;
+    pack?: string | null;
+    quantity: number;
+    unitPrice?: number | null;
+    lineTotal?: number | null;
+    priceConfirmed?: boolean | null;
+    id?: string | null;
+  }[];
+  /**
+   * Delivery and VAT are confirmed by the consultant.
+   */
+  total?: number | null;
+  buyer: {
+    type: 'person' | 'company';
+    name: string;
+    phone: string;
+    email: string;
+    company?: string | null;
+    cui?: string | null;
+    regCom?: string | null;
+    billingAddress?: string | null;
+  };
+  delivery: {
+    method: 'delivery' | 'pickup';
+    county?: (number | null) | County;
+    base?: (number | null) | Base;
+    address?: string | null;
+  };
+  /**
+   * Captured for professional-use products.
+   */
+  certificate?: {
+    number?: string | null;
+    validUntil?: string | null;
+  };
+  payment: 'consultant' | 'proforma';
+  message?: string | null;
+  /**
+   * Internal. The buyer never sees them.
+   */
+  staffNotes?: string | null;
+  meta?: {
+    locale?: ('ro' | 'en') | null;
+    consentVersion?: string | null;
+    termsVersion?: string | null;
+    adultConfirmed?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads".
  */
 export interface Lead {
@@ -1310,6 +1401,10 @@ export interface Lead {
   county?: (number | null) | County;
   base?: (number | null) | Base;
   crop?: (number | null) | Crop;
+  /**
+   * The product or cart a quote request came from.
+   */
+  product?: (number | Product)[] | null;
   message?: string | null;
   meta?: {
     locale?: ('ro' | 'en') | null;
@@ -1415,6 +1510,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'price-history';
         value: number | PriceHistory;
+      } | null)
+    | ({
+        relationTo: 'carts';
+        value: number | Cart;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: number | Order;
       } | null)
     | ({
         relationTo: 'people';
@@ -1951,6 +2054,7 @@ export interface ProductsSelect<T extends boolean = true> {
   brand?: T;
   crops?: T;
   targets?: T;
+  saleBlock?: T;
   summary?: T;
   description?: T;
   variants?:
@@ -2002,6 +2106,7 @@ export interface ProductsSelect<T extends boolean = true> {
         resistanceGroup?: T;
         toxicityClass?: T;
         safety?: T;
+        ghs06?: T;
         professionalUse?: T;
         compatibility?: T;
       };
@@ -2225,6 +2330,84 @@ export interface PriceHistorySelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "carts_select".
+ */
+export interface CartsSelect<T extends boolean = true> {
+  token?: T;
+  items?:
+    | T
+    | {
+        sku?: T;
+        quantity?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  reference?: T;
+  status?: T;
+  assignedTo?: T;
+  lines?:
+    | T
+    | {
+        sku?: T;
+        product?: T;
+        name?: T;
+        pack?: T;
+        quantity?: T;
+        unitPrice?: T;
+        lineTotal?: T;
+        priceConfirmed?: T;
+        id?: T;
+      };
+  total?: T;
+  buyer?:
+    | T
+    | {
+        type?: T;
+        name?: T;
+        phone?: T;
+        email?: T;
+        company?: T;
+        cui?: T;
+        regCom?: T;
+        billingAddress?: T;
+      };
+  delivery?:
+    | T
+    | {
+        method?: T;
+        county?: T;
+        base?: T;
+        address?: T;
+      };
+  certificate?:
+    | T
+    | {
+        number?: T;
+        validUntil?: T;
+      };
+  payment?: T;
+  message?: T;
+  staffNotes?: T;
+  meta?:
+    | T
+    | {
+        locale?: T;
+        consentVersion?: T;
+        termsVersion?: T;
+        adultConfirmed?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people_select".
  */
 export interface PeopleSelect<T extends boolean = true> {
@@ -2267,6 +2450,7 @@ export interface LeadsSelect<T extends boolean = true> {
   county?: T;
   base?: T;
   crop?: T;
+  product?: T;
   message?: T;
   meta?:
     | T

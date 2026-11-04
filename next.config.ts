@@ -26,8 +26,10 @@ function enrichmentEpoch() {
     }
   }
   for (const dir of ['products', 'hubs']) walk(path.join(dirname, 'data', dir))
-  const targets = path.join(dirname, 'data', 'targets.json')
-  if (existsSync(targets)) hash.update(readFileSync(targets))
+  for (const name of ['targets.json', 'pages.json']) {
+    const file = path.join(dirname, 'data', name)
+    if (existsSync(file)) hash.update(readFileSync(file))
+  }
   return hash.digest('hex').slice(0, 12)
 }
 

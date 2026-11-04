@@ -94,6 +94,31 @@ export function liveBlockers(p: ProductData, now = new Date()): string[] {
   return blockers
 }
 
+export type OrderBlock = 'sale-stopped' | 'registration-expired' | 'registration-missing' | 'ghs06'
+
+/**
+ * Why a product cannot go in the cart. It can still be asked about through a consultant.
+ * OUG 53/2025 art. 40 bans GHS06 products online; an expired or unknown registration means
+ * the sale cannot be shown to be legal. Adjuvants are not always authorised products, so a
+ * missing number alone does not stop them.
+ */
+export function orderBlock(
+  p: Pick<ProductData, 'productType' | 'protection' | 'saleBlock'> & {
+    category?: string | null
+  },
+  now = new Date(),
+): OrderBlock | null {
+  if (p.saleBlock?.trim()) return 'sale-stopped'
+  if (p.productType !== 'protection') return null
+  const { ghs06, registrationNumber, registrationValidUntil } = p.protection ?? {}
+  if (ghs06) return 'ghs06'
+  if (registrationValidUntil && new Date(registrationValidUntil) < now)
+    return 'registration-expired'
+  const adjuvant = p.category === 'adjuvanti' || p.category === 'adjuvants'
+  if (!registrationNumber && !adjuvant) return 'registration-missing'
+  return null
+}
+
 /** A hub needs at least this many products, so thin pages stay out of the index. */
 export const hubMinProducts = 3
 

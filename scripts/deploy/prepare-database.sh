@@ -12,3 +12,5 @@ if [ -n "$BLOB_STORE_ID" ] || [ -n "$R2_BUCKET" ]; then export SEED_PHOTOS=true;
 npm run migrate
 SEED_ONLY_IF_EMPTY=true npm run seed
 npm run apply:products
+# A warning only: a changed ANAF address must not stop a deploy, the buyer can type the data.
+npm run check:anaf || true

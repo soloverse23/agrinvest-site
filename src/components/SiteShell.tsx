@@ -2,7 +2,9 @@ import type { ReactNode } from 'react'
 
 import { SiteFooter } from '@ds/patterns/SiteFooter'
 import { SiteHeader } from '@ds/patterns/SiteHeader'
+import { commerceUi } from '@/i18n/commerce'
 import { localePath, type Locale } from '@/i18n/config'
+import { cartPath } from '@/i18n/routes'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, getFooter, getNavigation, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
@@ -66,6 +68,7 @@ export async function SiteShell({
       tone={overlay ? 'overlay' : 'default'}
       // The menu repeats the phone without a marker, so only once it is confirmed.
       phone={phone?.status === 'confirmed' ? phone.value : undefined}
+      cart={{ href: cartPath(locale), label: commerceUi[locale].cart }}
       cta={{
         href: nav.cta?.href || fixedUrl('contact', locale),
         label: nav.cta?.label || t.contact,
@@ -121,7 +124,13 @@ export async function SiteShell({
           label: socialName(s.url),
         }))}
         legal={footer.legal}
-        bottomLinks={[{ href: fixedUrl('privacy', locale), label: t.privacy }]}
+        bottomLinks={[
+          { href: fixedUrl('privacy', locale), label: t.privacy },
+          { href: fixedUrl('terms', locale), label: commerceUi[locale].terms },
+          { href: fixedUrl('delivery', locale), label: commerceUi[locale].deliveryPage },
+          { href: fixedUrl('returns', locale), label: commerceUi[locale].returns },
+          { href: 'https://anpc.ro/', label: commerceUi[locale].anpc },
+        ]}
         extra={seo.analytics?.ga4 ? <CookieSettings label={t.cookies} /> : undefined}
       />
     </>

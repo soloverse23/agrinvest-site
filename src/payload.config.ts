@@ -19,6 +19,8 @@ import { Leads } from './collections/Leads'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { People } from './collections/People'
+import { Carts } from './collections/Carts'
+import { Orders } from './collections/Orders'
 import { PriceHistory } from './collections/PriceHistory'
 import { Products } from './collections/Products'
 import { Targets } from './collections/Targets'
@@ -71,6 +73,8 @@ export default buildConfig({
     ActiveIngredients,
     Targets,
     PriceHistory,
+    Carts,
+    Orders,
     People,
     Leads,
     Media,

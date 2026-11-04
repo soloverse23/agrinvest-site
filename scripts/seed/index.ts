@@ -26,7 +26,7 @@ import {
   shopCrops,
 } from './data'
 import { footer, navigation, pages } from './pages'
-import { importProducts } from '../import/woo'
+import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
 
 const context = { skipChildren: true }
 
@@ -263,9 +263,9 @@ async function seedPeople(payload: Payload): Promise<Record<string, number>> {
 }
 
 /**
- * Video stills from the 2022 Agrinvest films (data/raw/frames, gitignored). Footage rights
- * are not confirmed, so they are uploaded as "pending" and only to a local database where
- * the files exist; elsewhere (CI, hosted previews) pages render without photos.
+ * Video stills from the 2022 Agrinvest films (`scripts/seed/assets/frames`). Footage rights
+ * are not confirmed, so they stay marked "pending". They upload to a local database or where
+ * cloud storage is set; elsewhere (CI) pages render without photos.
  */
 const frames: Record<string, { ro: string; en: string }> = {
   'harvest-sunflower': {
@@ -282,12 +282,10 @@ const frames: Record<string, { ro: string; en: string }> = {
 }
 
 async function seedMedia(payload: Payload): Promise<Ctx['media']> {
-  const dir = resolve('data/raw/frames')
+  const dir = resolve('scripts/seed/assets/frames')
   const ids: Ctx['media'] = {}
-  // Only a local database: the files stay on this machine, and footage rights are open.
-  const local = /@(127\.0\.0\.1|localhost)[:/]/.test(process.env.DATABASE_URL ?? '')
-  if (!local || !existsSync(dir)) {
-    console.log('media: skipped (local database and data/raw/frames only), no photos on pages')
+  if (!canUploadPhotos()) {
+    console.log('media: skipped (no local database or cloud storage), no photos on pages')
     return ids
   }
   for (const [name, alt] of Object.entries(frames)) {
@@ -434,11 +432,31 @@ async function seedGlobals(payload: Payload) {
 
 const payload = await getPayload({ config })
 
-// Deploys seed only an empty database, so they never overwrite what staff have entered.
+// Deploys seed only an empty database, so they never overwrite what staff have entered. Once
+// cloud storage exists they add the photos: stills go on the pages a single time, while no
+// still is uploaded yet, and products that have no photo get theirs.
 if (process.env.SEED_ONLY_IF_EMPTY === 'true') {
   const { totalDocs } = await payload.count({ collection: 'pages' })
   if (totalDocs > 0) {
     console.log(`seed: skipped, the database already has ${totalDocs} pages`)
+    if (process.env.SEED_PHOTOS === 'true') {
+      const { totalDocs: stills } = await payload.count({
+        collection: 'media',
+        // `like`: storage may rename a file whose name is already taken.
+        where: { filename: { like: 'harvest-sunflower' } },
+      })
+      if (!stills) {
+        const found = await payload.find({ collection: 'people', pagination: false, depth: 0 })
+        const ids = Object.fromEntries(
+          people.flatMap((p) => {
+            const doc = found.docs.find((d) => d.name === p.name)
+            return doc ? [[p.key, doc.id]] : []
+          }),
+        )
+        await seedPages(payload, { people: ids, media: await seedMedia(payload) })
+      }
+      await attachProductPhotos(payload)
+    }
     process.exit(0)
   }
 }

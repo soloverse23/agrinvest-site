@@ -29,11 +29,15 @@ import { LeadRouting } from './globals/LeadRouting'
 import { Navigation } from './globals/Navigation'
 import { SeoDefaults } from './globals/SeoDefaults'
 import { defaultLocale } from './i18n/config'
+import { vercelBlob } from './lib/storage/blob'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-/** Media goes to Cloudflare R2 when its credentials are set; local disk otherwise (dev, CI). */
+/**
+ * Media goes to Vercel Blob or Cloudflare R2, whichever is configured; local disk otherwise
+ * (dev, CI). Vercel's own disk is read-only, so hosted uploads need one of the two.
+ */
 const r2 = process.env.R2_BUCKET
   ? s3Storage({
       bucket: process.env.R2_BUCKET,
@@ -101,5 +105,5 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
-  plugins: r2 ? [r2] : [],
+  plugins: r2 ? [vercelBlob(), r2] : [vercelBlob()],
 })

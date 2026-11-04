@@ -5,5 +5,7 @@
 set -e
 export NODE_ENV=production
 export DATABASE_URL="${DATABASE_URL_UNPOOLED:-$DATABASE_URL}"
+# Photos need cloud storage: Vercel's own disk is read-only.
+if [ -n "$BLOB_STORE_ID" ] || [ -n "$R2_BUCKET" ]; then export SEED_PHOTOS=true; fi
 npm run migrate
 SEED_ONLY_IF_EMPTY=true npm run seed

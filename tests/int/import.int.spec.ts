@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { product } from '@/lib/schema'
+import { blobBaseUrl } from '@/lib/storage/blob'
 import {
   applyFilters,
   facetHref,
@@ -184,6 +185,14 @@ describe('catalogue', () => {
   it('searches without diacritics', () => {
     expect(searchProducts(products, 'grau').map((p) => p.id)).toEqual([1, 2])
     expect(searchProducts(products, '   ')).toEqual([])
+  })
+})
+
+describe('Blob storage', () => {
+  it('derives the public host from the store id', () => {
+    expect(blobBaseUrl('store_oOh5VAXHszu1RCkY')).toBe(
+      'https://ooh5vaxhszu1rcky.public.blob.vercel-storage.com',
+    )
   })
 })
 

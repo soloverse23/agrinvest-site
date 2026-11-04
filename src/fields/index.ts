@@ -60,10 +60,13 @@ export const link = (name: string, required = false): GroupField => ({
 export const faq: ArrayField = {
   name: 'faq',
   type: 'array',
+  // The whole list is per language: each language has its own questions, and saving one
+  // language never replaces the other's rows.
+  localized: true,
   labels: { singular: 'Question', plural: 'FAQ' },
   fields: [
-    { name: 'question', type: 'text', localized: true, required: true },
-    { name: 'answer', type: 'textarea', localized: true, required: true },
+    { name: 'question', type: 'text', required: true },
+    { name: 'answer', type: 'textarea', required: true },
   ],
 }
 

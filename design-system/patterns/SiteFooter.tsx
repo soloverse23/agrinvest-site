@@ -15,6 +15,8 @@ export type SiteFooterProps = {
   /** Small print: legal names, registrations. */
   legal?: string | null
   bottomLinks?: { href: string; label: string }[]
+  /** Extra controls next to the bottom links, e.g. the cookie settings button. */
+  extra?: ReactNode
   labels: { contact: string; social: string; footer: string }
 }
 
@@ -32,6 +34,7 @@ export function SiteFooter({
   social = [],
   legal,
   bottomLinks = [],
+  extra,
   labels,
 }: SiteFooterProps) {
   return (
@@ -107,6 +110,7 @@ export function SiteFooter({
                 </a>
               ),
             )}
+            {extra}
             {social.length > 0 && (
               <ul aria-label={labels.social} className="flex flex-wrap gap-x-4 gap-y-2">
                 {social.map((s) => (

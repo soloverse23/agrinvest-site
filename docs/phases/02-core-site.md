@@ -1,6 +1,6 @@
 # Phase 2: content model and core site
 
-Status: **2.1 built; 2.2 built (2026-11-03), waiting for the owner review; 2.3 next.** Plan approved 2026-11-03.
+Status: **2.1, 2.2 and 2.3 built (2026-11-04); waiting for the deployed preview and the owner review (the Phase 2 gate).** Plan approved 2026-11-03.
 
 ## Context
 
@@ -179,11 +179,33 @@ The content is rewritten from the crawl (`content-inventory.csv`) rather than co
 
 ## 2.3 English, analytics, full pass and gate
 
-- **English business pages:** `/en`, `/en/about`, `/en/storage`, `/en/partners`, `/en/market`, `/en/export` with `/en/export/{crop}` (corn, wheat, sunflower, rapeseed, barley, per the keyword map), and `/en/financing` (overview). They are written for buyers and partners, not translated. hreflang pairs exist only where an RO page has a true equivalent.
+- **English pages (changed, decision `0005-english-parity.md`):** the owner asked for both languages to match, so every Romanian page has an English equivalent with the same blocks, instead of the separate business-led set first planned here.
 - **Analytics:** a consent banner (GDPR; Google Consent Mode v2, denied by default), and GA4 loaded only after consent through `next/script`. Events: `generate_lead` (with the type), `call_click` (`tel:` links), `email_click`, and `order` reserved for Phase 3. Search Console and Bing verification come from SEO defaults. Plausible-style server logs are out of scope.
 - **AEO review:** `docs/audit/aeo-queries.md` holds about 30 representative questions (RO and EN: "unde vând grâu în Buzău", "Agrinvest capacitate depozitare"…). Check each page that should answer one: does a direct answer exist in the server-rendered HTML, is it attributable (date, source, author) and consistent with the Figures? Re-run after launch in Phase 10.
 - **Full pass:** `check:seo`, `check:figures` (warn), Lighthouse CI on every template, the screenshot review in RO and EN, the Rich Results Test on home, a base page, contact and a crop page, and Storybook visual tests for the new components.
 - **Gate:** a Vercel preview, which needs the Vercel link from Phase 0. Record the owner's review in `docs/decisions/`. Phase 1 closes at the same gate (the templates are approved on real pages).
+
+### 2.3 progress (2026-11-04)
+
+**Owner feedback on 2.2, fixed first:** the mega menu closed on the way to a panel (now a `MegaMenu` client component with hover intent); the map was too large and the list beside it unnecessary (decision 0004, revision: counties named on the map, area and bases on hover or tap).
+
+**Built**
+
+- **English:** all 13 pages plus 5 crop and 17 base pages (`scripts/seed/content-en.ts`), with English menus and footer. Route prefixes per language in `src/i18n/routes.ts`; crop and base templates shared in `src/components/templates/`. Sitemaps, `llms.txt`, IndexNow and hreflang cover both languages. The keyword map's `/en/export*` targets now point to `/en/grain*`.
+- **Analytics:** `ConsentBanner` and `Analytics` (Consent Mode v2, denied by default; GA4 only after acceptance; `generate_lead`, `call_click`, `email_click`; withdrawing consent removes the GA cookies; "Cookie settings" in the footer). The GA4 ID is a field in SEO defaults. While it is empty there is no banner and none of this code ships (`AnalyticsLazy`).
+- **AEO:** `docs/audit/aeo-queries.md` (32 questions, RO and EN) and `npm run check:aeo` (in CI). The check caught a real bug: crop FAQ rows were shared across languages, so English had replaced Romanian. The `faq` field is now localized as a whole.
+- **Tokens:** container sizes `sm`–`5xl` added; every `max-w-2xl`–`5xl` had silently produced no CSS since Phase 1.
+
+**Results**
+
+- `check:seo`: 70 pages, 0 errors, 0 warnings; 20 of 56 keyword-map URLs built. `check:aeo`: 32 of 32. `check:figures`: 41 unconfirmed values shown (warning until launch).
+- 36 integration and 48 e2e tests pass; 39 stories pass axe with no overflow at 390 / 768 / 1440 in RO and EN.
+- Lighthouse CI (mobile, applied throttling, 12 templates × 3 runs, RO and EN): performance, accessibility and best practices 100 on every template, LCP about 1,35 s, TBT ≤ 13 ms, CLS 0. That run failed only the script budget (160,6–164,2 KB against 160 KB); Analytics was then moved out of the bundle (`AnalyticsLazy`, about 4 KB less per page). The confirming run was still in progress at this commit.
+
+**Not done (needs a deployed URL)**
+
+- The Vercel preview (needs the owner's Vercel account), and with it the Rich Results Test and the simulated PageSpeed score.
+- The screenshot rubric scores for the real pages and the owner's review, recorded in `docs/decisions/` at the gate. Phase 1 closes at the same gate.
 
 **2.3 exit = Phase 2 exit:** all core pages pass the SEO checker, the Lighthouse budgets and the screenshot review in both languages; the owner approves the preview.
 

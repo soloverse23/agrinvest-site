@@ -59,6 +59,13 @@ export const pages: PageSeed[] = [
       summary:
         'Cifrele Agrinvest într-un singur loc: baze de depozitare, capacitate, flotă, programe și finanțare, fiecare cu sursa și data verificării.',
     },
+    en: {
+      title: 'Agrinvest in figures',
+      slug: 'figures',
+      seoTitle: 'Agrinvest in figures: bases, capacity, fleet, lending',
+      summary:
+        "Agrinvest's figures in one place: storage bases, capacity, fleet, programmes and lending, each with its source and verification status.",
+    },
   },
   {
     key: 'cereale',
@@ -68,6 +75,13 @@ export const pages: PageSeed[] = [
       seoTitle: 'Vinde cereale: grâu, porumb, floarea-soarelui, rapiță',
       summary:
         'Cumpărăm grâu, porumb, floarea-soarelui, rapiță și orz direct de la fermieri, cu recepție în bazele noastre și transport cu flota proprie.',
+    },
+    en: {
+      title: 'Grain at Agrinvest',
+      slug: 'grain',
+      seoTitle: 'Romanian grain: wheat, corn, sunflower, rapeseed',
+      summary:
+        'Agrinvest buys wheat, corn, sunflower, rapeseed and barley directly from Romanian farmers, receives it at its own bases and moves it with its own fleet.',
     },
   },
   {
@@ -97,6 +111,13 @@ export const pages: PageSeed[] = [
       summary:
         'Uscăm și precurățăm cerealele la recepție, ca să ajungă la umiditatea standard pentru depozitare și vânzare, fără să pierzi timp în plin sezon.',
     },
+    en: {
+      title: 'Grain drying',
+      slug: 'drying',
+      seoTitle: 'Grain drying and cleaning at reception | Agrinvest',
+      summary:
+        'We dry and clean grain at reception, so it reaches the standard moisture for storage and sale without losing time at the height of the harvest.',
+    },
   },
   {
     key: 'finantare',
@@ -124,6 +145,13 @@ export const pages: PageSeed[] = [
       summary:
         'Programul Golden Relationship ajută fermele în dificultate să își revină, cu un plan de redresare făcut împreună cu Agrinvest și sprijin pe termen lung.',
     },
+    en: {
+      title: 'Golden Relationship',
+      slug: 'golden-relationship',
+      seoTitle: 'Golden Relationship: helping farms in difficulty recover',
+      summary:
+        'Golden Relationship helps farms in difficulty recover, with a recovery plan built together with Agrinvest and long-term support afterwards.',
+    },
   },
   {
     key: 'logistica',
@@ -133,6 +161,13 @@ export const pages: PageSeed[] = [
       seoTitle: 'Transport cereale și inputuri cu flota proprie | Agrinvest',
       summary:
         'Transportăm cereale, semințe, îngrășăminte și produse de protecția plantelor cu flota proprie de camioane, de la fermă la bază și la client.',
+    },
+    en: {
+      title: 'Logistics and transport',
+      slug: 'logistics',
+      seoTitle: 'Grain and farm input transport, own fleet | Agrinvest',
+      summary:
+        'We move grain, seed, fertiliser and crop protection products with our own truck fleet, from the farm to the base and on to the customer.',
     },
   },
   {
@@ -160,6 +195,13 @@ export const pages: PageSeed[] = [
       seoTitle: 'Cariere la Agrinvest: locuri de muncă în agricultură',
       summary:
         'Locuri de muncă la Agrinvest: vânzări, agronomie, logistică, depozitare și finanțare. Trimite-ne CV-ul și spune-ne unde vrei să lucrezi.',
+    },
+    en: {
+      title: 'Careers at Agrinvest',
+      slug: 'careers',
+      seoTitle: 'Careers at Agrinvest: jobs in Romanian agriculture',
+      summary:
+        'Jobs at Agrinvest in sales, agronomy, logistics, storage and lending. Tell us where you would like to work and what you can do.',
     },
   },
   {
@@ -256,10 +298,52 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
     },
   ],
   en: [
-    { label: 'Storage', href: '/en/storage' },
+    {
+      label: 'Grain',
+      href: '/en/grain',
+      blurb: 'We buy grain directly from Romanian farmers and receive it at our own bases.',
+      children: [
+        { label: 'Wheat', href: '/en/grain/wheat', description: 'Summer harvest' },
+        { label: 'Corn', href: '/en/grain/corn', description: 'Autumn harvest' },
+        { label: 'Sunflower', href: '/en/grain/sunflower', description: 'Autumn harvest' },
+        { label: 'Rapeseed', href: '/en/grain/rapeseed', description: 'Summer harvest' },
+        { label: 'Barley', href: '/en/grain/barley', description: 'Summer harvest' },
+      ],
+    },
+    {
+      label: 'Storage',
+      href: '/en/storage',
+      blurb: 'Reception, drying and storage at our own bases, with sales straight from stock.',
+      children: [
+        { label: 'Our bases', href: '/en/storage', description: 'Map and capacity' },
+        {
+          label: 'Drying and cleaning',
+          href: '/en/storage/drying',
+          description: 'Grain brought to storage moisture',
+        },
+      ],
+    },
     { label: 'Financing', href: '/en/financing' },
-    { label: 'Partners', href: '/en/partners' },
-    { label: 'About', href: '/en/about' },
+    { label: 'Logistics', href: '/en/logistics' },
+    {
+      label: 'About',
+      href: '/en/about',
+      blurb: 'A Romanian-owned agribusiness that works directly with farmers.',
+      children: [
+        {
+          label: 'Agrinvest in figures',
+          href: '/en/about/figures',
+          description: 'With the source of every value',
+        },
+        {
+          label: 'Golden Relationship',
+          href: '/en/golden-relationship',
+          description: 'Support for farms in difficulty',
+        },
+        { label: 'Partners', href: '/en/partners', description: 'Inputs, processing, lending' },
+        { label: 'Careers', href: '/en/careers', description: 'Work with us' },
+      ],
+    },
   ],
   cta: {
     ro: { label: 'Contact', href: '/contact' },
@@ -304,12 +388,23 @@ export const footer = {
   en: {
     columns: [
       {
-        title: 'Agrinvest',
+        title: 'For farmers',
         links: [
-          ['About', '/en/about'],
+          ['Grain', '/en/grain'],
           ['Storage', '/en/storage'],
+          ['Drying and cleaning', '/en/storage/drying'],
           ['Financing', '/en/financing'],
+          ['Logistics', '/en/logistics'],
+        ],
+      },
+      {
+        title: 'Company',
+        links: [
+          ['About Agrinvest', '/en/about'],
+          ['Agrinvest in figures', '/en/about/figures'],
+          ['Golden Relationship', '/en/golden-relationship'],
           ['Partners', '/en/partners'],
+          ['Careers', '/en/careers'],
         ],
       },
       {

@@ -58,5 +58,22 @@ export const SeoDefaults: GlobalConfig = {
         },
       ],
     },
+    {
+      name: 'analytics',
+      type: 'group',
+      admin: {
+        description:
+          'Google Analytics 4 loads only after a visitor accepts statistics cookies (Consent Mode v2). Empty = no analytics and no cookie banner.',
+      },
+      fields: [
+        {
+          name: 'ga4',
+          type: 'text',
+          label: 'GA4 measurement ID',
+          validate: (value: string | null | undefined) =>
+            !value || /^G-[A-Z0-9]{4,}$/.test(value) || 'A GA4 ID looks like G-XXXXXXXXXX.',
+        },
+      ],
+    },
   ],
 }

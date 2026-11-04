@@ -12,6 +12,7 @@ export const ui = {
     faq: 'Întrebări frecvente',
     faqKicker: 'Pe scurt',
     footer: 'Subsol',
+    cookies: 'Setări cookie',
     social: 'Agrinvest pe rețelele sociale',
     contactUs: 'Contact',
     call: 'Sună',
@@ -32,8 +33,6 @@ export const ui = {
     deliver: 'Livrare',
     deliverValue: 'La bază sau ridicare de la fermă',
     priceSoon: 'Prețul zilei pentru această bază apare aici în curând.',
-    otherBases: 'Alte baze',
-    bookAt: (name: string) => `Programează o livrare la ${name}`,
     contact: 'Contact',
     privacy: 'Confidențialitate',
     capacity: 'Capacitate',
@@ -57,6 +56,7 @@ export const ui = {
     faq: 'Frequently asked questions',
     faqKicker: 'In short',
     footer: 'Footer',
+    cookies: 'Cookie settings',
     social: 'Agrinvest on social media',
     contactUs: 'Contact',
     call: 'Call',
@@ -77,8 +77,6 @@ export const ui = {
     deliver: 'Delivery',
     deliverValue: 'At the base or collected from the farm',
     priceSoon: "Today's price for this base will appear here soon.",
-    otherBases: 'Other bases',
-    bookAt: (name: string) => `Book a delivery to ${name}`,
     contact: 'Contact',
     privacy: 'Privacy',
     capacity: 'Capacity',
@@ -92,12 +90,14 @@ export const ui = {
     hectolitre: 'Minimum hectolitre mass',
     watch: 'Watch on YouTube',
   },
-} satisfies Record<Locale, Record<string, string | ((name: string) => string)>>
+} satisfies Record<Locale, Record<string, string>>
 
 /** Locale-relative paths of fixed pages (seeded in Payload). */
 export const fixedPaths = {
   privacy: { ro: '/confidentialitate', en: '/privacy' },
   contact: { ro: '/contact', en: '/contact' },
+  storage: { ro: '/depozitare', en: '/storage' },
+  grain: { ro: '/cereale', en: '/grain' },
 } satisfies Record<string, Record<Locale, string>>
 
 export const fixedUrl = (page: keyof typeof fixedPaths, locale: Locale) =>

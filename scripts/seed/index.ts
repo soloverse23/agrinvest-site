@@ -13,6 +13,7 @@ import { getPayload, type Payload, type Where } from 'payload'
 import type { FactStatus } from '@/fields'
 import { slugify } from '@/lib/slugify'
 import { contentFor, cropContent, cropFaq, type Ctx } from './content'
+import { contentEn, cropContentEn, cropFaqEn } from './content-en'
 import { bases, counties, crops, figures, people, routes, sameAs } from './data'
 import { footer, navigation, pages } from './pages'
 
@@ -146,7 +147,13 @@ async function seedLocations(payload: Payload) {
       collection: 'crops',
       id,
       locale: 'en',
-      data: { name: crop.name.en, slug: crop.slug.en, _status: 'published' },
+      data: {
+        name: crop.name.en,
+        slug: crop.slug.en,
+        intro: cropContentEn[crop.key].intro,
+        faq: cropFaqEn(crop.name.en.toLowerCase(), cropContentEn[crop.key].season),
+        _status: 'published',
+      },
       context,
     })
   }
@@ -193,8 +200,8 @@ async function seedPeople(payload: Payload): Promise<Record<string, number>> {
 
 /**
  * Video stills from the 2022 Agrinvest films (data/raw/frames, gitignored). Footage rights
- * are not confirmed, so they are uploaded as "pending" and only where the files exist
- * locally; without them (CI) pages render without photos.
+ * are not confirmed, so they are uploaded as "pending" and only to a local database where
+ * the files exist; elsewhere (CI, hosted previews) pages render without photos.
  */
 const frames: Record<string, { ro: string; en: string }> = {
   'harvest-sunflower': {
@@ -213,8 +220,10 @@ const frames: Record<string, { ro: string; en: string }> = {
 async function seedMedia(payload: Payload): Promise<Ctx['media']> {
   const dir = resolve('data/raw/frames')
   const ids: Ctx['media'] = {}
-  if (!existsSync(dir)) {
-    console.log('media: no local frames (data/raw/frames), pages render without photos')
+  // Only a local database: the files stay on this machine, and footage rights are open.
+  const local = /@(127\.0\.0\.1|localhost)[:/]/.test(process.env.DATABASE_URL ?? '')
+  if (!local || !existsSync(dir)) {
+    console.log('media: skipped (local database and data/raw/frames only), no photos on pages')
     return ids
   }
   for (const [name, alt] of Object.entries(frames)) {
@@ -241,6 +250,7 @@ async function seedPages(payload: Payload, ctx: Ctx) {
   const ids: Record<string, number> = {}
   for (const seed of pages) {
     const content = contentFor(seed.key, ctx)
+    const english = contentEn(seed.key, ctx)
     const where: Where = seed.isHome
       ? { isHome: { equals: true } }
       : {
@@ -289,8 +299,8 @@ async function seedPages(payload: Payload, ctx: Ctx) {
           slug: seed.en.slug,
           summary: seed.en.summary,
           seo: { title: seed.en.seoTitle },
-          layout: content?.en ?? [],
-          faq: content?.faq?.en ?? [],
+          layout: english?.blocks ?? [],
+          faq: english?.faq ?? [],
           _status: 'published',
         } as never,
       })

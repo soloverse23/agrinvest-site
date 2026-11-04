@@ -21,6 +21,7 @@ import {
 import { VideoEmbed } from '@ds/patterns/VideoEmbed'
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { localePath, type Locale } from '@/i18n/config'
+import { basePath, cropPath } from '@/i18n/routes'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, type Figures } from '@/lib/content/globals'
 import { listBases, listCounties, listCrops } from '@/lib/content/locations'
@@ -393,7 +394,7 @@ function FigureStripBlock({
   )
 }
 
-/** Bases on the county map, with the list beside it. Only Romanian base pages exist. */
+/** Bases on the county map, with links to every base page. */
 export async function BaseListBlock({
   block,
   ctx,
@@ -434,7 +435,7 @@ export async function BaseListBlock({
           const county = typeof b.county === 'object' && b.county ? b.county : null
           return {
             name: b.name,
-            href: localePath(`/baze/${b.slug}`, 'ro'),
+            href: basePath(b.slug, ctx.locale),
             capacity: b.capacity,
             county: county?.code,
             geo: b.geo,
@@ -465,7 +466,7 @@ async function CropListBlock({
         {crops.map((c) => (
           <li key={c.id}>
             <Link
-              href={localePath(`/cereale/${c.slug}`, 'ro')}
+              href={cropPath(c.slug, ctx.locale)}
               className="group flex h-full items-center gap-4 rounded-lg bg-raised p-4 text-ink no-underline shadow-soft ring-1 ring-line transition duration-150 ease-move hover:-translate-y-0.5 hover:shadow-raised lg:flex-col lg:items-start lg:p-5"
             >
               {cropKeys.includes(c.key) && <CropBadge crop={c.key} />}

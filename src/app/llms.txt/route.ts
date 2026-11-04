@@ -1,4 +1,5 @@
 import { localePath } from '@/i18n/config'
+import { basePath, cropPath } from '@/i18n/routes'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { payloadClient } from '@/lib/content/payload'
@@ -12,11 +13,12 @@ export const revalidate = 3600
  */
 export async function GET() {
   const payload = await payloadClient()
-  const [seoRo, seoEn, bases, crops] = await Promise.all([
+  const [seoRo, seoEn, bases, cropsRo, cropsEn] = await Promise.all([
     getSeoDefaults('ro'),
     getSeoDefaults('en'),
     listBases('ro'),
     listCrops('ro'),
+    listCrops('en'),
   ])
   const section = async (locale: 'ro' | 'en') => {
     const { docs } = await payload.find({
@@ -52,11 +54,17 @@ export async function GET() {
     '## Pages (English)',
     ...en,
     '',
-    '## Baze de depozitare',
-    ...bases.map((b) => `- [Baza ${b.name}](${absoluteUrl(localePath(`/baze/${b.slug}`, 'ro'))})`),
+    '## Baze de depozitare · Storage bases',
+    ...bases.map(
+      (b) =>
+        `- [Baza ${b.name}](${absoluteUrl(basePath(b.slug, 'ro'))}) · [${b.name} base](${absoluteUrl(basePath(b.slug, 'en'))})`,
+    ),
     '',
-    '## Cereale',
-    ...crops.map((c) => `- [${c.name}](${absoluteUrl(localePath(`/cereale/${c.slug}`, 'ro'))})`),
+    '## Cereale · Grain',
+    ...cropsRo.map((c) => {
+      const en = cropsEn.find((e) => e.id === c.id)
+      return `- [${c.name}](${absoluteUrl(cropPath(c.slug, 'ro'))})${en ? ` · [${en.name}](${absoluteUrl(cropPath(en.slug, 'en'))})` : ''}`
+    }),
     '',
   ].join('\n')
 

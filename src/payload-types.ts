@@ -1620,6 +1620,12 @@ export interface SeoDefault {
     google?: string | null;
     bing?: string | null;
   };
+  /**
+   * Google Analytics 4 loads only after a visitor accepts statistics cookies (Consent Mode v2). Empty = no analytics and no cookie banner.
+   */
+  analytics?: {
+    ga4?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1764,6 +1770,11 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
     | {
         google?: T;
         bing?: T;
+      };
+  analytics?:
+    | T
+    | {
+        ga4?: T;
       };
   updatedAt?: T;
   createdAt?: T;

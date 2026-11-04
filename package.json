@@ -33,7 +33,8 @@
     "check:seo": "tsx --env-file-if-exists=.env scripts/checks/seo.ts",
     "check:figures": "tsx --env-file-if-exists=.env scripts/checks/figures.ts",
     "brand:font": "tsx scripts/brand/subset-font.ts",
-    "brand:map": "tsx scripts/brand/build-map.ts"
+    "brand:map": "tsx scripts/brand/build-map.ts",
+    "check:aeo": "tsx scripts/checks/aeo.ts"
   },
   "dependencies": {
     "@fontsource-variable/onest": "^5.3.1",

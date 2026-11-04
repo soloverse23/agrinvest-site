@@ -119,7 +119,7 @@ export const Pages: CollectionConfig = {
           // Per language: the English site is business-led, not a translation of the Romanian.
           fields: [{ name: 'layout', type: 'blocks', blocks: pageBlocks, localized: true }],
         },
-        { label: 'FAQ', fields: [{ ...faq, localized: true }] },
+        { label: 'FAQ', fields: [faq] },
         { label: 'SEO', fields: [seo] },
       ],
     },

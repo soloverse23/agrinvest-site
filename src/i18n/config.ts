@@ -14,3 +14,7 @@ export const localePath = (path: string, locale: Locale): string => {
   const clean = path === '/' ? '' : path
   return locale === defaultLocale ? clean || '/' : `/${locale}${clean}`
 }
+
+/** A request or document locale as a site locale; `all`, unknown or missing → the default. */
+export const localeOf = (value: string | null | undefined): Locale =>
+  value && isLocale(value) ? value : defaultLocale

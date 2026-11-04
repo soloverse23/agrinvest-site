@@ -44,11 +44,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:int
       - run: npm run test:e2e
-      - name: SEO and figures checks
+      - name: SEO, AEO and figures checks
         run: |
           npm run start &
           for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3100/robots.txt && break; sleep 2; done
           npm run check:seo
+          npm run check:aeo
           npm run check:figures
           kill %1
       - name: Lighthouse (mobile budgets)

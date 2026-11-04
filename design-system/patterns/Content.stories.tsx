@@ -7,6 +7,7 @@ import { photos } from '../fixtures/sample'
 import { storyLocale } from '../fixtures/story'
 import { Button } from '../primitives/Button'
 import { BaseMap, type MapBase } from './BaseMap'
+import { ConsentBanner } from './ConsentBanner'
 import { FactTable } from './FactTable'
 import { Hero } from './Hero'
 import {
@@ -523,6 +524,31 @@ export const Footer: Story = {
           { href: '/confidentialitate', label: l(locale, 'Confidențialitate', 'Privacy') },
         ]}
       />
+    )
+  },
+}
+
+/** Statistics consent: fixed at the bottom, refusing as easy as accepting. */
+export const Consent: Story = {
+  name: 'Consent banner',
+  render: (_, { globals }) => {
+    const locale = storyLocale(globals)
+    return (
+      <div className="min-h-96">
+        <ConsentBanner
+          title={l(locale, 'Cookie-uri pentru statistici', 'Statistics cookies')}
+          body={l(
+            locale,
+            'Folosim Google Analytics ca să vedem ce pagini sunt utile, doar dacă ești de acord.',
+            'We use Google Analytics to see which pages help, only if you agree.',
+          )}
+          accept={l(locale, 'Accept', 'Accept')}
+          reject={l(locale, 'Refuz', 'Refuse')}
+          privacy={{ href: '/confidentialitate', label: l(locale, 'Detalii', 'Details') }}
+          onAccept={() => {}}
+          onReject={() => {}}
+        />
+      </div>
     )
   },
 }

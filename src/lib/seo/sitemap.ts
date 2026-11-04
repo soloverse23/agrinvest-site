@@ -1,4 +1,5 @@
-import { localePath, type Locale } from '@/i18n/config'
+import type { Locale } from '@/i18n/config'
+import { basePath, cropPath } from '@/i18n/routes'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { alternatesOf, listPages, type Alternates } from '@/lib/content/pages'
 import { absoluteUrl } from '@/lib/site'
@@ -21,20 +22,35 @@ export const segments = {
           alternates,
         }))
       }),
+  // Bases and crops exist in both languages (the base slug is shared, crop slugs are not).
   bases: async (): Promise<SitemapEntry[]> =>
     (await listBases('ro'))
       .filter((b) => !b.seo?.noindex)
-      .map((b) => {
-        const url = localePath(`/baze/${b.slug}`, 'ro')
-        return { url, lastModified: b.updatedAt, alternates: { ro: url } }
+      .flatMap((b) => {
+        const alternates = { ro: basePath(b.slug, 'ro'), en: basePath(b.slug, 'en') }
+        return Object.values(alternates).map((url) => ({
+          url,
+          lastModified: b.updatedAt,
+          alternates,
+        }))
       }),
-  crops: async (): Promise<SitemapEntry[]> =>
-    (await listCrops('ro'))
+  crops: async (): Promise<SitemapEntry[]> => {
+    const [ro, en] = await Promise.all([listCrops('ro'), listCrops('en')])
+    return ro
       .filter((c) => !c.seo?.noindex)
-      .map((c) => {
-        const url = localePath(`/cereale/${c.slug}`, 'ro')
-        return { url, lastModified: c.updatedAt, alternates: { ro: url } }
-      }),
+      .flatMap((c) => {
+        const other = en.find((e) => e.id === c.id)
+        const alternates: Alternates = {
+          ro: cropPath(c.slug, 'ro'),
+          ...(other ? { en: cropPath(other.slug, 'en') } : {}),
+        }
+        return Object.values(alternates).map((url) => ({
+          url,
+          lastModified: c.updatedAt,
+          alternates,
+        }))
+      })
+  },
 } satisfies Record<string, () => Promise<SitemapEntry[]>>
 
 export type SegmentName = keyof typeof segments

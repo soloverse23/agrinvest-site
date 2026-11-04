@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import { preload } from 'react-dom'
 
+import { AnalyticsLazy } from '@/components/AnalyticsLazy'
 import { isLocale, locales } from '@/i18n/config'
+import { fixedUrl } from '@/i18n/ui'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { SITE_INDEXABLE, SITE_URL } from '@/lib/site'
 import '../globals.css'
@@ -43,6 +45,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
+  const gaId = (await getSeoDefaults(locale)).analytics?.ga4
   // The one font file (Romanian + English subset), fetched with the HTML so it is usually in
   // time for the first render (font-display: optional never swaps it in later).
   preload('/fonts/onest-ro-wght.woff2', {
@@ -61,6 +64,9 @@ export default async function LocaleLayout({
           {skip[locale]}
         </a>
         {children}
+        {gaId && (
+          <AnalyticsLazy gaId={gaId} locale={locale} privacyHref={fixedUrl('privacy', locale)} />
+        )}
       </body>
     </html>
   )

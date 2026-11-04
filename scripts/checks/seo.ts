@@ -16,6 +16,8 @@ import { resolve } from 'node:path'
 import * as cheerio from 'cheerio'
 
 import { crawl, type CrawledPage } from './lib/site-crawl'
+import { locales } from '../../src/i18n/config'
+import { basePath } from '../../src/i18n/routes'
 
 const base = (process.argv[2] ?? 'http://localhost:3100').replace(/\/$/, '')
 const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? base).origin
@@ -40,7 +42,9 @@ const pathOf = (url: string) => {
 /** JSON-LD types every template must carry. */
 function expectedTypes(path: string): string[] {
   if (path === '/' || path === '/en') return ['Organization', 'WebSite', 'WebPage']
-  if (path.startsWith('/baze/')) return ['LocalBusiness', 'BreadcrumbList']
+  // Base pages in every language (src/i18n/routes.ts).
+  if (locales.some((l) => path.startsWith(`${basePath('', l)}`)))
+    return ['LocalBusiness', 'BreadcrumbList']
   return ['WebPage', 'BreadcrumbList']
 }
 

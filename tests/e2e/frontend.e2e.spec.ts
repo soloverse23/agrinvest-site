@@ -22,12 +22,21 @@ const coreRo = [
   '/contact',
   '/confidentialitate',
 ]
+// Every Romanian page has an English equivalent.
 const coreEn = [
   '/en',
   '/en/about',
+  '/en/about/figures',
+  '/en/grain',
+  '/en/grain/wheat',
   '/en/storage',
-  '/en/partners',
+  '/en/storage/drying',
+  '/en/bases/pogoanele',
   '/en/financing',
+  '/en/golden-relationship',
+  '/en/logistics',
+  '/en/partners',
+  '/en/careers',
   '/en/contact',
   '/en/privacy',
 ]
@@ -51,8 +60,10 @@ test.describe('Locale routing', () => {
     expect(res.headers().location).toBe('/')
   })
 
-  test('a page without an English version is not served under /en', async ({ request }) => {
+  test('Romanian slugs are not served under /en', async ({ request }) => {
     expect((await request.get('/en/despre', { maxRedirects: 0 })).status()).toBe(404)
+    expect((await request.get('/en/cereale/grau', { maxRedirects: 0 })).status()).toBe(404)
+    expect((await request.get('/grain/wheat', { maxRedirects: 0 })).status()).toBe(404)
   })
 })
 
@@ -75,10 +86,12 @@ test.describe('Language switch', () => {
     await expect(page).toHaveURL('/en/about')
   })
 
-  test('falls back to the English home otherwise', async ({ page }) => {
-    await page.goto('/despre/cifre')
-    const en = page.getByRole('group', { name: 'Limba' }).getByRole('link', { name: 'en' })
-    await expect(en).toHaveAttribute('href', '/en')
+  test('crop and base pages switch to their English twins', async ({ page }) => {
+    const en = () => page.getByRole('group', { name: 'Limba' }).getByRole('link', { name: 'en' })
+    await page.goto('/cereale/grau')
+    await expect(en()).toHaveAttribute('href', '/en/grain/wheat')
+    await page.goto('/baze/pogoanele')
+    await expect(en()).toHaveAttribute('href', '/en/bases/pogoanele')
   })
 })
 

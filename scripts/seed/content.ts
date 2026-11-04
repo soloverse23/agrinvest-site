@@ -1,7 +1,7 @@
 /**
- * Phase 2.2 page content: blocks and FAQ per page and language. Romanian copy is a draft
- * rewritten from the old site (agrinvest.ro, read 2026-11-03) for Agrinvest to review.
- * English layouts are short placeholders until 2.3 writes the business-led English site.
+ * Romanian page content: blocks and FAQ per page. The copy is a draft rewritten from the
+ * old site (agrinvest.ro, read 2026-11-03) for Agrinvest to review. The English site has the
+ * same pages and blocks (content-en.ts).
  *
  * Numbers and other register facts are never typed: `{{KEY}}` renders the figures register
  * value with its "to confirm" marker (src/components/FactText.tsx).
@@ -17,7 +17,7 @@ export type Ctx = {
   /** Media ids by frame name; empty when the local footage is not available (CI). */
   media: Record<string, number | undefined>
 }
-type Content = { ro: Blocks; en?: Blocks; faq?: { ro: Faq; en?: Faq } }
+type Content = { ro: Blocks; faq?: { ro: Faq } }
 
 const q = (question: string, answer: string) => ({ question, answer })
 
@@ -158,38 +158,6 @@ export function contentFor(key: string, ctx: Ctx): Content | null {
             primary: { label: 'Contactează-ne', href: '/contact' },
           },
         ],
-        en: [
-          {
-            blockType: 'hero',
-            eyebrow: 'Grain · Storage · Financing · Logistics',
-            title: 'Romanian grain, from the farm to your contract.',
-            accent: 'from the farm',
-            lead: 'Agrinvest buys grain directly from Romanian farmers, stores it in its own bases, moves it with its own fleet and finances production through Agrinvest Credit IFN.',
-            image: media['harvest-sunflower'],
-            primary: { label: 'Grain storage', href: '/en/storage' },
-            secondary: { label: 'Contact us', href: '/en/contact' },
-            needs: [
-              {
-                link: { label: 'Storage', href: '/en/storage' },
-                hint: 'Reception, drying, storage',
-              },
-              { link: { label: 'Financing', href: '/en/financing' }, hint: 'Agrinvest Credit IFN' },
-              {
-                link: { label: 'Partners', href: '/en/partners' },
-                hint: 'Inputs, processing, trade',
-              },
-              { link: { label: 'About', href: '/en/about' }, hint: 'A Romanian-owned group' },
-            ],
-          },
-          figures(['S1', 'S2', 'L1']),
-          {
-            blockType: 'ctaBand',
-            tone: 'surface',
-            heading: 'Talk to the person responsible',
-            body: 'Your enquiry goes straight to the team that handles it: grain, storage, logistics or financing.',
-            primary: { label: 'Contact us', href: '/en/contact' },
-          },
-        ],
         faq: {
           ro: [
             q(
@@ -253,15 +221,6 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             primary: { label: 'Agrinvest în cifre', href: '/despre/cifre' },
             secondary: { label: 'Contact', href: '/contact' },
           },
-        ],
-        en: [
-          {
-            blockType: 'richText',
-            content: rt(
-              'Agrinvest started in {{C1}} and is now run from Bucharest. The group trades grain, stores it in its own bases, moves it with its own fleet, supplies farm inputs and finances farmers through Agrinvest Credit IFN.\n\nAgrinvest is {{C5}} owned.',
-            ),
-          },
-          figures(['S1', 'S2', 'L1']),
         ],
         faq: {
           ro: [
@@ -445,20 +404,6 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             body: 'Spune-ne cultura, cantitatea și baza preferată. Te contactăm cu condițiile.',
           },
         ],
-        en: [
-          figures(['S1', 'S2']),
-          {
-            blockType: 'baseList',
-            heading: 'Our storage bases',
-            showMap: true,
-          },
-          {
-            blockType: 'ctaBand',
-            tone: 'surface',
-            heading: 'Storage or grain enquiries',
-            primary: { label: 'Contact us', href: '/en/contact' },
-          },
-        ],
         faq: {
           ro: [
             q(
@@ -582,19 +527,6 @@ Produsele noastre sunt gândite mai ales pentru fermierii mici și mijlocii, car
             extraFields: ['company', 'county'],
             heading: 'Cere o ofertă de finanțare',
             body: 'Spune-ne ce vrei să finanțezi și suprafața lucrată. Te contactează echipa Agrinvest Credit IFN.',
-          },
-        ],
-        en: [
-          {
-            blockType: 'richText',
-            content: rt(
-              'Agrinvest Credit IFN is the non-bank lender of the Agrinvest group, listed in the National Bank of Romania Special Register and lending to farmers since {{F3}}. It finances the production cycle and farm investments, in lei, with repayments aligned to the harvest.',
-            ),
-          },
-          {
-            blockType: 'figureTable',
-            heading: 'Company details',
-            keys: ['F1', 'F2.cui', 'F2.reg', 'F3'],
           },
         ],
         faq: {
@@ -785,41 +717,6 @@ După perioada critică rămânem alături: consultanță tehnică, comercială 
             body: 'Spune-ne cine ești și ce propui. Te contactăm în câteva zile lucrătoare.',
           },
         ],
-        en: [
-          {
-            blockType: 'serviceGrid',
-            heading: 'Who we work with',
-            columns: '2',
-            items: [
-              {
-                icon: 'leaf',
-                title: 'Input makers',
-                body: 'Seeds, fertilisers and crop protection, sold through our sales and agronomy network.',
-              },
-              {
-                icon: 'wheat',
-                title: 'Processors and grain buyers',
-                body: 'Grain and oilseeds from our bases, with our own logistics.',
-              },
-              {
-                icon: 'coins',
-                title: 'Lenders',
-                body: 'Banks and institutions funding farmers through Agrinvest Credit IFN.',
-              },
-              {
-                icon: 'handshake',
-                title: 'Farmers',
-                body: 'Long-term partnerships, including the Golden Relationship programme.',
-              },
-            ],
-          },
-          {
-            blockType: 'leadForm',
-            leadType: 'parteneri',
-            extraFields: ['company'],
-            heading: 'Propose a partnership',
-          },
-        ],
         faq: {
           ro: [
             q(
@@ -913,22 +810,6 @@ După perioada critică rămânem alături: consultanță tehnică, comercială 
             body: 'Cererea ajunge direct la persoana care se ocupă de ea.',
           },
         ],
-        en: [
-          {
-            blockType: 'contactCards',
-            heading: 'Who to talk to',
-            cards: [
-              { person: people.office, need: 'Grain, storage, inputs' },
-              { person: people.ifn, need: 'Financing' },
-            ],
-          },
-          {
-            blockType: 'leadForm',
-            leadType: 'general',
-            extraFields: ['company'],
-            heading: 'Write to us',
-          },
-        ],
         faq: {
           ro: [
             q(
@@ -965,20 +846,6 @@ Păstrăm datele cât este nevoie pentru a răspunde cererii și pentru obligaț
 ## Drepturile tale
 
 Poți cere oricând acces la datele tale, corectarea sau ștergerea lor. Scrie-ne la [dpo@agrinvest.ro](mailto:dpo@agrinvest.ro).`),
-          },
-        ],
-        en: [
-          {
-            blockType: 'callout',
-            tone: 'warning',
-            title: 'Draft',
-            body: 'This policy is a draft and will be approved by Agrinvest before launch.',
-          },
-          {
-            blockType: 'richText',
-            content: rt(
-              'We use the details you send through our forms (name, phone, email and your message) only to answer your enquiry. To access, correct or delete your data, write to [dpo@agrinvest.ro](mailto:dpo@agrinvest.ro).',
-            ),
           },
         ],
       }

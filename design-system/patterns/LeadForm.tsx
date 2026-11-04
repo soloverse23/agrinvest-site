@@ -112,7 +112,11 @@ export function LeadForm({
 
   useEffect(() => {
     if (state.status !== 'idle') status.current?.focus()
-  }, [state])
+    // Analytics (src/components/Analytics.tsx) records this as generate_lead, with consent.
+    if (state.status === 'success') {
+      window.dispatchEvent(new CustomEvent('agrinvest:lead', { detail: { type } }))
+    }
+  }, [state, type])
 
   const error = (f: LeadField) => state.errors?.[f]
   const value = (f: LeadField) => state.values?.[f]

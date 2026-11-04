@@ -7,6 +7,7 @@ import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, getFooter, getNavigation, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
 
+import { CookieSettings } from './CookieSettings'
 import { FactMark } from './Fact'
 
 /** Social profiles by host, for the footer labels. */
@@ -121,6 +122,7 @@ export async function SiteShell({
         }))}
         legal={footer.legal}
         bottomLinks={[{ href: fixedUrl('privacy', locale), label: t.privacy }]}
+        extra={seo.analytics?.ga4 ? <CookieSettings label={t.cookies} /> : undefined}
       />
     </>
   )

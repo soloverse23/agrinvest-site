@@ -12,7 +12,10 @@
         "http://localhost:3100/depozitare",
         "http://localhost:3100/baze/pogoanele",
         "http://localhost:3100/finantare",
-        "http://localhost:3100/contact"
+        "http://localhost:3100/contact",
+        "http://localhost:3100/en/grain/wheat",
+        "http://localhost:3100/en/bases/pogoanele",
+        "http://localhost:3100/en/storage"
       ],
       "numberOfRuns": 3,
       "settings": {

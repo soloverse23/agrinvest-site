@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
+import { localeOf } from '@/i18n/config'
+import { cropPath } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
 
@@ -16,9 +18,9 @@ export const Crops: CollectionConfig = {
     afterChange: [
       ({ doc, req }) => {
         revalidate(tags.crops)
-        if (doc._status === 'published' && (!req.locale || req.locale === 'ro')) {
-          void pingIndexNow([`/cereale/${doc.slug}`])
-        }
+        // The slug is per language: ping the URL of the language that was saved.
+        if (doc._status === 'published')
+          void pingIndexNow([cropPath(doc.slug, localeOf(req.locale))])
       },
     ],
     afterDelete: [() => revalidate(tags.crops)],

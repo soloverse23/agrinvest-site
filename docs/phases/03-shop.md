@@ -1,6 +1,6 @@
 # Phase 3: shop
 
-Status: **3.1 and 3.2 built (2026-11-04), waiting for owner review; 3.3 next.** Plan approved 2026-11-04. This doc is kept updated per sub-phase. Decisions go in `docs/decisions/0006…`.
+Status: **3.1 and 3.2 merged and live on the Vercel production domain (2026-11-04); 3.3 next.** Plan approved 2026-11-04. This doc is kept updated per sub-phase. Decisions go in `docs/decisions/0006…`.
 
 ## Context
 
@@ -193,6 +193,13 @@ Summary answer near the top, price with unit price and VAT note, pack sizes, sto
 - Principal Forte shows only part of its composition. Frontier Forte gives dimetenamid where its text says dimetenamid-P.
 - Prices to check: Wing P, the two Avenue products, Corida (19.380 lei/kg).
 - Old `pesticide` products were placed by their own text; Jolpolt moved from insecticides to adjuvants.
+
+**Deployment (2026-11-04)**
+
+- Every Vercel build runs `scripts/deploy/prepare-database.sh`: migrations, then a seed only if the database is empty.
+- Media and documents are in Vercel Blob through a small OIDC adapter (`src/lib/storage/blob.ts`), because connected stores have no read-write token and Payload's adapter needs one. Admin uploads over 4,5 MB do not work yet.
+- 71 product photos and 5 page stills were uploaded by the first build with storage, all marked rights pending. Decision of the owner: they are shown now; permission is still needed before launch.
+- Preview and Production share one Neon database and one Blob store.
 
 **Open for 3.3**
 

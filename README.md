@@ -41,6 +41,8 @@ The build reads the database, so every Vercel build first runs `scripts/deploy/p
 1. In Vercel, set for Production and Preview: `DATABASE_URL` and `DATABASE_URL_UNPOOLED` (the Neon integration adds both) and `PAYLOAD_SECRET` (`openssl rand -hex 32`). For uploads and photos, connect a public Vercel Blob store to the project (it adds `BLOB_STORE_ID`; authentication is OIDC, and files over 4.5 MB cannot go through the admin), or set `R2_BUCKET`, `R2_ENDPOINT`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`. Leave `SITE_INDEXABLE` off until Phase 8.
 2. Deploy. The first build with storage uploads the page stills and the old shop's product photos, marked "rights pending". Without storage, pages render without photos.
 
+The seed runs outside Next.js, so it cannot refresh Vercel's data cache, which survives deploys. After a seed or import changes content on a live site, run `vercel cache invalidate --tag products` (or the tag of what changed: see `src/lib/revalidate.ts`). Saving in the admin refreshes it by itself.
+
 Preview and Production share one database for now, so a preview build migrates it too. Give previews their own Neon branch before real orders arrive.
 
 ## Documents

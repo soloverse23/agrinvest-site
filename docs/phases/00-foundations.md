@@ -31,16 +31,19 @@ All work happens in the new folder `/Users/mosiho/Projects/Agrinvest/site/`. Not
 ## Result (2026-11-02)
 
 **Built**
+
 - The scaffold (A), the docs (B) and the audit (C) are done; the outputs and findings are summarised in `docs/audit/README.md`.
 - Verified: typecheck, lint, format check, `next build`, the Vitest integration test, 6 Playwright e2e tests (locale routing + admin) and the Storybook build all pass locally.
 
 **Deviations from the checklist**
+
 - All audit scripts live in `scripts/audit/`, not `scripts/crawl/`.
 - An extra `npm run audit:redirects` script generates the redirect map.
 - The dev server runs on port 3100, because port 3000 is used by another local project.
 - `keywords.ts` loads `../src/data/plan.ts` at runtime, because that file lives outside this repo.
 
 **Open (needs the owner)**
+
 - Vercel project link (no deploy yet, so there is no preview URL).
 - Keyword Planner access for exact volumes.
 - Review of `keyword-map.csv`, `redirect-map.csv` (15 REVIEW rows) and `figures-register.md`.

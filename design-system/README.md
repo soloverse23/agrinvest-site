@@ -1,9 +1,13 @@
 # Agrinvest design system
 
-Built in Phase 1 (see `docs/ROADMAP.md`). Shared by the public site and, later, the admin panel.
+Rules and usage: `docs/design-system.md`. Direction: `docs/decisions/0002-design-direction.md`.
 
-- `tokens/`: CSS custom properties (colour, type, space, shape, motion), exposed to Tailwind through `@theme`.
-- `primitives/`: base components (Button, Field, Table, Price…), each with a Storybook story.
-- `patterns/`: composed components (Header, ProductCard, PriceBoard, DoseTable…).
+- `tokens/`: `tokens.css`, the single source of colour, type, radius, shadow and motion, exposed to Tailwind through `@theme`.
+- `brand/`: the logo mark (rebuilt by `scripts/brand/build-logo.ts`).
+- `icons/`: the line-icon set.
+- `primitives/`: base components (Button, Badge, Delta, fields, SegmentedControl).
+- `patterns/`: composed components (SiteHeader, Hero, PriceTile, PriceTable, ProductCard, bands).
+- `pages/`: patterns composed into page sketches.
+- `fixtures/`: sample RO/EN content for stories.
 
-Rule: styling comes only from tokens. No hard-coded colours, sizes or font stacks in components.
+Rule: styling comes only from tokens. No hard-coded colours, sizes or font stacks, and no arbitrary Tailwind values.

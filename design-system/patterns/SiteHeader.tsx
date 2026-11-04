@@ -1,0 +1,184 @@
+import Link from 'next/link'
+
+import type { Locale } from '@/i18n/config'
+import { formatNumber } from '@/lib/format'
+
+import type { CropKey } from '../fixtures/sample'
+import { MenuIcon, PhoneIcon } from '../icons/icons'
+import { cx } from '../lib/cx'
+import { Button } from '../primitives/Button'
+import { Delta } from '../primitives/Delta'
+import { Lockup } from './parts'
+
+export type SiteHeaderProps = {
+  locale: Locale
+  nav: { href: string; label: string }[]
+  /** href of the current section, marked with aria-current. */
+  current?: string
+  cta: { href: string; label: string }
+  labels: { menu: string; main: string; language: string }
+  /** `overlay`: transparent, light text, for drawing over a hero photo. */
+  tone?: 'default' | 'overlay'
+  /** Optional strip above the header with today's prices and the phone number. */
+  ticker?: {
+    crops: { crop: CropKey; name: string; price: number; change: number }[]
+    phone: string
+  }
+}
+
+const linkBase =
+  'inline-flex h-10 items-center rounded-md px-3.5 text-small font-medium no-underline transition-colors duration-150'
+const linkState = (active: boolean, overlay = false) =>
+  overlay
+    ? active
+      ? 'bg-on-forest/15 text-on-forest'
+      : 'text-on-forest/85 hover:bg-on-forest/10 hover:text-on-forest'
+    : active
+      ? 'bg-accent-soft text-accent'
+      : 'text-muted hover:bg-surface hover:text-ink'
+
+/** Site header: logo, sections, language, one call to action. Mobile menu needs no JavaScript. */
+export function SiteHeader({
+  locale,
+  nav,
+  current,
+  cta,
+  labels,
+  tone = 'default',
+  ticker,
+}: SiteHeaderProps) {
+  const overlay = tone === 'overlay'
+  return (
+    <div className={cx(overlay && 'relative z-30')}>
+      {ticker && (
+        <div className="bg-forest text-caption text-on-forest">
+          <div className="mx-auto flex h-10 max-w-page items-center gap-6 px-4 md:px-8">
+            <ul className="flex min-w-0 items-center gap-5 overflow-hidden">
+              {ticker.crops.map((c, i) => (
+                <li
+                  key={c.crop}
+                  className={cx(
+                    'flex items-center gap-2 whitespace-nowrap',
+                    i > 0 && 'hidden md:flex',
+                  )}
+                >
+                  <span className="text-on-forest-muted">{c.name}</span>
+                  <span className="font-semibold tabular-nums">
+                    {formatNumber(c.price, locale)}
+                  </span>
+                  <Delta value={c.change} locale={locale} size="sm" />
+                </li>
+              ))}
+            </ul>
+            <a
+              href={`tel:${ticker.phone.replace(/\s/g, '')}`}
+              className="ml-auto flex shrink-0 items-center gap-2 font-medium text-on-forest no-underline hover:text-lime"
+            >
+              <PhoneIcon className="size-4" />
+              <span className="tabular-nums">{ticker.phone}</span>
+            </a>
+          </div>
+        </div>
+      )}
+      <header
+        className={overlay ? 'border-b border-on-forest/15' : 'border-b border-line bg-paper'}
+      >
+        <div className="relative mx-auto flex h-18 max-w-page items-center gap-6 px-4 md:px-8">
+          <Link href="/" className="no-underline" aria-label="Agrinvest">
+            <Lockup tone={overlay ? 'light' : 'dark'} />
+          </Link>
+          <nav aria-label={labels.main} className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={item.href === current ? 'page' : undefined}
+                    className={cx(linkBase, linkState(item.href === current, overlay))}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="ml-auto flex items-center gap-3">
+            <div
+              role="group"
+              aria-label={labels.language}
+              className={cx(
+                'hidden rounded-md p-1 md:flex',
+                overlay ? 'bg-on-forest/10' : 'bg-surface',
+              )}
+            >
+              {(['ro', 'en'] as const).map((l) => (
+                <Link
+                  key={l}
+                  href={l === 'ro' ? '/' : '/en'}
+                  lang={l}
+                  aria-current={l === locale ? 'true' : undefined}
+                  className={cx(
+                    'inline-flex h-8 items-center rounded-sm px-3 text-caption font-semibold uppercase no-underline',
+                    l === locale
+                      ? 'bg-raised text-ink shadow-soft'
+                      : overlay
+                        ? 'text-on-forest/85 hover:text-on-forest'
+                        : 'text-muted hover:text-ink',
+                  )}
+                >
+                  {l}
+                </Link>
+              ))}
+            </div>
+            <Button
+              href={cta.href}
+              size="sm"
+              variant={overlay ? 'lime' : 'primary'}
+              className="hidden md:inline-flex"
+            >
+              {cta.label}
+            </Button>
+            <details className="group lg:hidden">
+              <summary
+                className={cx(
+                  'flex size-11 cursor-pointer list-none items-center justify-center rounded-md ring-1 ring-inset',
+                  overlay
+                    ? 'bg-on-forest/10 text-on-forest ring-on-forest/30'
+                    : 'bg-raised ring-line-strong',
+                )}
+              >
+                <MenuIcon className="size-5" />
+                <span className="sr-only">{labels.menu}</span>
+              </summary>
+              <nav
+                aria-label={labels.main}
+                className="absolute inset-x-4 top-full z-20 mt-2 rounded-lg bg-raised p-2 shadow-floating ring-1 ring-line md:left-auto md:w-80"
+              >
+                <ul className="grid">
+                  {nav.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        aria-current={item.href === current ? 'page' : undefined}
+                        className={cx(
+                          linkBase,
+                          linkState(item.href === current),
+                          'h-12 w-full text-body',
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Button href={cta.href} fullWidth className="mt-2 md:hidden">
+                  {cta.label}
+                </Button>
+              </nav>
+            </details>
+          </div>
+        </div>
+      </header>
+    </div>
+  )
+}

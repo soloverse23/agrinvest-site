@@ -347,6 +347,15 @@ _SEO plumbing_
 - Segmented sitemaps, robots, `llms.txt`, IndexNow.
 - The SEO checker in CI.
 
+_AEO and LLM discoverability_
+
+- Structure key pages to answer likely questions directly, with clear headings, concise summaries and useful FAQs where appropriate.
+- Publish accurate, consistent entity and product details in crawlable HTML; connect pages with descriptive internal links and validated structured data.
+- Make authorship, publication or update dates, sources and claims clear so answers can be attributed and verified.
+- Keep relevant public pages accessible to search and AI crawlers through robots and server-rendered content; exclude private or restricted content.
+- Maintain `llms.txt` as a helpful content index, without relying on it as a substitute for crawlability, sitemaps or SEO.
+- Review representative AEO/LLM queries for accurate citations and answers; keep SEO requirements and canonical URLs intact.
+
 _Analytics_
 
 - GA4 events (lead, call click, order), Search Console, Bing.

@@ -43,9 +43,12 @@ The build reads the database (static pages, `llms.txt`), so a project with no en
 3. Fill the database once, from your machine:
 
    ```bash
-   DATABASE_URL=<production url> npm run migrate
-   DATABASE_URL=<production url> npm run seed
+   export DATABASE_URL=<production url> PAYLOAD_SECRET=<the same secret> NODE_ENV=production
+   npm run migrate
+   npm run seed
    ```
+
+   `NODE_ENV=production` matters: without it the seed pushes the schema itself, which mixes with the migrations.
 
 4. Redeploy. Photos stay local until their rights are confirmed, so pages render without them.
 

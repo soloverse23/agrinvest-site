@@ -1,0 +1,101 @@
+{
+  "slug": "napekhem-n-6-mg-s-6-11-micros",
+  "primaryKeyword": {
+    "ro": "napekhem n 6 + mg s (6 11) micros",
+    "en": "napekhem n 6 + mg s (6 11) micros"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "NaPeKhem N 6 + Mg S (6-11) Micros este un îngrășământ foliar cu azot, magneziu, sulf și mangan, pentru toate tipurile de culturi. Doza din fișă: 4–6 l/ha, în 1–2 aplicații. Ambalaje de 1 l și 20 l.",
+      "description": "### Ce este\nNaPeKhem N 6 + Mg-S (6-11) Micros este un îngrășământ foliar cu azot, magneziu, sulf și mangan ca microelement. Se folosește la toate tipurile de culturi: fructe, citrice, viță de vie, măsline, legume, culturi industriale.\n\n### Ce aduce fiecare element\n- **Azotul** susține dezvoltarea vegetativă pe tot parcursul creșterii.\n- **Sulful** intră în componența aminoacizilor, este necesar pentru clorofilă și pentru metabolismul azotului și ajută planta la frig sau atac de agenți patogeni.\n- **Magneziul** este centrul moleculei de clorofilă.\n- **Manganul** participă la fotosinteză, la respirație și la asimilarea azotului.\n\n### Doză\nFoliar, 4–6 l/ha, 1–2 aplicații. Pentru utilizări specifice, fișa trimite la departamentul tehnic al producătorului.",
+      "faq": [
+        {
+          "question": "Ce doză de NaPeKhem N 6 + Mg S se folosește?",
+          "answer": "Foliar, 4–6 l/ha, în 1–2 aplicații, conform fișei produsului."
+        },
+        {
+          "question": "Ce conține NaPeKhem N 6 + Mg S?",
+          "answer": "Azot, magneziu, sulf și mangan. Procentele exacte nu sunt încă verificate pe această pagină."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem N 6 + Mg S: îngrășământ foliar cu azot, Mg, S",
+        "description": "NaPeKhem N 6 + Mg S (6-11) Micros, îngrășământ foliar cu azot, magneziu, sulf și mangan: ce aduce fiecare element și doza de 4–6 l/ha."
+      }
+    },
+    "en": {
+      "summary": "NaPeKhem N 6 + Mg S (6-11) Micros is a foliar fertiliser with nitrogen, magnesium, sulphur and manganese, for all types of crops. Rate on the sheet: 4–6 l/ha, in 1–2 applications. 1 l and 20 l packs.",
+      "description": "### What it is\nNaPeKhem N 6 + Mg-S (6-11) Micros is a foliar fertiliser with nitrogen, magnesium, sulphur and manganese as a micronutrient. It is used on all types of crops: fruit, citrus, grapevine, olive, vegetables and industrial crops.\n\n### What each element brings\n- **Nitrogen** supports vegetative growth throughout.\n- **Sulphur** is part of amino acids, is needed for chlorophyll and nitrogen metabolism, and helps the plant against cold or pathogen attack.\n- **Magnesium** is the centre of the chlorophyll molecule.\n- **Manganese** takes part in photosynthesis, respiration and nitrogen assimilation.\n\n### Rate\nFoliar, 4–6 l/ha, 1–2 applications. For specific uses the sheet refers to the manufacturer’s technical department.",
+      "faq": [
+        {
+          "question": "What rate of NaPeKhem N 6 + Mg S is used?",
+          "answer": "Foliar, 4–6 l/ha, in 1–2 applications, according to the product sheet."
+        },
+        {
+          "question": "What does NaPeKhem N 6 + Mg S contain?",
+          "answer": "Nitrogen, magnesium, sulphur and manganese. The exact percentages are not yet checked on this page."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem N 6 + Mg S: foliar fertiliser with N, Mg, S",
+        "description": "NaPeKhem N 6 + Mg S (6-11) Micros, a foliar fertiliser with N, Mg, S and Mn: what each element brings and the 4–6 l/ha rate."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 6
+      }
+    ],
+    "form": {
+      "ro": "Lichid",
+      "en": "Liquid"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "4–6 l/ha, 1–2 aplicații",
+        "en": "4–6 l/ha, 1–2 applications"
+      },
+      "doseMin": 4,
+      "doseMax": 6,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-n-6-mg-s-6-11-micros-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-n-6-mg-s-6-11-micros-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Composition: the old page has an empty composition table; only “N 6” comes from the name. Percentages of Mg, S and Mn are missing."
+  ],
+  "conflicts": []
+}

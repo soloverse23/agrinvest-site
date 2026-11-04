@@ -1,0 +1,89 @@
+[
+  {
+    "key": "termeni",
+    "ro": {
+      "title": "Termeni de vânzare",
+      "slug": "termeni-de-vanzare",
+      "seoTitle": "Termeni de vânzare în magazinul Agrinvest",
+      "summary": "Cum se plasează și se confirmă o comandă în magazinul Agrinvest: prețuri, plată, produse de protecția plantelor, livrare, retragere și reclamații.",
+      "body": "## Cine vinde\n\nVânzătorul este Agrinvest SRL, [CUI], [nr. Registrul Comerțului], [sediul], [telefon], [e-mail].\n\n## Cum se încheie comanda\n\nO comandă trimisă pe site este o cerere. Nu se plătește nimic online. Un consultant Agrinvest te contactează, confirmă stocul, prețul, costul de livrare și modul de plată. Contractul se încheie când confirmi aceste condiții.\n\n## Prețuri\n\nPrețurile sunt în lei. Prețul final, TVA și costul de livrare se confirmă de consultant înainte de facturare.\n\n## Produse de protecția plantelor\n\n- Se vând numai persoanelor de cel puțin 18 ani.\n- Pentru produsele de uz profesional îți cerem numărul și valabilitatea certificatului.\n- Produsele cu toxicitate acută din categoriile 1, 2 și 3, cu pictograma GHS06, nu se vând online.\n- Citește eticheta și respectă doza, timpul de pauză și măsurile de siguranță.\n\n## Plată\n\nAlegi în comandă dacă vrei să te contacteze un consultant sau să plătești prin transfer bancar, pe baza unei proforme.\n\n## Cookie-uri pentru coș\n\nCoșul folosește două cookie-uri necesare funcționării, care păstrează produsele alese timp de 30 de zile.\n\n## Reclamații\n\nNe poți scrie la [e-mail]. Ai dreptul să te adresezi [Autorității Naționale pentru Protecția Consumatorilor](https://anpc.ro/) și procedurilor de [soluționare alternativă a litigiilor](https://anpc.ro/ce-este-sal/).",
+      "notice": {
+        "blockType": "callout",
+        "tone": "warning",
+        "title": "Proiect în lucru",
+        "body": "Acest text este un proiect și nu a fost încă verificat de avocatul Agrinvest. Datele între paranteze pătrate se completează înainte de lansare."
+      }
+    },
+    "en": {
+      "title": "Terms of sale",
+      "slug": "terms-of-sale",
+      "seoTitle": "Terms of sale in the Agrinvest shop",
+      "summary": "How an order is placed and confirmed in the Agrinvest shop: prices, payment, plant protection products, delivery, withdrawal and complaints.",
+      "body": "## Who sells\n\nThe seller is Agrinvest SRL, [tax ID], [trade register no.], [registered address], [phone], [email].\n\n## How an order is concluded\n\nAn order sent through the site is a request. Nothing is paid online. An Agrinvest consultant contacts you and confirms stock, price, delivery cost and payment. The contract is concluded when you confirm these conditions.\n\n## Prices\n\nPrices are in lei. The consultant confirms the final price, VAT and delivery cost before invoicing.\n\n## Plant protection products\n\n- They are sold only to people aged at least 18.\n- For professional-use products we ask for the number and validity of your certificate.\n- Products with acute toxicity in categories 1, 2 and 3, with the GHS06 pictogram, are not sold online.\n- Read the label and follow the rate, waiting period and safety measures.\n\n## Payment\n\nIn the order you choose whether a consultant contacts you or you pay by bank transfer against a proforma invoice.\n\n## Cart cookies\n\nThe cart uses two cookies needed for it to work, which keep the chosen products for 30 days.\n\n## Complaints\n\nYou can write to us at [email]. You may turn to the [National Authority for Consumer Protection](https://anpc.ro/) and to [alternative dispute resolution](https://anpc.ro/ce-este-sal/).",
+      "notice": {
+        "blockType": "callout",
+        "tone": "warning",
+        "title": "Draft",
+        "body": "This text is a draft and has not yet been checked by Agrinvest’s lawyer. The details in square brackets are completed before launch."
+      }
+    }
+  },
+  {
+    "key": "livrare",
+    "ro": {
+      "title": "Livrare",
+      "slug": "livrare",
+      "seoTitle": "Livrarea comenzilor din magazinul Agrinvest",
+      "summary": "Cum ajung comenzile la tine: livrare la adresă sau ridicare de la o bază Agrinvest, costul confirmat de consultant și transportul produselor de protecție.",
+      "body": "## Moduri de livrare\n\nPoți alege livrarea la adresă sau ridicarea de la o bază Agrinvest.\n\n## Cost și termen\n\nCostul și termenul de livrare se confirmă de consultant, în funcție de zonă, cantitate și tipul produsului. [Zonele de livrare se completează.]\n\n## Produse de protecția plantelor\n\nProdusele de protecția plantelor comandate online se livrează cu mijloace de transport autorizate.\n\n## Recepția\n\nVerifică ambalajele la primire și spune-ne pe loc dacă sunt deteriorate.",
+      "notice": {
+        "blockType": "callout",
+        "tone": "warning",
+        "title": "Proiect în lucru",
+        "body": "Acest text este un proiect și nu a fost încă verificat de avocatul Agrinvest. Datele între paranteze pătrate se completează înainte de lansare."
+      }
+    },
+    "en": {
+      "title": "Delivery",
+      "slug": "delivery",
+      "seoTitle": "Delivery of orders from the Agrinvest shop",
+      "summary": "How orders reach you: delivery to an address or pickup at an Agrinvest base, the cost confirmed by a consultant, and the transport of plant protection products.",
+      "body": "## Ways of delivery\n\nYou can choose delivery to an address or pickup at an Agrinvest base.\n\n## Cost and timing\n\nThe consultant confirms the delivery cost and timing, by area, quantity and product type. [Delivery zones to be completed.]\n\n## Plant protection products\n\nPlant protection products ordered online are delivered with authorised means of transport.\n\n## Receiving the goods\n\nCheck the packs on receipt and tell us at once if they are damaged.",
+      "notice": {
+        "blockType": "callout",
+        "tone": "warning",
+        "title": "Draft",
+        "body": "This text is a draft and has not yet been checked by Agrinvest’s lawyer. The details in square brackets are completed before launch."
+      }
+    }
+  },
+  {
+    "key": "retur",
+    "ro": {
+      "title": "Retur și dreptul de retragere",
+      "slug": "retur",
+      "seoTitle": "Retur și drept de retragere în magazinul Agrinvest",
+      "summary": "Cum te retragi dintr-o comandă și cum returnezi un produs: termenul de 14 zile pentru consumatori, excepțiile și ce se întâmplă cu banii.",
+      "body": "## Dreptul de retragere\n\nDacă ești consumator, te poți retrage dintr-un contract la distanță în 14 zile de la primirea produselor, fără să dai un motiv, conform OUG 34/2014.\n\n## Cum te retragi\n\nSpune-ne decizia ta în scris, la [e-mail] sau [adresă]. Trimiți înapoi produsele în 14 zile de la această comunicare.\n\n## Excepții\n\n[Avocatul confirmă excepțiile: de exemplu, produse sigilate desigilate după livrare din motive de protecție a sănătății, produse care se deteriorează rapid.] Produsele de protecția plantelor se returnează numai în ambalajul original, sigilat.\n\n## Banii\n\nRambursăm plata în cel mult 14 zile de la primirea retragerii, cu același mod de plată. Putem amâna rambursarea până primim produsele.\n\n## Firme\n\nDreptul de retragere se aplică consumatorilor. Pentru firme, returul se stabilește cu consultantul.",
+      "notice": {
+        "blockType": "callout",
+        "tone": "warning",
+        "title": "Proiect în lucru",
+        "body": "Acest text este un proiect și nu a fost încă verificat de avocatul Agrinvest. Datele între paranteze pătrate se completează înainte de lansare."
+      }
+    },
+    "en": {
+      "title": "Returns and the right of withdrawal",
+      "slug": "returns",
+      "seoTitle": "Returns and withdrawal in the Agrinvest shop",
+      "summary": "How to withdraw from an order and return a product: the 14-day period for consumers, the exceptions and what happens to your money.",
+      "body": "## Right of withdrawal\n\nIf you are a consumer, you may withdraw from a distance contract within 14 days of receiving the products, without giving a reason, under OUG 34/2014.\n\n## How to withdraw\n\nTell us your decision in writing, at [email] or [address]. Send the products back within 14 days of telling us.\n\n## Exceptions\n\n[The lawyer confirms the exceptions: for example, sealed goods unsealed after delivery for health protection reasons, goods that deteriorate quickly.] Plant protection products are returned only in their original, sealed pack.\n\n## Your money\n\nWe refund the payment within 14 days of receiving the withdrawal, by the same means of payment. We may delay the refund until we receive the products.\n\n## Companies\n\nThe right of withdrawal applies to consumers. For companies, returns are agreed with the consultant.",
+      "notice": {
+        "blockType": "callout",
+        "tone": "warning",
+        "title": "Draft",
+        "body": "This text is a draft and has not yet been checked by Agrinvest’s lawyer. The details in square brackets are completed before launch."
+      }
+    }
+  }
+]

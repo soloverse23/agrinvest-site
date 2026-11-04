@@ -32,6 +32,11 @@ export const categoryPath = (slug: string, locale: Locale) =>
 export const productPath = (category: string, slug: string, locale: Locale) =>
   localePath(`${sections.shop[locale]}/${category}/${slug}`, locale)
 
+/** Cart and checkout. Personal pages: never indexed. */
+export const cartPath = (locale: Locale) => localePath(locale === 'ro' ? '/cos' : '/cart', locale)
+export const checkoutPath = (locale: Locale) =>
+  localePath(locale === 'ro' ? '/comanda' : '/checkout', locale)
+
 /** Second-level shop routes. Their words are reserved: no category may use them. */
 export const shopRoutes = {
   crop: { ro: 'cultura', en: 'crop' },

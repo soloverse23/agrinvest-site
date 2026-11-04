@@ -1,0 +1,111 @@
+import type { LineProblem } from '@/lib/commerce/pricing'
+
+import type { Locale } from './config'
+
+/** Interface strings of the cart and checkout. The checkout form keeps its own, like LeadForm. */
+export const commerceUi = {
+  ro: {
+    cart: 'Coș',
+    cartTitle: 'Coșul tău',
+    cartSummary: 'Verifică produsele și cantitățile. Prețurile se confirmă înainte de facturare.',
+    seoCart: 'Coșul de cumpărături Agrinvest',
+    seoCartDescription:
+      'Produsele alese din magazinul Agrinvest, cu ambalajele și cantitățile lor.',
+    add: 'Adaugă în coș',
+    quantity: 'Cantitate',
+    update: 'Actualizează',
+    remove: 'Șterge',
+    each: '/ ambalaj',
+    empty: 'Coșul este gol.',
+    toShop: 'Mergi la magazin',
+    summary: 'Sumar comandă',
+    products: 'Produse',
+    delivery: 'Livrare',
+    deliveryValue: 'de confirmat',
+    total: 'Total estimat',
+    totalNote: 'Fără livrare. TVA, stocul și prețul final se confirmă de consultant.',
+    toCheckout: 'Continuă comanda',
+    fixCart: 'Scoate din coș produsele marcate ca să poți continua.',
+    bulkTitle: 'Cantități mari?',
+    bulkBody: 'Spune-ne cantitățile și unde livrăm. Un consultant revine cu o ofertă.',
+    checkoutTitle: 'Finalizează comanda',
+    checkoutSummary: 'Nu plătești acum. Un consultant confirmă stocul, prețul și plata.',
+    seoCheckout: 'Finalizează comanda în magazinul Agrinvest',
+    seoCheckoutDescription:
+      'Datele de cumpărător, livrarea și plata pentru comanda ta din magazinul Agrinvest.',
+    consultant: 'Vorbește cu un consultant',
+    terms: 'Termeni de vânzare',
+    deliveryPage: 'Livrare',
+    returns: 'Retur',
+    anpc: 'ANPC',
+    problems: {
+      'sale-stopped': 'Nu se poate comanda online',
+      'registration-expired': 'Omologare expirată',
+      'registration-missing': 'Omologare neverificată',
+      ghs06: 'Nu se vinde online',
+      'out-of-stock': 'Indisponibil',
+      'no-price': 'Preț la cerere',
+      gone: 'Produsul nu mai este disponibil',
+    } satisfies Record<LineProblem, string>,
+    blockTitle: 'Produsul nu poate fi comandat online',
+    blockReasons: {
+      'registration-expired': 'Omologarea produsului a expirat.',
+      'registration-missing':
+        'Numărul de omologare nu este încă verificat. Cere o ofertă și un consultant îți răspunde.',
+      ghs06:
+        'Conform OUG 53/2025, produsele cu toxicitate acută și pictograma GHS06 nu se vând online.',
+    },
+  },
+  en: {
+    cart: 'Cart',
+    cartTitle: 'Your cart',
+    cartSummary: 'Check the products and quantities. Prices are confirmed before invoicing.',
+    seoCart: 'Your shopping cart in the Agrinvest shop',
+    seoCartDescription:
+      'The products you chose in the Agrinvest shop, with their packs and quantities.',
+    add: 'Add to cart',
+    quantity: 'Quantity',
+    update: 'Update',
+    remove: 'Remove',
+    each: '/ pack',
+    empty: 'Your cart is empty.',
+    toShop: 'Go to the shop',
+    summary: 'Order summary',
+    products: 'Products',
+    delivery: 'Delivery',
+    deliveryValue: 'to be confirmed',
+    total: 'Estimated total',
+    totalNote: 'Without delivery. A consultant confirms VAT, stock and the final price.',
+    toCheckout: 'Continue to checkout',
+    fixCart: 'Remove the marked products from the cart to continue.',
+    bulkTitle: 'Large quantities?',
+    bulkBody: 'Tell us the quantities and where to deliver. A consultant will send you an offer.',
+    checkoutTitle: 'Complete your order',
+    checkoutSummary: 'You pay nothing now. A consultant confirms stock, price and payment.',
+    seoCheckout: 'Complete your order in the Agrinvest shop',
+    seoCheckoutDescription:
+      'Buyer details, delivery and payment for your order in the Agrinvest farm input shop.',
+    consultant: 'Talk to a consultant',
+    terms: 'Terms of sale',
+    deliveryPage: 'Delivery',
+    returns: 'Returns',
+    anpc: 'ANPC',
+    problems: {
+      'sale-stopped': 'Cannot be ordered online',
+      'registration-expired': 'Authorisation expired',
+      'registration-missing': 'Authorisation not checked',
+      ghs06: 'Not sold online',
+      'out-of-stock': 'Out of stock',
+      'no-price': 'Price on request',
+      gone: 'This product is no longer available',
+    } satisfies Record<LineProblem, string>,
+    blockTitle: 'This product cannot be ordered online',
+    blockReasons: {
+      'registration-expired': 'The product’s authorisation has expired.',
+      'registration-missing':
+        'The authorisation number has not been checked yet. Ask for an offer and a consultant will reply.',
+      ghs06:
+        'Under OUG 53/2025, products with acute toxicity and the GHS06 pictogram are not sold online.',
+    },
+  },
+} as const satisfies Record<Locale, unknown>

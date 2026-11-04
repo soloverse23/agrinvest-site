@@ -1,0 +1,74 @@
+{
+  "slug": "biofos-fix",
+  "primaryKeyword": {
+    "ro": "biofos fix",
+    "en": "biofos fix"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Biofos FIX este un fertilizant microbian (pulbere umectabilă) cu bacterii fixatoare de azot și mobilizatoare de fosfor, plus micorize, pentru semințe, sol sau amestec cu îngrășămintele de bază. Ambalaj de 12 kg.",
+      "description": "### Ce este Biofos FIX\nBiofos FIX este un fertilizant microbiologic sub formă de pulbere umectabilă, pe bază de bacterii care fixează azotul și mobilizează fosforul din sol. Microorganismele din pagina veche a produsului: micorize, Bacillus megaterium, Bacillus amyloliquefaciens, Azotobacter. Se folosește la tratamentul semințelor, în sol sau în amestec cu îngrășămintele de bază, și stimulează dezvoltarea rădăcinilor și disponibilitatea fosforului.\n\n### Doze\nNu publicăm încă dozele pe culturi: nu avem o fișă tehnică a producătorului. Întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Ce face Biofos FIX?",
+          "answer": "Conține bacterii care fixează azotul și mobilizează fosforul din sol și poate fi aplicat pe sămânță, în sol sau amestecat cu îngrășămintele de bază."
+        },
+        {
+          "question": "Ce doză de Biofos FIX se folosește?",
+          "answer": "Depinde de cultură. Întreabă un consultant Agrinvest; dozele verificate vor fi publicate aici."
+        }
+      ],
+      "seo": {
+        "title": "Biofos FIX: fertilizant microbian pentru fosfor și azot",
+        "description": "Biofos FIX, fertilizant microbian cu bacterii fixatoare de azot și mobilizatoare de fosfor: ce conține, cum se aplică și ambalaj de 12 kg."
+      }
+    },
+    "en": {
+      "summary": "Biofos FIX is a microbial fertiliser (wettable powder) with nitrogen-fixing and phosphorus-mobilising bacteria, plus mycorrhizae, for seed, soil or mixing with the base fertilisers. 12 kg pack.",
+      "description": "### What Biofos FIX is\nBiofos FIX is a microbial fertiliser as a wettable powder, based on bacteria that fix nitrogen and mobilise phosphorus in the soil. The micro-organisms named on the old product page: mycorrhizae, Bacillus megaterium, Bacillus amyloliquefaciens, Azotobacter. It is used for seed treatment, in the soil or mixed with the base fertilisers, and stimulates root growth and phosphorus availability.\n\n### Rates\nWe do not publish crop rates yet: we have no technical sheet from the manufacturer. Ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "What does Biofos FIX do?",
+          "answer": "It contains bacteria that fix nitrogen and mobilise phosphorus in the soil and can be applied to the seed, in the soil or mixed with the base fertilisers."
+        },
+        {
+          "question": "What rate of Biofos FIX is used?",
+          "answer": "It depends on the crop. Ask an Agrinvest consultant; checked rates will be published here."
+        }
+      ],
+      "seo": {
+        "title": "Biofos FIX: microbial fertiliser for phosphorus and nitrogen",
+        "description": "Biofos FIX, a microbial fertiliser with nitrogen-fixing and phosphorus-mobilising bacteria: what it contains, how it is applied, 12 kg pack."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [],
+    "form": {
+      "ro": "Pulbere umectabilă cu microorganisme",
+      "en": "Wettable powder with micro-organisms"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/biofos-fix-12kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer sheet, strains and counts (cfu/g), shelf life: missing.",
+    "Rates by crop: generic old table, no source: not used."
+  ],
+  "conflicts": []
+}

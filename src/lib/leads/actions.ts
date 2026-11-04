@@ -49,6 +49,7 @@ export async function submitLead(_prev: LeadFormState, form: FormData): Promise<
     type: form.get('type'),
     consent: form.get('consent') ?? undefined,
     sourcePath: String(form.get('sourcePath') ?? ''),
+    product: String(form.get('product') ?? ''),
   })
   if (!parsed.success) {
     const errors: LeadFormState['errors'] = {}

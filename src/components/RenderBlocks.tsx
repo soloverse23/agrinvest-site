@@ -499,12 +499,15 @@ export async function LeadFormBlock({
   locale,
   path,
   preset,
+  products,
 }: {
   block: Pick<BlockOf<'leadForm'>, 'leadType' | 'extraFields' | 'heading' | 'body'>
   locale: Locale
   path: string
   /** Pre-selected values, e.g. the base on its own page. */
   preset?: { base?: string; crop?: string }
+  /** Products a quote request is about. */
+  products?: number[]
 }) {
   const extra = block.extraFields ?? []
   const [counties, crops, bases] = await Promise.all([
@@ -523,6 +526,7 @@ export async function LeadFormBlock({
           body={block.body}
           extra={extra}
           defaults={preset}
+          products={products}
           options={{
             county: counties.map((c) => ({ value: String(c.id), label: c.name })),
             crop: crops.map((c) => ({ value: String(c.id), label: c.name })),

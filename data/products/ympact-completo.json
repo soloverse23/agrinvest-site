@@ -1,0 +1,101 @@
+{
+  "slug": "ympact-completo",
+  "primaryKeyword": {
+    "ro": "ympact completo",
+    "en": "ympact completo"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [
+    "tratament-samanta"
+  ],
+  "crops": [
+    "wheat",
+    "barley",
+    "maize",
+    "sunflower"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Ympact Completo este un îngrășământ lichid cu microelemente chelatate (Cu 0,45%, Mn 0,74%, Mo 0,012%, Zn 1,1%, plus bor și fier), folosit la tratamentul semințelor de cereale, porumb și floarea-soarelui. Ambalaj de 20 l.",
+      "description": "### Ce este Ympact Completo\nYmpact Completo este un fertilizant lichid complex, pe bază de microelemente esențiale chelatate, ușor asimilabile: bor, cupru, fier, mangan, molibden și zinc. Pagina veche îl descrie și ca produs pentru tratarea semințelor de cereale, porumb și floarea-soarelui, ca să stimuleze răsărirea uniformă și dezvoltarea timpurie, și ca îngrășământ foliar.\n\n### Compoziție (după pagina veche)\n- Cupru (Cu): 0,45%\n- Mangan (Mn): 0,74%\n- Molibden (Mo): 0,012%\n- Zinc (Zn): 1,1%\n- Bor și fier: prezente, fără procent indicat\n\n### Doze\nNu publicăm încă dozele (litri la tona de sămânță), pentru că pagina veche nu are o fișă tehnică a producătorului. Întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Ce microelemente conține Ympact Completo?",
+          "answer": "Bor, cupru, fier, mangan, molibden și zinc, chelatate. Procentele cunoscute: Cu 0,45%, Mn 0,74%, Mo 0,012%, Zn 1,1%."
+        },
+        {
+          "question": "Cum se folosește Ympact Completo?",
+          "answer": "La tratamentul semințelor înainte de semănat sau foliar. Dozele verificate vor fi publicate; până atunci, întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Ympact Completo: microelemente pentru tratarea semințelor",
+        "description": "Ympact Completo, îngrășământ lichid cu microelemente chelatate (B, Cu, Fe, Mn, Mo, Zn) pentru tratarea semințelor: compoziție și ambalaj de 20 l."
+      }
+    },
+    "en": {
+      "summary": "Ympact Completo is a liquid fertiliser with chelated micronutrients (Cu 0.45%, Mn 0.74%, Mo 0.012%, Zn 1.1%, plus boron and iron), used to treat cereal, maize and sunflower seed. 20 l pack.",
+      "description": "### What Ympact Completo is\nYmpact Completo is a complex liquid fertiliser based on essential chelated micronutrients, easily absorbed: boron, copper, iron, manganese, molybdenum and zinc. The old page also describes it as a product to treat cereal, maize and sunflower seed, to stimulate uniform emergence and early growth, and as a foliar fertiliser.\n\n### Composition (from the old page)\n- Copper (Cu): 0.45%\n- Manganese (Mn): 0.74%\n- Molybdenum (Mo): 0.012%\n- Zinc (Zn): 1.1%\n- Boron and iron: present, no percentage given\n\n### Rates\nWe do not publish rates yet (litres per tonne of seed), because the old page has no manufacturer’s technical sheet. Ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "Which micronutrients does Ympact Completo contain?",
+          "answer": "Boron, copper, iron, manganese, molybdenum and zinc, chelated. Known percentages: Cu 0.45%, Mn 0.74%, Mo 0.012%, Zn 1.1%."
+        },
+        {
+          "question": "How is Ympact Completo used?",
+          "answer": "To treat seed before sowing or as a foliar spray. Checked rates will be published; until then, ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Ympact Completo: micronutrients for seed treatment",
+        "description": "Ympact Completo, a liquid fertiliser with chelated micronutrients (B, Cu, Fe, Mn, Mo, Zn) for seed treatment: composition and 20 l pack."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "Cu",
+        "percent": 0.45
+      },
+      {
+        "nutrient": "Mn",
+        "percent": 0.74
+      },
+      {
+        "nutrient": "Mo",
+        "percent": 0.012
+      },
+      {
+        "nutrient": "Zn",
+        "percent": 1.1
+      }
+    ],
+    "form": {
+      "ro": "Lichid (microelemente chelatate)",
+      "en": "Liquid (chelated micronutrients)"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/tratament-samanta/ympact-completo-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer sheet: missing; boron and iron percentages are not given.",
+    "Rates: the old page gives seed-treatment rates but no source: not used."
+  ],
+  "conflicts": [
+    "The importer filed Ympact Completo under crop protection (seed treatment). The old text calls it a “foliar fertiliser” and a micronutrient seed stimulant, so it is moved to fertilisers (with seed treatment as a second category). Agrinvest confirms."
+  ],
+  "productType": "fertiliser"
+}

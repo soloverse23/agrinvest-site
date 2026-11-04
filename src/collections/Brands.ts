@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
-import { featuredProducts, hubFields, shopGroup, urlField } from '@/fields/shop'
+import { enrichmentLedger, featuredProducts, hubFields, shopGroup, urlField } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
 
 /** Manufacturers (`/magazin/producator/{slug}`). The slug is shared by both languages. */
@@ -46,5 +46,6 @@ export const Brands: CollectionConfig = {
       admin: { defaultColumns: ['name', 'commerceStatus', '_status'] },
     },
     slug('name'),
+    enrichmentLedger,
   ],
 }

@@ -20,3 +20,4 @@ Decision 0001 counted on Payload's official ecommerce plugin. Its documentation 
 - We maintain the cart and order code ourselves, with no dependency on a beta package.
 - Orders appear only in the admin until the owner picks a notification channel. This must be solved before real orders are accepted.
 - The owner can change the launch rule for pilot products before Phase 8.
+- OUG 53/2025 is enforced in code (`orderBlock`): a stopped, expired, unregistered or GHS06 product cannot go in the cart, and protection products need an 18+ confirmation. A missing registration number blocks ordering even for `pilot` products, which narrows "pilot products can be ordered" above; entering the number in the admin lifts it.

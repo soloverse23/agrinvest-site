@@ -39,9 +39,9 @@ The answers must stay consistent with the figures register: evidence phrases avo
 | 31  | en     | farm recovery programme Romania                        | /en/golden-relationship           | recovery plan                          |
 | 32  | en     | how to sell grain to Agrinvest                         | /en/grain                         | How selling grain to Agrinvest works   |
 | 33  | ro     | magazin semințe și erbicide Agrinvest                  | /magazin                          | Semințe                                |
-| 34  | ro     | ce erbicide vinde Agrinvest                            | /magazin/erbicide                 | Erbicide pentru cereale                |
-| 35  | ro     | doză Karate Zeon grâu                                  | /magazin/insecticide/karate-zeon  | 0,15 l/ha                              |
+| 34  | ro     | ce erbicide vinde Agrinvest                            | /magazin/erbicide                 | Erbicide pentru porumb, cereale        |
+| 35  | ro     | număr de omologare Karate Zeon                         | /magazin/insecticide/karate-zeon  | 1812/04.12.1997                        |
 | 36  | ro     | substanța activă din Karate Zeon                       | /magazin/insecticide/karate-zeon  | Lambda-cihalotrin                      |
 | 37  | ro     | produse pentru grâu                                    | /magazin/cultura/grau             | Produse pentru grâu                    |
 | 38  | en     | Agrinvest farm input shop                              | /en/shop                          | Seeds, crop protection                 |
-| 39  | en     | Karate Zeon active ingredient                          | /en/shop/insecticides/karate-zeon | lambda-cihalotrin                      |
+| 39  | en     | Karate Zeon active ingredient                          | /en/shop/insecticides/karate-zeon | lambda-cyhalothrin                     |

@@ -1,0 +1,158 @@
+{
+  "slug": "komplet-560-sc",
+  "primaryKeyword": {
+    "ro": "komplet 560 sc",
+    "en": "komplet 560 sc"
+  },
+  "category": "erbicide",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley",
+    "rye",
+    "triticale"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Komplet 560 SC este un erbicid cu flufenacet 280 g/l + diflufenican 280 g/l, formulare SC; omologat în România (certificat nr. 659PC/24.11.2020). Doza din registru la cereale de toamnă: grâu, triticale, orz, secară: 0,4–0,5 l/ha (doza mai mare pe solurile cu humus mult și cu îmburuienare mare).",
+      "description": "### Ce este Komplet 560 SC\n\nKomplet 560 SC este un erbicid cu flufenacet 280 g/l + diflufenican 280 g/l, formulare SC. Deținătorul înscris în registrul ANF: Bayer SRL (listele ANF).\n\n### Cum acționează\n\nFlufenacet este o oxiacetamidă: inhibă sinteza acizilor grași cu lanț foarte lung. Se încadrează la HRAC 15. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Doza din registru\n\nCereale de toamnă: grâu, triticale, orz, secară: 0,4–0,5 l/ha (doza mai mare pe solurile cu humus mult și cu îmburuienare mare). Postemergent timpuriu, de la răsărire, respectiv de la apariția primelor frunze, până în faza de 3 frați vizibili (BBCH 10–25). Citește eticheta ambalajului înainte de aplicare.\n\n### Omologare\n\nCertificatul de omologare nr. 659PC/24.11.2020. Numărul a fost găsit în deciziile ANF (ultima mențiune: 16.06.2025); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Komplet 560 SC?",
+          "answer": "Flufenacet 280 g/l + diflufenican 280 g/l."
+        },
+        {
+          "question": "Ce număr de omologare are Komplet 560 SC?",
+          "answer": "Certificatul de omologare nr. 659PC/24.11.2020, găsit în deciziile ANF (ultima mențiune: 16.06.2025)."
+        },
+        {
+          "question": "Ce doză de Komplet 560 SC se folosește?",
+          "answer": "0,4–0,5 l/ha (doza mai mare pe solurile cu humus mult și cu îmburuienare mare). Postemergent timpuriu, de la răsărire, respectiv de la apariția primelor frunze, până în faza de 3 frați vizibili (BBCH 10–25). Verifică eticheta ambalajului."
+        }
+      ],
+      "seo": {
+        "title": "Komplet 560 SC: erbicid cu flufenacet, omologare și doze",
+        "description": "Komplet 560 SC, erbicid cu flufenacet 280 g/l + diflufenican 280 g/l: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Komplet 560 SC is a herbicide with flufenacet 280 g/l + diflufenican 280 g/l, SC formulation; authorised in Romania (certificate no. 659PC/24.11.2020). Register rate on winter cereals: wheat, triticale, barley, rye: 0.4–0.5 l/ha (the higher rate on soils with high humus and heavy weed pressure).",
+      "description": "### What Komplet 560 SC is\n\nKomplet 560 SC is a herbicide with flufenacet 280 g/l + diflufenican 280 g/l, SC formulation. Holder named in the ANF register: Bayer SRL (listele ANF).\n\n### How it works\n\nFlufenacet is an oxyacetamide: it inhibits the synthesis of very-long-chain fatty acids. It belongs to HRAC 15. Alternate products from different groups to slow the build-up of resistance.\n\n### Register rate\n\nWinter cereals: wheat, triticale, barley, rye: 0.4–0.5 l/ha (the higher rate on soils with high humus and heavy weed pressure). Early post-emergence, from emergence, that is from the first leaves, up to 3 visible tillers (BBCH 10–25). Read the label on the pack before application.\n\n### Registration\n\nAuthorisation certificate no. 659PC/24.11.2020. The number was found in the ANF decisions (last mention: 16.06.2025); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Komplet 560 SC contain?",
+          "answer": "Flufenacet 280 g/l + diflufenican 280 g/l."
+        },
+        {
+          "question": "What is the registration number of Komplet 560 SC?",
+          "answer": "Authorisation certificate no. 659PC/24.11.2020, found in the ANF decisions (last mention: 16.06.2025)."
+        },
+        {
+          "question": "What rate of Komplet 560 SC is used?",
+          "answer": "0.4–0.5 l/ha (the higher rate on soils with high humus and heavy weed pressure). Early post-emergence, from emergence, that is from the first leaves, up to 3 visible tillers (BBCH 10–25). Check the label on the pack."
+        }
+      ],
+      "seo": {
+        "title": "Komplet 560 SC: herbicide, registration and rates",
+        "description": "Komplet 560 SC, herbicide with flufenacet 280 g/l + diflufenican 280 g/l: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "flufenacet",
+        "concentration": 280,
+        "unit": "g/l"
+      },
+      {
+        "name": "diflufenican",
+        "concentration": 280,
+        "unit": "g/l"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "SC",
+    "registrationNumber": "659PC/24.11.2020",
+    "modeOfAction": {
+      "ro": "Flufenacet este o oxiacetamidă: inhibă sinteza acizilor grași cu lanț foarte lung.",
+      "en": "Flufenacet is an oxyacetamide: it inhibits the synthesis of very-long-chain fatty acids."
+    },
+    "resistanceGroup": "HRAC 15"
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Cereale de toamnă: grâu, triticale, orz, secară",
+        "en": "Winter cereals: wheat, triticale, barley, rye"
+      },
+      "crops": [
+        "wheat",
+        "barley",
+        "triticale",
+        "rye"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Buruieni monocotiledonate și dicotiledonate anuale: Apera spica-venti, Capsella bursa-pastoris, Chenopodium album, Fumaria officinalis, Galeopsis tetrahit, Galium aparine, Lamium purpureum, Matricaria spp., Myosotis arvensis, Papaver rhoeas, Polygonum convolvulus, Raphanus raphanistrum, Stellaria media, Veronica spp., Vicia villosa, Viola arvensis, Geranium spp., samulastră de rapiță",
+        "en": "Annual grass and broadleaf weeds: Apera spica-venti, Capsella bursa-pastoris, Chenopodium album, Fumaria officinalis, Galeopsis tetrahit, Galium aparine, Lamium purpureum, Matricaria spp., Myosotis arvensis, Papaver rhoeas, Polygonum convolvulus, Raphanus raphanistrum, Stellaria media, Veronica spp., Vicia villosa, Viola arvensis, Geranium spp., volunteer rapeseed"
+      },
+      "doseText": {
+        "ro": "0,4–0,5 l/ha (doza mai mare pe solurile cu humus mult și cu îmburuienare mare)",
+        "en": "0.4–0.5 l/ha (the higher rate on soils with high humus and heavy weed pressure)"
+      },
+      "doseMin": 0.4,
+      "doseMax": 0.5,
+      "doseUnit": "l/ha",
+      "timing": {
+        "ro": "Postemergent timpuriu, de la răsărire, respectiv de la apariția primelor frunze, până în faza de 3 frați vizibili (BBCH 10–25).",
+        "en": "Early post-emergence, from emergence, that is from the first leaves, up to 3 visible tillers (BBCH 10–25)."
+      },
+      "bbch": "10–25"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-11-2021/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.11.2021, p. 16: entry with holder and registration, checked on the page image."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-16-06-2025/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 16.06.2025: Komplet 560 SC (certificate 659PC/24.11.2020); last mention found."
+      },
+      {
+        "url": "https://hracglobal.com/files/2024-HRAC-GLOBAL-HERBICIDE-MOA-CLASSIFICATION-POSTERold.pdf",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "HRAC 2024 classification poster."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/erbicide/komplet-560-sc-5l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-11-2021/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.11.2021, p. 16: dose rows, checked on the page image."
+      }
+    ]
+  },
+  "gaps": [
+    "Waiting period and toxicity classification: not in the ANF entry; a label is needed.",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [],
+  "brand": "bayer"
+}

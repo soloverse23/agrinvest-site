@@ -1,4 +1,4 @@
-﻿keyword,language,audience,cluster,intent,volumeTier,difficulty,potential,priority,plannerVolume,targetUrl,planPage,note
+keyword,language,audience,cluster,intent,volumeTier,difficulty,potential,priority,plannerVolume,targetUrl,planPage,note
 preț grâu azi,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/grau,/piata/preturi,
 pret grau,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/grau,/piata/preturi,
 preț porumb azi,ro,Farmers (Romanian),Grain prices and selling,I,H,H,H,1,,/preturi/porumb,/piata/preturi,
@@ -105,3 +105,17 @@ agrinvest cariere,ro,Brand,Brand searches,B,L,L,L,3,,/cariere,/cariere,
 farm inputs Romania,en,Partners,Shop (English),C,L,M,M,3,,/en/shop,shop,
 crop protection products Romania,en,Partners,Shop (English),C,L,M,M,3,,/en/shop/crop-protection,shop › crop protection,
 certified seed Romania,en,Partners,Shop (English),C,L,M,M,3,,/en/shop/seeds,shop › seeds,
+adengo 465 sc,ro,Farmers (Romanian),Crop protection and diesel,T,L,L,M,3,,/magazin/erbicide/adengo,shop › protecția plantelor,"product page: rates, registration, safety (3.3)"
+karate zeon,ro,Farmers (Romanian),Crop protection and diesel,T,M,M,M,3,,/magazin/insecticide/karate-zeon,shop › protecția plantelor,product page (3.3); rate table waits for the label
+principal forte,ro,Farmers (Romanian),Crop protection and diesel,T,L,L,M,3,,/magazin/erbicide/principal-forte-adjuvant-vivolt,shop › protecția plantelor,product page (3.3)
+frontier forte,ro,Farmers (Romanian),Crop protection and diesel,T,L,L,M,3,,/magazin/erbicide/frontier-forte,shop › protecția plantelor,product page (3.3)
+jolpolt,ro,Farmers (Romanian),Crop protection and diesel,T,L,L,L,3,,/magazin/insecticide/jolpolt,shop › protecția plantelor,"product page (3.3): an insecticide (Delmur), not an adjuvant"
+substanță activă deltametrin,ro,Farmers (Romanian),Crop protection and diesel,I,L,L,M,3,,/magazin/substanta-activa/deltametrin,shop › protecția plantelor,ingredient hub (3.3)
+erbicid cereale,ro,Farmers (Romanian),Crop protection and diesel,T,M,M,M,2,,/magazin/erbicide,shop › protecția plantelor,category page
+uree 46,ro,Farmers (Romanian),Fertilisers,T,M,M,M,2,,/magazin/ingrasaminte/uree,shop › îngrășăminte,product page (3.3); the price page is the primary target
+DAP 18-46-0,ro,Farmers (Romanian),Fertilisers,T,M,M,M,2,,/magazin/ingrasaminte/dap-18-46-0-fosfat-diamoniu,shop › îngrășăminte,product page (3.3)
+"azotat de amoniu 33,5",ro,Farmers (Romanian),Fertilisers,T,M,M,M,2,,/magazin/ingrasaminte/azotat-de-amoniu,shop › îngrășăminte,product page (3.3)
+semințe orz,ro,Farmers (Romanian),Seeds,T,M,M,M,2,,/magazin/cultura/orz,shop › semințe,crop hub (3.3)
+produse pentru grâu,ro,Farmers (Romanian),Seeds,C,M,M,M,2,,/magazin/cultura/grau,shop › cultură,crop hub (3.3)
+produse pentru porumb,ro,Farmers (Romanian),Crop protection and diesel,C,M,M,M,2,,/magazin/cultura/porumb,shop › cultură,crop hub (3.3)
+erbicide porumb Adengo,en,Farmers (English),Crop protection and diesel,T,L,L,L,3,,/en/shop/herbicides/adengo,shop › crop protection,English product page (3.3)

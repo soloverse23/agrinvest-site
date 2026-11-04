@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "stir",
+    "kind": "weed",
+    "name": {
+      "ro": "Știr",
+      "en": "Pigweed"
+    },
+    "crops": []
+  },
+  {
+    "slug": "loboda",
+    "kind": "weed",
+    "name": {
+      "ro": "Lobodă",
+      "en": "Common orache"
+    },
+    "crops": []
+  },
+  {
+    "slug": "spanac-salbatic",
+    "kind": "weed",
+    "name": {
+      "ro": "Spanac sălbatic",
+      "en": "Goosefoot"
+    },
+    "crops": []
+  },
+  {
+    "slug": "iarba-barboasa",
+    "kind": "weed",
+    "name": {
+      "ro": "Iarba bărboasă",
+      "en": "Barnyard grass"
+    },
+    "crops": []
+  },
+  {
+    "slug": "turita",
+    "kind": "weed",
+    "name": {
+      "ro": "Turiță",
+      "en": "Cleavers"
+    },
+    "crops": []
+  },
+  {
+    "slug": "zarna",
+    "kind": "weed",
+    "name": {
+      "ro": "Zârnă",
+      "en": "Black nightshade"
+    },
+    "crops": []
+  },
+  {
+    "slug": "teisor",
+    "kind": "weed",
+    "name": {
+      "ro": "Teișor",
+      "en": "Velvetleaf"
+    },
+    "crops": []
+  },
+  {
+    "slug": "ciumafaie",
+    "kind": "weed",
+    "name": {
+      "ro": "Ciumăfaie",
+      "en": "Thorn apple"
+    },
+    "crops": []
+  },
+  {
+    "slug": "mohor",
+    "kind": "weed",
+    "name": {
+      "ro": "Mohor",
+      "en": "Foxtail"
+    },
+    "crops": []
+  },
+  {
+    "slug": "costrei",
+    "kind": "weed",
+    "name": {
+      "ro": "Costrei",
+      "en": "Johnsongrass"
+    },
+    "crops": []
+  },
+  {
+    "slug": "meisor",
+    "kind": "weed",
+    "name": {
+      "ro": "Meișor",
+      "en": "Crabgrass"
+    },
+    "crops": []
+  },
+  {
+    "slug": "coada-vulpii",
+    "kind": "weed",
+    "name": {
+      "ro": "Coada vulpii",
+      "en": "Blackgrass"
+    },
+    "crops": []
+  },
+  {
+    "slug": "ardeiul-broastei",
+    "kind": "weed",
+    "name": {
+      "ro": "Ardeiul broaștei",
+      "en": "Knotweed"
+    },
+    "crops": []
+  },
+  {
+    "slug": "paduchi-de-frunze",
+    "kind": "pest",
+    "name": {
+      "ro": "Păduchi de frunze (afide)",
+      "en": "Aphids"
+    },
+    "crops": []
+  },
+  {
+    "slug": "gandacul-din-colorado",
+    "kind": "pest",
+    "name": {
+      "ro": "Gândacul din Colorado",
+      "en": "Colorado potato beetle"
+    },
+    "crops": []
+  },
+  {
+    "slug": "viermele-merelor",
+    "kind": "pest",
+    "name": {
+      "ro": "Viermele merelor",
+      "en": "Codling moth"
+    },
+    "crops": []
+  },
+  {
+    "slug": "molia-strugurilor",
+    "kind": "pest",
+    "name": {
+      "ro": "Molia strugurilor",
+      "en": "European grapevine moth"
+    },
+    "crops": []
+  },
+  {
+    "slug": "sfredelitorul-porumbului",
+    "kind": "pest",
+    "name": {
+      "ro": "Sfredelitorul porumbului",
+      "en": "European corn borer"
+    },
+    "crops": []
+  },
+  {
+    "slug": "omida-fructificatiilor",
+    "kind": "pest",
+    "name": {
+      "ro": "Omida fructificațiilor",
+      "en": "Cotton bollworm"
+    },
+    "crops": []
+  },
+  {
+    "slug": "viermi-sarma",
+    "kind": "pest",
+    "name": {
+      "ro": "Viermi sârmă",
+      "en": "Wireworms"
+    },
+    "crops": []
+  }
+]

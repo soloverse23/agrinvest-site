@@ -1,0 +1,87 @@
+{
+  "slug": "roca-fosfatica-30-p2o5",
+  "primaryKeyword": {
+    "ro": "rocă fosfatică 30% p2o5",
+    "en": "rocă fosfatică 30% p2o5"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [
+    "agricultura-bio"
+  ],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Rocă fosfatică moale granulată, îngrășământ CE cu 28–30% P2O5 total, granulație 1–5 mm, permisă în agricultura ecologică conform Reg. (UE) 2019/1009 și 2018/848. Un îngrășământ cu fosfor cu eliberare lentă pentru soluri acide și culturi bio.",
+      "description": "### Ce este\nRocă fosfatică moale granulată, un îngrășământ CE cu fosfor, extras din roci naturale și permis în agricultura ecologică. Fosforul din rocă se eliberează lent, deci se potrivește mai ales pe soluri acide.\n\n### Compoziție (după fișa din pagina veche)\n- P2O5: minim 28–30%\n- CaO: maxim 49%\n- MgO: maxim 1,5%\n- Fe2O3: maxim 3,5%\n- BPL: minim 65,5%\n- SiO2: 4–7% maxim; Al2O3: maxim 1%\n- Umiditate: maxim 5%; Cl: maxim 0,1%\n- Solubilitate în acid citric 2%: minim 32%\n- Granulație: 1–5 mm, minim 90%\n\n### Utilizare ecologică\nProdusul este permis în agricultura ecologică conform Reg. (CE) 2019/1009 (denumit în fișă; actul actual este Reg. (UE) 2019/1009) și ca input ecologic conform Reg. (UE) 2018/848. Metode de analiză: conform fișei tehnice a producătorului.\n\n### Doze\nNu publicăm încă dozele pe culturi: pagina veche nu le conține. Doza se stabilește după analiza solului; întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Câtă fosfor conține roca fosfatică?",
+          "answer": "Minim 28–30% P2O5 total, conform fișei din pagina veche."
+        },
+        {
+          "question": "Poate fi folosită în agricultura ecologică?",
+          "answer": "Da, produsul este indicat ca permis în agricultura ecologică (Reg. (UE) 2019/1009 și 2018/848). Confirmă cu eticheta lotului și cu organismul tău de certificare."
+        }
+      ],
+      "seo": {
+        "title": "Rocă fosfatică moale granulată 30% P2O5, bio",
+        "description": "Rocă fosfatică moale granulată cu 28–30% P2O5, îngrășământ CE permis în agricultura ecologică: compoziție, granulație 1–5 mm și utilizare."
+      }
+    },
+    "en": {
+      "summary": "Soft granulated rock phosphate, an EC fertiliser with 28–30% total P2O5, granule size 1–5 mm, permitted in organic farming under Reg. (EU) 2019/1009 and 2018/848. A slow-release phosphorus fertiliser for acid soils and organic crops.",
+      "description": "### What it is\nSoft granulated rock phosphate, an EC phosphorus fertiliser extracted from natural rock and permitted in organic farming. The phosphorus in the rock is released slowly, so it suits acid soils best.\n\n### Composition (from the sheet on the old page)\n- P2O5: minimum 28–30%\n- CaO: maximum 49%\n- MgO: maximum 1.5%\n- Fe2O3: maximum 3.5%\n- BPL: minimum 65.5%\n- SiO2: 4–7% maximum; Al2O3: maximum 1%\n- Moisture: maximum 5%; Cl: maximum 0.1%\n- Solubility in 2% citric acid: minimum 32%\n- Granulation: 1–5 mm, minimum 90%\n\n### Organic use\nThe product is permitted in organic farming under the fertiliser regulation (the sheet cites “Reg. (CE) 1009/2019”; the current act is Reg. (EU) 2019/1009) and as an organic input under Reg. (EU) 2018/848. Analysis methods: per the manufacturer’s technical sheet.\n\n### Rates\nWe do not publish crop rates yet: the old page has none. The rate is set from the soil analysis; ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "How much phosphorus does the rock phosphate contain?",
+          "answer": "At least 28–30% total P2O5, according to the sheet on the old page."
+        },
+        {
+          "question": "Can it be used in organic farming?",
+          "answer": "Yes, the product is stated to be permitted in organic farming (Reg. (EU) 2019/1009 and 2018/848). Confirm with the lot label and your certification body."
+        }
+      ],
+      "seo": {
+        "title": "Soft granulated rock phosphate 30% P2O5, organic",
+        "description": "Soft granulated rock phosphate with 28–30% P2O5, an EC fertiliser permitted in organic farming: composition, 1–5 mm granules and use."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "P2O5",
+        "percent": 30
+      },
+      {
+        "nutrient": "CaO",
+        "percent": 49
+      }
+    ],
+    "form": {
+      "ro": "Granule, rocă fosfatică moale",
+      "en": "Granules, soft rock phosphate"
+    },
+    "granuleSize": "1–5 mm"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/roca-fosfatica-30/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer and origin; the technical sheet itself: not seen. “Max” values are limits, not typical contents.",
+    "Rates by crop: none on the old page.",
+    "Pack: shown as one piece at 400 lei; confirm the unit (bag, big bag) and the price basis."
+  ],
+  "conflicts": []
+}

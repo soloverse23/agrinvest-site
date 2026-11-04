@@ -1,0 +1,104 @@
+{
+  "slug": "napekhem-s65",
+  "primaryKeyword": {
+    "ro": "napekhem s65",
+    "en": "napekhem s65"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [
+    "soybean",
+    "alfalfa"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "NaPeKhem S65 este un îngrășământ lichid cu azot și sulf pentru aplicare foliară sau în fertirigare, util la plantele oleaginoase (soia) și la lucernă. Doza foliară: 1–5 l/ha, cu cel mult 0,6% (v/v) în rezervor. Ambalaj de 20 l.",
+      "description": "### Ce este\nNaPeKhem S65 este un îngrășământ lichid pe bază de azot și sulf, pentru aplicare foliară și în fertirigare. Oferă sulf sub formă de sulfați, necesar pentru sinteza proteinelor.\n\n### De ce sulf\nCarența de sulf se vede mai rar cu ochiul liber; când apare, plantele, mai întâi frunzele tinere, devin uniform clorotice, iar pe margini se pot forma zone necrotice. Soia și alte oleaginoase, ca și lucerna, folosesc mult sulf. Sulfatul acidifică zona rădăcinilor și deseori deblochează fosforul și micronutrienți precum manganul, cuprul, fierul, borul și zincul.\n\n### Cum se folosește\nFoliar: 1–5 l/ha; concentrația maximă în rezervor: 0,6% (v/v). Momentul depinde de cultură: fișa trimite la departamentul tehnic. Compatibil în majoritatea perioadelor; când îl amesteci cu pesticide, regulatori de creștere sau micronutrienți, fă mai întâi un test. Depozitează la 5–40 °C.",
+      "faq": [
+        {
+          "question": "Ce doză de NaPeKhem S65 se folosește?",
+          "answer": "Foliar, 1–5 l/ha, cu cel mult 0,6% (v/v) în rezervor, conform fișei produsului."
+        },
+        {
+          "question": "La ce culturi ajută sulful?",
+          "answer": "Mai ales la plantele oleaginoase, ca soia, și la lucernă."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem S65: îngrășământ lichid cu azot și sulf",
+        "description": "NaPeKhem S65, îngrășământ lichid cu azot și sulf pentru soia, lucernă și alte culturi: doză foliară de 1–5 l/ha și compatibilitate."
+      }
+    },
+    "en": {
+      "summary": "NaPeKhem S65 is a liquid nitrogen and sulphur fertiliser for foliar application or fertigation, useful on oilseed crops (soybean) and alfalfa. Foliar rate: 1–5 l/ha, with at most 0.6% (v/v) in the tank. 20 l pack.",
+      "description": "### What it is\nNaPeKhem S65 is a liquid fertiliser based on nitrogen and sulphur, for foliar application and fertigation. It supplies sulphur as sulphates, needed to build proteins.\n\n### Why sulphur\nSulphur deficiency is less often visible to the naked eye; when it shows, plants, young leaves first, turn uniformly chlorotic, and necrotic patches can form at the edges. Soybean and other oilseeds, like alfalfa, use a lot of sulphur. Sulphate acidifies the root zone and often unlocks phosphorus and micronutrients such as manganese, copper, iron, boron and zinc.\n\n### How to use it\nFoliar: 1–5 l/ha; maximum tank concentration: 0.6% (v/v). Timing depends on the crop: the sheet refers to the technical department. Compatible at most times; when mixing with pesticides, growth regulators or micronutrients, test first. Store at 5–40 °C.",
+      "faq": [
+        {
+          "question": "What rate of NaPeKhem S65 is used?",
+          "answer": "Foliar, 1–5 l/ha, with at most 0.6% (v/v) in the tank, according to the product sheet."
+        },
+        {
+          "question": "Which crops benefit from sulphur?",
+          "answer": "Mostly oilseed crops such as soybean, and alfalfa."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem S65: liquid fertiliser with nitrogen and sulphur",
+        "description": "NaPeKhem S65, a liquid nitrogen and sulphur fertiliser for soybean, alfalfa and other crops: 1–5 l/ha foliar rate and compatibility."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [],
+    "form": {
+      "ro": "Lichid",
+      "en": "Liquid"
+    },
+    "storage": {
+      "ro": "Între 5 și 40 °C.",
+      "en": "Between 5 and 40 °C."
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "1–5 l/ha; cel mult 0,6% (v/v) în rezervor",
+        "en": "1–5 l/ha; at most 0.6% (v/v) in the tank"
+      },
+      "doseMin": 1,
+      "doseMax": 5,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-s65-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-s65-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Composition: the old page has an empty table and the name does not give percentages: nitrogen and sulphur contents are missing.",
+    "Timing by crop: the sheet refers to the manufacturer."
+  ],
+  "conflicts": []
+}

@@ -1,0 +1,145 @@
+{
+  "slug": "corida-75-wg",
+  "primaryKeyword": {
+    "ro": "corida 75 wg",
+    "en": "corida 75 wg"
+  },
+  "category": "erbicide",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Corida 75 WG este un erbicid cu tribenuron metil 750 g/kg, formulare WG; omologat în România (certificat nr. 367PC/29.11.2017). Doza din registru la cereale de toamnă și de primăvară (grâu și orz): 15–20 g/ha.",
+      "description": "### Ce este Corida 75 WG\n\nCorida 75 WG este un erbicid cu tribenuron metil 750 g/kg, formulare WG. Deținătorul înscris în registrul ANF: Zenith Crop Sciences Bulgaria Ltd. (lista ANF din 24.03.2022). În registru apare și sub numele comercial Adentis.\n\n### Cum acționează\n\nTribenuron metil este o sulfoniluree: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Doza din registru\n\nCereale de toamnă și de primăvară (grâu și orz): 15–20 g/ha. Postemergent, de la formarea primului internod până la apariția frunzei stindard (BBCH 31–39); buruienile, în creștere intensă, până la 6 frunze complet formate. Citește eticheta ambalajului înainte de aplicare.\n\n### Omologare\n\nCertificatul de omologare nr. 367PC/29.11.2017. Numărul a fost găsit în deciziile ANF (ultima mențiune: 24.03.2022); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Corida 75 WG?",
+          "answer": "Tribenuron metil 750 g/kg (o sulfoniluree din grupa HRAC 2)."
+        },
+        {
+          "question": "Ce număr de omologare are Corida 75 WG?",
+          "answer": "Certificatul de omologare nr. 367PC/29.11.2017, găsit în deciziile ANF (ultima mențiune: 24.03.2022)."
+        },
+        {
+          "question": "Ce doză de Corida 75 WG se folosește?",
+          "answer": "15–20 g/ha. Postemergent, de la formarea primului internod până la apariția frunzei stindard (BBCH 31–39); buruienile, în creștere intensă, până la 6 frunze complet formate. Verifică eticheta ambalajului."
+        }
+      ],
+      "seo": {
+        "title": "Corida 75 WG: erbicid cu tribenuron metil, omologare și doze",
+        "description": "Corida 75 WG, erbicid cu tribenuron metil 750 g/kg: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Corida 75 WG is a herbicide with tribenuron metil 750 g/kg, WG formulation; authorised in Romania (certificate no. 367PC/29.11.2017). Register rate on winter and spring cereals (wheat and barley): 15–20 g/ha.",
+      "description": "### What Corida 75 WG is\n\nCorida 75 WG is a herbicide with tribenuron metil 750 g/kg, WG formulation. Holder named in the ANF register: Zenith Crop Sciences Bulgaria Ltd. (lista ANF din 24.03.2022). The register also lists it under the trade name Adentis.\n\n### How it works\n\nTribenuron metil is a sulfonylurea: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Alternate products from different groups to slow the build-up of resistance.\n\n### Register rate\n\nWinter and spring cereals (wheat and barley): 15–20 g/ha. Post-emergence, from the first node to flag-leaf emergence (BBCH 31–39); weeds in active growth, up to 6 fully formed leaves. Read the label on the pack before application.\n\n### Registration\n\nAuthorisation certificate no. 367PC/29.11.2017. The number was found in the ANF decisions (last mention: 24.03.2022); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Corida 75 WG contain?",
+          "answer": "Tribenuron metil 750 g/kg (sulfonylurea, HRAC 2)."
+        },
+        {
+          "question": "What is the registration number of Corida 75 WG?",
+          "answer": "Authorisation certificate no. 367PC/29.11.2017, found in the ANF decisions (last mention: 24.03.2022)."
+        },
+        {
+          "question": "What rate of Corida 75 WG is used?",
+          "answer": "15–20 g/ha. Post-emergence, from the first node to flag-leaf emergence (BBCH 31–39); weeds in active growth, up to 6 fully formed leaves. Check the label on the pack."
+        }
+      ],
+      "seo": {
+        "title": "Corida 75 WG: herbicide, registration and rates",
+        "description": "Corida 75 WG, herbicide with tribenuron metil 750 g/kg: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "tribenuron metil",
+        "concentration": 750,
+        "unit": "g/kg"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "WG",
+    "registrationNumber": "367PC/29.11.2017",
+    "modeOfAction": {
+      "ro": "Tribenuron metil este o sulfoniluree: blochează enzima ALS din buruieni.",
+      "en": "Tribenuron metil is a sulfonylurea: it blocks the ALS enzyme in weeds."
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Cereale de toamnă și de primăvară (grâu și orz)",
+        "en": "Winter and spring cereals (wheat and barley)"
+      },
+      "crops": [
+        "wheat",
+        "barley"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Buruieni dicotiledonate, între care Chenopodium album, Galium aparine, Matricaria sp., Papaver rhoeas, Polygonum sp., Sinapis arvensis, Stellaria media, Cirsium arvense, Thlaspi arvense și altele",
+        "en": "Broadleaf weeds, including Chenopodium album, Galium aparine, Matricaria, Papaver rhoeas, Polygonum, Sinapis arvensis, Stellaria media, Cirsium arvense, Thlaspi arvense and others"
+      },
+      "timing": {
+        "ro": "Postemergent, de la formarea primului internod până la apariția frunzei stindard (BBCH 31–39); buruienile, în creștere intensă, până la 6 frunze complet formate.",
+        "en": "Post-emergence, from the first node to flag-leaf emergence (BBCH 31–39); weeds in active growth, up to 6 fully formed leaves."
+      },
+      "bbch": "31–39",
+      "doseText": {
+        "ro": "15–20 g/ha",
+        "en": "15–20 g/ha"
+      },
+      "doseMin": 15,
+      "doseMax": 20,
+      "doseUnit": "g/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-03-2022/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.03.2022, p. 29: CORIDA/(ADENTIS), 750 g/Kg tribenuron-metil, Zenith Crop Sciences Bulgaria Ltd., CO 367PC/29.11.2017. Checked on the page image."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-03-2022/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.03.2022: Corida 75 WG (certificate 367PC/29.11.2017); last mention found."
+      },
+      {
+        "url": "https://hracglobal.com/files/2024-HRAC-GLOBAL-HERBICIDE-MOA-CLASSIFICATION-POSTERold.pdf",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "HRAC 2024 classification poster."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-03-2022/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.03.2022, p. 29, checked on the page image."
+      }
+    ]
+  },
+  "gaps": [
+    "Waiting period and toxicity classification: not in the ANF entry; a label is needed.",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "Resolved: the old text called Corida a neonicotinoid insecticide against aphids. Its active substance is tribenuron-methyl 750 g/kg and the ANF entry is a cereal herbicide: the old text is not used.",
+    "Price: 1,938 lei for 100 g (19,380 lei/kg). At 15–20 g/ha that is about 290–390 lei/ha. Confirm the price and the pack."
+  ]
+}

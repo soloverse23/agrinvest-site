@@ -1,0 +1,70 @@
+{
+  "slug": "samanta-de-orz-zanzibar-c1",
+  "primaryKeyword": {
+    "ro": "sămânță orz",
+    "en": "barley seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "barley"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Sămânță certificată de orz, soiul Zanzibar, clasa biologică C1, în ambalaj de 600 kg. Caracteristicile soiului (tipul de orz, maturitatea, norma de semănat) vor fi publicate după verificarea cu fișa furnizorului.",
+      "description": "### Ce primești\nSămânță de orz din soiul Zanzibar, clasa biologică C1, în ambalaj de 600 kg. C1 înseamnă sămânță certificată din prima generație, obținută din sămânță de bază: este categoria folosită de majoritatea fermierilor pentru semănatul de producție.\n\n### Soiul\nNu publicăm încă datele soiului: tipul de orz, maturitatea, rezistența la iernare și la boli, potențialul de producție sau norma de semănat. Le adăugăm după ce le verificăm cu fișa furnizorului sau cu catalogul oficial al soiurilor. Până atunci, un consultant Agrinvest îți poate spune dacă soiul se potrivește zonei și rotației tale.",
+      "faq": [
+        {
+          "question": "Ce înseamnă C1 la sămânță?",
+          "answer": "C1 este sămânță certificată din prima generație, obținută din sămânță de bază."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de orz Zanzibar C1, certificată, 600 kg",
+        "description": "Sămânță certificată de orz Zanzibar, clasa C1, în ambalaj de 600 kg. Vezi prețul și cere sfatul unui consultant Agrinvest pentru alegerea soiului."
+      }
+    },
+    "en": {
+      "summary": "Certified barley seed, variety Zanzibar, seed class C1, in a 600 kg pack. The variety’s traits (barley type, maturity, sowing rate) will be published once checked against the supplier’s sheet.",
+      "description": "### What you get\nBarley seed of the variety Zanzibar, seed class C1, in a 600 kg pack. C1 means certified seed of the first generation, grown from basic seed: it is the category most farmers use for production sowing.\n\n### The variety\nWe do not publish the variety data yet: barley type, maturity, winter hardiness and disease resistance, yield potential or sowing rate. We add them once checked against the supplier’s sheet or the official variety catalogue. Until then, an Agrinvest consultant can tell you whether the variety suits your area and rotation.",
+      "faq": [
+        {
+          "question": "What does C1 mean for seed?",
+          "answer": "C1 is certified seed of the first generation, grown from basic seed."
+        }
+      ],
+      "seo": {
+        "title": "Zanzibar barley seed C1, certified, 600 kg pack",
+        "description": "Certified Zanzibar barley seed, class C1, in a 600 kg pack. See the price and ask an Agrinvest consultant to help you choose the variety."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Orz",
+      "en": "Barley"
+    },
+    "variety": "Zanzibar"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/samanta-orz-zanzibar-c1-600kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: species from the product name, class C1, pack. Its text calls the variety a wheat and was not used."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: unknown. No brand is set.",
+    "Variety data (barley type, maturity, winter hardiness, resistances, yield potential, sowing rate, recommended zones, seed treatment): no supplier sheet and no entry found in the official catalogue; web searches for “Zanzibar” returned nothing relevant.",
+    "Germination, purity and thousand-grain weight of the lot."
+  ],
+  "conflicts": [
+    "The old shop names the product “Sămânță de orz Zanzibar C1” but its text says “Grâul ZANZIBAR este un soi intensiv, semitardiv…”. Which species is it? Barley (the product name) is used until Agrinvest answers."
+  ]
+}

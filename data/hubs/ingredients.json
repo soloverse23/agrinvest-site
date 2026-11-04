@@ -1,0 +1,1257 @@
+[
+  {
+    "slug": "deltametrin",
+    "name": {
+      "ro": "deltametrin",
+      "en": "deltamethrin"
+    },
+    "chemicalGroup": {
+      "ro": "piretroizi",
+      "en": "pyrethroids"
+    },
+    "resistanceGroup": "IRAC 3A",
+    "intro": {
+      "ro": "Deltametrinul este o substanță activă din familia piretroizilor, folosită în insecticide. Acționează asupra sistemului nervos al insectelor și face parte din grupa 3A IRAC. Pe această pagină găsești produsele cu deltametrin din magazinul Agrinvest și, la fiecare, culturile și dozele din registrul ANF sau de pe eticheta producătorului.",
+      "en": "Deltamethrin is an active substance from the pyrethroid family, used in insecticides. It acts on the insects’ nervous system and belongs to IRAC group 3A. On this page you find the deltamethrin products in the Agrinvest shop and, for each, the crops and rates from the ANF register or the manufacturer’s label."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă IRAC face parte deltametrinul?",
+          "answer": "Din grupa 3A, modulatori ai canalelor de sodiu, împreună cu ceilalți piretroizi. Alternează-l cu insecticide din alte grupe pentru a evita rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which IRAC group is deltamethrin in?",
+          "answer": "Group 3A, sodium channel modulators, together with the other pyrethroids. Alternate it with insecticides from other groups to avoid resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu deltametrin: insecticide și doze",
+        "description": "Insecticide cu deltametrin la Agrinvest: substanță activă din grupa piretroizilor (IRAC 3A), cu culturi, doze și omologare pentru fiecare produs."
+      },
+      "en": {
+        "title": "Deltamethrin products: insecticides and rates",
+        "description": "Deltamethrin insecticides at Agrinvest: an active substance from the pyrethroid group (IRAC 3A), with crops, rates and registration for each product."
+      }
+    }
+  },
+  {
+    "slug": "lambda-cihalotrin",
+    "name": {
+      "ro": "lambda-cihalotrin",
+      "en": "lambda-cyhalothrin"
+    },
+    "chemicalGroup": {
+      "ro": "piretroizi",
+      "en": "pyrethroids"
+    },
+    "resistanceGroup": "IRAC 3A",
+    "intro": {
+      "ro": "Lambda-cihalotrinul este un piretroid folosit în insecticide, din grupa 3A IRAC. Îl găsești în produse cu concentrații diferite, de la 5% la 50 g/l, așa că verifică de fiecare dată concentrația și formularea înainte să compari dozele. Aici sunt produsele cu lambda-cihalotrin din magazinul Agrinvest.",
+      "en": "Lambda-cyhalothrin is a pyrethroid used in insecticides, from IRAC group 3A. It comes in products of different strengths, from 5% to 50 g/l, so check the strength and formulation every time before you compare rates. Here are the lambda-cyhalothrin products in the Agrinvest shop."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu lambda-cihalotrin: insecticide",
+        "description": "Insecticide cu lambda-cihalotrin la Agrinvest: concentrații și formulări diferite, grupa IRAC 3A, cu omologare și, unde există, doze verificate."
+      },
+      "en": {
+        "title": "Lambda-cyhalothrin products: insecticides",
+        "description": "Lambda-cyhalothrin insecticides at Agrinvest: different strengths and formulations, IRAC group 3A, with registration and, where available, checked rates."
+      }
+    }
+  },
+  {
+    "slug": "isoxaflutol",
+    "name": {
+      "ro": "isoxaflutol",
+      "en": "isoxaflutole"
+    },
+    "chemicalGroup": {
+      "ro": "izoxazoli (inhibitori HPPD)",
+      "en": "isoxazoles (HPPD inhibitors)"
+    },
+    "resistanceGroup": "HRAC 27",
+    "intro": {
+      "ro": "Isoxaflutolul este o substanță activă pentru erbicide, din grupa 27 HRAC: inhibă HPPD, o enzimă prin care plantele își protejează clorofila, iar buruienile albesc și mor. Se folosește la porumb, în preemergență sau în postemergență timpurie. Pe această pagină găsești produsele cu isoxaflutol din magazinul Agrinvest.",
+      "en": "Isoxaflutole is an active substance for herbicides, from HRAC group 27: it inhibits HPPD, an enzyme plants use to protect their chlorophyll, so weeds bleach and die. It is used on maize, pre-emergence or early post-emergence. On this page you find the isoxaflutole products in the Agrinvest shop."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu isoxaflutol: erbicide pentru porumb",
+        "description": "Erbicide cu isoxaflutol la Agrinvest: substanță activă din grupa HRAC 27, folosită la porumb, cu doze, momente de aplicare și omologare."
+      },
+      "en": {
+        "title": "Isoxaflutole products: maize herbicides",
+        "description": "Isoxaflutole herbicides at Agrinvest: an active substance from HRAC group 27, used on maize, with rates, application timing and registration."
+      }
+    }
+  },
+  {
+    "slug": "tebuconazol",
+    "name": {
+      "ro": "tebuconazol",
+      "en": "tebuconazole"
+    },
+    "intro": {
+      "ro": "Tebuconazol este o substanță activă pentru fungicide, un triazol: inhibă sinteza ergosterolului din membrana ciupercilor (DMI). Se încadrează la FRAC 3. Aici găsești produsele cu tebuconazol din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Tebuconazole is an active substance for fungicides, a triazole: it inhibits the synthesis of ergosterol in fungal membranes (DMI). It belongs to FRAC 3. Here you find the tebuconazole products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte tebuconazol?",
+          "answer": "Tebuconazol se încadrează la FRAC 3 (triazol). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is tebuconazole in?",
+          "answer": "Tebuconazole belongs to FRAC 3 (triazole). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu tebuconazol: doze și omologare",
+        "description": "Produse cu tebuconazol la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with tebuconazole: rates and registration",
+        "description": "Products with tebuconazole at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "triazol",
+      "en": "triazole"
+    },
+    "resistanceGroup": "FRAC 3"
+  },
+  {
+    "slug": "azoxistrobin",
+    "name": {
+      "ro": "azoxistrobin",
+      "en": "azoxystrobin"
+    },
+    "intro": {
+      "ro": "Azoxistrobin este o substanță activă pentru fungicide, o strobilurină: blochează respirația ciupercilor la nivelul mitocondriilor (QoI). Se încadrează la FRAC 11. Aici găsești produsele cu azoxistrobin din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Azoxystrobin is an active substance for fungicides, a strobilurin: it blocks fungal respiration in the mitochondria (QoI). It belongs to FRAC 11. Here you find the azoxystrobin products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte azoxistrobin?",
+          "answer": "Azoxistrobin se încadrează la FRAC 11 (strobilurină). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is azoxystrobin in?",
+          "answer": "Azoxystrobin belongs to FRAC 11 (strobilurin). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu azoxistrobin: doze și omologare",
+        "description": "Produse cu azoxistrobin la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with azoxystrobin: rates and registration",
+        "description": "Products with azoxystrobin at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "strobilurină",
+      "en": "strobilurin"
+    },
+    "resistanceGroup": "FRAC 11"
+  },
+  {
+    "slug": "protioconazol",
+    "name": {
+      "ro": "protioconazol",
+      "en": "prothioconazole"
+    },
+    "intro": {
+      "ro": "Protioconazol este o substanță activă pentru fungicide, un triazolintionă: inhibă sinteza ergosterolului din membrana ciupercilor (DMI). Se încadrează la FRAC 3. Aici găsești produsele cu protioconazol din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Prothioconazole is an active substance for fungicides, a triazolinthione: it inhibits the synthesis of ergosterol in fungal membranes (DMI). It belongs to FRAC 3. Here you find the prothioconazole products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte protioconazol?",
+          "answer": "Protioconazol se încadrează la FRAC 3 (triazolintionă). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is prothioconazole in?",
+          "answer": "Prothioconazole belongs to FRAC 3 (triazolinthione). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu protioconazol: doze și omologare",
+        "description": "Produse cu protioconazol la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with prothioconazole: rates and registration",
+        "description": "Products with prothioconazole at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "triazolintionă",
+      "en": "triazolinthione"
+    },
+    "resistanceGroup": "FRAC 3"
+  },
+  {
+    "slug": "difenoconazol",
+    "name": {
+      "ro": "difenoconazol",
+      "en": "difenoconazole"
+    },
+    "intro": {
+      "ro": "Difenoconazol este o substanță activă pentru fungicide, un triazol: inhibă sinteza ergosterolului din membrana ciupercilor (DMI). Se încadrează la FRAC 3. Aici găsești produsele cu difenoconazol din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Difenoconazole is an active substance for fungicides, a triazole: it inhibits the synthesis of ergosterol in fungal membranes (DMI). It belongs to FRAC 3. Here you find the difenoconazole products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte difenoconazol?",
+          "answer": "Difenoconazol se încadrează la FRAC 3 (triazol). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is difenoconazole in?",
+          "answer": "Difenoconazole belongs to FRAC 3 (triazole). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu difenoconazol: doze și omologare",
+        "description": "Produse cu difenoconazol la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with difenoconazole: rates and registration",
+        "description": "Products with difenoconazole at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "triazol",
+      "en": "triazole"
+    },
+    "resistanceGroup": "FRAC 3"
+  },
+  {
+    "slug": "fludioxonil",
+    "name": {
+      "ro": "fludioxonil",
+      "en": "fludioxonil"
+    },
+    "intro": {
+      "ro": "Fludioxonil este o substanță activă pentru fungicide, un fenilpirol: perturbă transmiterea semnalelor în celula ciupercii. Se încadrează la FRAC 12. Aici găsești produsele cu fludioxonil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Fludioxonil is an active substance for fungicides, a phenylpyrrole: it disturbs signal transduction in the fungal cell. It belongs to FRAC 12. Here you find the fludioxonil products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte fludioxonil?",
+          "answer": "Fludioxonil se încadrează la FRAC 12 (fenilpirol). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is fludioxonil in?",
+          "answer": "Fludioxonil belongs to FRAC 12 (phenylpyrrole). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu fludioxonil: doze și omologare",
+        "description": "Produse cu fludioxonil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with fludioxonil: rates and registration",
+        "description": "Products with fludioxonil at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "fenilpirol",
+      "en": "phenylpyrrole"
+    },
+    "resistanceGroup": "FRAC 12"
+  },
+  {
+    "slug": "acetamiprid",
+    "name": {
+      "ro": "acetamiprid",
+      "en": "acetamiprid"
+    },
+    "intro": {
+      "ro": "Acetamiprid este o substanță activă pentru insecticide, un neonicotinoid: acționează asupra receptorilor nicotinici ai sistemului nervos al insectelor. Se încadrează la IRAC 4A. Aici găsești produsele cu acetamiprid din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Acetamiprid is an active substance for insecticides, a neonicotinoid: it acts on the nicotinic receptors of the insect nervous system. It belongs to IRAC 4A. Here you find the acetamiprid products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte acetamiprid?",
+          "answer": "Acetamiprid se încadrează la IRAC 4A (neonicotinoid). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is acetamiprid in?",
+          "answer": "Acetamiprid belongs to IRAC 4A (neonicotinoid). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu acetamiprid: doze și omologare",
+        "description": "Produse cu acetamiprid la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with acetamiprid: rates and registration",
+        "description": "Products with acetamiprid at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "neonicotinoid",
+      "en": "neonicotinoid"
+    },
+    "resistanceGroup": "IRAC 4A"
+  },
+  {
+    "slug": "cipermetrin",
+    "name": {
+      "ro": "cipermetrin",
+      "en": "cypermethrin"
+    },
+    "intro": {
+      "ro": "Cipermetrin este o substanță activă pentru insecticide, un piretroid: modulează canalele de sodiu din sistemul nervos al insectelor. Se încadrează la IRAC 3A. Aici găsești produsele cu cipermetrin din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Cypermethrin is an active substance for insecticides, a pyrethroid: it modulates sodium channels in the insect nervous system. It belongs to IRAC 3A. Here you find the cypermethrin products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte cipermetrin?",
+          "answer": "Cipermetrin se încadrează la IRAC 3A (piretroid). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is cypermethrin in?",
+          "answer": "Cypermethrin belongs to IRAC 3A (pyrethroid). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu cipermetrin: doze și omologare",
+        "description": "Produse cu cipermetrin la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with cypermethrin: rates and registration",
+        "description": "Products with cypermethrin at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "piretroid",
+      "en": "pyrethroid"
+    },
+    "resistanceGroup": "IRAC 3A"
+  },
+  {
+    "slug": "sulfoxaflor",
+    "name": {
+      "ro": "sulfoxaflor",
+      "en": "sulfoxaflor"
+    },
+    "intro": {
+      "ro": "Sulfoxaflor este o substanță activă pentru insecticide, o sulfoximină: acționează asupra receptorilor nicotinici ai insectelor. Se încadrează la IRAC 4C. Aici găsești produsele cu sulfoxaflor din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Sulfoxaflor is an active substance for insecticides, a sulfoximine: it acts on the nicotinic receptors of insects. It belongs to IRAC 4C. Here you find the sulfoxaflor products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte sulfoxaflor?",
+          "answer": "Sulfoxaflor se încadrează la IRAC 4C (sulfoximină). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is sulfoxaflor in?",
+          "answer": "Sulfoxaflor belongs to IRAC 4C (sulfoximine). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu sulfoxaflor: doze și omologare",
+        "description": "Produse cu sulfoxaflor la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with sulfoxaflor: rates and registration",
+        "description": "Products with sulfoxaflor at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "sulfoximină",
+      "en": "sulfoximine"
+    },
+    "resistanceGroup": "IRAC 4C"
+  },
+  {
+    "slug": "bacillus-thuringiensis-var-kurstaki",
+    "name": {
+      "ro": "bacillus thuringiensis var kurstaki",
+      "en": "Bacillus thuringiensis var. kurstaki"
+    },
+    "intro": {
+      "ro": "Bacillus thuringiensis var kurstaki este o substanță activă pentru insecticide, o bacterie entomopatogenă: toxinele bacteriei distrug epiteliul intestinal al larvelor. Se încadrează la IRAC 11A. Aici găsești produsele cu bacillus thuringiensis var kurstaki din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Bacillus thuringiensis var. kurstaki is an active substance for insecticides, an entomopathogenic bacterium: it the bacterial toxins destroy the gut lining of the larvae. It belongs to IRAC 11A. Here you find the Bacillus thuringiensis var. kurstaki products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte bacillus thuringiensis var kurstaki?",
+          "answer": "Bacillus thuringiensis var kurstaki se încadrează la IRAC 11A (bacterie entomopatogenă). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is Bacillus thuringiensis var. kurstaki in?",
+          "answer": "Bacillus thuringiensis var. kurstaki belongs to IRAC 11A (entomopathogenic bacterium). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu bacillus thuringiensis var kurstaki",
+        "description": "Produse cu bacillus thuringiensis var kurstaki la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with Bacillus thuringiensis var. kurstaki",
+        "description": "Products with Bacillus thuringiensis var. kurstaki at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "bacterie entomopatogenă",
+      "en": "entomopathogenic bacterium"
+    },
+    "resistanceGroup": "IRAC 11A"
+  },
+  {
+    "slug": "tribenuron-metil",
+    "name": {
+      "ro": "tribenuron metil",
+      "en": "tribenuron-methyl"
+    },
+    "intro": {
+      "ro": "Tribenuron metil este o substanță activă pentru erbicide, o sulfoniluree: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Aici găsești produsele cu tribenuron metil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Tribenuron-methyl is an active substance for herbicides, a sulfonylurea: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Here you find the tribenuron-methyl products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte tribenuron metil?",
+          "answer": "Tribenuron metil se încadrează la HRAC 2 (sulfoniluree). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is tribenuron-methyl in?",
+          "answer": "Tribenuron-methyl belongs to HRAC 2 (sulfonylurea). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu tribenuron metil: doze și omologare",
+        "description": "Produse cu tribenuron metil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with tribenuron-methyl: rates and registration",
+        "description": "Products with tribenuron-methyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "sulfoniluree",
+      "en": "sulfonylurea"
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  {
+    "slug": "rimsulfuron-metil",
+    "name": {
+      "ro": "rimsulfuron metil",
+      "en": "rimsulfuron"
+    },
+    "intro": {
+      "ro": "Rimsulfuron metil este o substanță activă pentru erbicide, o sulfoniluree: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Aici găsești produsele cu rimsulfuron metil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Rimsulfuron is an active substance for herbicides, a sulfonylurea: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Here you find the rimsulfuron products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte rimsulfuron metil?",
+          "answer": "Rimsulfuron metil se încadrează la HRAC 2 (sulfoniluree). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is rimsulfuron in?",
+          "answer": "Rimsulfuron belongs to HRAC 2 (sulfonylurea). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu rimsulfuron metil: doze și omologare",
+        "description": "Produse cu rimsulfuron metil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with rimsulfuron: rates and registration",
+        "description": "Products with rimsulfuron at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "sulfoniluree",
+      "en": "sulfonylurea"
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  {
+    "slug": "nicosulfuron",
+    "name": {
+      "ro": "nicosulfuron",
+      "en": "nicosulfuron"
+    },
+    "intro": {
+      "ro": "Nicosulfuron este o substanță activă pentru erbicide, o sulfoniluree: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Aici găsești produsele cu nicosulfuron din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Nicosulfuron is an active substance for herbicides, a sulfonylurea: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Here you find the nicosulfuron products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte nicosulfuron?",
+          "answer": "Nicosulfuron se încadrează la HRAC 2 (sulfoniluree). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is nicosulfuron in?",
+          "answer": "Nicosulfuron belongs to HRAC 2 (sulfonylurea). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu nicosulfuron: doze și omologare",
+        "description": "Produse cu nicosulfuron la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with nicosulfuron: rates and registration",
+        "description": "Products with nicosulfuron at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "sulfoniluree",
+      "en": "sulfonylurea"
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  {
+    "slug": "imazamox",
+    "name": {
+      "ro": "imazamox",
+      "en": "imazamox"
+    },
+    "intro": {
+      "ro": "Imazamox este o substanță activă pentru erbicide, o imidazolinonă: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Aici găsești produsele cu imazamox din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Imazamox is an active substance for herbicides, an imidazolinone: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Here you find the imazamox products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte imazamox?",
+          "answer": "Imazamox se încadrează la HRAC 2 (imidazolinonă). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is imazamox in?",
+          "answer": "Imazamox belongs to HRAC 2 (imidazolinone). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu imazamox: doze și omologare",
+        "description": "Produse cu imazamox la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with imazamox: rates and registration",
+        "description": "Products with imazamox at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "imidazolinonă",
+      "en": "imidazolinone"
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  {
+    "slug": "tifensulfuron-metil",
+    "name": {
+      "ro": "tifensulfuron metil",
+      "en": "thifensulfuron-methyl"
+    },
+    "intro": {
+      "ro": "Tifensulfuron metil este o substanță activă pentru erbicide, o sulfoniluree: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Aici găsești produsele cu tifensulfuron metil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Thifensulfuron-methyl is an active substance for herbicides, a sulfonylurea: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Here you find the thifensulfuron-methyl products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte tifensulfuron metil?",
+          "answer": "Tifensulfuron metil se încadrează la HRAC 2 (sulfoniluree). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is thifensulfuron-methyl in?",
+          "answer": "Thifensulfuron-methyl belongs to HRAC 2 (sulfonylurea). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu tifensulfuron metil: doze și omologare",
+        "description": "Produse cu tifensulfuron metil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with thifensulfuron-methyl: rates and registration",
+        "description": "Products with thifensulfuron-methyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "sulfoniluree",
+      "en": "sulfonylurea"
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  {
+    "slug": "metsulfuron-metil",
+    "name": {
+      "ro": "metsulfuron metil",
+      "en": "metsulfuron-methyl"
+    },
+    "intro": {
+      "ro": "Metsulfuron metil este o substanță activă pentru erbicide, o sulfoniluree: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Aici găsești produsele cu metsulfuron metil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Metsulfuron-methyl is an active substance for herbicides, a sulfonylurea: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Here you find the metsulfuron-methyl products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte metsulfuron metil?",
+          "answer": "Metsulfuron metil se încadrează la HRAC 2 (sulfoniluree). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is metsulfuron-methyl in?",
+          "answer": "Metsulfuron-methyl belongs to HRAC 2 (sulfonylurea). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu metsulfuron metil: doze și omologare",
+        "description": "Produse cu metsulfuron metil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with metsulfuron-methyl: rates and registration",
+        "description": "Products with metsulfuron-methyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "sulfoniluree",
+      "en": "sulfonylurea"
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  {
+    "slug": "quizalofop-p-etil",
+    "name": {
+      "ro": "quizalofop-p-etil",
+      "en": "quizalofop-P-ethyl"
+    },
+    "intro": {
+      "ro": "Quizalofop-p-etil este o substanță activă pentru erbicide, un ariloxifenoxipropionat: blochează enzima ACCaza din gramineele sensibile. Se încadrează la HRAC 1. Aici găsești produsele cu quizalofop-p-etil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Quizalofop-P-ethyl is an active substance for herbicides, an aryloxyphenoxypropionate: it blocks the ACCase enzyme in susceptible grasses. It belongs to HRAC 1. Here you find the quizalofop-P-ethyl products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte quizalofop-p-etil?",
+          "answer": "Quizalofop-p-etil se încadrează la HRAC 1 (ariloxifenoxipropionat). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is quizalofop-P-ethyl in?",
+          "answer": "Quizalofop-P-ethyl belongs to HRAC 1 (aryloxyphenoxypropionate). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu quizalofop-p-etil: doze și omologare",
+        "description": "Produse cu quizalofop-p-etil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with quizalofop-P-ethyl: rates and registration",
+        "description": "Products with quizalofop-P-ethyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "ariloxifenoxipropionat",
+      "en": "aryloxyphenoxypropionate"
+    },
+    "resistanceGroup": "HRAC 1"
+  },
+  {
+    "slug": "fluazifop-p-butil",
+    "name": {
+      "ro": "fluazifop-p-butil",
+      "en": "fluazifop-P-butyl"
+    },
+    "intro": {
+      "ro": "Fluazifop-p-butil este o substanță activă pentru erbicide, un ariloxifenoxipropionat: blochează enzima ACCaza din gramineele sensibile. Se încadrează la HRAC 1. Aici găsești produsele cu fluazifop-p-butil din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Fluazifop-P-butyl is an active substance for herbicides, an aryloxyphenoxypropionate: it blocks the ACCase enzyme in susceptible grasses. It belongs to HRAC 1. Here you find the fluazifop-P-butyl products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte fluazifop-p-butil?",
+          "answer": "Fluazifop-p-butil se încadrează la HRAC 1 (ariloxifenoxipropionat). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is fluazifop-P-butyl in?",
+          "answer": "Fluazifop-P-butyl belongs to HRAC 1 (aryloxyphenoxypropionate). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu fluazifop-p-butil: doze și omologare",
+        "description": "Produse cu fluazifop-p-butil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with fluazifop-P-butyl: rates and registration",
+        "description": "Products with fluazifop-P-butyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "ariloxifenoxipropionat",
+      "en": "aryloxyphenoxypropionate"
+    },
+    "resistanceGroup": "HRAC 1"
+  },
+  {
+    "slug": "glifosat",
+    "name": {
+      "ro": "glifosat",
+      "en": "glyphosate"
+    },
+    "intro": {
+      "ro": "Glifosat este o substanță activă pentru erbicide, un erbicid total sistemic: blochează enzima EPSPS din plantă. Se încadrează la HRAC 9. Aici găsești produsele cu glifosat din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Glyphosate is an active substance for herbicides, a systemic non-selective herbicide: it blocks the EPSPS enzyme in the plant. It belongs to HRAC 9. Here you find the glyphosate products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte glifosat?",
+          "answer": "Glifosat se încadrează la HRAC 9 (erbicid total sistemic). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is glyphosate in?",
+          "answer": "Glyphosate belongs to HRAC 9 (systemic non-selective herbicide). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu glifosat: doze și omologare",
+        "description": "Produse cu glifosat la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with glyphosate: rates and registration",
+        "description": "Products with glyphosate at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "erbicid total sistemic",
+      "en": "systemic non-selective herbicide"
+    },
+    "resistanceGroup": "HRAC 9"
+  },
+  {
+    "slug": "flufenacet",
+    "name": {
+      "ro": "flufenacet",
+      "en": "flufenacet"
+    },
+    "intro": {
+      "ro": "Flufenacet este o substanță activă pentru erbicide, o oxiacetamidă: inhibă sinteza acizilor grași cu lanț foarte lung. Se încadrează la HRAC 15. Aici găsești produsele cu flufenacet din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Flufenacet is an active substance for herbicides, an oxyacetamide: it inhibits the synthesis of very-long-chain fatty acids. It belongs to HRAC 15. Here you find the flufenacet products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte flufenacet?",
+          "answer": "Flufenacet se încadrează la HRAC 15 (oxiacetamidă). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is flufenacet in?",
+          "answer": "Flufenacet belongs to HRAC 15 (oxyacetamide). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu flufenacet: doze și omologare",
+        "description": "Produse cu flufenacet la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with flufenacet: rates and registration",
+        "description": "Products with flufenacet at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "oxiacetamidă",
+      "en": "oxyacetamide"
+    },
+    "resistanceGroup": "HRAC 15"
+  },
+  {
+    "slug": "diflufenican",
+    "name": {
+      "ro": "diflufenican",
+      "en": "diflufenican"
+    },
+    "intro": {
+      "ro": "Diflufenican este o substanță activă pentru erbicide, un derivat de piridincarboxamidă: inhibă sinteza carotenoizilor, iar buruienile albesc. Se încadrează la HRAC 12. Aici găsești produsele cu diflufenican din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Diflufenican is an active substance for herbicides, a pyridinecarboxamide: it inhibits carotenoid synthesis, so weeds bleach. It belongs to HRAC 12. Here you find the diflufenican products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte diflufenican?",
+          "answer": "Diflufenican se încadrează la HRAC 12 (derivat de piridincarboxamidă). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is diflufenican in?",
+          "answer": "Diflufenican belongs to HRAC 12 (pyridinecarboxamide). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu diflufenican: doze și omologare",
+        "description": "Produse cu diflufenican la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with diflufenican: rates and registration",
+        "description": "Products with diflufenican at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "derivat de piridincarboxamidă",
+      "en": "pyridinecarboxamide"
+    },
+    "resistanceGroup": "HRAC 12"
+  },
+  {
+    "slug": "fluroxipir",
+    "name": {
+      "ro": "fluroxipir",
+      "en": "fluroxypyr"
+    },
+    "intro": {
+      "ro": "Fluroxipir este o substanță activă pentru erbicide, o auxină sintetică: imită hormonii de creștere ai plantei. Se încadrează la HRAC 4. Aici găsești produsele cu fluroxipir din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Fluroxypyr is an active substance for herbicides, a synthetic auxin: it mimics the plant’s growth hormones. It belongs to HRAC 4. Here you find the fluroxypyr products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte fluroxipir?",
+          "answer": "Fluroxipir se încadrează la HRAC 4 (auxină sintetică). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is fluroxypyr in?",
+          "answer": "Fluroxypyr belongs to HRAC 4 (synthetic auxin). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu fluroxipir: doze și omologare",
+        "description": "Produse cu fluroxipir la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with fluroxypyr: rates and registration",
+        "description": "Products with fluroxypyr at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "auxină sintetică",
+      "en": "synthetic auxin"
+    },
+    "resistanceGroup": "HRAC 4"
+  },
+  {
+    "slug": "dimetenamid-p",
+    "name": {
+      "ro": "dimetenamid-p",
+      "en": "dimethenamid-P"
+    },
+    "intro": {
+      "ro": "Dimetenamid-p este o substanță activă pentru erbicide, o cloroacetamidă: inhibă sinteza acizilor grași cu lanț foarte lung. Se încadrează la HRAC 15. Aici găsești produsele cu dimetenamid-p din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Dimethenamid-P is an active substance for herbicides, a chloroacetamide: it inhibits the synthesis of very-long-chain fatty acids. It belongs to HRAC 15. Here you find the dimethenamid-P products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte dimetenamid-p?",
+          "answer": "Dimetenamid-p se încadrează la HRAC 15 (cloroacetamidă). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is dimethenamid-P in?",
+          "answer": "Dimethenamid-P belongs to HRAC 15 (chloroacetamide). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu dimetenamid-p: doze și omologare",
+        "description": "Produse cu dimetenamid-p la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with dimethenamid-P: rates and registration",
+        "description": "Products with dimethenamid-P at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "cloroacetamidă",
+      "en": "chloroacetamide"
+    },
+    "resistanceGroup": "HRAC 15"
+  },
+  {
+    "slug": "pendimetalin",
+    "name": {
+      "ro": "pendimetalin",
+      "en": "pendimethalin"
+    },
+    "intro": {
+      "ro": "Pendimetalin este o substanță activă pentru erbicide, o dinitroanilină: inhibă diviziunea celulară în rădăcinile buruienilor. Se încadrează la HRAC 3. Aici găsești produsele cu pendimetalin din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Pendimethalin is an active substance for herbicides, a dinitroaniline: it inhibits cell division in weed roots. It belongs to HRAC 3. Here you find the pendimethalin products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte pendimetalin?",
+          "answer": "Pendimetalin se încadrează la HRAC 3 (dinitroanilină). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is pendimethalin in?",
+          "answer": "Pendimethalin belongs to HRAC 3 (dinitroaniline). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu pendimetalin: doze și omologare",
+        "description": "Produse cu pendimetalin la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with pendimethalin: rates and registration",
+        "description": "Products with pendimethalin at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "dinitroanilină",
+      "en": "dinitroaniline"
+    },
+    "resistanceGroup": "HRAC 3"
+  },
+  {
+    "slug": "dicamba",
+    "name": {
+      "ro": "dicamba",
+      "en": "dicamba"
+    },
+    "intro": {
+      "ro": "Dicamba este o substanță activă pentru erbicide, o auxină sintetică: imită hormonii de creștere ai plantei. Se încadrează la HRAC 4. Aici găsești produsele cu dicamba din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Dicamba is an active substance for herbicides, a synthetic auxin: it mimics the plant’s growth hormones. It belongs to HRAC 4. Here you find the dicamba products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte dicamba?",
+          "answer": "Dicamba se încadrează la HRAC 4 (auxină sintetică). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is dicamba in?",
+          "answer": "Dicamba belongs to HRAC 4 (synthetic auxin). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu dicamba: doze și omologare",
+        "description": "Produse cu dicamba la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with dicamba: rates and registration",
+        "description": "Products with dicamba at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "auxină sintetică",
+      "en": "synthetic auxin"
+    },
+    "resistanceGroup": "HRAC 4"
+  },
+  {
+    "slug": "cupru-metalic-hidroxid-de-cupru",
+    "name": {
+      "ro": "cupru metalic (hidroxid de cupru)",
+      "en": "copper hydroxide"
+    },
+    "intro": {
+      "ro": "Cupru metalic (hidroxid de cupru) este o substanță activă pentru fungicide, un fungicid de contact pe bază de cupru: ionii de cupru blochează mai multe enzime ale agentului patogen, deci riscul de rezistență este mic. Se încadrează la FRAC M01. Aici găsești produsele cu cupru metalic (hidroxid de cupru) din magazinul Agrinvest; pentru fiecare, concentrația și omologarea vin din registrul ANF sau de pe etichetă, iar dozele sunt publicate numai după verificare.",
+      "en": "Copper hydroxide is an active substance for fungicides, a copper-based contact fungicide: it copper ions block several enzymes of the pathogen, so the risk of resistance is low. It belongs to FRAC M01. Here you find the copper hydroxide products in the Agrinvest shop; for each, the strength and registration come from the ANF register or the label, and rates are published only once checked."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Din ce grupă face parte cupru metalic (hidroxid de cupru)?",
+          "answer": "Cupru metalic (hidroxid de cupru) se încadrează la FRAC M01 (fungicid de contact pe bază de cupru). Alternează produsele din grupe diferite ca să încetinești rezistența."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which group is copper hydroxide in?",
+          "answer": "Copper hydroxide belongs to FRAC M01 (copper-based contact fungicide). Alternate products from different groups to slow resistance."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu cupru metalic (hidroxid de cupru)",
+        "description": "Produse cu cupru metalic (hidroxid de cupru) la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with copper hydroxide: rates and registration",
+        "description": "Products with copper hydroxide at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true,
+    "chemicalGroup": {
+      "ro": "fungicid de contact pe bază de cupru",
+      "en": "copper-based contact fungicide"
+    },
+    "resistanceGroup": "FRAC M01"
+  },
+  {
+    "slug": "tiencarbazon-metil",
+    "name": {
+      "ro": "tiencarbazon-metil",
+      "en": "thiencarbazone-methyl"
+    },
+    "intro": {
+      "ro": "Tiencarbazon-metil este o substanță activă folosită în produse pentru protecția plantelor sau nutriție. Aici găsești produsele cu tiencarbazon-metil din magazinul Agrinvest, cu omologarea din registrul ANF sau de pe etichetă și doze publicate numai după verificare.",
+      "en": "Thiencarbazone-methyl is an active substance used in crop protection or nutrition products. Here you find the thiencarbazone-methyl products in the Agrinvest shop, with the registration from the ANF register or the label and rates published only once checked."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu tiencarbazon-metil: doze și omologare",
+        "description": "Produse cu tiencarbazon-metil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with thiencarbazone-methyl: rates and registration",
+        "description": "Products with thiencarbazone-methyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "ciprosulfamide",
+    "name": {
+      "ro": "ciprosulfamide",
+      "en": "cyprosulfamide"
+    },
+    "intro": {
+      "ro": "Ciprosulfamide este o substanță activă folosită în produse pentru protecția plantelor sau nutriție. Aici găsești produsele cu ciprosulfamide din magazinul Agrinvest, cu omologarea din registrul ANF sau de pe etichetă și doze publicate numai după verificare.",
+      "en": "Cyprosulfamide is an active substance used in crop protection or nutrition products. Here you find the cyprosulfamide products in the Agrinvest shop, with the registration from the ANF register or the label and rates published only once checked."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu ciprosulfamide: doze și omologare",
+        "description": "Produse cu ciprosulfamide la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with cyprosulfamide: rates and registration",
+        "description": "Products with cyprosulfamide at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "clorura-de-clormequat",
+    "name": {
+      "ro": "clorura de clormequat",
+      "en": "chlormequat chloride"
+    },
+    "intro": {
+      "ro": "Clorura de clormequat este o substanță activă folosită în produse pentru protecția plantelor sau nutriție. Aici găsești produsele cu clorura de clormequat din magazinul Agrinvest, cu omologarea din registrul ANF sau de pe etichetă și doze publicate numai după verificare.",
+      "en": "Chlormequat chloride is an active substance used in crop protection or nutrition products. Here you find the chlormequat chloride products in the Agrinvest shop, with the registration from the ANF register or the label and rates published only once checked."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu clorura de clormequat: doze și omologare",
+        "description": "Produse cu clorura de clormequat la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with chlormequat chloride: rates and registration",
+        "description": "Products with chlormequat chloride at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "clorhidrat-de-chitosan",
+    "name": {
+      "ro": "clorhidrat de chitosan",
+      "en": "chitosan hydrochloride"
+    },
+    "intro": {
+      "ro": "Clorhidrat de chitosan este o substanță activă folosită în produse pentru protecția plantelor sau nutriție. Aici găsești produsele cu clorhidrat de chitosan din magazinul Agrinvest, cu omologarea din registrul ANF sau de pe etichetă și doze publicate numai după verificare.",
+      "en": "Chitosan hydrochloride is an active substance used in crop protection or nutrition products. Here you find the chitosan hydrochloride products in the Agrinvest shop, with the registration from the ANF register or the label and rates published only once checked."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu clorhidrat de chitosan: doze și omologare",
+        "description": "Produse cu clorhidrat de chitosan la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with chitosan hydrochloride: rates and registration",
+        "description": "Products with chitosan hydrochloride at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "isoxadifen-etil",
+    "name": {
+      "ro": "isoxadifen-etil",
+      "en": "isoxadifen-ethyl"
+    },
+    "intro": {
+      "ro": "Isoxadifen-etil este o substanță activă folosită în produse pentru protecția plantelor sau nutriție. Aici găsești produsele cu isoxadifen-etil din magazinul Agrinvest, cu omologarea din registrul ANF sau de pe etichetă și doze publicate numai după verificare.",
+      "en": "Isoxadifen-ethyl is an active substance used in crop protection or nutrition products. Here you find the isoxadifen-ethyl products in the Agrinvest shop, with the registration from the ANF register or the label and rates published only once checked."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse cu isoxadifen-etil: doze și omologare",
+        "description": "Produse cu isoxadifen-etil la Agrinvest: concentrații, omologare și, unde sunt verificate, doze pe culturi."
+      },
+      "en": {
+        "title": "Products with isoxadifen-ethyl: rates and registration",
+        "description": "Products with isoxadifen-ethyl at Agrinvest: strengths, registration and, where checked, rates by crop."
+      }
+    },
+    "indexable": true
+  }
+]

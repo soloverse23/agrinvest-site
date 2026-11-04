@@ -2,7 +2,7 @@ import { ValidationError, type CollectionConfig } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
-import { featuredProducts, hubFields, shopGroup } from '@/fields/shop'
+import { enrichmentLedger, featuredProducts, hubFields, shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
 import { reservedCategorySlugs } from '@/lib/shop/rules'
 
@@ -120,5 +120,6 @@ export const Categories: CollectionConfig = {
       admin: { defaultColumns: ['name', 'commerceStatus', '_status'] },
     },
     slug('name', true),
+    enrichmentLedger,
   ],
 }

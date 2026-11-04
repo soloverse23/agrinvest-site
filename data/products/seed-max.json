@@ -1,0 +1,79 @@
+{
+  "slug": "seed-max",
+  "primaryKeyword": {
+    "ro": "seed max",
+    "en": "seed max"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [
+    "tratament-samanta"
+  ],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Seed Max este un fertilizant microbian pentru tratamentul semințelor, cu Azotobacter, Nitrobacter și Bacillus. Urmărește o germinare rapidă și o răsărire uniformă. Se aplică direct pe sămânță, înainte de semănat. Ambalaj de 1 kg.",
+      "description": "### Ce este Seed Max\nSeed Max este un fertilizant microbiologic pentru tratamentul semințelor. Conține microorganisme folositoare (Azotobacter, Nitrobacter, Bacillus) și urmărește germinarea rapidă, dezvoltarea uniformă a răsadurilor și o pornire viguroasă în vegetație. Nu este un produs de protecția plantelor.\n\n### Doze\nNu publicăm încă dozele pe culturi (în grame la tona de sămânță): pagina veche nu are o fișă tehnică a producătorului. Întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Seed Max este un produs de protecția plantelor?",
+          "answer": "Nu. Este un fertilizant microbian pentru tratarea semințelor."
+        },
+        {
+          "question": "Ce doză de Seed Max se folosește?",
+          "answer": "Se calculează la tona de sămânță și depinde de cultură. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Seed Max: fertilizant microbian pentru tratarea semințelor",
+        "description": "Seed Max, fertilizant microbian pentru tratarea semințelor cu Azotobacter, Nitrobacter și Bacillus: ce este, cum se aplică, ambalaj de 1 kg."
+      }
+    },
+    "en": {
+      "summary": "Seed Max is a microbial fertiliser for seed treatment, with Azotobacter, Nitrobacter and Bacillus. It aims at fast germination and uniform emergence. It is applied directly to the seed before sowing. 1 kg pack.",
+      "description": "### What Seed Max is\nSeed Max is a microbial fertiliser for seed treatment. It contains beneficial micro-organisms (Azotobacter, Nitrobacter, Bacillus) and aims at fast germination, uniform seedling development and a vigorous start. It is not a plant protection product.\n\n### Rates\nWe do not publish crop rates yet (in grams per tonne of seed): the old page has no manufacturer’s technical sheet. Ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "Is Seed Max a plant protection product?",
+          "answer": "No. It is a microbial fertiliser for seed treatment."
+        },
+        {
+          "question": "What rate of Seed Max is used?",
+          "answer": "It is worked out per tonne of seed and depends on the crop. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Seed Max: microbial fertiliser for seed treatment",
+        "description": "Seed Max, a microbial fertiliser for seed treatment with Azotobacter, Nitrobacter and Bacillus: what it is, how it is applied, 1 kg pack."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [],
+    "form": {
+      "ro": "Preparat microbian pentru sămânță",
+      "en": "Microbial seed preparation"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/tratament-samanta/seed-max-1-kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer sheet, strains and counts (cfu/g): missing.",
+    "Rates by crop: the old table is generic and repeats across products: not used."
+  ],
+  "conflicts": [
+    "The importer filed Seed Max under crop protection (seed treatment). The old text calls it a “microbial fertiliser”, so it is moved to fertilisers (with seed treatment as a second category), where no pesticide registration is needed. Agrinvest confirms."
+  ],
+  "productType": "fertiliser"
+}

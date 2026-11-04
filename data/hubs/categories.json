@@ -1,0 +1,398 @@
+[
+  {
+    "slug": "erbicide",
+    "intro": {
+      "ro": "Erbicide pentru porumb, cereale, floarea-soarelui și rapiță, cu substanța activă, numărul omologării și, unde le-am verificat, dozele din registrul ANF sau de pe etichetă.",
+      "en": "Herbicides for maize, cereals, sunflower and rapeseed, with the active substance, the registration number and, where we checked them, the rates from the ANF register or the label."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un erbicid\n- **Cultura și momentul**: unele produse se aplică înainte de răsărirea culturii (preemergent), altele după (postemergent). Eticheta spune la ce stadiu al culturii și al buruienilor.\n- **Buruienile din parcelă**: ia o listă a speciilor dominante și verifică-o în lista de buruieni a produsului; speciile perene și unele anuale nu sunt acoperite de toate erbicidele.\n- **Solul**: la multe produse doza depinde de conținutul de humus și de gradul de îmburuienare.\n- **Rezistența**: alternează grupele de acțiune (HRAC) de la un an la altul; produsele afișează grupa lor.\n- **Rotația**: citește la ce culturi poți semăna după erbicid și după cât timp.",
+      "en": "### How to choose a herbicide\n- **Crop and timing**: some products are applied before the crop emerges (pre-emergence), others after (post-emergence). The label gives the stage of the crop and of the weeds.\n- **The weeds in your field**: note the dominant species and check them against the product’s weed list; perennial species and some annuals are not covered by every herbicide.\n- **Soil**: for many products the rate depends on soil humus and weed pressure.\n- **Resistance**: alternate the mode-of-action groups (HRAC) from year to year; products show their group.\n- **Rotation**: read which crops you can sow after the herbicide and after how long."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Care este diferența dintre erbicid preemergent și postemergent?",
+          "answer": "Preemergentul se aplică după semănat și înainte de răsărirea culturii și acționează pe sol; postemergentul se aplică pe buruienile răsărite, în stadiul indicat pe etichetă."
+        },
+        {
+          "question": "De unde știu doza corectă?",
+          "answer": "De pe eticheta produsului sau din registrul ANF. Pe paginile noastre publicăm dozele numai după ce le-am verificat și marcăm ce lipsește; un consultant Agrinvest te ajută pentru parcela ta."
+        }
+      ],
+      "en": [
+        {
+          "question": "What is the difference between a pre-emergence and a post-emergence herbicide?",
+          "answer": "A pre-emergence product is applied after sowing and before the crop emerges and works through the soil; a post-emergence product is applied to emerged weeds, at the stage shown on the label."
+        },
+        {
+          "question": "How do I know the right rate?",
+          "answer": "From the product label or the ANF register. On our pages we publish rates only once checked and mark what is missing; an Agrinvest consultant helps you for your field."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Erbicide pentru culturile de câmp",
+        "description": "Erbicide la Agrinvest pentru porumb, cereale, floarea-soarelui și rapiță: substanță activă, omologare ANF și doze verificate. Cere ofertă."
+      },
+      "en": {
+        "title": "Herbicides for field crops: maize, cereals",
+        "description": "Herbicides at Agrinvest for maize, cereals, sunflower and rapeseed: active substance, ANF registration and checked rates. Ask for a quote."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "fungicide",
+    "intro": {
+      "ro": "Fungicide pentru cereale, rapiță, viță de vie, pomi și legume, cu substanța activă, grupa FRAC și numărul omologării.",
+      "en": "Fungicides for cereals, rapeseed, grapevine, orchards and vegetables, with the active substance, the FRAC group and the registration number."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un fungicid\n- **Boala și momentul**: fungicidele sunt mai eficiente preventiv sau la primele simptome; eticheta indică stadiul culturii.\n- **Substanța activă și grupa FRAC**: produsele cu mai multe substanțe din grupe diferite protejează mai larg și încetinesc rezistența.\n- **Contact sau sistemic**: cuprul acționează la suprafață; triazolii și strobilurinele pătrund în plantă.\n- **Timpul de pauză**: verifică zilele dintre ultimul tratament și recoltare.\n- **Alternarea**: nu repeta aceeași grupă la tratamente consecutive.",
+      "en": "### How to choose a fungicide\n- **The disease and the timing**: fungicides work best preventively or at the first symptoms; the label gives the crop stage.\n- **Active substance and FRAC group**: products with several substances from different groups protect more broadly and slow resistance.\n- **Contact or systemic**: copper works on the surface; triazoles and strobilurins enter the plant.\n- **Waiting period**: check the days between the last treatment and harvest.\n- **Rotation of groups**: do not repeat the same group in consecutive treatments."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Ce înseamnă grupa FRAC?",
+          "answer": "Este codul care arată modul de acțiune al unui fungicid. Alternarea grupelor diferite ajută la evitarea rezistenței agenților patogeni."
+        },
+        {
+          "question": "Pot trata preventiv?",
+          "answer": "Multe fungicide se aplică preventiv sau la primele simptome; momentul exact este pe etichetă."
+        }
+      ],
+      "en": [
+        {
+          "question": "What does the FRAC group mean?",
+          "answer": "It is the code that shows a fungicide’s mode of action. Alternating different groups helps avoid resistance in pathogens."
+        },
+        {
+          "question": "Can I treat preventively?",
+          "answer": "Many fungicides are applied preventively or at the first symptoms; the exact timing is on the label."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Fungicide pentru culturile de câmp",
+        "description": "Fungicide la Agrinvest pentru cereale, rapiță, viță de vie, pomi și legume: substanță activă, grupa FRAC, omologare ANF. Cere ofertă."
+      },
+      "en": {
+        "title": "Fungicides for field crops and orchards",
+        "description": "Fungicides at Agrinvest for cereals, rapeseed, grapevine, orchards and vegetables: active substance, FRAC group, ANF registration. Ask for a quote."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "insecticide",
+    "intro": {
+      "ro": "Insecticide pentru cereale, porumb, rapiță, cartof, legume și pomi, cu substanța activă, grupa IRAC și numărul omologării.",
+      "en": "Insecticides for cereals, maize, rapeseed, potato, vegetables and orchards, with the active substance, the IRAC group and the registration number."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un insecticid\n- **Dăunătorul**: identifică specia și stadiul (adult, larvă) și verifică dacă produsul are acea specie în lista lui.\n- **Pragul de dăunare**: tratează la avertizare sau când se atinge pragul economic, nu preventiv.\n- **Albinele**: multe insecticide sunt periculoase pentru albine; nu trata în perioada de zbor și respectă restricțiile de pe etichetă.\n- **Grupa IRAC**: alternează grupele de la un tratament la altul.\n- **Timpul de pauză și numărul de tratamente**: sunt pe etichetă, pe cultură.",
+      "en": "### How to choose an insecticide\n- **The pest**: identify the species and stage (adult, larva) and check that the product lists that species.\n- **Damage threshold**: treat on warning or when the economic threshold is reached, not preventively.\n- **Bees**: many insecticides are dangerous to bees; do not treat while they are foraging and follow the label’s restrictions.\n- **IRAC group**: alternate groups from one treatment to the next.\n- **Waiting period and number of treatments**: on the label, by crop."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Ce este grupa IRAC?",
+          "answer": "Codul care arată modul de acțiune al unui insecticid. Piretroizii sunt în grupa 3A, neonicotinoidele în 4A."
+        },
+        {
+          "question": "Când tratez cu insecticid?",
+          "answer": "La avertizare sau când dăunătorul atinge pragul economic de dăunare, în stadiul și cu doza de pe etichetă."
+        }
+      ],
+      "en": [
+        {
+          "question": "What is the IRAC group?",
+          "answer": "The code that shows an insecticide’s mode of action. Pyrethroids are in group 3A, neonicotinoids in 4A."
+        },
+        {
+          "question": "When do I treat with an insecticide?",
+          "answer": "On warning or when the pest reaches the economic damage threshold, at the stage and rate shown on the label."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Insecticide pentru culturile de câmp",
+        "description": "Insecticide la Agrinvest pentru cereale, porumb, rapiță, cartof, legume și pomi: substanță activă, grupa IRAC, omologare ANF. Cere ofertă."
+      },
+      "en": {
+        "title": "Insecticides for field crops and orchards",
+        "description": "Insecticides at Agrinvest for cereals, maize, rapeseed, potato, vegetables and orchards: active substance, IRAC group, ANF registration. Ask for a quote."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "tratament-samanta",
+    "intro": {
+      "ro": "Tratamente pentru sămânță pentru cereale, cu substanța activă, formularea și numărul omologării.",
+      "en": "Seed treatments for cereals, with the active substance, formulation and registration number."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un tratament pentru sămânță\n- **Bolile din sămânță și din sol**: tratamentul protejează germinația și răsărirea împotriva bolilor precum tăciunele și fuzarioza.\n- **Doza se calculează la tona de sămânță**, nu la hectar.\n- **Echipamentul**: tratamentul se face cu mașină de tratat semințe, ca stratul să fie uniform.\n- **Sămânța tratată**: nu se mai poate folosi ca hrană sau furaj.\n- **Alternativa**: sămânța certificată vine uneori deja tratată; verifică eticheta lotului.",
+      "en": "### How to choose a seed treatment\n- **Seed- and soil-borne diseases**: the treatment protects germination and emergence against diseases such as smut and fusarium.\n- **The rate is calculated per tonne of seed**, not per hectare.\n- **Equipment**: the treatment is done with a seed treater so that the coating is even.\n- **Treated seed**: it can no longer be used as food or feed.\n- **Alternative**: certified seed sometimes comes already treated; check the lot label."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Se calculează doza la hectar?",
+          "answer": "Nu, la tona de sămânță. Pe etichetă este indicată în kg sau litri la tonă."
+        },
+        {
+          "question": "Pot folosi sămânță tratată ca furaj?",
+          "answer": "Nu. Sămânța tratată cu produse de protecția plantelor nu se folosește ca hrană sau furaj."
+        }
+      ],
+      "en": [
+        {
+          "question": "Is the rate calculated per hectare?",
+          "answer": "No, per tonne of seed. The label gives it in kg or litres per tonne."
+        },
+        {
+          "question": "Can treated seed be used as feed?",
+          "answer": "No. Seed treated with plant protection products is not used as food or feed."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Tratamente pentru sămânță: cereale",
+        "description": "Tratamente pentru sămânță la Agrinvest, pentru cereale: substanță activă, formulare, omologare ANF. Cere ofertă și sfatul unui consultant."
+      },
+      "en": {
+        "title": "Seed treatments for cereals and maize",
+        "description": "Seed treatments at Agrinvest for cereals: active substance, formulation, ANF registration. Ask for a quote and a consultant’s advice."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "seminte",
+    "intro": {
+      "ro": "Sămânță certificată de grâu, orz, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.",
+      "en": "Certified wheat, barley, rapeseed and chickpea seed, with the variety, seed class and pack of each product."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi sămânța\n- **Soiul**: alege după zonă, epoca de semănat, rezistența la iernare, la secetă și la boli, nu după preț.\n- **Clasa biologică**: C1 este sămânță certificată din prima generație; „Bază” este sămânța din care se înmulțește cea certificată.\n- **Norma de semănat**: se calculează în boabe germinabile pe metru pătrat, după masa a 1000 de boabe și germinație.\n- **Eticheta lotului**: cere germinația, puritatea și masa a 1000 de boabe.\n- **Tratamentul**: verifică dacă sămânța este tratată și cu ce.\n\nVezi tot ce avem pentru [grâu](/magazin/cultura/grau) și pentru [orz](/magazin/cultura/orz).",
+      "en": "### How to choose seed\n- **The variety**: choose by area, sowing date, winter hardiness, drought and disease resistance, not by price.\n- **Seed class**: C1 is certified seed of the first generation; “Basic” is the seed from which certified seed is multiplied.\n- **Sowing rate**: calculated in germinable seeds per square metre, from thousand-grain weight and germination.\n- **Lot label**: ask for germination, purity and thousand-grain weight.\n- **Treatment**: check whether the seed is treated and with what.\n\nSee everything we have for [wheat](/en/shop/crop/wheat) and [barley](/en/shop/crop/barley)."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Ce înseamnă C1 la sămânță?",
+          "answer": "C1 este sămânță certificată din prima generație, obținută din sămânță de bază."
+        },
+        {
+          "question": "Cum calculez norma de semănat?",
+          "answer": "În boabe germinabile pe metru pătrat, apoi se transformă în kg/ha după masa a 1000 de boabe și germinație. Un consultant Agrinvest te ajută."
+        }
+      ],
+      "en": [
+        {
+          "question": "What does C1 mean for seed?",
+          "answer": "C1 is certified seed of the first generation, grown from basic seed."
+        },
+        {
+          "question": "How do I work out the sowing rate?",
+          "answer": "In germinable seeds per square metre, then converted to kg/ha from thousand-grain weight and germination. An Agrinvest consultant can help."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Sămânță certificată: grâu, orz, rapiță, năut",
+        "description": "Sămânță certificată la Agrinvest: grâu, orz, rapiță și năut. Vezi soiul, clasa biologică și ambalajul și cere sfatul unui consultant."
+      },
+      "en": {
+        "title": "Certified seed: wheat, barley, rapeseed, chickpea",
+        "description": "Certified seed at Agrinvest: wheat, barley, rapeseed and chickpea. See the variety, seed class and pack, and ask a consultant for advice."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "ingrasaminte",
+    "intro": {
+      "ro": "Îngrășăminte cu azot și fosfor, uree, azotat de amoniu, DAP, rocă fosfatică și fertilizanți microbieni, cu compoziția și ambalajul fiecărui produs.",
+      "en": "Nitrogen and phosphorus fertilisers, urea, ammonium nitrate, DAP, rock phosphate and microbial fertilisers, with the composition and pack of each product."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un îngrășământ\n- **Începe cu analiza solului**: ea arată ce lipsește și cât.\n- **Forma azotului**: uree (46% N), azotat de amoniu (33,5% N, nitrat și amoniu), DAP (18% N, 46% P2O5): fiecare se comportă diferit în sol.\n- **Compară pe element, nu pe sac**: împarte prețul la kilogramele de substanță activă (N, P2O5).\n- **Nu amesteca** uree cu azotat de amoniu: amestecul devine higroscopic.\n- **Depozitare**: spațiu acoperit, ferit de umezeală.",
+      "en": "### How to choose a fertiliser\n- **Start with a soil analysis**: it shows what is missing and how much.\n- **Form of nitrogen**: urea (46% N), ammonium nitrate (33.5% N, nitrate and ammonium), DAP (18% N, 46% P2O5): each behaves differently in the soil.\n- **Compare per nutrient, not per bag**: divide the price by the kilograms of nutrient (N, P2O5).\n- **Do not mix** urea with ammonium nitrate: the mix becomes hygroscopic.\n- **Storage**: under cover, away from damp."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Ce este mai ieftin: ureea sau azotatul de amoniu?",
+          "answer": "Compară prețul pe kilogram de azot: ureea are 46% N, azotatul de amoniu 33,5% N. Prețurile din magazin sunt de confirmat."
+        },
+        {
+          "question": "Cum calculez doza de îngrășământ?",
+          "answer": "Din cultură, recolta țintă și analiza solului. Un consultant Agrinvest te ajută."
+        }
+      ],
+      "en": [
+        {
+          "question": "Which is cheaper, urea or ammonium nitrate?",
+          "answer": "Compare the price per kilogram of nitrogen: urea has 46% N, ammonium nitrate 33.5% N. Prices in the shop are to be confirmed."
+        },
+        {
+          "question": "How do I work out the fertiliser rate?",
+          "answer": "From the crop, the target yield and the soil analysis. An Agrinvest consultant can help."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Îngrășăminte: uree, azotat, DAP, rocă fosfatică",
+        "description": "Îngrășăminte la Agrinvest: uree 46% N, azotat de amoniu, DAP 18-46-0, rocă fosfatică și fertilizanți microbieni, cu compoziție și prețuri."
+      },
+      "en": {
+        "title": "Fertilisers: urea, nitrate, DAP, rock phosphate",
+        "description": "Fertilisers at Agrinvest: urea 46% N, ammonium nitrate, DAP 18-46-0, rock phosphate and microbial fertilisers, with composition and prices."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "fertilizanti-foliare",
+    "intro": {
+      "ro": "Îngrășăminte foliare lichide cu microelemente, aminoacizi, azot, fosfor și sulf, cu compoziția, dozele din fișă și ambalajul fiecărui produs.",
+      "en": "Liquid foliar fertilisers with micronutrients, amino acids, nitrogen, phosphorus and sulphur, with the composition, the rates from the sheet and the pack of each product."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un îngrășământ foliar\n- **Carența**: bor, zinc, mangan sau magneziu lipsesc des; confirmă cu analiza foliară sau a solului.\n- **Aplică preventiv**: tratamentul corectează mai greu carența deja vizibilă.\n- **Compară pe element**: uită-te la procentul de nutrient (g/g și g/v), nu doar la preț.\n- **Compatibilitate**: nu amesteca cu uleiuri, cupruri sau produse alcaline, fără test.\n- **Condiții**: nu trata în orele de căldură și respectă volumul de apă din fișă.\n\nPentru fertilizarea de bază vezi [ureea](/magazin/ingrasaminte/uree) și [DAP 18-46-0](/magazin/ingrasaminte/dap-18-46-0-fosfat-diamoniu).",
+      "en": "### How to choose a foliar fertiliser\n- **The deficiency**: boron, zinc, manganese or magnesium are often short; confirm with a leaf or soil analysis.\n- **Apply preventively**: a treatment corrects a deficiency already visible less easily.\n- **Compare per nutrient**: look at the nutrient percentage (w/w and w/v), not just the price.\n- **Compatibility**: do not mix with oils, coppers or alkaline products without a test.\n- **Conditions**: do not treat in the heat of the day and follow the water volume on the sheet.\n\nFor base fertilisation see [urea](/en/shop/fertilisers/uree) and [DAP 18-46-0](/en/shop/fertilisers/dap-18-46-0-fosfat-diamoniu)."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Când se aplică un îngrășământ foliar?",
+          "answer": "Preventiv sau la primele semne de carență, în vegetația activă; momentul depinde de cultură."
+        },
+        {
+          "question": "Se poate amesteca cu produse de protecția plantelor?",
+          "answer": "Uneori, dar fă mai întâi un test și citește compatibilitatea de pe fișă."
+        }
+      ],
+      "en": [
+        {
+          "question": "When is a foliar fertiliser applied?",
+          "answer": "Preventively or at the first signs of deficiency, during active growth; the timing depends on the crop."
+        },
+        {
+          "question": "Can it be mixed with plant protection products?",
+          "answer": "Sometimes, but test first and read the compatibility on the sheet."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Îngrășăminte foliare lichide cu microelemente",
+        "description": "Îngrășăminte foliare la Agrinvest: bor, zinc, aminoacizi, azot, sulf și microelemente, cu compoziție, doze din fișă și ambalaje de 1 l și 20 l."
+      },
+      "en": {
+        "title": "Liquid foliar fertilisers with micronutrients",
+        "description": "Foliar fertilisers at Agrinvest: boron, zinc, amino acids, nitrogen, sulphur and micronutrients, with composition, rates from the sheet, 1 l and 20 l packs."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "adjuvanti",
+    "intro": {
+      "ro": "Adjuvanți pentru tratamentele fitosanitare: antiderivă, ulei vegetal metilat și alți aditivi, cu compoziția și ambalajul fiecărui produs.",
+      "en": "Adjuvants for crop protection sprays: anti-drift, methylated vegetable oil and other additives, with the composition and pack of each product."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un adjuvant\n- **Citește etichetele ambelor produse**: unele erbicide cer un adjuvant anume și altele îl interzic.\n- **Rolul**: un adjuvant poate îmbunătăți acoperirea și absorbția, poate reduce deriva sau evaporarea; nu înlocuiește doza produsului.\n- **Doza** se dă în % din soluție sau în l/ha și se stabilește după eticheta produsului cu care îl amesteci.\n- **Test**: fă un test de amestec într-o cantitate mică înainte de rezervor.\n- **Omologare**: verifică dacă adjuvantul are nevoie de autorizare pentru uzul prevăzut.",
+      "en": "### How to choose an adjuvant\n- **Read the labels of both products**: some herbicides call for a specific adjuvant and others forbid one.\n- **Role**: an adjuvant can improve coverage and uptake, or reduce drift or evaporation; it does not replace the product’s rate.\n- **The rate** is given in % of the solution or in l/ha and follows the label of the product you mix it with.\n- **Test**: do a small mix test before the tank.\n- **Authorisation**: check whether the adjuvant needs an authorisation for its intended use."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Orice erbicid are nevoie de adjuvant?",
+          "answer": "Nu. Eticheta fiecărui erbicid spune dacă cere, permite sau interzice un adjuvant."
+        },
+        {
+          "question": "Cât adjuvant se folosește?",
+          "answer": "Depinde de produsul cu care îl amesteci; doza este pe eticheta acelui produs."
+        }
+      ],
+      "en": [
+        {
+          "question": "Does every herbicide need an adjuvant?",
+          "answer": "No. The label of each herbicide says whether it requires, allows or forbids an adjuvant."
+        },
+        {
+          "question": "How much adjuvant is used?",
+          "answer": "It depends on the product you mix it with; the rate is on that product’s label."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Adjuvanți pentru tratamente fitosanitare",
+        "description": "Adjuvanți la Agrinvest: antiderivă și ulei vegetal metilat pentru erbicide, fungicide și insecticide, cu compoziție și ambalaj. Cere ofertă."
+      },
+      "en": {
+        "title": "Adjuvants for crop protection sprays",
+        "description": "Adjuvants at Agrinvest: anti-drift and methylated vegetable oil for herbicides, fungicides and insecticides, with composition and pack. Ask for a quote."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "slug": "regulatori-de-crestere",
+    "intro": {
+      "ro": "Regulatori de creștere pentru cereale păioase, care scurtează paiul și reduc riscul de cădere.",
+      "en": "Growth regulators for straw cereals, which shorten the straw and reduce the risk of lodging."
+    },
+    "buyingAdvice": {
+      "ro": "### Cum alegi un regulator de creștere\n- **Riscul de cădere**: soiurile înalte, azotul mult și densitatea mare cresc riscul.\n- **Momentul**: se aplică într-un stadiu precis al culturii (de la începutul înfrățirii până la frunza stindard la grâu); eticheta îl spune.\n- **Concentrația**: compară produsele după g/l de substanță activă, nu după ambalaj.\n- **Vigoarea plantei**: doza se adaptează vigorii culturii.",
+      "en": "### How to choose a growth regulator\n- **Lodging risk**: tall varieties, a lot of nitrogen and high density raise the risk.\n- **Timing**: applied at a precise crop stage (from the start of tillering to the flag leaf in wheat); the label says it.\n- **Strength**: compare products by g/l of active substance, not by pack.\n- **Plant vigour**: the rate is adapted to the vigour of the crop."
+    },
+    "faq": {
+      "ro": [
+        {
+          "question": "Când se aplică regulatorul de creștere?",
+          "answer": "La cereale, într-un stadiu precis (la grâu, în general de la începutul înfrățirii până la frunza stindard), după eticheta produsului."
+        },
+        {
+          "question": "Ce face un regulator de creștere?",
+          "answer": "Scurtează și îngroașă paiul, ca planta să reziste mai bine la cădere."
+        }
+      ],
+      "en": [
+        {
+          "question": "When is the growth regulator applied?",
+          "answer": "On cereals, at a precise stage (in wheat, generally from the start of tillering to the flag leaf), per the product label."
+        },
+        {
+          "question": "What does a growth regulator do?",
+          "answer": "It shortens and thickens the straw so the plant resists lodging better."
+        }
+      ]
+    },
+    "seo": {
+      "ro": {
+        "title": "Regulatori de creștere pentru cereale",
+        "description": "Regulatori de creștere la Agrinvest pentru cereale păioase: scurtează paiul și reduc riscul de cădere. Vezi concentrația, omologarea și cere ofertă."
+      },
+      "en": {
+        "title": "Growth regulators for straw cereals",
+        "description": "Growth regulators at Agrinvest for straw cereals: they shorten the straw and reduce lodging risk. See the strength, registration and ask for a quote."
+      }
+    },
+    "indexable": true
+  }
+]

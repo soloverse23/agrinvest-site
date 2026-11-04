@@ -1,0 +1,100 @@
+{
+  "slug": "decis-25-wg",
+  "primaryKeyword": {
+    "ro": "decis 25 wg",
+    "en": "decis 25 wg"
+  },
+  "category": "insecticide",
+  "secondaryCategories": [],
+  "crops": [
+    "potato",
+    "wheat",
+    "fruit-trees",
+    "vegetables",
+    "grapevine"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Decis 25 WG este un insecticid cu deltametrin 250 g/kg, formulare WG; numărul omologării nu este încă verificat. Dozele pe culturi vor fi publicate după verificarea cu eticheta producătorului.",
+      "description": "### Ce este Decis 25 WG\n\nDecis 25 WG este un insecticid cu deltametrin 250 g/kg, formulare WG.\n\n### Cum acționează\n\nDeltametrin este un piretroid: modulează canalele de sodiu din sistemul nervos al insectelor. Se încadrează la IRAC 3A. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Culturi și doze\n\nNu publicăm încă dozele, timpii de pauză și culturile omologate: le adăugăm după ce le verificăm cu eticheta producătorului sau cu registrul ANF. În magazin produsul apare asociat cu: cartof, grâu, pomi fructiferi, legume și viță de vie. Până atunci, întreabă un consultant Agrinvest sau citește eticheta de pe ambalaj înainte de tratament.\n\n### Omologare\n\nNu am găsit încă numărul omologării în listele ANF. Îl adăugăm după verificarea cu eticheta; până atunci, cere-i consultantului eticheta produsului.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Decis 25 WG?",
+          "answer": "Deltametrin 250 g/kg (piretroid din grupa IRAC 3A)."
+        },
+        {
+          "question": "Unde găsesc doza de Decis 25 WG pe cultura mea?",
+          "answer": "Pe eticheta ambalajului. Dozele diferă pe cultură și dăunător, iar tabelul verificat al producătorului nu este încă publicat pe această pagină. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Decis 25 WG: insecticid cu deltametrin, omologare și doze",
+        "description": "Decis 25 WG, insecticid cu deltametrin 250 g/kg: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Decis 25 WG is a insecticide with deltametrin 250 g/kg, WG formulation; its registration number is not yet checked. Rates by crop will be published once checked against the manufacturer’s label.",
+      "description": "### What Decis 25 WG is\n\nDecis 25 WG is a insecticide with deltametrin 250 g/kg, WG formulation.\n\n### How it works\n\nDeltametrin is a pyrethroid: it modulates sodium channels in the insect nervous system. It belongs to IRAC 3A. Alternate products from different groups to slow the build-up of resistance.\n\n### Crops and rates\n\nWe do not publish the rates, waiting periods and authorised crops yet: we add them once checked against the manufacturer’s label or the ANF register. In the shop the product is listed for: potato, wheat, orchard fruit, vegetables and grapevine. Until then, ask an Agrinvest consultant or read the label on the pack before treating.\n\n### Registration\n\nWe have not yet found the registration number in the ANF lists. We add it once checked against the label; until then, ask the consultant for the product label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Decis 25 WG contain?",
+          "answer": "Deltametrin 250 g/kg (pyrethroid, IRAC 3A)."
+        },
+        {
+          "question": "Where do I find the Decis 25 WG rate for my crop?",
+          "answer": "On the label of the pack. Rates differ by crop and pest, and the manufacturer’s checked table is not yet published on this page. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Decis 25 WG: insecticide, registration and rates",
+        "description": "Decis 25 WG, insecticide with deltametrin 250 g/kg: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "deltametrin",
+        "concentration": 250,
+        "unit": "g/kg"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "WG",
+    "modeOfAction": {
+      "ro": "Deltametrin este un piretroid: modulează canalele de sodiu din sistemul nervos al insectelor.",
+      "en": "Deltametrin is a pyrethroid: it modulates sodium channels in the insect nervous system."
+    },
+    "resistanceGroup": "IRAC 3A"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://irac-online.org/documents/moa-brochure",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "IRAC mode of action brochure."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/pesticide/decis-25-wg-0-6-kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Registration number: the ANF lists DECIS EXPERT 100 EC (123PC/22.07.2015) and other Decis products, but no “Decis 25 WG”.",
+    "Dose table, waiting periods, maximum treatments and water volume: no label or register table was read for this product. The old shop’s dose table is not used (it is kept in docs/audit/products-raw.json).",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "The brand comes from the product line (Decis is a Bayer product).",
+    "Crops attached to this product come from the old shop’s dose table; they are not checked against the register."
+  ],
+  "brand": "bayer"
+}

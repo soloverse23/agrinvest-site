@@ -1,0 +1,299 @@
+{
+  "slug": "orius-25-ew",
+  "primaryKeyword": {
+    "ro": "orius 25 ew",
+    "en": "orius 25 ew"
+  },
+  "category": "fungicide",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley",
+    "rapeseed",
+    "fruit-trees",
+    "grapevine",
+    "vegetables"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Orius 25 EW este un fungicid cu tebuconazol 250 g/l, formulare EW; omologat în România (certificat nr. 1866/15.12.1998). Doza din registru la grâu, orz: 0,5 l/ha.",
+      "description": "### Ce este Orius 25 EW\n\nOrius 25 EW este un fungicid cu tebuconazol 250 g/l, formulare EW. Deținătorul înscris în registrul ANF: ADAMA (lista ANF din 15.11.2018). În registru apare și sub numele comercial Salvator 25 EW.\n\n### Cum acționează\n\nTebuconazol este un triazol: inhibă sinteza ergosterolului din membrana ciupercilor (DMI). Se încadrează la FRAC 3. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Doza din registru\n\nGrâu, orz: 0,5 l/ha. Rapiță: 1,0 l/ha. Rapiță, tratament de toamnă: 0,5 l/ha. Toamna. Măr: 0,05% (0,75 l/ha în 1.500 l apă). Prun, cireș: 0,075–0,1% (0,75–1,0 l/ha în 1.000 l apă). Viță de vie: 0,4 l/ha. Tomate: 0,05% (0,5 l/ha în 1.000 l apă). Castraveți: 0,05% (0,5 l/ha în 1.000 l apă). Citește eticheta ambalajului înainte de aplicare.\n\n### Omologare\n\nCertificatul de omologare nr. 1866/15.12.1998. Numărul a fost găsit în deciziile ANF (ultima mențiune: 17.03.2025); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Orius 25 EW?",
+          "answer": "Tebuconazol 250 g/l (triazol din grupa FRAC 3)."
+        },
+        {
+          "question": "Ce număr de omologare are Orius 25 EW?",
+          "answer": "Certificatul de omologare nr. 1866/15.12.1998, găsit în deciziile ANF (ultima mențiune: 17.03.2025)."
+        },
+        {
+          "question": "Ce doză de Orius 25 EW se folosește?",
+          "answer": "0,5 l/ha.  Verifică eticheta ambalajului."
+        }
+      ],
+      "seo": {
+        "title": "Orius 25 EW: fungicid cu tebuconazol, omologare și doze",
+        "description": "Orius 25 EW, fungicid cu tebuconazol 250 g/l: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Orius 25 EW is a fungicide with tebuconazol 250 g/l, EW formulation; authorised in Romania (certificate no. 1866/15.12.1998). Register rate on wheat, barley: 0.5 l/ha.",
+      "description": "### What Orius 25 EW is\n\nOrius 25 EW is a fungicide with tebuconazol 250 g/l, EW formulation. Holder named in the ANF register: ADAMA (lista ANF din 15.11.2018). The register also lists it under the trade name Salvator 25 EW.\n\n### How it works\n\nTebuconazol is a triazole: it inhibits the synthesis of ergosterol in fungal membranes (DMI). It belongs to FRAC 3. Alternate products from different groups to slow the build-up of resistance.\n\n### Register rate\n\nWheat, barley: 0.5 l/ha. Rapeseed: 1.0 l/ha. Rapeseed, autumn treatment: 0.5 l/ha. In autumn. Apple: 0.05% (0.75 l/ha in 1,500 l of water). Plum, cherry: 0.075–0.1% (0.75–1.0 l/ha in 1,000 l of water). Grapevine: 0.4 l/ha. Tomato: 0.05% (0.5 l/ha in 1,000 l of water). Cucumber: 0.05% (0.5 l/ha in 1,000 l of water). Read the label on the pack before application.\n\n### Registration\n\nAuthorisation certificate no. 1866/15.12.1998. The number was found in the ANF decisions (last mention: 17.03.2025); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Orius 25 EW contain?",
+          "answer": "Tebuconazol 250 g/l (triazole, FRAC 3)."
+        },
+        {
+          "question": "What is the registration number of Orius 25 EW?",
+          "answer": "Authorisation certificate no. 1866/15.12.1998, found in the ANF decisions (last mention: 17.03.2025)."
+        },
+        {
+          "question": "What rate of Orius 25 EW is used?",
+          "answer": "0.5 l/ha.  Check the label on the pack."
+        }
+      ],
+      "seo": {
+        "title": "Orius 25 EW: fungicide with tebuconazol, registration, rates",
+        "description": "Orius 25 EW, fungicide with tebuconazol 250 g/l: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "tebuconazol",
+        "concentration": 250,
+        "unit": "g/l"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "EW",
+    "registrationNumber": "1866/15.12.1998",
+    "modeOfAction": {
+      "ro": "Tebuconazol este un triazol: inhibă sinteza ergosterolului din membrana ciupercilor (DMI).",
+      "en": "Tebuconazol is a triazole: it inhibits the synthesis of ergosterol in fungal membranes (DMI)."
+    },
+    "resistanceGroup": "FRAC 3"
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Grâu, orz",
+        "en": "Wheat, barley"
+      },
+      "crops": [
+        "wheat",
+        "barley"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Complex de boli foliare: Erysiphe graminis, Puccinia recondita, Puccinia striiformis, Septoria tritici, Pyrenophora teres, Fusarium graminearum",
+        "en": "Complex of foliar diseases: Erysiphe graminis, Puccinia recondita, Puccinia striiformis, Septoria tritici, Pyrenophora teres, Fusarium graminearum"
+      },
+      "doseText": {
+        "ro": "0,5 l/ha",
+        "en": "0.5 l/ha"
+      },
+      "doseMin": 0.5,
+      "doseMax": 0.5,
+      "doseUnit": "l/ha"
+    },
+    {
+      "cropText": {
+        "ro": "Rapiță",
+        "en": "Rapeseed"
+      },
+      "crops": [
+        "rapeseed"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Sclerotinia sclerotiorum, Alternaria brassicae, Phoma lingam, Botrytis cinerea, Erysiphe communis",
+        "en": "Sclerotinia sclerotiorum, Alternaria brassicae, Phoma lingam, Botrytis cinerea, Erysiphe communis"
+      },
+      "doseText": {
+        "ro": "1,0 l/ha",
+        "en": "1.0 l/ha"
+      },
+      "doseMin": 1,
+      "doseMax": 1,
+      "doseUnit": "l/ha"
+    },
+    {
+      "cropText": {
+        "ro": "Rapiță, tratament de toamnă",
+        "en": "Rapeseed, autumn treatment"
+      },
+      "crops": [
+        "rapeseed"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Pentru creșterea rezistenței plantelor la iernare și combaterea Phoma lingam",
+        "en": "To raise the plants’ winter hardiness and control Phoma lingam"
+      },
+      "doseText": {
+        "ro": "0,5 l/ha",
+        "en": "0.5 l/ha"
+      },
+      "doseMin": 0.5,
+      "doseMax": 0.5,
+      "doseUnit": "l/ha",
+      "timing": {
+        "ro": "Toamna.",
+        "en": "In autumn."
+      }
+    },
+    {
+      "cropText": {
+        "ro": "Măr",
+        "en": "Apple"
+      },
+      "crops": [
+        "fruit-trees"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Podosphaera leucotricha, Venturia inaequalis",
+        "en": "Podosphaera leucotricha, Venturia inaequalis"
+      },
+      "doseText": {
+        "ro": "0,05% (0,75 l/ha în 1.500 l apă)",
+        "en": "0.05% (0.75 l/ha in 1,500 l of water)"
+      },
+      "doseMin": 0.05,
+      "doseMax": 0.05,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Prun, cireș",
+        "en": "Plum, cherry"
+      },
+      "crops": [
+        "fruit-trees"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Monilia spp.",
+        "en": "Monilia spp."
+      },
+      "doseText": {
+        "ro": "0,075–0,1% (0,75–1,0 l/ha în 1.000 l apă)",
+        "en": "0.075–0.1% (0.75–1.0 l/ha in 1,000 l of water)"
+      },
+      "doseMin": 0.075,
+      "doseMax": 0.1,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Viță de vie",
+        "en": "Grapevine"
+      },
+      "crops": [
+        "grapevine"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Uncinula necator",
+        "en": "Uncinula necator"
+      },
+      "doseText": {
+        "ro": "0,4 l/ha",
+        "en": "0.4 l/ha"
+      },
+      "doseMin": 0.4,
+      "doseMax": 0.4,
+      "doseUnit": "l/ha"
+    },
+    {
+      "cropText": {
+        "ro": "Tomate",
+        "en": "Tomato"
+      },
+      "crops": [
+        "vegetables"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Alternaria solani",
+        "en": "Alternaria solani"
+      },
+      "doseText": {
+        "ro": "0,05% (0,5 l/ha în 1.000 l apă)",
+        "en": "0.05% (0.5 l/ha in 1,000 l of water)"
+      },
+      "doseMin": 0.05,
+      "doseMax": 0.05,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Castraveți",
+        "en": "Cucumber"
+      },
+      "crops": [
+        "vegetables"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Sphaerotheca fuliginea",
+        "en": "Sphaerotheca fuliginea"
+      },
+      "doseText": {
+        "ro": "0,05% (0,5 l/ha în 1.000 l apă)",
+        "en": "0.05% (0.5 l/ha in 1,000 l of water)"
+      },
+      "doseMin": 0.05,
+      "doseMax": 0.05,
+      "doseUnit": "%"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-15-11-2018/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 15.11.2018, pp. 36–37: entry with holder and registration, checked on the page image."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-17-03-2025/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 17.03.2025: Orius 25 EW (certificate 1866/15.12.1998); last mention found."
+      },
+      {
+        "url": "https://www.frac.info/",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "FRAC code list."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/pesticide/orius-25-ew-5l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-15-11-2018/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 15.11.2018, pp. 36–37: dose rows, checked on the page image."
+      }
+    ]
+  },
+  "gaps": [
+    "Waiting period and toxicity classification: not in the ANF entry; a label is needed.",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [],
+  "brand": "adama"
+}

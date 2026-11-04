@@ -1,0 +1,82 @@
+{
+  "slug": "samanta-de-rapita-pioneer-pt303",
+  "primaryKeyword": {
+    "ro": "sămânță rapiță pt303",
+    "en": "pt303 rapeseed seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "rapeseed"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "PT303 este un hibrid semitimpuriu de rapiță Pioneer, cu toleranță ridicată la Sclerotinia și la virusul galben al ridichii (TuYV), conținut ridicat de ulei, rezistență foarte bună la iernare și la scuturare. Potrivit și pentru rotație scurtă.",
+      "description": "### Ce este PT303\nPT303 este un hibrid semitimpuriu de rapiță produs de Pioneer, cu productivitate mare și răspuns bun la tehnologie ridicată.\n\n### Caracteristici (după textul din pagina veche, care reia mesajul producătorului)\n- Toleranță la Sclerotinia, pe care producătorul o prezintă drept cea mai ridicată din Europa (afirmație a producătorului, neverificată de noi).\n- Toleranță ridicată la principalele boli și la virusul galben al ridichii (TuYV).\n- Rezistență foarte bună la iernare și la scuturare.\n- Ramificare foarte bună, masă mare de silicve fertile, talie masivă.\n- Conținut foarte ridicat de ulei.\n- Pornește în vegetație devreme primăvara (semitimpuriu).\n- Potrivit și pentru rotație scurtă.\n\n### Densitate și semănat\nNu publicăm încă densitatea și norma de semănat: pagina veche nu le indică. Cere un consultant Agrinvest sau fișa Pioneer.",
+      "faq": [
+        {
+          "question": "Ce soi de rapiță este PT303?",
+          "answer": "PT303 este un hibrid de rapiță semitimpuriu de la Pioneer, tolerant la Sclerotinia și la TuYV, cu conținut ridicat de ulei."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de rapiță PT303 None, certificată, 1 buc.",
+        "description": "Rapiță Pioneer PT303: hibrid semitimpuriu tolerant la Sclerotinia și la virusul galben al ridichii, conținut ridicat de ulei, rezistent la scuturare."
+      }
+    },
+    "en": {
+      "summary": "PT303 is a semi-early rapeseed hybrid from Pioneer, with high tolerance of Sclerotinia and turnip yellows virus (TuYV), high oil content, very good winter hardiness and shatter resistance. Also suited to short rotation.",
+      "description": "### What PT303 is\nPT303 is a semi-early rapeseed hybrid from Pioneer, with high productivity and a good response to high-input technology.\n\n### Characteristics (from the old page, which repeats the manufacturer’s message)\n- Tolerance of Sclerotinia, which the manufacturer presents as the highest in Europe (a manufacturer claim we have not verified).\n- High tolerance of the main diseases and of turnip yellows virus (TuYV).\n- Very good winter hardiness and shatter resistance.\n- Very good branching, a large mass of fertile pods, a massive stature.\n- Very high oil content.\n- Starts growing early in spring (semi-early).\n- Also suited to short rotation.\n\n### Density and sowing\nWe do not publish the density and sowing rate yet: the old page does not give them. Ask an Agrinvest consultant or the Pioneer sheet.",
+      "faq": [
+        {
+          "question": "What kind of rapeseed is PT303?",
+          "answer": "PT303 is a semi-early rapeseed hybrid from Pioneer, tolerant of Sclerotinia and TuYV, with high oil content."
+        }
+      ],
+      "seo": {
+        "title": "PT303 rapeseed seed None, certified, 1 pc pack",
+        "description": "Pioneer PT303 rapeseed: a semi-early hybrid tolerant of Sclerotinia and turnip yellows virus, high oil content, shatter resistant."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Rapiță",
+      "en": "Rapeseed"
+    },
+    "variety": "PT303",
+    "maturity": {
+      "ro": "Semitimpuriu",
+      "en": "Semi-early"
+    },
+    "yieldPotential": {
+      "ro": "Foarte ridicat (după producător)",
+      "en": "Very high (manufacturer’s claim)"
+    },
+    "resistances": {
+      "ro": "Toleranță la Sclerotinia, la boli și la TuYV; rezistență bună la iernare și scuturare",
+      "en": "Tolerance of Sclerotinia, diseases and TuYV; good winter hardiness and shatter resistance"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/seminte-rapita-pioneer-pt303/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: the hybrid’s description, as the manufacturer’s message is repeated there; not checked against the Pioneer sheet."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label.",
+    "Pack: the price (1,580 lei) is for one piece; the content (seeds per unit) is not stated.",
+    "Sowing density and rate, seed treatment: not stated."
+  ],
+  "conflicts": [],
+  "brand": "pioneer"
+}

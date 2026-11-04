@@ -1,0 +1,131 @@
+{
+  "slug": "zafiro",
+  "primaryKeyword": {
+    "ro": "zafiro",
+    "en": "zafiro"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley",
+    "maize",
+    "sunflower",
+    "rapeseed"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Zafiro este un îngrășământ foliar lichid concentrat în bor (boroetanolamină, 9% în greutate), cu mangan, zinc, molibden și azot (4,5%). Pentru cereale, doza din fișă este de 2–3 l/ha. Se folosește la porumb, floarea-soarelui, rapiță și cereale. Ambalaj de 20 l.",
+      "description": "### Ce este Zafiro\nZafiro este un îngrășământ foliar lichid, concentrat în bor sub formă de boroetanolamină, cu mangan, molibden, zinc și azot. Echilibrul dintre bor și molibden, completat cu zinc (un inductor al auxinei), sprijină înflorirea, polenizarea și legarea fructelor. Formula este făcută să acopere bine frunza și să adere la ea.\n\n### Compoziție\n- Azot (N): 4,5% (g/g), 6,1% (g/v)\n- Bor (B, boroetanolamină): 9,0% (g/g), 12,2% (g/v)\n- Mangan (Mn): 0,09% (g/g), 0,12% (g/v)\n- Zinc (Zn): 0,09% (g/g), 0,12% (g/v)\n- Molibden (Mo): 0,45% (g/g), 0,60% (g/v)\n- Aspect: lichid solubil (LS), maro, pH 8,3 ± 0,5, densitate 1,36 ± 0,03 kg/l\n\n### Doze și moment\nFișa produsului indică 2–3 l/ha la cereale. Se aplică când cultura are nevoie de dezvoltarea rădăcinilor, în vegetația activă, până la începutul înfloririi, în momentele de maximă nevoie.\n\n### Depozitare\nÎn ambalajul original, la 5–35 °C, într-un loc răcoros și uscat, ferit de lumina directă.",
+      "faq": [
+        {
+          "question": "Ce doză de Zafiro se folosește la cereale?",
+          "answer": "2–3 l/ha, conform fișei produsului. Pentru alte culturi, întreabă un consultant Agrinvest."
+        },
+        {
+          "question": "Ce conține Zafiro?",
+          "answer": "Bor (9,0% g/g), azot (4,5%), mangan, zinc și molibden; detaliile sunt în lista de compoziție de mai sus."
+        }
+      ],
+      "seo": {
+        "title": "Zafiro: îngrășământ foliar cu bor, mangan, zinc, molibden",
+        "description": "Zafiro, îngrășământ foliar lichid cu bor 9%, azot, mangan, zinc și molibden: compoziție, doză la cereale și depozitare."
+      }
+    },
+    "en": {
+      "summary": "Zafiro is a liquid foliar fertiliser rich in boron (boroethanolamine, 9% by weight), with manganese, zinc, molybdenum and nitrogen (4.5%). For cereals the rate on the sheet is 2–3 l/ha. Used on maize, sunflower, rapeseed and cereals. 20 l pack.",
+      "description": "### What Zafiro is\nZafiro is a liquid foliar fertiliser, rich in boron as boroethanolamine, with manganese, molybdenum, zinc and nitrogen. The balance between boron and molybdenum, completed with zinc (an auxin inducer), supports flowering, pollination and fruit set. The formula is made to cover the leaf well and stick to it.\n\n### Composition\n- Nitrogen (N): 4.5% (w/w), 6.1% (w/v)\n- Boron (B, boroethanolamine): 9.0% (w/w), 12.2% (w/v)\n- Manganese (Mn): 0.09% (w/w), 0.12% (w/v)\n- Zinc (Zn): 0.09% (w/w), 0.12% (w/v)\n- Molybdenum (Mo): 0.45% (w/w), 0.60% (w/v)\n- Appearance: soluble liquid (LS), brown, pH 8.3 ± 0.5, density 1.36 ± 0.03 kg/l\n\n### Rate and timing\nThe product sheet gives 2–3 l/ha on cereals. Apply it when the crop needs root development, during active growth and up to the start of flowering, at the moments of greatest need.\n\n### Storage\nIn the original pack, at 5–35 °C, in a cool dry place away from direct light.",
+      "faq": [
+        {
+          "question": "What rate of Zafiro is used on cereals?",
+          "answer": "2–3 l/ha, according to the product sheet. For other crops, ask an Agrinvest consultant."
+        },
+        {
+          "question": "What does Zafiro contain?",
+          "answer": "Boron (9.0% w/w), nitrogen (4.5%), manganese, zinc and molybdenum; details are in the composition list above."
+        }
+      ],
+      "seo": {
+        "title": "Zafiro: foliar fertiliser with boron, Mn, Zn, Mo",
+        "description": "Zafiro, a liquid foliar fertiliser with 9% boron, nitrogen, manganese, zinc and molybdenum: composition, cereal rate and storage."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 4.5
+      },
+      {
+        "nutrient": "B",
+        "percent": 9.0
+      },
+      {
+        "nutrient": "Mn",
+        "percent": 0.09
+      },
+      {
+        "nutrient": "Zn",
+        "percent": 0.09
+      },
+      {
+        "nutrient": "Mo",
+        "percent": 0.45
+      }
+    ],
+    "form": {
+      "ro": "Lichid solubil (LS)",
+      "en": "Soluble liquid (LS)"
+    },
+    "storage": {
+      "ro": "În ambalajul original, la 5–35 °C, loc răcoros, uscat, ferit de lumina directă.",
+      "en": "In the original pack, at 5–35 °C, in a cool dry place away from direct light."
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Cereale",
+        "en": "Cereals"
+      },
+      "crops": [
+        "wheat",
+        "barley"
+      ],
+      "doseText": {
+        "ro": "2–3 l/ha",
+        "en": "2–3 l/ha"
+      },
+      "doseMin": 2,
+      "doseMax": 3,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/zafiro-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/zafiro-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Rates for maize, sunflower and rapeseed: the old page names them as uses but gives a rate for cereals only.",
+    "Price: 1,734 lei for the 20 l pack; confirm."
+  ],
+  "conflicts": []
+}

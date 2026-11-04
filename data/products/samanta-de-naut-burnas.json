@@ -1,0 +1,84 @@
+{
+  "slug": "samanta-de-naut-burnas",
+  "primaryKeyword": {
+    "ro": "sămânță năut burnas",
+    "en": "burnas chickpea seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "chickpea"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Sămânță de năut Burnas, soi autohton omologat în 2006 de SCDA Teleorman, ambalaj de 600 kg. Foarte rezistent la secetă, cu rezistență bună la antracnoză, perioadă de vegetație de 78–81 de zile și producție de 2.100–2.460 kg/ha.",
+      "description": "### Ce primești\nSămânță de năut din soiul Burnas (Cicer arietinum L.), în ambalaj de 600 kg. Soiul autohton a fost omologat în 2006 de SCDA Teleorman.\n\n### Caracteristici (după pagina veche a produsului)\n- Plantă de tip tufă, erectă, cu creștere nedeterminată; 2–3 ramuri principale; talie mijlocie-mare, 50–60 cm.\n- Prima păstaie bazală se prinde la 25–32 cm înălțime.\n- Păstăi: 62–76 pe plantă; semințe mijlocii, rotunde sau unghiulare, tegument galben-bej; MMB 280–310 g.\n- Proteină brută în semințe: 24,8–27,1%.\n- Perioada de vegetație: 78–81 zile.\n\n### Rezistențe și zone\nSoi foarte rezistent la secetă, cu rezistență bună la antracnoză. Recomandat pentru zonele cu ariditate din România. Capacitate de producție: 2.100–2.460 kg/ha.",
+      "faq": [
+        {
+          "question": "Ce soi de năut este Burnas?",
+          "answer": "Burnas este un soi autohton de năut, omologat în 2006, foarte rezistent la secetă și cu rezistență bună la antracnoză."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de năut Burnas None, certificată, 600 kg",
+        "description": "Sămânță de năut Burnas, soi autohton foarte rezistent la secetă, 2.100–2.460 kg/ha, vegetație 78–81 zile, ambalaj de 600 kg."
+      }
+    },
+    "en": {
+      "summary": "Burnas chickpea seed, a Romanian variety registered in 2006 by SCDA Teleorman, 600 kg pack. Very drought resistant, with good resistance to anthracnose, a vegetation period of 78–81 days and a yield of 2,100–2,460 kg/ha.",
+      "description": "### What you get\nChickpea seed of the variety Burnas (Cicer arietinum L.), in a 600 kg pack. The Romanian variety was registered in 2006 by SCDA Teleorman.\n\n### Characteristics (from the old product page)\n- Bush-type, erect plant with indeterminate growth; 2–3 main branches; medium-to-tall, 50–60 cm.\n- The first basal pod sets at 25–32 cm height.\n- Pods: 62–76 per plant; medium, round or angular seeds, yellow-beige coat; thousand-grain weight 280–310 g.\n- Crude protein in the seed: 24.8–27.1%.\n- Vegetation period: 78–81 days.\n\n### Resistances and areas\nA very drought-resistant variety with good resistance to anthracnose. Recommended for the arid areas of Romania. Yield capacity: 2,100–2,460 kg/ha.",
+      "faq": [
+        {
+          "question": "What kind of chickpea is Burnas?",
+          "answer": "Burnas is a Romanian chickpea variety registered in 2006, very drought resistant with good resistance to anthracnose."
+        }
+      ],
+      "seo": {
+        "title": "Burnas chickpea seed None, certified, 600 kg pack",
+        "description": "Burnas chickpea seed, a Romanian variety, very drought resistant, 2,100–2,460 kg/ha, 78–81 day vegetation, 600 kg pack."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Năut",
+      "en": "Chickpea"
+    },
+    "variety": "Burnas",
+    "maturity": {
+      "ro": "Perioada de vegetație 78–81 zile",
+      "en": "Vegetation period 78–81 days"
+    },
+    "yieldPotential": {
+      "ro": "2.100–2.460 kg/ha",
+      "en": "2,100–2,460 kg/ha"
+    },
+    "resistances": {
+      "ro": "Foarte rezistent la secetă; rezistență bună la antracnoză",
+      "en": "Very drought resistant; good resistance to anthracnose"
+    },
+    "recommendedZones": {
+      "ro": "Zone cu ariditate din România",
+      "en": "Arid areas of Romania"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/seminte-naut-burnas-600kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: variety description as stated there (it matches an official variety description in style); not checked against the official catalogue."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label.",
+    "Seed class: not stated (the old page gives none)."
+  ],
+  "conflicts": []
+}

@@ -1,0 +1,105 @@
+{
+  "slug": "napekhem-20-20-0-plus",
+  "primaryKeyword": {
+    "ro": "napekhem 20-20-0 plus",
+    "en": "napekhem 20-20-0 plus"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "NaPeKhem 20-20-0 Plus este un îngrășământ lichid NP echilibrat (20-20-0), cu aminoacizi esențiali, pentru aplicare foliară sau în fertirigare. Doza din fișă: 2–4 l/ha foliar, pe tot ciclul culturii. Ambalaj de 20 l.",
+      "description": "### Ce este\nNaPeKhem 20-20-0 Plus este un îngrășământ lichid cu azot și fosfor în raport 1-1-0, îmbogățit cu aminoacizi esențiali, care îi cresc efectul de stimulator biologic și de corector al metabolismului. Fosforul este într-o combinație de ortofosfat și polifosfat, pe care planta o folosește eficient. Conținutul ridicat de fosfor ajută rădăcinile la început.\n\n### Cum se folosește\n- Culturi: toate.\n- Moment: tratamente regulate de la căderea petalelor până la sfârșitul îngrășării; în tot ciclul, mai ales în fazele de creștere activă.\n- Doză foliară: 2–4 l/ha. Pentru utilizări specifice (portocale, struguri), fișa trimite la departamentul tehnic.\n\n### De evitat\nNu amesteca cu uleiuri, cupruri, sulfuri sau produse cu reacție alcalină. Evită tratamentul la temperaturi ridicate și agită înainte de folosire.",
+      "faq": [
+        {
+          "question": "Ce doză de NaPeKhem 20-20-0 Plus se folosește?",
+          "answer": "Foliar, 2–4 l/ha, conform fișei produsului."
+        },
+        {
+          "question": "Cu ce nu se amestecă NaPeKhem 20-20-0 Plus?",
+          "answer": "Cu uleiuri, cupruri, sulfuri sau produse cu reacție alcalină."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem 20-20-0 Plus: îngrășământ lichid NP cu aminoacizi",
+        "description": "NaPeKhem 20-20-0 Plus, îngrășământ lichid NP 20-20-0 cu aminoacizi, foliar sau fertirigare: doză de 2–4 l/ha și incompatibilități."
+      }
+    },
+    "en": {
+      "summary": "NaPeKhem 20-20-0 Plus is a balanced liquid NP fertiliser (20-20-0), enriched with essential amino acids, for foliar application or fertigation. Rate on the sheet: 2–4 l/ha foliar, throughout the crop cycle. 20 l pack.",
+      "description": "### What it is\nNaPeKhem 20-20-0 Plus is a liquid fertiliser with nitrogen and phosphorus in a 1-1-0 ratio, enriched with essential amino acids that increase its effect as a biological stimulant and metabolism corrector. The phosphorus is a combination of orthophosphate and polyphosphate, which the plant uses efficiently. The high phosphorus content helps the roots early on.\n\n### How to use it\n- Crops: all.\n- Timing: regular treatments from petal fall to the end of grain filling; throughout the cycle, mostly in phases of active growth.\n- Foliar rate: 2–4 l/ha. For specific uses (oranges, grapes), the sheet refers to the technical department.\n\n### What to avoid\nDo not mix with oils, coppers, sulphurs or products with an alkaline reaction. Avoid treating at high temperatures and shake before use.",
+      "faq": [
+        {
+          "question": "What rate of NaPeKhem 20-20-0 Plus is used?",
+          "answer": "Foliar, 2–4 l/ha, according to the product sheet."
+        },
+        {
+          "question": "What should NaPeKhem 20-20-0 Plus not be mixed with?",
+          "answer": "Oils, coppers, sulphurs or products with an alkaline reaction."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem 20-20-0 Plus: liquid NP fertiliser with amino acids",
+        "description": "NaPeKhem 20-20-0 Plus, liquid NP 20-20-0 fertiliser with amino acids, foliar or fertigation: 2–4 l/ha rate and incompatibilities."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 20
+      },
+      {
+        "nutrient": "P2O5",
+        "percent": 20
+      }
+    ],
+    "form": {
+      "ro": "Lichid",
+      "en": "Liquid"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "2–4 l/ha",
+        "en": "2–4 l/ha"
+      },
+      "doseMin": 2,
+      "doseMax": 4,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-20-20-0-plus-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-20-20-0-plus-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Composition: the old page has an empty table; 20-20-0 comes from the name. Fertigation rates are not stated."
+  ],
+  "conflicts": []
+}

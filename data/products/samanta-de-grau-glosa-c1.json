@@ -1,0 +1,92 @@
+{
+  "slug": "samanta-de-grau-glosa-c1",
+  "primaryKeyword": {
+    "ro": "sămânță grâu glosa",
+    "en": "glosa wheat seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Sămânță certificată de grâu de toamnă Glosa, clasa C1, ambalaj de 800 kg. Soi românesc, aristat, timpuriu, cu gluten tare și potențial bun de producție chiar în secetă. Normă de semănat: 200–220 kg/ha.",
+      "description": "### Ce primești\nSămânță de grâu de toamnă din soiul Glosa, clasa biologică C1, în ambalaj de 800 kg.\n\n### Caracteristici (după pagina veche a produsului)\n- Soi românesc de toamnă, aristat, timpuriu (precoce).\n- Gluten tare; potențial bun de producție și în condiții de secetă.\n- Înălțime medie de 85–95 cm; boabe mijlocii, alungite, roșii; masa a 1000 de boabe 42–44 g.\n\n### Rezistențe\n- Rezistent la făinare; mijlociu de sensibil la rugina brună.\n- Mijlociu de rezistent la rugina galbenă, septorioză și fuzarioză.\n- Rezistență bună la cădere, la iernare, la secetă și arșiță și la încolțirea în spic.\n\n### Semănat\nNormă de semănat: 200–220 kg/ha.",
+      "faq": [
+        {
+          "question": "Ce înseamnă C1 la sămânță?",
+          "answer": "C1 este sămânță certificată din prima generație, obținută din sămânță de bază."
+        },
+        {
+          "question": "Ce soi de grâu este Glosa?",
+          "answer": "Glosa este un grâu românesc de toamnă, aristat și timpuriu, cu gluten tare și bună comportare în secetă."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de grâu Glosa C1, certificată, 800 kg",
+        "description": "Sămânță de grâu Glosa C1, soi românesc timpuriu cu gluten tare, rezistent la făinare și la secetă, normă 200–220 kg/ha, ambalaj de 800 kg."
+      }
+    },
+    "en": {
+      "summary": "Certified winter wheat seed Glosa, class C1, 800 kg pack. A Romanian, awned, early variety with strong gluten and good yield potential even in drought. Sowing rate: 200–220 kg/ha.",
+      "description": "### What you get\nWinter wheat seed of the variety Glosa, seed class C1, in an 800 kg pack.\n\n### Characteristics (from the old product page)\n- A Romanian winter variety, awned, early.\n- Strong gluten; good yield potential also in drought.\n- Medium height of 85–95 cm; medium, elongated, red grains; thousand-grain weight 42–44 g.\n\n### Resistances\n- Resistant to powdery mildew; moderately susceptible to brown rust.\n- Moderately resistant to yellow rust, septoria and fusarium.\n- Good resistance to lodging, winter cold, drought and heat, and to pre-harvest sprouting.\n\n### Sowing\nSowing rate: 200–220 kg/ha.",
+      "faq": [
+        {
+          "question": "What does C1 mean for seed?",
+          "answer": "C1 is certified seed of the first generation, grown from basic seed."
+        },
+        {
+          "question": "What kind of wheat is Glosa?",
+          "answer": "Glosa is a Romanian winter wheat, awned and early, with strong gluten and good behaviour in drought."
+        }
+      ],
+      "seo": {
+        "title": "Glosa wheat seed C1, certified, 800 kg pack",
+        "description": "Glosa C1 wheat seed, an early Romanian variety with strong gluten, resistant to mildew and drought, 200–220 kg/ha, 800 kg pack."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Grâu",
+      "en": "Wheat"
+    },
+    "variety": "Glosa",
+    "maturity": {
+      "ro": "Timpuriu (precoce)",
+      "en": "Early"
+    },
+    "sowingRate": {
+      "ro": "200–220 kg/ha",
+      "en": "200–220 kg/ha"
+    },
+    "yieldPotential": {
+      "ro": "Bun, inclusiv în secetă",
+      "en": "Good, including in drought"
+    },
+    "resistances": {
+      "ro": "Rezistent la făinare; mijlociu la rugini, septorioză și fuzarioză; rezistență bună la cădere, iernare, secetă și încolțirea în spic",
+      "en": "Resistant to mildew; moderate to rusts, septoria and fusarium; good resistance to lodging, winter cold, drought and pre-harvest sprouting"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/samanta-grau-glosa-c1/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: variety description as stated there; not checked against the breeder’s sheet or the official catalogue. The page also quotes a farmer’s field trial (8,800–8,900 kg/ha), which is not used."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label.",
+    "Breeder and maintainer of the variety: not stated."
+  ],
+  "conflicts": []
+}

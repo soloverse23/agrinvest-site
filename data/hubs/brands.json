@@ -1,0 +1,271 @@
+[
+  {
+    "slug": "bayer",
+    "name": "Bayer",
+    "country": {
+      "ro": "Germania",
+      "en": "Germany"
+    },
+    "website": "https://www.bayer.com",
+    "intro": {
+      "ro": "Bayer este un producător german, cu sediul la Leverkusen. În România produsele sale de protecție a plantelor sunt omologate prin Bayer SRL. Pe această pagină găsești produsele Bayer din magazinul Agrinvest, cu doze luate din eticheta producătorului sau din registrul ANF.",
+      "en": "Bayer is a German manufacturer based in Leverkusen. In Romania its crop protection products are registered through Bayer SRL. On this page you find the Bayer products in the Agrinvest shop, with rates taken from the manufacturer’s label or the ANF register."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse Bayer pentru protecția culturilor",
+        "description": "Produse Bayer pentru protecția plantelor la Agrinvest: erbicide și insecticide cu doze din eticheta producătorului și număr de omologare."
+      },
+      "en": {
+        "title": "Bayer crop protection products from Agrinvest",
+        "description": "Bayer crop protection products at Agrinvest: herbicides and insecticides with rates from the manufacturer’s label and the registration number."
+      }
+    }
+  },
+  {
+    "slug": "syngenta",
+    "name": "Syngenta",
+    "country": {
+      "ro": "Elveția",
+      "en": "Switzerland"
+    },
+    "website": "https://www.syngenta.ro",
+    "intro": {
+      "ro": "Syngenta este un producător de produse pentru protecția plantelor. În registrul ANF, omologările sale din România sunt deținute de Syngenta Agro SRL, iar producătorul înscris este Syngenta Crop Protection AG. Aici găsești produsele Syngenta din magazinul Agrinvest.",
+      "en": "Syngenta is a manufacturer of crop protection products. In the ANF register its Romanian registrations are held by Syngenta Agro SRL, and the manufacturer named is Syngenta Crop Protection AG. Here you find the Syngenta products in the Agrinvest shop."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse Syngenta pentru protecția culturilor",
+        "description": "Produse Syngenta pentru protecția plantelor la Agrinvest: insecticide și alte produse omologate în România, cu număr de omologare și grupă de rezistență."
+      },
+      "en": {
+        "title": "Syngenta crop protection products from Agrinvest",
+        "description": "Syngenta crop protection products at Agrinvest: insecticides and other products registered in Romania, with registration number and resistance group."
+      }
+    }
+  },
+  {
+    "slug": "exclusivas-sarabia",
+    "name": "Exclusivas Sarabia",
+    "country": {
+      "ro": "Spania",
+      "en": "Spain"
+    },
+    "intro": {
+      "ro": "Exclusivas Sarabia S.A. este un deținător de omologări din Spania. În registrul ANF, produsul Delmur, cunoscut și ca Jolpolt, este omologat în România pe numele său, după omologarea din Italia.",
+      "en": "Exclusivas Sarabia S.A. is a registration holder from Spain. In the ANF register, the product Delmur, also sold as Jolpolt, is authorised in Romania in its name, after its approval in Italy."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse Exclusivas Sarabia la Agrinvest",
+        "description": "Produse ale deținătorului de omologări Exclusivas Sarabia disponibile la Agrinvest, cu număr de omologare și doze din registrul ANF."
+      },
+      "en": {
+        "title": "Exclusivas Sarabia products at Agrinvest",
+        "description": "Products of the registration holder Exclusivas Sarabia available at Agrinvest, with the registration number and rates from the ANF register."
+      }
+    }
+  },
+  {
+    "slug": "nufarm",
+    "name": "Nufarm",
+    "country": {
+      "ro": "Australia",
+      "en": "Australia"
+    },
+    "website": "https://nufarm.com/",
+    "intro": {
+      "ro": "Nufarm este un producător de produse pentru protecția plantelor. În România deținătorul omologărilor din registrul ANF este Nufarm România SRL. Aici găsești produsele Nufarm din magazinul Agrinvest: tratamente pentru sămânță, regulatori de creștere, erbicide și fungicide, fiecare cu numărul omologării găsit în deciziile ANF.",
+      "en": "Nufarm is a manufacturer of crop protection products. In Romania the holder of the registrations in the ANF register is Nufarm România SRL. Here you find the Nufarm products in the Agrinvest shop: seed treatments, growth regulators, herbicides and fungicides, each with the registration number found in the ANF decisions."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse Nufarm pentru protecția culturilor",
+        "description": "Produse Nufarm la Agrinvest: tratamente pentru sămânță, regulatori de creștere, erbicide și fungicide, cu numărul omologării din registrul ANF."
+      },
+      "en": {
+        "title": "Nufarm crop protection products at Agrinvest",
+        "description": "Nufarm products at Agrinvest: seed treatments, growth regulators, herbicides and fungicides, with the registration number from the ANF register."
+      }
+    }
+  },
+  {
+    "slug": "adama",
+    "name": "ADAMA",
+    "country": {
+      "ro": "Israel",
+      "en": "Israel"
+    },
+    "website": "https://www.adama.com/",
+    "intro": {
+      "ro": "ADAMA este un producător de produse pentru protecția plantelor; în registrul ANF apare ca ADAMA Agricultural Solutions SRL. Pe această pagină găsești produsele ADAMA din magazinul Agrinvest: insecticide și fungicide, fiecare cu numărul omologării găsit în deciziile ANF.",
+      "en": "ADAMA is a manufacturer of crop protection products; in the ANF register it appears as ADAMA Agricultural Solutions SRL. On this page you find the ADAMA products in the Agrinvest shop: insecticides and fungicides, each with the registration number found in the ANF decisions."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse ADAMA pentru protecția culturilor",
+        "description": "Produse ADAMA la Agrinvest: insecticide și fungicide pentru culturile de câmp, cu numărul omologării găsit în deciziile ANF."
+      },
+      "en": {
+        "title": "ADAMA crop protection products at Agrinvest",
+        "description": "ADAMA products at Agrinvest: insecticides and fungicides for field crops, with the registration number found in the ANF decisions."
+      }
+    }
+  },
+  {
+    "slug": "sharda",
+    "name": "Sharda Cropchem",
+    "country": {
+      "ro": "India",
+      "en": "India"
+    },
+    "website": "https://www.shardacropchem.com/",
+    "intro": {
+      "ro": "Sharda Cropchem este un producător indian de produse pentru protecția plantelor. În registrul ANF omologările apar pe numele Sharda Europe b.v.b.a., Belgia, sau Sharda Cropchem España. Aici găsești produsele Sharda din magazinul Agrinvest.",
+      "en": "Sharda Cropchem is an Indian manufacturer of crop protection products. In the ANF register the registrations appear in the name of Sharda Europe b.v.b.a., Belgium, or Sharda Cropchem España. Here you find the Sharda products in the Agrinvest shop."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse Sharda Cropchem la Agrinvest",
+        "description": "Produse Sharda Cropchem pentru protecția plantelor la Agrinvest: tratamente pentru sămânță, cu număr de omologare din registrul ANF."
+      },
+      "en": {
+        "title": "Sharda Cropchem products at Agrinvest",
+        "description": "Sharda Cropchem crop protection products at Agrinvest: seed treatments, with the registration number from the ANF register."
+      }
+    }
+  },
+  {
+    "slug": "corteva",
+    "name": "Corteva",
+    "country": {
+      "ro": "Statele Unite",
+      "en": "United States"
+    },
+    "website": "https://www.corteva.ro/",
+    "intro": {
+      "ro": "Corteva Agriscience este o companie agricolă americană. În România omologările din registrul ANF sunt deținute de Corteva Agriscience România SRL. Aici găsești produsele Corteva din magazinul Agrinvest: erbicide și insecticide pentru porumb și cereale, cu numărul omologării și, unde le-am verificat, dozele din registru.",
+      "en": "Corteva Agriscience is an American agricultural company. In Romania the registrations in the ANF register are held by Corteva Agriscience România SRL. Here you find the Corteva products in the Agrinvest shop: herbicides and insecticides for maize and cereals, with the registration number and, where we checked them, the rates from the register."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse Corteva pentru protecția culturilor",
+        "description": "Produse Corteva la Agrinvest: erbicide și insecticide, cu numărul omologării și dozele din registrul ANF, acolo unde sunt verificate."
+      },
+      "en": {
+        "title": "Corteva crop protection products at Agrinvest",
+        "description": "Corteva products at Agrinvest: herbicides and insecticides, with the registration number and the rates from the ANF register where checked."
+      }
+    }
+  },
+  {
+    "slug": "basf",
+    "name": "BASF",
+    "country": {
+      "ro": "Germania",
+      "en": "Germany"
+    },
+    "website": "https://www.basf.com/",
+    "intro": {
+      "ro": "BASF este un producător german; în registrul ANF produsele sale apar pe numele BASF SE, Germania. Pe această pagină găsești produsele BASF din magazinul Agrinvest: erbicide și adjuvanți, cu numărul omologării și, unde le-am verificat, dozele din registru.",
+      "en": "BASF is a German manufacturer; in the ANF register its products appear in the name of BASF SE, Germany. On this page you find the BASF products in the Agrinvest shop: herbicides and adjuvants, with the registration number and, where we checked them, the rates from the register."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse BASF pentru protecția culturilor",
+        "description": "Produse BASF la Agrinvest: erbicide și adjuvanți, cu numărul omologării și dozele din registrul ANF, acolo unde sunt verificate."
+      },
+      "en": {
+        "title": "BASF crop protection products at Agrinvest",
+        "description": "BASF products at Agrinvest: herbicides and adjuvants, with the registration number and the rates from the ANF register where checked."
+      }
+    }
+  },
+  {
+    "slug": "pioneer",
+    "name": "Pioneer",
+    "country": {
+      "ro": "Statele Unite",
+      "en": "United States"
+    },
+    "website": "https://www.pioneer.com/",
+    "intro": {
+      "ro": "Pioneer este o marcă de semințe a companiei Corteva. În magazinul Agrinvest găsești hibrizi de rapiță Pioneer, cu datele pe care le avem despre fiecare și ce mai așteptăm de la furnizor.",
+      "en": "Pioneer is a seed brand of the company Corteva. In the Agrinvest shop you find Pioneer rapeseed hybrids, with the data we have on each and what we still expect from the supplier."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Semințe Pioneer: hibrizi de rapiță Agrinvest",
+        "description": "Semințe Pioneer la Agrinvest: hibrizi de rapiță, cu caracteristicile din textul producătorului și datele care mai lipsesc."
+      },
+      "en": {
+        "title": "Pioneer seed: rapeseed hybrids at Agrinvest",
+        "description": "Pioneer seed at Agrinvest: rapeseed hybrids, with the characteristics from the manufacturer’s text and the data still missing."
+      }
+    }
+  },
+  {
+    "slug": "dekalb",
+    "name": "Dekalb",
+    "country": {
+      "ro": "Statele Unite",
+      "en": "United States"
+    },
+    "website": "https://www.dekalb.ro/",
+    "intro": {
+      "ro": "Dekalb este o marcă de semințe a Bayer Crop Science. În magazinul Agrinvest găsești hibrizi de rapiță Dekalb, cu datele pe care le avem despre fiecare și ce mai așteptăm de la furnizor.",
+      "en": "Dekalb is a seed brand of Bayer Crop Science. In the Agrinvest shop you find Dekalb rapeseed hybrids, with the data we have on each and what we still expect from the supplier."
+    },
+    "faq": {
+      "ro": [],
+      "en": []
+    },
+    "seo": {
+      "ro": {
+        "title": "Semințe Dekalb: hibrizi de rapiță Agrinvest",
+        "description": "Semințe Dekalb la Agrinvest: hibrizi de rapiță de toamnă, cu caracteristicile din textul producătorului și datele care mai lipsesc."
+      },
+      "en": {
+        "title": "Dekalb seed: rapeseed hybrids at Agrinvest",
+        "description": "Dekalb seed at Agrinvest: winter rapeseed hybrids, with the characteristics from the manufacturer’s text and the data still missing."
+      }
+    }
+  }
+]

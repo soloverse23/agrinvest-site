@@ -274,3 +274,108 @@ test.describe('Interactions', () => {
     await expect(card).toContainText('6.103 km²')
   })
 })
+
+test.describe('Shop orders', () => {
+  const product = '/magazin/ingrasaminte/uree'
+  const protection = '/magazin/erbicide/adengo'
+
+  const addToCart = async (page: import('@playwright/test').Page, url: string) => {
+    await page.goto(url)
+    await page
+      .getByRole('button', { name: /Adaugă în coș|Add to cart/ })
+      .first()
+      .click()
+    await page.waitForURL(/\/(cos|cart)$/)
+  }
+  const buyer = async (page: import('@playwright/test').Page) => {
+    await page.locator('[name=name]').fill('Test Comandă')
+    await page.locator('[name=phone]').fill('0741 201 056')
+    await page.locator('[name=email]').fill('test@example.ro')
+    await page.locator('[name=deliveryMethod][value=pickup]').check()
+    await page.locator('[name=base]').selectOption({ index: 1 })
+    await page.locator('[name=consent]').check()
+    await page.locator('[name=terms]').check()
+  }
+  const reference = (page: import('@playwright/test').Page) =>
+    page.locator('[data-order-reference]')
+
+  test('a person orders in Romanian and the order reaches the admin, routed', async ({ page }) => {
+    await addToCart(page, product)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Coșul tău')
+    await page.getByRole('link', { name: 'Continuă comanda' }).click()
+    await page.waitForURL('**/comanda')
+    await expect(page.locator('[data-company-fields]')).toBeHidden()
+    await buyer(page)
+    await page.getByRole('button', { name: 'Trimite comanda' }).click()
+    await expect(reference(page)).toHaveText(/^AGR-\d{4}-[A-Z2-9]{5}$/)
+    const code = await reference(page).textContent()
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'orders',
+      where: { reference: { equals: code } },
+      depth: 0,
+    })
+    expect(docs[0]).toMatchObject({ status: 'new', payment: 'consultant' })
+    expect(docs[0].assignedTo).toBeTruthy()
+    expect(docs[0].lines[0].name).toBe('Uree')
+    await payload.delete({ collection: 'orders', id: docs[0].id })
+  })
+
+  test('a company orders in English, entering its details by hand', async ({ page }) => {
+    await addToCart(page, '/en/shop/fertilisers/uree')
+    await page.goto('/en/checkout')
+    await page.locator('[name=buyerType][value=company]').check()
+    await expect(page.locator('[data-company-fields]')).toBeVisible()
+    await buyer(page)
+    await page.getByLabel('Tax ID (CUI)').fill('14399840')
+    await page.getByLabel('Company name').fill('Firma Test SRL')
+    await page.getByLabel('Registered address').fill('Buzău, str. Test 1')
+    await page.getByRole('button', { name: 'Send order' }).click()
+    await expect(reference(page)).toBeVisible()
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'orders',
+      where: { reference: { equals: await reference(page).textContent() } },
+      depth: 0,
+    })
+    expect(docs[0].buyer).toMatchObject({ type: 'company', company: 'Firma Test SRL' })
+    await payload.delete({ collection: 'orders', id: docs[0].id })
+  })
+
+  test('a professional-use product needs a certificate and the age confirmation', async ({
+    page,
+  }) => {
+    await addToCart(page, protection)
+    await page.goto('/comanda')
+    await buyer(page)
+    await page.getByRole('button', { name: 'Trimite comanda' }).click()
+    await expect(page.locator('form [role=alert]')).toContainText('certificatului')
+    await expect(page.locator('form [role=alert]')).toContainText('18 ani')
+    await expect(reference(page)).toHaveCount(0)
+  })
+
+  test('a withdrawn product has no add to cart button', async ({ page }) => {
+    await page.goto('/magazin/fungicide/tazer-250-sc')
+    await expect(page.getByRole('button', { name: 'Adaugă în coș' })).toHaveCount(0)
+    await expect(page.getByRole('note')).toContainText('nu poate fi comandat online')
+  })
+
+  test('the cart changes quantities and empties, without JavaScript', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await addToCart(page, product)
+    await page.getByLabel('Cantitate').fill('3')
+    await page.getByRole('button', { name: 'Actualizează' }).click()
+    await expect(page.getByLabel('Cantitate')).toHaveValue('3')
+    await page.getByRole('button', { name: 'Șterge' }).click()
+    await expect(page.getByText('Coșul este gol.')).toBeVisible()
+    await context.close()
+  })
+
+  test('cart and checkout are not indexed', async ({ page }) => {
+    for (const url of ['/cos', '/en/cart', '/comanda', '/en/checkout']) {
+      await page.goto(url)
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/)
+    }
+  })
+})

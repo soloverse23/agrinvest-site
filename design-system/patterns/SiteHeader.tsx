@@ -8,6 +8,7 @@ import { MenuIcon, PhoneIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
 import { Delta } from '../primitives/Delta'
+import { CartLink } from './CartLink'
 import { MegaMenu } from './MegaMenu'
 import { linkBase, linkState } from './nav-styles'
 import { Lockup } from './parts'
@@ -27,6 +28,8 @@ export type SiteHeaderProps = {
   /** href of the current section, marked with aria-current. */
   current?: string
   cta: { href: string; label: string }
+  /** The shop cart; its count is a tiny client island. */
+  cart?: { href: string; label: string }
   labels: { menu: string; main: string; language: string; all?: string; call?: string }
   /** Phone in the menu panels ("call us"), from the figures register. */
   phone?: string
@@ -50,6 +53,7 @@ export function SiteHeader({
   nav,
   current,
   cta,
+  cart,
   labels,
   tone = 'default',
   ticker,
@@ -125,6 +129,7 @@ export function SiteHeader({
                 </Link>
               ))}
             </div>
+            {cart && <CartLink href={cart.href} label={cart.label} overlay={overlay} />}
             <Button
               href={cta.href}
               size="sm"

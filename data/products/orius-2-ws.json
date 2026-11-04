@@ -1,0 +1,220 @@
+{
+  "slug": "orius-2-ws",
+  "primaryKeyword": {
+    "ro": "orius 2 ws",
+    "en": "orius 2 ws"
+  },
+  "category": "tratament-samanta",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Orius 2 WS este un produs pentru tratarea semințelor cu tebuconazol 20 g/kg, formulare WS; omologat în România (certificat nr. 2005/26.08.1999). Doza din registru la grâu: 0,15 kg/t de sămânță.",
+      "description": "### Ce este Orius 2 WS\n\nOrius 2 WS este un produs pentru tratarea semințelor cu tebuconazol 20 g/kg, formulare WS. Deținătorul înscris în registrul ANF: Nufarm România SRL (lista ANF din 09.09.2021).\n\n### Cum acționează\n\nTebuconazol este un triazol: inhibă sinteza ergosterolului din membrana ciupercilor (DMI). Se încadrează la FRAC 3. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Doza din registru\n\nGrâu: 0,15 kg/t de sămânță. Tratament al semințelor. Orz: 0,15 kg/t de sămânță. Tratament al semințelor. Secară: 0,15 kg/t de sămânță. Tratament al semințelor. Ovăz, triticale: 0,15 kg/t de sămânță. Tratament al semințelor. Citește eticheta ambalajului înainte de aplicare.\n\n### Omologare\n\nCertificatul de omologare nr. 2005/26.08.1999. Numărul a fost găsit în deciziile ANF (ultima mențiune: 07.11.2024); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Orius 2 WS?",
+          "answer": "Tebuconazol 20 g/kg (triazol din grupa FRAC 3)."
+        },
+        {
+          "question": "Ce număr de omologare are Orius 2 WS?",
+          "answer": "Certificatul de omologare nr. 2005/26.08.1999, găsit în deciziile ANF (ultima mențiune: 07.11.2024)."
+        },
+        {
+          "question": "Ce doză de Orius 2 WS se folosește?",
+          "answer": "0,15 kg/t de sămânță. Tratament al semințelor. Verifică eticheta ambalajului."
+        }
+      ],
+      "seo": {
+        "title": "Orius 2 WS: tratament pentru sămânță, omologare și doze",
+        "description": "Orius 2 WS, tratament pentru sămânță cu tebuconazol 20 g/kg: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Orius 2 WS is a seed treatment with tebuconazol 20 g/kg, WS formulation; authorised in Romania (certificate no. 2005/26.08.1999). Register rate on wheat: 0.15 kg/t of seed.",
+      "description": "### What Orius 2 WS is\n\nOrius 2 WS is a seed treatment with tebuconazol 20 g/kg, WS formulation. Holder named in the ANF register: Nufarm România SRL (lista ANF din 09.09.2021).\n\n### How it works\n\nTebuconazol is a triazole: it inhibits the synthesis of ergosterol in fungal membranes (DMI). It belongs to FRAC 3. Alternate products from different groups to slow the build-up of resistance.\n\n### Register rate\n\nWheat: 0.15 kg/t of seed. Seed treatment. Barley: 0.15 kg/t of seed. Seed treatment. Rye: 0.15 kg/t of seed. Seed treatment. Oats, triticale: 0.15 kg/t of seed. Seed treatment. Read the label on the pack before application.\n\n### Registration\n\nAuthorisation certificate no. 2005/26.08.1999. The number was found in the ANF decisions (last mention: 07.11.2024); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Orius 2 WS contain?",
+          "answer": "Tebuconazol 20 g/kg (triazole, FRAC 3)."
+        },
+        {
+          "question": "What is the registration number of Orius 2 WS?",
+          "answer": "Authorisation certificate no. 2005/26.08.1999, found in the ANF decisions (last mention: 07.11.2024)."
+        },
+        {
+          "question": "What rate of Orius 2 WS is used?",
+          "answer": "0.15 kg/t of seed. Seed treatment. Check the label on the pack."
+        }
+      ],
+      "seo": {
+        "title": "Orius 2 WS: seed treatment, registration and rates",
+        "description": "Orius 2 WS, seed treatment with tebuconazol 20 g/kg: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "tebuconazol",
+        "concentration": 20,
+        "unit": "g/kg"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "WS",
+    "registrationNumber": "2005/26.08.1999",
+    "modeOfAction": {
+      "ro": "Tebuconazol este un triazol: inhibă sinteza ergosterolului din membrana ciupercilor (DMI).",
+      "en": "Tebuconazol is a triazole: it inhibits the synthesis of ergosterol in fungal membranes (DMI)."
+    },
+    "resistanceGroup": "FRAC 3"
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Grâu",
+        "en": "Wheat"
+      },
+      "crops": [
+        "wheat"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Tilletia spp., Fusarium spp., Fusarium culmorum, Cochliobolus sativus",
+        "en": "Tilletia spp., Fusarium spp., Fusarium culmorum, Cochliobolus sativus"
+      },
+      "doseText": {
+        "ro": "0,15 kg/t de sămânță",
+        "en": "0.15 kg/t of seed"
+      },
+      "doseMin": 0.15,
+      "doseMax": 0.15,
+      "doseUnit": "kg/t",
+      "timing": {
+        "ro": "Tratament al semințelor.",
+        "en": "Seed treatment."
+      }
+    },
+    {
+      "cropText": {
+        "ro": "Orz",
+        "en": "Barley"
+      },
+      "crops": [
+        "barley"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Ustilago nuda, Pyrenophora graminea, Pyrenophora teres, Cochliobolus sativus, Fusarium spp., Fusarium culmorum",
+        "en": "Ustilago nuda, Pyrenophora graminea, Pyrenophora teres, Cochliobolus sativus, Fusarium spp., Fusarium culmorum"
+      },
+      "doseText": {
+        "ro": "0,15 kg/t de sămânță",
+        "en": "0.15 kg/t of seed"
+      },
+      "doseMin": 0.15,
+      "doseMax": 0.15,
+      "doseUnit": "kg/t",
+      "timing": {
+        "ro": "Tratament al semințelor.",
+        "en": "Seed treatment."
+      }
+    },
+    {
+      "cropText": {
+        "ro": "Secară",
+        "en": "Rye"
+      },
+      "crops": [],
+      "targets": [],
+      "targetText": {
+        "ro": "Urocystis occulta, Monographella nivalis",
+        "en": "Urocystis occulta, Monographella nivalis"
+      },
+      "doseText": {
+        "ro": "0,15 kg/t de sămânță",
+        "en": "0.15 kg/t of seed"
+      },
+      "doseMin": 0.15,
+      "doseMax": 0.15,
+      "doseUnit": "kg/t",
+      "timing": {
+        "ro": "Tratament al semințelor.",
+        "en": "Seed treatment."
+      }
+    },
+    {
+      "cropText": {
+        "ro": "Ovăz, triticale",
+        "en": "Oats, triticale"
+      },
+      "crops": [
+        "triticale"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Fusarium spp., Fusarium culmorum, Cochliobolus sativus",
+        "en": "Fusarium spp., Fusarium culmorum, Cochliobolus sativus"
+      },
+      "doseText": {
+        "ro": "0,15 kg/t de sămânță",
+        "en": "0.15 kg/t of seed"
+      },
+      "doseMin": 0.15,
+      "doseMax": 0.15,
+      "doseUnit": "kg/t",
+      "timing": {
+        "ro": "Tratament al semințelor.",
+        "en": "Seed treatment."
+      }
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-09-09-2021/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 09.09.2021, pp. 18–19: entry with holder and registration, checked on the page image."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-07-11-2024/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 07.11.2024: Orius 2 WS (certificate 2005/26.08.1999); last mention found."
+      },
+      {
+        "url": "https://www.frac.info/",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "FRAC code list."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/fungicide/orius-2-ws-1-5-kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-09-09-2021/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 09.09.2021, pp. 18–19: dose rows, checked on the page image."
+      }
+    ]
+  },
+  "gaps": [
+    "Waiting period and toxicity classification: not in the ANF entry; a label is needed.",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [],
+  "brand": "nufarm"
+}

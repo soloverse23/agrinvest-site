@@ -1,0 +1,145 @@
+{
+  "slug": "frontier-forte",
+  "primaryKeyword": {
+    "ro": "frontier forte",
+    "en": "frontier forte"
+  },
+  "category": "erbicide",
+  "secondaryCategories": [],
+  "crops": [
+    "potato",
+    "sugar-beet",
+    "maize",
+    "soybean"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Frontier Forte este un erbicid cu dimetenamid-p 720 g/l; omologat în România (certificat nr. 2089/19.12.2000). Doza din registru la porumb: 0,8 l/ha pe soluri cu 2% humus; 1,2 l/ha pe soluri cu 2–3% humus; 1,4 l/ha pe soluri cu peste 3% humus.",
+      "description": "### Ce este Frontier Forte\n\nFrontier Forte este un erbicid cu dimetenamid-p 720 g/l. Deținătorul înscris în registrul ANF: BASF SE, Germania (lista ANF din 15.11.2018). În registru apare și sub numele comercial Spectrum.\n\n### Cum acționează\n\nDimetenamid-p este o cloroacetamidă: inhibă sinteza acizilor grași cu lanț foarte lung. Se încadrează la HRAC 15. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Doza din registru\n\nPorumb: 0,8 l/ha pe soluri cu 2% humus; 1,2 l/ha pe soluri cu 2–3% humus; 1,4 l/ha pe soluri cu peste 3% humus. Preemergent, în condiții de umiditate; încorporat la 3–4 cm, în condiții de secetă; sau postemergent, la porumb cu 1–6 frunze (BBCH 10–16). Citește eticheta ambalajului înainte de aplicare.\n\n### Omologare\n\nCertificatul de omologare nr. 2089/19.12.2000. Numărul a fost găsit în deciziile ANF (ultima mențiune: 15.11.2018); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Frontier Forte?",
+          "answer": "Dimetenamid-p 720 g/l (o cloroacetamidă din grupa HRAC 15)."
+        },
+        {
+          "question": "Ce număr de omologare are Frontier Forte?",
+          "answer": "Certificatul de omologare nr. 2089/19.12.2000, găsit în deciziile ANF (ultima mențiune: 15.11.2018)."
+        },
+        {
+          "question": "Ce doză de Frontier Forte se folosește?",
+          "answer": "0,8 l/ha pe soluri cu 2% humus; 1,2 l/ha pe soluri cu 2–3% humus; 1,4 l/ha pe soluri cu peste 3% humus. Preemergent, în condiții de umiditate; încorporat la 3–4 cm, în condiții de secetă; sau postemergent, la porumb cu 1–6 frunze (BBCH 10–16). Verifică eticheta ambalajului."
+        }
+      ],
+      "seo": {
+        "title": "Frontier Forte: erbicid cu dimetenamid-p, omologare și doze",
+        "description": "Frontier Forte, erbicid cu dimetenamid-p 720 g/l: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Frontier Forte is a herbicide with dimetenamid-p 720 g/l; authorised in Romania (certificate no. 2089/19.12.2000). Register rate on maize: 0.8 l/ha on soils with 2% humus; 1.2 l/ha on soils with 2–3% humus; 1.4 l/ha on soils with more than 3% humus.",
+      "description": "### What Frontier Forte is\n\nFrontier Forte is a herbicide with dimetenamid-p 720 g/l. Holder named in the ANF register: BASF SE, Germania (lista ANF din 15.11.2018). The register also lists it under the trade name Spectrum.\n\n### How it works\n\nDimetenamid-p is a chloroacetamide: it inhibits the synthesis of very-long-chain fatty acids. It belongs to HRAC 15. Alternate products from different groups to slow the build-up of resistance.\n\n### Register rate\n\nMaize: 0.8 l/ha on soils with 2% humus; 1.2 l/ha on soils with 2–3% humus; 1.4 l/ha on soils with more than 3% humus. Pre-emergence in moist conditions; incorporated to 3–4 cm in dry conditions; or post-emergence, at 1–6 maize leaves (BBCH 10–16). Read the label on the pack before application.\n\n### Registration\n\nAuthorisation certificate no. 2089/19.12.2000. The number was found in the ANF decisions (last mention: 15.11.2018); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Frontier Forte contain?",
+          "answer": "Dimetenamid-p 720 g/l (chloroacetamide, HRAC 15)."
+        },
+        {
+          "question": "What is the registration number of Frontier Forte?",
+          "answer": "Authorisation certificate no. 2089/19.12.2000, found in the ANF decisions (last mention: 15.11.2018)."
+        },
+        {
+          "question": "What rate of Frontier Forte is used?",
+          "answer": "0.8 l/ha on soils with 2% humus; 1.2 l/ha on soils with 2–3% humus; 1.4 l/ha on soils with more than 3% humus. Pre-emergence in moist conditions; incorporated to 3–4 cm in dry conditions; or post-emergence, at 1–6 maize leaves (BBCH 10–16). Check the label on the pack."
+        }
+      ],
+      "seo": {
+        "title": "Frontier Forte: herbicide, registration and rates",
+        "description": "Frontier Forte, herbicide with dimetenamid-p 720 g/l: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "dimetenamid-p",
+        "concentration": 720,
+        "unit": "g/l"
+      }
+    ],
+    "professionalUse": true,
+    "registrationNumber": "2089/19.12.2000",
+    "modeOfAction": {
+      "ro": "Dimetenamid-p este o cloroacetamidă: inhibă sinteza acizilor grași cu lanț foarte lung.",
+      "en": "Dimetenamid-p is a chloroacetamide: it inhibits the synthesis of very-long-chain fatty acids."
+    },
+    "resistanceGroup": "HRAC 15"
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Porumb",
+        "en": "Maize"
+      },
+      "crops": [
+        "maize"
+      ],
+      "targets": [],
+      "targetText": {
+        "ro": "Buruieni monocotiledonate anuale (Setaria spp., Echinochloa spp., Digitaria spp.) și unele dicotiledonate anuale (Amaranthus spp., Chenopodium spp.)",
+        "en": "Annual grass weeds (Setaria, Echinochloa, Digitaria) and some annual broadleaf weeds (Amaranthus, Chenopodium)"
+      },
+      "timing": {
+        "ro": "Preemergent, în condiții de umiditate; încorporat la 3–4 cm, în condiții de secetă; sau postemergent, la porumb cu 1–6 frunze (BBCH 10–16).",
+        "en": "Pre-emergence in moist conditions; incorporated to 3–4 cm in dry conditions; or post-emergence, at 1–6 maize leaves (BBCH 10–16)."
+      },
+      "bbch": "10–16",
+      "doseText": {
+        "ro": "0,8 l/ha pe soluri cu 2% humus; 1,2 l/ha pe soluri cu 2–3% humus; 1,4 l/ha pe soluri cu peste 3% humus",
+        "en": "0.8 l/ha on soils with 2% humus; 1.2 l/ha on soils with 2–3% humus; 1.4 l/ha on soils with more than 3% humus"
+      },
+      "doseMin": 0.8,
+      "doseMax": 1.4,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-15-11-2018/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 15.11.2018, pp. 41–42: FRONTIER FORTE, 720 g/L dimetenamid-P, BASF SE Germania, CO 2089/19.12.2000. Checked on the page image."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-15-11-2018/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 15.11.2018: Frontier Forte (certificate 2089/19.12.2000); last mention found."
+      },
+      {
+        "url": "https://hracglobal.com/files/2024-HRAC-GLOBAL-HERBICIDE-MOA-CLASSIFICATION-POSTERold.pdf",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "HRAC 2024 classification poster."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-15-11-2018/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 15.11.2018, pp. 41–42, checked on the page image."
+      }
+    ]
+  },
+  "gaps": [
+    "Waiting period and toxicity classification: not in the ANF entry; a label is needed.",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "Resolved: the old shop wrote “dimetenamid”; the ANF entry says 720 g/L dimetenamid-P. The page uses dimetenamid-P."
+  ],
+  "brand": "basf"
+}

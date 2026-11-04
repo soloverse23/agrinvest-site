@@ -1,0 +1,85 @@
+{
+  "slug": "dap-18-46-0-fosfat-diamoniu",
+  "primaryKeyword": {
+    "ro": "dap 18-46-0 (fosfat diamoniu)",
+    "en": "dap 18-46-0 (fosfat diamoniu)"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "DAP 18-46-0 (fosfat diamoniu) este un îngrășământ complex granulat cu 18% azot amoniacal și 46% P2O5, pentru toate solurile și culturile, mai ales pe soluri sărace în fosfor. Țară de origine: Maroc. Big bag de 600 kg.",
+      "description": "### Ce este\nDAP 18-46-0 este un îngrășământ complex, binar, granulat, cu azot și fosfor. Se poate aplica pe toate solurile și la toate plantele, dar este recomandat mai ales pe soluri slab aprovizionate cu fosfor.\n\n### Compoziție\n- Azot amoniacal (NH4): 18%\n- Pentoxid de fosfor (P2O5): 46%\n\n### De ce azot și fosfor împreună\nAzotul crește recolta mai întâi cantitativ, apoi calitativ, prin sinteza aminoacizilor și a proteinelor. Fosforul determină calitatea producției și intră în compușii care stochează și transferă energia, deci asigură o creștere echilibrată. Interacțiunea dintre cele două elemente stă la baza fertilizărilor și a producțiilor ridicate la toate culturile.\n\n### Doze\nNu publicăm încă dozele pe culturi, pentru că nu avem o fișă tehnică a producătorului. Doza se stabilește după analiza solului: întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Ce înseamnă DAP 18-46-0?",
+          "answer": "Îngrășământ cu 18% azot (amoniacal) și 46% fosfor (P2O5): fosfat diamoniu."
+        },
+        {
+          "question": "Pe ce soluri se potrivește DAP?",
+          "answer": "Se poate folosi pe toate solurile; este recomandat mai ales pe cele slab aprovizionate cu fosfor."
+        }
+      ],
+      "seo": {
+        "title": "DAP 18-46-0, fosfat diamoniu: îngrășământ complex NP",
+        "description": "DAP 18-46-0, fosfat diamoniu granulat din Maroc, big bag de 600 kg: compoziție, pe ce soluri se folosește și ce aduce plantei."
+      }
+    },
+    "en": {
+      "summary": "DAP 18-46-0 (diammonium phosphate) is a granular complex fertiliser with 18% ammoniacal nitrogen and 46% P2O5, for all soils and crops, above all on soils poor in phosphorus. Country of origin: Morocco. 600 kg big bag.",
+      "description": "### What it is\nDAP 18-46-0 is a binary complex granular fertiliser with nitrogen and phosphorus. It can be applied on all soils and to all plants, but is recommended above all on soils poorly supplied with phosphorus.\n\n### Composition\n- Ammoniacal nitrogen (NH4): 18%\n- Phosphorus pentoxide (P2O5): 46%\n\n### Why nitrogen and phosphorus together\nNitrogen raises the yield first in quantity, then in quality, by building amino acids and proteins. Phosphorus determines the quality of production and is part of the compounds that store and transfer energy, so it ensures balanced growth. The interaction between the two elements is the basis of fertilisation and high yields on all crops.\n\n### Rates\nWe do not publish crop rates yet, because we have no manufacturer’s technical sheet. The rate is set from the soil analysis: ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "What does DAP 18-46-0 mean?",
+          "answer": "A fertiliser with 18% nitrogen (ammoniacal) and 46% phosphorus (P2O5): diammonium phosphate."
+        },
+        {
+          "question": "Which soils does DAP suit?",
+          "answer": "It can be used on all soils; it is recommended above all on those poorly supplied with phosphorus."
+        }
+      ],
+      "seo": {
+        "title": "DAP 18-46-0 diammonium phosphate: complex NP fertiliser",
+        "description": "DAP 18-46-0, granular diammonium phosphate from Morocco, 600 kg big bag: composition, which soils it suits and what it gives the plant."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 18
+      },
+      {
+        "nutrient": "P2O5",
+        "percent": 46
+      }
+    ],
+    "form": {
+      "ro": "Granule complexe",
+      "en": "Complex granules"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/dap/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer and the technical sheet/analysis certificate: not stated (only the country, Morocco).",
+    "Rates by crop: not stated."
+  ],
+  "conflicts": [
+    "The old page says “this price is per kilogram”, while the pack is 600 kg at 2,550 lei (4.25 lei/kg). Confirm that 2,550 lei is the price of the 600 kg big bag."
+  ]
+}

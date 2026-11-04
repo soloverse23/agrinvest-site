@@ -6,6 +6,9 @@ import type { Page } from '@/payload-types'
 
 import { payloadClient } from './payload'
 
+/** Changes with the reviewed data (see `next.config.ts`): new pages reach the cache on deploy. */
+const epoch = process.env.ENRICHMENT_EPOCH ?? 'dev'
+
 /** Public URL of the same document in each language it is published in. */
 export type Alternates = Partial<Record<Locale, string>>
 
@@ -53,7 +56,7 @@ export const listPages = unstable_cache(
       noindex: Boolean(doc.seo?.noindex),
     }))
   },
-  ['pages:list'],
+  [`pages:list:${epoch}`],
   { tags: [tags.pages] },
 )
 
@@ -75,7 +78,7 @@ async function findPage(path: string, locale: Locale, draft: boolean): Promise<P
 
 const findPublishedPage = unstable_cache(
   (path: string, locale: Locale) => findPage(path, locale, false),
-  ['pages:by-path'],
+  [`pages:by-path:${epoch}`],
   { tags: [tags.pages] },
 )
 

@@ -1,0 +1,114 @@
+{
+  "slug": "amazonas-zn",
+  "primaryKeyword": {
+    "ro": "amazonas [zn]",
+    "en": "amazonas [zn]"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Amazonas [Zn] este un îngrășământ lichid cu zinc sub formă de carboxilat (8,5% în greutate, 9,9% greutate/volum), fără cloruri, nitrați și sulfați. Se folosește foliar, la 0,15–0,25%, sau în fertirigare, la 2–5 l/ha, pentru carența de zinc. Ambalaje de 1 l și 20 l.",
+      "description": "### Ce este Amazonas [Zn]\nAmazonas [Zn] este o formulă lichidă pe bază de zinc sub formă de carboxilat, cu excepția clorurilor, nitraților și sulfaților. Se poate aplica pe frunze și la rădăcină, ca tratament preventiv sau curativ al carenței de zinc.\n\n### Compoziție\n- Zinc (Zn): 8,5% (greutate/greutate), 9,9% (greutate/volum)\n\n### De ce zinc\nLipsa zincului duce la boli fiziologice precum folioceloza, mai frecventă la culturile sensibile: citrice, porumb, roșii. Carboxilatul ajută zincul să pătrundă și să circule în plantă, iar sursa de zinc se dizolvă bine și rămâne stabilă în soluția de stropit.\n\n### Doze din fișa produsului\nFoliar: 0,15–0,25% din soluție; fertirigare: 2–5 l/ha. Respectă eticheta ambalajului.",
+      "faq": [
+        {
+          "question": "Ce doză de Amazonas [Zn] se folosește?",
+          "answer": "Foliar, 0,15–0,25% din soluție; în fertirigare, 2–5 l/ha, conform fișei produsului."
+        },
+        {
+          "question": "La ce culturi ajută zincul?",
+          "answer": "Mai ales la cele sensibile la carența de zinc: porumb, roșii, citrice. Produsul se poate folosi și preventiv."
+        }
+      ],
+      "seo": {
+        "title": "Amazonas [Zn]: îngrășământ lichid cu zinc carboxilat",
+        "description": "Amazonas [Zn], îngrășământ lichid cu zinc carboxilat: compoziție, doze foliare și în fertirigare și culturile sensibile la carență."
+      }
+    },
+    "en": {
+      "summary": "Amazonas [Zn] is a liquid fertiliser with zinc as carboxylate (8.5% by weight, 9.9% weight/volume), free of chlorides, nitrates and sulphates. Used as a foliar spray at 0.15–0.25%, or in fertigation at 2–5 l/ha, for zinc deficiency. 1 l and 20 l packs.",
+      "description": "### What Amazonas [Zn] is\nAmazonas [Zn] is a liquid formula based on zinc as carboxylate, free of chlorides, nitrates and sulphates. It can be applied to the leaves and at the root, as a preventive or corrective treatment for zinc deficiency.\n\n### Composition\n- Zinc (Zn): 8.5% (weight/weight), 9.9% (weight/volume)\n\n### Why zinc\nLack of zinc causes physiological disorders such as leaf chlorosis, more frequent in sensitive crops: citrus, maize, tomato. The carboxylate helps zinc enter and move through the plant, and the zinc source dissolves well and stays stable in the spray mix.\n\n### Rates on the product sheet\nFoliar: 0.15–0.25% solution; fertigation: 2–5 l/ha. Follow the label on the pack.",
+      "faq": [
+        {
+          "question": "What rate of Amazonas [Zn] is used?",
+          "answer": "Foliar, 0.15–0.25% solution; in fertigation, 2–5 l/ha, according to the product sheet."
+        },
+        {
+          "question": "Which crops benefit from zinc?",
+          "answer": "Mostly those sensitive to zinc deficiency: maize, tomato, citrus. The product can also be used preventively."
+        }
+      ],
+      "seo": {
+        "title": "Amazonas [Zn]: liquid zinc carboxylate fertiliser",
+        "description": "Amazonas [Zn], a liquid zinc carboxylate fertiliser: composition, foliar and fertigation rates, and crops sensitive to deficiency."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "Zn",
+        "percent": 8.5
+      }
+    ],
+    "form": {
+      "ro": "Lichid",
+      "en": "Liquid"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "0,15–0,25% din soluție",
+        "en": "0.15–0.25% solution"
+      },
+      "doseMin": 0.15,
+      "doseMax": 0.25,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Toate culturile, fertirigare",
+        "en": "All crops, fertigation"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "2–5 l/ha",
+        "en": "2–5 l/ha"
+      },
+      "doseMin": 2,
+      "doseMax": 5,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/amazonas-zn-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/amazonas-zn-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming."
+  ],
+  "conflicts": []
+}

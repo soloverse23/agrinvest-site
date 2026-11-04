@@ -1,0 +1,78 @@
+{
+  "slug": "samanta-de-grau-asterion-c1",
+  "primaryKeyword": {
+    "ro": "sămânță grâu asterion",
+    "en": "asterion wheat seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Sămânță certificată de grâu, soiul Asterion, clasa biologică C1, ambalaj de 800 kg. Datele soiului (tipul, maturitatea, rezistențele, norma de semănat) vor fi publicate după verificarea cu fișa furnizorului sau cu catalogul oficial al soiurilor.",
+      "description": "### Ce primești\nSămânță de grâu din soiul Asterion, clasa biologică C1, în ambalaj de 800 kg. C1 este sămânță certificată din prima generație, obținută din sămânță de bază.\n\n### Soiul\nNu publicăm încă datele soiului: tipul, maturitatea, rezistența la iernare și la boli, potențialul de producție sau norma de semănat. Le adăugăm după ce le verificăm cu fișa furnizorului sau cu catalogul oficial al soiurilor. Până atunci, un consultant Agrinvest îți poate spune dacă soiul se potrivește zonei și rotației tale.\n\n### Cum alegi\nCând alegi un soi de grâu, uită-te la zona și epoca de semănat, rezistența la iernare, la secetă și la boli (făinare, rugini, septorioză, fuzarioză), la masa a 1000 de boabe și, pentru panificație, la proteină și gluten.",
+      "faq": [
+        {
+          "question": "Ce înseamnă C1 la sămânță?",
+          "answer": "C1 este sămânță certificată din prima generație, obținută din sămânță de bază."
+        },
+        {
+          "question": "Ce soi de grâu este Asterion?",
+          "answer": "Datele soiului Asterion (tip, maturitate, rezistențe) nu sunt încă publicate. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de grâu Asterion C1, certificată, 800 kg",
+        "description": "Sămânță certificată de grâu Asterion, clasa C1, ambalaj de 800 kg. Vezi prețul și cere sfatul unui consultant Agrinvest pentru alegerea soiului."
+      }
+    },
+    "en": {
+      "summary": "Certified wheat seed, variety Asterion, seed class C1, 800 kg pack. The variety’s traits (type, maturity, resistances, sowing rate) will be published once checked against the supplier’s sheet or the official variety catalogue.",
+      "description": "### What you get\nWheat seed of the variety Asterion, seed class C1, in a 800 kg pack. C1 is certified seed of the first generation, grown from basic seed.\n\n### The variety\nWe do not publish the variety data yet: type, maturity, winter hardiness and disease resistance, yield potential or sowing rate. We add them once checked against the supplier’s sheet or the official variety catalogue. Until then, an Agrinvest consultant can tell you whether the variety suits your area and rotation.\n\n### How to choose\nWhen choosing a wheat variety, look at your area and sowing date, winter hardiness, drought and disease resistance (mildew, rusts, septoria, fusarium), thousand-grain weight and, for bread-making, protein and gluten.",
+      "faq": [
+        {
+          "question": "What does C1 mean for seed?",
+          "answer": "C1 is certified seed of the first generation, grown from basic seed."
+        },
+        {
+          "question": "What kind of wheat is Asterion?",
+          "answer": "The data on the variety Asterion (type, maturity, resistances) are not yet published. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Asterion wheat seed C1, certified, 800 kg pack",
+        "description": "Certified wheat seed Asterion, class C1, 800 kg pack. See the price and ask an Agrinvest consultant to help you choose the variety."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Grâu",
+      "en": "Wheat"
+    },
+    "variety": "Asterion"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/samanta-grau-asterion-c1-800-kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: species and class from the product name. Its trait text is a generic template (identical structure and sowing rates across varieties) and is not used."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label.",
+    "Variety data (type, maturity, winter hardiness, resistances, yield potential, sowing rate, recommended zones, seed treatment): no supplier sheet and no entry in the official catalogue was found."
+  ],
+  "conflicts": [
+    "The old text for this variety is a generic template, identical in structure and sowing rates to the others; it was not used."
+  ]
+}

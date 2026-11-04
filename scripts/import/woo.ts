@@ -1,7 +1,8 @@
 /**
  * Writes the planned products (`woo-plan.ts`) into Payload as `pilot`. Idempotent: products,
  * brands, ingredients and photos are upserted by slug or filename. Runs as part of
- * `npm run seed`. It overwrites product fields, so it is for development and first loads.
+ * `npm run seed`. It overwrites the fields of a product that was never enriched, so it is for
+ * development and first loads; enriched products are left to `scripts/products/apply.ts`.
  */
 import { existsSync, readdirSync } from 'node:fs'
 import { resolve } from 'node:path'
@@ -158,6 +159,7 @@ export async function importProducts(payload: Payload) {
   const categories = await find('categories', 'slug')
   const cropIds = (keys: string[]) => keys.flatMap((k) => crops.get(k) ?? [])
 
+  let kept = 0
   for (const p of plan) {
     const ingredients = []
     for (const i of p.ingredients) {
@@ -223,6 +225,11 @@ export async function importProducts(payload: Payload) {
       draft: true,
     })
     const draft = p.status === 'draft'
+    // A product the enrichment step has written is no longer import data: leave it alone.
+    if (docs[0] && (docs[0] as { enrichment?: unknown }).enrichment) {
+      kept++
+      continue
+    }
     const doc = docs[0]
       ? await payload.update({
           collection: 'products',
@@ -254,5 +261,8 @@ export async function importProducts(payload: Payload) {
     })
   }
   const merged = plan.reduce((n, p) => n + p.legacy.length, 0)
-  console.log(`products: ${plan.length} from ${merged} old records, all pilot`)
+  console.log(
+    `products: ${plan.length} from ${merged} old records, all pilot` +
+      (kept ? `; ${kept} already enriched, kept as they are` : ''),
+  )
 }

@@ -1,0 +1,90 @@
+{
+  "slug": "azotat-de-amoniu",
+  "primaryKeyword": {
+    "ro": "azotat de amoniu",
+    "en": "azotat de amoniu"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Azotatul de amoniu este un îngrășământ azotat granulat cu 33,5% azot total, care aduce azot în ambele forme (nitrat și amoniu), pentru completarea fazială a culturilor de câmp, legumelor, fructelor și viței de vie. Pachet de 1.000 kg.",
+      "description": "### Ce este\nAzotatul de amoniu este un îngrășământ granulat care dă planta azot în două forme: nitrat, pe care planta îl ia imediat, și amoniu, care rămâne mai mult în sol. De aceea este folosit mult pentru completarea fazială cu azot la culturile de câmp, legume, fructe, viță de vie și plante ornamentale.\n\n### Caracteristici (după pagina veche)\n- Aspect: granule albe, slab colorate\n- Azot total: 33,5%\n- pH: minim 4,5\n- Conținut de apă: maxim 0,45%\n- Densitate: peste 0,98 g/cm³\n- Granulație: 2–5 mm, minim 90% (granulat); 1–4 mm, minim 95% (prill)\n\n### Doze\nNu publicăm încă dozele pe culturi, pentru că nu avem o fișă tehnică a producătorului. Doza depinde de cultură, de recolta țintă și de analiza solului: întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Câți la sută azot are azotatul de amoniu?",
+          "answer": "Produsul din magazin are 33,5% azot total."
+        },
+        {
+          "question": "Ce diferență este între azotat de amoniu și uree?",
+          "answer": "Azotatul de amoniu (33,5% N) are azotul în două forme, nitrat și amoniu; ureea (46% N) are mai mult azot, într-o singură formă care se transformă în sol."
+        },
+        {
+          "question": "Se amestecă azotatul de amoniu cu ureea?",
+          "answer": "Evită amestecul: devine higroscopic și se aglomerează."
+        }
+      ],
+      "seo": {
+        "title": "Azotat de amoniu 33,5% N, îngrășământ azotat granulat",
+        "description": "Azotat de amoniu 33,5% N, granulat, pachet de 1.000 kg: caracteristici, ce aduce plantei și cum îl alegi față de uree."
+      }
+    },
+    "en": {
+      "summary": "Ammonium nitrate is a granular nitrogen fertiliser with 33.5% total nitrogen, supplying nitrogen in both forms (nitrate and ammonium), for top-dressing field crops, vegetables, fruit and grapevine. 1,000 kg pack.",
+      "description": "### What it is\nAmmonium nitrate is a granular fertiliser that gives the plant nitrogen in two forms: nitrate, which the plant takes up at once, and ammonium, which stays longer in the soil. That is why it is widely used for top-dressing nitrogen on field crops, vegetables, fruit, grapevine and ornamentals.\n\n### Characteristics (from the old page)\n- Appearance: white, slightly coloured granules\n- Total nitrogen: 33.5%\n- pH: minimum 4.5\n- Water content: maximum 0.45%\n- Density: above 0.98 g/cm³\n- Granulation: 2–5 mm, minimum 90% (granulated); 1–4 mm, minimum 95% (prill)\n\n### Rates\nWe do not publish crop rates yet, because we have no manufacturer’s technical sheet. The rate depends on the crop, the target yield and the soil analysis: ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "What percentage of nitrogen does ammonium nitrate have?",
+          "answer": "The product in the shop has 33.5% total nitrogen."
+        },
+        {
+          "question": "What is the difference between ammonium nitrate and urea?",
+          "answer": "Ammonium nitrate (33.5% N) has its nitrogen in two forms, nitrate and ammonium; urea (46% N) has more nitrogen, in a single form that converts in the soil."
+        },
+        {
+          "question": "Can ammonium nitrate be mixed with urea?",
+          "answer": "Avoid the mix: it becomes hygroscopic and cakes."
+        }
+      ],
+      "seo": {
+        "title": "Ammonium nitrate 33.5% N, granular nitrogen fertiliser",
+        "description": "Ammonium nitrate 33.5% N, granular, 1,000 kg pack: characteristics, what it gives the plant and how to choose it against urea."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 33.5
+      }
+    ],
+    "form": {
+      "ro": "Granule albe",
+      "en": "White granules"
+    },
+    "granuleSize": "2–5 mm (granulat); 1–4 mm (prill)"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/azotat/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer, origin and the technical sheet/analysis certificate: not stated.",
+    "Rates by crop: not stated."
+  ],
+  "conflicts": [
+    "The old shop’s short text calls the price “per kilogram”, while the pack is 1,000 kg at 2,800 lei (and a regular price of 2,900 lei). Is 2,800 lei the price of the 1,000 kg pack (2.80 lei/kg)?"
+  ]
+}

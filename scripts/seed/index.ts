@@ -27,6 +27,7 @@ import {
 } from './data'
 import { footer, navigation, pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
+import { applyEnrichment } from '../products/apply'
 
 const context = { skipChildren: true }
 
@@ -199,6 +200,16 @@ async function seedShop(payload: Payload) {
   const ids: Record<string, number> = {}
   for (const [order, c] of categories.entries()) {
     const parent = 'parent' in c ? ids[c.parent] : null
+    // The enrichment step owns the text of a category it has written: never reset it.
+    const { docs: existing } = await payload.find({
+      collection: 'categories',
+      where: { slug: { equals: c.slug.ro } },
+      locale: 'ro',
+      depth: 0,
+      limit: 1,
+      draft: true,
+    })
+    const enriched = Boolean((existing[0] as { enrichment?: unknown } | undefined)?.enrichment)
     ids[c.slug.ro] = await upsert(
       payload,
       'categories',
@@ -210,8 +221,7 @@ async function seedShop(payload: Payload) {
         parent,
         order,
         icon: 'icon' in c ? c.icon : null,
-        intro: c.intro.ro,
-        indexable: true,
+        ...(enriched ? {} : { intro: c.intro.ro, indexable: true }),
         _status: 'published',
       },
     )
@@ -219,7 +229,12 @@ async function seedShop(payload: Payload) {
       collection: 'categories',
       id: ids[c.slug.ro],
       locale: 'en',
-      data: { name: c.name.en, slug: c.slug.en, intro: c.intro.en, _status: 'published' },
+      data: {
+        name: c.name.en,
+        slug: c.slug.en,
+        ...(enriched ? {} : { intro: c.intro.en }),
+        _status: 'published',
+      },
       context,
     })
   }
@@ -465,6 +480,7 @@ await seedFigures(payload)
 await seedLocations(payload)
 await seedShop(payload)
 await importProducts(payload)
+await applyEnrichment(payload)
 const peopleIds = await seedPeople(payload)
 const mediaIds = await seedMedia(payload)
 await seedGlobals(payload)

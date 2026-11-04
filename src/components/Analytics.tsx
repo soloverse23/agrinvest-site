@@ -14,7 +14,7 @@ import { CHANGE_EVENT, OPEN_EVENT } from '@/lib/consent'
  * `consent` cookie and can be changed from the footer ("Cookie settings").
  *
  * Events: generate_lead (with the lead type), call_click (tel: links), email_click (mailto:).
- * `order` is reserved for the shop (Phase 3).
+ * order (a shop order, with no personal data).
  */
 type Choice = 'granted' | 'denied'
 
@@ -108,10 +108,13 @@ export function Analytics({
       if (href.startsWith('tel:')) track('call_click', { link_url: href })
       else if (href.startsWith('mailto:')) track('email_click', { link_url: href })
     }
+    const onOrder = () => track('order')
     window.addEventListener('agrinvest:lead', onLead)
+    window.addEventListener('agrinvest:order', onOrder)
     document.addEventListener('click', onClick, { capture: true })
     return () => {
       window.removeEventListener('agrinvest:lead', onLead)
+      window.removeEventListener('agrinvest:order', onOrder)
       document.removeEventListener('click', onClick, { capture: true })
     }
   }, [choice])

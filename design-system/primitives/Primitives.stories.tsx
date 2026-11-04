@@ -5,7 +5,7 @@ import { ArrowRightIcon, CartIcon } from '../icons/icons'
 import { Badge } from './Badge'
 import { Button } from './Button'
 import { Delta } from './Delta'
-import { SelectField, TextField } from './Field'
+import { CheckboxField, SelectField, TextAreaField, TextField } from './Field'
 import { SegmentedControl } from './SegmentedControl'
 
 const meta: Meta = { title: 'Primitives' }
@@ -148,6 +148,18 @@ export const Fields: Story = {
           type="tel"
           autoComplete="tel"
           placeholder="07xx xxx xxx"
+        />
+        <TextAreaField
+          label={ro ? 'Mesaj' : 'Message'}
+          hint={ro ? 'Cantitate, perioadă.' : 'Quantity, timing.'}
+        />
+        <CheckboxField
+          label={
+            ro
+              ? 'Sunt de acord să fiu contactat despre această cerere.'
+              : 'I agree to be contacted about this request.'
+          }
+          error={ro ? 'Avem nevoie de acordul tău.' : 'We need your consent.'}
         />
       </form>
     )

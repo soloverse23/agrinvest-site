@@ -136,3 +136,43 @@ export const LeafIcon = icon(
   'LeafIcon',
   <path d="M5 19C5 10 10.5 5 20 4.5 19.5 14 14.5 19 5.5 19.5M5 19l7-7" />,
 )
+export const ScaleIcon = icon(
+  'ScaleIcon',
+  <path d="M12 4v16M8 20h8M5 7h14M5 7l-2.5 6a2.5 2.5 0 0 0 5 0zM19 7l-2.5 6a2.5 2.5 0 0 0 5 0z" />,
+)
+export const DropIcon = icon(
+  'DropIcon',
+  <path d="M12 3.5s-6 6.4-6 10.6a6 6 0 0 0 12 0C18 9.9 12 3.5 12 3.5zM9.2 14.5a2.9 2.9 0 0 0 2.6 2.7" />,
+)
+export const CoinsIcon = icon(
+  'CoinsIcon',
+  <>
+    <ellipse cx="9" cy="7" rx="5.5" ry="2.5" />
+    <path d="M3.5 7v4c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5V7M3.5 11v4c0 1.4 2.5 2.5 5.5 2.5 1 0 2-.1 2.8-.4" />
+    <ellipse cx="15.5" cy="15" rx="5" ry="2.3" />
+    <path d="M10.5 15v2.7c0 1.3 2.2 2.3 5 2.3s5-1 5-2.3V15" />
+  </>,
+)
+export const ClockIcon = icon(
+  'ClockIcon',
+  <>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 7.5V12l3 2" />
+  </>,
+)
+export const HandshakeIcon = icon(
+  'HandshakeIcon',
+  <path d="M2.5 8.5 6 6l3 1.5L12 6l3 1.5L18 6l3.5 2.5M2.5 8.5V14l3 1.5M21.5 8.5V14l-5 3.5-2.5-1.5M5.5 15.5l3 2.5 1.5-1.2 1.5 1.2 1.5-1.2L14 16M9 7.5l-1.5 3a1.5 1.5 0 0 0 2.4 1.6L12 10l4.5 4" />,
+)
+export const MailIcon = icon(
+  'MailIcon',
+  <>
+    <rect x="3" y="5.5" width="18" height="13" rx="2" />
+    <path d="m3.5 7 8.5 6 8.5-6" />
+  </>,
+)
+export const DocumentIcon = icon(
+  'DocumentIcon',
+  <path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6" />,
+)
+export const PlayIcon = icon('PlayIcon', <path d="M8 5.5v13l10.5-6.5z" />)

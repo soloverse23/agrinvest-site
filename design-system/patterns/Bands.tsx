@@ -18,7 +18,14 @@ export function FigureStrip({
   items,
 }: {
   locale: Locale
-  items: readonly { key: string; value: number; unit?: string; label: string }[]
+  items: readonly {
+    key: string
+    value: number
+    unit?: string
+    label: string
+    /** Shown after the value, e.g. a "to confirm" marker. */
+    note?: ReactNode
+  }[]
 }) {
   return (
     <dl className="grid divide-y divide-line border-y border-line md:grid-cols-3 md:divide-x md:divide-y-0">
@@ -38,6 +45,7 @@ export function FigureStrip({
             {item.unit && (
               <span className="ml-1.5 text-h3 font-medium text-muted">{item.unit}</span>
             )}
+            {item.note}
           </dd>
         </div>
       ))}
@@ -57,29 +65,33 @@ export function FinanceBand({
   secondary,
   instalments,
 }: {
-  kicker: string
+  kicker?: string | null
   title: string
-  body: string
+  body?: ReactNode
   cta: { href: string; label: string }
-  secondary: { href: string; label: string }
+  secondary?: { href: string; label: string } | null
   instalments: { when: string; label: string }[]
 }) {
   return (
     <section className="grid gap-12 rounded-xl bg-forest px-6 py-10 text-on-forest md:px-12 md:py-14 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-16">
       <div className="grid gap-5 lg:col-span-6">
-        <p className="flex items-center gap-3 text-small font-medium text-lime">
-          <span className="h-px w-10 bg-lime" aria-hidden="true" />
-          {kicker}
-        </p>
+        {kicker && (
+          <p className="flex items-center gap-3 text-small font-medium text-lime">
+            <span className="h-px w-10 bg-lime" aria-hidden="true" />
+            {kicker}
+          </p>
+        )}
         <h2 className="text-h1 font-semibold text-balance">{title}</h2>
-        <p className="max-w-xl text-lead text-on-forest-muted">{body}</p>
+        {body && <p className="max-w-xl text-lead text-on-forest-muted">{body}</p>}
         <div className="mt-2 flex flex-wrap gap-3">
           <Button href={cta.href} variant="lime" icon={<ArrowRightIcon />}>
             {cta.label}
           </Button>
-          <Button href={secondary.href} variant="on-dark">
-            {secondary.label}
-          </Button>
+          {secondary && (
+            <Button href={secondary.href} variant="on-dark">
+              {secondary.label}
+            </Button>
+          )}
         </div>
       </div>
       <ol className="relative grid gap-8 border-l border-on-forest/20 pl-8 lg:col-span-6">

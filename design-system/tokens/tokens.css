@@ -4,8 +4,6 @@
  * (bg-paper, text-ink, rounded-card, shadow-raised…), never raw values.
  * Tailwind's own palette, fonts, radii and shadows are cleared so only these exist.
  */
-@import '@fontsource-variable/onest/wght.css';
-
 @theme {
   --color-*: initial;
   --font-*: initial;
@@ -54,7 +52,9 @@
   --color-danger-soft: #f9e7df;
 
   /* Type: one family, Onest, with tabular figures for data */
-  --font-sans: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* 'Onest Variable' is declared by the site (globals.css, preloaded) and by Storybook
+     (@fontsource); both use the same files. */
+  --font-sans: 'Onest Variable', 'Onest Fallback', 'Onest Fallback Roboto', system-ui, sans-serif;
 
   --text-caption: 0.8125rem;
   --text-caption--line-height: 1.4;
@@ -106,6 +106,13 @@
   --breakpoint-xl: 1440px;
   --container-text: 42rem; /* ~68 characters */
   --container-page: 82rem;
+  /* Measures for headlines, leads and panels (Tailwind's scale, kept to the sizes in use). */
+  --container-sm: 24rem;
+  --container-xl: 36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-4xl: 56rem;
+  --container-5xl: 64rem;
 
   /* Motion (craft.md) */
   --ease-enter: cubic-bezier(0.2, 0, 0, 1);
@@ -150,5 +157,52 @@
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
     }
+  }
+}
+
+/* Long-form text from the CMS (Lexical rich text): headings, lists and links in token styles. */
+@layer components {
+  .prose-agr {
+    display: grid;
+    gap: 1.25rem;
+    color: var(--color-muted);
+    max-width: var(--container-text);
+  }
+  .prose-agr :where(h2) {
+    margin-top: 1.5rem;
+    color: var(--color-ink);
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+    letter-spacing: var(--text-h2--letter-spacing);
+    font-weight: 600;
+    text-wrap: balance;
+    scroll-margin-top: 6rem;
+  }
+  .prose-agr :where(h3) {
+    margin-top: 0.75rem;
+    color: var(--color-ink);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3--line-height);
+    letter-spacing: var(--text-h3--letter-spacing);
+    font-weight: 600;
+  }
+  .prose-agr :where(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .prose-agr :where(a) {
+    color: var(--color-accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-agr :where(ul) {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .prose-agr :where(li)::marker {
+    color: var(--color-accent);
   }
 }

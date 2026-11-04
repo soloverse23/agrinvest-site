@@ -18,6 +18,11 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 5. **Acordul de a folosi materialele video** de pe YouTube (filmul de brand din 2022, seria Golden Relationship, aparițiile Agro TV) pe site.
 6. **Fotografii reale:** baze, echipă, flotă, câmpuri, evenimente. Fără fotografii de stoc.
    - **Sigla în format vectorial** (SVG, AI sau PDF) și eventualul manual de identitate. Până atunci folosim o retrasare a siglei actuale.
+   - **Cine primește fiecare tip de cerere** de pe site (vânzare cereale, depozitare, inputuri, finanțare, logistică, parteneriate, cariere): nume, rol, telefon, e-mail și acordul de a afișa telefonul pe site.
+   - **Politica de confidențialitate** pentru formulare (GDPR), aprobată de responsabilul cu protecția datelor (dpo@agrinvest.ro). Pagina există pe site, fără text final.
+   - **Revizuirea textelor paginilor principale** (faza 2.2): textele în română sunt o schiță rescrisă după site-ul vechi; fiecare pagină are un rezumat, întrebări frecvente și cifre din registru.
+   - **Condițiile de recepție pe cultură** (umiditate, impurități, masă hectolitrică) folosite de Agrinvest; paginile `/cereale/{cultură}` le afișează când sunt completate.
+   - **Calendarul ratelor IFN:** pagina veche spune „toamnă și primăvară”, schița aprobată spune „după recolta de vară și de toamnă”.
 
 ### Magazinul (faza 3)
 
@@ -57,6 +62,11 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 5. **Permission to use the YouTube videos** (the 2022 brand film, the Golden Relationship series, the Agro TV appearances) on the site.
 6. **Real photos:** bases, team, fleet, fields, events. No stock photos.
    - **The logo as a vector file** (SVG, AI or PDF) and any brand guidelines. Until then we use a redrawn trace of the current logo.
+   - **Who receives each type of enquiry** from the site (selling grain, storage, inputs, financing, logistics, partnerships, careers): name, role, phone, email, and consent to show the phone on the site.
+   - **The privacy policy** for the forms (GDPR), approved by the data protection officer (dpo@agrinvest.ro). The page exists on the site without final text.
+   - **A review of the core page copy** (phase 2.2): the Romanian text is a draft rewritten from the old site; every page has a summary, an FAQ and figures from the register.
+   - **Reception standards per crop** (moisture, impurities, hectolitre mass) that Agrinvest applies; the `/cereale/{crop}` pages show them once filled in.
+   - **The IFN instalment calendar:** the old page says "autumn and spring", the approved sketch says "after the summer and autumn harvests".
 
 ### Shop (phase 3)
 

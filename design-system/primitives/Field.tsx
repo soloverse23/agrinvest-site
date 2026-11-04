@@ -1,4 +1,10 @@
-import { useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from 'react'
+import {
+  useId,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type SelectHTMLAttributes,
+  type TextareaHTMLAttributes,
+} from 'react'
 
 import { ChevronDownIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
@@ -25,10 +31,11 @@ function Frame({
   label,
   hint,
   error,
+  className,
   children,
-}: FieldFrame & { id: string; children: ReactNode }) {
+}: FieldFrame & { id: string; className?: string; children: ReactNode }) {
   return (
-    <div className="grid gap-1.5">
+    <div className={cx('grid content-start gap-1.5', className)}>
       <label htmlFor={id} className="text-small font-medium text-ink">
         {label}
       </label>
@@ -60,8 +67,8 @@ export function TextField({
 }: FieldFrame & Omit<InputHTMLAttributes<HTMLInputElement>, 'children'>) {
   const id = useId()
   return (
-    <Frame id={id} label={label} hint={hint} error={error}>
-      <div className={cx('relative', className)}>
+    <Frame id={id} label={label} hint={hint} error={error} className={className}>
+      <div className="relative">
         <input
           id={id}
           aria-invalid={error ? true : undefined}
@@ -97,8 +104,8 @@ export function SelectField({
   >) {
   const id = useId()
   return (
-    <Frame id={id} label={label} hint={hint} error={error}>
-      <div className={cx('relative', className)}>
+    <Frame id={id} label={label} hint={hint} error={error} className={className}>
+      <div className="relative">
         <select
           id={id}
           aria-invalid={error ? true : undefined}
@@ -115,5 +122,63 @@ export function SelectField({
         <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-muted" />
       </div>
     </Frame>
+  )
+}
+
+export function TextAreaField({
+  label,
+  hint,
+  error,
+  className,
+  rows = 4,
+  ...props
+}: Omit<FieldFrame, 'suffix'> & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'children'>) {
+  const id = useId()
+  return (
+    <Frame id={id} label={label} hint={hint} error={error} className={className}>
+      <textarea
+        id={id}
+        rows={rows}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy(id, hint, error)}
+        className={cx(control, controlState(error), 'h-auto py-3')}
+        {...props}
+      />
+    </Frame>
+  )
+}
+
+/** Checkbox with its label to the right; the label may contain links. */
+export function CheckboxField({
+  label,
+  error,
+  className,
+  ...props
+}: { label: ReactNode; error?: string } & Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'children'
+>) {
+  const id = useId()
+  return (
+    <div className={cx('grid gap-1.5', className)}>
+      <div className="flex items-start gap-3">
+        <input
+          id={id}
+          type="checkbox"
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className="mt-0.5 size-5 shrink-0 rounded-sm border-field-line accent-accent focus-visible:ring-4 focus-visible:ring-accent/15 focus-visible:outline-none"
+          {...props}
+        />
+        <label htmlFor={id} className="text-small text-muted">
+          {label}
+        </label>
+      </div>
+      {error && (
+        <p id={`${id}-error`} className="text-caption font-medium text-danger">
+          {error}
+        </p>
+      )}
+    </div>
   )
 }

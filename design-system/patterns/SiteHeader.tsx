@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { Locale } from '@/i18n/config'
+import { localePath, type Locale } from '@/i18n/config'
 import { formatNumber } from '@/lib/format'
 
 import type { CropKey } from '../fixtures/sample'
@@ -8,34 +8,41 @@ import { MenuIcon, PhoneIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
 import { Delta } from '../primitives/Delta'
+import { MegaMenu } from './MegaMenu'
+import { linkBase, linkState } from './nav-styles'
 import { Lockup } from './parts'
+
+export type NavItem = {
+  href: string
+  label: string
+  /** One sentence for the menu panel. */
+  blurb?: string | null
+  /** Sub-pages: shown in the desktop panel and indented in the mobile menu. */
+  children?: { href: string; label: string; description?: string | null }[]
+}
 
 export type SiteHeaderProps = {
   locale: Locale
-  nav: { href: string; label: string }[]
+  nav: NavItem[]
   /** href of the current section, marked with aria-current. */
   current?: string
   cta: { href: string; label: string }
-  labels: { menu: string; main: string; language: string }
+  labels: { menu: string; main: string; language: string; all?: string; call?: string }
+  /** Phone in the menu panels ("call us"), from the figures register. */
+  phone?: string
   /** `overlay`: transparent, light text, for drawing over a hero photo. */
   tone?: 'default' | 'overlay'
+  /**
+   * Public URL of this page in each language. A language without an equivalent page
+   * links to that language's home.
+   */
+  alternates?: Partial<Record<Locale, string>>
   /** Optional strip above the header with today's prices and the phone number. */
   ticker?: {
     crops: { crop: CropKey; name: string; price: number; change: number }[]
     phone: string
   }
 }
-
-const linkBase =
-  'inline-flex h-10 items-center rounded-md px-3.5 text-small font-medium no-underline transition-colors duration-150'
-const linkState = (active: boolean, overlay = false) =>
-  overlay
-    ? active
-      ? 'bg-on-forest/15 text-on-forest'
-      : 'text-on-forest/85 hover:bg-on-forest/10 hover:text-on-forest'
-    : active
-      ? 'bg-accent-soft text-accent'
-      : 'text-muted hover:bg-surface hover:text-ink'
 
 /** Site header: logo, sections, language, one call to action. Mobile menu needs no JavaScript. */
 export function SiteHeader({
@@ -46,6 +53,8 @@ export function SiteHeader({
   labels,
   tone = 'default',
   ticker,
+  alternates = {},
+  phone,
 }: SiteHeaderProps) {
   const overlay = tone === 'overlay'
   return (
@@ -84,24 +93,10 @@ export function SiteHeader({
         className={overlay ? 'border-b border-on-forest/15' : 'border-b border-line bg-paper'}
       >
         <div className="relative mx-auto flex h-18 max-w-page items-center gap-6 px-4 md:px-8">
-          <Link href="/" className="no-underline" aria-label="Agrinvest">
+          <Link href={localePath('/', locale)} className="no-underline" aria-label="Agrinvest">
             <Lockup tone={overlay ? 'light' : 'dark'} />
           </Link>
-          <nav aria-label={labels.main} className="hidden lg:block">
-            <ul className="flex items-center gap-1">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={item.href === current ? 'page' : undefined}
-                    className={cx(linkBase, linkState(item.href === current, overlay))}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <MegaMenu nav={nav} current={current} overlay={overlay} phone={phone} labels={labels} />
           <div className="ml-auto flex items-center gap-3">
             <div
               role="group"
@@ -114,7 +109,7 @@ export function SiteHeader({
               {(['ro', 'en'] as const).map((l) => (
                 <Link
                   key={l}
-                  href={l === 'ro' ? '/' : '/en'}
+                  href={alternates[l] ?? localePath('/', l)}
                   lang={l}
                   aria-current={l === locale ? 'true' : undefined}
                   className={cx(
@@ -168,6 +163,25 @@ export function SiteHeader({
                       >
                         {item.label}
                       </Link>
+                      {!!item.children?.length && (
+                        <ul className="mb-1 ml-3.5 grid border-l border-line pl-2">
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                aria-current={child.href === current ? 'page' : undefined}
+                                className={cx(
+                                  linkBase,
+                                  linkState(child.href === current),
+                                  'h-11 w-full',
+                                )}
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>

@@ -183,6 +183,11 @@ async function main() {
   for (const [name, content] of Object.entries(files)) {
     await fs.writeFile(path.join(brandDir, name), content)
   }
+  // The site serves the colour and the light mark as files (the Lockup's <img>), so the
+  // logo is cached once instead of repeated as inline SVG in every page's HTML and RSC data.
+  for (const name of ['logo-mark.svg', 'logo-mark-mono-light.svg']) {
+    await fs.writeFile(path.join(root, 'public/brand', name), files[name])
+  }
   // Geometry for the React component, so it needs no SVG loader.
   await fs.writeFile(
     path.join(brandDir, 'geometry.ts'),

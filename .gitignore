@@ -56,3 +56,6 @@ node_modules/
 
 # Design review (screenshots are regenerated; keep only the final set)
 /docs/design-review/shots/
+
+# build caches (fonts for metric calculation)
+/.cache/

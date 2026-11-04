@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/nextjs-vite'
 
-// Same stylesheet as the public site, so stories render with the real tokens.
+// Same stylesheet as the public site, so stories render with the real tokens. The site
+// loads Onest through next/font; Storybook loads the same files from @fontsource.
+import '@fontsource-variable/onest/wght.css'
 import '../src/app/(frontend)/globals.css'
 
 const preview: Preview = {

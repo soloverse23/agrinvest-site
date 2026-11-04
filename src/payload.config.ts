@@ -1,6 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { en } from '@payloadcms/translations/languages/en'
 import { ro } from '@payloadcms/translations/languages/ro'
 import path from 'path'
@@ -33,7 +34,10 @@ import { defaultLocale } from './i18n/config'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-/** Media goes to Cloudflare R2 when its credentials are set; local disk otherwise (dev, CI). */
+/**
+ * Media goes to Vercel Blob or Cloudflare R2, whichever is configured; local disk otherwise
+ * (dev, CI). Vercel's own disk is read-only, so hosted uploads need one of the two.
+ */
 const r2 = process.env.R2_BUCKET
   ? s3Storage({
       bucket: process.env.R2_BUCKET,
@@ -46,6 +50,15 @@ const r2 = process.env.R2_BUCKET
           secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
         },
       },
+    })
+  : null
+
+const blob = process.env.BLOB_READ_WRITE_TOKEN
+  ? vercelBlobStorage({
+      collections: { media: true, documents: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      // Straight from the browser: a Vercel function accepts 4.5 MB at most.
+      clientUploads: true,
     })
   : null
 
@@ -101,5 +114,5 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
-  plugins: r2 ? [r2] : [],
+  plugins: [blob, r2].flatMap((plugin) => plugin ?? []),
 })

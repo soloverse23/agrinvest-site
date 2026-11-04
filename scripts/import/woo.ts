@@ -46,39 +46,100 @@ async function upsertBySlug(
   return doc.id
 }
 
-/** Product photos from the old shop. Local database only, and rights stay pending. */
+/** A local database, or a deploy with cloud storage (`SEED_PHOTOS`). Rights stay pending. */
+export const canUploadPhotos = () =>
+  process.env.SEED_PHOTOS === 'true' ||
+  /@(127\.0\.0\.1|localhost)[:/]/.test(process.env.DATABASE_URL ?? '')
+
+/** The photo as a file: the local export if there is one, else from the old shop. */
+async function photoFile(slug: string, url?: string) {
+  const local = existsSync(photosDir)
+    ? readdirSync(photosDir).find((f) => f.replace(/\.\w+$/, '') === `${slug}-1`)
+    : undefined
+  if (local) return { filename: local, filePath: resolve(photosDir, local) }
+  if (!url) return null
+  const filename = `${slug}-1.${url.split('.').pop()}`
+  return { filename, url }
+}
+
+/** Photos of a product. A photo that cannot be fetched is skipped: it never stops a deploy. */
 async function photoOf(payload: Payload, product: PlannedProduct) {
-  const local = /@(127\.0\.0\.1|localhost)[:/]/.test(process.env.DATABASE_URL ?? '')
-  if (!local || !existsSync(photosDir)) return []
+  if (!canUploadPhotos()) return []
   const ids: number[] = []
-  const files = readdirSync(photosDir)
-  for (const { slug } of product.legacy) {
-    const filename = files.find((f) => f.replace(/\.\w+$/, '') === `${slug}-1`)
-    if (!filename) continue
+  for (const { slug, image } of product.legacy) {
+    const source = await photoFile(slug, image)
+    if (!source) continue
     const found = await payload.find({
       collection: 'media',
-      where: { filename: { equals: filename } },
+      where: { filename: { equals: source.filename } },
       limit: 1,
       depth: 0,
     })
     const data = { alt: product.name.ro, rights: 'pending' as const, credit: 'agrinvestshop.ro' }
-    const doc =
-      found.docs[0] ??
-      (await payload.create({
+    try {
+      let doc = found.docs[0]
+      if (!doc && source.filePath)
+        doc = await payload.create({
+          collection: 'media',
+          data,
+          filePath: source.filePath,
+          locale: 'ro',
+        })
+      if (!doc && source.url) {
+        const res = await fetch(source.url)
+        if (!res.ok) throw new Error(`${source.url} → ${res.status}`)
+        const bytes = Buffer.from(await res.arrayBuffer())
+        doc = await payload.create({
+          collection: 'media',
+          data,
+          locale: 'ro',
+          file: {
+            data: bytes,
+            name: source.filename,
+            size: bytes.length,
+            mimetype: res.headers.get('content-type') ?? 'image/png',
+          },
+        })
+      }
+      if (!doc) continue
+      await payload.update({
         collection: 'media',
-        data,
-        filePath: resolve(photosDir, filename),
-        locale: 'ro',
-      }))
-    await payload.update({
-      collection: 'media',
-      id: doc.id,
-      data: { alt: product.name.en },
-      locale: 'en',
-    })
-    ids.push(doc.id)
+        id: doc.id,
+        data: { alt: product.name.en },
+        locale: 'en',
+      })
+      ids.push(doc.id)
+    } catch (error) {
+      console.warn(`photo skipped for ${product.slug}: ${(error as Error).message}`)
+    }
   }
   return ids
+}
+
+/** Adds photos to published products that have none. Never touches a product that has some. */
+export async function attachProductPhotos(payload: Payload) {
+  let added = 0
+  for (const p of planProducts()) {
+    if (p.status !== 'published') continue
+    const { docs } = await payload.find({
+      collection: 'products',
+      where: { slug: { equals: p.slug } },
+      limit: 1,
+      depth: 0,
+    })
+    if (!docs[0] || docs[0].gallery?.length) continue
+    const gallery = await photoOf(payload, p)
+    if (!gallery.length) continue
+    await payload.update({
+      collection: 'products',
+      id: docs[0].id,
+      locale: 'ro',
+      data: { gallery },
+      context,
+    })
+    added++
+  }
+  console.log(`product photos: added to ${added} products`)
 }
 
 export async function importProducts(payload: Payload) {

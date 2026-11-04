@@ -23,6 +23,17 @@ npm run dev              # http://localhost:3100 (RO), /en (EN), /admin
 | `npm run generate:types` / `generate:importmap`             | Regenerate Payload types and the admin import map     |
 | `npm run audit:crawl` / `audit:products` / `audit:keywords` | Phase 0 audit scripts (outputs in `docs/audit/`)      |
 
+## Database changes
+
+Development pushes the schema automatically. Production only changes through migrations:
+
+```bash
+npm run migrate:create <name>   # after changing collections; commit src/migrations/
+npm run migrate                 # with the production DATABASE_URL, before deploying that code
+```
+
+CI fails if the collections and `src/migrations/` disagree. A local push can stop and wait for a yes on a change that may lose data (a column changing type, for example); it never runs in production.
+
 ## Documents
 
 - `docs/ROADMAP.md`: all phases.

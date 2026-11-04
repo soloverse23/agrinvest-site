@@ -39,6 +39,11 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
+      - name: Migrations match the collections
+        run: |
+          npm run migrate:create -- drift-check --skip-empty
+          git diff --exit-code --stat -- src/migrations
+          test -z "$(git ls-files --others --exclude-standard src/migrations)"
       - name: Seed content (schema push + Phase 2 seed)
         run: npm run seed
       - run: npm run build

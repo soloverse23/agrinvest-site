@@ -16,6 +16,7 @@ import { cropPath, sections } from '@/i18n/routes'
 import { fixedPaths, ui } from '@/i18n/ui'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import { getCrop, listCrops } from '@/lib/content/locations'
+import { isGrainKey } from '@/lib/crops'
 import { getPage, type Alternates } from '@/lib/content/pages'
 import { formatNumber } from '@/lib/format'
 import { buildMetadata } from '@/lib/seo/metadata'
@@ -207,7 +208,7 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
                     href={cropPath(c.slug, locale)}
                     className="flex items-center gap-3 rounded-lg bg-raised py-2 pr-4 pl-2 font-semibold text-ink no-underline shadow-soft ring-1 ring-line hover:ring-accent"
                   >
-                    <CropBadge crop={c.key} size="sm" />
+                    {isGrainKey(c.key) && <CropBadge crop={c.key} size="sm" />}
                     {c.name}
                   </Link>
                 </li>

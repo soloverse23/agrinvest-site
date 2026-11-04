@@ -7,6 +7,11 @@ export const tags = {
   crops: 'crops',
   counties: 'counties',
   people: 'people',
+  products: 'products',
+  categories: 'categories',
+  brands: 'brands',
+  ingredients: 'ingredients',
+  targets: 'targets',
   global: (slug: string) => `global:${slug}`,
 } as const
 

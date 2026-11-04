@@ -68,7 +68,12 @@ export const Leads: CollectionConfig = {
       fields: [
         { name: 'county', type: 'relationship', relationTo: 'counties' },
         { name: 'base', type: 'relationship', relationTo: 'bases' },
-        { name: 'crop', type: 'relationship', relationTo: 'crops' },
+        {
+          name: 'crop',
+          type: 'relationship',
+          relationTo: 'crops',
+          filterOptions: { isGrain: { equals: true } },
+        },
       ],
     },
     { name: 'message', type: 'textarea' },

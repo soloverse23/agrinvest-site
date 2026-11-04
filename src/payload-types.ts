@@ -71,24 +71,48 @@ export interface Config {
     bases: Base;
     counties: County;
     crops: Crop;
+    products: Product;
+    categories: Category;
+    brands: Brand;
+    'active-ingredients': ActiveIngredient;
+    targets: Target;
+    'price-history': PriceHistory;
     people: Person;
     leads: Lead;
     media: Media;
+    documents: ProductDocument;
     users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      products: 'products';
+    };
+    brands: {
+      products: 'products';
+    };
+    'active-ingredients': {
+      products: 'products';
+    };
+  };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     bases: BasesSelect<false> | BasesSelect<true>;
     counties: CountiesSelect<false> | CountiesSelect<true>;
     crops: CropsSelect<false> | CropsSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    'active-ingredients': ActiveIngredientsSelect<false> | ActiveIngredientsSelect<true>;
+    targets: TargetsSelect<false> | TargetsSelect<true>;
+    'price-history': PriceHistorySelect<false> | PriceHistorySelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -542,7 +566,7 @@ export interface CropListBlock {
   heading?: string | null;
   lead?: string | null;
   /**
-   * Empty = all crops.
+   * Empty = all crops Agrinvest buys.
    */
   crops?: (number | Crop)[] | null;
   id?: string | null;
@@ -557,9 +581,13 @@ export interface Crop {
   id: number;
   name: string;
   /**
-   * Stable key for icons, prices and data colours.
+   * Stable English key for icons, prices and data colours.
    */
-  key: 'wheat' | 'maize' | 'sunflower' | 'rapeseed' | 'barley';
+  key: string;
+  /**
+   * Turns on the grain page, the sitemap entry and the lead form option.
+   */
+  isGrain?: boolean | null;
   intro?: string | null;
   /**
    * Reception standards (STAS). To confirm with Agrinvest.
@@ -594,6 +622,28 @@ export interface Crop {
     description?: string | null;
     image?: (number | null) | Media;
     noindex?: boolean | null;
+  };
+  /**
+   * The crop hub in the shop (/magazin/cultura/…).
+   */
+  shop?: {
+    /**
+     * Required before the hub can be indexed.
+     */
+    intro?: string | null;
+    /**
+     * Also needs an intro and at least 3 products.
+     */
+    indexable?: boolean | null;
+    /**
+     * Title 30–60 characters, description 70–160 (checked by check:seo).
+     */
+    seo?: {
+      title?: string | null;
+      description?: string | null;
+      image?: (number | null) | Media;
+      noindex?: boolean | null;
+    };
   };
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -762,6 +812,430 @@ export interface Base {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  commerceStatus: 'pilot' | 'live';
+  gaps?:
+    | (
+        | 'variants'
+        | 'category'
+        | 'brand'
+        | 'crops'
+        | 'summary'
+        | 'description'
+        | 'gallery'
+        | 'technical'
+        | 'doses'
+        | 'documents'
+        | 'price-unconfirmed'
+        | 'technical-unconfirmed'
+        | 'doses-unconfirmed'
+      )[]
+    | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  name: string;
+  productType: 'protection' | 'seed' | 'fertiliser' | 'other';
+  /**
+   * Sets the product URL.
+   */
+  primaryCategory?: (number | null) | Category;
+  secondaryCategories?: (number | Category)[] | null;
+  brand?: (number | null) | Brand;
+  crops?: (number | Crop)[] | null;
+  targets?: (number | Target)[] | null;
+  /**
+   * The direct answer shown at the top of the page.
+   */
+  summary?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  variants?:
+    | {
+        sku: string;
+        size: number;
+        unit: 'l' | 'ml' | 'kg' | 'g' | 't' | 'seeds' | 'pieces';
+        price?: number | null;
+        /**
+         * Empty until Agrinvest confirms it.
+         */
+        vatRate?: number | null;
+        stock: 'in-stock' | 'on-request' | 'out-of-stock';
+        /**
+         * Calculated on save.
+         */
+        unitPrice?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  protection?: {
+    activeIngredients?:
+      | {
+          ingredient: number | ActiveIngredient;
+          concentration?: number | null;
+          unit?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    formulation?: string | null;
+    registrationNumber?: string | null;
+    registrationValidUntil?: string | null;
+    /**
+     * From the label or the official register only. Never inferred.
+     */
+    doses?:
+      | {
+          crop: number | Crop;
+          target?: (number | Target)[] | null;
+          bbch?: string | null;
+          doseMin?: number | null;
+          doseMax?: number | null;
+          doseUnit?: string | null;
+          waterVolume?: string | null;
+          maxTreatments?: number | null;
+          waitingPeriod?: number | null;
+          notes?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    modeOfAction?: string | null;
+    resistanceGroup?: string | null;
+    toxicityClass?: string | null;
+    safety?: string | null;
+    /**
+     * Checkout asks for the buyer’s certificate.
+     */
+    professionalUse?: boolean | null;
+    compatibility?: string | null;
+  };
+  seed?: {
+    species?: string | null;
+    variety?: string | null;
+    faoGroup?: string | null;
+    maturity?: string | null;
+    sowingDensity?: string | null;
+    sowingRate?: string | null;
+    yieldPotential?: string | null;
+    resistances?: string | null;
+    recommendedZones?: string | null;
+    seedTreatment?: string | null;
+  };
+  fertiliser?: {
+    /**
+     * N, P2O5, K2O, S and micronutrients.
+     */
+    nutrients?:
+      | {
+          nutrient?: string | null;
+          percent?: number | null;
+          id?: string | null;
+        }[]
+      | null;
+    form?: string | null;
+    granuleSize?: string | null;
+    rates?:
+      | {
+          crop: number | Crop;
+          timing?: string | null;
+          rateMin?: number | null;
+          rateMax?: number | null;
+          rateUnit?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    storage?: string | null;
+  };
+  gallery?: (number | Media)[] | null;
+  documents?: (number | ProductDocument)[] | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  related?: (number | Product)[] | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  verification: {
+    price: {
+      status: 'to-confirm' | 'conflict' | 'confirmed';
+      source?: string | null;
+    };
+    technical: {
+      status: 'to-confirm' | 'conflict' | 'confirmed';
+      source?: string | null;
+    };
+    doses: {
+      status: 'to-confirm' | 'conflict' | 'confirmed';
+      source?: string | null;
+    };
+  };
+  /**
+   * Internal. Never shown on the site.
+   */
+  sourceNotes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  name: string;
+  /**
+   * Products get a Category as their primary one. Groups only hold categories; themes cut across them.
+   */
+  role: 'group' | 'category' | 'theme';
+  parent?: (number | null) | Category;
+  order?: number | null;
+  icon?: ('leaf' | 'drop' | 'silo' | 'scale' | 'document') | null;
+  /**
+   * Required before the hub can be indexed.
+   */
+  intro?: string | null;
+  /**
+   * Also needs an intro and at least 3 products.
+   */
+  indexable?: boolean | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  buyingAdvice?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  featured?: (number | Product)[] | null;
+  facets?: ('crop' | 'brand' | 'target' | 'ingredient' | 'formulation' | 'stock')[] | null;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: number;
+  name: string;
+  logo?: (number | null) | Media;
+  country?: string | null;
+  website?: string | null;
+  /**
+   * Required before the hub can be indexed.
+   */
+  intro?: string | null;
+  /**
+   * Also needs an intro and at least 3 products.
+   */
+  indexable?: boolean | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  featured?: (number | Product)[] | null;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "targets".
+ */
+export interface Target {
+  id: number;
+  name: string;
+  kind: 'weed' | 'disease' | 'pest' | 'deficiency';
+  crops?: (number | Crop)[] | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "active-ingredients".
+ */
+export interface ActiveIngredient {
+  id: number;
+  name: string;
+  chemicalGroup?: string | null;
+  /**
+   * HRAC, FRAC or IRAC code.
+   */
+  resistanceGroup?: string | null;
+  /**
+   * Required before the hub can be indexed.
+   */
+  intro?: string | null;
+  /**
+   * Also needs an intro and at least 3 products.
+   */
+  indexable?: boolean | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  featured?: (number | Product)[] | null;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface ProductDocument {
+  id: number;
+  title: string;
+  kind: 'technical' | 'safety' | 'label';
+  language: 'ro' | 'en';
+  version?: string | null;
+  source?: string | null;
+  /**
+   * A "pending" file is not public. The product links to its source instead.
+   */
+  rights: 'owned' | 'licensed' | 'pending';
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "price-history".
+ */
+export interface PriceHistory {
+  id: number;
+  product?: (number | null) | Product;
+  sku: string;
+  /**
+   * Lei.
+   */
+  price: number;
+  date: string;
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads".
  */
 export interface Lead {
@@ -860,6 +1334,30 @@ export interface PayloadLockedDocument {
         value: number | Crop;
       } | null)
     | ({
+        relationTo: 'products';
+        value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'brands';
+        value: number | Brand;
+      } | null)
+    | ({
+        relationTo: 'active-ingredients';
+        value: number | ActiveIngredient;
+      } | null)
+    | ({
+        relationTo: 'targets';
+        value: number | Target;
+      } | null)
+    | ({
+        relationTo: 'price-history';
+        value: number | PriceHistory;
+      } | null)
+    | ({
         relationTo: 'people';
         value: number | Person;
       } | null)
@@ -870,6 +1368,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: number | ProductDocument;
       } | null)
     | ({
         relationTo: 'users';
@@ -1326,6 +1828,7 @@ export interface CountiesSelect<T extends boolean = true> {
 export interface CropsSelect<T extends boolean = true> {
   name?: T;
   key?: T;
+  isGrain?: T;
   intro?: T;
   quality?:
     | T
@@ -1350,11 +1853,304 @@ export interface CropsSelect<T extends boolean = true> {
         image?: T;
         noindex?: T;
       };
+  shop?:
+    | T
+    | {
+        intro?: T;
+        indexable?: T;
+        seo?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+              noindex?: T;
+            };
+      };
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  commerceStatus?: T;
+  gaps?: T;
+  generateSlug?: T;
+  slug?: T;
+  name?: T;
+  productType?: T;
+  primaryCategory?: T;
+  secondaryCategories?: T;
+  brand?: T;
+  crops?: T;
+  targets?: T;
+  summary?: T;
+  description?: T;
+  variants?:
+    | T
+    | {
+        sku?: T;
+        size?: T;
+        unit?: T;
+        price?: T;
+        vatRate?: T;
+        stock?: T;
+        unitPrice?: T;
+        id?: T;
+      };
+  protection?:
+    | T
+    | {
+        activeIngredients?:
+          | T
+          | {
+              ingredient?: T;
+              concentration?: T;
+              unit?: T;
+              id?: T;
+            };
+        formulation?: T;
+        registrationNumber?: T;
+        registrationValidUntil?: T;
+        doses?:
+          | T
+          | {
+              crop?: T;
+              target?: T;
+              bbch?: T;
+              doseMin?: T;
+              doseMax?: T;
+              doseUnit?: T;
+              waterVolume?: T;
+              maxTreatments?: T;
+              waitingPeriod?: T;
+              notes?: T;
+              id?: T;
+            };
+        modeOfAction?: T;
+        resistanceGroup?: T;
+        toxicityClass?: T;
+        safety?: T;
+        professionalUse?: T;
+        compatibility?: T;
+      };
+  seed?:
+    | T
+    | {
+        species?: T;
+        variety?: T;
+        faoGroup?: T;
+        maturity?: T;
+        sowingDensity?: T;
+        sowingRate?: T;
+        yieldPotential?: T;
+        resistances?: T;
+        recommendedZones?: T;
+        seedTreatment?: T;
+      };
+  fertiliser?:
+    | T
+    | {
+        nutrients?:
+          | T
+          | {
+              nutrient?: T;
+              percent?: T;
+              id?: T;
+            };
+        form?: T;
+        granuleSize?: T;
+        rates?:
+          | T
+          | {
+              crop?: T;
+              timing?: T;
+              rateMin?: T;
+              rateMax?: T;
+              rateUnit?: T;
+              id?: T;
+            };
+        storage?: T;
+      };
+  gallery?: T;
+  documents?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  related?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  verification?:
+    | T
+    | {
+        price?:
+          | T
+          | {
+              status?: T;
+              source?: T;
+            };
+        technical?:
+          | T
+          | {
+              status?: T;
+              source?: T;
+            };
+        doses?:
+          | T
+          | {
+              status?: T;
+              source?: T;
+            };
+      };
+  sourceNotes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  parent?: T;
+  order?: T;
+  icon?: T;
+  intro?: T;
+  indexable?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  buyingAdvice?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  featured?: T;
+  facets?: T;
+  products?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  country?: T;
+  website?: T;
+  intro?: T;
+  indexable?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  featured?: T;
+  products?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "active-ingredients_select".
+ */
+export interface ActiveIngredientsSelect<T extends boolean = true> {
+  name?: T;
+  chemicalGroup?: T;
+  resistanceGroup?: T;
+  intro?: T;
+  indexable?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  featured?: T;
+  products?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "targets_select".
+ */
+export interface TargetsSelect<T extends boolean = true> {
+  name?: T;
+  kind?: T;
+  crops?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "price-history_select".
+ */
+export interface PriceHistorySelect<T extends boolean = true> {
+  product?: T;
+  sku?: T;
+  price?: T;
+  date?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1423,6 +2219,29 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   credit?: T;
+  rights?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  kind?: T;
+  language?: T;
+  version?: T;
+  source?: T;
   rights?: T;
   updatedAt?: T;
   createdAt?: T;

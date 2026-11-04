@@ -28,9 +28,10 @@ New agrinvest.ro: public site, shop, farmer tools, finance (Agrinvest Credit IFN
 - **Performance budget (mobile):** LCP < 2.0 s, CLS < 0.05, INP < 200 ms. Server components by default; client components only for real interactivity.
 - **Indexing:** the site stays `noindex` until the launch phase (Phase 8).
 - **Facts and numbers** about Agrinvest come from the figures register (Payload global "Figures", rendered with `<Fact k="S1" />`), never typed ad hoc. JSON-LD states a fact only once it is confirmed.
+- **Staff access** means `users` accounts only (`src/access`); never test for just `req.user`.
 - **Public data reads** use `overrideAccess: false`, so drafts and unpublished contact details never reach a page.
 - **Leads** collect phone and email; `notifyLead` stays a no-op until the owner chooses a channel.
-- After changing collections: `npm run generate:types` and `npm run generate:importmap`.
+- After changing collections: `npm run generate:types`, `npm run generate:importmap` and `npm run migrate:create <name>` (production changes only through `src/migrations/`).
 
 ## Definition of done
 

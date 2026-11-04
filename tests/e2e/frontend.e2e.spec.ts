@@ -68,6 +68,11 @@ test.describe('Locale routing', () => {
 })
 
 test.describe('Core pages', () => {
+  test('shop-only crops have no grain page', async ({ page }) => {
+    expect((await page.goto('/cereale/soia'))?.status()).toBe(404)
+    expect((await page.goto('/en/grain/soybean'))?.status()).toBe(404)
+  })
+
   for (const path of [...coreRo, ...coreEn]) {
     test(`${path} renders with one H1`, async ({ page }) => {
       const res = await page.goto(path)

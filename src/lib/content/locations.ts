@@ -27,11 +27,13 @@ export async function getBase(slug: string, locale: Locale) {
   return (await listBases(locale)).find((b) => b.slug === slug) ?? null
 }
 
+/** Crops Agrinvest buys: the ones with grain pages. The shop has its own crop loader. */
 export const listCrops = unstable_cache(
   async (locale: Locale) => {
     const payload = await payloadClient()
     const { docs } = await payload.find({
       collection: 'crops',
+      where: { isGrain: { equals: true } },
       locale,
       depth: 0,
       limit: 50,

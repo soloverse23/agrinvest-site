@@ -2,12 +2,16 @@ import type { CollectionConfig } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
+import { hubFields } from '@/fields/shop'
 import { localeOf } from '@/i18n/config'
 import { cropPath } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
 
-/** Crops Agrinvest buys. Reused by the grain pages, prices (Phase 5), shop and guides. */
+/**
+ * Crops. `isGrain` marks the ones Agrinvest buys: only those get grain pages, sitemap entries
+ * and lead options. All crops serve the shop (dose tables, crop hubs), prices and guides.
+ */
 export const Crops: CollectionConfig = {
   slug: 'crops',
   labels: { singular: { ro: 'Cultură', en: 'Crop' }, plural: { ro: 'Culturi', en: 'Crops' } },
@@ -19,7 +23,7 @@ export const Crops: CollectionConfig = {
       ({ doc, req }) => {
         revalidate(tags.crops)
         // The slug is per language: ping the URL of the language that was saved.
-        if (doc._status === 'published')
+        if (doc._status === 'published' && doc.isGrain)
           void pingIndexNow([cropPath(doc.slug, localeOf(req.locale))])
       },
     ],
@@ -29,11 +33,22 @@ export const Crops: CollectionConfig = {
     { name: 'name', type: 'text', localized: true, required: true },
     {
       name: 'key',
-      type: 'select',
+      type: 'text',
       required: true,
       unique: true,
-      options: ['wheat', 'maize', 'sunflower', 'rapeseed', 'barley'],
-      admin: { description: 'Stable key for icons, prices and data colours.' },
+      validate: (value: null | string | undefined) =>
+        /^[a-z][a-z-]*$/.test(value ?? '') || 'Lowercase English letters and hyphens only.',
+      admin: { description: 'Stable English key for icons, prices and data colours.' },
+    },
+    {
+      name: 'isGrain',
+      type: 'checkbox',
+      defaultValue: false,
+      label: { ro: 'Agrinvest cumpără această cultură', en: 'Agrinvest buys this crop' },
+      admin: {
+        position: 'sidebar',
+        description: 'Turns on the grain page, the sitemap entry and the lead form option.',
+      },
     },
     { name: 'intro', type: 'textarea', localized: true },
     {
@@ -54,6 +69,13 @@ export const Crops: CollectionConfig = {
     },
     faq,
     seo,
+    {
+      name: 'shop',
+      type: 'group',
+      label: { ro: 'Pagina din magazin', en: 'Shop hub' },
+      admin: { description: 'The crop hub in the shop (/magazin/cultura/…).' },
+      fields: hubFields,
+    },
     slug('name', true),
   ],
 }

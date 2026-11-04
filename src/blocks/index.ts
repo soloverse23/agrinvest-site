@@ -205,7 +205,8 @@ export const CropListBlock: Block = {
       type: 'relationship',
       relationTo: 'crops',
       hasMany: true,
-      admin: { description: 'Empty = all crops.' },
+      filterOptions: { isGrain: { equals: true } },
+      admin: { description: 'Empty = all crops Agrinvest buys.' },
     },
   ],
 }

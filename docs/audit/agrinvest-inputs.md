@@ -31,6 +31,12 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 9. **Cele 15 produse** care apar pe agrinvest.ro dar nu în magazin (mai ales gama bio: Algavell, Amino Organic, Cuproxat Flowable…): se mai vând?
 10. **Plata și livrarea:** metode de plată online (card, OP cu proformă, ramburs), sistemul de facturare (SmartBill, Oblio, altul), zone de livrare cu flota proprie, curier pentru colete mici.
 11. **Verificarea juridică:** vânzarea online a produselor de protecția plantelor pentru uz profesional (atestatul cumpărătorului).
+    - **TVA:** prețurile actuale includ TVA? La ce cotă, pe categorie?
+    - **Prețuri de verificat:** Wing P 10L (720 față de 1.450 lei) și cele două produse AVENUE 800 kg (2.250 și 2.800 lei).
+    - **Coduri SKU** reale pentru fiecare produs și ambalaj.
+    - **Semințe de porumb și floarea-soarelui:** lipsesc din magazin, deși sunt cuvinte-cheie prioritare. Le vindeți?
+    - **Cine primește comenzile** și cererile de inputuri: nume, rol, telefon, e-mail.
+    - **Condițiile de vânzare, livrare și retur**, verificate de un jurist.
 
 ### Finanțare – Agrinvest Credit IFN (faza 4)
 
@@ -75,6 +81,12 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 9. **The 15 products** shown on agrinvest.ro but missing from the shop (mostly the organic range: Algavell, Amino Organic, Cuproxat Flowable…): are they still sold?
 10. **Payment and delivery:** online payment methods (card, bank transfer with proforma, cash on delivery), invoicing system (SmartBill, Oblio, other), delivery zones with the own fleet, courier for small parcels.
 11. **Legal check:** selling professional-use plant-protection products online (the buyer's certificate).
+    - **VAT:** do the current prices include VAT? At what rate, per category?
+    - **Prices to check:** Wing P 10L (720 vs 1,450 lei) and the two AVENUE 800 kg products (2,250 and 2,800 lei).
+    - **Real SKU codes** for each product and pack size.
+    - **Maize and sunflower seed:** missing from the shop although they are priority keywords. Do you sell them?
+    - **Who receives orders** and input enquiries: name, role, phone, email.
+    - **Terms of sale, delivery and returns**, checked by a lawyer.
 
 ### Finance – Agrinvest Credit IFN (phase 4)
 

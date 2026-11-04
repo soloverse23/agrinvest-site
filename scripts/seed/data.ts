@@ -231,6 +231,118 @@ export const crops = [
   { key: 'barley', name: { ro: 'Orz', en: 'Barley' }, slug: { ro: 'orz', en: 'barley' } },
 ] as const
 
+/** Crops the shop's products are used on, which Agrinvest does not buy: no grain pages. */
+export const shopCrops = [
+  { key: 'soybean', name: { ro: 'Soia', en: 'Soybean' }, slug: { ro: 'soia', en: 'soybean' } },
+  {
+    key: 'triticale',
+    name: { ro: 'Triticale', en: 'Triticale' },
+    slug: { ro: 'triticale', en: 'triticale' },
+  },
+  { key: 'potato', name: { ro: 'Cartof', en: 'Potato' }, slug: { ro: 'cartof', en: 'potato' } },
+  {
+    key: 'sugar-beet',
+    name: { ro: 'Sfeclă de zahăr', en: 'Sugar beet' },
+    slug: { ro: 'sfecla-de-zahar', en: 'sugar-beet' },
+  },
+  {
+    key: 'alfalfa',
+    name: { ro: 'Lucernă', en: 'Alfalfa' },
+    slug: { ro: 'lucerna', en: 'alfalfa' },
+  },
+  {
+    key: 'vegetables',
+    name: { ro: 'Legume', en: 'Vegetables' },
+    slug: { ro: 'legume', en: 'vegetables' },
+  },
+  {
+    key: 'fruit-trees',
+    name: { ro: 'Pomi fructiferi', en: 'Fruit trees' },
+    slug: { ro: 'pomi-fructiferi', en: 'fruit-trees' },
+  },
+  {
+    key: 'grapevine',
+    name: { ro: 'Viță de vie', en: 'Grapevine' },
+    slug: { ro: 'vita-de-vie', en: 'grapevine' },
+  },
+] as const
+
+/** The shop's category tree, in menu order. `pesticide` from the old shop is retired. */
+export const categories = [
+  {
+    name: { ro: 'Semințe', en: 'Seeds' },
+    slug: { ro: 'seminte', en: 'seeds' },
+    role: 'category',
+    icon: 'leaf',
+  },
+  {
+    name: { ro: 'Protecția plantelor', en: 'Crop protection' },
+    slug: { ro: 'protectia-plantelor', en: 'crop-protection' },
+    role: 'group',
+    icon: 'drop',
+  },
+  {
+    name: { ro: 'Erbicide', en: 'Herbicides' },
+    slug: { ro: 'erbicide', en: 'herbicides' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+  },
+  {
+    name: { ro: 'Fungicide', en: 'Fungicides' },
+    slug: { ro: 'fungicide', en: 'fungicides' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+  },
+  {
+    name: { ro: 'Insecticide', en: 'Insecticides' },
+    slug: { ro: 'insecticide', en: 'insecticides' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+  },
+  {
+    name: { ro: 'Tratament sămânță', en: 'Seed treatment' },
+    slug: { ro: 'tratament-samanta', en: 'seed-treatment' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+  },
+  {
+    name: { ro: 'Adjuvanți', en: 'Adjuvants' },
+    slug: { ro: 'adjuvanti', en: 'adjuvants' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+  },
+  {
+    name: { ro: 'Regulatori de creștere', en: 'Growth regulators' },
+    slug: { ro: 'regulatori-de-crestere', en: 'growth-regulators' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+  },
+  {
+    name: { ro: 'Nutriție', en: 'Plant nutrition' },
+    slug: { ro: 'nutritie', en: 'plant-nutrition' },
+    role: 'group',
+    icon: 'scale',
+  },
+  {
+    name: { ro: 'Îngrășăminte', en: 'Fertilisers' },
+    slug: { ro: 'ingrasaminte', en: 'fertilisers' },
+    role: 'category',
+    parent: 'nutritie',
+  },
+  {
+    name: { ro: 'Fertilizanți foliari', en: 'Foliar fertilisers' },
+    slug: { ro: 'fertilizanti-foliare', en: 'foliar-fertilisers' },
+    role: 'category',
+    parent: 'nutritie',
+  },
+  {
+    name: { ro: 'Agricultură bio', en: 'Organic farming' },
+    slug: { ro: 'agricultura-bio', en: 'organic-farming' },
+    role: 'theme',
+    icon: 'leaf',
+  },
+] as const
+
 /** People named in the audit. No phone or email is public until each person agrees. */
 export const people = [
   {

@@ -34,23 +34,14 @@ npm run migrate                 # with the production DATABASE_URL, before deplo
 
 CI fails if the collections and `src/migrations/` disagree. A local push can stop and wait for a yes on a change that may lose data (a column changing type, for example); it never runs in production.
 
-## First deploy
+## Deploying
 
-The build reads the database (static pages, `llms.txt`), so a project with no environment or an empty database fails to build.
+The build reads the database, so every Vercel build first runs `scripts/deploy/prepare-database.sh`: it applies pending migrations and seeds the database only if it is empty.
 
-1. Create a Postgres database (Neon) and a Cloudflare R2 bucket.
-2. In Vercel, set for Production and Preview: `DATABASE_URL`, `PAYLOAD_SECRET` (`openssl rand -hex 32`), `R2_BUCKET`, `R2_ENDPOINT`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`. Leave `SITE_INDEXABLE` unset until Phase 8.
-3. Fill the database once, from your machine:
+1. In Vercel, set for Production and Preview: `DATABASE_URL` and `DATABASE_URL_UNPOOLED` (the Neon integration adds both) and `PAYLOAD_SECRET` (`openssl rand -hex 32`). For uploads, add `R2_BUCKET`, `R2_ENDPOINT`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`. Leave `SITE_INDEXABLE` off until Phase 8.
+2. Deploy. Photos stay local until their rights are confirmed, so pages render without them.
 
-   ```bash
-   export DATABASE_URL=<production url> PAYLOAD_SECRET=<the same secret> NODE_ENV=production
-   npm run migrate
-   npm run seed
-   ```
-
-   `NODE_ENV=production` matters: without it the seed pushes the schema itself, which mixes with the migrations.
-
-4. Redeploy. Photos stay local until their rights are confirmed, so pages render without them.
+Preview and Production share one database for now, so a preview build migrates it too. Give previews their own Neon branch before real orders arrive.
 
 ## Documents
 

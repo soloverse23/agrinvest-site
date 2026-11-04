@@ -433,6 +433,16 @@ async function seedGlobals(payload: Payload) {
 }
 
 const payload = await getPayload({ config })
+
+// Deploys seed only an empty database, so they never overwrite what staff have entered.
+if (process.env.SEED_ONLY_IF_EMPTY === 'true') {
+  const { totalDocs } = await payload.count({ collection: 'pages' })
+  if (totalDocs > 0) {
+    console.log(`seed: skipped, the database already has ${totalDocs} pages`)
+    process.exit(0)
+  }
+}
+
 await seedFigures(payload)
 await seedLocations(payload)
 await seedShop(payload)

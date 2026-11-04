@@ -68,6 +68,76 @@ test.describe('Locale routing', () => {
 })
 
 test.describe('Core pages', () => {
+  for (const path of [
+    '/magazin',
+    '/magazin/erbicide',
+    '/magazin/protectia-plantelor',
+    '/magazin/cultura/grau',
+    '/magazin/substanta-activa/tebuconazol',
+    '/magazin/producator/bayer',
+    '/magazin/insecticide/karate-zeon',
+    '/magazin/seminte/samanta-de-grau-apache-c1',
+    '/en/shop',
+    '/en/shop/herbicides',
+    '/en/shop/crop/wheat',
+    '/en/shop/insecticides/karate-zeon',
+  ]) {
+    test(`${path} renders with one H1`, async ({ page }) => {
+      expect((await page.goto(path))?.status()).toBe(200)
+      await expect(page.locator('h1')).toHaveCount(1)
+    })
+  }
+
+  test('a product shows its packs, price marker, doses and no Offer while it is a pilot', async ({
+    page,
+  }) => {
+    await page.goto('/magazin/insecticide/lamdex-extra')
+    await expect(page.getByRole('rowheader', { name: '1 kg' })).toBeVisible()
+    await expect(page.getByRole('rowheader', { name: '5 kg' })).toBeVisible()
+    await expect(page.getByText('862 lei')).toBeVisible()
+    await expect(page.getByText('de confirmat').first()).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Doze recomandate' })).toHaveCount(1)
+    const schema = await page.locator('script[type="application/ld+json"]').allTextContents()
+    expect(schema.join()).toContain('"Product"')
+    expect(schema.join()).not.toContain('Offer')
+  })
+
+  test('a product under another category does not exist', async ({ page }) => {
+    expect((await page.goto('/magazin/erbicide/karate-zeon'))?.status()).toBe(404)
+  })
+
+  test('filters work as plain links and stay out of the index', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/magazin/erbicide')
+    const all = await page.locator('h3').count()
+    await page.getByRole('link', { name: /^Porumb/ }).click()
+    await expect(page).toHaveURL(/\/magazin\/erbicide\?cultura=porumb/)
+    expect(await page.locator('h3').count()).toBeLessThan(all)
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      /\/magazin\/erbicide$/,
+    )
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/)
+    await context.close()
+  })
+
+  test('search finds products without diacritics', async ({ page }) => {
+    await page.goto('/magazin/cautare?q=tebuconazol')
+    await expect(page.getByRole('link', { name: 'Tokama', exact: true })).toBeVisible()
+    await page.goto('/magazin/cautare?q=samanta%20grau%20apache')
+    await expect(page.locator('h3')).toHaveCount(1)
+    await expect(page.locator('h3')).toContainText('Sămânță de grâu Apache C1')
+    await page.goto('/magazin/cautare?q=nuexista')
+    await expect(page.locator('h3')).toHaveCount(0)
+  })
+
+  test('English product pages show no Romanian text', async ({ page }) => {
+    await page.goto('/en/shop/insecticides/karate-zeon')
+    await expect(page.locator('main')).not.toContainText('insecticid piretroid')
+    await expect(page.getByRole('heading', { name: 'Recommended doses' })).toBeVisible()
+  })
+
   test('shop-only crops have no grain page', async ({ page }) => {
     expect((await page.goto('/cereale/soia'))?.status()).toBe(404)
     expect((await page.goto('/en/grain/soybean'))?.status()).toBe(404)

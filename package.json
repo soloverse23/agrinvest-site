@@ -26,6 +26,7 @@
     "audit:products": "tsx scripts/audit/products.ts",
     "audit:keywords": "tsx scripts/audit/keywords.ts",
     "audit:redirects": "tsx scripts/audit/redirects.ts",
+    "audit:import": "tsx scripts/import/report.ts",
     "brand:logo": "tsx scripts/brand/build-logo.ts",
     "check:logo": "tsx scripts/checks/logo-diff.ts",
     "check:fonts": "tsx scripts/checks/fonts.ts",

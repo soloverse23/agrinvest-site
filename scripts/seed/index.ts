@@ -26,6 +26,7 @@ import {
   shopCrops,
 } from './data'
 import { footer, navigation, pages } from './pages'
+import { importProducts } from '../import/woo'
 
 const context = { skipChildren: true }
 
@@ -209,6 +210,8 @@ async function seedShop(payload: Payload) {
         parent,
         order,
         icon: 'icon' in c ? c.icon : null,
+        intro: c.intro.ro,
+        indexable: true,
         _status: 'published',
       },
     )
@@ -216,7 +219,7 @@ async function seedShop(payload: Payload) {
       collection: 'categories',
       id: ids[c.slug.ro],
       locale: 'en',
-      data: { name: c.name.en, slug: c.slug.en, _status: 'published' },
+      data: { name: c.name.en, slug: c.slug.en, intro: c.intro.en, _status: 'published' },
       context,
     })
   }
@@ -433,6 +436,7 @@ const payload = await getPayload({ config })
 await seedFigures(payload)
 await seedLocations(payload)
 await seedShop(payload)
+await importProducts(payload)
 const peopleIds = await seedPeople(payload)
 const mediaIds = await seedMedia(payload)
 await seedGlobals(payload)

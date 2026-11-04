@@ -68,7 +68,7 @@ const fact = (text: string | null | undefined, ctx: Pick<Ctx, 'figures' | 'local
   text ? <FactText text={text} figures={ctx.figures} locale={ctx.locale} /> : null
 
 /** Rich text with register facts inside text nodes, in the long-form style. */
-function Prose({
+export function Prose({
   data,
   ctx,
   className,

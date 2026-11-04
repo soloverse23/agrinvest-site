@@ -15,7 +15,12 @@
         "http://localhost:3100/contact",
         "http://localhost:3100/en/grain/wheat",
         "http://localhost:3100/en/bases/pogoanele",
-        "http://localhost:3100/en/storage"
+        "http://localhost:3100/en/storage",
+        "http://localhost:3100/magazin",
+        "http://localhost:3100/magazin/erbicide",
+        "http://localhost:3100/magazin/cultura/grau",
+        "http://localhost:3100/magazin/insecticide/karate-zeon",
+        "http://localhost:3100/en/shop/insecticides/karate-zeon"
       ],
       "numberOfRuns": 3,
       "settings": {

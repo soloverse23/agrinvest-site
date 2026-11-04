@@ -1,5 +1,6 @@
 /** Component props built from the sample content, shared by pattern and page stories. */
 import type { Locale } from '@/i18n/config'
+import { formatNumber } from '@/lib/format'
 
 import type { HeroProps } from '../patterns/Hero'
 import type { PriceTableProps } from '../patterns/PriceTable'
@@ -107,18 +108,17 @@ export const productCardProps = (p: SampleProduct, locale: Locale): ProductCardP
   crops: p.crops[locale],
   dose: p.dose[locale],
   price: p.price,
-  regularPrice: p.regularPrice,
-  amount: p.amount,
-  amountUnit: p.amountUnit,
+  unitPrice: `${formatNumber(p.price / p.amount, locale)} lei/${p.amountUnit}`,
   inStock: p.inStock,
+  payAtHarvestHref: '/finantare/inputuri-plata-la-recolta',
   labels: {
     crops: copy.product.cropsLabel[locale],
     dose: copy.product.doseLabel[locale],
     inStock: copy.product.inStock[locale],
     outOfStock: copy.product.outOfStock[locale],
-    add: copy.product.add[locale],
-    quote: copy.product.quote[locale],
-    vat: copy.product.vat[locale],
+    details: copy.product.details[locale],
+    from: copy.product.from[locale],
+    askPrice: copy.product.askPrice[locale],
     payAtHarvest: copy.product.payAtHarvest[locale],
   },
 })

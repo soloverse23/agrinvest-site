@@ -1,9 +1,11 @@
 import type {
   BreadcrumbList,
   FAQPage,
+  ItemList,
   LocalBusiness,
   Organization,
   Person,
+  Product,
   VideoObject,
   WebPage,
   WebSite,
@@ -227,5 +229,84 @@ export function videoObject(input: {
     embedUrl: `https://www.youtube-nocookie.com/embed/${input.youtubeId}`,
     contentUrl: `https://www.youtube.com/watch?v=${input.youtubeId}`,
     publisher: { '@id': ORG_ID },
+  }
+}
+
+const availability = {
+  'in-stock': 'https://schema.org/InStock',
+  'on-request': 'https://schema.org/PreOrder',
+  'out-of-stock': 'https://schema.org/OutOfStock',
+} as const
+
+/**
+ * A product. Offers state a price and stock, so they appear only for `confirmed` products;
+ * pilot products publish their identity and nothing Agrinvest has not approved.
+ */
+export function product(input: {
+  url: string
+  name: string
+  description: string
+  image: string[]
+  brand?: string | null
+  category: string
+  sku?: string
+  variants: {
+    sku: string
+    price?: number | null
+    stock: keyof typeof availability
+  }[]
+  confirmed: boolean
+}): WithContext<Product> {
+  const url = absoluteUrl(input.url)
+  const priced = input.variants.flatMap((v) => (v.price != null ? [{ ...v, price: v.price }] : []))
+  const prices = priced.map((v) => v.price)
+  const offers =
+    !input.confirmed || !priced.length
+      ? undefined
+      : priced.length === 1
+        ? {
+            '@type': 'Offer' as const,
+            url,
+            sku: priced[0].sku,
+            price: priced[0].price,
+            priceCurrency: 'RON',
+            availability: availability[priced[0].stock],
+            seller: { '@id': ORG_ID },
+          }
+        : {
+            '@type': 'AggregateOffer' as const,
+            url,
+            priceCurrency: 'RON',
+            lowPrice: Math.min(...prices),
+            highPrice: Math.max(...prices),
+            offerCount: priced.length,
+          }
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    '@id': `${url}#product`,
+    name: input.name,
+    url,
+    description: input.description,
+    image: input.image.length ? input.image : undefined,
+    sku: input.sku,
+    category: input.category,
+    brand: input.brand ? { '@type': 'Brand', name: input.brand } : undefined,
+    offers,
+  }
+}
+
+/** The products of a listing, in the order shown. */
+export function itemList(items: { name: string; url: string }[]): WithContext<ItemList> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: absoluteUrl(item.url),
+    })),
   }
 }

@@ -835,6 +835,10 @@ export interface Product {
       )[]
     | null;
   /**
+   * Slugs on agrinvestshop.ro, for the redirects.
+   */
+  legacySlugs?: string[] | null;
+  /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
@@ -903,9 +907,13 @@ export interface Product {
      */
     doses?:
       | {
-          crop: number | Crop;
+          cropText?: string | null;
+          crops?: (number | Crop)[] | null;
+          targetText?: string | null;
           target?: (number | Target)[] | null;
+          timing?: string | null;
           bbch?: string | null;
+          doseText?: string | null;
           doseMin?: number | null;
           doseMax?: number | null;
           doseUnit?: string | null;
@@ -953,8 +961,10 @@ export interface Product {
     granuleSize?: string | null;
     rates?:
       | {
-          crop: number | Crop;
+          cropText?: string | null;
+          crops?: (number | Crop)[] | null;
           timing?: string | null;
+          rateText?: string | null;
           rateMin?: number | null;
           rateMax?: number | null;
           rateUnit?: string | null;
@@ -1880,6 +1890,7 @@ export interface CropsSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   commerceStatus?: T;
   gaps?: T;
+  legacySlugs?: T;
   generateSlug?: T;
   slug?: T;
   name?: T;
@@ -1920,9 +1931,13 @@ export interface ProductsSelect<T extends boolean = true> {
         doses?:
           | T
           | {
-              crop?: T;
+              cropText?: T;
+              crops?: T;
+              targetText?: T;
               target?: T;
+              timing?: T;
               bbch?: T;
+              doseText?: T;
               doseMin?: T;
               doseMax?: T;
               doseUnit?: T;
@@ -1968,8 +1983,10 @@ export interface ProductsSelect<T extends boolean = true> {
         rates?:
           | T
           | {
-              crop?: T;
+              cropText?: T;
+              crops?: T;
               timing?: T;
+              rateText?: T;
               rateMin?: T;
               rateMax?: T;
               rateUnit?: T;

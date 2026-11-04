@@ -1,7 +1,16 @@
 import type { Locale } from '@/i18n/config'
-import { basePath, cropPath } from '@/i18n/routes'
+import { basePath, categoryPath, cropPath, hubPath, productPath, shopPath } from '@/i18n/routes'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { alternatesOf, listPages, type Alternates } from '@/lib/content/pages'
+import {
+  hubIndexable,
+  inCategory,
+  listBrands,
+  listCategories,
+  listIngredients,
+  listProducts,
+  listShopCrops,
+} from '@/lib/content/shop'
 import { absoluteUrl } from '@/lib/site'
 
 /**
@@ -9,6 +18,9 @@ import { absoluteUrl } from '@/lib/site'
  * Every URL carries its hreflang alternates when it has a pair.
  */
 export type SitemapEntry = { url: string; lastModified?: string; alternates: Alternates }
+
+const entries = (alternates: Alternates, lastModified?: string): SitemapEntry[] =>
+  Object.values(alternates).map((url) => ({ url, lastModified, alternates }))
 
 export const segments = {
   pages: async (): Promise<SitemapEntry[]> =>
@@ -50,6 +62,100 @@ export const segments = {
           alternates,
         }))
       })
+  },
+  // Products share their slug across languages; their category slug is translated.
+  products: async (): Promise<SitemapEntry[]> => {
+    const [ro, en] = await Promise.all([listProducts('ro'), listProducts('en')])
+    return ro.flatMap((p) => {
+      const twin = en.find((e) => e.id === p.id)
+      const alternates: Alternates = {
+        ro: productPath(p.category.slug, p.slug, 'ro'),
+        ...(twin ? { en: productPath(twin.category.slug, p.slug, 'en') } : {}),
+      }
+      return entries(alternates, p.updatedAt)
+    })
+  },
+  // A listing is listed only when the hub rule allows indexing it.
+  categories: async (): Promise<SitemapEntry[]> => {
+    const [ro, en, products] = await Promise.all([
+      listCategories('ro'),
+      listCategories('en'),
+      listProducts('ro'),
+    ])
+    const home = { ro: shopPath('ro'), en: shopPath('en') }
+    return [
+      ...entries(home),
+      ...ro
+        .filter((c) => hubIndexable(c, inCategory(products, c).length))
+        .flatMap((c) => {
+          const twin = en.find((e) => e.id === c.id)
+          return entries(
+            {
+              ro: categoryPath(c.slug, 'ro'),
+              ...(twin ? { en: categoryPath(twin.slug, 'en') } : {}),
+            },
+            c.updatedAt,
+          )
+        }),
+    ]
+  },
+  hubs: async (): Promise<SitemapEntry[]> => {
+    const [products, cropsRo, cropsEn, brands, ingredientsRo, ingredientsEn] = await Promise.all([
+      listProducts('ro'),
+      listShopCrops('ro'),
+      listShopCrops('en'),
+      listBrands('ro'),
+      listIngredients('ro'),
+      listIngredients('en'),
+    ])
+    const count = (test: (p: (typeof products)[number]) => boolean) => products.filter(test).length
+    return [
+      ...cropsRo.flatMap((c) => {
+        if (
+          !hubIndexable(
+            c.shop ?? {},
+            count((p) => p.crops.some((x) => x.id === c.id)),
+          )
+        )
+          return []
+        const twin = cropsEn.find((e) => e.id === c.id)
+        return entries(
+          {
+            ro: hubPath('crop', c.slug, 'ro'),
+            ...(twin ? { en: hubPath('crop', twin.slug, 'en') } : {}),
+          },
+          c.updatedAt,
+        )
+      }),
+      ...brands.flatMap((b) =>
+        hubIndexable(
+          b,
+          count((p) => p.brand?.id === b.id),
+        )
+          ? entries(
+              { ro: hubPath('brand', b.slug, 'ro'), en: hubPath('brand', b.slug, 'en') },
+              b.updatedAt,
+            )
+          : [],
+      ),
+      ...ingredientsRo.flatMap((i) => {
+        if (
+          !hubIndexable(
+            i,
+            count((p) => p.ingredients.some((x) => x.id === i.id)),
+          )
+        )
+          return []
+        const twin = ingredientsEn.find((e) => e.id === i.id)
+        return entries(
+          {
+            ro: hubPath('ingredient', i.slug, 'ro'),
+            ...(twin ? { en: hubPath('ingredient', twin.slug, 'en') } : {}),
+          },
+          i.updatedAt,
+        )
+      }),
+    ]
   },
 } satisfies Record<string, () => Promise<SitemapEntry[]>>
 

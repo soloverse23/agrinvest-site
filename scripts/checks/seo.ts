@@ -17,7 +17,7 @@ import * as cheerio from 'cheerio'
 
 import { crawl, type CrawledPage } from './lib/site-crawl'
 import { locales } from '../../src/i18n/config'
-import { basePath } from '../../src/i18n/routes'
+import { basePath, sections, shopRoutes } from '../../src/i18n/routes'
 
 const base = (process.argv[2] ?? 'http://localhost:3100').replace(/\/$/, '')
 const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? base).origin
@@ -45,6 +45,15 @@ function expectedTypes(path: string): string[] {
   // Base pages in every language (src/i18n/routes.ts).
   if (locales.some((l) => path.startsWith(`${basePath('', l)}`)))
     return ['LocalBusiness', 'BreadcrumbList']
+  for (const l of locales) {
+    const shop = `${l === 'en' ? '/en' : ''}${sections.shop[l]}`
+    if (!path.startsWith(`${shop}/`)) continue
+    const parts = path.slice(shop.length + 1).split('/')
+    const hub = Object.values(shopRoutes).some((r) => r[l] === parts[0])
+    // `/magazin/{categorie}/{produs}` is a product; everything else is a listing.
+    if (parts.length === 2 && !hub) return ['Product', 'BreadcrumbList']
+    if (parts[0] !== shopRoutes.search[l]) return ['WebPage', 'BreadcrumbList', 'ItemList']
+  }
   return ['WebPage', 'BreadcrumbList']
 }
 
@@ -124,6 +133,10 @@ for (const page of pages) {
   for (const t of expectedTypes(p)) if (!types.has(t)) error('json-ld', `${p}: missing ${t}`)
 
   const robots = $('meta[name="robots"]').attr('content') ?? ''
+  // Offers state a price: a product still marked to confirm must not publish one.
+  const unconfirmed = $('[data-fact^="product:"][data-fact-status="to-confirm"]').length > 0
+  if (unconfirmed && $('script[type="application/ld+json"]').text().includes('"Offer"'))
+    error('json-ld', `${p}: an Offer on a product Agrinvest has not confirmed`)
   if (indexable && page.inSitemap && /noindex/.test(robots))
     error('sitemap', `${p}: in the sitemap but noindex`)
   if (!indexable && !/noindex/.test(robots)) error('robots', `${p}: indexable before launch`)

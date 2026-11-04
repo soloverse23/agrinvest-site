@@ -1,6 +1,6 @@
 # Phase 3: shop
 
-Status: **3.1 built (2026-11-04), waiting for owner review; 3.2 next.** Plan approved 2026-11-04. This doc is kept updated per sub-phase. Decisions go in `docs/decisions/0006…`.
+Status: **3.1 and 3.2 built (2026-11-04), waiting for owner review; 3.3 next.** Plan approved 2026-11-04. This doc is kept updated per sub-phase. Decisions go in `docs/decisions/0006…`.
 
 ## Context
 
@@ -157,6 +157,47 @@ Summary answer near the top, price with unit price and VAT note, pack sizes, sto
 - Add shop entries to the seeded menu, the mega menu and home.
 
 **3.2 exit:** all 77 imported; listings, hubs, search and product pages work in RO and EN; `check:seo` has 0 errors; Lighthouse budgets pass on listing, hub and product.
+
+### 3.2 progress (2026-11-04)
+
+**Built**
+
+- **Import:** `scripts/import/woo-plan.ts` is a pure planner shared by the importer (`woo.ts`, part of `npm run seed`), the redirect map and the report (`npm run audit:import` → `docs/audit/import-report.md`). 77 records became 72 products (5 pack families merged; 71 published, 1 draft), 180 dose rows on 34 products, active ingredients on 32 products. `redirect-map.csv` is regenerated from the plan: all 77 old products resolve.
+- **Pages, RO and EN:** shop home, categories (with group pages), crop, brand and ingredient hubs, search, product pages. Shared templates `ShopListing`, `ProductPage`, `ShopParts`; strings in `src/i18n/shop.ts`.
+- **Components:** FacetPanel, ProductGallery, PackTable, DoseTable, SpecSheet, DocumentList, ShopTile, with stories. `ProductCard` reworked (`Photo` instead of `next/image`, optional data).
+- **Model:** dose rows keep the source wording (`cropText`, `targetText`, `timing`, `doseText`) next to the parsed values; a row links to several crops; `legacySlugs`. Migration `shop_catalogue`.
+- **SEO and AEO:** `product` and `itemList` JSON-LD, sitemap segments `products`, `categories`, `hubs`, `llms.txt`, shop menu, category intros in both languages. `check:seo` knows the shop templates and fails on an Offer for an unconfirmed product. 7 AEO questions and 3 English keyword rows added. Pilot prices are tagged, so `check:figures` lists them.
+
+**Results**
+
+- typecheck, lint, format, `next build`, `test:int`, `test:e2e` pass. `check:seo`: 342 pages, 0 errors. `check:aeo`: 39 of 39. Keyword map: 31 of 59 URLs built. Both migrations apply to an empty database.
+- Lighthouse on 5 shop templates, mobile, applied throttling, 2 runs each, 0 failed assertions: listing, hub and home performance 100, LCP 1,35 s, 144 KB of script; product performance 99, LCP 1,9 s, 148 KB; accessibility 100 and CLS 0 on all. The product page's LCP is the photo, and has little room under the 2,0 s budget. Recheck on the preview with real image hosting.
+- Axe passes on all Patterns stories, with no overflow at 390 / 768 / 1440 in RO and EN.
+
+**Deviations from the plan**
+
+- **PackTable instead of PackSizeSelector:** every pack and price is in the HTML and needs no JavaScript, which is also better for search. Add to cart goes on each row in 3.4.
+- **Quote leads use the existing `inputuri` form** with the product's URL as source. The `product` field on Leads stays in 3.4.
+- **Brands:** only 4 products have one so far (the ones named in their own text). The rest come from enrichment, so the brand filter and hubs are thin until 3.3.
+- **Targets are not linked yet:** the text stays in `targetText`, and the target filter is off. Turning free text into clean Targets belongs to 3.3.
+- **No committed image fixtures:** pages are complete without photos, so CI runs without any. Product photos load on local databases only, with rights pending.
+- **Categories follow the hub rule too**, so they are indexable only with an intro and 3 products. "Regulatori de creștere" has 1 product and stays out of the index.
+- **Listings render per request** because filters are in the query string; their data is cached. Revisit CDN caching in Phase 8.
+- **No pagination:** the largest listing has 38 products.
+- **English text:** names and interface are translated. Summaries are built from the data and doses show the label's numbers. Descriptions, targets and timing stay empty until 3.3, and shop reads use no language fallback.
+
+**Found in the old data** (`import-report.md`, 33 products to check)
+
+- Texts reused on the wrong product: Listego and Uree carry the ammonium nitrate summary; Zanzibar and Su Ellen barley are described as wheat. These summaries are not used.
+- Jolpolt, an oil adjuvant, lists deltamethrin as its active substance. Compositions of adjuvants and mixed products are left for hand entry.
+- Principal Forte shows only part of its composition. Frontier Forte gives dimetenamid where its text says dimetenamid-P.
+- Prices to check: Wing P, the two Avenue products, Corida (19.380 lei/kg).
+- Old `pesticide` products were placed by their own text; Jolpolt moved from insecticides to adjuvants.
+
+**Open for 3.3**
+
+- All descriptions are still the old text (cedilla letters fixed, missing diacritics not). Enrichment rewrites them and the English.
+- `inputuri` has no seeded route, so quote leads go to the general contact until Agrinvest names someone.
 
 ---
 

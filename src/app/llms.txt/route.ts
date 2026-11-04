@@ -1,8 +1,9 @@
 import { localePath } from '@/i18n/config'
-import { basePath, cropPath } from '@/i18n/routes'
+import { basePath, categoryPath, cropPath, productPath } from '@/i18n/routes'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { payloadClient } from '@/lib/content/payload'
+import { listCategories, listProducts } from '@/lib/content/shop'
 import { absoluteUrl } from '@/lib/site'
 
 export const revalidate = 3600
@@ -13,13 +14,17 @@ export const revalidate = 3600
  */
 export async function GET() {
   const payload = await payloadClient()
-  const [seoRo, seoEn, bases, cropsRo, cropsEn] = await Promise.all([
-    getSeoDefaults('ro'),
-    getSeoDefaults('en'),
-    listBases('ro'),
-    listCrops('ro'),
-    listCrops('en'),
-  ])
+  const [seoRo, seoEn, bases, cropsRo, cropsEn, categoriesRo, categoriesEn, products] =
+    await Promise.all([
+      getSeoDefaults('ro'),
+      getSeoDefaults('en'),
+      listBases('ro'),
+      listCrops('ro'),
+      listCrops('en'),
+      listCategories('ro'),
+      listCategories('en'),
+      listProducts('ro'),
+    ])
   const section = async (locale: 'ro' | 'en') => {
     const { docs } = await payload.find({
       collection: 'pages',
@@ -65,6 +70,17 @@ export async function GET() {
       const en = cropsEn.find((e) => e.id === c.id)
       return `- [${c.name}](${absoluteUrl(cropPath(c.slug, 'ro'))})${en ? ` · [${en.name}](${absoluteUrl(cropPath(en.slug, 'en'))})` : ''}`
     }),
+    '',
+    '## Magazin · Shop',
+    ...categoriesRo.map((c) => {
+      const en = categoriesEn.find((e) => e.id === c.id)
+      return `- [${c.name}](${absoluteUrl(categoryPath(c.slug, 'ro'))})${en ? ` · [${en.name}](${absoluteUrl(categoryPath(en.slug, 'en'))})` : ''}`
+    }),
+    '',
+    '## Produse · Products',
+    ...products.map(
+      (p) => `- [${p.name}](${absoluteUrl(productPath(p.category.slug, p.slug, 'ro'))})`,
+    ),
     '',
   ].join('\n')
 

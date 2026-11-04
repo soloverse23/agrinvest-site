@@ -31,6 +31,30 @@ const number = (name: string, ro: string, en: string): Field => ({
   label: { ro, en },
 })
 
+/** Crops of a dose row: the wording of the source, and the relation that drives the filters. */
+const cropColumns: Field[] = [
+  {
+    type: 'row',
+    fields: [
+      text('cropText', 'Cultură, ca în sursă', 'Crop, as in the source'),
+      { name: 'crops', type: 'relationship', relationTo: 'crops', hasMany: true },
+    ],
+  },
+]
+
+/** A dose as printed on the label, which is what the page shows, and its parsed numbers. */
+const amountColumns = (name: 'dose' | 'rate'): Field[] => [
+  text(`${name}Text`, 'Doză, ca în sursă', 'Dose, as in the source'),
+  {
+    type: 'row',
+    fields: [
+      number(`${name}Min`, 'Doză minimă', 'Minimum'),
+      number(`${name}Max`, 'Doză maximă', 'Maximum'),
+      text(`${name}Unit`, 'Unitate (l/ha…)', 'Unit (l/ha…)', false),
+    ],
+  },
+]
+
 /** SKUs identify a pack across orders and price history, so they are unique shop-wide. */
 const validateVariants: ArrayField['validate'] = async (value, { id, req }) => {
   const skus = ((value ?? []) as { sku?: string }[]).flatMap((v) => (v.sku ? [v.sku] : []))
@@ -174,22 +198,22 @@ const protection: Field = {
       label: { ro: 'Tabel de doze', en: 'Dose table' },
       admin: { description: 'From the label or the official register only. Never inferred.' },
       fields: [
+        ...cropColumns,
         {
           type: 'row',
           fields: [
-            { name: 'crop', type: 'relationship', relationTo: 'crops', required: true },
+            text('targetText', 'Ținte, ca în sursă', 'Targets, as in the source'),
             { name: 'target', type: 'relationship', relationTo: 'targets', hasMany: true },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            text('timing', 'Moment de aplicare', 'Timing'),
             text('bbch', 'Stadiu BBCH', 'BBCH stage', false),
           ],
         },
-        {
-          type: 'row',
-          fields: [
-            number('doseMin', 'Doză minimă', 'Minimum dose'),
-            number('doseMax', 'Doză maximă', 'Maximum dose'),
-            text('doseUnit', 'Unitate (l/ha…)', 'Unit (l/ha…)', false),
-          ],
-        },
+        ...amountColumns('dose'),
         {
           type: 'row',
           fields: [
@@ -283,21 +307,9 @@ const fertiliser: Field = {
       type: 'array',
       label: { ro: 'Doze pe cultură', en: 'Rates by crop' },
       fields: [
-        {
-          type: 'row',
-          fields: [
-            { name: 'crop', type: 'relationship', relationTo: 'crops', required: true },
-            text('timing', 'Moment de aplicare', 'Timing'),
-          ],
-        },
-        {
-          type: 'row',
-          fields: [
-            number('rateMin', 'Doză minimă', 'Minimum rate'),
-            number('rateMax', 'Doză maximă', 'Maximum rate'),
-            text('rateUnit', 'Unitate (kg/ha…)', 'Unit (kg/ha…)', false),
-          ],
-        },
+        ...cropColumns,
+        text('timing', 'Moment de aplicare', 'Timing'),
+        ...amountColumns('rate'),
       ],
     },
     note('storage', 'Depozitare', 'Storage'),
@@ -390,6 +402,14 @@ export const Products: CollectionConfig = {
       access: { read: isStaffField, create: () => false, update: () => false },
       admin: { position: 'sidebar', readOnly: true },
       hooks: { afterRead: [({ data }) => productGaps(data as Partial<Product>)] },
+    },
+    {
+      name: 'legacySlugs',
+      type: 'text',
+      hasMany: true,
+      label: { ro: 'Adrese vechi', en: 'Old slugs' },
+      admin: { position: 'sidebar', description: 'Slugs on agrinvestshop.ro, for the redirects.' },
+      access: { read: isStaffField },
     },
     slug('name'),
     {

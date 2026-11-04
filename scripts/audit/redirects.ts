@@ -12,6 +12,7 @@ import path from 'node:path'
 import * as cheerio from 'cheerio'
 import { parse } from 'csv-parse/sync'
 
+import { newSlugOf, planProducts } from '../import/woo-plan'
 import { auditDir, rel, writeCsv } from './lib'
 
 type Inventory = { site: string; url: string; type: string; title: string }
@@ -25,8 +26,17 @@ const products: Product[] = (
   JSON.parse(await fs.readFile(path.join(auditDir, 'products-raw.json'), 'utf8')) as Product[]
 ).map((p) => ({ ...p, name: cheerio.load(p.name).text() })) // names carry HTML entities
 
-/** New URL of a shop product. Category slugs are provisional until the Phase 3 taxonomy. */
-const productUrl = (p: Product) => `/magazin/${p.categories[0]?.slug ?? 'produse'}/${p.slug}`
+const plan = planProducts()
+
+/** New URL of an old shop product, after merges and the new categories (`woo-plan.ts`). */
+function productUrl(p: Product) {
+  const planned = newSlugOf(plan, p.slug)
+  if (!planned) throw new Error(`Not in the import plan: ${p.slug}`)
+  return `/magazin/${planned.category}/${planned.slug}`
+}
+
+/** Old shop categories whose name changed or which were retired. */
+const CATEGORY_URLS: Record<string, string> = { pesticide: '/magazin/protectia-plantelor' }
 
 const normalize = (s: string) =>
   s
@@ -74,9 +84,9 @@ const FIXED: Record<string, string | 410> = {
   'agrinvestshop.ro/': '/magazin',
   'agrinvestshop.ro/shop/': '/magazin',
   'agrinvestshop.ro/blog/': '/ghiduri',
-  'agrinvestshop.ro/reduceri/': '/magazin/oferte',
-  'agrinvestshop.ro/suport/': '/magazin/cum-comand',
-  'agrinvestshop.ro/cum-comand-produse/': '/magazin/cum-comand',
+  'agrinvestshop.ro/reduceri/': '/magazin',
+  'agrinvestshop.ro/suport/': '/contact',
+  'agrinvestshop.ro/cum-comand-produse/': '/contact',
   'agrinvestshop.ro/refund_returns/': '/retur',
   'agrinvestshop.ro/termeni-si-conditii/': '/termeni-si-conditii',
   'agrinvestshop.ro/cookies/': '/cookie-uri',
@@ -173,9 +183,9 @@ for (const slug of new Set(products.flatMap((p) => p.categories.map((c) => c.slu
     site: 'agrinvestshop.ro',
     oldUrl: `https://agrinvestshop.ro/categorie/${slug}/`,
     status: 301,
-    newUrl: `/magazin/${slug}`,
+    newUrl: CATEGORY_URLS[slug] ?? `/magazin/${slug}`,
     rule: 'category',
-    note: 'not in sitemap; slug provisional',
+    note: 'not in sitemap',
   })
 }
 

@@ -8,13 +8,20 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { ActiveIngredients } from './collections/ActiveIngredients'
 import { Bases } from './collections/Bases'
+import { Brands } from './collections/Brands'
+import { Categories } from './collections/Categories'
 import { Counties } from './collections/Counties'
 import { Crops } from './collections/Crops'
+import { Documents } from './collections/Documents'
 import { Leads } from './collections/Leads'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { People } from './collections/People'
+import { PriceHistory } from './collections/PriceHistory'
+import { Products } from './collections/Products'
+import { Targets } from './collections/Targets'
 import { Users } from './collections/Users'
 import { Figures } from './globals/Figures'
 import { Footer } from './globals/Footer'
@@ -30,7 +37,7 @@ const dirname = path.dirname(filename)
 const r2 = process.env.R2_BUCKET
   ? s3Storage({
       bucket: process.env.R2_BUCKET,
-      collections: { media: true },
+      collections: { media: true, documents: true },
       config: {
         endpoint: process.env.R2_ENDPOINT,
         region: 'auto',
@@ -49,7 +56,23 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Pages, Bases, Counties, Crops, People, Leads, Media, Users],
+  collections: [
+    Pages,
+    Bases,
+    Counties,
+    Crops,
+    Products,
+    Categories,
+    Brands,
+    ActiveIngredients,
+    Targets,
+    PriceHistory,
+    People,
+    Leads,
+    Media,
+    Documents,
+    Users,
+  ],
   globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting],
   editor: lexicalEditor(),
   // Content locales (what visitors read). Romanian is the source language.
@@ -74,6 +97,8 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    // Development pushes the schema; production applies these files (`npm run migrate`).
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
   plugins: r2 ? [r2] : [],

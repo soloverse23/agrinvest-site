@@ -25,6 +25,7 @@ import {
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { localePath, type Locale } from '@/i18n/config'
 import { basePath, cropPath } from '@/i18n/routes'
+import { isGrainKey } from '@/lib/crops'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, type Figures } from '@/lib/content/globals'
 import { listBases, listCounties, listCrops } from '@/lib/content/locations'
@@ -67,7 +68,7 @@ const fact = (text: string | null | undefined, ctx: Pick<Ctx, 'figures' | 'local
   text ? <FactText text={text} figures={ctx.figures} locale={ctx.locale} /> : null
 
 /** Rich text with register facts inside text nodes, in the long-form style. */
-function Prose({
+export function Prose({
   data,
   ctx,
   className,
@@ -459,8 +460,6 @@ export async function BaseListBlock({
   )
 }
 
-const cropKeys = ['wheat', 'maize', 'sunflower', 'rapeseed', 'barley'] as const
-
 async function CropListBlock({
   block,
   ctx,
@@ -482,7 +481,7 @@ async function CropListBlock({
               href={cropPath(c.slug, ctx.locale)}
               className="group flex h-full items-center gap-4 rounded-lg bg-raised p-4 text-ink no-underline shadow-soft ring-1 ring-line transition duration-150 ease-move hover:-translate-y-0.5 hover:shadow-raised lg:flex-col lg:items-start lg:p-5"
             >
-              {cropKeys.includes(c.key) && <CropBadge crop={c.key} />}
+              {isGrainKey(c.key) && <CropBadge crop={c.key} />}
               <span className="flex flex-1 items-center justify-between gap-2 self-stretch font-semibold">
                 {c.name}
                 <ArrowRightIcon className="size-4 text-accent transition-transform duration-150 group-hover:translate-x-0.5" />

@@ -210,9 +210,9 @@ export const copy = {
     doseLabel: { ro: 'Doză', en: 'Dose' },
     inStock: { ro: 'În stoc', en: 'In stock' },
     outOfStock: { ro: 'La comandă', en: 'On order' },
-    add: { ro: 'Adaugă în coș', en: 'Add to cart' },
-    quote: { ro: 'Cere ofertă', en: 'Request a quote' },
-    vat: { ro: 'cu TVA', en: 'incl. VAT' },
+    details: { ro: 'Vezi produsul', en: 'View product' },
+    from: { ro: 'de la', en: 'from' },
+    askPrice: { ro: 'Preț la cerere', en: 'Price on request' },
     payAtHarvest: { ro: 'Plătești la recoltă', en: 'Pay at harvest' },
   },
   finance: {

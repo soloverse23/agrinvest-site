@@ -1,5 +1,5 @@
 /**
- * Seeds the Phase 2 content model: Figures register, counties, bases, crops, people,
+ * Seeds the content model: Figures register, counties, bases, crops, shop categories, people,
  * lead routing, media (local footage stills), navigation, footer, SEO defaults and the core
  * pages with their content (content.ts).
  * Idempotent: every record is upserted by its key or slug. Run with `npm run seed`.
@@ -14,8 +14,19 @@ import type { FactStatus } from '@/fields'
 import { slugify } from '@/lib/slugify'
 import { contentFor, cropContent, cropFaq, type Ctx } from './content'
 import { contentEn, cropContentEn, cropFaqEn } from './content-en'
-import { bases, counties, crops, figures, people, routes, sameAs } from './data'
+import {
+  bases,
+  categories,
+  counties,
+  crops,
+  figures,
+  people,
+  routes,
+  sameAs,
+  shopCrops,
+} from './data'
 import { footer, navigation, pages } from './pages'
+import { importProducts } from '../import/woo'
 
 const context = { skipChildren: true }
 
@@ -40,7 +51,7 @@ function registerStatuses(): Map<string, FactStatus> {
   return out
 }
 
-async function upsert<T extends 'counties' | 'bases' | 'crops' | 'people'>(
+async function upsert<T extends 'counties' | 'bases' | 'crops' | 'people' | 'categories'>(
   payload: Payload,
   collection: T,
   where: Record<string, { equals: unknown }>,
@@ -136,6 +147,7 @@ async function seedLocations(payload: Payload) {
       { key: { equals: crop.key } },
       {
         key: crop.key,
+        isGrain: true,
         name: crop.name.ro,
         slug: crop.slug.ro,
         intro: cropContent[crop.key].intro,
@@ -160,6 +172,58 @@ async function seedLocations(payload: Payload) {
   console.log(
     `locations: ${counties.length} counties, ${bases.length} bases, ${crops.length} crops`,
   )
+}
+
+async function seedShop(payload: Payload) {
+  for (const crop of shopCrops) {
+    const id = await upsert(
+      payload,
+      'crops',
+      { key: { equals: crop.key } },
+      {
+        key: crop.key,
+        isGrain: false,
+        name: crop.name.ro,
+        slug: crop.slug.ro,
+        _status: 'published',
+      },
+    )
+    await payload.update({
+      collection: 'crops',
+      id,
+      locale: 'en',
+      data: { name: crop.name.en, slug: crop.slug.en, _status: 'published' },
+      context,
+    })
+  }
+  const ids: Record<string, number> = {}
+  for (const [order, c] of categories.entries()) {
+    const parent = 'parent' in c ? ids[c.parent] : null
+    ids[c.slug.ro] = await upsert(
+      payload,
+      'categories',
+      { slug: { equals: c.slug.ro } },
+      {
+        name: c.name.ro,
+        slug: c.slug.ro,
+        role: c.role,
+        parent,
+        order,
+        icon: 'icon' in c ? c.icon : null,
+        intro: c.intro.ro,
+        indexable: true,
+        _status: 'published',
+      },
+    )
+    await payload.update({
+      collection: 'categories',
+      id: ids[c.slug.ro],
+      locale: 'en',
+      data: { name: c.name.en, slug: c.slug.en, intro: c.intro.en, _status: 'published' },
+      context,
+    })
+  }
+  console.log(`shop: ${shopCrops.length} shop crops, ${categories.length} categories`)
 }
 
 async function seedPeople(payload: Payload): Promise<Record<string, number>> {
@@ -369,8 +433,20 @@ async function seedGlobals(payload: Payload) {
 }
 
 const payload = await getPayload({ config })
+
+// Deploys seed only an empty database, so they never overwrite what staff have entered.
+if (process.env.SEED_ONLY_IF_EMPTY === 'true') {
+  const { totalDocs } = await payload.count({ collection: 'pages' })
+  if (totalDocs > 0) {
+    console.log(`seed: skipped, the database already has ${totalDocs} pages`)
+    process.exit(0)
+  }
+}
+
 await seedFigures(payload)
 await seedLocations(payload)
+await seedShop(payload)
+await importProducts(payload)
 const peopleIds = await seedPeople(payload)
 const mediaIds = await seedMedia(payload)
 await seedGlobals(payload)

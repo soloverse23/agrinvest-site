@@ -25,6 +25,7 @@ export default defineConfig([
     },
   },
   globalIgnores([
+    'src/migrations/',
     '.next/',
     'storybook-static/',
     'data/',

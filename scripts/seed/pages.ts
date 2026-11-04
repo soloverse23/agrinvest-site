@@ -275,6 +275,24 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
         },
       ],
     },
+    {
+      label: 'Magazin',
+      href: '/magazin',
+      blurb: 'Semințe, protecția plantelor și nutriție, cu doze și prețuri pe ambalaj.',
+      children: [
+        { label: 'Semințe', href: '/magazin/seminte', description: 'Grâu, orz, rapiță, năut' },
+        {
+          label: 'Protecția plantelor',
+          href: '/magazin/protectia-plantelor',
+          description: 'Erbicide, fungicide, insecticide',
+        },
+        {
+          label: 'Nutriție',
+          href: '/magazin/nutritie',
+          description: 'Îngrășăminte și fertilizanți foliari',
+        },
+      ],
+    },
     { label: 'Finanțare', href: '/finantare' },
     { label: 'Logistică', href: '/logistica' },
     {
@@ -320,6 +338,28 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
           label: 'Drying and cleaning',
           href: '/en/storage/drying',
           description: 'Grain brought to storage moisture',
+        },
+      ],
+    },
+    {
+      label: 'Shop',
+      href: '/en/shop',
+      blurb: 'Seeds, crop protection and plant nutrition, with doses and prices per pack.',
+      children: [
+        {
+          label: 'Seeds',
+          href: '/en/shop/seeds',
+          description: 'Wheat, barley, rapeseed, chickpea',
+        },
+        {
+          label: 'Crop protection',
+          href: '/en/shop/crop-protection',
+          description: 'Herbicides, fungicides, insecticides',
+        },
+        {
+          label: 'Plant nutrition',
+          href: '/en/shop/plant-nutrition',
+          description: 'Fertilisers and foliar products',
         },
       ],
     },

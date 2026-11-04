@@ -23,6 +23,26 @@ npm run dev              # http://localhost:3100 (RO), /en (EN), /admin
 | `npm run generate:types` / `generate:importmap`             | Regenerate Payload types and the admin import map     |
 | `npm run audit:crawl` / `audit:products` / `audit:keywords` | Phase 0 audit scripts (outputs in `docs/audit/`)      |
 
+## Database changes
+
+Development pushes the schema automatically. Production only changes through migrations:
+
+```bash
+npm run migrate:create <name>   # after changing collections; commit src/migrations/
+npm run migrate                 # with the production DATABASE_URL, before deploying that code
+```
+
+CI fails if the collections and `src/migrations/` disagree. A local push can stop and wait for a yes on a change that may lose data (a column changing type, for example); it never runs in production.
+
+## Deploying
+
+The build reads the database, so every Vercel build first runs `scripts/deploy/prepare-database.sh`: it applies pending migrations and seeds the database only if it is empty.
+
+1. In Vercel, set for Production and Preview: `DATABASE_URL` and `DATABASE_URL_UNPOOLED` (the Neon integration adds both) and `PAYLOAD_SECRET` (`openssl rand -hex 32`). For uploads, add `R2_BUCKET`, `R2_ENDPOINT`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`. Leave `SITE_INDEXABLE` off until Phase 8.
+2. Deploy. Photos stay local until their rights are confirmed, so pages render without them.
+
+Preview and Production share one database for now, so a preview build migrates it too. Give previews their own Neon branch before real orders arrive.
+
 ## Documents
 
 - `docs/ROADMAP.md`: all phases.

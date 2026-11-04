@@ -32,6 +32,27 @@ test.describe('Admin Panel', () => {
     await expect(listViewArtifact).toBeVisible()
   })
 
+  test('lists the shop category tree with product counts', async () => {
+    await page.goto('/admin/collections/categories')
+    await expect(page.getByRole('link', { name: 'Erbicide', exact: true })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Protecția plantelor', exact: true })).toBeVisible()
+  })
+
+  test('shows only the technical fields of the chosen product type', async () => {
+    test.setTimeout(60_000)
+    await page.goto('/admin/collections/products/create')
+    await expect(page.locator('input[name="name"]')).toBeVisible()
+    // The select ignores clicks until the admin has hydrated, which is slow on CI.
+    await expect(async () => {
+      await page.locator('#field-productType .rs__control').click()
+      await expect(page.locator('.rs__option').first()).toBeVisible({ timeout: 2_000 })
+    }).toPass({ timeout: 25_000 })
+    await page.locator('.rs__option').first().click()
+    await page.getByRole('button', { name: /Date tehnice|Technical data/ }).click()
+    await expect(page.locator('#field-protection__formulation')).toBeVisible()
+    await expect(page.locator('#field-seed__variety')).toHaveCount(0)
+  })
+
   test('can navigate to edit view', async () => {
     await page.goto('/admin/collections/users/create')
     await expect(page).toHaveURL(/\/admin\/collections\/users\/[a-zA-Z0-9-_]+/)

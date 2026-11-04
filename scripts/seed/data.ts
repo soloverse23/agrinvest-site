@@ -231,6 +231,169 @@ export const crops = [
   { key: 'barley', name: { ro: 'Orz', en: 'Barley' }, slug: { ro: 'orz', en: 'barley' } },
 ] as const
 
+/** Crops the shop's products are used on, which Agrinvest does not buy: no grain pages. */
+export const shopCrops = [
+  { key: 'soybean', name: { ro: 'Soia', en: 'Soybean' }, slug: { ro: 'soia', en: 'soybean' } },
+  {
+    key: 'triticale',
+    name: { ro: 'Triticale', en: 'Triticale' },
+    slug: { ro: 'triticale', en: 'triticale' },
+  },
+  { key: 'rye', name: { ro: 'Secară', en: 'Rye' }, slug: { ro: 'secara', en: 'rye' } },
+  { key: 'peas', name: { ro: 'Mazăre', en: 'Peas' }, slug: { ro: 'mazare', en: 'peas' } },
+  { key: 'chickpea', name: { ro: 'Năut', en: 'Chickpea' }, slug: { ro: 'naut', en: 'chickpea' } },
+  { key: 'potato', name: { ro: 'Cartof', en: 'Potato' }, slug: { ro: 'cartof', en: 'potato' } },
+  {
+    key: 'sugar-beet',
+    name: { ro: 'Sfeclă de zahăr', en: 'Sugar beet' },
+    slug: { ro: 'sfecla-de-zahar', en: 'sugar-beet' },
+  },
+  {
+    key: 'alfalfa',
+    name: { ro: 'Lucernă', en: 'Alfalfa' },
+    slug: { ro: 'lucerna', en: 'alfalfa' },
+  },
+  {
+    key: 'vegetables',
+    name: { ro: 'Legume', en: 'Vegetables' },
+    slug: { ro: 'legume', en: 'vegetables' },
+  },
+  {
+    key: 'fruit-trees',
+    name: { ro: 'Pomi fructiferi', en: 'Fruit trees' },
+    slug: { ro: 'pomi-fructiferi', en: 'fruit-trees' },
+  },
+  {
+    key: 'grapevine',
+    name: { ro: 'Viță de vie', en: 'Grapevine' },
+    slug: { ro: 'vita-de-vie', en: 'grapevine' },
+  },
+] as const
+
+/** The shop's category tree, in menu order. `pesticide` from the old shop is retired. */
+export const categories = [
+  {
+    name: { ro: 'Semințe', en: 'Seeds' },
+    slug: { ro: 'seminte', en: 'seeds' },
+    role: 'category',
+    icon: 'leaf',
+    intro: {
+      ro: 'Sămânță certificată de grâu, orz, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.',
+      en: 'Certified wheat, barley, rapeseed and chickpea seed, with the variety, seed class and pack of each product.',
+    },
+  },
+  {
+    name: { ro: 'Protecția plantelor', en: 'Crop protection' },
+    slug: { ro: 'protectia-plantelor', en: 'crop-protection' },
+    role: 'group',
+    icon: 'drop',
+    intro: {
+      ro: 'Erbicide, fungicide, insecticide, tratamente pentru sămânță și adjuvanți, cu substanța activă și dozele pe cultură.',
+      en: 'Herbicides, fungicides, insecticides, seed treatments and adjuvants, with the active ingredient and doses by crop.',
+    },
+  },
+  {
+    name: { ro: 'Erbicide', en: 'Herbicides' },
+    slug: { ro: 'erbicide', en: 'herbicides' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+    intro: {
+      ro: 'Erbicide pentru cereale, porumb, floarea-soarelui și rapiță. Alege după cultură, substanța activă și momentul aplicării.',
+      en: 'Herbicides for cereals, maize, sunflower and rapeseed. Choose by crop, active ingredient and application timing.',
+    },
+  },
+  {
+    name: { ro: 'Fungicide', en: 'Fungicides' },
+    slug: { ro: 'fungicide', en: 'fungicides' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+    intro: {
+      ro: 'Fungicide pentru combaterea bolilor din culturile de câmp, cu dozele și stadiile de aplicare pe fiecare cultură.',
+      en: 'Fungicides against diseases of field crops, with doses and application stages for each crop.',
+    },
+  },
+  {
+    name: { ro: 'Insecticide', en: 'Insecticides' },
+    slug: { ro: 'insecticide', en: 'insecticides' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+    intro: {
+      ro: 'Insecticide pentru dăunătorii din culturile de câmp, cu substanța activă, doza și timpul de pauză al fiecărui produs.',
+      en: 'Insecticides against pests of field crops, with the active ingredient, dose and waiting period of each product.',
+    },
+  },
+  {
+    name: { ro: 'Tratament sămânță', en: 'Seed treatment' },
+    slug: { ro: 'tratament-samanta', en: 'seed-treatment' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+    intro: {
+      ro: 'Produse pentru tratarea seminței înainte de semănat, cu doza la 100 kg de sămânță și bolile combătute.',
+      en: 'Products for treating seed before sowing, with the dose per 100 kg of seed and the diseases they control.',
+    },
+  },
+  {
+    name: { ro: 'Adjuvanți', en: 'Adjuvants' },
+    slug: { ro: 'adjuvanti', en: 'adjuvants' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+    intro: {
+      ro: 'Adjuvanți care se aplică împreună cu tratamentele, pentru o acoperire mai bună a frunzelor și pierderi mai mici.',
+      en: 'Adjuvants applied with crop protection treatments, for better leaf coverage and lower losses.',
+    },
+  },
+  {
+    name: { ro: 'Regulatori de creștere', en: 'Growth regulators' },
+    slug: { ro: 'regulatori-de-crestere', en: 'growth-regulators' },
+    role: 'category',
+    parent: 'protectia-plantelor',
+    intro: {
+      ro: 'Regulatori de creștere pentru cereale, cu dozele și stadiile de aplicare recomandate pe cultură.',
+      en: 'Growth regulators for cereals, with the recommended doses and application stages by crop.',
+    },
+  },
+  {
+    name: { ro: 'Nutriție', en: 'Plant nutrition' },
+    slug: { ro: 'nutritie', en: 'plant-nutrition' },
+    role: 'group',
+    icon: 'scale',
+    intro: {
+      ro: 'Îngrășăminte granulate și fertilizanți foliari pentru nutriția culturilor, cu compoziția și ambalajul fiecărui produs.',
+      en: 'Granular fertilisers and foliar products for crop nutrition, with the composition and pack of each product.',
+    },
+  },
+  {
+    name: { ro: 'Îngrășăminte', en: 'Fertilisers' },
+    slug: { ro: 'ingrasaminte', en: 'fertilisers' },
+    role: 'category',
+    parent: 'nutritie',
+    intro: {
+      ro: 'Îngrășăminte cu azot și fosfor, în saci mari sau ambalaje mici, inclusiv produse pentru agricultura ecologică.',
+      en: 'Nitrogen and phosphorus fertilisers in big bags or small packs, including products for organic farming.',
+    },
+  },
+  {
+    name: { ro: 'Fertilizanți foliari', en: 'Foliar fertilisers' },
+    slug: { ro: 'fertilizanti-foliare', en: 'foliar-fertilisers' },
+    role: 'category',
+    parent: 'nutritie',
+    intro: {
+      ro: 'Fertilizanți foliari cu macro și microelemente, pentru corectarea carențelor în perioada de vegetație.',
+      en: 'Foliar fertilisers with macro and micronutrients, for correcting deficiencies during the growing season.',
+    },
+  },
+  {
+    name: { ro: 'Agricultură bio', en: 'Organic farming' },
+    slug: { ro: 'agricultura-bio', en: 'organic-farming' },
+    role: 'theme',
+    icon: 'leaf',
+    intro: {
+      ro: 'Produse pentru fermele ecologice: îngrășăminte biologice și roci naturale, cu compoziția și modul de folosire.',
+      en: 'Products for organic farms: biological fertilisers and natural rock, with composition and how to use them.',
+    },
+  },
+] as const
+
 /** People named in the audit. No phone or email is public until each person agrees. */
 export const people = [
   {

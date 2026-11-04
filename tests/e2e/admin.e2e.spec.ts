@@ -39,9 +39,14 @@ test.describe('Admin Panel', () => {
   })
 
   test('shows only the technical fields of the chosen product type', async () => {
+    test.setTimeout(60_000)
     await page.goto('/admin/collections/products/create')
     await expect(page.locator('input[name="name"]')).toBeVisible()
-    await page.locator('#field-productType').click()
+    // The select ignores clicks until the admin has hydrated, which is slow on CI.
+    await expect(async () => {
+      await page.locator('#field-productType .rs__control').click()
+      await expect(page.locator('.rs__option').first()).toBeVisible({ timeout: 2_000 })
+    }).toPass({ timeout: 25_000 })
     await page.locator('.rs__option').first().click()
     await page.getByRole('button', { name: /Date tehnice|Technical data/ }).click()
     await expect(page.locator('#field-protection__formulation')).toBeVisible()

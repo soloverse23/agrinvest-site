@@ -1,7 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { en } from '@payloadcms/translations/languages/en'
 import { ro } from '@payloadcms/translations/languages/ro'
 import path from 'path'
@@ -30,6 +29,7 @@ import { LeadRouting } from './globals/LeadRouting'
 import { Navigation } from './globals/Navigation'
 import { SeoDefaults } from './globals/SeoDefaults'
 import { defaultLocale } from './i18n/config'
+import { vercelBlob } from './lib/storage/blob'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,15 +50,6 @@ const r2 = process.env.R2_BUCKET
           secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
         },
       },
-    })
-  : null
-
-const blob = process.env.BLOB_READ_WRITE_TOKEN
-  ? vercelBlobStorage({
-      collections: { media: true, documents: true },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      // Straight from the browser: a Vercel function accepts 4.5 MB at most.
-      clientUploads: true,
     })
   : null
 
@@ -114,5 +105,5 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
-  plugins: [blob, r2].flatMap((plugin) => plugin ?? []),
+  plugins: r2 ? [vercelBlob(), r2] : [vercelBlob()],
 })

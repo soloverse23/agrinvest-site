@@ -285,6 +285,8 @@ export interface Media {
    * Footage from YouTube or TV stays "pending" until Agrinvest confirms the rights.
    */
   rights: 'owned' | 'licensed' | 'pending';
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1215,6 +1217,8 @@ export interface ProductDocument {
    * A "pending" file is not public. The product links to its source instead.
    */
   rights: 'owned' | 'licensed' | 'pending';
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -2237,6 +2241,8 @@ export interface MediaSelect<T extends boolean = true> {
   caption?: T;
   credit?: T;
   rights?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -2260,6 +2266,8 @@ export interface DocumentsSelect<T extends boolean = true> {
   version?: T;
   source?: T;
   rights?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

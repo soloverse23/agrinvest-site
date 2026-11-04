@@ -1,0 +1,99 @@
+{
+  "slug": "champ-77-wg",
+  "primaryKeyword": {
+    "ro": "champ 77 wg",
+    "en": "champ 77 wg"
+  },
+  "category": "fungicide",
+  "secondaryCategories": [],
+  "crops": [
+    "potato",
+    "vegetables",
+    "grapevine",
+    "fruit-trees"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Champ 77 WG este un fungicid cu cupru metalic (hidroxid de cupru) 500 g/kg, formulare WG; numărul omologării nu este încă verificat. Dozele pe culturi vor fi publicate după verificarea cu eticheta producătorului.",
+      "description": "### Ce este Champ 77 WG\n\nChamp 77 WG este un fungicid cu cupru metalic (hidroxid de cupru) 500 g/kg, formulare WG.\n\n### Cum acționează\n\nCupru metalic (hidroxid de cupru) este un fungicid de contact pe bază de cupru: ionii de cupru blochează mai multe enzime ale agentului patogen, deci riscul de rezistență este mic. Se încadrează la FRAC M01. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Culturi și doze\n\nNu publicăm încă dozele, timpii de pauză și culturile omologate: le adăugăm după ce le verificăm cu eticheta producătorului sau cu registrul ANF. În magazin produsul apare asociat cu: cartof, legume, viță de vie și pomi fructiferi. Până atunci, întreabă un consultant Agrinvest sau citește eticheta de pe ambalaj înainte de tratament.\n\n### Omologare\n\nNu am găsit încă numărul omologării în listele ANF. Îl adăugăm după verificarea cu eticheta; până atunci, cere-i consultantului eticheta produsului.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Champ 77 WG?",
+          "answer": "Cupru metalic (hidroxid de cupru) 500 g/kg (fungicid de contact pe bază de cupru din grupa FRAC M01)."
+        },
+        {
+          "question": "Unde găsesc doza de Champ 77 WG pe cultura mea?",
+          "answer": "Pe eticheta ambalajului. Dozele diferă pe cultură și dăunător, iar tabelul verificat al producătorului nu este încă publicat pe această pagină. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Champ 77 WG: fungicid, omologare și doze",
+        "description": "Champ 77 WG, fungicid cu cupru metalic (hidroxid de cupru) 500 g/kg: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Champ 77 WG is a fungicide with cupru metalic (hidroxid de cupru) 500 g/kg, WG formulation; its registration number is not yet checked. Rates by crop will be published once checked against the manufacturer’s label.",
+      "description": "### What Champ 77 WG is\n\nChamp 77 WG is a fungicide with cupru metalic (hidroxid de cupru) 500 g/kg, WG formulation.\n\n### How it works\n\nCupru metalic (hidroxid de cupru) is a copper-based contact fungicide: it copper ions block several enzymes of the pathogen, so the risk of resistance is low. It belongs to FRAC M01. Alternate products from different groups to slow the build-up of resistance.\n\n### Crops and rates\n\nWe do not publish the rates, waiting periods and authorised crops yet: we add them once checked against the manufacturer’s label or the ANF register. In the shop the product is listed for: potato, vegetables, grapevine and orchard fruit. Until then, ask an Agrinvest consultant or read the label on the pack before treating.\n\n### Registration\n\nWe have not yet found the registration number in the ANF lists. We add it once checked against the label; until then, ask the consultant for the product label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Champ 77 WG contain?",
+          "answer": "Cupru metalic (hidroxid de cupru) 500 g/kg (copper-based contact fungicide, FRAC M01)."
+        },
+        {
+          "question": "Where do I find the Champ 77 WG rate for my crop?",
+          "answer": "On the label of the pack. Rates differ by crop and pest, and the manufacturer’s checked table is not yet published on this page. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Champ 77 WG: fungicide, registration and rates",
+        "description": "Champ 77 WG, fungicide with cupru metalic (hidroxid de cupru) 500 g/kg: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "cupru metalic (hidroxid de cupru)",
+        "concentration": 500,
+        "unit": "g/kg"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "WG",
+    "modeOfAction": {
+      "ro": "Cupru metalic (hidroxid de cupru) este un fungicid de contact pe bază de cupru: ionii de cupru blochează mai multe enzime ale agentului patogen, deci riscul de rezistență este mic.",
+      "en": "Cupru metalic (hidroxid de cupru) is a copper-based contact fungicide: it copper ions block several enzymes of the pathogen, so the risk of resistance is low."
+    },
+    "resistanceGroup": "FRAC M01"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://www.frac.info/",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "FRAC code list."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/pesticide/champ-77-wg-1-kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Registration number: the ANF lists of 2017 mention CHAMP but no certificate number could be read.",
+    "Dose table, waiting periods, maximum treatments and water volume: no label or register table was read for this product. The old shop’s dose table is not used (it is kept in docs/audit/products-raw.json).",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "The brand comes from the product line (Champ is a Nufarm product).",
+    "Crops attached to this product come from the old shop’s dose table; they are not checked against the register."
+  ],
+  "brand": "nufarm"
+}

@@ -1,0 +1,85 @@
+{
+  "slug": "samanta-de-rapita-dk-excited",
+  "primaryKeyword": {
+    "ro": "sămânță rapiță dk excited",
+    "en": "dk excited rapeseed seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "rapeseed"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "DK Excited este un hibrid de rapiță de toamnă (segment convențional) Dekalb, Bayer Crop Science, cu dublă rezistență la Phoma, toleranță la virusul galben al ridichii, rezistență la scuturare și consum eficient de azot. Densitate: 25–35 plante/m². Pachet de 1.500.000 de boabe, tratat cu fungicid Scenic Gold.",
+      "description": "### Ce este DK Excited\nDK Excited este un hibrid de rapiță de toamnă din segmentul convențional, oferit de Dekalb (Bayer Crop Science), cu sămânța tratată cu fungicidul Scenic Gold. Textul producătorului îl prezintă ca un hibrid cu producții de top în Europa și conținut ridicat de ulei, care performează în toate mediile de producție din România.\n\n### Caracteristici (după pagina veche a produsului)\n- Dublă rezistență la Phoma (putregai negru); rezistență genetică la putregaiul negru RLM-7.\n- Toleranță ridicată la virusul galben al ridichii.\n- Comportament foarte bun la Sclerotinia și Verticillium.\n- Conținut ridicat de ulei.\n- Rezistență la scuturarea boabelor din silicve.\n- Toleranță la ger.\n- Utilizare eficientă a azotului.\n\n### Densitate\n25–35 plante pe metru pătrat.",
+      "faq": [
+        {
+          "question": "Ce soi de rapiță este DK Excited?",
+          "answer": "DK Excited este un hibrid de rapiță de toamnă, convențional, cu dublă rezistență la Phoma, tolerant la virusul galben al ridichii și cu conținut ridicat de ulei."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de rapiță DK Excited None, certificată",
+        "description": "Rapiță DK Excited (Dekalb): hibrid de toamnă convențional cu dublă rezistență la Phoma, tolerant la TuYV, 25–35 plante/m², pachet 1.500.000 boabe."
+      }
+    },
+    "en": {
+      "summary": "DK Excited is a winter rapeseed hybrid (conventional segment) from Dekalb, Bayer Crop Science, with double Phoma resistance, tolerance of turnip yellows virus, shatter resistance and efficient nitrogen use. Density: 25–35 plants/m². 1,500,000-seed pack, treated with the fungicide Scenic Gold.",
+      "description": "### What DK Excited is\nDK Excited is a winter rapeseed hybrid from the conventional segment, offered by Dekalb (Bayer Crop Science), with seed treated with the fungicide Scenic Gold. The manufacturer’s text presents it as a hybrid with top yields in Europe and a high oil content, performing in all production environments in Romania.\n\n### Characteristics (from the old product page)\n- Double Phoma (blackleg) resistance; genetic resistance to blackleg RLM-7.\n- High tolerance of turnip yellows virus.\n- Very good behaviour against Sclerotinia and Verticillium.\n- High oil content.\n- Resistance to seed shattering from the pods.\n- Frost tolerance.\n- Efficient nitrogen use.\n\n### Density\n25–35 plants per square metre.",
+      "faq": [
+        {
+          "question": "What kind of rapeseed is DK Excited?",
+          "answer": "DK Excited is a conventional winter rapeseed hybrid with double Phoma resistance, tolerant of turnip yellows virus and with high oil content."
+        }
+      ],
+      "seo": {
+        "title": "DK Excited rapeseed seed None, certified, 1.5e+06 seeds pack",
+        "description": "DK Excited (Dekalb) rapeseed: a conventional winter hybrid with double Phoma resistance, TuYV tolerant, 25–35 plants/m², 1,500,000-seed pack."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Rapiță",
+      "en": "Rapeseed"
+    },
+    "variety": "DK Excited",
+    "sowingDensity": {
+      "ro": "25–35 plante/m²",
+      "en": "25–35 plants/m²"
+    },
+    "yieldPotential": {
+      "ro": "Ridicat, conținut ridicat de ulei (după producător)",
+      "en": "High, high oil content (manufacturer’s claim)"
+    },
+    "resistances": {
+      "ro": "Dublă rezistență la Phoma (RLM-7); toleranță la TuYV, Sclerotinia, Verticillium și ger; rezistență la scuturare",
+      "en": "Double Phoma resistance (RLM-7); tolerance of TuYV, Sclerotinia, Verticillium and frost; shatter resistance"
+    },
+    "seedTreatment": {
+      "ro": "Fungicid Scenic Gold",
+      "en": "Fungicide Scenic Gold"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/samanta-de-rapita-dk-excited-1-500-000-boabe/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: the hybrid’s description, as the manufacturer’s message is repeated there; not checked against the Dekalb sheet."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label.",
+    "Seed class and certified-seed label."
+  ],
+  "conflicts": [],
+  "brand": "dekalb"
+}

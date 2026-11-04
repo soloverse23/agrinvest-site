@@ -1,12 +1,38 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 import type { NextConfig } from 'next'
+import { createHash } from 'crypto'
+import { existsSync, readdirSync, readFileSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
+/**
+ * Hash of the reviewed enrichment files. The apply step (`scripts/products/apply.ts`) runs
+ * outside Next.js and cannot refresh Vercel's data cache, which survives deploys. The shop's
+ * cache keys carry this hash, so a deploy with new data reads the database afresh.
+ */
+function enrichmentEpoch() {
+  const hash = createHash('sha256')
+  const walk = (dir: string) => {
+    if (!existsSync(dir)) return
+    for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    )) {
+      const file = path.join(dir, entry.name)
+      if (entry.isDirectory()) walk(file)
+      else if (entry.name.endsWith('.json')) hash.update(file).update(readFileSync(file))
+    }
+  }
+  for (const dir of ['products', 'hubs']) walk(path.join(dirname, 'data', dir))
+  const targets = path.join(dirname, 'data', 'targets.json')
+  if (existsSync(targets)) hash.update(readFileSync(targets))
+  return hash.digest('hex').slice(0, 12)
+}
+
 const nextConfig: NextConfig = {
+  env: { ENRICHMENT_EPOCH: enrichmentEpoch() },
   experimental: {
     // Tailwind's CSS is small: inlining it removes the render-blocking stylesheet request.
     inlineCss: true,

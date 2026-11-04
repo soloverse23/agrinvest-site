@@ -90,6 +90,18 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
     - **Who receives orders** and input enquiries: name, role, phone, email.
     - **Terms of sale, delivery and returns**, checked by a lawyer.
 
+### Product enrichment (phase 3.3)
+
+20. **Brand, manufacturer and label for each crop-protection product.** `product-verification.md` lists, per product, what is still missing: registration number, validity date, waiting period, toxicity classification (GHS) and buffer zones. The old shop's dose tables are not used: send the manufacturer labels or technical sheets (PDF) and the doses are added straight away.
+21. **Do your licences cover online sale?** (Owner: Agrinvest holds all the required licences.) OUG 53/2025 ties online trade to the authorisation holder or its approved distributors: OUG 53/2025 limits online trade in plant-protection products to the authorisation holder and its approved distributors (see `oug-53-2025-summary.md`). A written confirmation per manufacturer is needed before checkout opens.
+22. **Which products carry the GHS06 pictogram?** They cannot be sold online under OUG 53/2025.
+23. **Jolpolt** is registered as an insecticide (second name of Delmur, deltamethrin 25 g/L), not an adjuvant. Please check the pack and send a photo of the label; the old photo is marked "Adjuvant".
+24. **Mix-ups in the old shop:** Corida 75 WG is a cereal herbicide (tribenuron-methyl), not an insecticide. Zanzibar and SU Ellen are filed as barley but the old text says wheat: which species are they? Stabilan: is it 750 g/L or the registered 400 g/L product? Custodia 320 SC: certificate 258PC or 259PC? Mospilan: 20 SP or 20 SG?
+25. **Products that may not be plant-protection products:** Seed Max and Ympact Completo are moved to fertilisers; Prevatect and Kappa-O have no registration found. Please confirm what they are and send the labels before they claim fungicidal effect.
+26. **Seed varieties:** send the supplier sheets (or the official catalogue entries) for Zanzibar, SU Ellen, Cardinal, Sorrial, Solindo, Sofru, Rubisko, PG102, Asterion and Apache. The old texts for these are generic templates and are not used.
+27. **Price basis for bulk fertilisers:** the old pages say "price per kilogram" for urea, ammonium nitrate and DAP while the packs are 600–1,000 kg. Are 1,650 / 2,800 / 2,550 lei the price of the whole pack?
+28. **Photos:** the old photos are kept with rights pending; Jolpolt's photo says "Adjuvant".
+
 ### Finance – Agrinvest Credit IFN (phase 4)
 
 12. The current list of credit products, with amounts, terms, guarantees and eligibility (full questions in `ifn.md`).

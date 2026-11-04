@@ -1,0 +1,154 @@
+{
+  "slug": "napekhem-n27-mg-micros",
+  "primaryKeyword": {
+    "ro": "napekhem n27 + mg micros",
+    "en": "napekhem n27 + mg micros"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [
+    "fruit-trees",
+    "vegetables",
+    "grapevine"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "NaPeKhem N 27 + Mg Micros este un îngrășământ foliar cu azot, îmbogățit cu magneziu și microelemente, pentru stimularea creșterii la începutul vegetației sau după stres. Dozele: 0,2–0,4% la pomi și horticultură; 20–40 l/ha în fertirigare. Ambalaj de 20 l.",
+      "description": "### Ce este\nNaPeKhem N 27 + Mg Micros este un îngrășământ foliar cu azot, îmbogățit cu magneziu și microelemente. Susține dezvoltarea vegetativă în faza inițială a ciclului, când planta are nevoie de impuls.\n\n### Când ajută cel mai mult\nEste recomandat mai ales pentru a crește vigoarea plantei slăbite de agenți interni sau externi (ger, întârziere vegetativă) și când planta are dificultăți să ia nutrienți prin rădăcini. Microelementele ajută respirația celulară, producția de clorofilă și păstrarea hormonilor de creștere.\n\n### Doze din fișa produsului\n- Pomi fructiferi: 0,2–0,4% (1–2 aplicații)\n- Horticultură: 0,2–0,4% (mai multe aplicații)\n- Ceapă: 1,0–1,2% (mai multe aplicații)\n- Măslin: 0,8–1,0% (1–2 aplicații)\n- Fertirigare: 20–40 l/ha\n\nPerioadă: pe parcursul ciclului vegetativ la cereale și horticultură; la pomi, înainte și după înflorire sau după căderea petalelor. Nu amesteca cu uleiuri, cupruri, sulfuri sau produse alcaline; nu trata în orele de căldură puternică.",
+      "faq": [
+        {
+          "question": "Ce doză de NaPeKhem N 27 se folosește?",
+          "answer": "La pomi și horticultură, 0,2–0,4%; la ceapă, 1,0–1,2%; în fertirigare, 20–40 l/ha, conform fișei produsului."
+        },
+        {
+          "question": "Când se aplică NaPeKhem N 27?",
+          "answer": "La începutul vegetației sau când planta este slăbită de stres și absoarbe greu nutrienți."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem N 27 + Mg Micros: îngrășământ foliar cu azot",
+        "description": "NaPeKhem N 27 + Mg Micros, îngrășământ foliar cu azot, magneziu și microelemente: doze pe culturi, perioade de aplicare și incompatibilități."
+      }
+    },
+    "en": {
+      "summary": "NaPeKhem N 27 + Mg Micros is a foliar nitrogen fertiliser, enriched with magnesium and micronutrients, to stimulate growth at the start of the season or after stress. Rates: 0.2–0.4% on fruit trees and horticulture; 20–40 l/ha in fertigation. 20 l pack.",
+      "description": "### What it is\nNaPeKhem N 27 + Mg Micros is a foliar nitrogen fertiliser, enriched with magnesium and micronutrients. It supports vegetative growth in the early phase of the cycle, when the plant needs a push.\n\n### When it helps most\nIt is recommended above all to raise the vigour of a plant weakened by internal or external agents (frost, delayed growth) and when the plant has difficulty taking nutrients up through the roots. The micronutrients help cellular respiration, chlorophyll production and the preservation of growth hormones.\n\n### Rates on the product sheet\n- Fruit trees: 0.2–0.4% (1–2 applications)\n- Horticulture: 0.2–0.4% (several applications)\n- Onion: 1.0–1.2% (several applications)\n- Olive: 0.8–1.0% (1–2 applications)\n- Fertigation: 20–40 l/ha\n\nTiming: during the growing cycle in cereals and horticulture; in orchards, before and after flowering or after petal fall. Do not mix with oils, coppers, sulphurs or alkaline products; do not treat in the heat of the day.",
+      "faq": [
+        {
+          "question": "What rate of NaPeKhem N 27 is used?",
+          "answer": "On fruit trees and horticulture, 0.2–0.4%; on onion, 1.0–1.2%; in fertigation, 20–40 l/ha, according to the product sheet."
+        },
+        {
+          "question": "When is NaPeKhem N 27 applied?",
+          "answer": "At the start of the season or when the plant is weakened by stress and takes nutrients up with difficulty."
+        }
+      ],
+      "seo": {
+        "title": "NaPeKhem N 27 + Mg Micros: foliar nitrogen fertiliser",
+        "description": "NaPeKhem N 27 + Mg Micros, a foliar fertiliser with nitrogen, magnesium and micronutrients: rates by crop, timing and incompatibilities."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 27
+      }
+    ],
+    "form": {
+      "ro": "Lichid",
+      "en": "Liquid"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Pomi fructiferi, foliar",
+        "en": "Fruit trees, foliar"
+      },
+      "crops": [
+        "fruit-trees"
+      ],
+      "doseText": {
+        "ro": "0,2–0,4% (1–2 aplicații)",
+        "en": "0.2–0.4% (1–2 applications)"
+      },
+      "doseMin": 0.2,
+      "doseMax": 0.4,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Horticultură, foliar",
+        "en": "Horticulture, foliar"
+      },
+      "crops": [
+        "vegetables"
+      ],
+      "doseText": {
+        "ro": "0,2–0,4% (mai multe aplicații)",
+        "en": "0.2–0.4% (several applications)"
+      },
+      "doseMin": 0.2,
+      "doseMax": 0.4,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Ceapă, foliar",
+        "en": "Onion, foliar"
+      },
+      "crops": [
+        "vegetables"
+      ],
+      "doseText": {
+        "ro": "1,0–1,2% (mai multe aplicații)",
+        "en": "1.0–1.2% (several applications)"
+      },
+      "doseMin": 1.0,
+      "doseMax": 1.2,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Fertirigare",
+        "en": "Fertigation"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "20–40 l/ha",
+        "en": "20–40 l/ha"
+      },
+      "doseMin": 20,
+      "doseMax": 40,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-n27-mg-micros-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/napekhem-n27-mg-micros-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Composition: the old page has an empty table; “N 27” comes from the name. Magnesium and micronutrient contents are missing.",
+    "Rates for olive are on the old page; there is no olive crop in the shop, so that row is not carried."
+  ],
+  "conflicts": []
+}

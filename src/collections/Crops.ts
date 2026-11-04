@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
-import { hubFields } from '@/fields/shop'
+import { enrichmentLedger, hubFields } from '@/fields/shop'
 import { localeOf } from '@/i18n/config'
 import { cropPath } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
@@ -77,5 +77,6 @@ export const Crops: CollectionConfig = {
       fields: hubFields,
     },
     slug('name', true),
+    enrichmentLedger,
   ],
 }

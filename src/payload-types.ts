@@ -652,6 +652,15 @@ export interface Crop {
    */
   generateSlug?: boolean | null;
   slug: string;
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -845,6 +854,15 @@ export interface Product {
    */
   generateSlug?: boolean | null;
   slug: string;
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   name: string;
   productType: 'protection' | 'seed' | 'fertiliser' | 'other';
   /**
@@ -1081,6 +1099,15 @@ export interface Category {
    */
   generateSlug?: boolean | null;
   slug: string;
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1130,6 +1157,15 @@ export interface Brand {
    */
   generateSlug?: boolean | null;
   slug: string;
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1198,6 +1234,15 @@ export interface ActiveIngredient {
    */
   generateSlug?: boolean | null;
   slug: string;
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1883,6 +1928,7 @@ export interface CropsSelect<T extends boolean = true> {
       };
   generateSlug?: T;
   slug?: T;
+  enrichment?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1897,6 +1943,7 @@ export interface ProductsSelect<T extends boolean = true> {
   legacySlugs?: T;
   generateSlug?: T;
   slug?: T;
+  enrichment?: T;
   name?: T;
   productType?: T;
   primaryCategory?: T;
@@ -2076,6 +2123,7 @@ export interface CategoriesSelect<T extends boolean = true> {
   products?: T;
   generateSlug?: T;
   slug?: T;
+  enrichment?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2110,6 +2158,7 @@ export interface BrandsSelect<T extends boolean = true> {
   products?: T;
   generateSlug?: T;
   slug?: T;
+  enrichment?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2143,6 +2192,7 @@ export interface ActiveIngredientsSelect<T extends boolean = true> {
   products?: T;
   generateSlug?: T;
   slug?: T;
+  enrichment?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

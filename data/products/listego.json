@@ -1,0 +1,106 @@
+{
+  "slug": "listego",
+  "primaryKeyword": {
+    "ro": "listego",
+    "en": "listego"
+  },
+  "category": "erbicide",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Listego este un erbicid cu imazamox 40 g/l; omologat în România (certificat nr. 1859/29.09.1998). Dozele pe culturi vor fi publicate după verificarea cu eticheta producătorului.",
+      "description": "### Ce este Listego\n\nListego este un erbicid cu imazamox 40 g/l.\n\n### Cum acționează\n\nImazamox este o imidazolinonă: blochează enzima ALS din buruieni. Se încadrează la HRAC 2. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Culturi și doze\n\nNu publicăm încă dozele, timpii de pauză și culturile omologate: le adăugăm după ce le verificăm cu eticheta producătorului sau cu registrul ANF. Până atunci, întreabă un consultant Agrinvest sau citește eticheta de pe ambalaj înainte de tratament.\n\n### Omologare\n\nCertificatul de omologare nr. 1859/29.09.1998. Numărul a fost găsit în deciziile ANF (ultima mențiune: 28.09.2023); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Listego?",
+          "answer": "Imazamox 40 g/l (o imidazolinonă din grupa HRAC 2)."
+        },
+        {
+          "question": "Ce număr de omologare are Listego?",
+          "answer": "Certificatul de omologare nr. 1859/29.09.1998, găsit în deciziile ANF (ultima mențiune: 28.09.2023)."
+        },
+        {
+          "question": "Unde găsesc doza de Listego pe cultura mea?",
+          "answer": "Pe eticheta ambalajului. Dozele diferă pe cultură și dăunător, iar tabelul verificat al producătorului nu este încă publicat pe această pagină. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Listego: erbicid cu imazamox, omologare și doze",
+        "description": "Listego, erbicid cu imazamox 40 g/l: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Listego is a herbicide with imazamox 40 g/l; authorised in Romania (certificate no. 1859/29.09.1998). Rates by crop will be published once checked against the manufacturer’s label.",
+      "description": "### What Listego is\n\nListego is a herbicide with imazamox 40 g/l.\n\n### How it works\n\nImazamox is an imidazolinone: it blocks the ALS enzyme in weeds. It belongs to HRAC 2. Alternate products from different groups to slow the build-up of resistance.\n\n### Crops and rates\n\nWe do not publish the rates, waiting periods and authorised crops yet: we add them once checked against the manufacturer’s label or the ANF register. Until then, ask an Agrinvest consultant or read the label on the pack before treating.\n\n### Registration\n\nAuthorisation certificate no. 1859/29.09.1998. The number was found in the ANF decisions (last mention: 28.09.2023); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Listego contain?",
+          "answer": "Imazamox 40 g/l (imidazolinone, HRAC 2)."
+        },
+        {
+          "question": "What is the registration number of Listego?",
+          "answer": "Authorisation certificate no. 1859/29.09.1998, found in the ANF decisions (last mention: 28.09.2023)."
+        },
+        {
+          "question": "Where do I find the Listego rate for my crop?",
+          "answer": "On the label of the pack. Rates differ by crop and pest, and the manufacturer’s checked table is not yet published on this page. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Listego: herbicide with imazamox, registration, rates",
+        "description": "Listego, herbicide with imazamox 40 g/l: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "imazamox",
+        "concentration": 40,
+        "unit": "g/l"
+      }
+    ],
+    "professionalUse": true,
+    "registrationNumber": "1859/29.09.1998",
+    "modeOfAction": {
+      "ro": "Imazamox este o imidazolinonă: blochează enzima ALS din buruieni.",
+      "en": "Imazamox is an imidazolinone: it blocks the ALS enzyme in weeds."
+    },
+    "resistanceGroup": "HRAC 2"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-28-09-2023/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 28.09.2023: Listego (certificate 1859/29.09.1998); last mention found."
+      },
+      {
+        "url": "https://hracglobal.com/files/2024-HRAC-GLOBAL-HERBICIDE-MOA-CLASSIFICATION-POSTERold.pdf",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "HRAC 2024 classification poster."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/pesticide/listego-5l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Holder and brand: the ANF mention does not name them.",
+    "Dose table, waiting periods, maximum treatments and water volume: no label or register table was read for this product. The old shop’s dose table is not used (it is kept in docs/audit/products-raw.json).",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "Resolved: the old text of this product described ammonium nitrate; it is not used."
+  ]
+}

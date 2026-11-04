@@ -1,0 +1,74 @@
+{
+  "slug": "azofix",
+  "primaryKeyword": {
+    "ro": "azofix",
+    "en": "azofix"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Azofix este un fertilizant microbian sub formă de pulbere umectabilă, cu bacterii care fixează azotul din aer (Azotobacter, Nitrobacter, Bacillus). Se aplică pe sămânță sau în sol, ca să reducă necesarul de azot chimic. Ambalaj de 10 kg.",
+      "description": "### Ce este Azofix\nAzofix este un fertilizant microbiologic, sub formă de pulbere umectabilă, care conține bacterii fixatoare de azot. Se folosește la tratamentul semințelor și la aplicarea în sol. Bacteriile transformă azotul din atmosferă într-o formă pe care planta o poate folosi, ceea ce poate reduce dozele de azot chimic și sprijină răsărirea uniformă și dezvoltarea rădăcinilor.\n\n### Microorganisme\nAzotobacter, Nitrobacter și Bacillus, după datele din pagina veche a produsului.\n\n### Doze și utilizare\nNu publicăm încă dozele pe culturi: tabelul din pagina veche nu are un producător și o fișă tehnică de care să ne putem lega. Cere un consultant Agrinvest pentru doza și momentul potrivit culturii tale și păstrează produsul conform instrucțiunilor de pe ambalaj.",
+      "faq": [
+        {
+          "question": "Ce face Azofix?",
+          "answer": "Conține bacterii care fixează azotul din aer; se aplică pe sămânță sau în sol și poate reduce necesarul de azot chimic."
+        },
+        {
+          "question": "Ce doză de Azofix se folosește?",
+          "answer": "Depinde de cultură și de modul de aplicare. Dozele verificate vor fi publicate aici; până atunci, întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Azofix: fertilizant microbian cu bacterii fixatoare de azot",
+        "description": "Azofix, fertilizant microbian cu bacterii fixatoare de azot (pulbere umectabilă), pentru sămânță sau sol: ce conține și cum îl alegi."
+      }
+    },
+    "en": {
+      "summary": "Azofix is a microbial fertiliser as a wettable powder, with bacteria that fix nitrogen from the air (Azotobacter, Nitrobacter, Bacillus). It is applied to the seed or in the soil, to reduce the need for chemical nitrogen. 10 kg pack.",
+      "description": "### What Azofix is\nAzofix is a microbial fertiliser, as a wettable powder, that contains nitrogen-fixing bacteria. It is used for seed treatment and soil application. The bacteria turn nitrogen from the atmosphere into a form the plant can use, which may reduce chemical nitrogen rates and supports uniform emergence and root growth.\n\n### Micro-organisms\nAzotobacter, Nitrobacter and Bacillus, according to the old product page.\n\n### Rates and use\nWe do not publish crop rates yet: the table on the old page has no named manufacturer or technical sheet we can rely on. Ask an Agrinvest consultant for the rate and timing that suit your crop and store the product as the instructions on the pack say.",
+      "faq": [
+        {
+          "question": "What does Azofix do?",
+          "answer": "It contains bacteria that fix nitrogen from the air; it is applied to the seed or in the soil and may reduce the need for chemical nitrogen."
+        },
+        {
+          "question": "What rate of Azofix is used?",
+          "answer": "It depends on the crop and the way of application. Checked rates will be published here; until then, ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Azofix: microbial fertiliser with nitrogen-fixing bacteria",
+        "description": "Azofix, a microbial fertiliser with nitrogen-fixing bacteria (wettable powder), for seed or soil: what it contains and how to choose it."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [],
+    "form": {
+      "ro": "Pulbere umectabilă cu microorganisme",
+      "en": "Wettable powder with micro-organisms"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/azofix-10kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer sheet, microorganism strains and counts (cfu/g), shelf life and storage: missing.",
+    "Rates by crop: the old page has a generic table that repeats across several products and names no source: not used."
+  ],
+  "conflicts": []
+}

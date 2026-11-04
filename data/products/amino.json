@@ -1,0 +1,115 @@
+{
+  "slug": "amino",
+  "primaryKeyword": {
+    "ro": "amino",
+    "en": "amino"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Amino este un biostimulator lichid pe bază de aminoacizi L liberi (19,2% în greutate, 3,4% azot), folosit foliar la 2 l/ha sau în fertirigare la 7–15 l/ha. Ajută plantele să treacă mai ușor peste stres și să își revină după el. Se vinde în ambalaje de 1 l și 20 l.",
+      "description": "### Ce este Amino\nAmino este un lichid pe bază de aminoacizi, prezenți numai în forma liberă și ca enantiomeri „L”, singura formă pe care celula o folosește. Din acest motiv sunt absorbiți ușor de plantă, iar produsul acționează ca biostimulant al metabolismului primar.\n\n### Compoziție\n- Aminoacizi: 19,2% (greutate/greutate) sau 20,7% (greutate/volum)\n- Azot total: 3,4% (g/g) sau 3,7% (g/v), din care azot organic 3,4% (g/g)\n\n### Cum se folosește\nSe folosește la toate culturile, când vrei să pregătești planta pentru situații de stres (secetă, ger, grindină, tratamente) sau să o ajuți să își revină. Doza din fișa produsului: 2 l/ha foliar, 7–15 l/ha în fertirigare. Respectă eticheta ambalajului și încearcă amestecul într-o cantitate mică înainte de a-l face în rezervor.",
+      "faq": [
+        {
+          "question": "Ce doză de Amino se folosește?",
+          "answer": "Foliar, 2 l/ha; în fertirigare, 7–15 l/ha, conform fișei produsului. Verifică eticheta ambalajului."
+        },
+        {
+          "question": "La ce culturi se folosește Amino?",
+          "answer": "La toate tipurile de culturi, în momentele în care planta are nevoie să fie stimulată sau să se refacă după stres."
+        }
+      ],
+      "seo": {
+        "title": "Amino: biostimulator cu aminoacizi L pentru culturi",
+        "description": "Amino, biostimulator lichid cu aminoacizi L liberi: compoziție, doză foliară și în fertirigare, ambalaje de 1 l și 20 l."
+      }
+    },
+    "en": {
+      "summary": "Amino is a liquid biostimulant based on free L-amino acids (19.2% by weight, 3.4% nitrogen), used as a foliar spray at 2 l/ha or in fertigation at 7–15 l/ha. It helps plants get through stress and recover from it. Sold in 1 l and 20 l packs.",
+      "description": "### What Amino is\nAmino is a liquid based on amino acids, present only in the free form and as “L” enantiomers, the only form the cell uses. That is why plants absorb them easily, and the product acts as a biostimulant of primary metabolism.\n\n### Composition\n- Amino acids: 19.2% (weight/weight) or 20.7% (weight/volume)\n- Total nitrogen: 3.4% (w/w) or 3.7% (w/v), of which organic nitrogen 3.4% (w/w)\n\n### How to use it\nUse it on all crops when you want to prepare the plant for stress (drought, frost, hail, spray treatments) or help it recover. Rate on the product sheet: 2 l/ha as a foliar spray, 7–15 l/ha in fertigation. Follow the label on the pack and test a small mix before making the tank mix.",
+      "faq": [
+        {
+          "question": "What rate of Amino is used?",
+          "answer": "Foliar, 2 l/ha; in fertigation, 7–15 l/ha, according to the product sheet. Check the label on the pack."
+        },
+        {
+          "question": "Which crops is Amino used on?",
+          "answer": "All types of crops, at the times when the plant needs stimulation or recovery after stress."
+        }
+      ],
+      "seo": {
+        "title": "Amino: L-amino acid biostimulant for field crops",
+        "description": "Amino, a liquid biostimulant with free L-amino acids: composition, foliar and fertigation rates, 1 l and 20 l packs."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N total",
+        "percent": 3.4
+      }
+    ],
+    "form": {
+      "ro": "Lichid (aminoacizi L liberi)",
+      "en": "Liquid (free L-amino acids)"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "2 l/ha",
+        "en": "2 l/ha"
+      },
+      "doseMin": 2,
+      "doseMax": 2,
+      "doseUnit": "l/ha"
+    },
+    {
+      "cropText": {
+        "ro": "Toate culturile, fertirigare",
+        "en": "All crops, fertigation"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "7–15 l/ha",
+        "en": "7–15 l/ha"
+      },
+      "doseMin": 7,
+      "doseMax": 15,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/amino-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/amino-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Nitrogen is shown as the total (3.4% w/w); the sheet also gives the percentages by volume."
+  ],
+  "conflicts": []
+}

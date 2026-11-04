@@ -19,6 +19,9 @@ const read = (locale: Locale) => ({
   pagination: false,
 })
 
+/** Changes with the reviewed product data (see `next.config.ts`), so a deploy never serves old cache. */
+const epoch = process.env.ENRICHMENT_EPOCH ?? 'dev'
+
 const shopTags = [
   tags.products,
   tags.categories,
@@ -111,7 +114,7 @@ export const listProducts = unstable_cache(
     })
     return docs.flatMap((p) => toCard(p as Product) ?? [])
   },
-  ['shop:products'],
+  [`shop:products:${epoch}`],
   { tags: shopTags },
 )
 
@@ -136,7 +139,7 @@ export const getProduct = unstable_cache(
     })
     return docs[0] ?? null
   },
-  ['shop:product'],
+  [`shop:product:${epoch}`],
   { tags: shopTags },
 )
 
@@ -153,7 +156,7 @@ export const listCategories = unstable_cache(
     })
     return docs
   },
-  ['shop:categories'],
+  [`shop:categories:${epoch}`],
   { tags: shopTags },
 )
 
@@ -179,7 +182,7 @@ export const listShopCrops = unstable_cache(
     })
     return docs
   },
-  ['shop:crops'],
+  [`shop:crops:${epoch}`],
   { tags: shopTags },
 )
 
@@ -196,7 +199,7 @@ export const listBrands = unstable_cache(
     })
     return docs
   },
-  ['shop:brands'],
+  [`shop:brands:${epoch}`],
   { tags: shopTags },
 )
 
@@ -213,7 +216,7 @@ export const listIngredients = unstable_cache(
     })
     return docs
   },
-  ['shop:ingredients'],
+  [`shop:ingredients:${epoch}`],
   { tags: shopTags },
 )
 

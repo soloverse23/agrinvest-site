@@ -1,0 +1,93 @@
+{
+  "slug": "uree",
+  "primaryKeyword": {
+    "ro": "uree preț",
+    "en": "urea fertiliser price"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Ureea este un îngrășământ azotat granulat cu 46% azot (N), cu tratament de suprafață împotriva lipirii granulelor, vândut în pachet de 600 kg. Se depozitează în spațiu acoperit și nu se amestecă cu azotatul de amoniu.",
+      "description": "### Ce este\nUreea are 46% azot (N), cel mai mult dintre îngrășămintele azotate solide uzuale. Produsul din magazin este uree granulată cu tratament de suprafață: tratamentul împiedică lipirea granulelor în timpul depozitării, așa că îngrășământul se poate transporta vrac.\n\n### Depozitare\nPăstrează ureea în spațiu acoperit. Evită amestecul cu îngrășământ pe bază de azotat de amoniu, pentru că amestecul absoarbe umezeala din aer și se aglomerează.\n\n### Doza\nNu publicăm încă doze pe culturi pentru acest produs, pentru că nu avem o fișă tehnică a furnizorului. Doza depinde de cultură, de recolta țintă, de solul parcelei și de analiza lui. Un consultant Agrinvest te ajută să o calculezi.",
+      "faq": [
+        {
+          "question": "Câți la sută azot are ureea?",
+          "answer": "Ureea din magazin are 46% azot (N)."
+        },
+        {
+          "question": "Se poate amesteca ureea cu azotatul de amoniu?",
+          "answer": "Se recomandă să eviți amestecul: devine higroscopic și se aglomerează."
+        },
+        {
+          "question": "Cum se depozitează ureea?",
+          "answer": "În spațiu acoperit. Granulele cu tratament de suprafață nu se lipesc, așa că ureea se poate transporta vrac."
+        }
+      ],
+      "seo": {
+        "title": "Uree 46% N, îngrășământ azotat granulat, pachet 600 kg",
+        "description": "Uree granulată cu 46% azot (N) și tratament de suprafață, pachet de 600 kg. Vezi prețul, depozitarea și cere sfatul unui consultant pentru doze."
+      }
+    },
+    "en": {
+      "summary": "Urea is a granular nitrogen fertiliser with 46% nitrogen (N), surface-treated to stop the granules caking, sold in a 600 kg pack. Store it under cover and do not mix it with ammonium nitrate.",
+      "description": "### What it is\nUrea has 46% nitrogen (N), the most of the usual solid nitrogen fertilisers. The product in the shop is granular urea with a surface treatment: the treatment stops the granules sticking together in storage, so the fertiliser can be carried in bulk.\n\n### Storage\nKeep urea under cover. Avoid mixing it with ammonium-nitrate fertiliser, because the mix takes up moisture from the air and cakes.\n\n### Rate\nWe do not publish crop rates for this product yet, because we have no technical sheet from the supplier. The rate depends on the crop, the target yield, your soil and its analysis. An Agrinvest consultant can help you work it out.",
+      "faq": [
+        {
+          "question": "What percentage of nitrogen does urea have?",
+          "answer": "The urea in the shop has 46% nitrogen (N)."
+        },
+        {
+          "question": "Can urea be mixed with ammonium nitrate?",
+          "answer": "Avoid the mix: it becomes hygroscopic and cakes."
+        },
+        {
+          "question": "How is urea stored?",
+          "answer": "Under cover. Surface-treated granules do not stick together, so urea can be carried in bulk."
+        }
+      ],
+      "seo": {
+        "title": "Urea 46% N granular nitrogen fertiliser, 600 kg pack",
+        "description": "Granular urea with 46% nitrogen (N) and a surface treatment, 600 kg pack. See the price and storage advice, and ask a consultant for rates."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "N",
+        "percent": 46
+      }
+    ],
+    "form": {
+      "ro": "Granule, cu tratament de suprafață împotriva lipirii",
+      "en": "Granules, surface-treated against caking"
+    },
+    "storage": {
+      "ro": "Spațiu acoperit. Se evită amestecarea cu îngrășământ cu azotat de amoniu.",
+      "en": "Under cover. Avoid mixing with ammonium-nitrate fertiliser."
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/uree-egipt/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: 46% N, surface treatment, storage. Reworded; no manufacturer sheet was found."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: the old page name says “Egipt”, nothing else. No brand is set.",
+    "Technical sheet or analysis certificate: not found, so granule size, moisture, biuret and the conformity of the fertiliser are missing.",
+    "Rates by crop and timing: no source. The page says to ask a consultant."
+  ],
+  "conflicts": [
+    "The old shop’s short text is about ammonium nitrate (not used), and it says “this price is per kilogram” while the pack is 600 kg at 1,650 lei. Is 1,650 lei the price of the 600 kg pack (2.75 lei/kg) or per tonne?"
+  ]
+}

@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
-import { featuredProducts, hubFields, shopGroup } from '@/fields/shop'
+import { enrichmentLedger, featuredProducts, hubFields, shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
 
 /** Active substances (`/magazin/substanta-activa/{slug}`), linked from crop protection products. */
@@ -55,5 +55,6 @@ export const ActiveIngredients: CollectionConfig = {
       admin: { defaultColumns: ['name', 'commerceStatus', '_status'] },
     },
     slug('name', true),
+    enrichmentLedger,
   ],
 }

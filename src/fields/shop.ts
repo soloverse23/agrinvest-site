@@ -1,5 +1,7 @@
 import type { Field, GroupField, TextField } from 'payload'
 
+import { isStaffField } from '@/access'
+
 import { factStatus, seo } from './index'
 
 export const shopGroup = { ro: 'Magazin', en: 'Shop' }
@@ -57,4 +59,16 @@ export const featuredProducts: Field = {
   hasMany: true,
   maxRows: 8,
   label: { ro: 'Produse evidențiate', en: 'Featured products' },
+}
+
+/**
+ * Bookkeeping of the enrichment step (`scripts/products/apply.ts`): the hash of each group of
+ * data it last wrote. A group whose current hash differs was changed by staff, so the step
+ * leaves it alone. Hidden in the admin, and never part of a public read.
+ */
+export const enrichmentLedger: Field = {
+  name: 'enrichment',
+  type: 'json',
+  access: { read: isStaffField, create: () => false, update: () => false },
+  admin: { hidden: true },
 }

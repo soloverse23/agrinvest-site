@@ -2,7 +2,7 @@ import type { ArrayField, CollectionAfterChangeHook, CollectionConfig, Field } f
 
 import { isStaff, isStaffField, publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
-import { shopGroup, verified } from '@/fields/shop'
+import { enrichmentLedger, shopGroup, verified } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
 import { gapOptions, liveBlockers, productGaps, unitPriceOf } from '@/lib/shop/rules'
 import type { Product } from '@/payload-types'
@@ -412,6 +412,7 @@ export const Products: CollectionConfig = {
       access: { read: isStaffField },
     },
     slug('name'),
+    enrichmentLedger,
     {
       type: 'tabs',
       tabs: [

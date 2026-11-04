@@ -1,0 +1,114 @@
+{
+  "slug": "zn-70e",
+  "primaryKeyword": {
+    "ro": "[zn] 70e",
+    "en": "[zn] 70e"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "[Zn] 70E este o emulsie foarte concentrată cu zinc (40,5% în greutate, 70% greutate/volum), fără cloruri, nitrați și sulfați, pentru uz foliar și radicular. Doza din fișă: 0,10–0,2% sau 0,5–1,0 l/ha în 500–1.500 l apă. Ambalaj de 20 l.",
+      "description": "### Ce este [Zn] 70E\n[Zn] 70E este o emulsie foarte concentrată pe bază de zinc, fără cloruri, nitrați și sulfați, pentru aplicare pe frunze și la rădăcină. Controlează preventiv și curativ carența de zinc, care favorizează boli fiziologice precum folioceloza la culturile sensibile (porumb, roșii).\n\n### Compoziție\n- Zinc (Zn): 40,5% (greutate/greutate), 70,0% (greutate/volum)\n\n### Doze din fișa produsului\nÎn funcție de numărul de tratamente și de stadiul plantei: 0,10–0,2% în 500–1.500 l apă/ha, sau 0,5–1,0 l/ha în 500–1.500 l apă. Tratamentul este mai eficient în ultima fază a creșterii foliare; un adjuvant (amplificator foliar) crește eficacitatea.",
+      "faq": [
+        {
+          "question": "Ce doză de [Zn] 70E se folosește?",
+          "answer": "0,10–0,2% în 500–1.500 l apă/ha sau 0,5–1,0 l/ha în 500–1.500 l apă, după numărul de tratamente și stadiul plantei."
+        },
+        {
+          "question": "Ce conține [Zn] 70E?",
+          "answer": "Zinc: 40,5% în greutate și 70,0% greutate/volum, fără cloruri, nitrați și sulfați."
+        }
+      ],
+      "seo": {
+        "title": "[Zn] 70E: emulsie concentrată cu zinc, fără cloruri",
+        "description": "[Zn] 70E, emulsie concentrată cu zinc 70% g/v, fără cloruri, pentru uz foliar și radicular: compoziție și doze din fișa produsului."
+      }
+    },
+    "en": {
+      "summary": "[Zn] 70E is a very concentrated zinc emulsion (40.5% by weight, 70% weight/volume), free of chlorides, nitrates and sulphates, for foliar and root use. Rate on the sheet: 0.10–0.2% or 0.5–1.0 l/ha in 500–1,500 l of water. 20 l pack.",
+      "description": "### What [Zn] 70E is\n[Zn] 70E is a very concentrated zinc-based emulsion, free of chlorides, nitrates and sulphates, for application to leaves and at the root. It controls zinc deficiency preventively and correctively; the deficiency favours physiological disorders such as leaf chlorosis in sensitive crops (maize, tomato).\n\n### Composition\n- Zinc (Zn): 40.5% (weight/weight), 70.0% (weight/volume)\n\n### Rates on the product sheet\nDepending on the number of treatments and the plant stage: 0.10–0.2% in 500–1,500 l of water/ha, or 0.5–1.0 l/ha in 500–1,500 l of water. The treatment is more effective in the last phase of leaf growth; a foliar adjuvant increases its efficacy.",
+      "faq": [
+        {
+          "question": "What rate of [Zn] 70E is used?",
+          "answer": "0.10–0.2% in 500–1,500 l of water/ha or 0.5–1.0 l/ha in 500–1,500 l of water, depending on the number of treatments and plant stage."
+        },
+        {
+          "question": "What does [Zn] 70E contain?",
+          "answer": "Zinc: 40.5% by weight and 70.0% weight/volume, free of chlorides, nitrates and sulphates."
+        }
+      ],
+      "seo": {
+        "title": "[Zn] 70E: concentrated zinc emulsion, chloride-free",
+        "description": "[Zn] 70E, concentrated zinc emulsion 70% w/v, chloride-free, for foliar and root use: composition and rates from the product sheet."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "Zn",
+        "percent": 40.5
+      }
+    ],
+    "form": {
+      "ro": "Emulsie concentrată",
+      "en": "Concentrated emulsion"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "0,10–0,2% în 500–1.500 l apă/ha",
+        "en": "0.10–0.2% in 500–1,500 l water/ha"
+      },
+      "doseMin": 0.1,
+      "doseMax": 0.2,
+      "doseUnit": "%"
+    },
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "0,5–1,0 l/ha în 500–1.500 l apă",
+        "en": "0.5–1.0 l/ha in 500–1,500 l water"
+      },
+      "doseMin": 0.5,
+      "doseMax": 1,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/zn-70e-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/zn-70e-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming."
+  ],
+  "conflicts": []
+}

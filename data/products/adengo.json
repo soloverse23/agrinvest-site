@@ -1,0 +1,283 @@
+{
+  "slug": "adengo",
+  "primaryKeyword": {
+    "ro": "erbicid porumb",
+    "en": "maize herbicide"
+  },
+  "brand": "bayer",
+  "category": "erbicide",
+  "secondaryCategories": [],
+  "crops": [
+    "maize"
+  ],
+  "targets": [
+    "stir",
+    "loboda",
+    "spanac-salbatic",
+    "iarba-barboasa",
+    "turita",
+    "zarna",
+    "teisor",
+    "ciumafaie",
+    "mohor",
+    "costrei",
+    "meisor",
+    "coada-vulpii",
+    "ardeiul-broastei"
+  ],
+  "text": {
+    "ro": {
+      "summary": "Adengo 465 SC este un erbicid pentru porumb, omologat în România cu o singură aplicare pe sezon: preemergent, la 0,35–0,40 l/ha, sau postemergent timpuriu, la 0,30–0,35 l/ha. Combate buruienile anuale dicotiledonate și monocotiledonate. Doza depinde de conținutul de humus al solului și de gradul de îmburuienare.",
+      "description": "### Ce este Adengo 465 SC\nAdengo 465 SC este un erbicid pentru cultura de porumb, sub formă de suspensie concentrată (SC). Conține trei componente: isoxaflutol (225 g/l), tiencarbazon-metil (90 g/l) și ciprosulfamidă (150 g/l), un safener, adică o substanță care protejează porumbul de efectul erbicidului. Omologarea (certificat nr. 2789/26.06.2008) aparține Bayer SRL, iar producătorul este Bayer AG, Germania.\n\n### Cum acționează\nProdusul acționează prin rădăcini și este sistemic în plantă. Primul semn al efectului este albirea buruienilor, urmată de distrugerea lor. Tiencarbazon-metilul blochează enzima ALS, deci completează acțiunea asupra gramineelor și a unor buruieni precum Polygonum. Produsul rămâne activ în stratul superficial al solului și se reactivează după fiecare ploaie de cel puțin 10 mm, așa că poate controla și buruienile care răsar mai târziu.\n\n### Cât și când se aplică\nSe face o singură aplicare pe sezon sau pe cultură, în una dintre cele două variante:\n- **Preemergent**, imediat după semănat și înainte de răsărirea porumbului (BBCH 00–09), cu buruienile în faza de 2–3 frunze: 0,35 l/ha pe soluri cu humus până la 2,5% și 0,40 l/ha pe soluri cu 2,5–3,5% humus și îmburuienare puternică.\n- **Postemergent timpuriu**, când porumbul are cel mult 3 frunze (BBCH 12–13) și buruienile 2–3 frunze: 0,30–0,35 l/ha. Doza mai mică se potrivește solurilor cu puțin humus și îmburuienării slabe; 0,35 l/ha, solurilor cu 2,5–3,5% humus și îmburuienării puternice.\n\nVolumul de soluție recomandat este de 200–400 litri la hectar. Pentru cea mai bună eficacitate la aplicarea preemergentă, solul trebuie să fie bine mărunțit, fără bulgări. Pe secetă foarte puternică, eficacitatea scade la gramineele anuale și la unele dicotiledonate, de exemplu Xanthium.\n\n### Ce buruieni combate\nCombate speciile anuale dicotiledonate și monocotiledonate, între care știrul, lobodele, spanacul sălbatic, iarba bărboasă, turița, zârna, teișorul, ciumăfaia, mohorul și costreiul din semințe. Nu combate speciile perene. La aplicarea preemergentă, Xanthium, Raphanus și Sinapis nu sunt acoperite; la cea postemergentă, Hibiscus.\n\n### Culturile următoare\nPorumbul tratat are restricții la cultura care urmează: rapița și cerealele de toamnă după 4 luni, secara, triticale și lucerna după 5 luni, sfecla de zahăr după 10 luni, iar floarea-soarelui, cartoful, soia, roșiile, mazărea și fasolea după 11 luni. Dacă porumbul este compromis, se poate resemăna numai porumb.\n\n### Siguranță și mediu\nEticheta este marcată „Pericol” și produsul este de utilizare profesională. Este clasificat ca susceptibil de a dăuna fătului (H361d) și foarte toxic pentru viața acvatică, cu efecte de lungă durată (H410). Se respectă o zonă tampon netratată de 15 m față de apele de suprafață și de 5 m față de terenul necultivat, cu duze care reduc deriva cu 75%. Timp de pauză: nu se aplică. Citește eticheta înainte de orice tratament.",
+      "faq": [
+        {
+          "question": "Se aplică Adengo 465 SC preemergent sau postemergent?",
+          "answer": "Ambele variante sunt omologate pe porumb. Preemergent, imediat după semănat și înainte de răsărire (0,35–0,40 l/ha), sau postemergent timpuriu, până la 3 frunze ale porumbului (0,30–0,35 l/ha). Se face o singură aplicare pe sezon."
+        },
+        {
+          "question": "De ce depinde doza de Adengo?",
+          "answer": "Eticheta leagă doza de conținutul solului în humus și de gradul de îmburuienare: doza mai mică pe soluri cu puțin humus și îmburuienare slabă, doza mai mare pe soluri cu 2,5–3,5% humus și îmburuienare puternică. Pentru parcela ta, întreabă un consultant Agrinvest."
+        },
+        {
+          "question": "Ce este ciprosulfamida din Adengo?",
+          "answer": "Este un safener, adică o substanță care protejează porumbul de efectul erbicidului."
+        },
+        {
+          "question": "Se poate folosi Adengo la alte culturi decât porumbul?",
+          "answer": "Nu. Omologarea din România cuprinde numai cultura de porumb."
+        },
+        {
+          "question": "Ce număr de omologare are Adengo 465 SC?",
+          "answer": "Certificatul de omologare nr. 2789/26.06.2008, deținut de Bayer SRL."
+        }
+      ],
+      "seo": {
+        "title": "Adengo 465 SC: erbicid pentru porumb, doze și omologare",
+        "description": "Adengo 465 SC, erbicid pentru porumb: doze preemergent și postemergent, buruieni combătute, omologare Bayer, restricții pentru culturile următoare."
+      }
+    },
+    "en": {
+      "summary": "Adengo 465 SC is a maize herbicide approved in Romania for a single application per season: pre-emergence at 0.35–0.40 l/ha, or early post-emergence at 0.30–0.35 l/ha. It controls annual broadleaf and grass weeds. The rate depends on soil humus and weed pressure.",
+      "description": "### What Adengo 465 SC is\nAdengo 465 SC is a herbicide for maize, formulated as a suspension concentrate (SC). It contains three components: isoxaflutole (225 g/l), thiencarbazone-methyl (90 g/l) and cyprosulfamide (150 g/l), a safener, meaning a substance that protects the maize from the herbicide. The authorisation (certificate no. 2789/26.06.2008) is held by Bayer SRL, and the manufacturer is Bayer AG, Germany.\n\n### How it works\nThe product acts through the roots and is systemic in the plant. The first sign of effect is bleaching of the weeds, followed by their death. Thiencarbazone-methyl blocks the ALS enzyme, so it adds to the effect on grasses and on weeds such as Polygonum. The product stays active in the top layer of soil and is reactivated by every rain of at least 10 mm, so it can also control weeds that emerge later.\n\n### How much and when\nApply once per season or crop, in one of two ways:\n- **Pre-emergence**, right after sowing and before the maize emerges (BBCH 00–09), with weeds at the 2–3 leaf stage: 0.35 l/ha on soils with up to 2.5% humus and 0.40 l/ha on soils with 2.5–3.5% humus and heavy weed pressure.\n- **Early post-emergence**, when maize has at most 3 leaves (BBCH 12–13) and weeds have 2–3 leaves: 0.30–0.35 l/ha. The lower rate suits low-humus soils and light infestation; 0.35 l/ha suits soils with 2.5–3.5% humus and heavy infestation.\n\nThe recommended spray volume is 200–400 litres per hectare. For the best result in pre-emergence use, the soil should be well prepared, with no clods. In very severe drought, control of annual grasses and some broadleaf weeds, such as Xanthium, is weaker.\n\n### Weeds it controls\nIt controls annual broadleaf and grass species, including pigweed, orache, goosefoot, barnyard grass, cleavers, black nightshade, velvetleaf, thorn apple, foxtail and johnsongrass from seed. It does not control perennial species. In pre-emergence use Xanthium, Raphanus and Sinapis are not covered; in post-emergence use, Hibiscus.\n\n### Following crops\nTreated maize has restrictions on the next crop: rapeseed and winter cereals after 4 months, rye, triticale and alfalfa after 5 months, sugar beet after 10 months, and sunflower, potato, soybean, tomato, peas and beans after 11 months. If the maize is lost, only maize can be resown.\n\n### Safety and environment\nThe label carries the signal word “Danger” and the product is for professional use. It is classified as suspected of damaging the unborn child (H361d) and very toxic to aquatic life with long-lasting effects (H410). Keep an untreated buffer of 15 m from surface water and 5 m from uncultivated land, with nozzles that cut drift by 75%. Waiting period: not applicable. Read the label before any treatment.",
+      "faq": [
+        {
+          "question": "Is Adengo 465 SC applied pre-emergence or post-emergence?",
+          "answer": "Both are approved on maize. Pre-emergence, right after sowing and before emergence (0.35–0.40 l/ha), or early post-emergence, up to 3 maize leaves (0.30–0.35 l/ha). Apply once per season."
+        },
+        {
+          "question": "What does the Adengo rate depend on?",
+          "answer": "The label ties the rate to soil humus and weed pressure: the lower rate for low-humus soils and light infestation, the higher rate for soils with 2.5–3.5% humus and heavy infestation. For your field, ask an Agrinvest consultant."
+        },
+        {
+          "question": "What is the cyprosulfamide in Adengo?",
+          "answer": "It is a safener, meaning a substance that protects the maize from the effect of the herbicide."
+        },
+        {
+          "question": "Can Adengo be used on crops other than maize?",
+          "answer": "No. The Romanian authorisation covers maize only."
+        },
+        {
+          "question": "What is the registration number of Adengo 465 SC?",
+          "answer": "Authorisation certificate no. 2789/26.06.2008, held by Bayer SRL."
+        }
+      ],
+      "seo": {
+        "title": "Adengo 465 SC maize herbicide: rates and registration",
+        "description": "Adengo 465 SC maize herbicide: pre- and post-emergence rates, weeds controlled, Bayer registration and restrictions for the following crops."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "isoxaflutol",
+        "concentration": 225,
+        "unit": "g/l"
+      },
+      {
+        "name": "tiencarbazon-metil",
+        "concentration": 90,
+        "unit": "g/l"
+      },
+      {
+        "name": "ciprosulfamide",
+        "concentration": 150,
+        "unit": "g/l"
+      }
+    ],
+    "formulation": "SC",
+    "registrationNumber": "2789/26.06.2008",
+    "professionalUse": true,
+    "modeOfAction": {
+      "ro": "Isoxaflutolul acționează prin inhibarea pigmenților care protejează clorofila (HPPD), iar tiencarbazon-metilul prin inhibarea enzimei ALS. Ciprosulfamida este safener. Produsul acționează prin rădăcini și are activitate sistemică în plantă.",
+      "en": "Isoxaflutole works by inhibiting the pigments that protect chlorophyll (HPPD) and thiencarbazone-methyl by inhibiting the ALS enzyme. Cyprosulfamide is a safener. The product acts through the roots and is systemic in the plant."
+    },
+    "resistanceGroup": "HRAC 27 (F2) + 2 (B)",
+    "safety": {
+      "ro": "Cuvânt de avertizare „Pericol”. H361d: susceptibil de a dăuna fătului. H410: foarte toxic pentru viața acvatică, cu efecte de lungă durată. EUH401, EUH208 (conține 1,2-benzizotiazolin-3-onă), EUH451. Zonă tampon: 15 m față de apele de suprafață; 5 m față de terenul necultivat, cu duze care reduc deriva cu 75%. Echipament de protecție: mănuși din cauciuc nitrilic, ochelari și protecție respiratorie.",
+      "en": "Signal word “Danger”. H361d: suspected of damaging the unborn child. H410: very toxic to aquatic life with long-lasting effects. EUH401, EUH208 (contains 1,2-benzisothiazolin-3-one), EUH451. Buffer zone: 15 m from surface water; 5 m from uncultivated land, with drift-reducing nozzles (75%). Protective equipment: nitrile rubber gloves, goggles and respiratory protection."
+    },
+    "compatibility": {
+      "ro": "La infestări foarte puternice cu graminee, pe soluri cu peste 3,5% humus, poate fi folosit în asociere cu alte erbicide.",
+      "en": "In very heavy grass infestations on soils with more than 3.5% humus, it can be used together with other herbicides."
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Porumb",
+        "en": "Maize"
+      },
+      "crops": [
+        "maize"
+      ],
+      "targetText": {
+        "ro": "Amaranthus spp. (știr), Atriplex patula (lobodă), Chenopodium spp. (spanac sălbatic), Echinochloa crus-galli (iarba bărboasă), Galium aparine (turița), Polygonum spp. (ardeiul broaștei), Solanum nigrum (zârnă), Abutilon theophrasti (teișor), Alopecurus myosuroides (coada vulpii), Datura stramonium (ciumăfaie), Digitaria sanguinalis (meișor), Setaria spp. (mohor), Sorghum halepense din semințe (costrei) și alte specii anuale dicotiledonate și monocotiledonate; fără speciile perene, Xanthium, Raphanus și Sinapis",
+        "en": "annual broadleaf and grass weeds, including Amaranthus (pigweed), Atriplex patula (common orache), Chenopodium (goosefoot), Echinochloa crus-galli (barnyard grass), Galium aparine (cleavers), Polygonum (knotweed), Solanum nigrum (black nightshade), Abutilon theophrasti (velvetleaf), Alopecurus myosuroides (blackgrass), Datura stramonium (thorn apple), Digitaria sanguinalis (crabgrass), Setaria (foxtail) and Sorghum halepense from seed (johnsongrass); perennial species, Xanthium, Raphanus and Sinapis are not covered"
+      },
+      "targets": [
+        "stir",
+        "loboda",
+        "spanac-salbatic",
+        "iarba-barboasa",
+        "turita",
+        "zarna",
+        "teisor",
+        "ciumafaie",
+        "mohor",
+        "costrei",
+        "meisor",
+        "coada-vulpii",
+        "ardeiul-broastei"
+      ],
+      "timing": {
+        "ro": "Preemergent, imediat după semănat și înainte de răsărirea porumbului, de la stadiul de cariopsă până când coleoptilul străbate solul (BBCH 00–09). Buruieni în faza de 2–3 frunze.",
+        "en": "Pre-emergence, right after sowing and before the maize emerges, from caryopsis until the coleoptile breaks through the soil (BBCH 00–09). Weeds at the 2–3 leaf stage."
+      },
+      "bbch": "00–09",
+      "doseText": {
+        "ro": "0,35 l/ha pe soluri cu humus până la 2,5%; 0,40 l/ha pe soluri cu 2,5–3,5% humus și îmburuienare puternică",
+        "en": "0.35 l/ha on soils with up to 2.5% humus; 0.40 l/ha on soils with 2.5–3.5% humus and heavy weed pressure"
+      },
+      "doseMin": 0.35,
+      "doseMax": 0.4,
+      "doseUnit": "l/ha",
+      "waterVolume": "200–400 l/ha",
+      "maxTreatments": 1,
+      "notes": {
+        "ro": "Timp de pauză: nu se aplică. Reactivat de ploi de cel puțin 10 mm. După porumbul tratat se pot semăna, la 4 luni de la aplicare și după o arătură normală: rapiță, grâu de toamnă, orz de toamnă, grâu durum și grâu de primăvară. Secara, triticale și lucerna: 5 luni. Sfecla de zahăr: 10 luni. Floarea-soarelui, cartof, soia, tomate, mazăre și fasole de câmp: 11 luni. Dacă porumbul este compromis, se poate resemăna doar porumb.",
+        "en": "Waiting period: not applicable. Reactivated by rain of at least 10 mm. After treated maize, the following can be sown 4 months after application and after normal ploughing: rapeseed, winter wheat, winter barley, durum wheat and spring wheat. Rye, triticale and alfalfa: 5 months. Sugar beet: 10 months. Sunflower, potato, soybean, tomato, peas and field beans: 11 months. If the maize is lost, only maize can be resown."
+      }
+    },
+    {
+      "cropText": {
+        "ro": "Porumb",
+        "en": "Maize"
+      },
+      "crops": [
+        "maize"
+      ],
+      "targetText": {
+        "ro": "Amaranthus spp. (știr), Atriplex patula (lobodă), Chenopodium spp. (spanac sălbatic), Echinochloa crus-galli (iarba bărboasă), Galium aparine (turița), Polygonum spp. (ardeiul broaștei), Solanum nigrum (zârnă), Abutilon theophrasti (teișor), Alopecurus myosuroides (coada vulpii), Datura stramonium (ciumăfaie), Digitaria sanguinalis (meișor), Setaria spp. (mohor), Sorghum halepense din semințe (costrei) și alte specii anuale dicotiledonate și monocotiledonate; fără speciile perene, Hibiscus",
+        "en": "annual broadleaf and grass weeds, including Amaranthus (pigweed), Atriplex patula (common orache), Chenopodium (goosefoot), Echinochloa crus-galli (barnyard grass), Galium aparine (cleavers), Polygonum (knotweed), Solanum nigrum (black nightshade), Abutilon theophrasti (velvetleaf), Alopecurus myosuroides (blackgrass), Datura stramonium (thorn apple), Digitaria sanguinalis (crabgrass), Setaria (foxtail) and Sorghum halepense from seed (johnsongrass); perennial species, Hibiscus are not covered"
+      },
+      "targets": [
+        "stir",
+        "loboda",
+        "spanac-salbatic",
+        "iarba-barboasa",
+        "turita",
+        "zarna",
+        "teisor",
+        "ciumafaie",
+        "mohor",
+        "costrei",
+        "meisor",
+        "coada-vulpii",
+        "ardeiul-broastei"
+      ],
+      "timing": {
+        "ro": "Postemergent timpuriu, la cel mult 3 frunze ale porumbului (BBCH 12–13). Buruieni în faza incipientă, de 2–3 frunze.",
+        "en": "Early post-emergence, at no more than 3 maize leaves (BBCH 12–13). Weeds at an early stage, 2–3 leaves."
+      },
+      "bbch": "12–13",
+      "doseText": {
+        "ro": "0,30–0,35 l/ha: doza mică pe soluri cu puțin humus și îmburuienare slabă; 0,35 l/ha pe soluri cu 2,5–3,5% humus și îmburuienare puternică",
+        "en": "0.30–0.35 l/ha: the lower rate on low-humus soils and light infestation; 0.35 l/ha on soils with 2.5–3.5% humus and heavy infestation"
+      },
+      "doseMin": 0.3,
+      "doseMax": 0.35,
+      "doseUnit": "l/ha",
+      "waterVolume": "200–400 l/ha",
+      "maxTreatments": 1,
+      "notes": {
+        "ro": "Timp de pauză: nu se aplică. După porumbul tratat se pot semăna, la 4 luni de la aplicare și după o arătură normală: rapiță, grâu de toamnă, orz de toamnă, grâu durum și grâu de primăvară. Secara, triticale și lucerna: 5 luni. Sfecla de zahăr: 10 luni. Floarea-soarelui, cartof, soia, tomate, mazăre și fasole de câmp: 11 luni. Dacă porumbul este compromis, se poate resemăna doar porumb.",
+        "en": "Waiting period: not applicable. After treated maize, the following can be sown 4 months after application and after normal ploughing: rapeseed, winter wheat, winter barley, durum wheat and spring wheat. Rye, triticale and alfalfa: 5 months. Sugar beet: 10 months. Sunflower, potato, soybean, tomato, peas and field beans: 11 months. If the maize is lost, only maize can be resown."
+      }
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://www.cs-contentapi.bayer.com/content/dam/regional-folders/emea/europe/romania/products/crop-protection/herbicide/documents/etichet%C4%83/Adengo%20465SC_5L_31%20august.pdf",
+        "kind": "label",
+        "retrieved": "2026-11-04",
+        "note": "Bayer label, 5 L pack: composition, formulation, certificate, classification, buffer zones, HRAC groups."
+      },
+      {
+        "url": "https://www.cs-contentapi.bayer.com/content/dam/regional-folders/emea/europe/romania/products/crop-protection/herbicide/documents/fi%C8%99%C4%83-cu-date-de-securitate/ADENGO%20465%20SC_07052026.pdf",
+        "kind": "technical-sheet",
+        "retrieved": "2026-11-04",
+        "note": "Safety data sheet dated 07.05.2026: H361d, H410, signal word Pericol."
+      },
+      {
+        "url": "https://www.cropscience.bayer.ro/cpd/erbicide-bcs-adengo-465-sc-ro-ro",
+        "kind": "technical-sheet",
+        "retrieved": "2026-11-04",
+        "note": "Bayer Romania product page."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-17-03-2025/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 17.03.2025, p. 59: composition, holder Bayer SRL, certificate 2789/26.06.2008."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-08-06-2026/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 08.06.2026: minor composition change noted for certificate 2789/26.06.2008."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://www.cs-contentapi.bayer.com/content/dam/regional-folders/emea/europe/romania/products/crop-protection/herbicide/documents/etichet%C4%83/Adengo%20465SC_5L_31%20august.pdf",
+        "kind": "label",
+        "retrieved": "2026-11-04",
+        "note": "Bayer label: doses by humus content, timing, water volume, waiting period, crop rotation."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-17-03-2025/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 17.03.2025, p. 59: same doses, one application per season; read from the page image."
+      },
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-11-2021/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.11.2021: same doses."
+      }
+    ]
+  },
+  "gaps": [
+    "Registration validity date: the ANF decision lists do not state it, and the label does not either.",
+    "Pack sizes: the Bayer page lists 100 ml, 200 ml, 1 l and 5 l; Agrinvest sells 1 l only. Confirm the packs you stock.",
+    "The manufacturer has not been asked for a technical sheet: only the label and the safety data sheet were used."
+  ],
+  "conflicts": [
+    "Signal word: the ANF list of 17.03.2025 shows “Atenție”; the Bayer label and the safety data sheet of 07.05.2026 show “Pericol” with H361d. The page uses the label.",
+    "Post-emergence stage: the ANF list says maize “maximum 6 leaves” (BBCH 12–13); the Bayer label says at most 3 leaves (BBCH 12–13). The page uses the label.",
+    "Old shop text gave the post-emergence dose without the soil-humus condition and the water volume; the label adds both."
+  ]
+}

@@ -1,6 +1,8 @@
 #!/bin/sh
-# Runs before every Vercel build, which reads the database. Applies pending migrations and
-# fills an empty database once. Uses Vercel's own environment, so no credentials leave it.
+# Runs before every Vercel build, which reads the database. Applies pending migrations, fills an
+# empty database once, then applies the reviewed product data (data/products): that step is
+# idempotent and leaves alone anything staff changed in the admin. Uses Vercel's own
+# environment, so no credentials leave it.
 # Exports stay inside this script: the build itself keeps the pooled DATABASE_URL.
 set -e
 export NODE_ENV=production
@@ -9,3 +11,4 @@ export DATABASE_URL="${DATABASE_URL_UNPOOLED:-$DATABASE_URL}"
 if [ -n "$BLOB_STORE_ID" ] || [ -n "$R2_BUCKET" ]; then export SEED_PHOTOS=true; fi
 npm run migrate
 SEED_ONLY_IF_EMPTY=true npm run seed
+npm run apply:products

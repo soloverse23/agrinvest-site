@@ -1,6 +1,7 @@
 import * as migration_20261104_155651_baseline from './20261104_155651_baseline';
 import * as migration_20261104_161615_shop_catalogue from './20261104_161615_shop_catalogue';
 import * as migration_20261104_181555_storage_fields from './20261104_181555_storage_fields';
+import * as migration_20261104_184009_enrichment_ledger from './20261104_184009_enrichment_ledger';
 
 export const migrations = [
   {
@@ -16,6 +17,11 @@ export const migrations = [
   {
     up: migration_20261104_181555_storage_fields.up,
     down: migration_20261104_181555_storage_fields.down,
-    name: '20261104_181555_storage_fields'
+    name: '20261104_181555_storage_fields',
+  },
+  {
+    up: migration_20261104_184009_enrichment_ledger.up,
+    down: migration_20261104_184009_enrichment_ledger.down,
+    name: '20261104_184009_enrichment_ledger'
   },
 ];

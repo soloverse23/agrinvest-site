@@ -1,0 +1,164 @@
+[
+  {
+    "key": "maize",
+    "intro": {
+      "ro": "Porumbul are nevoie de protecție în trei momente: la semănat, împotriva buruienilor răsărite și, mai târziu, împotriva dăunătorilor. Aici sunt erbicidele, insecticidele și îngrășămintele din magazinul Agrinvest cu utilizare la porumb, cu dozele și momentele de aplicare din eticheta producătorului sau din registrul ANF acolo unde le-am verificat. Fiecare produs arată ce date lipsesc încă.",
+      "en": "Maize needs protection at three points: at sowing, against emerged weeds, and later against pests. Here are the herbicides, insecticides and fertilisers in the Agrinvest shop used on maize, with the rates and timings from the manufacturer’s label or the ANF register where we checked them. Each product shows which data are still missing."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru porumb: erbicide, insecticide",
+        "description": "Produse pentru porumb la Agrinvest: erbicide preemergente și postemergente, insecticide și îngrășăminte, cu doze și omologare pentru fiecare."
+      },
+      "en": {
+        "title": "Products for maize: herbicides and insecticides",
+        "description": "Products for maize at Agrinvest: pre- and post-emergence herbicides, insecticides and fertilisers, with rates and registration for each."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "wheat",
+    "intro": {
+      "ro": "La grâu, deciziile se iau de-a lungul sezonului: sămânța și tratamentul ei, erbicidul de primăvară, regulatorul de creștere, fungicidele din perioada de înspicare și fertilizarea. Aici găsești sămânță de grâu, produse de protecție și îngrășăminte din magazinul Agrinvest, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "With wheat, decisions run through the season: seed and its treatment, the spring herbicide, the growth regulator, the fungicides around heading, and fertilisation. Here you find wheat seed, crop protection products and fertilisers in the Agrinvest shop, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru grâu: sămânță, erbicide, fungicide",
+        "description": "Produse pentru grâu la Agrinvest: sămânță certificată, tratamente pentru sămânță, erbicide, fungicide, regulatori de creștere și îngrășăminte."
+      },
+      "en": {
+        "title": "Products for wheat: seed, herbicides, fungicides",
+        "description": "Products for wheat at Agrinvest: certified seed, seed treatments, herbicides, fungicides, growth regulators and fertilisers."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "barley",
+    "intro": {
+      "ro": "Orzul se seamănă devreme și se recoltează primul dintre cereale, deci tratamentele de la sămânță și din toamnă contează mult. Aici găsești sămânță de orz, tratamente pentru sămânță, erbicide, fungicide și îngrășăminte din magazinul Agrinvest, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "Barley is sown early and is the first cereal harvested, so seed and autumn treatments matter a lot. Here you find barley seed, seed treatments, herbicides, fungicides and fertilisers in the Agrinvest shop, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru orz: sămânță și protecție",
+        "description": "Produse pentru orz la Agrinvest: sămânță certificată, tratamente pentru sămânță, erbicide, fungicide și îngrășăminte, cu omologare și doze verificate."
+      },
+      "en": {
+        "title": "Products for barley: seed and crop protection",
+        "description": "Products for barley at Agrinvest: certified seed, seed treatments, herbicides, fungicides and fertilisers, with registration and checked rates."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "rapeseed",
+    "intro": {
+      "ro": "Rapița cere decizii bune din toamnă: hibridul, densitatea, erbicidul și protecția împotriva dăunătorilor și a bolilor, între care Sclerotinia și Phoma. Aici găsești hibrizi de rapiță, erbicide, insecticide și fungicide din magazinul Agrinvest, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "Rapeseed needs good decisions from autumn: the hybrid, the density, the herbicide and protection against pests and diseases, including Sclerotinia and Phoma. Here you find rapeseed hybrids, herbicides, insecticides and fungicides in the Agrinvest shop, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru rapiță: hibrizi și protecție",
+        "description": "Produse pentru rapiță la Agrinvest: hibrizi de toamnă, erbicide, insecticide și fungicide, cu omologare și doze verificate acolo unde le avem."
+      },
+      "en": {
+        "title": "Products for rapeseed: hybrids and protection",
+        "description": "Products for rapeseed at Agrinvest: winter hybrids, herbicides, insecticides and fungicides, with registration and checked rates where we have them."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "sunflower",
+    "intro": {
+      "ro": "La floarea-soarelui contează controlul buruienilor la început și protecția împotriva dăunătorilor din sol și a bolilor. Aici găsești erbicide, insecticide, fungicide și îngrășăminte din magazinul Agrinvest cu utilizare la floarea-soarelui, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "With sunflower, early weed control and protection against soil pests and diseases matter. Here you find herbicides, insecticides, fungicides and fertilisers in the Agrinvest shop used on sunflower, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru floarea-soarelui: protecție",
+        "description": "Produse pentru floarea-soarelui la Agrinvest: erbicide, insecticide, fungicide și îngrășăminte, cu omologare și doze verificate acolo unde le avem."
+      },
+      "en": {
+        "title": "Products for sunflower: crop protection",
+        "description": "Products for sunflower at Agrinvest: herbicides, insecticides, fungicides and fertilisers, with registration and checked rates where we have them."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "potato",
+    "intro": {
+      "ro": "Cartoful este printre culturile cu cele mai multe tratamente: gândacul din Colorado, afidele, bolile foliare și buruienile. Aici găsești insecticide, fungicide, erbicide și îngrășăminte din magazinul Agrinvest cu utilizare la cartof, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "Potato is among the crops with the most treatments: Colorado potato beetle, aphids, foliar diseases and weeds. Here you find insecticides, fungicides, herbicides and fertilisers in the Agrinvest shop used on potato, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru cartof: insecticide, fungicide",
+        "description": "Produse pentru cartof la Agrinvest: insecticide, fungicide, erbicide și îngrășăminte, cu omologare și doze verificate acolo unde le avem."
+      },
+      "en": {
+        "title": "Products for potato: insecticides, fungicides",
+        "description": "Products for potato at Agrinvest: insecticides, fungicides, herbicides and fertilisers, with registration and checked rates where we have them."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "grapevine",
+    "intro": {
+      "ro": "Viața de vie se protejează cu tratamente repetate, în special împotriva manei, a făinării și a moliilor strugurilor. Aici găsești fungicide și insecticide din magazinul Agrinvest cu utilizare la viță de vie, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "Grapevine is protected with repeated treatments, above all against downy mildew, powdery mildew and grapevine moths. Here you find fungicides and insecticides in the Agrinvest shop used on grapevine, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru viță de vie: fungicide, insecticide",
+        "description": "Produse pentru viță de vie la Agrinvest: fungicide și insecticide, cu omologarea din registrul ANF și dozele verificate acolo unde le avem."
+      },
+      "en": {
+        "title": "Products for grapevine: fungicides, insecticides",
+        "description": "Products for grapevine at Agrinvest: fungicides and insecticides, with the registration from the ANF register and checked rates where we have them."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "fruit-trees",
+    "intro": {
+      "ro": "Livada cere tratamente în fazele de înflorire și de legare a fructelor, împotriva dăunătorilor și a bolilor. Aici găsești insecticide și fungicide din magazinul Agrinvest cu utilizare la pomi fructiferi, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "The orchard needs treatments at flowering and fruit set, against pests and diseases. Here you find insecticides and fungicides in the Agrinvest shop used on orchard fruit, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru pomi fructiferi: protecție",
+        "description": "Produse pentru pomi fructiferi la Agrinvest: insecticide și fungicide, cu omologarea din registrul ANF și dozele verificate acolo unde le avem."
+      },
+      "en": {
+        "title": "Products for orchard fruit: crop protection",
+        "description": "Products for orchard fruit at Agrinvest: insecticides and fungicides, with the registration from the ANF register and checked rates where we have them."
+      }
+    },
+    "indexable": true
+  },
+  {
+    "key": "vegetables",
+    "intro": {
+      "ro": "Legumele se tratează des și pe perioade scurte, iar timpul de pauză înainte de recoltare contează. Aici găsești insecticide, fungicide și îngrășăminte din magazinul Agrinvest cu utilizare la legume, cu omologarea din registrul ANF și dozele verificate acolo unde le avem.",
+      "en": "Vegetables are treated often and over short periods, and the waiting period before harvest matters. Here you find insecticides, fungicides and fertilisers in the Agrinvest shop used on vegetables, with the registration from the ANF register and checked rates where we have them."
+    },
+    "seo": {
+      "ro": {
+        "title": "Produse pentru legume: insecticide, fungicide",
+        "description": "Produse pentru legume la Agrinvest: insecticide, fungicide și îngrășăminte, cu omologare și doze verificate acolo unde le avem."
+      },
+      "en": {
+        "title": "Products for vegetables: insecticides, fungicides",
+        "description": "Products for vegetables at Agrinvest: insecticides, fungicides and fertilisers, with registration and checked rates where we have them."
+      }
+    },
+    "indexable": true
+  }
+]

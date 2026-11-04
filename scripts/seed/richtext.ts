@@ -40,9 +40,31 @@ const textNode = (text: string, format = 0): Node => ({
 
 export function rt(markdown: string) {
   const children: Node[] = []
-  for (const chunk of markdown.trim().split(/\n\s*\n/)) {
-    const lines = chunk.trim().split('\n')
-    const heading = /^(#{2,3}) (.+)$/.exec(lines[0])
+  // Blocks are blank-line separated, but a heading or a list may also follow a line directly.
+  const blocks: string[][] = []
+  let lines: string[] = []
+  const flush = () => {
+    if (lines.length) blocks.push(lines)
+    lines = []
+  }
+  for (const line of markdown.trim().split('\n')) {
+    const text = line.trim()
+    const kind = (l: string) =>
+      /^#{2,3} /.test(l) ? 'heading' : l.startsWith('- ') ? 'item' : 'text'
+    if (!text) flush()
+    else if (kind(text) === 'heading') {
+      flush()
+      lines.push(text)
+      flush()
+    } else {
+      // A list starts or ends the block before it.
+      if (lines.length && (kind(text) === 'item') !== (kind(lines[0]) === 'item')) flush()
+      lines.push(text)
+    }
+  }
+  flush()
+  for (const chunk of blocks) {
+    const heading = /^(#{2,3}) (.+)$/.exec(chunk[0])
     if (heading) {
       children.push({
         ...base,
@@ -52,14 +74,14 @@ export function rt(markdown: string) {
       })
       continue
     }
-    if (lines.every((l) => l.startsWith('- '))) {
+    if (chunk.every((l) => l.startsWith('- '))) {
       children.push({
         ...base,
         type: 'list',
         listType: 'bullet',
         start: 1,
         tag: 'ul',
-        children: lines.map((l, i) => ({
+        children: chunk.map((l, i) => ({
           ...base,
           type: 'listitem',
           value: i + 1,
@@ -68,7 +90,7 @@ export function rt(markdown: string) {
       })
       continue
     }
-    children.push({ ...base, type: 'paragraph', textFormat: 0, children: inline(lines.join(' ')) })
+    children.push({ ...base, type: 'paragraph', textFormat: 0, children: inline(chunk.join(' ')) })
   }
   return { root: { ...base, type: 'root', children } }
 }

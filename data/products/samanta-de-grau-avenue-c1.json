@@ -1,0 +1,94 @@
+{
+  "slug": "samanta-de-grau-avenue-c1",
+  "primaryKeyword": {
+    "ro": "sămânță grâu avenue",
+    "en": "avenue wheat seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Sămânță certificată de grâu Avenue, clasa C1, ambalaj de 800 kg. Soi nearistat, timpuriu, recomandat în toate zonele, mai ales în sud și sud-est; este cel mai timpuriu soi de grâu de pe piață, se coace la 4–6 zile după orz. Densitate recomandată: 370–400 boabe germinabile/m².",
+      "description": "### Ce primești\nSămânță de grâu din soiul Avenue, clasa biologică C1, în ambalaj de 800 kg. C1 înseamnă sămânță certificată din prima generație, obținută din sămânță de bază.\n\n### Caracteristici (după textul furnizorului din pagina veche)\n- Soi de grâu nearistat, timpuriu.\n- Cel mai timpuriu soi din piață: se coace la 4–6 zile după orz, deci recoltarea trebuie urmărită cu atenție.\n- Ajunge la înflorit (nu la maturitate) înainte de temperaturile foarte ridicate, de aceea se recomandă în toate zonele, dar mai ales în sudul și sud-estul României.\n- Plante de talie medie, cu toleranță foarte bună la cădere.\n- Toleranță bună la rugina brună și la Fusarium; toleranță foarte bună la iernare.\n- Putere foarte mare de înfrățire, cu frați cu port erect.\n- Premergător bun pentru semănatul timpuriu al rapiței.\n\n### Semănat\nSe recomandă începerea semănatului în a doua parte a epocii optime. Densitate recomandată: 370–400 boabe germinabile pe metru pătrat.",
+      "faq": [
+        {
+          "question": "Ce înseamnă C1 la sămânță?",
+          "answer": "C1 este sămânță certificată din prima generație, obținută din sămânță de bază."
+        },
+        {
+          "question": "Ce soi de grâu este Avenue?",
+          "answer": "Avenue este un soi nearistat și timpuriu, recomandat în toate zonele, mai ales în sud și sud-est, cu toleranță foarte bună la iernare și la cădere."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de grâu Avenue C1, certificată, 800 kg",
+        "description": "Sămânță de grâu Avenue C1: soi nearistat, cel mai timpuriu din piață, densitate 370–400 boabe/m², ambalaj de 800 kg, pentru sud și sud-est."
+      }
+    },
+    "en": {
+      "summary": "Certified Avenue wheat seed, class C1, 800 kg pack. An awnless, early variety recommended for all areas, especially the south and south-east; the earliest wheat variety on the market, it ripens 4–6 days after barley. Recommended sowing density: 370–400 germinable seeds/m².",
+      "description": "### What you get\nWheat seed of the variety Avenue, seed class C1, in an 800 kg pack. C1 means certified seed of the first generation, grown from basic seed.\n\n### Characteristics (from the supplier’s text on the old page)\n- An awnless, early wheat variety.\n- The earliest variety on the market: it ripens 4–6 days after barley, so harvest timing needs close attention.\n- It reaches flowering (not maturity) before very high temperatures, which is why it is recommended in all areas, but above all in southern and south-eastern Romania.\n- Medium-height plants with very good lodging tolerance.\n- Good tolerance of brown rust and Fusarium; very good winter hardiness.\n- Very strong tillering, with upright tillers.\n- A good preceding crop for early sowing of rapeseed.\n\n### Sowing\nStart sowing in the second part of the optimum period. Recommended density: 370–400 germinable seeds per square metre.",
+      "faq": [
+        {
+          "question": "What does C1 mean for seed?",
+          "answer": "C1 is certified seed of the first generation, grown from basic seed."
+        },
+        {
+          "question": "What kind of wheat is Avenue?",
+          "answer": "Avenue is an awnless, early variety recommended in all areas, above all the south and south-east, with very good winter hardiness and lodging tolerance."
+        }
+      ],
+      "seo": {
+        "title": "Avenue wheat seed C1, certified, 800 kg pack",
+        "description": "Avenue C1 wheat seed: an awnless variety, the earliest on the market, 370–400 seeds/m², 800 kg pack, for the south and south-east."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Grâu",
+      "en": "Wheat"
+    },
+    "variety": "Avenue",
+    "maturity": {
+      "ro": "Timpuriu; se coace la 4–6 zile după orz",
+      "en": "Early; ripens 4–6 days after barley"
+    },
+    "sowingDensity": {
+      "ro": "370–400 boabe germinabile/m²",
+      "en": "370–400 germinable seeds/m²"
+    },
+    "resistances": {
+      "ro": "Toleranță bună la rugina brună și la Fusarium; foarte bună la iernare și la cădere",
+      "en": "Good tolerance of brown rust and Fusarium; very good winter hardiness and lodging tolerance"
+    },
+    "recommendedZones": {
+      "ro": "Toate zonele, mai ales sudul și sud-estul României",
+      "en": "All areas, above all southern and south-eastern Romania"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/samanta-grau-avenue-c1-800-kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page of the second Avenue product (800 kg, 2,800 lei), whose text is a breeder’s description (“recommendation LG”). The text of this product’s own page is a generic template and is not used."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label."
+  ],
+  "conflicts": [
+    "Two Avenue products at two prices: 2,250 lei (this one) and 2,800 lei (held back as a draft). The 2,250 lei page describes an awned variety in a generic template, the 2,800 lei page an awnless one with breeder data: the latter is used. Which price is right?",
+    "The supplier text names “LG” (probably LG Seeds). No brand is set until confirmed."
+  ]
+}

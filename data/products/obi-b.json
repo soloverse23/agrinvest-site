@@ -1,0 +1,101 @@
+{
+  "slug": "obi-b",
+  "primaryKeyword": {
+    "ro": "obi [b]",
+    "en": "obi [b]"
+  },
+  "category": "fertilizanti-foliare",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "OBI [B] este un îngrășământ lichid cu bor sub formă de boroetanolamină (9,6% în greutate, 12,5% greutate/volum), pentru tratamente foliare la 1–4 l/ha. Previne și corectează carența de bor, importantă pentru polen și legarea florilor. Ambalaje de 1 l și 20 l.",
+      "description": "### Ce este OBI [B]\nOBI [B] este o formulă lichidă pe bază de bor, sub formă de boroetanolamină, o sursă cu conținut ridicat de bor pe care cultura îl asimilează corect.\n\n### Compoziție\n- Bor (B): 9,6% (greutate/greutate), 12,5% (greutate/volum)\n\n### Când și cum\nAplică-l înainte să apară simptomele de carență: borul stimulează creșterea țesuturilor meristematice și este esențial pentru producția de polen și pentru fecundarea florilor. Se recomandă ca sursă complementară de bor la culturile care cer cantități mari de nutrienți și ca tratament preventiv sau curativ al carenței. Doza din fișa produsului: 1–4 l/ha foliar.",
+      "faq": [
+        {
+          "question": "Ce doză de OBI [B] se folosește?",
+          "answer": "Foliar, 1–4 l/ha, conform fișei produsului. Verifică eticheta ambalajului."
+        },
+        {
+          "question": "Când se aplică borul?",
+          "answer": "Înainte de apariția simptomelor de carență; borul contribuie la polen și la fecundarea florilor."
+        }
+      ],
+      "seo": {
+        "title": "OBI [B]: îngrășământ foliar cu bor (boroetanolamină)",
+        "description": "OBI [B], îngrășământ lichid cu bor sub formă de boroetanolamină: compoziție, doză foliară de 1–4 l/ha și când se aplică."
+      }
+    },
+    "en": {
+      "summary": "OBI [B] is a liquid fertiliser with boron as boroethanolamine (9.6% by weight, 12.5% weight/volume), for foliar sprays at 1–4 l/ha. It prevents and corrects boron deficiency, which matters for pollen and flower set. 1 l and 20 l packs.",
+      "description": "### What OBI [B] is\nOBI [B] is a liquid formula based on boron, as boroethanolamine, a source with a high boron content that the crop absorbs properly.\n\n### Composition\n- Boron (B): 9.6% (weight/weight), 12.5% (weight/volume)\n\n### When and how\nApply it before deficiency symptoms appear: boron stimulates the growth of meristematic tissue and is essential for pollen production and flower fertilisation. It is recommended as a complementary boron source for crops that need large amounts of nutrients and as a preventive or corrective treatment for deficiency. Rate on the product sheet: 1–4 l/ha foliar.",
+      "faq": [
+        {
+          "question": "What rate of OBI [B] is used?",
+          "answer": "Foliar, 1–4 l/ha, according to the product sheet. Check the label on the pack."
+        },
+        {
+          "question": "When is boron applied?",
+          "answer": "Before deficiency symptoms appear; boron contributes to pollen and flower fertilisation."
+        }
+      ],
+      "seo": {
+        "title": "OBI [B]: boron foliar fertiliser (boroethanolamine)",
+        "description": "OBI [B], a liquid boron fertiliser as boroethanolamine: composition, foliar rate of 1–4 l/ha and when to apply it."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [
+      {
+        "nutrient": "B",
+        "percent": 9.6
+      }
+    ],
+    "form": {
+      "ro": "Lichid",
+      "en": "Liquid"
+    }
+  },
+  "doses": [
+    {
+      "cropText": {
+        "ro": "Toate culturile, foliar",
+        "en": "All crops, foliar"
+      },
+      "crops": [],
+      "doseText": {
+        "ro": "1–4 l/ha",
+        "en": "1–4 l/ha"
+      },
+      "doseMin": 1,
+      "doseMax": 4,
+      "doseUnit": "l/ha"
+    }
+  ],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/obi-b-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": [
+      {
+        "url": "https://agrinvestshop.ro/shop/fertilizanti-foliare/obi-b-20l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: rates as stated there; the sheet they come from was not seen."
+      }
+    ]
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer technical sheet or safety data sheet: not seen, so the composition and rates are those of the old shop page and need confirming.",
+    "Timing by crop stage: not stated."
+  ],
+  "conflicts": []
+}

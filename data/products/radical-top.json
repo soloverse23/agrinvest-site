@@ -1,0 +1,74 @@
+{
+  "slug": "radical-top",
+  "primaryKeyword": {
+    "ro": "radical top",
+    "en": "radical top"
+  },
+  "category": "ingrasaminte",
+  "secondaryCategories": [],
+  "crops": [],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Radical TOP este un fertilizant microbian (pulbere umectabilă) cu micorize, bacterii ale rizosferei și Trichoderma, pentru tratamentul semințelor sau aplicarea în sol. Stimulează rădăcinile și absorbția nutrienților. Ambalaj de 10 kg.",
+      "description": "### Ce este Radical TOP\nRadical TOP este un fertilizant microbiologic sub formă de pulbere umectabilă, cu un grup de microorganisme folositoare: micorize, bacterii ale rizosferei și Trichoderma. Se aplică pe sămânță sau în sol și urmărește să dezvolte rădăcinile, să crească absorbția nutrienților și să îmbunătățească fertilitatea naturală a solului.\n\n### Doze\nNu publicăm încă dozele pe culturi, pentru că nu avem o fișă tehnică a producătorului. Întreabă un consultant Agrinvest.",
+      "faq": [
+        {
+          "question": "Ce conține Radical TOP?",
+          "answer": "Micorize, bacterii ale rizosferei și Trichoderma, după datele din pagina veche a produsului."
+        },
+        {
+          "question": "Unde se aplică Radical TOP?",
+          "answer": "Pe sămânță sau în sol. Doza depinde de cultură: întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Radical TOP: fertilizant microbian pentru rădăcini și fosfor",
+        "description": "Radical TOP, fertilizant microbian cu micorize, bacterii ale rizosferei și Trichoderma pentru sămânță sau sol: ce conține și cum se alege."
+      }
+    },
+    "en": {
+      "summary": "Radical TOP is a microbial fertiliser (wettable powder) with mycorrhizae, rhizosphere bacteria and Trichoderma, for seed treatment or soil application. It stimulates roots and nutrient uptake. 10 kg pack.",
+      "description": "### What Radical TOP is\nRadical TOP is a microbial fertiliser as a wettable powder, with a group of beneficial micro-organisms: mycorrhizae, rhizosphere bacteria and Trichoderma. It is applied to the seed or in the soil and aims to develop the roots, increase nutrient uptake and improve the natural fertility of the soil.\n\n### Rates\nWe do not publish crop rates yet, because we have no technical sheet from the manufacturer. Ask an Agrinvest consultant.",
+      "faq": [
+        {
+          "question": "What does Radical TOP contain?",
+          "answer": "Mycorrhizae, rhizosphere bacteria and Trichoderma, according to the old product page."
+        },
+        {
+          "question": "Where is Radical TOP applied?",
+          "answer": "To the seed or in the soil. The rate depends on the crop: ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Radical TOP: microbial fertiliser for roots and phosphorus",
+        "description": "Radical TOP, a microbial fertiliser with mycorrhizae, rhizosphere bacteria and Trichoderma for seed or soil: what it contains and how to choose it."
+      }
+    }
+  },
+  "fertiliser": {
+    "nutrients": [],
+    "form": {
+      "ro": "Pulbere umectabilă cu microorganisme",
+      "en": "Wettable powder with micro-organisms"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/ingrasaminte/radical-top-10kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: composition and use. Reworded; no manufacturer sheet was seen."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer and country of origin: not stated on the old page. No brand is set.",
+    "Manufacturer sheet, strains and counts (cfu/g), shelf life: missing.",
+    "Rates by crop: generic old table, no source: not used."
+  ],
+  "conflicts": []
+}

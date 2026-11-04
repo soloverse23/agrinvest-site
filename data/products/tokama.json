@@ -1,0 +1,116 @@
+{
+  "slug": "tokama",
+  "primaryKeyword": {
+    "ro": "tokama",
+    "en": "tokama"
+  },
+  "category": "fungicide",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley",
+    "maize"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Tokama este un fungicid cu protioconazol 125 g/l + tebuconazol 125 g/l; omologat în România (certificat nr. 933PC/07.03.2024). Dozele pe culturi vor fi publicate după verificarea cu eticheta producătorului.",
+      "description": "### Ce este Tokama\n\nTokama este un fungicid cu protioconazol 125 g/l + tebuconazol 125 g/l.\n\n### Cum acționează\n\nProtioconazol este un triazolintionă: inhibă sinteza ergosterolului din membrana ciupercilor (DMI). Se încadrează la FRAC 3. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Culturi și doze\n\nNu publicăm încă dozele, timpii de pauză și culturile omologate: le adăugăm după ce le verificăm cu eticheta producătorului sau cu registrul ANF. În magazin produsul apare asociat cu: grâu, orz și porumb. Până atunci, întreabă un consultant Agrinvest sau citește eticheta de pe ambalaj înainte de tratament.\n\n### Omologare\n\nCertificatul de omologare nr. 933PC/07.03.2024. Numărul a fost găsit în deciziile ANF (ultima mențiune: 08.06.2026); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Tokama?",
+          "answer": "Protioconazol 125 g/l + tebuconazol 125 g/l."
+        },
+        {
+          "question": "Ce număr de omologare are Tokama?",
+          "answer": "Certificatul de omologare nr. 933PC/07.03.2024, găsit în deciziile ANF (ultima mențiune: 08.06.2026)."
+        },
+        {
+          "question": "Unde găsesc doza de Tokama pe cultura mea?",
+          "answer": "Pe eticheta ambalajului. Dozele diferă pe cultură și dăunător, iar tabelul verificat al producătorului nu este încă publicat pe această pagină. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Tokama: fungicid cu protioconazol, omologare și doze",
+        "description": "Tokama, fungicid cu protioconazol 125 g/l + tebuconazol 125 g/l: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Tokama is a fungicide with protioconazol 125 g/l + tebuconazol 125 g/l; authorised in Romania (certificate no. 933PC/07.03.2024). Rates by crop will be published once checked against the manufacturer’s label.",
+      "description": "### What Tokama is\n\nTokama is a fungicide with protioconazol 125 g/l + tebuconazol 125 g/l.\n\n### How it works\n\nProtioconazol is a triazolinthione: it inhibits the synthesis of ergosterol in fungal membranes (DMI). It belongs to FRAC 3. Alternate products from different groups to slow the build-up of resistance.\n\n### Crops and rates\n\nWe do not publish the rates, waiting periods and authorised crops yet: we add them once checked against the manufacturer’s label or the ANF register. In the shop the product is listed for: wheat, barley and maize. Until then, ask an Agrinvest consultant or read the label on the pack before treating.\n\n### Registration\n\nAuthorisation certificate no. 933PC/07.03.2024. The number was found in the ANF decisions (last mention: 08.06.2026); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Tokama contain?",
+          "answer": "Protioconazol 125 g/l + tebuconazol 125 g/l."
+        },
+        {
+          "question": "What is the registration number of Tokama?",
+          "answer": "Authorisation certificate no. 933PC/07.03.2024, found in the ANF decisions (last mention: 08.06.2026)."
+        },
+        {
+          "question": "Where do I find the Tokama rate for my crop?",
+          "answer": "On the label of the pack. Rates differ by crop and pest, and the manufacturer’s checked table is not yet published on this page. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Tokama: fungicide with protioconazol, registration, rates",
+        "description": "Tokama, fungicide with protioconazol 125 g/l + tebuconazol 125 g/l: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "protioconazol",
+        "concentration": 125,
+        "unit": "g/l"
+      },
+      {
+        "name": "tebuconazol",
+        "concentration": 125,
+        "unit": "g/l"
+      }
+    ],
+    "professionalUse": true,
+    "registrationNumber": "933PC/07.03.2024",
+    "modeOfAction": {
+      "ro": "Protioconazol este un triazolintionă: inhibă sinteza ergosterolului din membrana ciupercilor (DMI).",
+      "en": "Protioconazol is a triazolinthione: it inhibits the synthesis of ergosterol in fungal membranes (DMI)."
+    },
+    "resistanceGroup": "FRAC 3"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-de-08-06-2026/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 08.06.2026: Tokama (certificate 933PC/07.03.2024); last mention found."
+      },
+      {
+        "url": "https://www.frac.info/",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "FRAC code list."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/fungicide/tokama/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Holder and brand: the ANF mention does not name them.",
+    "Dose table, waiting periods, maximum treatments and water volume: no label or register table was read for this product. The old shop’s dose table is not used (it is kept in docs/audit/products-raw.json).",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "Pack size: the old shop gave none (shown as one piece at 224 lei).",
+    "Crops attached to this product come from the old shop’s dose table; they are not checked against the register."
+  ]
+}

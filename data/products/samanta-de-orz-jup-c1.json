@@ -1,0 +1,101 @@
+{
+  "slug": "samanta-de-orz-jup-c1",
+  "primaryKeyword": {
+    "ro": "sămânță orz jup",
+    "en": "jup barley seed"
+  },
+  "category": "seminte",
+  "secondaryCategories": [],
+  "crops": [
+    "barley"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Sămânță certificată de orz de toamnă Jup, clasa C1, ambalaj de 600 kg. Orz cu 6 rânduri, semitimpuriu, aristat, cu tolerență bună la ger, cădere și secetă și rezistență la făinare. Normă: 160–180 kg/ha (400.000–450.000 boabe germinabile/ha).",
+      "description": "### Ce primești\nSămânță de orz de toamnă din soiul Jup, clasa biologică C1, în ambalaj de 600 kg.\n\n### Caracteristici (după pagina veche a produsului)\n- Orz de toamnă, aristat, cu 6 rânduri; alungirea paiului semitimpurie, apariția spicului timpurie.\n- Talie medie-înaltă, greutate specifică ridicată.\n- Toleranță bună la ger, la cădere și la secetă.\n- Rezistent la făinare (Erysiphe hordei), la sfâșierea frunzelor (Pyrenophora graminea) și la arsura frunzelor (Rhynchosporium secalis); ușor sensibil la rugina brună (Puccinia hordei).\n- Potențial de producție ridicat; soi furajer, potrivit în toate zonele de cultură a orzului din țară.\n\n### Semănat\nDensitate optimă: 160–180 kg/ha, adică 400.000–450.000 boabe germinabile pe hectar.",
+      "faq": [
+        {
+          "question": "Ce înseamnă C1 la sămânță?",
+          "answer": "C1 este sămânță certificată din prima generație, obținută din sămânță de bază."
+        },
+        {
+          "question": "Ce soi de orz este Jup?",
+          "answer": "Jup este un orz de toamnă cu 6 rânduri, aristat, semitimpuriu, cu toleranță bună la ger, cădere și secetă."
+        }
+      ],
+      "seo": {
+        "title": "Sămânță de orz Jup C1, certificată, 600 kg",
+        "description": "Sămânță de orz de toamnă Jup C1 cu 6 rânduri: rezistență la făinare, tolerant la ger și secetă, normă 160–180 kg/ha, ambalaj de 600 kg."
+      }
+    },
+    "en": {
+      "summary": "Certified winter barley seed Jup, class C1, 600 kg pack. A six-row, semi-early, awned barley with good tolerance of frost, lodging and drought and resistance to mildew. Rate: 160–180 kg/ha (400,000–450,000 germinable seeds/ha).",
+      "description": "### What you get\nWinter barley seed of the variety Jup, seed class C1, in a 600 kg pack.\n\n### Characteristics (from the old product page)\n- A winter, awned, six-row barley; semi-early straw elongation, early ear emergence.\n- Medium-to-tall height, high test weight.\n- Good tolerance of frost, lodging and drought.\n- Resistant to powdery mildew (Erysiphe hordei), leaf stripe (Pyrenophora graminea) and scald (Rhynchosporium secalis); slightly susceptible to brown rust (Puccinia hordei).\n- High yield potential; a feed variety suited to all barley-growing areas of the country.\n\n### Sowing\nOptimum density: 160–180 kg/ha, that is 400,000–450,000 germinable seeds per hectare.",
+      "faq": [
+        {
+          "question": "What does C1 mean for seed?",
+          "answer": "C1 is certified seed of the first generation, grown from basic seed."
+        },
+        {
+          "question": "What kind of barley is Jup?",
+          "answer": "Jup is a six-row, awned, semi-early winter barley with good tolerance of frost, lodging and drought."
+        }
+      ],
+      "seo": {
+        "title": "Jup barley seed C1, certified, 600 kg pack",
+        "description": "Jup C1 six-row winter barley seed: resistant to mildew, tolerant of frost and drought, 160–180 kg/ha, 600 kg pack."
+      }
+    }
+  },
+  "seed": {
+    "species": {
+      "ro": "Orz",
+      "en": "Barley"
+    },
+    "variety": "Jup",
+    "maturity": {
+      "ro": "Semitimpuriu",
+      "en": "Semi-early"
+    },
+    "sowingDensity": {
+      "ro": "160–180 kg/ha",
+      "en": "160–180 kg/ha"
+    },
+    "sowingRate": {
+      "ro": "400.000–450.000 boabe germinabile/ha",
+      "en": "400,000–450,000 germinable seeds/ha"
+    },
+    "yieldPotential": {
+      "ro": "Ridicat",
+      "en": "High"
+    },
+    "resistances": {
+      "ro": "Rezistent la făinare, sfâșierea frunzelor și arsura frunzelor; ușor sensibil la rugina brună; toleranță bună la ger, cădere și secetă",
+      "en": "Resistant to mildew, leaf stripe and scald; slightly susceptible to brown rust; good tolerance of frost, lodging and drought"
+    },
+    "recommendedZones": {
+      "ro": "Toate zonele de cultură a orzului din țară",
+      "en": "All barley-growing areas of the country"
+    }
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://agrinvestshop.ro/shop/seminte/samanta-orz-jup-c1-500kg/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "The old shop page: variety description and sowing density, as stated there; not checked against the breeder’s sheet or the official catalogue."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Manufacturer or breeder and the seed supplier: not stated.",
+    "Germination, purity and thousand-grain weight of the lot; the official seed label."
+  ],
+  "conflicts": [
+    "The old product slug says 500 kg, the name and pack say 600 kg. Confirm the pack."
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "tazer-250-sc",
+  "primaryKeyword": {
+    "ro": "tazer 250 sc",
+    "en": "tazer 250 sc"
+  },
+  "category": "fungicide",
+  "secondaryCategories": [],
+  "crops": [
+    "wheat",
+    "barley",
+    "triticale",
+    "rapeseed",
+    "sunflower"
+  ],
+  "targets": [],
+  "text": {
+    "ro": {
+      "summary": "Tazer 250 SC este un fungicid cu azoxistrobin 250 g/l, formulare SC; omologat în România (certificat nr. 060PC/29.09.2014). Dozele pe culturi vor fi publicate după verificarea cu eticheta producătorului.",
+      "description": "### Ce este Tazer 250 SC\n\nTazer 250 SC este un fungicid cu azoxistrobin 250 g/l, formulare SC.\n\n### Cum acționează\n\nAzoxistrobin este o strobilurină: blochează respirația ciupercilor la nivelul mitocondriilor (QoI). Se încadrează la FRAC 11. Alternează produsele din grupe diferite ca să încetinești apariția rezistenței.\n\n### Culturi și doze\n\nNu publicăm încă dozele, timpii de pauză și culturile omologate: le adăugăm după ce le verificăm cu eticheta producătorului sau cu registrul ANF. În magazin produsul apare asociat cu: grâu, orz, triticale, rapiță și floarea-soarelui. Până atunci, întreabă un consultant Agrinvest sau citește eticheta de pe ambalaj înainte de tratament.\n\n### Omologare\n\nCertificatul de omologare nr. 060PC/29.09.2014. Numărul a fost găsit în deciziile ANF (ultima mențiune: 24.11.2021); data până la care este valabil nu apare în aceste liste, deci verific-o pe etichetă.\n\n### Siguranță\n\nProdus de uz profesional. Înainte de utilizare citește eticheta și fișa cu date de securitate și folosește echipamentul de protecție prevăzut.",
+      "faq": [
+        {
+          "question": "Ce substanță activă conține Tazer 250 SC?",
+          "answer": "Azoxistrobin 250 g/l (o strobilurină din grupa FRAC 11)."
+        },
+        {
+          "question": "Ce număr de omologare are Tazer 250 SC?",
+          "answer": "Certificatul de omologare nr. 060PC/29.09.2014, găsit în deciziile ANF (ultima mențiune: 24.11.2021)."
+        },
+        {
+          "question": "Unde găsesc doza de Tazer 250 SC pe cultura mea?",
+          "answer": "Pe eticheta ambalajului. Dozele diferă pe cultură și dăunător, iar tabelul verificat al producătorului nu este încă publicat pe această pagină. Întreabă un consultant Agrinvest."
+        }
+      ],
+      "seo": {
+        "title": "Tazer 250 SC: fungicid cu azoxistrobin, omologare și doze",
+        "description": "Tazer 250 SC, fungicid cu azoxistrobin 250 g/l: număr de omologare, grupa de rezistență și informații pentru alegerea dozei."
+      }
+    },
+    "en": {
+      "summary": "Tazer 250 SC is a fungicide with azoxistrobin 250 g/l, SC formulation; authorised in Romania (certificate no. 060PC/29.09.2014). Rates by crop will be published once checked against the manufacturer’s label.",
+      "description": "### What Tazer 250 SC is\n\nTazer 250 SC is a fungicide with azoxistrobin 250 g/l, SC formulation.\n\n### How it works\n\nAzoxistrobin is a strobilurin: it blocks fungal respiration in the mitochondria (QoI). It belongs to FRAC 11. Alternate products from different groups to slow the build-up of resistance.\n\n### Crops and rates\n\nWe do not publish the rates, waiting periods and authorised crops yet: we add them once checked against the manufacturer’s label or the ANF register. In the shop the product is listed for: wheat, barley, triticale, rapeseed and sunflower. Until then, ask an Agrinvest consultant or read the label on the pack before treating.\n\n### Registration\n\nAuthorisation certificate no. 060PC/29.09.2014. The number was found in the ANF decisions (last mention: 24.11.2021); the date until which it is valid does not appear in those lists, so check it on the label.\n\n### Safety\n\nProduct for professional use. Before use read the label and the safety data sheet, and wear the protective equipment they require.",
+      "faq": [
+        {
+          "question": "What active substance does Tazer 250 SC contain?",
+          "answer": "Azoxistrobin 250 g/l (strobilurin, FRAC 11)."
+        },
+        {
+          "question": "What is the registration number of Tazer 250 SC?",
+          "answer": "Authorisation certificate no. 060PC/29.09.2014, found in the ANF decisions (last mention: 24.11.2021)."
+        },
+        {
+          "question": "Where do I find the Tazer 250 SC rate for my crop?",
+          "answer": "On the label of the pack. Rates differ by crop and pest, and the manufacturer’s checked table is not yet published on this page. Ask an Agrinvest consultant."
+        }
+      ],
+      "seo": {
+        "title": "Tazer 250 SC: fungicide, registration and rates",
+        "description": "Tazer 250 SC, fungicide with azoxistrobin 250 g/l: registration number, resistance group and how to choose the rate."
+      }
+    }
+  },
+  "protection": {
+    "activeIngredients": [
+      {
+        "name": "azoxistrobin",
+        "concentration": 250,
+        "unit": "g/l"
+      }
+    ],
+    "professionalUse": true,
+    "formulation": "SC",
+    "registrationNumber": "060PC/29.09.2014",
+    "modeOfAction": {
+      "ro": "Azoxistrobin este o strobilurină: blochează respirația ciupercilor la nivelul mitocondriilor (QoI).",
+      "en": "Azoxistrobin is a strobilurin: it blocks fungal respiration in the mitochondria (QoI)."
+    },
+    "resistanceGroup": "FRAC 11"
+  },
+  "doses": [],
+  "sources": {
+    "technical": [
+      {
+        "url": "https://anfdf.ro/download/sedinta-din-data-24-11-2021/",
+        "kind": "register",
+        "retrieved": "2026-11-04",
+        "note": "ANF decisions of 24.11.2021: Tazer 250 SC (certificate 060PC/29.09.2014); last mention found."
+      },
+      {
+        "url": "https://www.frac.info/",
+        "kind": "classification",
+        "retrieved": "2026-11-04",
+        "note": "FRAC code list."
+      },
+      {
+        "url": "https://agrinvestshop.ro/shop/fungicide/tazer-250-sc-5-l/",
+        "kind": "old-shop",
+        "retrieved": "2026-11-04",
+        "note": "Composition, crops and pack as the old shop states them; not checked against a label."
+      }
+    ],
+    "doses": []
+  },
+  "gaps": [
+    "Holder and brand: the ANF mention does not name them.",
+    "Dose table, waiting periods, maximum treatments and water volume: no label or register table was read for this product. The old shop’s dose table is not used (it is kept in docs/audit/products-raw.json).",
+    "Registration validity date: not stated in the ANF lists.",
+    "GHS classification, hazard statements and buffer zones: need the label or the safety data sheet."
+  ],
+  "conflicts": [
+    "Crops attached to this product come from the old shop’s dose table; they are not checked against the register."
+  ]
+}

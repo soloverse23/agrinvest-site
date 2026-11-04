@@ -8,5 +8,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     include: ['tests/int/**/*.int.spec.ts'],
+    // Every file starts Payload, and a schema push is not safe to run twice at once.
+    fileParallelism: false,
+    // Starting Payload takes longer than the default 10 s on a CI machine.
+    hookTimeout: 60_000,
   },
 })

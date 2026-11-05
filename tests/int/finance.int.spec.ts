@@ -544,6 +544,12 @@ describe('finance', () => {
       await payload.delete({ collection: 'pages', id: page.id })
     })
 
+    it('adds the arable land row to the company table, once', () => {
+      const once = correct({ keys: ['C1', 'C5', 'C4', 'C7', 'C8'] })
+      expect(once).toEqual({ keys: ['C1', 'C5', 'C4', 'C7', 'C8', 'C10'] })
+      expect(correct(once)).toEqual(once)
+    })
+
     it('says silos and warehouses, not bases, with the count', () => {
       expect(correct('Capacitatea este de {{S2}}, în {{S1}} baze.')).toBe(
         'Capacitatea este de {{S2}}, în {{S1}} silozuri și depozite de cereale.',

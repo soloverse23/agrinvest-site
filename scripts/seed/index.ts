@@ -357,6 +357,8 @@ async function seedPages(payload: Payload, ctx: Ctx) {
         data: {
           title: seed.en.title,
           slug: seed.en.slug,
+          // Or Payload makes the slug from the title, and it no longer matches the path.
+          generateSlug: false,
           summary: seed.en.summary,
           seo: { title: seed.en.seoTitle, description: null },
           layout: english?.blocks ?? [],

@@ -20,6 +20,7 @@ import { contentFor } from '../seed/content'
 import { contentEn } from '../seed/content-en'
 import { pages as seededPages } from '../seed/pages'
 import { rt } from '../seed/richtext'
+import { keepUrl } from './corrections'
 import { applyFigures } from './figures'
 import {
   guideFile,
@@ -444,6 +445,7 @@ async function applyHub(
       locale: l,
       data: {
         title: t.title,
+        ...keepUrl(at(doc.path, l), at(doc.slug, l)),
         summary: t.summary,
         layout: hubBlocks(t.layout),
         faq: t.faq,
@@ -457,7 +459,10 @@ async function applyHub(
       collection: 'pages',
       id: doc.id as number,
       locale: 'ro',
-      data: { enrichment: { groups: next } } as never,
+      data: {
+        enrichment: { groups: next },
+        ...keepUrl(at(doc.path, 'ro'), at(doc.slug, 'ro')),
+      } as never,
       context,
     })
   return report

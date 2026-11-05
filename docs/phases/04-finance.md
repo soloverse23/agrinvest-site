@@ -2,7 +2,7 @@
 
 ## Finance (Agrinvest Credit IFN)
 
-Status: **4.1, 4.2, the owner's corrections and all of 4.3 are merged to `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
+Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
 
 ## Context
 
@@ -247,6 +247,17 @@ Each page is written in Romanian and English together, with correct ș and ț. T
 **Sources:** interest in insolvency is art. 80 of Law 85/2014 (with art. 103), not art. 79 as noted earlier; guarantors are art. 75(2)(b). APIA's convention list still could not be read, so no page says whether Agrinvest takes part. Statements from Agro TV interviews are used only as general advice, unattributed, until checked against the audio and the IFN allows quoting. Guides are signed by "Agrinvest Credit IFN", with no named person, until the same permission.
 
 **Results (Batches 1 and 2):** typecheck, lint, format, `next build`, `test:int` (126), `test:e2e` (72), `check:seo` (402 pages, 0 errors; it now fails on a raw `{{KEY}}` anywhere). Keyword map: 66 of 102 target URLs built. On an empty database: migrations, seed and apply run clean and a second apply changes nothing. A test rebuilds the page a live site has from the first seed, and the hub replaces it without a false conflict.
+
+### First deploy of Phase 4 (2026-11-05)
+
+The first merge failed on Vercel: `apply:finance` crashed on live data, and CI failed too. Migrations ran; the register rows, the unpublishing and some Romanian pages were written before the crash. Every step is safe to repeat.
+
+A rehearsal (old code and old data, then the new deploy) found what tests had not:
+
+- **Null groups:** Payload crashes on a group set to null, and a missing key keeps the old value, because rows merge by id. An empty link is written out as `{ label: null, href: null }`.
+- **Slug and path disagree on old data:** English pages had slug `farm-financing` and path `/financing`, and any save rebuilds the path from the slug. Scripts now send the slug the path uses (`keepUrl`), and the seed no longer creates the mismatch.
+
+**Rule from now on:** any step that writes to the live database is rehearsed first: build a database with the code on `main`, run the new deploy on it, and compare every page path.
 
 ## 4.4 Tools
 

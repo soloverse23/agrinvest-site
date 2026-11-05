@@ -1,7 +1,7 @@
 /**
  * Minimal Markdown → Lexical (Payload rich text) for seed content.
  * Supports: paragraphs (blank-line separated), `## ` / `### ` headings, `- ` bullet lists,
- * `**bold**` and `[label](/path)` links. Enough for page copy; editors take over in the admin.
+ * `| a | b |` tables (the first row is the header), `**bold**` and `[label](/path)` links. Enough for page copy; editors take over in the admin.
  */
 type Node = { type: string; version: number; [key: string]: unknown }
 
@@ -38,6 +38,44 @@ const textNode = (text: string, format = 0): Node => ({
   version: 1,
 })
 
+const cells = (line: string) =>
+  line
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((c) => c.trim())
+
+/** The node shape of Payload's table feature. */
+function table(lines: string[]): Node {
+  const rows = lines.filter((l) => !/^\|[\s:|-]+\|$/.test(l)).map(cells)
+  return {
+    type: 'table',
+    version: 1,
+    format: '',
+    indent: 0,
+    direction: 'ltr',
+    children: rows.map((row, r) => ({
+      type: 'tablerow',
+      version: 1,
+      format: '',
+      indent: 0,
+      direction: 'ltr',
+      children: row.map((text) => ({
+        type: 'tablecell',
+        version: 1,
+        format: '',
+        indent: 0,
+        direction: 'ltr',
+        // 1 marks a header row in Lexical.
+        headerState: r === 0 ? 1 : 0,
+        colSpan: 1,
+        rowSpan: 1,
+        children: [{ ...base, type: 'paragraph', textFormat: 0, children: inline(text) }],
+      })),
+    })),
+  }
+}
+
 export function rt(markdown: string) {
   const children: Node[] = []
   // Blocks are blank-line separated, but a heading or a list may also follow a line directly.
@@ -50,15 +88,21 @@ export function rt(markdown: string) {
   for (const line of markdown.trim().split('\n')) {
     const text = line.trim()
     const kind = (l: string) =>
-      /^#{2,3} /.test(l) ? 'heading' : l.startsWith('- ') ? 'item' : 'text'
+      /^#{2,3} /.test(l)
+        ? 'heading'
+        : l.startsWith('- ')
+          ? 'item'
+          : l.startsWith('|')
+            ? 'row'
+            : 'text'
     if (!text) flush()
     else if (kind(text) === 'heading') {
       flush()
       lines.push(text)
       flush()
     } else {
-      // A list starts or ends the block before it.
-      if (lines.length && (kind(text) === 'item') !== (kind(lines[0]) === 'item')) flush()
+      // A list or a table starts or ends the block before it.
+      if (lines.length && kind(text) !== kind(lines[0])) flush()
       lines.push(text)
     }
   }
@@ -72,6 +116,10 @@ export function rt(markdown: string) {
         tag: heading[1] === '##' ? 'h2' : 'h3',
         children: inline(heading[2]),
       })
+      continue
+    }
+    if (chunk[0].startsWith('|')) {
+      children.push(table(chunk))
       continue
     }
     if (chunk.every((l) => l.startsWith('- '))) {

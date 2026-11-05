@@ -72,7 +72,7 @@ const FIXED: Record<string, string | 410> = {
   'agrinvest.ro/silozuri/': '/depozitare',
   'agrinvest.ro/transport-si-logistica/': '/logistica',
   'agrinvest.ro/flota-proprie/': '/logistica',
-  'agrinvest.ro/agrinvest-golden-relationships/': '/golden-relationship',
+  'agrinvest.ro/agrinvest-golden-relationships/': '/despre',
   'agrinvest.ro/produse-si-servicii/': '/magazin',
   'agrinvest.ro/produse-conventionale/': '/magazin',
   'agrinvest.ro/produse-bio/': '/magazin/agricultura-bio',

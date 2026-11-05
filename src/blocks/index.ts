@@ -142,7 +142,7 @@ export const FinanceBandBlock: Block = {
       name: 'instalments',
       type: 'array',
       maxRows: 4,
-      admin: { description: 'The repayment timeline (figures register F5).' },
+      admin: { description: 'The repayment timeline (figures register F5.instalments).' },
       fields: [
         { name: 'when', type: 'text', localized: true, required: true },
         { name: 'label', type: 'text', localized: true, required: true },
@@ -291,6 +291,13 @@ export const CalloutBlock: Block = {
   ],
 }
 
+/** The credit products, read from the Finance products collection. */
+export const FinanceProductsBlock: Block = {
+  slug: 'financeProducts',
+  interfaceName: 'FinanceProductsBlock',
+  fields: [...sectionHead(true)],
+}
+
 export const pageBlocks: Block[] = [
   HeroBlock,
   RichTextBlock,
@@ -299,6 +306,7 @@ export const pageBlocks: Block[] = [
   ServiceGridBlock,
   StepsBlock,
   FinanceBandBlock,
+  FinanceProductsBlock,
   StorySectionBlock,
   BaseListBlock,
   CropListBlock,

@@ -8,6 +8,7 @@ import type {
 import { publishedOrStaff, isStaff } from '@/access'
 import { pageBlocks } from '@/blocks'
 import { faq, seo, slug } from '@/fields'
+import { enrichmentLedger } from '@/fields/shop'
 import { localePath, locales, type Locale } from '@/i18n/config'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
@@ -162,5 +163,6 @@ export const Pages: CollectionConfig = {
           'Languages this page is published in. English pages are business-led, not a mirror; a page in one language has no hreflang pair.',
       },
     },
+    enrichmentLedger,
   ],
 }

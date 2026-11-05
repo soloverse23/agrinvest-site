@@ -9,6 +9,7 @@ export const sections = {
   bases: { ro: '/baze', en: '/bases' },
   crops: { ro: '/cereale', en: '/grain' },
   shop: { ro: '/magazin', en: '/shop' },
+  finance: { ro: '/finantare', en: '/financing' },
 } as const satisfies Record<string, Record<Locale, string>>
 
 export type Section = keyof typeof sections
@@ -53,3 +54,33 @@ export const hubPath = (kind: HubKind, slug: string, locale: Locale) =>
 
 export const searchPath = (locale: Locale) =>
   localePath(`${sections.shop[locale]}/${shopRoutes.search[locale]}`, locale)
+
+/** Finance routes that are not products. Their words are reserved: no product may use them. */
+export const financeRoutes = {
+  guides: { ro: 'ghiduri', en: 'guides' },
+  simulator: { ro: 'simulator', en: 'simulator' },
+  eligibility: { ro: 'eligibilitate', en: 'eligibility' },
+  documents: { ro: 'documente', en: 'documents' },
+  apply: { ro: 'aplica', en: 'apply' },
+  faq: { ro: 'intrebari-frecvente', en: 'faq' },
+  about: { ro: 'despre-ifn', en: 'about-ifn' },
+} as const satisfies Record<string, Record<Locale, string>>
+
+export const reservedFinanceSlugs = new Set(
+  Object.values(financeRoutes).flatMap((r) => Object.values(r) as string[]),
+)
+
+/** Finance section: `/finantare`, `/en/financing`. */
+export const financePath = (locale: Locale) => localePath(sections.finance[locale], locale)
+
+/** A finance product, or one nested under another: `/finantare/credit-investitii/utilaje`. */
+export const financeProductPath = (slug: string, locale: Locale, parentSlug?: string | null) =>
+  localePath(`${sections.finance[locale]}/${parentSlug ? `${parentSlug}/` : ''}${slug}`, locale)
+
+/** A fixed finance page: `/finantare/simulator`, `/en/financing/about-ifn`. */
+export const financeRoutePath = (route: keyof typeof financeRoutes, locale: Locale) =>
+  localePath(`${sections.finance[locale]}/${financeRoutes[route][locale]}`, locale)
+
+/** A guide: `/finantare/ghiduri/glosar`, `/en/financing/guides/glossary`. */
+export const guidePath = (slug: string, locale: Locale) =>
+  localePath(`${sections.finance[locale]}/${financeRoutes.guides[locale]}/${slug}`, locale)

@@ -78,6 +78,7 @@ describe('Figures register', () => {
     for (const row of figures.rows ?? []) {
       expect(['to-confirm', 'conflict', 'confirmed']).toContain(row.status)
     }
-    expect(figures.rows?.find((r) => r.key === 'S2')?.status).toBe('conflict')
+    expect(figures.rows?.find((r) => r.key === 'S2')?.status).toBe('confirmed')
+    expect(figures.rows?.find((r) => r.key === 'F4.money')?.status).toBe('conflict')
   })
 })

@@ -10,6 +10,9 @@ import type {
   WebPage,
   WebSite,
   WithContext,
+  Article,
+  DefinedTermSet,
+  LoanOrCredit,
 } from 'schema-dts'
 
 import { localePath, type Locale } from '@/i18n/config'
@@ -308,5 +311,84 @@ export function itemList(items: { name: string; url: string }[]): WithContext<It
       name: item.name,
       url: absoluteUrl(item.url),
     })),
+  }
+}
+
+/** A guide. Sources are listed as citations, so an answer can be traced. */
+export function article(input: {
+  url: string
+  headline: string
+  description?: string | null
+  locale: Locale
+  dateModified?: string
+  datePublished?: string
+  authorName?: string | null
+  citations?: string[]
+}): WithContext<Article> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${absoluteUrl(input.url)}#article`,
+    url: absoluteUrl(input.url),
+    headline: input.headline,
+    description: input.description ?? undefined,
+    inLanguage: input.locale,
+    dateModified: input.dateModified,
+    datePublished: input.datePublished,
+    author: input.authorName
+      ? { '@type': 'Organization', name: input.authorName }
+      : { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    citation: input.citations?.length ? input.citations : undefined,
+  }
+}
+
+/** The glossary. */
+export function definedTermSet(input: {
+  url: string
+  name: string
+  locale: Locale
+  terms: { term: string; definition: string }[]
+}): WithContext<DefinedTermSet> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    '@id': `${absoluteUrl(input.url)}#terms`,
+    name: input.name,
+    inLanguage: input.locale,
+    hasDefinedTerm: input.terms.map((t) => ({
+      '@type': 'DefinedTerm',
+      name: t.term,
+      description: t.definition,
+    })),
+  }
+}
+
+/** A credit product. A term or amount appears only once the IFN has confirmed it. */
+export function loanOrCredit(input: {
+  url: string
+  name: string
+  description?: string | null
+  termMonths?: number | null
+  amountMax?: number | null
+  confirmed: boolean
+}): WithContext<LoanOrCredit> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LoanOrCredit',
+    '@id': `${absoluteUrl(input.url)}#product`,
+    url: absoluteUrl(input.url),
+    name: input.name,
+    description: input.description ?? undefined,
+    currency: 'RON',
+    provider: { '@id': IFN_ID },
+    loanTerm:
+      input.confirmed && input.termMonths
+        ? { '@type': 'QuantitativeValue', value: input.termMonths, unitCode: 'MON' }
+        : undefined,
+    amount:
+      input.confirmed && input.amountMax
+        ? { '@type': 'MonetaryAmount', maxValue: input.amountMax, currency: 'RON' }
+        : undefined,
   }
 }

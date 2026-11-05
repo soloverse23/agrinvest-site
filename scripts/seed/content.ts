@@ -86,12 +86,6 @@ export function contentFor(key: string, ctx: Ctx): Content | null {
                 link: { label: 'Logistică', href: '/logistica' },
               },
               {
-                icon: 'handshake',
-                title: 'Golden Relationship',
-                body: 'Un program prin care sprijinim fermele aflate în dificultate să își revină și să crească din nou.',
-                link: { label: 'Despre program', href: '/golden-relationship' },
-              },
-              {
                 icon: 'leaf',
                 title: 'Consultanță tehnică',
                 body: 'Agronomii noștri te ajută să alegi tehnologia potrivită pentru fiecare cultură și fiecare sezon.',
@@ -130,19 +124,10 @@ export function contentFor(key: string, ctx: Ctx): Content | null {
             ],
           },
           {
-            blockType: 'storySection',
-            kicker: 'Golden Relationship',
-            heading: 'Când un an greu nu trebuie să însemne sfârșitul fermei',
-            body: rt(
-              'Prin programul Golden Relationship, Agrinvest și Agrinvest Credit IFN lucrează alături de fermierii aflați într-o situație dificilă, dar care au o șansă reală de redresare.\n\nO echipă de specialiști (financiari, juridici, tehnici și comerciali) face împreună cu fermierul un plan de redresare și rămâne alături de el și după ce perioada grea a trecut.\n\n[Află cum funcționează programul](/golden-relationship)',
-            ),
-            media: media.combine,
-          },
-          {
             blockType: 'financeBand',
             kicker: 'Agrinvest Credit IFN',
             heading: 'Finanțare cu rate după recoltă',
-            lead: 'Credite în lei pentru producție și investiții, cu răspuns {{F4}}. Rambursezi în ritmul fermei: {{F5}}.',
+            lead: 'Credite în lei pentru producție și investiții, cu răspuns {{F4.reply}}. Rambursezi în ritmul fermei: {{F5.term}}, {{F5.instalments}}.',
             primary: { label: 'Despre finanțare', href: '/finantare' },
             secondary: { label: 'Cere o ofertă', href: '/finantare#cerere' },
             instalments: [
@@ -247,7 +232,7 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             blockType: 'figureTable',
             kicker: 'Companie',
             heading: 'Despre companie',
-            keys: ['C1', 'C5', 'C4', 'C7', 'C8'],
+            keys: ['C1', 'C5', 'C4', 'C7', 'C8', 'C10'],
           },
           {
             blockType: 'figureTable',
@@ -260,13 +245,17 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             blockType: 'figureTable',
             kicker: 'Finanțare',
             heading: 'Agrinvest Credit IFN',
-            keys: ['F1', 'F2.cui', 'F2.reg', 'F3', 'F4', 'F5', 'F6'],
-          },
-          {
-            blockType: 'figureTable',
-            kicker: 'Programe',
-            heading: 'Golden Relationship',
-            keys: ['P1'],
+            keys: [
+              'F1',
+              'F2.cui',
+              'F2.reg',
+              'F3',
+              'F4.reply',
+              'F4.money',
+              'F5.term',
+              'F5.instalments',
+              'F6',
+            ],
           },
         ],
         faq: {
@@ -416,7 +405,7 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             ),
             q(
               'Care este capacitatea totală de depozitare?',
-              'Capacitatea totală este de {{S2}}, în {{S1}} baze.',
+              'Capacitatea totală este de {{S2}}, în {{S1}} silozuri și depozite de cereale.',
             ),
           ],
         },
@@ -499,8 +488,8 @@ Produsele noastre sunt gândite mai ales pentru fermierii mici și mijlocii, car
 ## Condiții
 
 - Finanțare în lei, cu documentație simplă
-- Răspuns {{F4}}
-- Durată și rambursare: {{F5}}, corelate cu recoltele
+- Răspuns {{F4.reply}}
+- Durată și rambursare: {{F5.term}}, {{F5.instalments}}
 - Garanții acceptate: bilete la ordin, culturi, utilaje agricole, subvenții APIA, contracte de vânzare a cerealelor, ipoteci imobiliare`),
           },
           {
@@ -531,82 +520,13 @@ Produsele noastre sunt gândite mai ales pentru fermierii mici și mijlocii, car
         ],
         faq: {
           ro: [
-            q('În cât timp primesc răspuns la cerere?', 'Răspunsul vine {{F4}}.'),
-            q('Pe ce perioadă pot lua un credit?', '{{F5}}.'),
+            q('În cât timp primesc răspuns la cerere?', 'Răspunsul vine {{F4.reply}}.'),
+            q('Pe ce perioadă pot lua un credit?', '{{F5.term}}, {{F5.instalments}}.'),
             q(
               'Ce garanții acceptați?',
               'Bilete la ordin, culturi, utilaje agricole, subvenții APIA, contracte de vânzare a cerealelor sau ipoteci imobiliare.',
             ),
             q('În ce monedă se acordă creditele?', 'Toate finanțările se acordă în lei.'),
-          ],
-        },
-      }
-
-    case 'golden-relationship':
-      return {
-        ro: [
-          {
-            blockType: 'richText',
-            content: rt(`## Pentru cine este programul
-
-Golden Relationship (#AGR) se adresează fermierilor ale căror afaceri trec printr-o perioadă grea, dar care au o șansă reală de redresare. Nu oferim doar o soluție de moment: construim un parteneriat pe termen lung, ca ferma să crească din nou.
-
-## Cum lucrăm
-
-Agrinvest și Agrinvest Credit IFN pun la dispoziția fermierului o echipă cu experiență financiară, juridică, tehnică, managerială și comercială. Împreună cu el facem un plan de redresare și îl urmărim pas cu pas.
-
-După perioada critică rămânem alături: consultanță tehnică, comercială și financiară și ajutor pentru a vinde recolta cât mai bine.
-
-## Programul în prezent
-
-În program sunt integrate {{P1}}. Programul este coordonat de ing. Dan N. Săvoiu, inginer agronom cu experiență îndelungată în agribusiness-ul din România.`),
-          },
-          {
-            blockType: 'steps',
-            kicker: 'Pas cu pas',
-            heading: 'Cum funcționează Golden Relationship',
-            items: [
-              {
-                title: 'Analiza fermei',
-                body: 'Ne uităm împreună la culturi, datorii, utilaje și piață.',
-              },
-              {
-                title: 'Planul de redresare',
-                body: 'Stabilim ce se schimbă, în ce ordine și cu ce resurse.',
-              },
-              {
-                title: 'Sprijin în sezon',
-                body: 'Inputuri, finanțare și consultanță tehnică, la timp.',
-              },
-              { title: 'Valorificarea recoltei', body: 'Te ajutăm să vinzi recolta cât mai bine.' },
-            ],
-          },
-          {
-            blockType: 'videoEmbed',
-            kicker: 'Povești din program',
-            heading: 'Fermieri din Golden Relationship',
-            youtubeId: 'JOzMUJPyy40',
-            title: 'Agrinvest Golden Relationship – Constanța',
-            uploadDate: '2022-09-06',
-            duration: 'PT11M7S',
-          },
-          {
-            blockType: 'ctaBand',
-            heading: 'Ferma ta trece printr-o perioadă grea?',
-            body: 'Vorbește cu noi. Discuția este confidențială și te ajută să vezi ce opțiuni ai.',
-            primary: { label: 'Contactează-ne', href: '/contact' },
-          },
-        ],
-        faq: {
-          ro: [
-            q(
-              'Cine poate intra în programul Golden Relationship?',
-              'Fermierii care trec printr-o perioadă grea, dar au o șansă reală de redresare. Fiecare caz este analizat împreună cu fermierul.',
-            ),
-            q(
-              'Cine coordonează programul?',
-              'Programul este coordonat de ing. Dan N. Săvoiu, inginer agronom.',
-            ),
           ],
         },
       }
@@ -704,8 +624,7 @@ După perioada critică rămânem alături: consultanță tehnică, comercială 
               {
                 icon: 'handshake',
                 title: 'Fermieri',
-                body: 'Parteneriate pe termen lung, inclusiv prin programul Golden Relationship.',
-                link: { label: 'Golden Relationship', href: '/golden-relationship' },
+                body: 'Parteneriate pe termen lung.',
               },
             ],
           },
@@ -800,7 +719,7 @@ După perioada critică rămânem alături: consultanță tehnică, comercială 
             blockType: 'figureTable',
             kicker: 'Birouri',
             heading: 'Unde ne găsești',
-            keys: ['C2', 'C3', 'C9.phone', 'C9.email'],
+            keys: ['C3', 'C9.email'],
           },
           {
             blockType: 'leadForm',

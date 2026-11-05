@@ -106,12 +106,6 @@ export function contentEn(
                 link: { label: 'Logistics', href: '/en/logistics' },
               },
               {
-                icon: 'handshake',
-                title: 'Golden Relationship',
-                body: 'A programme that helps farms in difficulty recover and grow again.',
-                link: { label: 'About the programme', href: '/en/golden-relationship' },
-              },
-              {
                 icon: 'leaf',
                 title: 'Agronomic advice',
                 body: 'Our agronomists help choose the right technology for each crop and each season.',
@@ -128,19 +122,10 @@ export function contentEn(
           },
           sellingSteps,
           {
-            blockType: 'storySection',
-            kicker: 'Golden Relationship',
-            heading: 'When a hard year does not have to end the farm',
-            body: rt(
-              'Through the Golden Relationship programme, Agrinvest and Agrinvest Credit IFN work alongside farmers who are in a difficult situation but have a real chance of recovery.\n\nA team of financial, legal, technical and commercial specialists builds a recovery plan with the farmer and stays with them after the hard period is over.\n\n[How the programme works](/en/golden-relationship)',
-            ),
-            media: media.combine,
-          },
-          {
             blockType: 'financeBand',
             kicker: 'Agrinvest Credit IFN',
             heading: 'Financing repaid after the harvest',
-            lead: 'Loans in lei for production and investment, with a reply {{F4}}. Repayments follow the farm: {{F5}}.',
+            lead: 'Loans in lei for production and investment, with a reply {{F4.reply}}. Repayments follow the farm: {{F5.term}}, {{F5.instalments}}.',
             primary: { label: 'About financing', href: '/en/financing' },
             secondary: { label: 'Ask for an offer', href: '/en/financing#cerere' },
             instalments,
@@ -242,7 +227,7 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
             blockType: 'figureTable',
             kicker: 'Company',
             heading: 'About the company',
-            keys: ['C1', 'C5', 'C4', 'C7', 'C8'],
+            keys: ['C1', 'C5', 'C4', 'C7', 'C8', 'C10'],
           },
           {
             blockType: 'figureTable',
@@ -260,13 +245,17 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
             blockType: 'figureTable',
             kicker: 'Financing',
             heading: 'Agrinvest Credit IFN',
-            keys: ['F1', 'F2.cui', 'F2.reg', 'F3', 'F4', 'F5', 'F6'],
-          },
-          {
-            blockType: 'figureTable',
-            kicker: 'Programmes',
-            heading: 'Golden Relationship',
-            keys: ['P1'],
+            keys: [
+              'F1',
+              'F2.cui',
+              'F2.reg',
+              'F3',
+              'F4.reply',
+              'F4.money',
+              'F5.term',
+              'F5.instalments',
+              'F6',
+            ],
           },
         ],
         faq: [
@@ -389,7 +378,7 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
           ),
           q(
             'What is the total storage capacity?',
-            'The total capacity is {{S2}}, across {{S1}} bases.',
+            'The total capacity is {{S2}}, across {{S1}} silos and grain warehouses.',
           ),
         ],
       }
@@ -469,8 +458,8 @@ Our products are designed mainly for small and medium farmers who find it hard t
 ## Terms
 
 - Loans in lei, with simple paperwork
-- A reply {{F4}}
-- Term and repayment: {{F5}}, aligned with the harvests
+- A reply {{F4.reply}}
+- Term and repayment: {{F5.term}}, {{F5.instalments}}
 - Accepted guarantees: promissory notes, crops, farm machinery, APIA subsidies, grain sale contracts, real-estate mortgages`),
           },
           {
@@ -497,84 +486,13 @@ Our products are designed mainly for small and medium farmers who find it hard t
           },
         ],
         faq: [
-          q('How quickly do I get a reply?', 'You get a reply {{F4}}.'),
-          q('For how long can I borrow?', '{{F5}}.'),
+          q('How quickly do I get a reply?', 'You get a reply {{F4.reply}}.'),
+          q('For how long can I borrow?', '{{F5.term}}, {{F5.instalments}}.'),
           q(
             'Which guarantees do you accept?',
             'Promissory notes, crops, farm machinery, APIA subsidies, grain sale contracts or real-estate mortgages.',
           ),
           q('In which currency are the loans?', 'All loans are in lei.'),
-        ],
-      }
-
-    case 'golden-relationship':
-      return {
-        blocks: [
-          {
-            blockType: 'richText',
-            content: rt(`## Who the programme is for
-
-Golden Relationship (#AGR) is for farmers whose business is going through a hard period but has a real chance of recovery. We do not offer a one-off fix: we build a long-term partnership, so the farm can grow again.
-
-## How we work
-
-Agrinvest and Agrinvest Credit IFN give the farmer a team with financial, legal, technical, management and commercial experience. Together with the farmer we build a recovery plan and follow it step by step.
-
-After the critical period we stay alongside: technical, commercial and financial advice, and help to sell the harvest as well as possible.
-
-## The programme today
-
-The programme covers {{P1}}. It is coordinated by Dan N. Săvoiu, an agronomist with long experience in Romanian agribusiness.`),
-          },
-          {
-            blockType: 'steps',
-            kicker: 'Step by step',
-            heading: 'How Golden Relationship works',
-            items: [
-              {
-                title: 'Farm review',
-                body: 'Together we look at the crops, debts, machinery and market.',
-              },
-              {
-                title: 'Recovery plan',
-                body: 'We agree what changes, in what order and with which resources.',
-              },
-              {
-                title: 'In-season support',
-                body: 'Inputs, financing and agronomic advice, on time.',
-              },
-              {
-                title: 'Selling the harvest',
-                body: 'We help you sell the harvest as well as possible.',
-              },
-            ],
-          },
-          {
-            blockType: 'videoEmbed',
-            kicker: 'Stories from the programme',
-            heading: 'Farmers in Golden Relationship',
-            youtubeId: 'JOzMUJPyy40',
-            title: 'Agrinvest Golden Relationship – Constanța',
-            description: 'In Romanian.',
-            uploadDate: '2022-09-06',
-            duration: 'PT11M7S',
-          },
-          {
-            blockType: 'ctaBand',
-            heading: 'Is your farm going through a hard period?',
-            body: 'Talk to us. The conversation is confidential and helps you see your options.',
-            primary: { label: 'Contact us', href: '/en/contact' },
-          },
-        ],
-        faq: [
-          q(
-            'Who can join the Golden Relationship programme?',
-            'Farmers going through a hard period who have a real chance of recovery. Every case is reviewed together with the farmer.',
-          ),
-          q(
-            'Who coordinates the programme?',
-            'The programme is coordinated by Dan N. Săvoiu, an agronomist.',
-          ),
         ],
       }
 
@@ -669,8 +587,7 @@ The programme covers {{P1}}. It is coordinated by Dan N. Săvoiu, an agronomist 
               {
                 icon: 'handshake',
                 title: 'Farmers',
-                body: 'Long-term partnerships, including the Golden Relationship programme.',
-                link: { label: 'Golden Relationship', href: '/en/golden-relationship' },
+                body: 'Long-term partnerships.',
               },
             ],
           },
@@ -761,7 +678,7 @@ The programme covers {{P1}}. It is coordinated by Dan N. Săvoiu, an agronomist 
             blockType: 'figureTable',
             kicker: 'Offices',
             heading: 'Where to find us',
-            keys: ['C2', 'C3', 'C9.phone', 'C9.email'],
+            keys: ['C3', 'C9.email'],
           },
           {
             blockType: 'leadForm',

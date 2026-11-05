@@ -17,7 +17,7 @@ import * as cheerio from 'cheerio'
 
 import { crawl, type CrawledPage } from './lib/site-crawl'
 import { locales } from '../../src/i18n/config'
-import { basePath, sections, shopRoutes } from '../../src/i18n/routes'
+import { basePath, financeRoutes, sections, shopRoutes } from '../../src/i18n/routes'
 
 const base = (process.argv[2] ?? 'http://localhost:3100').replace(/\/$/, '')
 const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? base).origin
@@ -46,6 +46,15 @@ function expectedTypes(path: string): string[] {
   if (locales.some((l) => path.startsWith(`${basePath('', l)}`)))
     return ['LocalBusiness', 'BreadcrumbList']
   for (const l of locales) {
+    const guides = `${l === 'en' ? '/en' : ''}${sections.finance[l]}/${financeRoutes.guides[l]}`
+    if (path.startsWith(`${guides}/`)) return ['Article', 'BreadcrumbList']
+    if (path === guides) return ['WebPage', 'BreadcrumbList', 'ItemList']
+    const finance = `${l === 'en' ? '/en' : ''}${sections.finance[l]}`
+    if (path.startsWith(`${finance}/`)) {
+      const first = path.slice(finance.length + 1).split('/')[0]
+      const fixed = Object.values(financeRoutes).some((r) => r[l] === first)
+      if (!fixed) return ['LoanOrCredit', 'BreadcrumbList']
+    }
     const shop = `${l === 'en' ? '/en' : ''}${sections.shop[l]}`
     if (!path.startsWith(`${shop}/`)) continue
     const parts = path.slice(shop.length + 1).split('/')
@@ -92,6 +101,15 @@ for (const page of pages) {
   const p = page.url
 
   const h1 = $('h1').length
+  // A register key that never became its value: the page shows `{{F5.term}}` to the visitor.
+  const raw = $('body')
+    .clone()
+    .find('script, style')
+    .remove()
+    .end()
+    .text()
+    .match(/\{\{[^}]*\}\}/)
+  if (raw) error('raw register key', `${p}: ${raw[0]}`)
   if (h1 !== 1) error('h1 count', `${p}: ${h1}`)
   else if (!$('h1').text().trim()) error('h1 empty', p)
 

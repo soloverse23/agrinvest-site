@@ -1,6 +1,6 @@
 #!/bin/sh
 # Runs before every Vercel build, which reads the database. Applies pending migrations, fills an
-# empty database once, then applies the reviewed product data (data/products): that step is
+# empty database once, then applies the reviewed data (data/products, data/finance): those steps are
 # idempotent and leaves alone anything staff changed in the admin. Uses Vercel's own
 # environment, so no credentials leave it.
 # Exports stay inside this script: the build itself keeps the pooled DATABASE_URL.
@@ -12,5 +12,6 @@ if [ -n "$BLOB_STORE_ID" ] || [ -n "$R2_BUCKET" ]; then export SEED_PHOTOS=true;
 npm run migrate
 SEED_ONLY_IF_EMPTY=true npm run seed
 npm run apply:products
+npm run apply:finance
 # A warning only: a changed ANAF address must not stop a deploy, the buyer can type the data.
 npm run check:anaf || true

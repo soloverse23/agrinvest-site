@@ -1,0 +1,198 @@
+{
+  "key": "subventii-apia",
+  "order": 32,
+  "harvestCalendar": true,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie"
+  ],
+  "relatedGuides": [
+    "credit-adeverinta-apia",
+    "plata-subventii-apia"
+  ],
+  "sources": [
+    {
+      "title": "Banking News: Agrinvest Credit IFN și BRD, 30.05.2022",
+      "url": "https://bankingnews.ro/agrinvest-credit-ifn-credit-brd-lei.html",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Finanțare pe subvenții APIA",
+      "slug": "subventii-apia",
+      "answer": "Subvențiile APIA sunt una dintre garanțiile pe care Agrinvest Credit IFN le acceptă, iar finanțarea a fost anunțată astfel: {{F11}}. Nu este același lucru cu schema de credit pe adeverință.",
+      "fits": "Se potrivește fermierilor care încasează subvenții în mod regulat și au nevoie de bani înainte de plata APIA, mai ales dacă nu au alte garanții libere.",
+      "notFor": "Nu este potrivită dacă subvenția e deja legată de alt credit. Aceeași sumă nu poate acoperi două datorii.\n\nNu e potrivită nici pentru investiții de durată, pentru care există [creditul de investiții](/finantare/credit-investitii).",
+      "finances": "Banii acoperă nevoile curente ale fermei până la încasarea subvenției.\n\n**Nu confunda cu schema pe adeverință.** Schema are reguli publice: până la 90% din sumă, cu plafon de dobândă și convenții între APIA și finanțatori. Ea este explicată în [ghidul despre creditul pe adeverință](/finantare/ghiduri/credit-adeverinta-apia), iar lista instituțiilor participante se găsește pe site-ul APIA. Dacă vrei să știi cum funcționează exact finanțarea noastră, întreabă echipa.",
+      "repayment": "Rambursarea se leagă de momentul în care primești banii de la APIA. Pentru campania 2026, avansul s-a plătit între 16 octombrie și 30 noiembrie, iar diferența după 1 decembrie. Vezi [calendarul plăților](/finantare/ghiduri/plata-subventii-apia).",
+      "example": {
+        "title": "Sume de încasat de 100.000 de lei",
+        "scenario": "O fermă are de încasat 100.000 de lei de la APIA. Calculul folosește limita anunțată: {{F11}}.",
+        "rows": [
+          {
+            "label": "Sume de încasat",
+            "value": "100.000 lei"
+          },
+          {
+            "label": "Finanțare, la limita anunțată",
+            "value": "200.000 lei"
+          },
+          {
+            "label": "Diferența peste subvenție",
+            "value": "100.000 lei, din alte încasări"
+          }
+        ]
+      },
+      "risks": "Dacă finanțarea trece de suma subvenției, restul se plătește din recoltă sau din alte venituri. Subvenția poate fi mai mică decât ai estimat, după controale. Calculează prudent și nu lua suma maximă doar pentru că poți.",
+      "guarantees": [
+        {
+          "kind": "apia-subsidies",
+          "note": "Sumele de încasat de la APIA susțin creditul."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm situația",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Este același lucru cu creditul pe adeverința APIA?",
+          "answer": "Nu neapărat. Schema pe adeverință are reguli publice și convenții cu APIA. Întreabă echipa cum se aplică la noi."
+        },
+        {
+          "question": "Cât pot primi?",
+          "answer": "Limita anunțată: {{F11}}. Suma exactă depinde de analiză."
+        },
+        {
+          "question": "Am nevoie de adeverință APIA?",
+          "answer": "Întreabă echipa. Îți spunem ce documente sunt necesare după prima discuție."
+        },
+        {
+          "question": "Pot lua finanțare dacă subvenția e deja la o bancă?",
+          "answer": "Spune-ne din start. Aceeași sumă nu poate garanta două credite."
+        }
+      ],
+      "seo": {
+        "title": "Finanțare pe subvenții APIA pentru fermieri",
+        "description": "Cum funcționează subvențiile APIA ca garanție la Agrinvest Credit IFN și prin ce diferă de creditul pe adeverință. Când merită și ce riscuri are."
+      }
+    },
+    "en": {
+      "title": "Financing against APIA subsidies",
+      "slug": "apia-subsidies",
+      "answer": "APIA subsidies are one of the guarantees Agrinvest Credit IFN accepts, and financing has been announced as {{F11}}. This is not the same as the certificate loan scheme.",
+      "fits": "It suits farmers who receive subsidies regularly and need money before APIA pays, especially if they have no other free collateral.",
+      "notFor": "It does not fit if the subsidy is already tied to another loan. The same amount cannot cover two debts.\n\nNor does it suit long-term investment, which is what the [investment loan](/en/financing/investment-credit) is for.",
+      "finances": "The money covers the farm's current needs until the subsidy arrives.\n\n**Do not confuse it with the certificate scheme.** That scheme has public rules: up to 90% of the amount, with an interest cap and agreements between APIA and lenders. It is explained in the [guide to certificate loans](/en/financing/guides/apia-certificate-credit), and the list of participating institutions is on the APIA website. If you want to know exactly how our financing works, ask the team.",
+      "repayment": "Repayment is tied to when you receive the money from APIA. For the 2026 campaign the advance was paid between 16 October and 30 November, and the balance after 1 December. See the [payment calendar](/en/financing/guides/apia-subsidy-payments).",
+      "example": {
+        "title": "100,000 lei due from APIA",
+        "scenario": "A farm is due 100,000 lei from APIA. The calculation uses the announced limit: {{F11}}.",
+        "rows": [
+          {
+            "label": "Amounts due",
+            "value": "100,000 lei"
+          },
+          {
+            "label": "Financing, at the announced limit",
+            "value": "200,000 lei"
+          },
+          {
+            "label": "Above the subsidy",
+            "value": "100,000 lei, from other income"
+          }
+        ]
+      },
+      "risks": "If the financing goes above the subsidy, the rest is paid from the harvest or other income. The subsidy can turn out lower than you estimated, after checks. Work cautiously and do not take the highest amount just because you can.",
+      "guarantees": [
+        {
+          "kind": "apia-subsidies",
+          "note": "Amounts due from APIA support the loan."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at your position",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Is this the same as an APIA certificate loan?",
+          "answer": "Not necessarily. The certificate scheme has public rules and agreements with APIA. Ask the team how it applies with us."
+        },
+        {
+          "question": "How much can I get?",
+          "answer": "The announced limit: {{F11}}. The exact amount depends on the analysis."
+        },
+        {
+          "question": "Do I need an APIA certificate?",
+          "answer": "Ask the team. We tell you which documents are needed after the first conversation."
+        },
+        {
+          "question": "Can I get financing if the subsidy is already with a bank?",
+          "answer": "Tell us from the start. The same amount cannot guarantee two loans."
+        }
+      ],
+      "seo": {
+        "title": "Financing against APIA subsidies in Romania",
+        "description": "How APIA subsidies work as a guarantee at Agrinvest Credit IFN and how this differs from the certificate loan. When it pays and what the risks are."
+      }
+    }
+  }
+}

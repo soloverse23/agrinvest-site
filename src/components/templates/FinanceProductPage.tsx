@@ -183,17 +183,22 @@ export async function FinanceProductPage({
           )}
           <Part title={t.repayment}>
             <Prose data={product.repayment} ctx={ctx} />
-            <RepaymentCalendar
-              caption={t.calendar.title}
-              heads={[t.calendar.season, t.calendar.crops, t.calendar.when]}
-              rows={calendarRows(locale)}
-            />
+            {product.harvestCalendar !== false && (
+              <RepaymentCalendar
+                caption={t.calendar.title}
+                heads={[t.calendar.season, t.calendar.crops, t.calendar.when]}
+                rows={calendarRows(locale)}
+              />
+            )}
           </Part>
           <WorkedExample
             kicker={t.example}
             title={example.title}
             note={t.exampleNote}
-            rows={(example.rows ?? []).map((r) => ({ label: r.label, value: r.value }))}
+            rows={(example.rows ?? []).map((r) => ({
+              label: r.label,
+              value: <FactText text={r.value} figures={figures} locale={locale} />,
+            }))}
           >
             <Prose data={example.scenario} ctx={ctx} />
           </WorkedExample>

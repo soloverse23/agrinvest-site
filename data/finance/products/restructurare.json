@@ -1,0 +1,202 @@
+{
+  "key": "restructurare",
+  "order": 35,
+  "harvestCalendar": true,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "insolventa-sau-restructurare",
+    "cum-analizeaza-finantatorul-ferma",
+    "fonduri-garantare"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Restructurarea datoriilor unei ferme",
+      "slug": "restructurare",
+      "answer": "Dacă ferma are datorii greu de plătit, dar încă poate merge mai departe, căutăm împreună o soluție: rate mai mici pe o perioadă mai lungă și un plan realist. Cu cât vorbești mai devreme, cu atât sunt mai multe variante.",
+      "fits": "Este pentru fermele sănătoase ca activitate, care au acumulat datorii după ani grei: furnizori, bănci, leasing. Problema lor este că plățile vin prea repede față de încasări, nu că ferma nu mai poate produce.",
+      "notFor": "Nu putem repara o fermă care pierde bani în fiecare an fără să schimbe ceva. Un credit nou nu rezolvă o activitate care nu se plătește.\n\nDacă firma este deja în insolvență sau a mutat bunuri pe alte societăți, discuția e alta. Citește [ghidul despre insolvență și restructurare](/finantare/ghiduri/insolventa-sau-restructurare).",
+      "finances": "Soluția se construiește pentru fiecare fermă. Poate include o finanțare pe termen mai lung, care reduce rata anuală, și un plan al activității: ce cultivi, ce vinzi, ce costuri tai. Nu există o formulă standard.",
+      "repayment": "Ideea de bază este simplă: aceeași datorie, plătită într-o perioadă mai lungă, apasă mai puțin pe fermă în fiecare an. În schimb, plătești dobândă pentru mai mult timp. Ratele se pun după recolte, ca să poată fi plătite.",
+      "example": {
+        "title": "Datorii de 900.000 de lei",
+        "scenario": "O fermă are de plătit 900.000 de lei în doi ani, iar încasările nu ajung. Pe șase ani, plățile de capital scad la o treime. Cifrele sunt inventate pentru exemplu.",
+        "rows": [
+          {
+            "label": "Datorii",
+            "value": "900.000 lei"
+          },
+          {
+            "label": "Capital pe an, în 2 ani",
+            "value": "450.000 lei"
+          },
+          {
+            "label": "Capital pe an, în 6 ani",
+            "value": "150.000 lei"
+          }
+        ]
+      },
+      "risks": "Un termen mai lung înseamnă mai multă dobândă în total, iar garanțiile rămân blocate mai mult timp. Un plan funcționează doar dacă toți creditorii sunt la masă și dacă spui tot ce datorezi. Nu semna doar ca să câștigi timp: un plan care nu poate fi ținut înrăutățește lucrurile.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Terenul sau clădirile pot garanta noua structură."
+        },
+        {
+          "kind": "machinery",
+          "note": "Utilajele pot rămâne în garanție."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm situația",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Când trebuie să vă contactez?",
+          "answer": "Înainte de scadență și înainte de orice procedură. După ce începe executarea, variantele sunt mai puține."
+        },
+        {
+          "question": "Îmi plătiți datoriile la alți creditori?",
+          "answer": "Depinde de analiză. Spune-ne toate datoriile și vedem împreună ce se poate."
+        },
+        {
+          "question": "Dacă sunt în insolvență mai pot lua credit?",
+          "answer": "Discută cu administratorul judiciar. Condițiile sunt altele."
+        },
+        {
+          "question": "Este obligatoriu să fiu client Agrinvest?",
+          "answer": "Întreabă echipa și spune-ne situația ta."
+        }
+      ],
+      "seo": {
+        "title": "Restructurare datorii fermă: cum începi",
+        "description": "Ce poți face când ferma are datorii greu de plătit: rate mai mici pe termen mai lung, un plan realist și când să vorbești cu creditorii."
+      }
+    },
+    "en": {
+      "title": "Restructuring a farm's debts",
+      "slug": "restructuring",
+      "answer": "If the farm has debts that are hard to pay but can still carry on, we look for a solution together: lower instalments over a longer time and a realistic plan. The earlier you talk, the more options there are.",
+      "fits": "It is for farms that are sound as businesses but have built up debts after hard years: suppliers, banks, leasing. Their problem is that payments come too fast for their income, not that the farm can no longer produce.",
+      "notFor": "We cannot fix a farm that loses money every year without changing something. A new loan does not solve an activity that does not pay.\n\nIf the company is already insolvent or has moved assets to other companies, it is a different conversation. Read the [guide to insolvency and restructuring](/en/financing/guides/insolvency-or-restructuring).",
+      "finances": "The solution is built for each farm. It can include longer-term financing that lowers the yearly instalment, and a plan for the work: what you grow, what you sell, what costs you cut. There is no standard formula.",
+      "repayment": "The basic idea is simple: the same debt, paid over a longer time, presses less on the farm each year. In return, you pay interest for longer. Instalments follow the harvests, so that they can be paid.",
+      "example": {
+        "title": "Debts of 900,000 lei",
+        "scenario": "A farm has 900,000 lei to pay within two years, and income does not cover it. Over six years, principal payments fall to a third. The numbers are invented for the example.",
+        "rows": [
+          {
+            "label": "Debts",
+            "value": "900,000 lei"
+          },
+          {
+            "label": "Principal per year, over 2 years",
+            "value": "450,000 lei"
+          },
+          {
+            "label": "Principal per year, over 6 years",
+            "value": "150,000 lei"
+          }
+        ]
+      },
+      "risks": "A longer term means more interest in total, and guarantees stay tied up for longer. A plan works only if all creditors are at the table and you say everything you owe. Do not sign just to buy time: a plan that cannot be kept makes things worse.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Land or buildings can guarantee the new structure."
+        },
+        {
+          "kind": "machinery",
+          "note": "Machinery can stay pledged."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at your position",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "When should I contact you?",
+          "answer": "Before the due date and before any procedure. Once enforcement starts, there are fewer options."
+        },
+        {
+          "question": "Do you pay my debts to other creditors?",
+          "answer": "It depends on the analysis. Tell us all your debts and we will see together what can be done."
+        },
+        {
+          "question": "Can I get a loan if I am insolvent?",
+          "answer": "Talk to the judicial administrator. The conditions are different."
+        },
+        {
+          "question": "Must I be an Agrinvest client?",
+          "answer": "Ask the team and tell us your position."
+        }
+      ],
+      "seo": {
+        "title": "Restructuring farm debts: where to start",
+        "description": "What you can do when a farm has debts that are hard to pay: lower instalments over a longer term, a realistic plan and when to talk to creditors."
+      }
+    }
+  }
+}

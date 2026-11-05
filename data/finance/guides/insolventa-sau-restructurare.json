@@ -2,7 +2,9 @@
   "key": "insolventa-sau-restructurare",
   "section": "finantare",
   "author": "Agrinvest Credit IFN",
-  "relatedProducts": [],
+  "relatedProducts": [
+    "restructurare"
+  ],
   "relatedGuides": [
     "cum-analizeaza-finantatorul-ferma",
     "fonduri-garantare"

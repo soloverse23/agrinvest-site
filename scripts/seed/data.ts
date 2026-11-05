@@ -249,6 +249,15 @@ export const figures: FigureSeed[] = [
     },
     source: 'agrointel 11.03.2025',
   },
+  {
+    key: 'F14',
+    label: { ro: 'Plata cu produse agricole', en: 'Payment in farm produce' },
+    value: {
+      ro: 'o parte din achizițiile de cereale vin de la fermieri care au primit sprijin pentru înființarea culturilor și își achită datoria cu produse agricole, la recoltare',
+      en: 'part of the grain bought comes from farmers who received support to establish their crops and settle the debt in farm produce at harvest',
+    },
+    source: 'agrinvest.ro/flota-proprie/',
+  },
 ]
 
 /** Counties named for the collection points (C4). Centroid = county seat, approximate. */

@@ -57,6 +57,8 @@ Avem deja de la conducere: răspuns în 24 de ore de la dosarul complet, durată
 
 **3.6 Ce finanțați exact?** Finanțați utilaje second-hand sau cumpărate din străinătate, uscătoare și cântare, animale de reproducție? Pe site nu le-am promis.
 
+**3.7 Finanțarea pe subvenții APIA.** În 2022 s-a spus „până la 200%, potrivit adeverinței APIA”, iar o postare din 2023 spune că finanțarea nu depinde de adeverințe. Care este valabil acum? Se mai oferă?
+
 **3.5 Reducerea de marjă.** Cum funcționează, pe un exemplu? Când se aplică, se calculează anual, iar „10%” este din marjă sau puncte procentuale?
 
 ## 4. Ce se poate publica

@@ -50,6 +50,7 @@ export const productFile = z.strictObject({
   key,
   parent: key.optional(),
   order: z.number().int().default(100),
+  harvestCalendar: z.boolean().default(true),
   borrowers: z.array(z.enum(borrowerKinds)).default([]),
   /** The name of a person in the admin. */
   advisor: text.optional(),

@@ -2,7 +2,10 @@
   "key": "fonduri-garantare",
   "section": "finantare",
   "author": "Agrinvest Credit IFN",
-  "relatedProducts": [],
+  "relatedProducts": [
+    "credit-investitii",
+    "restructurare"
+  ],
   "relatedGuides": [
     "credit-adeverinta-apia",
     "plata-subventii-apia"

@@ -141,7 +141,11 @@ function productDocView(doc: Obj, names: Names): Views {
   return {
     'text.ro': text('ro'),
     'text.en': text('en'),
-    data: { order: doc.order, borrowers: [...((doc.borrowers ?? []) as string[])].sort() },
+    data: {
+      order: doc.order,
+      harvestCalendar: doc.harvestCalendar !== false,
+      borrowers: [...((doc.borrowers ?? []) as string[])].sort(),
+    },
     links: {
       parent: names.product(doc.parent),
       advisor: names.person(doc.advisor),
@@ -168,7 +172,11 @@ function productFileView(file: ProductFile): Views {
   return {
     'text.ro': text('ro'),
     'text.en': text('en'),
-    data: { order: file.order, borrowers: [...file.borrowers].sort() },
+    data: {
+      order: file.order,
+      harvestCalendar: file.harvestCalendar,
+      borrowers: [...file.borrowers].sort(),
+    },
     links: {
       parent: file.parent,
       advisor: file.advisor,
@@ -522,7 +530,11 @@ export async function applyFinance(
           file,
           wanted: withLinks ? wanted : withoutLinks(wanted),
           textData: (l) => productTextData(file, l),
-          data: { order: file.order, borrowers: file.borrowers },
+          data: {
+            order: file.order,
+            harvestCalendar: file.harvestCalendar,
+            borrowers: file.borrowers,
+          },
           links: () => ({
             parent: file.parent ? idsOf([file.parent], ids.products, 'product')[0] : null,
             advisor: file.advisor ? idsOf([file.advisor], ids.people, 'person')[0] : null,

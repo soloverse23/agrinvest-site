@@ -1,0 +1,201 @@
+{
+  "key": "credit-contracte-cereale",
+  "order": 30,
+  "harvestCalendar": true,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie",
+    "finantare-stocuri"
+  ],
+  "relatedGuides": [
+    "cand-vinzi-recolta"
+  ],
+  "sources": [
+    {
+      "title": "Financial Intelligence: ING și Agrinvest Credit IFN, 27.01.2022",
+      "url": "https://financialintelligence.ro/ing-bank-romania-a-acordat-o-noua-finantare-de-10-milioane-lei-pentru-agrinvest-credit-ifn-pentru-a-sustine-fermierii-romani/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit garantat cu contract de vânzare a cerealelor",
+      "slug": "credit-contracte-cereale",
+      "answer": "Dacă ai deja un contract de vânzare pentru recolta viitoare, el poate garanta un credit. Finanțarea este de {{F10}}, iar creditul se plătește din banii pe care îi încasezi la livrare.",
+      "fits": "Se potrivește fermierilor care și-au vândut o parte din recoltă pe contract și au nevoie de bani înainte de livrare, de exemplu pentru ultimele lucrări sau pentru recoltat. Contractul arată de unde vin banii, și asta poate ajuta când nu ai alte garanții libere.",
+      "notFor": "Nu se potrivește dacă nu ai un contract semnat cu un cumpărător serios. O intenție de vânzare nu ajunge.\n\nNu este bine nici dacă ai vândut pe contract mai mult decât poți livra. Atunci riscul se dublează: ai o obligație de livrare și un credit de plătit din ea.",
+      "finances": "Banii pot merge către orice nevoie curentă a fermei: inputuri, motorină, lucrări. Contează contractul: cultura, cantitatea, prețul, data livrării și cumpărătorul.",
+      "repayment": "Creditul se întoarce când livrezi și încasezi. De aceea, data ratei se pune după data de plată din contract. Dacă ai mai multe contracte, pe culturi diferite, plata se poate împărți.",
+      "example": {
+        "title": "Un contract pentru 500 t de grâu",
+        "scenario": "O fermă are un contract pentru 500 t de grâu la 1.000 de lei tona, cu livrare în iulie. Valoarea contractului este de 500.000 de lei. Calculul folosește limita anunțată: {{F10}}.",
+        "rows": [
+          {
+            "label": "Valoarea contractului",
+            "value": "500.000 lei"
+          },
+          {
+            "label": "Credit, la limita anunțată",
+            "value": "175.000 lei"
+          },
+          {
+            "label": "Plata",
+            "value": "după încasarea contractului"
+          }
+        ]
+      },
+      "risks": "Dacă producția iese mai mică, s-ar putea să nu poți livra toată cantitatea. Atunci primești mai puțini bani, iar contractul poate avea și penalități. Citește ce spune contractul despre lipsuri și calitate, și nu angaja mai mult decât poți livra într-un an slab. Vezi și [când vinzi recolta](/finantare/ghiduri/cand-vinzi-recolta).",
+      "guarantees": [
+        {
+          "kind": "grain-contracts",
+          "note": "Contractul de vânzare susține creditul."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "crops",
+          "note": "Cultura din care livrezi poate susține creditul."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm situația",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Cât pot primi pe un contract?",
+          "answer": "Limita anunțată: {{F10}}. Suma exactă depinde de analiză."
+        },
+        {
+          "question": "Contractul trebuie să fie cu Agrinvest?",
+          "answer": "Întreabă echipa. Contează cine este cumpărătorul și ce prevede contractul."
+        },
+        {
+          "question": "Ce se întâmplă dacă nu pot livra?",
+          "answer": "Vorbește cu noi și cu cumpărătorul din timp. Creditul rămâne de plătit, iar contractul poate avea penalități."
+        },
+        {
+          "question": "Pot folosi mai multe contracte?",
+          "answer": "Spune-ne ce contracte ai și vedem împreună."
+        }
+      ],
+      "seo": {
+        "title": "Credit pe contract de vânzare cereale",
+        "description": "Credit garantat cu un contract de vânzare a cerealelor, plătit din banii încasați la livrare. Când se potrivește și ce riscuri are pentru fermieri."
+      }
+    },
+    "en": {
+      "title": "Loan backed by a grain sale contract",
+      "slug": "grain-contract-credit",
+      "answer": "If you already hold a sale contract for the coming harvest, it can back a loan. Financing is {{F10}}, and the loan is repaid from the money you receive on delivery.",
+      "fits": "It suits farmers who have sold part of the crop on contract and need money before delivery, for example for the last field work or for harvesting. The contract shows where the money comes from, which can help when you have no other free collateral.",
+      "notFor": "It does not fit if you have no signed contract with a serious buyer. An intention to sell is not enough.\n\nNor is it good if you have sold more on contract than you can deliver. Then the risk doubles: you owe a delivery and a loan that depends on it.",
+      "finances": "The money can go to any current need of the farm: inputs, diesel, field work. What matters is the contract: the crop, quantity, price, delivery date and buyer.",
+      "repayment": "The loan comes back when you deliver and get paid. So the instalment date follows the payment date in the contract. If you have several contracts on different crops, the payment can be split.",
+      "example": {
+        "title": "A contract for 500 t of wheat",
+        "scenario": "A farm has a contract for 500 t of wheat at 1,000 lei a tonne, for delivery in July. The contract is worth 500,000 lei. The calculation uses the announced limit: {{F10}}.",
+        "rows": [
+          {
+            "label": "Contract value",
+            "value": "500,000 lei"
+          },
+          {
+            "label": "Loan, at the announced limit",
+            "value": "175,000 lei"
+          },
+          {
+            "label": "Repayment",
+            "value": "after the contract is paid"
+          }
+        ]
+      },
+      "risks": "If the crop comes in smaller, you may not be able to deliver the full quantity. You then receive less money, and the contract may carry penalties too. Read what the contract says about shortfalls and quality, and do not commit more than you can deliver in a weak year. See also [when to sell your harvest](/en/financing/guides/when-to-sell-the-harvest).",
+      "guarantees": [
+        {
+          "kind": "grain-contracts",
+          "note": "The sale contract supports the loan."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "crops",
+          "note": "The crop you deliver from can support the loan."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at your position",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "How much can I get on a contract?",
+          "answer": "The announced limit: {{F10}}. The exact amount depends on the analysis."
+        },
+        {
+          "question": "Must the contract be with Agrinvest?",
+          "answer": "Ask the team. Who the buyer is and what the contract says both matter."
+        },
+        {
+          "question": "What happens if I cannot deliver?",
+          "answer": "Talk to us and the buyer early. The loan still has to be paid, and the contract may carry penalties."
+        },
+        {
+          "question": "Can I use several contracts?",
+          "answer": "Tell us which contracts you hold and we will look at them together."
+        }
+      ],
+      "seo": {
+        "title": "Loan backed by a grain sale contract",
+        "description": "A loan backed by a grain sale contract, repaid from the money received on delivery. When it fits and what risks it carries for farmers."
+      }
+    }
+  }
+}

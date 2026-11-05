@@ -102,6 +102,13 @@ export const FinanceProducts: CollectionConfig = {
             section('finances', 'Ce finanțează', 'What it finances'),
             section('repayment', 'Rambursarea', 'Repayment'),
             {
+              name: 'harvestCalendar',
+              type: 'checkbox',
+              defaultValue: true,
+              label: label('Arată calendarul ratelor', 'Show the instalment calendar'),
+              admin: { description: 'Off where repayment does not follow the harvests.' },
+            },
+            {
               name: 'example',
               type: 'group',
               label: label('Exemplu', 'Worked example'),

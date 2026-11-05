@@ -2,7 +2,7 @@
 
 ## Finance (Agrinvest Credit IFN)
 
-Status: **4.1, 4.2, the owner's corrections and 4.3 Batches 1 and 2 are committed on `phase-4/finance`. Batch 3 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
+Status: **4.1, 4.2, the owner's corrections and all of 4.3 are merged to `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
 
 ## Context
 
@@ -232,7 +232,11 @@ Each page is written in Romanian and English together, with correct ș and ț. T
 
 - **Batch 2 written (RO and EN):** the product template, routes for one and two levels, the `financeProducts` hub block, hub text, `credit-productie`, `credit-investitii` and its 5 pages, `despre-ifn` and a 20-question FAQ.
 
-**Not built yet:** Batch 3 (`credit-contracte-cereale`, `finantare-stocuri`, `subventii-apia`, `inputuri-plata-la-recolta`, `industrie-alimentara`, `restructurare`). Pages link to the lead form for now: the simulator and application come in 4.4.
+- **Batch 3 written (RO and EN):** `credit-contracte-cereale`, `finantare-stocuri`, `subventii-apia`, `inputuri-plata-la-recolta`, `industrie-alimentara`, `restructurare`. `harvestCalendar` turns the calendar off where repayment does not follow harvests, and worked examples can carry marked facts.
+- **`inputuri-plata-la-recolta`** names no product. It states what is sourced: a production loan, and the old site's statement that some farmers settle debts in farm produce (`F14`). It says which company does what, and that the terms come from the team.
+- **`subventii-apia`** keeps Agrinvest's own financing apart from the certificate scheme and says nothing on participation. The 2022 and 2023 statements on whether it depends on the certificate disagree, so the page states neither. Both questions are on the IFN form.
+
+**Not built yet:** pages link to the lead form for now: the simulator and application come in 4.4.
 
 **Deviations:** `despre-ifn` and the FAQ are Guides with section `pagina-finantare`, served by fixed routes, so they reuse the apply step. The FAQ has 20 questions, not 40: the rest would have repeated the product pages. Claims with no source (second-hand machinery, dryers, breeding animals) were taken out and added to the IFN form.
 

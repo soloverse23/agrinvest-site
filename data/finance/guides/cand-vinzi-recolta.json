@@ -3,7 +3,9 @@
   "section": "finantare",
   "author": "Agrinvest Credit IFN",
   "relatedProducts": [
-    "depozitare"
+    "depozitare",
+    "finantare-stocuri",
+    "credit-contracte-cereale"
   ],
   "relatedGuides": [
     "plata-subventii-apia",

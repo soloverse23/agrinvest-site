@@ -5,6 +5,7 @@ import * as migration_20261104_184009_enrichment_ledger from './20261104_184009_
 import * as migration_20261104_195035_shop_orders from './20261104_195035_shop_orders';
 import * as migration_20261105_093331_finance_model from './20261105_093331_finance_model';
 import * as migration_20261105_102608_finance_pages from './20261105_102608_finance_pages';
+import * as migration_20261105_104230_finance_calendar from './20261105_104230_finance_calendar';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261105_102608_finance_pages.up,
     down: migration_20261105_102608_finance_pages.down,
-    name: '20261105_102608_finance_pages'
+    name: '20261105_102608_finance_pages',
+  },
+  {
+    up: migration_20261105_104230_finance_calendar.up,
+    down: migration_20261105_104230_finance_calendar.down,
+    name: '20261105_104230_finance_calendar'
   },
 ];

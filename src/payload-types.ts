@@ -1504,6 +1504,10 @@ export interface FinanceProduct {
     [k: string]: unknown;
   };
   /**
+   * Off where repayment does not follow the harvests.
+   */
+  harvestCalendar?: boolean | null;
+  /**
    * Principal only, round numbers, always labelled as an example.
    */
   example: {
@@ -2820,6 +2824,7 @@ export interface FinanceProductsSelect<T extends boolean = true> {
   notFor?: T;
   finances?: T;
   repayment?: T;
+  harvestCalendar?: T;
   example?:
     | T
     | {

@@ -1,0 +1,192 @@
+{
+  "key": "industrie-alimentara",
+  "order": 34,
+  "harvestCalendar": false,
+  "borrowers": [
+    "srl",
+    "sa"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "costul-real-al-creditului",
+    "cum-analizeaza-finantatorul-ferma"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: Agrinvest Credit IFN își extinde portofoliul, 2025",
+      "url": "https://agrointel.ro/320343/agrinvest-credit-ifn-sa-isi-extinde-portofoliul-produselor-de-creditare",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru industria alimentară",
+      "slug": "industrie-alimentara",
+      "answer": "Finanțăm și producători agroalimentari, {{F12}}. Creditul susține activitatea curentă și investițiile, iar graficul se stabilește după încasările firmei.",
+      "fits": "Este pentru firmele care transformă produse agricole: procesatori de carne, procesatori de lapte, brutării și patiserii, producători de nutrețuri. Se potrivește și fermierilor care vor să adauge o verigă de procesare.",
+      "notFor": "Un proiect de procesare fără clienți nu devine bun prin finanțare. Dacă nu știi cui vinzi, începe de acolo.\n\nAtenție și la autorizații: un credit nu rezolvă cerințele sanitare și de mediu, care trebuie clarificate înainte de investiție.",
+      "finances": "- capital de lucru: materie primă, ambalaje, salarii\n- investiții: echipamente, linii de producție, spații\n\nSpune-ne ce produci și ce vrei să finanțezi. Fiecare sector are alt ritm al banilor.",
+      "repayment": "O brutărie încasează zilnic, iar un fermier de două ori pe an. De aceea, nu folosim aici calendarul recoltelor. Graficul se stabilește după încasările reale ale firmei.",
+      "example": {
+        "title": "O linie de panificație",
+        "scenario": "O brutărie cumpără o linie nouă de 600.000 de lei și rambursează în 5 ani. Durata și suma sunt inventate pentru exemplu.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "600.000 lei"
+          },
+          {
+            "label": "Durată",
+            "value": "5 ani"
+          },
+          {
+            "label": "Capital pe an",
+            "value": "120.000 lei"
+          }
+        ]
+      },
+      "risks": "Costul materiei prime și al energiei poate urca mai repede decât prețul de vânzare. Un client mare care întârzie plata poate bloca firma. Ține cont de termenele de încasare și nu te baza pe un singur cumpărător.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Clădirile sau terenul pot garanta creditul."
+        },
+        {
+          "kind": "machinery",
+          "note": "Echipamentele pot rămâne în garanție."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm situația",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Ce sectoare finanțați?",
+          "answer": "Finanțăm {{F12}}. Dacă ești în alt sector din lanțul agroalimentar, întreabă echipa."
+        },
+        {
+          "question": "Sunt fermier și vreau să procesez. Se poate?",
+          "answer": "Da, spune-ne proiectul. Contează clienții, autorizațiile și cât poate plăti firma."
+        },
+        {
+          "question": "Ratele sunt legate de recoltă?",
+          "answer": "Nu aici. Graficul urmează încasările firmei."
+        },
+        {
+          "question": "În ce monedă este creditul?",
+          "answer": "În lei."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru industria alimentară și procesare",
+        "description": "Finanțare pentru producători de carne, lactate, panificație și nutrețuri, cu grafic după încasările firmei. Capital de lucru și investiții."
+      }
+    },
+    "en": {
+      "title": "Loan for food producers",
+      "slug": "food-industry",
+      "answer": "We also finance food producers, {{F12}}. The loan supports current activity and investment, and the schedule is set around the company's income.",
+      "fits": "It is for companies that process farm produce: meat processors, dairies, bakeries and pastry makers, feed producers. It also suits farmers who want to add a processing step.",
+      "notFor": "A processing project with no customers does not become good through finance. If you do not know who you sell to, start there.\n\nTake care with permits too: a loan does not solve health and environmental requirements, which must be settled before you invest.",
+      "finances": "- working capital: raw materials, packaging, wages\n- investment: equipment, production lines, premises\n\nTell us what you make and what you want to finance. Each sector has its own rhythm of money.",
+      "repayment": "A bakery takes money every day, a farmer twice a year. That is why we do not use the harvest calendar here. The schedule is set around the company's real income.",
+      "example": {
+        "title": "A bakery line",
+        "scenario": "A bakery buys a new line for 600,000 lei and repays over 5 years. The term and amount are invented for the example.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "600,000 lei"
+          },
+          {
+            "label": "Term",
+            "value": "5 years"
+          },
+          {
+            "label": "Principal per year",
+            "value": "120,000 lei"
+          }
+        ]
+      },
+      "risks": "The cost of raw materials and energy can rise faster than selling prices. A large customer who pays late can block the company. Allow for payment terms and do not rely on a single buyer.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Buildings or land can guarantee the loan."
+        },
+        {
+          "kind": "machinery",
+          "note": "The equipment can stay pledged."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at your position",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Which sectors do you finance?",
+          "answer": "We finance food producers {{F12}}. If you are elsewhere in the food chain, ask the team."
+        },
+        {
+          "question": "I am a farmer and want to process. Is that possible?",
+          "answer": "Yes, tell us the project. Customers, permits and what the company can pay all matter."
+        },
+        {
+          "question": "Are instalments tied to the harvest?",
+          "answer": "Not here. The schedule follows the company's income."
+        },
+        {
+          "question": "In which currency is the loan?",
+          "answer": "In lei."
+        }
+      ],
+      "seo": {
+        "title": "Loan for food producers and processors in Romania",
+        "description": "Financing for meat, dairy, bakery and feed producers, with a schedule set around company income. Working capital and investment."
+      }
+    }
+  }
+}

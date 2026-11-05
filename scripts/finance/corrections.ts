@@ -11,6 +11,16 @@ import type { Payload } from 'payload'
 const context = { skipChildren: true }
 type Obj = Record<string, unknown>
 
+/**
+ * The path is the page's URL. On sites seeded before the slug was fixed, the English slug says
+ * `farm-financing` while the path says `/financing`, and any save rebuilds the path from the
+ * slug. So a script that saves a page sends the slug its path already uses.
+ */
+export const keepUrl = (path: unknown, slug: unknown) => ({
+  slug: (typeof path === 'string' && path.split('/').filter(Boolean).pop()) || slug,
+  generateSlug: false,
+})
+
 const topic = /golden[- ]relationship/i
 const inTopic = (value: unknown) => topic.test(JSON.stringify(value) ?? '')
 
@@ -58,9 +68,12 @@ export function correct(value: unknown, field?: string): unknown {
     // A card with its own title stands without the link. A menu item is its link, so it keeps
     // it here, and the list above drops the whole item.
     const hasTitle = 'title' in value
+    // An empty link is written out: Payload cannot save a null group, and a missing key keeps
+    // the old value, because rows are merged by id.
     const entries = Object.entries(value).map(([k, v]) => {
       const fixed = correct(v, k)
-      return [k, k === 'link' && hasTitle && inTopic(fixed) ? null : fixed] as const
+      const drop = k === 'link' && hasTitle && inTopic(fixed)
+      return [k, drop ? { label: null, href: null } : fixed] as const
     })
     return Object.fromEntries(entries)
   }
@@ -86,7 +99,7 @@ async function correctPages(payload: Payload, log: (s: string) => void) {
         collection: 'pages',
         id: doc.id,
         locale,
-        data: after as never,
+        data: { ...after, ...keepUrl(doc.path, doc.slug) } as never,
         draft: doc._status === 'draft',
         context,
       })

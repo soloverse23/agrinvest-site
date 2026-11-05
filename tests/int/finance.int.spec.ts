@@ -7,7 +7,7 @@ import { getPayload, type Payload } from 'payload'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 import { applyFinance, richView } from '../../scripts/finance/apply'
-import { correct } from '../../scripts/finance/corrections'
+import { correct, keepUrl } from '../../scripts/finance/corrections'
 import { applyFigures } from '../../scripts/finance/figures'
 import { productFile, type ProductFile } from '../../scripts/finance/schema'
 import { contentFor } from '../../scripts/seed/content'
@@ -281,7 +281,7 @@ describe('finance', () => {
       payload
         .find({
           collection: 'pages',
-          where: { slug: { equals: locale === 'ro' ? 'finantare' : 'financing' } },
+          where: { path: { equals: locale === 'ro' ? '/finantare' : '/financing' } },
           locale,
           depth: 0,
           draft: true,
@@ -471,12 +471,77 @@ describe('finance', () => {
             blockType: 'serviceGrid',
             items: [
               card('Logistică', 'Transport.', '/logistica'),
-              card('Fermieri', 'Parteneriate pe termen lung.'),
+              {
+                title: 'Fermieri',
+                body: 'Parteneriate pe termen lung.',
+                link: { label: null, href: null },
+              },
             ],
           },
           { blockType: 'figureTable', keys: ['C3', 'C9.email'] },
         ],
       })
+    })
+
+    it('saves a real page after taking a link out of a card', async () => {
+      const page = await payload.create({
+        collection: 'pages',
+        locale: 'ro',
+        data: {
+          title: 'ZZ card page',
+          slug: 'zz-fin-card',
+          summary: 'Rezumat.',
+          languages: ['ro', 'en'],
+          layout: [
+            {
+              blockType: 'serviceGrid',
+              heading: 'Parteneri',
+              items: [
+                {
+                  title: 'Fermieri',
+                  body: 'Parteneriate pe termen lung, inclusiv prin programul Golden Relationship.',
+                  link: { label: 'Golden Relationship', href: '/golden-relationship' },
+                },
+              ],
+            },
+          ],
+          _status: 'published',
+        } as never,
+        context: { skipChildren: true },
+      })
+      await applyFigures(payload, silent)
+      const fresh = await payload.findByID({ collection: 'pages', id: page.id, locale: 'ro' })
+      expect(fresh.slug).toBe('zz-fin-card')
+      expect(JSON.stringify(fresh.layout)).toContain('Fermieri')
+      expect(JSON.stringify(fresh.layout)).not.toContain('olden')
+      await payload.delete({ collection: 'pages', id: page.id })
+    })
+
+    it('keeps the URL when the slug and the path disagree', async () => {
+      expect(keepUrl('/about/figures', 'agrinvest-in-figures').slug).toBe('figures')
+      expect(keepUrl('/', 'acasa').slug).toBe('acasa')
+      const page = await payload.create({
+        collection: 'pages',
+        locale: 'ro',
+        data: {
+          title: 'ZZ url',
+          slug: 'zz-fin-url',
+          summary: 'Capacitate în {{S1}} baze.',
+          languages: ['ro'],
+          _status: 'published',
+        } as never,
+        context: { skipChildren: true },
+      })
+      await payload.db.updateOne({
+        collection: 'pages',
+        id: page.id,
+        data: { slug: 'zz-fin-other' },
+        locale: 'ro',
+      } as never)
+      await applyFigures(payload, silent)
+      const fresh = await payload.findByID({ collection: 'pages', id: page.id, locale: 'ro' })
+      expect(fresh.path).toBe('/zz-fin-url')
+      await payload.delete({ collection: 'pages', id: page.id })
     })
 
     it('says silos and warehouses, not bases, with the count', () => {

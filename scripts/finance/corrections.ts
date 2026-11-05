@@ -61,7 +61,11 @@ export const rewriteText = (text: string) =>
 export function correct(value: unknown, field?: string): unknown {
   if (typeof value === 'string') return rewriteText(value)
   if (Array.isArray(value)) {
-    if (field === 'keys') return value.flatMap((v) => splitKeys[v as string] ?? [v])
+    if (field === 'keys') {
+      const keys = value.flatMap((v) => splitKeys[v as string] ?? [v])
+      // The company table gained the arable land row.
+      return keys.includes('C8') && !keys.includes('C10') ? [...keys, 'C10'] : keys
+    }
     return value.map((v) => correct(v)).filter((v) => !inTopic(v))
   }
   if (value && typeof value === 'object') {

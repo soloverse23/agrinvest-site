@@ -1,0 +1,200 @@
+{
+  "text": {
+    "ro": {
+      "title": "Finanțare agricolă",
+      "summary": "Agrinvest Credit IFN finanțează producția și investițiile fermierilor, cu rate după recoltă și răspuns rapid la cerere.",
+      "layout": [
+        {
+          "blockType": "richText",
+          "content": "Agrinvest Credit IFN este instituția financiară nebancară a grupului Agrinvest, înscrisă în Registrul Special al BNR. Finanțăm agricultura din {{F3}} și lucrăm mai ales cu fermieri mici și mijlocii, care au acces greu la creditul bancar clasic.\n\n## Ce ne face diferiți\n\nAgricultura nu încasează lunar, așa că un credit standard nu i se potrivește. La noi:\n\n- **ratele urmează recolta:** {{F5.instalments}};\n- **analiza pornește de la fermă**, nu doar de la bilanț: discutăm cu tine, fără un scor automat;\n- **răspunsul este rapid:** {{F4.reply}};\n- **creditul e legat de restul fermei:** același grup vinde inputuri, cumpără cereale, depozitează și transportă.\n\nFinanțăm persoane fizice autorizate, întreprinderi individuale și familiale, societăți comerciale și societăți agricole. Toate finanțările se acordă în lei."
+        },
+        {
+          "blockType": "financeProducts",
+          "kicker": "Produse",
+          "heading": "Ce finanțăm",
+          "lead": "Alege după ce ai nevoie. Fiecare pagină explică pentru cine e creditul, cum se rambursează și ce riscuri are."
+        },
+        {
+          "blockType": "financeBand",
+          "kicker": "Rambursare",
+          "heading": "Plătești când vinzi recolta",
+          "lead": "Ratele se stabilesc împreună cu tine, după momentul în care încasezi banii pe recoltă.",
+          "primary": {
+            "label": "Cere o ofertă",
+            "href": "/finantare#cerere"
+          },
+          "secondary": {
+            "label": "Vezi ghidurile",
+            "href": "/finantare/ghiduri"
+          },
+          "instalments": [
+            {
+              "when": "Rata 1 · după recolta de vară",
+              "label": "grâu, orz, rapiță"
+            },
+            {
+              "when": "Rata 2 · după recolta de toamnă",
+              "label": "porumb, floarea-soarelui"
+            }
+          ]
+        },
+        {
+          "blockType": "richText",
+          "content": "## Cum alegi\n\n| Ai nevoie de bani pentru | Începe cu |\n| --- | --- |\n| semințe, îngrășăminte, motorină, lucrări | [credit de producție](/finantare/credit-productie) |\n| un tractor, o combină sau alt utilaj | [credit pentru utilaje](/finantare/credit-investitii/utilaje) |\n| irigații | [credit pentru irigații](/finantare/credit-investitii/irigatii) |\n| siloz sau magazie | [credit pentru depozitare](/finantare/credit-investitii/depozitare) |\n| teren | [credit pentru teren agricol](/finantare/credit-investitii/teren-agricol) |\n| grajd sau dezvoltarea fermei | [credit pentru ferme](/finantare/credit-investitii/ferme) |\n\nNu ești sigur? Trimite-ne cererea și vedem împreună ce se potrivește. Pentru explicații pe larg, citește [ghidurile de finanțare](/finantare/ghiduri), de la [IFN sau bancă](/finantare/ghiduri/ifn-sau-banca) până la [costul real al creditului](/finantare/ghiduri/costul-real-al-creditului)."
+        },
+        {
+          "blockType": "figureTable",
+          "kicker": "Identificare",
+          "heading": "Datele Agrinvest Credit IFN",
+          "keys": [
+            "F1",
+            "F2.cui",
+            "F2.reg",
+            "F3",
+            "F4.reply",
+            "F5.term",
+            "F5.instalments",
+            "F6",
+            "F7.registered",
+            "F7.office",
+            "F8.email"
+          ]
+        },
+        {
+          "blockType": "leadForm",
+          "leadType": "finantare",
+          "extraFields": [
+            "company",
+            "county"
+          ],
+          "heading": "Cere o ofertă de finanțare",
+          "body": "Spune-ne ce vrei să finanțezi și suprafața lucrată. Te contactează echipa Agrinvest Credit IFN."
+        }
+      ],
+      "faq": [
+        {
+          "question": "În cât timp primesc răspuns la cerere?",
+          "answer": "Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "question": "Pe ce perioadă pot lua un credit?",
+          "answer": "Durata ajunge {{F5.term}}. Ai {{F5.instalments}}."
+        },
+        {
+          "question": "Ce garanții acceptați?",
+          "answer": "Bilete la ordin, culturi, utilaje agricole, subvenții APIA, contracte de vânzare a cerealelor sau ipoteci imobiliare."
+        },
+        {
+          "question": "În ce monedă se acordă creditele?",
+          "answer": "Toate finanțările se acordă în lei."
+        },
+        {
+          "question": "Cine poate cere un credit?",
+          "answer": "Persoane fizice autorizate, întreprinderi individuale și familiale, societăți comerciale și societăți agricole."
+        }
+      ],
+      "seo": {
+        "title": "Finanțare agricolă pentru fermieri | Agrinvest Credit IFN",
+        "description": "Credit agricol pentru producție și investiții, cu rate după recoltă și răspuns rapid: utilaje, irigații, depozitare, teren și ferme, de la Agrinvest Credit IFN."
+      }
+    },
+    "en": {
+      "title": "Farm financing",
+      "summary": "Agrinvest Credit IFN finances farmers' production and investments, with instalments after harvest and a quick reply to your request.",
+      "layout": [
+        {
+          "blockType": "richText",
+          "content": "Agrinvest Credit IFN is the non-bank financial institution of the Agrinvest group, listed in the National Bank of Romania Special Register. We have been financing farming since {{F3}} and work mainly with small and medium farmers who find bank credit hard to reach.\n\n## What makes us different\n\nFarming does not earn monthly, so a standard loan does not fit it. With us:\n\n- **instalments follow the harvest:** {{F5.instalments}};\n- **the analysis starts from the farm**, not just the balance sheet: we talk with you, with no automatic score;\n- **the reply is quick:** {{F4.reply}};\n- **the loan is tied to the rest of the farm:** the same group sells inputs, buys grain, stores and transports.\n\nWe finance authorised individuals, sole and family enterprises, companies and agricultural companies. All loans are in lei."
+        },
+        {
+          "blockType": "financeProducts",
+          "kicker": "Products",
+          "heading": "What we finance",
+          "lead": "Choose by what you need. Each page explains who the loan is for, how it is repaid and what risks it carries."
+        },
+        {
+          "blockType": "financeBand",
+          "kicker": "Repayment",
+          "heading": "Pay when you sell the harvest",
+          "lead": "Instalments are agreed with you, around the time you are paid for the harvest.",
+          "primary": {
+            "label": "Ask for an offer",
+            "href": "/en/financing#cerere"
+          },
+          "secondary": {
+            "label": "See the guides",
+            "href": "/en/financing/guides"
+          },
+          "instalments": [
+            {
+              "when": "Instalment 1 · after the summer harvest",
+              "label": "wheat, barley, rapeseed"
+            },
+            {
+              "when": "Instalment 2 · after the autumn harvest",
+              "label": "maize, sunflower"
+            }
+          ]
+        },
+        {
+          "blockType": "richText",
+          "content": "## How to choose\n\n| You need money for | Start with |\n| --- | --- |\n| seed, fertiliser, diesel, field work | [production loan](/en/financing/production-credit) |\n| a tractor, combine or other machine | [machinery loan](/en/financing/investment-credit/machinery) |\n| irrigation | [irrigation loan](/en/financing/investment-credit/irrigation) |\n| a silo or shed | [storage loan](/en/financing/investment-credit/storage) |\n| land | [farmland loan](/en/financing/investment-credit/farmland) |\n| a barn or growing the farm | [farm loan](/en/financing/investment-credit/farms) |\n\nNot sure? Send us your request and we will see together what fits. For full explanations, read the [financing guides](/en/financing/guides), from [IFN or bank](/en/financing/guides/ifn-or-bank) to the [true cost of credit](/en/financing/guides/true-cost-of-credit)."
+        },
+        {
+          "blockType": "figureTable",
+          "kicker": "Identification",
+          "heading": "Agrinvest Credit IFN details",
+          "keys": [
+            "F1",
+            "F2.cui",
+            "F2.reg",
+            "F3",
+            "F4.reply",
+            "F5.term",
+            "F5.instalments",
+            "F6",
+            "F7.registered",
+            "F7.office",
+            "F8.email"
+          ]
+        },
+        {
+          "blockType": "leadForm",
+          "leadType": "finantare",
+          "extraFields": [
+            "company",
+            "county"
+          ],
+          "heading": "Ask for a financing offer",
+          "body": "Tell us what you want to finance and the area you farm. The Agrinvest Credit IFN team will contact you."
+        }
+      ],
+      "faq": [
+        {
+          "question": "How quickly do I get a reply?",
+          "answer": "You get a reply {{F4.reply}}."
+        },
+        {
+          "question": "For how long can I borrow?",
+          "answer": "Loans run {{F5.term}}. You have {{F5.instalments}}."
+        },
+        {
+          "question": "Which guarantees do you accept?",
+          "answer": "Promissory notes, crops, farm machinery, APIA subsidies, grain sale contracts or real-estate mortgages."
+        },
+        {
+          "question": "In which currency are the loans?",
+          "answer": "All loans are in lei."
+        },
+        {
+          "question": "Who can apply?",
+          "answer": "Authorised individuals, sole and family enterprises, companies and agricultural companies."
+        }
+      ],
+      "seo": {
+        "title": "Farm financing in Romania | Agrinvest Credit IFN",
+        "description": "Farm loans for production and investment, with instalments after harvest and a quick reply: machinery, irrigation, storage, land and farms."
+      }
+    }
+  }
+}

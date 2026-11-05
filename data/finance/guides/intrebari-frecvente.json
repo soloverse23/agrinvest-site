@@ -1,0 +1,196 @@
+{
+  "key": "intrebari-frecvente",
+  "section": "pagina-finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [],
+  "relatedGuides": [],
+  "sources": [],
+  "text": {
+    "ro": {
+      "title": "Întrebări frecvente despre credit agricol",
+      "slug": "intrebari-frecvente",
+      "summary": "Răspunsuri scurte despre cum funcționează finanțarea la Agrinvest Credit IFN: cine poate cere un credit, cât durează, când plătești ratele și ce faci dacă apare o problemă.",
+      "body": "Nu găsești răspunsul? [Scrie-ne](/finantare#cerere) sau citește [ghidurile de finanțare](/finantare/ghiduri).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Cine poate cere un credit la Agrinvest Credit IFN?",
+          "answer": "Persoane fizice autorizate, întreprinderi individuale și familiale, societăți comerciale și societăți agricole."
+        },
+        {
+          "question": "Ce finanțați?",
+          "answer": "Producția agricolă și investițiile: utilaje, irigații, depozitare, teren și ferme."
+        },
+        {
+          "question": "În cât timp primesc răspuns?",
+          "answer": "Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "question": "Când primesc banii?",
+          "answer": "Banii ajung {{F4.money}}."
+        },
+        {
+          "question": "Pe ce perioadă pot lua un credit?",
+          "answer": "Durata ajunge {{F5.term}}."
+        },
+        {
+          "question": "Când plătesc ratele?",
+          "answer": "Ai {{F5.instalments}}."
+        },
+        {
+          "question": "Am rate lunare?",
+          "answer": "De regulă nu. Ratele sunt legate de recolte, ca să plătești după ce încasezi."
+        },
+        {
+          "question": "În ce monedă se acordă creditul?",
+          "answer": "În lei."
+        },
+        {
+          "question": "Cât este dobânda?",
+          "answer": "Costul depinde de analiza fermei și de garanții. Nu publicăm o dobândă fixă."
+        },
+        {
+          "question": "Pot plăti mai puțină dobândă dacă plătesc la timp?",
+          "answer": "La creditul de investiții există un mecanism de reducere: {{F9}}."
+        },
+        {
+          "question": "Ce garanții acceptați?",
+          "answer": "Bilete la ordin, culturi, utilaje agricole, subvenții APIA, contracte de achiziție cereale sau ipoteci imobiliare."
+        },
+        {
+          "question": "Ce documente trebuie să pregătesc?",
+          "answer": "Depinde de forma de organizare și de produs. Îți spunem exact după prima discuție."
+        },
+        {
+          "question": "Pot primi credit dacă banca m-a refuzat?",
+          "answer": "Fiecare fermă este analizată separat, deci merită să ne spui situația. Nu putem promite aprobarea."
+        },
+        {
+          "question": "Pot primi credit dacă am un an slab?",
+          "answer": "Da, se poate discuta. Contează motivul, datoriile și planul fermei."
+        },
+        {
+          "question": "Ce fac dacă nu pot plăti o rată?",
+          "answer": "Sună-ne înainte de scadență. Cu cât vorbim mai devreme, cu atât sunt mai multe variante."
+        },
+        {
+          "question": "Sunteți o bancă?",
+          "answer": "Nu. Suntem o instituție financiară nebancară, înscrisă în Registrul Special al BNR."
+        },
+        {
+          "question": "Unde vă găsesc?",
+          "answer": "Birou: {{F7.office}}. E-mail: {{F8.email}}."
+        },
+        {
+          "question": "Pot cere un credit pentru un proiect AFIR?",
+          "answer": "Un credit poate acoperi cofinanțarea și banii plătiți până la decontare. Spune-ne despre proiect."
+        },
+        {
+          "question": "Finanțați și industria alimentară?",
+          "answer": "Da, {{F12}}."
+        },
+        {
+          "question": "Cum îmi protejați datele?",
+          "answer": "Le folosim doar pentru cererea ta, conform politicii de confidențialitate. Contact: {{F8.dpo}}."
+        }
+      ],
+      "seo": {
+        "title": "Întrebări frecvente: credit agricol Agrinvest Credit IFN",
+        "description": "Răspunsuri despre creditele Agrinvest Credit IFN: cine poate aplica, cât durează, cum plătești ratele, garanții și ce faci dacă nu poți plăti."
+      }
+    },
+    "en": {
+      "title": "Frequently asked questions about farm loans",
+      "slug": "faq",
+      "summary": "Short answers on how financing works at Agrinvest Credit IFN: who can apply, how long it takes, when you pay instalments and what to do if a problem comes up.",
+      "body": "Cannot find your answer? [Write to us](/en/financing#cerere) or read the [financing guides](/en/financing/guides).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Who can apply to Agrinvest Credit IFN?",
+          "answer": "Authorised individuals, sole and family enterprises, companies and agricultural companies."
+        },
+        {
+          "question": "What do you finance?",
+          "answer": "Farm production and investment: machinery, irrigation, storage, land and farms."
+        },
+        {
+          "question": "How quickly do I get a reply?",
+          "answer": "You get a reply {{F4.reply}}."
+        },
+        {
+          "question": "When do I get the money?",
+          "answer": "The money arrives {{F4.money}}."
+        },
+        {
+          "question": "For how long can I borrow?",
+          "answer": "Loans run {{F5.term}}."
+        },
+        {
+          "question": "When do I pay instalments?",
+          "answer": "You have {{F5.instalments}}."
+        },
+        {
+          "question": "Do I have monthly instalments?",
+          "answer": "Usually not. Instalments are tied to harvests, so you pay after you are paid."
+        },
+        {
+          "question": "In which currency is the loan?",
+          "answer": "In lei."
+        },
+        {
+          "question": "What is the interest rate?",
+          "answer": "The cost depends on the farm analysis and the guarantees. We do not publish a fixed rate."
+        },
+        {
+          "question": "Can I pay less interest if I pay on time?",
+          "answer": "The investment loan has a reduction mechanism: {{F9}}."
+        },
+        {
+          "question": "Which guarantees do you accept?",
+          "answer": "Promissory notes, crops, farm machinery, APIA subsidies, grain purchase contracts or real-estate mortgages."
+        },
+        {
+          "question": "Which documents do I need?",
+          "answer": "It depends on your legal form and the product. We tell you exactly after the first conversation."
+        },
+        {
+          "question": "Can I get a loan if a bank refused me?",
+          "answer": "Each farm is analysed separately, so it is worth telling us your position. We cannot promise approval."
+        },
+        {
+          "question": "Can I get a loan after a weak year?",
+          "answer": "It can be discussed. The reason, the debts and the farm's plan all matter."
+        },
+        {
+          "question": "What do I do if I cannot pay an instalment?",
+          "answer": "Call us before the due date. The earlier we talk, the more options there are."
+        },
+        {
+          "question": "Are you a bank?",
+          "answer": "No. We are a non-bank financial institution, listed in the BNR Special Register."
+        },
+        {
+          "question": "Where can I find you?",
+          "answer": "Office: {{F7.office}}. Email: {{F8.email}}."
+        },
+        {
+          "question": "Can I get a loan for an AFIR project?",
+          "answer": "A loan can cover the cofinancing and the money paid until reimbursement. Tell us about the project."
+        },
+        {
+          "question": "Do you finance food producers?",
+          "answer": "Yes, {{F12}}."
+        },
+        {
+          "question": "How do you protect my data?",
+          "answer": "We use them only for your request, under our privacy policy. Contact: {{F8.dpo}}."
+        }
+      ],
+      "seo": {
+        "title": "FAQ: farm loans from Agrinvest Credit IFN",
+        "description": "Answers about Agrinvest Credit IFN loans: who can apply, how long it takes, how instalments work, guarantees and what to do if you cannot pay."
+      }
+    }
+  }
+}

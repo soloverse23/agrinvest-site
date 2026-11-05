@@ -1,0 +1,214 @@
+{
+  "key": "utilaje",
+  "order": 21,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "irigatii"
+  ],
+  "relatedGuides": [
+    "credit-sau-leasing-utilaje"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru utilaje agricole",
+      "slug": "utilaje",
+      "answer": "Finanțăm tractoare, combine și alte utilaje agricole, {{F5.term}}, cu rate legate de recoltă. Utilajul este al tău de la început și poate rămâne în garanție până la rambursare.",
+      "fits": "Este pentru fermele care au nevoie de un utilaj pe care îl vor folosi mulți ani și care vor rate după recoltă, nu lunare. Ajută mai ales când încasările fermei vin de două ori pe an, iar ratele lunare ar apăsa pe campanie.",
+      "notFor": "Dacă folosești utilajul câteva zile pe an, poate fi mai ieftin să plătești prestări de servicii. Calculează câte hectare lucrezi cu el și compară cu ce plătești azi.\n\nDacă ai încasări regulate și vrei un utilaj nou de la un dealer, compară și cu [leasingul](/finantare/ghiduri/credit-sau-leasing-utilaje).",
+      "finances": "- tractoare și combine\n- semănători, pluguri, cultivatoare și echipamente de erbicidat\n- remorci și alte utilaje pentru fermă\n\nPregătește oferta sau factura și informațiile despre utilaj. Dacă vrei un utilaj second-hand, spune-ne de la început.",
+      "repayment": "Cumpără cu gândul la calendarul de plată. Un utilaj luat chiar înainte de recoltă începe să producă imediat, iar prima rată poate veni după ce încasezi. Un utilaj cumpărat iarna stă până primăvara, dar poți prinde oferte mai bune.",
+      "example": {
+        "title": "O combină de 900.000 de lei",
+        "scenario": "O fermă de 600 ha înlocuiește o combină veche. Alege 6 ani, cu 2 rate pe an.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "900.000 lei"
+          },
+          {
+            "label": "Număr de rate",
+            "value": "12"
+          },
+          {
+            "label": "Rată de capital",
+            "value": "75.000 lei"
+          },
+          {
+            "label": "Capital pe hectar și an",
+            "value": "250 lei"
+          }
+        ]
+      },
+      "risks": "Un utilaj nou aduce și costuri noi: asigurare, service, piese. Pune-le în calcul înainte de rată. Întreabă și ce face ferma dacă utilajul se strică în campanie, iar la un utilaj second-hand verifică înainte de plată starea și actele.",
+      "guarantees": [
+        {
+          "kind": "machinery",
+          "note": "Utilajul cumpărat rămâne în garanție până la rambursare."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "crops",
+          "note": "Cultura poate susține creditul, în funcție de analiză."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Finanțați utilaje second-hand?",
+          "answer": "Discută cu echipa despre utilajul exact. Contează starea, vechimea și prețul lui."
+        },
+        {
+          "question": "Este mai bine credit sau leasing?",
+          "answer": "Depinde de ferma ta. La credit ești proprietar de la început, iar la leasing bunul rămâne al finanțatorului până la final. Compară costul total."
+        },
+        {
+          "question": "Pot cumpăra utilajul din străinătate?",
+          "answer": "Spune-ne de la cine cumperi și vedem ce documente sunt necesare."
+        },
+        {
+          "question": "Rămân cu utilajul dacă nu plătesc?",
+          "answer": "Utilajul pus în garanție poate fi folosit de finanțator pentru recuperarea datoriei. Vorbește cu noi din timp."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru utilaje agricole, rate după recoltă",
+        "description": "Credit pentru tractoare, combine și alte utilaje agricole, pe termen lung, cu rate legate de recolte. Comparație cu leasingul."
+      }
+    },
+    "en": {
+      "title": "Loan for farm machinery",
+      "slug": "machinery",
+      "answer": "We finance tractors, combines and other farm machinery, {{F5.term}}, with instalments tied to the harvest. The machine is yours from the start and can stay pledged until repayment.",
+      "fits": "It is for farms that need a machine they will use for many years and want instalments after harvest rather than monthly. It helps most when the farm is paid twice a year and monthly instalments would squeeze the season.",
+      "notFor": "If you use the machine only a few days a year, paying a contractor may be cheaper. Work out how many hectares you would cover and compare with what you pay today.\n\nIf you have regular income and want a new machine from a dealer, compare with [leasing](/en/financing/guides/credit-or-leasing-machinery) too.",
+      "finances": "- tractors and combines\n- seed drills, ploughs, cultivators and sprayers\n- trailers and other farm equipment\n\nHave the quote or invoice and the machine's details ready. If you want a second-hand machine, tell us at the start.",
+      "repayment": "Buy with the payment calendar in mind. A machine bought just before harvest starts earning at once, and the first instalment can come after you are paid. A machine bought in winter waits until spring, though you may find better offers.",
+      "example": {
+        "title": "A 900,000 lei combine",
+        "scenario": "A 600 ha farm replaces an old combine. It chooses 6 years, with 2 instalments a year.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "900,000 lei"
+          },
+          {
+            "label": "Number of instalments",
+            "value": "12"
+          },
+          {
+            "label": "Principal per instalment",
+            "value": "75,000 lei"
+          },
+          {
+            "label": "Principal per hectare and year",
+            "value": "250 lei"
+          }
+        ]
+      },
+      "risks": "A new machine brings new costs: insurance, servicing, parts. Count them before the instalment. Ask too what the farm does if the machine breaks down in the season, and with a second-hand machine check its condition and papers before you pay.",
+      "guarantees": [
+        {
+          "kind": "machinery",
+          "note": "The purchased machine stays pledged until repayment."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "crops",
+          "note": "The crop can support the loan, depending on the analysis."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Do you finance second-hand machinery?",
+          "answer": "Talk to the team about the exact machine. Its condition, age and price all matter."
+        },
+        {
+          "question": "Is a loan or a lease better?",
+          "answer": "It depends on your farm. With a loan you own it from the start; with a lease the asset stays the lender's until the end. Compare the total cost."
+        },
+        {
+          "question": "Can I buy the machine abroad?",
+          "answer": "Tell us who you are buying from and we will see which documents are needed."
+        },
+        {
+          "question": "Do I keep the machine if I do not pay?",
+          "answer": "A pledged machine can be used by the lender to recover the debt. Talk to us early."
+        }
+      ],
+      "seo": {
+        "title": "Farm machinery loan with harvest instalments",
+        "description": "A loan for tractors, combines and other farm machinery, long term, with instalments tied to the harvests. Compared with leasing."
+      }
+    }
+  },
+  "parent": "credit-investitii"
+}

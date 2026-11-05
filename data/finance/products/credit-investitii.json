@@ -1,0 +1,238 @@
+{
+  "key": "credit-investitii",
+  "order": 20,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie"
+  ],
+  "relatedGuides": [
+    "credit-sau-leasing-utilaje",
+    "credit-sau-grant-afir",
+    "costul-real-al-creditului"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit de investiții pentru fermieri",
+      "slug": "credit-investitii",
+      "answer": "Creditul de investiții finanțează utilaje, irigații, depozitare, teren și ferme, {{F5.term}}. Ratele sunt legate de recolte, iar dobânda se poate reduce: {{F9}}.",
+      "fits": "Este pentru fermele care vor să cumpere ceva ce se va plăti în ani. Termenul lung înseamnă rate mai mici, ceea ce lasă mai mulți bani în fermă, inclusiv în anii slabi.\n\nAnaliza nu este un calcul automat. Discutăm cu tine ca să înțelegem ferma, nu doar bilanțul.",
+      "notFor": "Nu este potrivit dacă investiția nu aduce economii sau venituri reale. Rata mică nu face un proiect bun.\n\nNu este nici soluția pentru cheltuielile unei campanii. Pentru acestea există [creditul de producție](/finantare/credit-productie). Dacă ferma este deja în întârziere la mai mulți creditori, începe cu o discuție despre datorii, nu cu o investiție nouă.",
+      "finances": "Mai jos găsești detalii pentru fiecare tip de investiție. Dacă proiectul tău combină mai multe, de exemplu irigații și utilaje, discutăm despre el ca întreg.",
+      "repayment": "Investiția se plătește din veniturile pe care le aduce, deci ratele urmează încasările, nu calendarul lunar.\n\nReducerea marjei de dobândă răsplătește disciplina: {{F9}}. Condițiile exacte sunt în contract.",
+      "example": {
+        "title": "Utilaj și irigații pe 10 ani",
+        "scenario": "O fermă vrea un sistem de irigații și un utilaj pentru lucrări, în valoare de 1.500.000 de lei. Alege 2 rate pe an, timp de 10 ani.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "1.500.000 lei"
+          },
+          {
+            "label": "Număr de rate",
+            "value": "20"
+          },
+          {
+            "label": "Rată de capital",
+            "value": "75.000 lei"
+          },
+          {
+            "label": "Capital pe an",
+            "value": "150.000 lei"
+          }
+        ]
+      },
+      "risks": "Un credit pe mulți ani trece prin ani buni și ani slabi. Înainte să semnezi:\n\n- calculează dacă poți plăti și într-un an cu producție mică;\n- gândește-te ce se întâmplă dacă prețul scade doi ani la rând;\n- păstrează bani pentru campanie, nu pune tot în investiție;\n- cere mai multe oferte pentru utilaj sau sistem, pentru că o economie la cumpărare înseamnă un credit mai mic.\n\nPentru comparații, vezi [credit sau leasing](/finantare/ghiduri/credit-sau-leasing-utilaje) și [credit sau grant AFIR](/finantare/ghiduri/credit-sau-grant-afir).",
+      "guarantees": [
+        {
+          "kind": "machinery",
+          "note": "Utilajul finanțat poate rămâne în garanție până la rambursare."
+        },
+        {
+          "kind": "mortgage",
+          "note": "Terenul sau clădirile garantează creditul."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Sumele de încasat de la APIA pot susține creditul."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Pe ce perioadă pot lua creditul?",
+          "answer": "Durata ajunge {{F5.term}}. Cea potrivită depinde de investiție și de cât poate plăti ferma."
+        },
+        {
+          "question": "Cum funcționează reducerea de dobândă?",
+          "answer": "Reducerea este de {{F9}}. Se aplică marjei, nu dobânzii totale, în condițiile din contract."
+        },
+        {
+          "question": "Câte rate am pe an?",
+          "answer": "Ai {{F5.instalments}}."
+        },
+        {
+          "question": "Pot finanța două investiții într-un singur credit?",
+          "answer": "Spune-ne ce ai în plan și vedem împreună ce structură are sens."
+        },
+        {
+          "question": "Trebuie să am un avans?",
+          "answer": "Depinde de analiză și de garanții. Întreabă echipa."
+        },
+        {
+          "question": "Cât de repede primesc răspuns?",
+          "answer": "Răspunsul vine {{F4.reply}}."
+        }
+      ],
+      "seo": {
+        "title": "Credit de investiții agricole pe până la 10 ani",
+        "description": "Credit pentru utilaje, irigații, depozitare, teren și ferme, cu rate după recoltă și reducere a marjei de dobândă pentru plata la timp."
+      }
+    },
+    "en": {
+      "title": "Investment loan for farmers",
+      "slug": "investment-credit",
+      "answer": "The investment loan finances machinery, irrigation, storage, land and farms, {{F5.term}}. Instalments are tied to the harvests, and the interest can be reduced: {{F9}}.",
+      "fits": "It is for farms that want to buy something that will pay back over years. A long term means lower instalments, which leaves more money in the farm, including in weak years.\n\nThe analysis is not an automatic calculation. We talk with you to understand the farm, not just the balance sheet.",
+      "notFor": "It does not fit if the investment brings no real savings or income. A low instalment does not make a project good.\n\nNor is it the answer for a season's costs; that is what the [production loan](/en/financing/production-credit) is for. If the farm is already behind with several creditors, start with a talk about the debts, not a new investment.",
+      "finances": "Below you will find details for each type of investment. If your project combines several, such as irrigation and machinery, we discuss it as a whole.",
+      "repayment": "An investment pays for itself from what it earns, so instalments follow income, not the calendar month.\n\nThe margin reduction rewards discipline: {{F9}}. The exact terms are in the contract.",
+      "example": {
+        "title": "Machinery and irrigation over 10 years",
+        "scenario": "A farm wants an irrigation system and a machine for field work, worth 1,500,000 lei. It chooses 2 instalments a year for 10 years.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "1,500,000 lei"
+          },
+          {
+            "label": "Number of instalments",
+            "value": "20"
+          },
+          {
+            "label": "Principal per instalment",
+            "value": "75,000 lei"
+          },
+          {
+            "label": "Principal per year",
+            "value": "150,000 lei"
+          }
+        ]
+      },
+      "risks": "A loan over many years goes through good years and weak ones. Before you sign:\n\n- work out whether you can pay in a low-yield year too;\n- think about what happens if prices fall two years running;\n- keep money for the season, do not put it all into the investment;\n- ask for several quotes for the machine or system, because a saving on the purchase means a smaller loan.\n\nFor comparisons, see [loan or lease](/en/financing/guides/credit-or-leasing-machinery) and [loan or AFIR grant](/en/financing/guides/credit-or-afir-grant).",
+      "guarantees": [
+        {
+          "kind": "machinery",
+          "note": "The financed machine can stay pledged until repayment."
+        },
+        {
+          "kind": "mortgage",
+          "note": "Land or buildings guarantee the loan."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Amounts due from APIA can support the loan."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "For how long can I borrow?",
+          "answer": "Loans run {{F5.term}}. The right term depends on the investment and on what the farm can pay."
+        },
+        {
+          "question": "How does the interest reduction work?",
+          "answer": "The reduction is {{F9}}. It applies to the margin, not the total interest, under the terms of the contract."
+        },
+        {
+          "question": "How many instalments a year?",
+          "answer": "You have {{F5.instalments}}."
+        },
+        {
+          "question": "Can I finance two investments in one loan?",
+          "answer": "Tell us your plans and we will see together which structure makes sense."
+        },
+        {
+          "question": "Do I need a deposit?",
+          "answer": "It depends on the analysis and the guarantees. Ask the team."
+        },
+        {
+          "question": "How fast do I get a reply?",
+          "answer": "You get a reply {{F4.reply}}."
+        }
+      ],
+      "seo": {
+        "title": "Farm investment loan for up to 10 years",
+        "description": "A loan for machinery, irrigation, storage, land and farms, with instalments after harvest and a margin reduction for paying on time."
+      }
+    }
+  }
+}

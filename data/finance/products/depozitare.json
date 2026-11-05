@@ -1,0 +1,214 @@
+{
+  "key": "depozitare",
+  "order": 23,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "irigatii"
+  ],
+  "relatedGuides": [
+    "cand-vinzi-recolta"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru depozitare și silozuri",
+      "slug": "depozitare",
+      "answer": "Finanțăm silozuri și spații de depozitare, {{F5.term}}, cu rate legate de recoltă. Un depozit propriu îți lasă libertatea de a vinde când vrei, dar merită doar dacă folosești spațiul an de an.",
+      "fits": "Este pentru fermele care produc destul încât să umple un depozit și care pierd bani pentru că trebuie să vândă la recoltă. Ajută și fermele care vor să curețe sau să usuce marfa înainte de vânzare.",
+      "notFor": "Dacă depozitezi puțin sau rar, un depozit propriu poate costa mai mult decât [depozitarea la Agrinvest](/depozitare). Compară tariful plătit cu costul de a construi și întreține spațiul.",
+      "finances": "- silozuri și celule de depozitare\n- magazii și hale\n\nPentru o construcție contează terenul, autorizațiile și accesul camioanelor, așa că pregătește-le din timp.",
+      "repayment": "Depozitul se plătește prin prețul mai bun pe care îl obții și prin taxele economisite. Ambele variază de la un an la altul, așa că ratele trebuie să poată fi plătite și într-un an fără câștig de preț.",
+      "example": {
+        "title": "Un siloz de 3.000 de tone",
+        "scenario": "O fermă de 700 ha construiește un siloz cu un cost de 1.000.000 de lei. Alege 8 ani, cu 2 rate pe an.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "1.000.000 lei"
+          },
+          {
+            "label": "Număr de rate",
+            "value": "16"
+          },
+          {
+            "label": "Rată de capital",
+            "value": "62.500 lei"
+          },
+          {
+            "label": "Capital pe tonă de capacitate și an",
+            "value": "42 lei"
+          }
+        ]
+      },
+      "risks": "Marfa stocată poate pierde valoare dacă e prost urmărită, iar prețul poate scădea după ce ai așteptat. Citește [când merită să aștepți](/finantare/ghiduri/cand-vinzi-recolta). Calculează cu grijă și costul construcției: lucrările depășesc adesea bugetul.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Terenul și construcția pot garanta creditul."
+        },
+        {
+          "kind": "machinery",
+          "note": "Echipamentele pot rămâne în garanție."
+        },
+        {
+          "kind": "grain-contracts",
+          "note": "Contractele de vânzare arată din ce bani plătești."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Merită să îmi fac siloz propriu?",
+          "answer": "Depinde de cantitate și de cât de des stochezi. Compară cu tariful de depozitare."
+        },
+        {
+          "question": "Finanțați și uscătoare?",
+          "answer": "Spune-ne din ce e format proiectul. Echipamentele legate de depozitare se discută împreună cu el."
+        },
+        {
+          "question": "Pot depozita la Agrinvest până atunci?",
+          "answer": "Agrinvest are {{S1}} silozuri și depozite de cereale, cu o capacitate de {{S2}}. Vezi pagina de depozitare și bazele."
+        },
+        {
+          "question": "Trebuie să am autorizația de construire?",
+          "answer": "Spune-ne stadiul proiectului. Autorizațiile și terenul contează pentru analiză."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru silozuri și spații de depozitare",
+        "description": "Credit pe termen lung pentru construcția sau cumpărarea de silozuri și magazii, cu rate după recoltă. Când merită un depozit propriu."
+      }
+    },
+    "en": {
+      "title": "Loan for storage and silos",
+      "slug": "storage",
+      "answer": "We finance silos and storage space, {{F5.term}}, with instalments tied to the harvest. Your own store gives you the freedom to sell when you choose, but it pays only if you use the space year after year.",
+      "fits": "It is for farms that produce enough to fill a store and lose money because they must sell at harvest. It also helps farms that want to clean or dry grain before selling.",
+      "notFor": "If you store little or rarely, your own store can cost more than [storing with Agrinvest](/en/storage). Compare the rate you pay with the cost of building and keeping up the space.",
+      "finances": "- silos and storage bins\n- sheds and halls\n\nFor a building, the land, permits and truck access all matter, so prepare them early.",
+      "repayment": "A store pays for itself through the better price you get and the fees you save. Both vary from year to year, so the instalments must be payable in a year with no price gain too.",
+      "example": {
+        "title": "A 3,000-tonne silo",
+        "scenario": "A 700 ha farm builds a silo costing 1,000,000 lei. It chooses 8 years, with 2 instalments a year.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "1,000,000 lei"
+          },
+          {
+            "label": "Number of instalments",
+            "value": "16"
+          },
+          {
+            "label": "Principal per instalment",
+            "value": "62,500 lei"
+          },
+          {
+            "label": "Principal per tonne of capacity and year",
+            "value": "42 lei"
+          }
+        ]
+      },
+      "risks": "Stored grain can lose value if it is badly watched, and the price can fall after you have waited. Read [when waiting pays](/en/financing/guides/when-to-sell-the-harvest). Work out the building cost carefully too: works often overrun the budget.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "The land and building can guarantee the loan."
+        },
+        {
+          "kind": "machinery",
+          "note": "The equipment can stay pledged."
+        },
+        {
+          "kind": "grain-contracts",
+          "note": "Sale contracts show where the repayment comes from."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Is my own silo worth it?",
+          "answer": "It depends on the quantity and how often you store. Compare with the storage rate."
+        },
+        {
+          "question": "Do you finance dryers too?",
+          "answer": "Tell us what the project includes. Equipment linked to storage is discussed along with it."
+        },
+        {
+          "question": "Can I store with Agrinvest until then?",
+          "answer": "Agrinvest has {{S1}} silos and grain warehouses, with a capacity of {{S2}}. See the storage page and the bases."
+        },
+        {
+          "question": "Must I have the building permit?",
+          "answer": "Tell us how far the project has got. Permits and land matter for the analysis."
+        }
+      ],
+      "seo": {
+        "title": "Loan for silos and grain storage in Romania",
+        "description": "A long-term loan to build or buy silos and sheds, with instalments after harvest. When your own store is worth it."
+      }
+    }
+  },
+  "parent": "credit-investitii"
+}

@@ -1,0 +1,215 @@
+{
+  "key": "irigatii",
+  "order": 22,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "utilaje"
+  ],
+  "relatedGuides": [
+    "credit-sau-grant-afir",
+    "costul-real-al-creditului"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru irigații",
+      "slug": "irigatii",
+      "answer": "Finanțăm sisteme de irigații pentru ferme, {{F5.term}}, cu rate legate de recoltă. Investiția are sens acolo unde există apă sigură și unde producția în plus plătește sistemul.",
+      "fits": "Este pentru fermele din zone cu secetă repetată, care au acces la o sursă de apă și vor producții mai stabile de la un an la altul. Termenul lung contează aici, pentru că un sistem de irigații se plătește în mulți ani.",
+      "notFor": "Fără o sursă sigură de apă, sistemul nu face nimic. Dacă nu ai clarificat de unde vine apa, cine plătește energia și ce avize îți trebuie, e prea devreme pentru credit.\n\nNu merită nici pe suprafețe mici și împrăștiate, unde mutarea echipamentului costă prea mult.",
+      "finances": "- pivoți, tambururi și sisteme prin picurare\n- pompe, conducte și racorduri\n- automatizări și contorizare\n\nÎnainte de cerere, pregătește o ofertă de la furnizor și un calcul simplu de cost pe hectar. Te putem ajuta și la negocierea cu furnizorii, dacă ne spui din timp.",
+      "repayment": "Primii ani nu arată ca restul: sistemul se montează, iar producția crește treptat. Ține cont de asta când alegi durata și prima rată. O rată mai mică pe o perioadă mai lungă lasă spațiu pentru energia și întreținerea pe care le plătești în plus.",
+      "example": {
+        "title": "Irigații pe 120 ha",
+        "scenario": "O fermă cu acces la apă irigă 120 ha de porumb. Sistemul costă 1.200.000 de lei și alege 8 ani, cu 2 rate pe an.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "1.200.000 lei"
+          },
+          {
+            "label": "Număr de rate",
+            "value": "16"
+          },
+          {
+            "label": "Rată de capital",
+            "value": "75.000 lei"
+          },
+          {
+            "label": "Capital pe hectar irigat și an",
+            "value": "1.250 lei"
+          }
+        ]
+      },
+      "risks": "Costul irigării nu se oprește la rată. Calculează energia sau motorina, apa, munca și întreținerea. Pune în balanță producția în plus, cu prețuri prudente. Dacă sistemul nu se plătește la un preț slab al porumbului, regândește dimensiunea lui.",
+      "guarantees": [
+        {
+          "kind": "machinery",
+          "note": "Echipamentele pot rămâne în garanție până la rambursare."
+        },
+        {
+          "kind": "mortgage",
+          "note": "Terenul sau alte imobile garantează creditul."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Trebuie să am deja sursa de apă?",
+          "answer": "Da, trebuie să fie clar de unde vine apa înainte de investiție. Spune-ne cum ai rezolvat asta."
+        },
+        {
+          "question": "Finanțați și pompe sau doar pivoți?",
+          "answer": "Spune-ne din ce e format proiectul. Îl privim ca întreg, cu pompe și conducte."
+        },
+        {
+          "question": "Pot combina creditul cu fonduri europene?",
+          "answer": "Da, un credit poate acoperi partea pe care grantul nu o plătește. Vezi ghidul despre credit și grant AFIR."
+        },
+        {
+          "question": "Cum aleg durata?",
+          "answer": "Pornește de la costul pe hectar și de la cât poate plăti ferma într-un an slab."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru irigații: sisteme și pompe",
+        "description": "Credit pe termen lung pentru sisteme de irigații, pompe și conducte, cu rate după recoltă. Ce să verifici înainte de investiție."
+      }
+    },
+    "en": {
+      "title": "Loan for irrigation",
+      "slug": "irrigation",
+      "answer": "We finance irrigation systems for farms, {{F5.term}}, with instalments tied to the harvest. The investment makes sense where water is reliable and the extra yield pays for the system.",
+      "fits": "It is for farms in areas with repeated drought, which have access to a water source and want steadier yields from year to year. The long term matters here, because an irrigation system pays back over many years.",
+      "notFor": "Without a reliable water source, the system does nothing. If you have not settled where the water comes from, who pays for energy and which permits you need, it is too early for a loan.\n\nIt does not pay on small, scattered plots either, where moving the equipment costs too much.",
+      "finances": "- pivots, reels and drip systems\n- pumps, pipes and connections\n- automation and metering\n\nBefore you apply, get a quote from a supplier and a simple cost per hectare. We can also help in talks with suppliers if you tell us early.",
+      "repayment": "The first years do not look like the rest: the system is installed and yields rise gradually. Allow for this when you choose the term and the first instalment. A lower instalment over a longer period leaves room for the extra energy and upkeep.",
+      "example": {
+        "title": "Irrigating 120 ha",
+        "scenario": "A farm with access to water irrigates 120 ha of maize. The system costs 1,200,000 lei and it chooses 8 years, with 2 instalments a year.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "1,200,000 lei"
+          },
+          {
+            "label": "Number of instalments",
+            "value": "16"
+          },
+          {
+            "label": "Principal per instalment",
+            "value": "75,000 lei"
+          },
+          {
+            "label": "Principal per irrigated hectare and year",
+            "value": "1,250 lei"
+          }
+        ]
+      },
+      "risks": "The cost of irrigation does not stop at the instalment. Count energy or diesel, water, labour and upkeep. Weigh this against the extra yield, at cautious prices. If the system does not pay at a weak maize price, rethink its size.",
+      "guarantees": [
+        {
+          "kind": "machinery",
+          "note": "The equipment can stay pledged until repayment."
+        },
+        {
+          "kind": "mortgage",
+          "note": "Land or other property guarantees the loan."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Must I already have the water source?",
+          "answer": "Yes, it must be clear where the water comes from before the investment. Tell us how you have settled this."
+        },
+        {
+          "question": "Do you finance pumps, or only pivots?",
+          "answer": "Tell us what the project consists of. We look at it as a whole, with pumps and pipes."
+        },
+        {
+          "question": "Can I combine the loan with EU funds?",
+          "answer": "Yes, a loan can cover the part the grant does not pay. See the guide to loans and AFIR grants."
+        },
+        {
+          "question": "How do I choose the term?",
+          "answer": "Start from the cost per hectare and what the farm can pay in a weak year."
+        }
+      ],
+      "seo": {
+        "title": "Irrigation loan for farms: systems and pumps",
+        "description": "A long-term loan for irrigation systems, pumps and pipes, with instalments after harvest. What to check before you invest."
+      }
+    }
+  },
+  "parent": "credit-investitii"
+}

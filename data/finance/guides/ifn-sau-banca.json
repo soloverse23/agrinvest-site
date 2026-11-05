@@ -1,0 +1,87 @@
+{
+  "key": "ifn-sau-banca",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie",
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "credit-adeverinta-apia"
+  ],
+  "sources": [
+    {
+      "title": "Legea 93/2009 privind instituțiile financiare nebancare",
+      "url": "https://lawchat.ro/legislatie/text-complet-legea-93-2009-institutiile-financiare-nebancare-158903",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "IFN sau bancă: ce alegi pentru credit agricol",
+      "slug": "ifn-sau-banca",
+      "summary": "Banca are de regulă costuri mai mici, dar cere standarde mai stricte, iar un IFN specializat poate fi mai rapid și mai flexibil cu recolta și garanțiile agricole, la un cost adesea mai mare. Multe ferme lucrează cu amândouă.",
+      "body": "## Două instituții, două roluri\n\nBanca și IFN-ul se completează adesea într-o fermă, nu se exclud. Multe ferme lucrează cu amândouă: banca pentru ce se potrivește standardului ei, IFN-ul pentru ce are nevoie de flexibilitate sau rapiditate.\n\n| | Bancă | Instituție financiară nebancară (IFN) |\n| --- | --- | --- |\n| De unde are banii | depozite și alte surse | capital și împrumuturi, nu depozite |\n| Ce poate face | cont, depozite, credite, plăți | credite și alte activități de creditare permise de lege |\n| Cine o supraveghează | BNR | BNR, prin Registrul general și Registrul special |\n| Dobânda pe adeverință APIA | cel mult ROBOR 6 luni + 2% | cel mult ROBOR 6 luni + 8% |\n\nLegea 93/2009 interzice IFN-urilor să atragă depozite de la public. Un IFN nu îți poate ține banii într-un depozit, dar îți poate da un credit.\n\n## Ce înseamnă Registrul special\n\nToate IFN-urile sunt înscrise la BNR în Registrul general. Cele care îndeplinesc criteriile stabilite de BNR, de exemplu de volum al creditelor sau de active, sunt înscrise și în Registrul special și au cerințe suplimentare. Înainte să semnezi cu un finanțator, verifică numele și numărul lui în registrele publicate de BNR.\n\nAgrinvest Credit IFN este înscrisă în Registrul special cu numărul {{F1}}.\n\n## Unde poate ajuta un IFN specializat\n\nFermele nu au venituri lunare. Un credit gândit pentru salariați sau pentru firme cu încasări zilnice nu se potrivește cu două recolte pe an. Un finanțator care lucrează doar cu agricultura se poate uita mai ușor la:\n\n- calendarul real al încasărilor;\n- culturile și zona fermei;\n- garanții specifice, cum ar fi culturile sau contractele de vânzare;\n- un an slab, explicat, față de o fermă în declin.\n\n## De ce costă uneori mai mult\n\nUn IFN nu are depozite ieftine și se finanțează, de regulă, de la bănci. În plus, lucrează adesea cu fermieri pe care băncile îi consideră mai riscanți. Regula APIA arată această diferență: plafonul de dobândă la IFN-uri este mai mare decât la bănci.\n\nUn cost mai mare poate fi justificat dacă rezolvă o problemă reală: o decizie rapidă înainte de campanie, o structură pe care banca nu o oferă, sau acces la finanțare când altfel nu ar exista. Nu este justificat dacă ai aceeași soluție mai ieftin. Compară [costul total](/finantare/ghiduri/costul-real-al-creditului), nu doar dobânda.\n\n## Cum alegi\n\nÎncepe cu banca dacă:\n\n- ai situații financiare bune, garanții imobiliare libere și timp;\n- ai nevoie și de cont, plăți și alte servicii în același loc;\n- produsul standard se potrivește nevoii tale.\n\nIa în calcul un IFN dacă:\n\n- ai nevoie de un răspuns rapid;\n- ratele trebuie să urmeze recolta;\n- garanțiile tale sunt mai ales agricole;\n- ai avut un an slab, dar ferma este solidă.\n\nIndiferent de finanțator, întreabă-te dacă poți plăti. O aprobare rapidă nu este un motiv să te împrumuți.\n\n## Ce verifici la orice finanțator\n\n- Este înscris la BNR?\n- Îți dă în scris toate costurile înainte să semnezi?\n- Ce se întâmplă dacă întârzii o rată?\n- Poți rambursa mai devreme, și cu ce cost?\n- Cine te contactează dacă ai o problemă?\n\nDacă un finanțator îți promite aprobarea înainte să îți vadă ferma, fii atent.",
+      "faq": [
+        {
+          "question": "Este sigur să iau credit de la un IFN?",
+          "answer": "IFN-urile sunt înscrise și supravegheate de BNR. Verifică finanțatorul în registrele BNR și citește toate costurile înainte să semnezi."
+        },
+        {
+          "question": "Pot avea credit și la bancă și la IFN?",
+          "answer": "Da, dacă ferma poate plăti ambele și dacă garanțiile și contractele permit. Finanțatorii vor vedea datoriile existente."
+        },
+        {
+          "question": "De ce un IFN are dobânzi mai mari?",
+          "answer": "Nu atrage depozite, se finanțează de regulă de la bănci și lucrează adesea cu riscuri mai mari. Regula APIA îi permite o marjă mai mare decât băncilor."
+        },
+        {
+          "question": "Un IFN îmi poate ține banii într-un depozit?",
+          "answer": "Nu. Legea 93/2009 interzice IFN-urilor atragerea de depozite de la public."
+        }
+      ],
+      "seo": {
+        "title": "IFN sau bancă pentru credit agricol: cum alegi",
+        "description": "Diferențele dintre bancă și IFN pentru fermieri: de unde au banii, cine îi supraveghează, de ce costă diferit și când se potrivește fiecare."
+      }
+    },
+    "en": {
+      "title": "IFN or bank: which to choose for a farm loan",
+      "slug": "ifn-or-bank",
+      "summary": "A bank usually costs less but sets stricter standards, while a specialist IFN can be quicker and more flexible with the harvest and farm guarantees, often at a higher cost. Many farms work with both.",
+      "body": "## Two institutions, two roles\n\nA bank and an IFN often complement each other on a farm rather than compete. Many farms work with both: the bank for what fits its standard, the IFN for what needs flexibility or speed.\n\n| | Bank | Non-bank financial institution (IFN) |\n| --- | --- | --- |\n| Where its money comes from | deposits and other sources | capital and borrowing, not deposits |\n| What it can do | accounts, deposits, loans, payments | loans and other lending the law allows |\n| Who supervises it | BNR | BNR, through the General and Special Registers |\n| Interest on an APIA certificate | at most 6-month ROBOR + 2% | at most 6-month ROBOR + 8% |\n\nLaw 93/2009 forbids IFNs from taking deposits from the public. An IFN cannot hold your money on deposit, but it can lend to you.\n\n## What the Special Register means\n\nAll IFNs are listed with BNR in the General Register. Those that meet BNR's criteria, for example on lending volume or assets, are also listed in the Special Register and have extra requirements. Before you sign with a lender, check its name and number in the registers BNR publishes.\n\nAgrinvest Credit IFN is listed in the Special Register under number {{F1}}.\n\n## Where a specialist IFN can help\n\nFarms do not earn monthly. A loan designed for employees, or for companies with daily takings, does not fit two harvests a year. A lender that works only with farming can more easily look at:\n\n- the real calendar of income;\n- the farm's crops and area;\n- specific guarantees, such as crops or sale contracts;\n- one weak, explained year, as opposed to a farm in decline.\n\n## Why it sometimes costs more\n\nAn IFN has no cheap deposits and usually borrows from banks. It also often works with farmers banks consider riskier. The APIA rule shows the difference: the interest cap at IFNs is higher than at banks.\n\nA higher cost can be justified if it solves a real problem: a quick decision before the season, a structure the bank does not offer, or access to finance that would otherwise not exist. It is not justified if you can get the same thing for less. Compare the [true cost](/en/financing/guides/true-cost-of-credit), not just the rate.\n\n## How to choose\n\nStart with the bank if:\n\n- you have good accounts, free property to pledge and time;\n- you also want an account, payments and other services in one place;\n- the standard product fits your need.\n\nConsider an IFN if:\n\n- you need a quick answer;\n- instalments have to follow the harvest;\n- your guarantees are mainly agricultural;\n- you had a weak year but the farm is sound.\n\nWhatever the lender, ask yourself whether you can pay. A fast approval is not a reason to borrow.\n\n## What to check at any lender\n\n- Is it listed with BNR?\n- Does it give you all costs in writing before you sign?\n- What happens if you are late with an instalment?\n- Can you repay early, and at what cost?\n- Who contacts you if you have a problem?\n\nIf a lender promises approval before seeing your farm, be careful.",
+      "faq": [
+        {
+          "question": "Is it safe to borrow from an IFN?",
+          "answer": "IFNs are listed and supervised by BNR. Check the lender in the BNR registers and read all the costs before you sign."
+        },
+        {
+          "question": "Can I have a loan at a bank and at an IFN?",
+          "answer": "Yes, if the farm can pay both and the guarantees and contracts allow it. Lenders will see your existing debts."
+        },
+        {
+          "question": "Why does an IFN charge more?",
+          "answer": "It takes no deposits, usually borrows from banks and often works with higher risk. The APIA rule allows it a higher margin than banks."
+        },
+        {
+          "question": "Can an IFN hold my money on deposit?",
+          "answer": "No. Law 93/2009 forbids IFNs from taking deposits from the public."
+        }
+      ],
+      "seo": {
+        "title": "IFN or bank for a Romanian farm loan: how to choose",
+        "description": "The differences between a bank and an IFN for farmers: where the money comes from, who supervises them, why costs differ and when each one fits."
+      }
+    }
+  }
+}

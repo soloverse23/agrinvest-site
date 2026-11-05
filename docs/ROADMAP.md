@@ -38,13 +38,13 @@ Quality bar: **everything clean.** Clean code, clean data model, clean URLs, cle
 - Pages are uncached.
 - About 30 product pages duplicate the shop.
 
-**Facts to reuse (to be confirmed with management)**
+**Facts to reuse (confirmed by the owner, 2026-11-05)**
 
-- Founded in 2003 in Buzău; 22 counties.
-- **17 silo bases, 238,000 t** (Pogoanele 86,000 t).
-- Fleet of 55 trucks.
-- Golden Relationship covers more than 6,000 ha.
-- IFN: reply in 24 h, money in 3 days, loans up to 7 years.
+- Founded in 2003 in Buzău; 11 counties; 100% Romanian capital.
+- **17 silos and grain warehouses, 275,000 t** (Pogoanele 86,000 t).
+- Fleet of 55 trucks, 1 liquid-fertiliser tanker, 2 vans and 70 other vehicles.
+- 9,000 ha of arable land, over 50% owned directly.
+- IFN: reply in 24 h after complete documents, loans up to 10 years, at most 2 instalments a year, 500+ clients. Time to money still differs between sources.
 - Diesel is a business line with no page.
 
 **agrinvestshop.ro**
@@ -92,20 +92,20 @@ Quality bar: **everything clean.** Clean code, clean data model, clean URLs, cle
   - Grain stock financing.
   - APIA subsidy used as collateral (up to 200% of claims, per a 2022 source).
 - **Terms:**
-  - Lei only; up to 7 years.
-  - At most **2 instalments a year, aligned with the autumn and spring harvests**.
-  - Reply in 24 h after complete documents; money within 3 days of signing.
+  - Lei only; **up to 10 years** (owner, 2026-11-05).
+  - At most **2 instalments a year, after the summer and autumn harvests** (owner, 2026-11-05).
+  - Reply in 24 h after complete documents; money within 3 days of signing (old page). The CEO said about 3 days + 2 days in November 2025 and 24 h + 24 h in June 2026.
 - **Accepted guarantees:** promissory notes, crops, machinery, APIA subsidies, grain purchase contracts, mortgage.
 - **Eligible borrowers:** sole traders (PFA, II, IF), SRL and SA companies, agricultural companies.
 - **Scale:** 500+ clients, €70M+ financed (agrointel, March 2025).
-- **Bank funding lines:** ING, BRD, UniCredit.
-- **Unverified:** a June 2026 headline about loans of up to 10 years and up to 10%/year off the interest rate for borrowers who pay on time.
+- **Bank funding lines:** ING, BRD, UniCredit, Banca Transilvania.
+- **On-time discount:** up to 10% of the interest **margin**, for keeping to the contract and schedule (not 10% off the rate, as the June 2026 headline suggests).
 - **Gaps on the current site:**
   - The only IFN page is `/servicii-ifn/`, and its meta description says "Trading Cereale".
   - No amounts, process, document list, simulator or online application.
-  - Two different registered-office addresses are listed.
-- **Competitor benchmark: Agricover Credit IFN** has named products ("Motorină cu plata la recoltă", "Card Fermier" up to 150k lei paid at harvest, "Hectar Plus", "Credit Avans Forward", irrigation credit) and a digital platform (Agricover Pay).
-- **Market context:** the 2026 APIA-certificate loan scheme lends up to 90% of the subsidy, guaranteed by FGCR / FNGCIMM, at ROBOR 6M + max 2%. Lenders must have an agreement with APIA, so Agrinvest's participation needs confirming.
+  - Two different addresses are listed. ANAF gives the registered office as Bd. Pipera nr. 1 I, et. 4, Voluntari; the second may be a working office.
+- **Competitor benchmark: Agricover Credit IFN** has named products ("Motorină cu plata la recoltă", "Card Fermier" up to 250k lei paid at harvest, "Hectar Plus", "Credit Avans Forward", irrigation credit) and a digital platform (Agricover Pay).
+- **Market context:** the 2026 APIA-certificate loan scheme lends up to 90% of the subsidy, guaranteed by FGCR / FNGCIMM, at ROBOR 6M + max 2% from banks and + max 8% from IFNs (OMADR 703/2013, as APIA states it). Lenders must have an agreement with APIA, so Agrinvest's participation needs confirming.
 
 **HamidHosseini project, patterns to reuse**
 
@@ -201,7 +201,7 @@ Romanian is the default language at `/`, English lives at `/en`. Slugs have no d
 
 - `/ghiduri/{pilon}/{articol}`
 - `/autori/{expert}`
-- `/golden-relationship`, `/logistica`
+- `/logistica`
 - `/video`, `/povesti`
 
 **Finance** (its own section of the site, run by Agrinvest Credit IFN)
@@ -223,7 +223,7 @@ Romanian is the default language at `/`, English lives at `/en`. Slugs have no d
   - `/finantare/intrebari-frecvente`
   - `/finantare/ghiduri/*`: APIA advance, guarantee funds, AFIR/PNS grants vs credit, glossary.
   - `/finantare/despre-ifn`: legal identity, BNR registration, team, funding partners.
-- English: `/en/financing`, a business-level overview for partners.
+- English: every page, under `/en/financing` (decision 0005 replaces the business-level overview).
 
 **English** (business-led, not a mirror)
 
@@ -337,7 +337,7 @@ _Pages_
 
 - Home with a cinematic hero (b-roll from Agrinvest's YouTube videos).
 - Despre and Cifre; Cereale and its crop pages; Depozitare plus the 17 base pages.
-- Finanțare, Golden Relationship, Logistica, Parteneri, Cariere, Contact.
+- Finanțare, Logistica, Parteneri, Cariere, Contact.
 - The English business pages.
 
 _SEO plumbing_
@@ -443,7 +443,7 @@ _Analytics_
 **4.3 Pages:** the hub, one page per product, and the trust page, all as in the information-architecture section.
 
 - Each product page has:
-  - who it is for, what it finances, how repayment follows the harvest, guarantees, documents, the 4-step process (apply → reply in 24 h → sign → money in ≤ 3 days), FAQ;
+  - who it is for, what it finances, how repayment follows the harvest, guarantees, documents, the 4-step process (apply → reply → sign → money, with the times from the figures register), FAQ;
   - a named advisor;
   - a call to action to the simulator and the application.
 
@@ -469,7 +469,6 @@ _Analytics_
 | Grain sale contract pages   | credit secured by the contract                                                             |
 | Diesel page                 | financing                                                                                  |
 | Base pages                  | the local IFN contact                                                                      |
-| Golden Relationship         | farmer rescue + financing story                                                            |
 
 - Later, an option to pay at harvest at checkout, once legal and operational setup is done.
 

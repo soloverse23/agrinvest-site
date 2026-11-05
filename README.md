@@ -43,6 +43,10 @@ The build reads the database, so every Vercel build first runs `scripts/deploy/p
 
 After the seed, the same script runs `npm run apply:products`: it applies the reviewed product data (`data/products`, `data/hubs`, `data/targets.json`) to the database. It is idempotent and safe next to staff: per data group it writes only what it wrote last time, or what the first import left untouched, and it reports (never overwrites) a group edited in the admin. It never touches prices, stock, SKUs, photos or `commerceStatus`. The importer (`scripts/import/woo.ts`) skips a product the step has written.
 
+Then `npm run apply:finance` does the same for `data/finance`, and brings the finance rows of the figures register up to date. It creates missing products and guides, and never sets a review status: approval happens only in the admin.
+
+Credit applications need a `users` account with the `ifn` role. Roles are changed by an `admin`; existing accounts became admins with the `finance_model` migration.
+
 The seed and the apply step run outside Next.js, so they cannot refresh Vercel's data cache, which survives deploys. The shop's cache keys carry a hash of `data/` (`ENRICHMENT_EPOCH`, set in `next.config.ts`), so a deploy with new product data reads the database afresh. For any other seed or import that changes content on a live site, run `vercel cache invalidate --tag products` (or the tag of what changed: see `src/lib/revalidate.ts`). Saving in the admin refreshes the cache by itself.
 
 `check:anaf` runs in the same script as a warning: it tells you when ANAF moves the company service to a new version (`ANAF_URL` in `src/lib/commerce/anaf.ts`).

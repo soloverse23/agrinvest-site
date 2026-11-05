@@ -19,8 +19,6 @@ The answers must stay consistent with the figures register: evidence phrases avo
 | 11  | ro     | credit agricol rate după recoltă                       | /finantare                        | rate                                   |
 | 12  | ro     | Agrinvest Credit IFN registrul BNR                     | /finantare                        | Registrul Special                      |
 | 13  | ro     | ce garanții acceptă Agrinvest Credit IFN               | /finantare                        | subvenții APIA                         |
-| 14  | ro     | program ajutor ferme în dificultate                    | /golden-relationship              | redresare                              |
-| 15  | ro     | cine coordonează Golden Relationship                   | /golden-relationship              | Dan N. Săvoiu                          |
 | 16  | ro     | transport cereale de la fermă                          | /logistica                        | flota proprie                          |
 | 17  | ro     | Agrinvest capital românesc                             | /despre                           | capital                                |
 | 18  | ro     | locuri de muncă agronom Agrinvest                      | /cariere                          | agronomi                               |
@@ -36,7 +34,6 @@ The answers must stay consistent with the figures register: evidence phrases avo
 | 28  | en     | partner with a Romanian agribusiness input distributor | /en/partners                      | Input makers                           |
 | 29  | en     | grain logistics Romania own fleet                      | /en/logistics                     | own fleet                              |
 | 30  | en     | Agrinvest Pogoanele base                               | /en/bases/pogoanele               | Agrinvest Pogoanele base               |
-| 31  | en     | farm recovery programme Romania                        | /en/golden-relationship           | recovery plan                          |
 | 32  | en     | how to sell grain to Agrinvest                         | /en/grain                         | How selling grain to Agrinvest works   |
 | 33  | ro     | magazin semințe și erbicide Agrinvest                  | /magazin                          | Semințe                                |
 | 34  | ro     | ce erbicide vinde Agrinvest                            | /magazin/erbicide                 | Erbicide pentru porumb, cereale        |

@@ -137,23 +137,6 @@ export const pages: PageSeed[] = [
     },
   },
   {
-    key: 'golden-relationship',
-    ro: {
-      title: 'Golden Relationship',
-      slug: 'golden-relationship',
-      seoTitle: 'Golden Relationship: redresarea fermelor în dificultate',
-      summary:
-        'Programul Golden Relationship ajută fermele în dificultate să își revină, cu un plan de redresare făcut împreună cu Agrinvest și sprijin pe termen lung.',
-    },
-    en: {
-      title: 'Golden Relationship',
-      slug: 'golden-relationship',
-      seoTitle: 'Golden Relationship: helping farms in difficulty recover',
-      summary:
-        'Golden Relationship helps farms in difficulty recover, with a recovery plan built together with Agrinvest and long-term support afterwards.',
-    },
-  },
-  {
     key: 'logistica',
     ro: {
       title: 'Logistică și transport',
@@ -305,11 +288,6 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
           href: '/despre/cifre',
           description: 'Cu sursa fiecărei valori',
         },
-        {
-          label: 'Golden Relationship',
-          href: '/golden-relationship',
-          description: 'Sprijin pentru fermele în dificultate',
-        },
         { label: 'Parteneri', href: '/parteneri', description: 'Inputuri, procesare, finanțare' },
         { label: 'Cariere', href: '/cariere', description: 'Lucrează cu noi' },
       ],
@@ -375,11 +353,6 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
           href: '/en/about/figures',
           description: 'With the source of every value',
         },
-        {
-          label: 'Golden Relationship',
-          href: '/en/golden-relationship',
-          description: 'Support for farms in difficulty',
-        },
         { label: 'Partners', href: '/en/partners', description: 'Inputs, processing, lending' },
         { label: 'Careers', href: '/en/careers', description: 'Work with us' },
       ],
@@ -410,7 +383,6 @@ export const footer = {
         links: [
           ['Despre Agrinvest', '/despre'],
           ['Agrinvest în cifre', '/despre/cifre'],
-          ['Golden Relationship', '/golden-relationship'],
           ['Parteneri', '/parteneri'],
           ['Cariere', '/cariere'],
         ],
@@ -442,7 +414,6 @@ export const footer = {
         links: [
           ['About Agrinvest', '/en/about'],
           ['Agrinvest in figures', '/en/about/figures'],
-          ['Golden Relationship', '/en/golden-relationship'],
           ['Partners', '/en/partners'],
           ['Careers', '/en/careers'],
         ],

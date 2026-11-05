@@ -1,0 +1,87 @@
+{
+  "key": "credit-sau-leasing-utilaje",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "utilaje"
+  ],
+  "relatedGuides": [
+    "credit-sau-grant-afir",
+    "costul-real-al-creditului"
+  ],
+  "sources": [
+    {
+      "title": "OG 51/1997 privind operațiunile de leasing",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/20556",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "IPC: Making financial decisions, ghid pentru fermieri din România",
+      "url": "https://www.ipcgmbh.com/wp-content/uploads/2017/12/Booklet-on-agricultural-finance-Romania-English.pdf",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Expert Credit: leasing financiar 2026",
+      "url": "https://credite.cc/blog/leasing-financiar-2026.html",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit sau leasing pentru utilaje agricole",
+      "slug": "credit-sau-leasing-utilaje",
+      "summary": "La credit, utilajul este al tău de la început, iar ratele se pot alinia uneori la recoltă. La leasing financiar rămâne al finanțatorului până la final, cu rate de obicei lunare și o valoare reziduală. Compară costul total, nu rata.",
+      "body": "## Diferența de bază\n\nLa credit, utilajul e al tău din prima zi și, de obicei, îl pui în garanție. La leasing financiar, utilajul rămâne al finanțatorului până la final, iar tu îl folosești și plătești rate. La sfârșitul contractului poți deveni proprietar, de regulă plătind valoarea reziduală.\n\n| | Credit | Leasing financiar |\n| --- | --- | --- |\n| Proprietar pe durata contractului | tu | finanțatorul |\n| Avans | depinde de finanțator | de regulă 10–20% din valoare |\n| Rate | se pot alinia la încasări, la unii finanțatori | de obicei lunare |\n| Durată pentru utilaje | depinde de produs | în practică 36–84 de luni |\n| La final | utilajul e liber de garanție | plătești valoarea reziduală, dacă vrei să îl cumperi |\n| Asigurare | cerută adesea de finanțator | obligatorie prin contract |\n| Utilaj second-hand | posibil, în funcție de finanțator | mai limitat, avans mai mare |\n\nSumele din tabel sunt practici de piață, nu reguli. Fiecare contract are condițiile lui.\n\n## Ce spune legea despre leasing\n\nOG 51/1997 stabilește câteva lucruri pe care merită să le știi:\n\n- **Durata:** contractul de leasing nu se poate încheia pe mai puțin de un an.\n- **Valoarea reziduală** este suma la care, la expirarea contractului, proprietatea trece la utilizator.\n- **Riscul:** în lipsa unei prevederi contrare, utilizatorul poartă riscul pierderii, distrugerii sau avarierii bunului și continuă să plătească ratele.\n- **Neplata:** dacă nu plătești rata două luni consecutive, finanțatorul poate rezilia contractul, iar tu trebuie să înapoiezi bunul și să plătești ratele scadente, dacă în contract nu se prevede altfel.\n- **Modificările:** nu poți modifica bunul și nu îl poți greva fără acordul finanțatorului.\n\nPentru o fermă, punctul despre neplată contează mai ales. Dacă banii vin de două ori pe an, iar ratele sunt lunare, două luni grele înainte de recoltă pot deveni o problemă.\n\n## Când se potrivește leasingul\n\n- vrei un utilaj nou, de la un dealer cu care firma de leasing lucrează deja;\n- ai nevoie de el repede și ai încasări regulate;\n- nu vrei să pui alte garanții, pentru că bunul în sine acoperă riscul finanțatorului;\n- contabilul tău vede un avantaj fiscal în cazul tău.\n\n## Când se potrivește creditul\n\n- încasările sunt sezoniere și vrei rate după recoltă;\n- utilajul este second-hand sau cumpărat direct din străinătate;\n- finanțezi mai multe lucruri deodată, de exemplu utilaj și irigații;\n- vrei să fii proprietar de la început.\n\nTerenul și construcțiile, cum ar fi un siloz, se finanțează de regulă prin credit, nu prin leasing de utilaje.\n\n## Cum compari două oferte\n\nNu compara ratele, ci totalul. Pentru fiecare ofertă adună:\n\n- avansul;\n- toate ratele;\n- valoarea reziduală;\n- comisioanele de la început și de pe parcurs;\n- asigurările obligatorii pe toată durata;\n- costul garanțiilor și al evaluării.\n\nO rată mică poate ascunde o valoare reziduală mare la final. Un exemplu pe un utilaj de 500.000 de lei, cu cifre inventate pentru ilustrare:\n\n| | Oferta A | Oferta B |\n| --- | --- | --- |\n| Avans | 100.000 lei | 50.000 lei |\n| Total rate | 460.000 lei | 470.000 lei |\n| Valoare reziduală | 5.000 lei | 75.000 lei |\n| Comisioane și asigurări | 30.000 lei | 25.000 lei |\n| **Cost total** | **595.000 lei** | **620.000 lei** |\n\nOferta B pare mai ușoară la început, dar costă mai mult până la capăt. Dacă banii sunt foarte strânși acum, poate fi totuși alegerea potrivită. Important este să știi ce plătești.\n\n## Înainte să semnezi\n\nPune calendarul ratelor lângă calendarul încasărilor. Dacă rata de iunie vine înainte de banii pe grâu, ai nevoie de o rezervă. Întreabă contabilul despre TVA, amortizare și cheltuieli deductibile, pentru că efectul fiscal depinde de firma ta. Dacă proiectul poate primi fonduri europene, citește și ghidul despre [credit și grant AFIR](/finantare/ghiduri/credit-sau-grant-afir).",
+      "faq": [
+        {
+          "question": "Ce este mai ieftin, creditul sau leasingul?",
+          "answer": "Depinde de ofertă. Compară totalul: avans, rate, valoare reziduală, comisioane, asigurări și garanții."
+        },
+        {
+          "question": "Pot lua în leasing un utilaj second-hand?",
+          "answer": "Uneori, dar opțiunile sunt mai limitate și avansul este adesea mai mare. Creditul este de regulă mai flexibil aici."
+        },
+        {
+          "question": "Ce se întâmplă dacă nu plătesc ratele de leasing?",
+          "answer": "Potrivit OG 51/1997, după două luni consecutive de neplată finanțatorul poate rezilia contractul, iar tu trebuie să înapoiezi bunul și să plătești ce e scadent, dacă în contract nu se prevede altfel."
+        },
+        {
+          "question": "Pot avea rate după recoltă la leasing?",
+          "answer": "Unele firme oferă grafice sezoniere, dar ratele sunt de obicei lunare. Întreabă înainte să semnezi."
+        }
+      ],
+      "seo": {
+        "title": "Credit sau leasing pentru utilaje agricole: comparație",
+        "description": "Diferențele dintre credit și leasing financiar pentru tractoare și utilaje: proprietate, avans, rate, valoare reziduală și cum compari două oferte."
+      }
+    },
+    "en": {
+      "title": "Loan or lease for farm machinery",
+      "slug": "credit-or-leasing-machinery",
+      "summary": "With a loan the machine is yours from the start, and instalments can sometimes follow the harvest. With a finance lease it stays the lender's until the end, with usually monthly instalments and a residual value. Compare the total cost, not the instalment.",
+      "body": "## The basic difference\n\nWith a loan, the machine is yours from day one and you usually pledge it. With a finance lease, the machine stays the lender's until the end, while you use it and pay instalments. At the end of the contract you can become the owner, usually by paying the residual value.\n\n| | Loan | Finance lease |\n| --- | --- | --- |\n| Owner during the contract | you | the lender |\n| Deposit | depends on the lender | usually 10–20% of the value |\n| Instalments | can follow income, at some lenders | usually monthly |\n| Term for machinery | depends on the product | in practice 36–84 months |\n| At the end | the machine is free of the pledge | you pay the residual value if you want to buy it |\n| Insurance | often required by the lender | required by the contract |\n| Second-hand machinery | possible, depending on the lender | more limited, with a higher deposit |\n\nThese amounts are market practice, not rules. Every contract has its own terms.\n\n## What the law says about leasing\n\nOG 51/1997 sets out a few things worth knowing:\n\n- **Term:** a lease cannot run for less than one year.\n- **Residual value** is the amount at which ownership passes to the user when the contract ends.\n- **Risk:** unless the contract says otherwise, the user bears the risk of loss, destruction or damage to the asset and keeps paying the instalments.\n- **Non-payment:** if you miss the instalment for two months in a row, the lender can end the contract, and you must return the asset and pay what is due, unless the contract says otherwise.\n- **Changes:** you cannot alter the asset or charge it without the lender's consent.\n\nFor a farm, the point on non-payment matters most. If money arrives twice a year and instalments are monthly, two hard months before harvest can become a problem.\n\n## When leasing fits\n\n- you want a new machine from a dealer the leasing company already works with;\n- you need it quickly and have regular income;\n- you do not want to pledge other assets, because the asset itself covers the lender's risk;\n- your accountant sees a tax advantage in your case.\n\n## When a loan fits\n\n- income is seasonal and you want instalments after harvest;\n- the machine is second-hand or bought directly from abroad;\n- you are financing several things at once, such as machinery and irrigation;\n- you want to be the owner from the start.\n\nLand and buildings, such as a silo, are usually financed with a loan, not a machinery lease.\n\n## How to compare two offers\n\nDo not compare instalments, compare the total. For each offer add up:\n\n- the deposit;\n- all the instalments;\n- the residual value;\n- fees at the start and along the way;\n- compulsory insurance for the whole term;\n- the cost of guarantees and valuation.\n\nA low instalment can hide a large residual value at the end. Here is an example on a 500,000 lei machine, with invented numbers for illustration:\n\n| | Offer A | Offer B |\n| --- | --- | --- |\n| Deposit | 100,000 lei | 50,000 lei |\n| Total instalments | 460,000 lei | 470,000 lei |\n| Residual value | 5,000 lei | 75,000 lei |\n| Fees and insurance | 30,000 lei | 25,000 lei |\n| **Total cost** | **595,000 lei** | **620,000 lei** |\n\nOffer B looks easier at the start but costs more by the end. If money is very tight now, it may still be the right choice. What matters is knowing what you pay.\n\n## Before you sign\n\nPut the instalment calendar next to the income calendar. If the June instalment comes before the wheat money, you need a reserve. Ask your accountant about VAT, depreciation and deductible costs, because the tax effect depends on your company. If the project could get EU funds, read the guide to [loans and AFIR grants](/en/financing/guides/credit-or-afir-grant) too.",
+      "faq": [
+        {
+          "question": "Which is cheaper, a loan or a lease?",
+          "answer": "It depends on the offer. Compare the total: deposit, instalments, residual value, fees, insurance and guarantees."
+        },
+        {
+          "question": "Can I lease a second-hand machine?",
+          "answer": "Sometimes, but options are more limited and the deposit is often higher. A loan is usually more flexible here."
+        },
+        {
+          "question": "What happens if I do not pay lease instalments?",
+          "answer": "Under OG 51/1997, after two months in a row of non-payment the lender can end the contract, and you must return the asset and pay what is due, unless the contract says otherwise."
+        },
+        {
+          "question": "Can a lease have instalments after harvest?",
+          "answer": "Some companies offer seasonal schedules, but instalments are usually monthly. Ask before you sign."
+        }
+      ],
+      "seo": {
+        "title": "Loan or lease for farm machinery in Romania",
+        "description": "The differences between a loan and a finance lease for tractors and machinery: ownership, deposit, instalments, residual value and how to compare offers."
+      }
+    }
+  }
+}

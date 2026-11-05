@@ -1,0 +1,223 @@
+{
+  "key": "ferme",
+  "order": 25,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "utilaje"
+  ],
+  "relatedGuides": [
+    "cum-analizeaza-finantatorul-ferma",
+    "fonduri-garantare"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru ferme vegetale și zootehnice",
+      "slug": "ferme",
+      "answer": "Finanțăm dezvoltarea fermelor vegetale și zootehnice, {{F5.term}}. La o fermă vegetală ratele urmează recolta, iar la o fermă zootehnică încasările vin altfel, așa că graficul se stabilește după ferma ta.",
+      "fits": "Este pentru fermele care se dezvoltă: un grajd nou, o linie de muls, mai multe animale, un spațiu pentru utilaje sau o tehnologie care reduce costurile. Se potrivește mai ales când investiția schimbă felul în care lucrează ferma, nu doar când înlocuiește ceva.",
+      "notFor": "Nu începe cu o fermă zootehnică fără un cumpărător sigur pentru lapte sau carne. Fără contract și fără un plan de furaje, rata e doar o parte din problemă.\n\nDacă vrei să acoperi pierderile fermei, nu este creditul potrivit: mai întâi trebuie să afli de ce apar.",
+      "finances": "- construcții și modernizări: grajduri, adăposturi, hale\n- echipamente: săli de muls, furajare, ventilație\n- tehnologie care reduce costurile",
+      "repayment": "O fermă de cereale încasează de două ori pe an, iar o fermă de lapte primește bani mai des, de la procesator. De aceea, nu există un grafic bun pentru toate. Ratele se discută după fluxul real al banilor din ferma ta.",
+      "example": {
+        "title": "Un grajd modernizat",
+        "scenario": "O fermă de vaci de lapte modernizează adăpostul și sala de muls cu 800.000 de lei și alege 8 ani, cu 2 rate pe an.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "800.000 lei"
+          },
+          {
+            "label": "Număr de rate",
+            "value": "16"
+          },
+          {
+            "label": "Rată de capital",
+            "value": "50.000 lei"
+          },
+          {
+            "label": "Capital pe an",
+            "value": "100.000 lei"
+          }
+        ]
+      },
+      "risks": "La zootehnie riscurile sunt altele decât la cereale: bolile, prețul furajelor, prețul laptelui sau al cărnii și lipsa oamenilor. Un an cu furaje scumpe poate apăsa pe rate, deci păstrează o rezervă. Întreabă și ce asigurări ai pentru animale și clădiri.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Construcțiile sau terenul pot garanta creditul."
+        },
+        {
+          "kind": "machinery",
+          "note": "Echipamentele pot rămâne în garanție."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Sumele de încasat de la APIA pot susține creditul."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Finanțați și ferme zootehnice?",
+          "answer": "Da, finanțăm atât ferme vegetale, cât și zootehnice. Spune-ne ce vrei să faci."
+        },
+        {
+          "question": "Pot avea rate lunare?",
+          "answer": "Discută cu echipa. Ratele sunt de regulă legate de recolte, dar fluxul banilor diferă la zootehnie."
+        },
+        {
+          "question": "Cumpărați și producția?",
+          "answer": "Agrinvest cumpără cereale. Pentru lapte sau carne ai nevoie de contractele tale de vânzare."
+        },
+        {
+          "question": "Pot folosi creditul pentru pierderi?",
+          "answer": "Nu este destinat acestui lucru. Vorbește cu noi despre situația fermei."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru ferme vegetale și zootehnice",
+        "description": "Credit pe termen lung pentru grajduri, echipamente și dezvoltarea fermei, cu rate după fluxul de bani. Pentru ferme vegetale și zootehnice."
+      }
+    },
+    "en": {
+      "title": "Loan for crop and livestock farms",
+      "slug": "farms",
+      "answer": "We finance the growth of crop and livestock farms, {{F5.term}}. On a crop farm instalments follow the harvest; on a livestock farm money comes in differently, so the schedule is set around your farm.",
+      "fits": "It is for farms that are growing: a new barn, a milking line, more animals, a machinery shed or technology that cuts costs. It fits best when the investment changes how the farm works, not just when it replaces something.",
+      "notFor": "Do not start a livestock farm without a sure buyer for milk or meat. With no contract and no feed plan, the instalment is only part of the problem.\n\nIf you want to cover the farm's losses, this is not the right loan: first you need to find out why they arise.",
+      "finances": "- buildings and upgrades: barns, shelters, halls\n- equipment: milking parlours, feeding, ventilation\n- technology that cuts costs",
+      "repayment": "A grain farm is paid twice a year, while a dairy farm receives money more often, from the processor. So no single schedule suits everyone. Instalments are discussed around the real flow of money on your farm.",
+      "example": {
+        "title": "An upgraded barn",
+        "scenario": "A dairy farm upgrades its barn and milking parlour for 800,000 lei and chooses 8 years, with 2 instalments a year.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "800,000 lei"
+          },
+          {
+            "label": "Number of instalments",
+            "value": "16"
+          },
+          {
+            "label": "Principal per instalment",
+            "value": "50,000 lei"
+          },
+          {
+            "label": "Principal per year",
+            "value": "100,000 lei"
+          }
+        ]
+      },
+      "risks": "Livestock risks differ from grain: disease, feed prices, milk or meat prices and a shortage of people. A year of dear feed can press on instalments, so keep a reserve. Ask too what insurance you have on animals and buildings.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Buildings or land can guarantee the loan."
+        },
+        {
+          "kind": "machinery",
+          "note": "The equipment can stay pledged."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Amounts due from APIA can support the loan."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Do you finance livestock farms?",
+          "answer": "Yes, both crop and livestock farms. Tell us what you want to do."
+        },
+        {
+          "question": "Can I have monthly instalments?",
+          "answer": "Talk to the team. Instalments are usually tied to harvests, but the flow of money differs in livestock."
+        },
+        {
+          "question": "Do you also buy the output?",
+          "answer": "Agrinvest buys grain. For milk or meat you need your own sale contracts."
+        },
+        {
+          "question": "Can I use the loan for losses?",
+          "answer": "It is not meant for that. Talk to us about the farm's position."
+        }
+      ],
+      "seo": {
+        "title": "Loan for crop and livestock farms in Romania",
+        "description": "A long-term loan for barns, equipment and farm growth, with instalments set around cash flow. For crop and livestock farms."
+      }
+    }
+  },
+  "parent": "credit-investitii"
+}

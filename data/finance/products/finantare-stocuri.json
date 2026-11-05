@@ -1,0 +1,197 @@
+{
+  "key": "finantare-stocuri",
+  "order": 31,
+  "harvestCalendar": true,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-contracte-cereale",
+    "depozitare"
+  ],
+  "relatedGuides": [
+    "cand-vinzi-recolta",
+    "costul-real-al-creditului"
+  ],
+  "sources": [
+    {
+      "title": "Financial Intelligence: ING și Agrinvest Credit IFN, 27.01.2022",
+      "url": "https://financialintelligence.ro/ing-bank-romania-a-acordat-o-noua-finantare-de-10-milioane-lei-pentru-agrinvest-credit-ifn-pentru-a-sustine-fermierii-romani/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Finanțarea stocurilor de cereale",
+      "slug": "finantare-stocuri",
+      "answer": "Finanțarea stocurilor îți aduce bani pe marfa din depozit, ca să nu fii obligat să vinzi la recoltă, când prețurile sunt de regulă mai mici. Rambursezi când vinzi.",
+      "fits": "Este pentru fermierii care au marfă depozitată în condiții bune și au plăți de făcut chiar după recoltă: rate, arendă, furnizori, semințe pentru toamnă. Creditul le dă timp să aleagă momentul vânzării.",
+      "notFor": "Nu are sens dacă nu ai motive să crezi că poți vinde mai bine. Creditul costă, iar prețul poate și să scadă.\n\nNu este potrivit nici pentru marfă păstrată în condiții proaste, pentru că pierzi din calitate exact în perioada în care aștepți.",
+      "finances": "Finanțăm nevoia de bani cât timp marfa stă în depozit: plăți către furnizori, pregătirea campaniei următoare și alte cheltuieli curente. Marfa poate sta în depozitul tău sau la [bazele Agrinvest](/depozitare). Spune-ne unde o ții.",
+      "repayment": "Rambursezi din vânzarea stocului. Durata se stabilește de la început, de aceea e bine să ai un plan: până când ești dispus să aștepți și la ce preț vinzi.",
+      "example": {
+        "title": "500 t de porumb în depozit",
+        "scenario": "O fermă are 500 t de porumb și vrea să aștepte trei luni. Ia un credit de 300.000 de lei, ca să plătească furnizorii. Cifrele sunt inventate pentru exemplu.",
+        "rows": [
+          {
+            "label": "Marfă stocată",
+            "value": "500 t"
+          },
+          {
+            "label": "Credit",
+            "value": "300.000 lei"
+          },
+          {
+            "label": "Durată",
+            "value": "3 luni"
+          },
+          {
+            "label": "Rambursare",
+            "value": "din vânzarea stocului"
+          }
+        ]
+      },
+      "risks": "Riscul principal este că prețul nu urcă. Atunci ai plătit depozitare și dobândă și ai vândut la fel sau mai ieftin. Stabilește de la început prețul minim și data la care vinzi oricum. Calculul pe tonă este în ghidul [când vinzi recolta](/finantare/ghiduri/cand-vinzi-recolta).",
+      "guarantees": [
+        {
+          "kind": "crops",
+          "note": "Marfa stocată sau cultura susține creditul."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm situația",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "De ce să nu vând la recoltă?",
+          "answer": "Uneori chiar merită să vinzi. Stocarea are sens doar dacă prețul viitor acoperă depozitarea, dobânda și pierderile."
+        },
+        {
+          "question": "Marfa trebuie să fie la Agrinvest?",
+          "answer": "Întreabă echipa. Contează unde este marfa și cum este păstrată."
+        },
+        {
+          "question": "Pot vinde stocul altcuiva?",
+          "answer": "Discută cu echipa. Condițiile depind de garanții."
+        },
+        {
+          "question": "Ce se întâmplă dacă prețul scade?",
+          "answer": "Creditul rămâne de plătit. De aceea e bine să ai un preț minim și o dată-limită."
+        }
+      ],
+      "seo": {
+        "title": "Finanțarea stocurilor de cereale pentru fermieri",
+        "description": "Credit pe marfa din depozit, ca să nu vinzi la recoltă. Când merită, cum se rambursează și ce se întâmplă dacă prețul nu crește."
+      }
+    },
+    "en": {
+      "title": "Grain stock financing",
+      "slug": "stock-financing",
+      "answer": "Stock financing gives you money against grain in store, so you are not forced to sell at harvest, when prices are usually lower. You repay when you sell.",
+      "fits": "It is for farmers who have grain in good storage and payments to make right after harvest: instalments, land rent, suppliers, autumn seed. The loan gives them time to choose when to sell.",
+      "notFor": "It makes no sense if you have no reason to expect a better price. The loan costs money, and the price can fall as well.\n\nNor does it suit grain kept in poor conditions, because you lose quality during the very time you are waiting.",
+      "finances": "We finance the need for money while grain sits in store: supplier payments, preparing the next season and other current costs. The grain can be in your own store or at [Agrinvest bases](/en/storage). Tell us where you keep it.",
+      "repayment": "You repay from selling the stock. The term is set at the start, so it helps to have a plan: how long you are willing to wait and at what price you sell.",
+      "example": {
+        "title": "500 t of maize in store",
+        "scenario": "A farm has 500 t of maize and wants to wait three months. It takes a 300,000 lei loan to pay suppliers. The numbers are invented for the example.",
+        "rows": [
+          {
+            "label": "Stored grain",
+            "value": "500 t"
+          },
+          {
+            "label": "Loan",
+            "value": "300,000 lei"
+          },
+          {
+            "label": "Term",
+            "value": "3 months"
+          },
+          {
+            "label": "Repayment",
+            "value": "from selling the stock"
+          }
+        ]
+      },
+      "risks": "The main risk is that the price does not rise. You have then paid storage and interest and sold for the same or less. Set a minimum price at the start, and a date when you sell anyway. The per-tonne calculation is in the guide [when to sell your harvest](/en/financing/guides/when-to-sell-the-harvest).",
+      "guarantees": [
+        {
+          "kind": "crops",
+          "note": "The stored grain or crop supports the loan."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at your position",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Why not sell at harvest?",
+          "answer": "Sometimes it does pay to sell. Storing makes sense only if the future price covers storage, interest and losses."
+        },
+        {
+          "question": "Must the grain be at Agrinvest?",
+          "answer": "Ask the team. Where the grain is and how it is kept both matter."
+        },
+        {
+          "question": "Can I sell the stock to someone else?",
+          "answer": "Talk to the team. The conditions depend on the guarantees."
+        },
+        {
+          "question": "What happens if the price falls?",
+          "answer": "The loan still has to be paid. That is why a minimum price and a deadline help."
+        }
+      ],
+      "seo": {
+        "title": "Grain stock financing for Romanian farmers",
+        "description": "A loan against grain in store, so you need not sell at harvest. When it is worth it, how repayment works and what happens if prices do not rise."
+      }
+    }
+  }
+}

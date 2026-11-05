@@ -1,0 +1,202 @@
+{
+  "key": "inputuri-plata-la-recolta",
+  "order": 33,
+  "harvestCalendar": true,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie",
+    "credit-contracte-cereale"
+  ],
+  "relatedGuides": [
+    "costul-real-al-creditului",
+    "cand-vinzi-recolta"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Flota proprie (site-ul vechi)",
+      "url": "https://agrinvest.ro/flota-proprie/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Inputuri cu plata la recoltă",
+      "slug": "inputuri-plata-la-recolta",
+      "answer": "Poți cumpăra semințe, îngrășăminte și tratamente acum și plăti după recoltă, printr-un credit de producție. În grupul Agrinvest există și fermieri care își achită datoria cu produse agricole, la recoltare. Condițiile le afli de la echipă.",
+      "fits": "Se potrivește fermierilor care au nevoie de inputuri la începutul campaniei și vor banii înapoi din recolta aceleiași culturi. Dacă lucrezi deja cu Agrinvest și pentru vânzarea cerealelor, discuția este mai simplă: inputurile, creditul și vânzarea sunt în același grup.",
+      "notFor": "Nu este o reducere. Plata amânată are un cost, chiar și când nu îl vezi ca dobândă. Dacă ai bani disponibili, compară cu plata imediată.\n\nNu cumpăra mai mult decât ai nevoie doar pentru că plătești mai târziu. La recoltă, nota vine toată odată.",
+      "finances": "Vorbim despre inputurile pentru cultură: semințe, îngrășăminte, produse de protecția plantelor. Le găsești în [magazinul Agrinvest](/magazin).\n\n**Cu cine lucrezi.** Agrinvest SRL vinde inputurile și cumpără cerealele. Agrinvest Credit IFN acordă creditele. Sunt două societăți, deci întreabă înainte de comandă cu cine semnezi și ce fel de contract este.",
+      "repayment": "Sunt două variante posibile, iar echipa îți spune care se aplică:\n\n- **Credit de producție:** împrumuți bani pentru inputuri și îi rambursezi după recoltă. Vezi [creditul de producție](/finantare/credit-productie).\n- **Plata cu produse agricole:** {{F14}}.",
+      "example": {
+        "title": "100 ha de grâu",
+        "scenario": "O fermă are nevoie de inputuri de 2.000 de lei pe hectar pentru 100 ha de grâu și vrea să plătească după recolta de vară.",
+        "rows": [
+          {
+            "label": "Inputuri",
+            "value": "200.000 lei"
+          },
+          {
+            "label": "Plata",
+            "value": "după recolta de vară"
+          }
+        ]
+      },
+      "risks": "Dacă recolta e slabă, datoria rămâne aceeași. La plata cu marfă, verifică prețul la care se calculează cerealele, pentru că el decide câtă marfă dai. Citește condițiile înainte să comanzi și compară cu prețul de vânzare din acel moment.",
+      "guarantees": [
+        {
+          "kind": "crops",
+          "note": "Cultura înființată susține plata."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "grain-contracts",
+          "note": "Un contract de vânzare arată din ce bani plătești."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm situația",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Pot plăti inputurile după recoltă?",
+          "answer": "Prin creditul de producție, da, dacă cererea este aprobată. Pentru alte variante întreabă echipa."
+        },
+        {
+          "question": "Pot plăti cu cereale?",
+          "answer": "Agrinvest are fermieri care își achită datoriile cu produse agricole, la recoltare. Întreabă echipa ce condiții se aplică."
+        },
+        {
+          "question": "La ce preț se calculează cerealele?",
+          "answer": "Prețul se stabilește în contract. Citește-l și compară cu prețul pieței."
+        },
+        {
+          "question": "Cine îmi dă finanțarea?",
+          "answer": "Creditele vin de la Agrinvest Credit IFN, iar inputurile de la Agrinvest SRL. Întreabă cu cine semnezi."
+        },
+        {
+          "question": "Pot comanda online și plăti la recoltă?",
+          "answer": "Nu din coșul de cumpărături. Vorbește cu un consultant înainte de comandă."
+        }
+      ],
+      "seo": {
+        "title": "Inputuri cu plata la recoltă: semințe și îngrășăminte",
+        "description": "Cum poți cumpăra semințe, îngrășăminte și tratamente acum și plăti după recoltă, ce variante există și ce să verifici înainte să comanzi."
+      }
+    },
+    "en": {
+      "title": "Farm inputs paid at harvest",
+      "slug": "inputs-paid-at-harvest",
+      "answer": "You can buy seed, fertiliser and crop protection now and pay after harvest, through a production loan. In the Agrinvest group there are also farmers who settle their debt in farm produce at harvest. The team can tell you the terms.",
+      "fits": "It suits farmers who need inputs at the start of the season and want the money back from that same crop's harvest. If you already sell grain to Agrinvest, the conversation is simpler: inputs, credit and sales are in one group.",
+      "notFor": "It is not a discount. Paying later has a cost, even when you do not see it as interest. If you have money available, compare with paying straight away.\n\nDo not buy more than you need just because you pay later. At harvest, the bill comes all at once.",
+      "finances": "We are talking about inputs for the crop: seed, fertiliser, crop protection. You will find them in the [Agrinvest shop](/en/shop).\n\n**Who you deal with.** Agrinvest SRL sells the inputs and buys the grain. Agrinvest Credit IFN gives the loans. They are two companies, so ask before you order who you are signing with and what kind of contract it is.",
+      "repayment": "There are two possible routes, and the team tells you which applies:\n\n- **Production loan:** you borrow money for inputs and repay it after harvest. See the [production loan](/en/financing/production-credit).\n- **Payment in farm produce:** {{F14}}.",
+      "example": {
+        "title": "100 ha of wheat",
+        "scenario": "A farm needs inputs of 2,000 lei per hectare for 100 ha of wheat and wants to pay after the summer harvest.",
+        "rows": [
+          {
+            "label": "Inputs",
+            "value": "200,000 lei"
+          },
+          {
+            "label": "Payment",
+            "value": "after the summer harvest"
+          }
+        ]
+      },
+      "risks": "If the harvest is poor, the debt stays the same. With payment in grain, check the price at which the grain is valued, because it decides how much you hand over. Read the terms before you order and compare with the selling price at that time.",
+      "guarantees": [
+        {
+          "kind": "crops",
+          "note": "The growing crop supports the payment."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "grain-contracts",
+          "note": "A sale contract shows where the money comes from."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at your position",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Can I pay for inputs after harvest?",
+          "answer": "Through the production loan, yes, if the request is approved. For other routes ask the team."
+        },
+        {
+          "question": "Can I pay in grain?",
+          "answer": "Agrinvest has farmers who settle their debts in farm produce at harvest. Ask the team which terms apply."
+        },
+        {
+          "question": "At what price is the grain valued?",
+          "answer": "The price is set in the contract. Read it and compare with the market price."
+        },
+        {
+          "question": "Who provides the finance?",
+          "answer": "Loans come from Agrinvest Credit IFN and inputs from Agrinvest SRL. Ask who you are signing with."
+        },
+        {
+          "question": "Can I order online and pay at harvest?",
+          "answer": "Not through the shopping cart. Talk to a consultant before you order."
+        }
+      ],
+      "seo": {
+        "title": "Farm inputs paid at harvest in Romania",
+        "description": "How to buy seed, fertiliser and crop protection now and pay after harvest, which routes exist and what to check before you order."
+      }
+    }
+  }
+}

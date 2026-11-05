@@ -1,5 +1,13 @@
 import { localePath } from '@/i18n/config'
-import { basePath, categoryPath, cropPath, productPath } from '@/i18n/routes'
+import {
+  basePath,
+  categoryPath,
+  cropPath,
+  financeProductPath,
+  guidePath,
+  productPath,
+} from '@/i18n/routes'
+import { listFinanceProducts, listGuides } from '@/lib/content/finance'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { payloadClient } from '@/lib/content/payload'
@@ -44,7 +52,18 @@ export async function GET() {
           `- [${d.title}](${absoluteUrl(localePath(d.path as string, locale))})${d.summary ? `: ${d.summary}` : ''}`,
       )
   }
-  const [ro, en] = await Promise.all([section('ro'), section('en')])
+  const [ro, en, guidesRo, guidesEn, productsRo, productsEn] = await Promise.all([
+    section('ro'),
+    section('en'),
+    listGuides('ro'),
+    listGuides('en'),
+    listFinanceProducts('ro'),
+    listFinanceProducts('en'),
+  ])
+  const productLine = (locale: 'ro' | 'en') => (p: (typeof productsRo)[number]) =>
+    `- [${p.title}](${absoluteUrl(financeProductPath(p.slug, locale, p.parentSlug))})`
+  const guideLine = (locale: 'ro' | 'en') => (g: (typeof guidesRo)[number]) =>
+    `- [${g.title}](${absoluteUrl(guidePath(g.slug, locale))}): ${g.summary}`
 
   const body = [
     `# ${seoRo.siteName}`,
@@ -58,6 +77,18 @@ export async function GET() {
     '',
     '## Pages (English)',
     ...en,
+    '',
+    '## Credite (Agrinvest Credit IFN)',
+    ...productsRo.map(productLine('ro')),
+    '',
+    '## Credit products (Agrinvest Credit IFN)',
+    ...productsEn.map(productLine('en')),
+    '',
+    '## Ghiduri de finanțare',
+    ...guidesRo.map(guideLine('ro')),
+    '',
+    '## Financing guides',
+    ...guidesEn.map(guideLine('en')),
     '',
     '## Baze de depozitare · Storage bases',
     ...bases.map(

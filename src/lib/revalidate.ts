@@ -12,6 +12,8 @@ export const tags = {
   brands: 'brands',
   ingredients: 'ingredients',
   targets: 'targets',
+  finance: 'finance',
+  guides: 'guides',
   global: (slug: string) => `global:${slug}`,
 } as const
 

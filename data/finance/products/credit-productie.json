@@ -1,0 +1,227 @@
+{
+  "key": "credit-productie",
+  "order": 10,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "inputuri-plata-la-recolta",
+    "credit-contracte-cereale"
+  ],
+  "relatedGuides": [
+    "costul-real-al-creditului",
+    "credit-adeverinta-apia",
+    "plata-subventii-apia"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: Agrinvest Credit IFN își extinde portofoliul, 2025",
+      "url": "https://agrointel.ro/320343/agrinvest-credit-ifn-sa-isi-extinde-portofoliul-produselor-de-creditare",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru producție agricolă",
+      "slug": "credit-productie",
+      "answer": "Creditul de producție acoperă cheltuielile unui an agricol, de la semințe și îngrășăminte până la lucrări, și se rambursează după recoltă. Ratele se stabilesc cu tine: {{F5.instalments}}.",
+      "fits": "Este gândit pentru fermele vegetale care plătesc mult primăvara și toamna, dar încasează abia după recoltă. Se potrivește mai ales fermierilor mici și mijlocii, care au acces greu la creditul bancar clasic sau au nevoie de un răspuns rapid înainte de campanie.",
+      "notFor": "Nu este potrivit pentru investiții. Un utilaj se plătește în ani, nu într-o recoltă, așa că pentru el există [creditul de investiții](/finantare/credit-investitii).\n\nNu rezolvă nici o datorie veche care se tot mută de la un an la altul. Dacă ferma pierde bani de mai mulți ani, un credit nou doar amână problema.",
+      "finances": "- semințe, îngrășăminte și produse de protecția plantelor\n- motorină și lucrări agricole\n- alte cheltuieli din campanie\n\nPentru inputuri poți comanda direct din [magazinul Agrinvest](/magazin).",
+      "repayment": "Banii se întorc atunci când vinzi recolta. De aceea, ratele se pun după încasări, nu lunar. Dacă ai și grâu, și porumb, împarți plata după culturi: o parte după recolta de vară, o parte după cea de toamnă.",
+      "example": {
+        "title": "O fermă de 200 ha",
+        "scenario": "O fermă cultivă 120 ha de grâu și 80 ha de porumb și are nevoie de circa 2.000 de lei pe hectar pentru campanie. Împarte plata după culturi, ca să plătească din banii fiecărei recolte.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "400.000 lei"
+          },
+          {
+            "label": "Rata după recolta de vară (grâu)",
+            "value": "240.000 lei"
+          },
+          {
+            "label": "Rata după recolta de toamnă (porumb)",
+            "value": "160.000 lei"
+          }
+        ]
+      },
+      "risks": "Un an secetos sau o scădere de preț pot lăsa ferma cu mai puțini bani decât a calculat. Câteva lucruri te ajută:\n\n- calculează rata pe o producție prudentă, nu pe cea din anul bun;\n- asigură culturile, dacă poți;\n- vinde o parte din producție pe contract, dacă îți poți livra cantitatea;\n- dacă vezi că nu poți plăti, sună-ne înainte de scadență, nu după.",
+      "guarantees": [
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "crops",
+          "note": "Cultura înființată susține creditul."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Sumele de încasat de la APIA susțin creditul."
+        },
+        {
+          "kind": "grain-contracts",
+          "note": "Un contract de vânzare arată din ce bani plătești."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Când trebuie să cer creditul?",
+          "answer": "Înainte de campanie, ca să ai timp pentru analiză. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "question": "Pot plăti totul într-o singură rată?",
+          "answer": "Da, dacă ai o singură recoltă principală și asta se stabilește la semnare. Numărul maxim este de 2 rate pe an."
+        },
+        {
+          "question": "Trebuie să cumpăr inputurile de la Agrinvest?",
+          "answer": "Întreabă echipa, în funcție de ce vrei să cumperi."
+        },
+        {
+          "question": "În ce monedă primesc banii?",
+          "answer": "Finanțările se acordă în lei."
+        },
+        {
+          "question": "Ce se întâmplă dacă recolta e slabă?",
+          "answer": "Vorbește cu noi din timp. Căutăm împreună o soluție, dar datoria rămâne și trebuie plătită."
+        },
+        {
+          "question": "Cât este dobânda?",
+          "answer": "Costul depinde de analiza fiecărei ferme și de garanții. Nu publicăm o dobândă fixă."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru producție agricolă, rate după recoltă",
+        "description": "Credit pentru semințe, îngrășăminte, motorină și lucrări, cu rate după recolta de vară și de toamnă. Pentru PFA, II, IF și societăți agricole."
+      }
+    },
+    "en": {
+      "title": "Farm production loan",
+      "slug": "production-credit",
+      "answer": "A production loan covers the costs of a farming year, from seed and fertiliser to field work, and is repaid after harvest. Instalments are agreed with you: {{F5.instalments}}.",
+      "fits": "It is built for arable farms that spend heavily in spring and autumn but earn only after harvest. It suits small and medium farmers in particular, who find bank credit hard to reach or need a quick answer before the season.",
+      "notFor": "It does not suit investment. A machine pays back over years, not in one harvest, which is what the [investment loan](/en/financing/investment-credit) is for.\n\nNor does it solve an old debt that keeps moving from year to year. If the farm has been losing money for several years, a new loan only delays the problem.",
+      "finances": "- seed, fertiliser and crop protection\n- diesel and field work\n- other season costs\n\nFor inputs you can order directly from the [Agrinvest shop](/en/shop).",
+      "repayment": "The money comes back when you sell the harvest. That is why instalments follow income rather than the calendar month. If you grow both wheat and maize, you split the payment by crop: part after the summer harvest, part after the autumn one.",
+      "example": {
+        "title": "A 200 ha farm",
+        "scenario": "A farm grows 120 ha of wheat and 80 ha of maize and needs about 2,000 lei per hectare for the season. It splits the payment by crop, so each harvest pays its own share.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "400,000 lei"
+          },
+          {
+            "label": "Instalment after the summer harvest (wheat)",
+            "value": "240,000 lei"
+          },
+          {
+            "label": "Instalment after the autumn harvest (maize)",
+            "value": "160,000 lei"
+          }
+        ]
+      },
+      "risks": "A dry year or a price fall can leave the farm with less money than it planned. A few things help:\n\n- work out the instalment on a cautious yield, not the one from a good year;\n- insure the crops if you can;\n- sell part of the crop on contract, if you can deliver the quantity;\n- if you can see you cannot pay, call us before the due date, not after.",
+      "guarantees": [
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "crops",
+          "note": "The growing crop supports the loan."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Amounts due from APIA support the loan."
+        },
+        {
+          "kind": "grain-contracts",
+          "note": "A sale contract shows where the repayment comes from."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "When should I apply?",
+          "answer": "Before the season, to leave time for the analysis. You get a reply {{F4.reply}}."
+        },
+        {
+          "question": "Can I pay everything in one instalment?",
+          "answer": "Yes, if you have one main harvest and this is agreed at signing. The most is 2 instalments a year."
+        },
+        {
+          "question": "Must I buy inputs from Agrinvest?",
+          "answer": "Ask the team, depending on what you want to buy."
+        },
+        {
+          "question": "In which currency is the loan?",
+          "answer": "Loans are in lei."
+        },
+        {
+          "question": "What happens if the harvest is poor?",
+          "answer": "Talk to us early. We look for a solution together, but the debt remains and has to be paid."
+        },
+        {
+          "question": "What is the interest rate?",
+          "answer": "The cost depends on the analysis of each farm and on the guarantees. We do not publish a fixed rate."
+        }
+      ],
+      "seo": {
+        "title": "Farm production loan, repaid after harvest",
+        "description": "A loan for seed, fertiliser, diesel and field work, with instalments after the summer and autumn harvests. For PFA, II, IF and farm companies."
+      }
+    }
+  }
+}

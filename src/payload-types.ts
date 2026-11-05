@@ -79,6 +79,9 @@ export interface Config {
     'price-history': PriceHistory;
     carts: Cart;
     orders: Order;
+    'finance-products': FinanceProduct;
+    guides: Guide;
+    'finance-applications': FinanceApplication;
     people: Person;
     leads: Lead;
     media: Media;
@@ -113,6 +116,9 @@ export interface Config {
     'price-history': PriceHistorySelect<false> | PriceHistorySelect<true>;
     carts: CartsSelect<false> | CartsSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
+    'finance-products': FinanceProductsSelect<false> | FinanceProductsSelect<true>;
+    guides: GuidesSelect<false> | GuidesSelect<true>;
+    'finance-applications': FinanceApplicationsSelect<false> | FinanceApplicationsSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -189,6 +195,7 @@ export interface Page {
         | ServiceGridBlock
         | StepsBlock
         | FinanceBandBlock
+        | FinanceProductsBlock
         | StorySectionBlock
         | BaseListBlock
         | CropListBlock
@@ -230,6 +237,15 @@ export interface Page {
    * Languages this page is published in. English pages are business-led, not a mirror; a page in one language has no hreflang pair.
    */
   languages: ('ro' | 'en')[];
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -447,7 +463,7 @@ export interface FinanceBandBlock {
     href?: string | null;
   };
   /**
-   * The repayment timeline (figures register F5).
+   * The repayment timeline (figures register F5.instalments).
    */
   instalments?:
     | {
@@ -459,6 +475,18 @@ export interface FinanceBandBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'financeBand';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FinanceProductsBlock".
+ */
+export interface FinanceProductsBlock {
+  kicker?: string | null;
+  heading: string;
+  lead?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'financeProducts';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1386,6 +1414,351 @@ export interface Order {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finance-products".
+ */
+export interface FinanceProduct {
+  id: number;
+  title: string;
+  /**
+   * Stable key used by the reviewed files.
+   */
+  key: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  /**
+   * Only for the investment pages.
+   */
+  parent?: (number | null) | FinanceProduct;
+  /**
+   * Position on the finance hub.
+   */
+  order?: number | null;
+  /**
+   * Two or three sentences at the top: what it is, who it is for.
+   */
+  answer: string;
+  fits: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Honest limits build trust and stop the wrong applications.
+   */
+  notFor: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  finances: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  repayment: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Off where repayment does not follow the harvests.
+   */
+  harvestCalendar?: boolean | null;
+  /**
+   * Principal only, round numbers, always labelled as an example.
+   */
+  example: {
+    title: string;
+    scenario: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    rows?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  risks: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  borrowers?: ('pfa' | 'ii' | 'if' | 'srl' | 'sa' | 'agricultural-company')[] | null;
+  guarantees?:
+    | {
+        kind: 'promissory-note' | 'crops' | 'machinery' | 'apia-subsidies' | 'grain-contracts' | 'mortgage';
+        note: string;
+        id?: string | null;
+      }[]
+    | null;
+  documents?:
+    | {
+        audience: 'all' | 'individual' | 'company';
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  process?:
+    | {
+        title: string;
+        body: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Only what the IFN allows. JSON-LD states these once the status is confirmed.
+   */
+  limits?: {
+    amountMin?: number | null;
+    amountMax?: number | null;
+    termMonths?: number | null;
+  };
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  advisor?: (number | null) | Person;
+  relatedProducts?: (number | FinanceProduct)[] | null;
+  relatedGuides?: (number | Guide)[] | null;
+  sources?:
+    | {
+        title: string;
+        url: string;
+        retrieved: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  review: {
+    legalStatus: 'draft' | 'ifn-reviewed' | 'legal-approved';
+    status: 'to-confirm' | 'conflict' | 'confirmed';
+    reviewedAt?: string | null;
+    reviewedBy?: string | null;
+  };
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides".
+ */
+export interface Guide {
+  id: number;
+  title: string;
+  /**
+   * Stable key used by the reviewed files.
+   */
+  key: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  section: 'finantare' | 'pagina-finantare';
+  summary: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Only for the glossary.
+   */
+  terms?:
+    | {
+        term: string;
+        definition: string;
+        id?: string | null;
+      }[]
+    | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  author?: (number | null) | Person;
+  reviewer?: (number | null) | Person;
+  relatedProducts?: (number | FinanceProduct)[] | null;
+  relatedGuides?: (number | Guide)[] | null;
+  sources?:
+    | {
+        title: string;
+        url: string;
+        retrieved: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  review: {
+    legalStatus: 'draft' | 'ifn-reviewed' | 'legal-approved';
+    status: 'to-confirm' | 'conflict' | 'confirmed';
+    reviewedAt?: string | null;
+    reviewedBy?: string | null;
+  };
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finance-applications".
+ */
+export interface FinanceApplication {
+  id: number;
+  reference: string;
+  status: 'new' | 'contacted' | 'in-analysis' | 'closed';
+  assignedTo?: (number | null) | Person;
+  borrower: 'pfa' | 'ii' | 'if' | 'srl' | 'sa' | 'agricultural-company';
+  company?: string | null;
+  cui?: string | null;
+  name: string;
+  phone: string;
+  email: string;
+  product?: (number | null) | FinanceProduct;
+  amount?: number | null;
+  termMonths?: number | null;
+  guarantees?: ('promissory-note' | 'crops' | 'machinery' | 'apia-subsidies' | 'grain-contracts' | 'mortgage')[] | null;
+  county?: (number | null) | County;
+  crops?: (number | Crop)[] | null;
+  area?: number | null;
+  message?: string | null;
+  consents: {
+    dataProcessing: boolean;
+    creditBureau?: boolean | null;
+    version?: string | null;
+  };
+  meta?: {
+    locale?: ('ro' | 'en') | null;
+    sourcePath?: string | null;
+    utmSource?: string | null;
+    utmCampaign?: string | null;
+  };
+  /**
+   * Internal notes.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads".
  */
 export interface Lead {
@@ -1427,6 +1800,10 @@ export interface Lead {
  */
 export interface User {
   id: number;
+  /**
+   * ifn: reads credit applications. admin: changes roles.
+   */
+  roles?: ('admin' | 'ifn')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1520,6 +1897,18 @@ export interface PayloadLockedDocument {
         value: number | Order;
       } | null)
     | ({
+        relationTo: 'finance-products';
+        value: number | FinanceProduct;
+      } | null)
+    | ({
+        relationTo: 'guides';
+        value: number | Guide;
+      } | null)
+    | ({
+        relationTo: 'finance-applications';
+        value: number | FinanceApplication;
+      } | null)
+    | ({
         relationTo: 'people';
         value: number | Person;
       } | null)
@@ -1598,6 +1987,7 @@ export interface PagesSelect<T extends boolean = true> {
         serviceGrid?: T | ServiceGridBlockSelect<T>;
         steps?: T | StepsBlockSelect<T>;
         financeBand?: T | FinanceBandBlockSelect<T>;
+        financeProducts?: T | FinanceProductsBlockSelect<T>;
         storySection?: T | StorySectionBlockSelect<T>;
         baseList?: T | BaseListBlockSelect<T>;
         cropList?: T | CropListBlockSelect<T>;
@@ -1628,6 +2018,7 @@ export interface PagesSelect<T extends boolean = true> {
   isHome?: T;
   parent?: T;
   languages?: T;
+  enrichment?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1781,6 +2172,17 @@ export interface FinanceBandBlockSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FinanceProductsBlock_select".
+ */
+export interface FinanceProductsBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  heading?: T;
+  lead?: T;
   id?: T;
   blockName?: T;
 }
@@ -2408,6 +2810,205 @@ export interface OrdersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finance-products_select".
+ */
+export interface FinanceProductsSelect<T extends boolean = true> {
+  title?: T;
+  key?: T;
+  generateSlug?: T;
+  slug?: T;
+  parent?: T;
+  order?: T;
+  answer?: T;
+  fits?: T;
+  notFor?: T;
+  finances?: T;
+  repayment?: T;
+  harvestCalendar?: T;
+  example?:
+    | T
+    | {
+        title?: T;
+        scenario?: T;
+        rows?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  risks?: T;
+  borrowers?: T;
+  guarantees?:
+    | T
+    | {
+        kind?: T;
+        note?: T;
+        id?: T;
+      };
+  documents?:
+    | T
+    | {
+        audience?: T;
+        label?: T;
+        id?: T;
+      };
+  process?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  limits?:
+    | T
+    | {
+        amountMin?: T;
+        amountMax?: T;
+        termMonths?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  advisor?: T;
+  relatedProducts?: T;
+  relatedGuides?: T;
+  sources?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        retrieved?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  review?:
+    | T
+    | {
+        legalStatus?: T;
+        status?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
+  enrichment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides_select".
+ */
+export interface GuidesSelect<T extends boolean = true> {
+  title?: T;
+  key?: T;
+  generateSlug?: T;
+  slug?: T;
+  section?: T;
+  summary?: T;
+  body?: T;
+  terms?:
+    | T
+    | {
+        term?: T;
+        definition?: T;
+        id?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  author?: T;
+  reviewer?: T;
+  relatedProducts?: T;
+  relatedGuides?: T;
+  sources?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        retrieved?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  review?:
+    | T
+    | {
+        legalStatus?: T;
+        status?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
+  enrichment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finance-applications_select".
+ */
+export interface FinanceApplicationsSelect<T extends boolean = true> {
+  reference?: T;
+  status?: T;
+  assignedTo?: T;
+  borrower?: T;
+  company?: T;
+  cui?: T;
+  name?: T;
+  phone?: T;
+  email?: T;
+  product?: T;
+  amount?: T;
+  termMonths?: T;
+  guarantees?: T;
+  county?: T;
+  crops?: T;
+  area?: T;
+  message?: T;
+  consents?:
+    | T
+    | {
+        dataProcessing?: T;
+        creditBureau?: T;
+        version?: T;
+      };
+  meta?:
+    | T
+    | {
+        locale?: T;
+        sourcePath?: T;
+        utmSource?: T;
+        utmCampaign?: T;
+      };
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people_select".
  */
 export interface PeopleSelect<T extends boolean = true> {
@@ -2519,6 +3120,7 @@ export interface DocumentsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

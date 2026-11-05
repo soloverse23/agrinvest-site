@@ -27,6 +27,9 @@ import { localePath, type Locale } from '@/i18n/config'
 import { basePath, cropPath } from '@/i18n/routes'
 import { isGrainKey } from '@/lib/crops'
 import { fixedUrl, ui } from '@/i18n/ui'
+import { slugify } from '@/lib/slugify'
+import { financeProductPath } from '@/i18n/routes'
+import { listFinanceProducts } from '@/lib/content/finance'
 import { getFigures, type Figures } from '@/lib/content/globals'
 import { listBases, listCounties, listCrops } from '@/lib/content/locations'
 import { submitLead } from '@/lib/leads/actions'
@@ -67,6 +70,29 @@ type Ctx = { locale: Locale; path: string; first: boolean; figures: Figures }
 const fact = (text: string | null | undefined, ctx: Pick<Ctx, 'figures' | 'locale'>) =>
   text ? <FactText text={text} figures={ctx.figures} locale={ctx.locale} /> : null
 
+/** Anchor of an H2, shared with the contents list of long pages. */
+export const headingId = (node: { children?: unknown[] }) =>
+  slugify(
+    (node.children ?? [])
+      .map((c) => (c as { text?: string }).text ?? '')
+      .join(' ')
+      .slice(0, 80),
+  )
+
+/** The H2s of a rich text, for an in-page contents list. */
+export function headingsOf(data: unknown) {
+  const root = (data as { root?: { children?: { type: string; tag?: string }[] } })?.root
+  return (root?.children ?? [])
+    .filter((n) => n.type === 'heading' && n.tag === 'h2')
+    .map((n) => {
+      const node = n as unknown as { children?: { text?: string }[] }
+      return {
+        id: headingId(node),
+        title: (node.children ?? []).map((c) => c.text ?? '').join(''),
+      }
+    })
+}
+
 /** Rich text with register facts inside text nodes, in the long-form style. */
 export function Prose({
   data,
@@ -79,6 +105,18 @@ export function Prose({
 }) {
   const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
     ...defaultConverters,
+    heading: (args) => {
+      const render = defaultConverters.heading
+      const rendered = typeof render === 'function' ? render(args) : null
+      const node = args.node as { tag: string; children: unknown[] }
+      if (node.tag !== 'h2') return rendered
+      const Tag = 'h2'
+      return (
+        <Tag id={headingId(node)} className="scroll-mt-24">
+          {args.nodesToJSX({ nodes: args.node.children })}
+        </Tag>
+      )
+    },
     text: (args) => {
       const node = args.node as SerializedTextNode
       if (!node.text.includes('{{')) {
@@ -268,6 +306,15 @@ async function renderBlock(block: Block, ctx: Ctx): Promise<ReactNode> {
             }
           />
         </Section>
+      )
+    case 'financeProducts':
+      return (
+        <FinanceProductsSection
+          key={block.id}
+          block={block}
+          locale={ctx.locale}
+          figures={ctx.figures}
+        />
       )
     case 'leadForm':
       return <LeadFormBlock key={block.id} block={block} locale={ctx.locale} path={ctx.path} />
@@ -536,6 +583,57 @@ export async function LeadFormBlock({
           privacyHref={fixedUrl('privacy', locale)}
         />
       </div>
+    </Section>
+  )
+}
+
+/** The credit products on the finance hub. Nested pages appear under their parent. */
+async function FinanceProductsSection({
+  block,
+  locale,
+  figures,
+}: {
+  block: BlockOf<'financeProducts'>
+  locale: Locale
+  figures: Figures
+}) {
+  const products = await listFinanceProducts(locale)
+  const top = products.filter((p) => !p.parentSlug)
+  return (
+    <Section id="produse">
+      <SectionHeading kicker={block.kicker} title={block.heading} lead={block.lead} />
+      <ul className="mt-8 grid gap-4 md:grid-cols-2">
+        {top.map((p) => {
+          const children = products.filter((c) => c.parentSlug === p.slug)
+          return (
+            <li
+              key={p.id}
+              className="grid content-start gap-3 rounded-lg bg-raised p-6 ring-1 ring-line"
+            >
+              <h3 className="text-h4 font-semibold">
+                <Link href={financeProductPath(p.slug, locale)} className="text-ink">
+                  {p.title}
+                </Link>
+              </h3>
+              <p className="text-small text-muted">{fact(p.answer, { figures, locale })}</p>
+              {children.length > 0 && (
+                <ul className="flex flex-wrap gap-x-4 gap-y-1 text-small">
+                  {children.map((c) => (
+                    <li key={c.id}>
+                      <Link
+                        href={financeProductPath(c.slug, locale, p.slug)}
+                        className="text-accent underline underline-offset-2"
+                      >
+                        {c.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          )
+        })}
+      </ul>
     </Section>
   )
 }

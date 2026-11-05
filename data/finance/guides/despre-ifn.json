@@ -1,0 +1,76 @@
+{
+  "key": "despre-ifn",
+  "section": "pagina-finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [],
+  "relatedGuides": [],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: Agrinvest Credit IFN își extinde portofoliul, 2025",
+      "url": "https://agrointel.ro/320343/agrinvest-credit-ifn-sa-isi-extinde-portofoliul-produselor-de-creditare",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Legea 93/2009 privind instituțiile financiare nebancare",
+      "url": "https://lawchat.ro/legislatie/text-complet-legea-93-2009-institutiile-financiare-nebancare-158903",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Despre Agrinvest Credit IFN",
+      "slug": "despre-ifn",
+      "summary": "Agrinvest Credit IFN este instituția financiară nebancară a grupului Agrinvest, care finanțează fermieri români și este înscrisă în Registrul Special al BNR.",
+      "body": "## Cine suntem\n\nAgrinvest Credit IFN a pornit dintr-o nevoie simplă: fermierii cu care lucra grupul aveau nevoie de bani înainte de recoltă, iar băncile nu erau mereu soluția. Finanțăm agricultura din {{F3}}. Grupul Agrinvest are capital {{C5}} și activează în agribusiness din {{C1}}.\n\n## Ce finanțăm\n\nCredite pentru [producție](/finantare/credit-productie) și [investiții](/finantare/credit-investitii). Finanțăm și producători din industria alimentară, {{F12}}. Avem {{F6}} de clienți.\n\n## Cum lucrăm\n\nUn fermier nu seamănă cu altul, deci analiza nu este un calcul automat. Ne uităm la cifre, dar și la ce se întâmplă în fermă: culturi, zonă, istoric, planuri. Ratele se pun după recolte. Când o fermă trece printr-un an greu, vrem să aflăm din timp, ca să căutăm o soluție împreună.\n\nFacem parte dintr-un grup care vinde inputuri, cumpără cereale, depozitează și transportă. Asta ne ajută să înțelegem ce se întâmplă în câmp pe parcursul anului.\n\n## Date legale\n\n| | |\n| --- | --- |\n| Denumire | Agrinvest Credit IFN SA |\n| Registrul Special BNR | {{F1}} |\n| CUI | {{F2.cui}} |\n| Registrul Comerțului | {{F2.reg}} |\n| Sediul social | {{F7.registered}} |\n| Birou | {{F7.office}} |\n| E-mail | {{F8.email}} |\n| Protecția datelor | {{F8.dpo}} |\n\nPoți verifica înscrierea noastră în registrele publicate de Banca Națională a României. Vezi și [IFN sau bancă](/finantare/ghiduri/ifn-sau-banca).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Ce este un IFN?",
+          "answer": "O instituție financiară nebancară: acordă credite, dar nu atrage depozite de la public. IFN-urile sunt înscrise și supravegheate de BNR."
+        },
+        {
+          "question": "Sunteți o bancă?",
+          "answer": "Nu. Agrinvest Credit IFN este o instituție financiară nebancară din grupul Agrinvest."
+        },
+        {
+          "question": "Cum vă pot verifica?",
+          "answer": "În registrele publicate de BNR, după numărul din Registrul Special și după denumire."
+        }
+      ],
+      "seo": {
+        "title": "Despre Agrinvest Credit IFN: BNR, date legale",
+        "description": "Cine este Agrinvest Credit IFN, cum lucrăm cu fermierii și datele legale: înscrierea în Registrul Special BNR, CUI, sediu și contact."
+      }
+    },
+    "en": {
+      "title": "About Agrinvest Credit IFN",
+      "slug": "about-ifn",
+      "summary": "Agrinvest Credit IFN is the non-bank financial institution of the Agrinvest group, financing Romanian farmers and listed in the National Bank of Romania Special Register.",
+      "body": "## Who we are\n\nAgrinvest Credit IFN began with a simple need: the farmers the group worked with needed money before harvest, and banks were not always the answer. We have been financing farming since {{F3}}. The Agrinvest group is {{C5}} owned and has been in agribusiness since {{C1}}.\n\n## What we finance\n\nLoans for [production](/en/financing/production-credit) and [investment](/en/financing/investment-credit). We also finance food producers, {{F12}}. We have {{F6}} clients.\n\n## How we work\n\nNo two farmers are alike, so our analysis is not an automatic calculation. We look at the numbers and at what is happening on the farm: crops, area, history, plans. Instalments follow the harvests. When a farm goes through a hard year, we want to know early, so we can look for a solution together.\n\nWe are part of a group that sells inputs, buys grain, stores and transports. That helps us understand what is happening in the field through the year.\n\n## Legal details\n\n| | |\n| --- | --- |\n| Name | Agrinvest Credit IFN SA |\n| BNR Special Register | {{F1}} |\n| Tax ID | {{F2.cui}} |\n| Trade register | {{F2.reg}} |\n| Registered office | {{F7.registered}} |\n| Office | {{F7.office}} |\n| Email | {{F8.email}} |\n| Data protection | {{F8.dpo}} |\n\nYou can check our listing in the registers published by the National Bank of Romania. See also [IFN or bank](/en/financing/guides/ifn-or-bank).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "What is an IFN?",
+          "answer": "A non-bank financial institution: it lends but does not take deposits from the public. IFNs are listed and supervised by BNR."
+        },
+        {
+          "question": "Are you a bank?",
+          "answer": "No. Agrinvest Credit IFN is a non-bank financial institution in the Agrinvest group."
+        },
+        {
+          "question": "How can I check you?",
+          "answer": "In the registers published by BNR, by Special Register number and name."
+        }
+      ],
+      "seo": {
+        "title": "About Agrinvest Credit IFN: BNR and legal details",
+        "description": "Who Agrinvest Credit IFN is, how we work with farmers and our legal details: BNR Special Register listing, tax ID, offices and contact."
+      }
+    }
+  }
+}

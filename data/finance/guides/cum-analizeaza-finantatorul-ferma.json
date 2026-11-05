@@ -1,0 +1,74 @@
+{
+  "key": "cum-analizeaza-finantatorul-ferma",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "ifn-sau-banca",
+    "costul-real-al-creditului"
+  ],
+  "sources": [
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De trei ori subvenția",
+      "url": "https://fgcr.ro/produse/de-trei-ori-subventia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cum analizează un finanțator ferma ta",
+      "slug": "cum-analizeaza-finantatorul-ferma",
+      "summary": "Un finanțator vrea să știe din ce bani va fi plătit creditul. Se uită la grad de îndatorare, solvabilitate, cash-flow și istoricul de plată, dar și la realitatea din fermă: suprafețe, culturi, producții, costuri pe hectar și contracte.",
+      "body": "## Ce vrea să afle un finanțator\n\nToate analizele de credit încearcă să răspundă la o singură întrebare: din ce bani va fi plătit creditul, și ce se întâmplă dacă banii aceia nu vin? Restul sunt detalii.\n\nSituațiile financiare sunt doar punctul de plecare. Bilanțul și balanța arată trecutul. Un finanțator serios încearcă să înțeleagă și ce se întâmplă acum în fermă.\n\n## Ce se uită în cifre\n\n| Ce verifică | Ce înseamnă | De ce contează |\n| --- | --- | --- |\n| Gradul de îndatorare | cât din fermă este finanțat din datorii | prea multe datorii lasă puțin spațiu pentru un an slab |\n| Solvabilitatea | cât capital propriu are firma | capitalul propriu absoarbe pierderile |\n| Cash-flow-ul | când intră și ies banii | profitul de pe hârtie nu plătește ratele |\n| Profitabilitatea | dacă ferma câștigă, pe mai mulți ani | un an bun nu spune totul |\n| Datoriile restante | furnizori, stat, alți finanțatori | întârzierile arată unde se blochează lucrurile |\n\n## De ce cifrele pot induce în eroare\n\nO fermă solidă poate arăta prost după un an de secetă. O fermă care pare bună pe hârtie poate avea, de fapt, datorii greu de plătit și stocuri supraevaluate. De aceea, analiza nu se oprește la bilanț.\n\nCâteva obiceiuri slăbesc însă imaginea firmei, chiar și într-un an bun:\n\n- **Scoți banii din firmă.** Dividendele și împrumuturile către asociați reduc capitalul propriu și solvabilitatea.\n- **Pui cheltuieli personale pe firmă.** Finanțatorul vede costuri care nu au legătură cu ferma.\n- **Lucrezi fără evidență pe culturi.** Fără costuri pe hectar, nu poți explica unde s-au dus banii.\n- **Te bazezi pe credite scurte pentru investiții.** Datoria scurtă apasă pe cash-flow.\n\n## Ce se uită în teren\n\nUn finanțator care cunoaște agricultura mai întreabă:\n\n- ce suprafață lucrezi, în proprietate și în arendă, și pe ce durată sunt contractele;\n- ce culturi ai și ce producții ai obținut în ultimii ani;\n- ce utilaje ai și în ce stare sunt;\n- unde vinzi și ce contracte ai;\n- ce costuri ai pe hectar;\n- cine conduce ferma și cine va continua activitatea.\n\nAjută să ai aceste răspunsuri pregătite, pe o singură pagină. O fermă care își cunoaște cifrele inspiră încredere.\n\n## Istoricul de plată\n\nFinanțatorii verifică Centrala Riscului de Credit și Biroul de Credit. Întârzierile de acolo cântăresc mult, iar la unele garanții de la fonduri restanțele te exclud până le achiți. Dacă ai avut o problemă, explic-o direct. Un finanțator o va găsi oricum.\n\n## Ce strică încrederea\n\nDouă lucruri sunt greu de reparat. Primul este informația incompletă: o datorie nedeclarată, descoperită la analiză, oprește de obicei discuția. Al doilea este mutarea suprafețelor de pe o firmă pe alta ca să scapi de creditori. Din afară se vede, iar după aceea nimeni nu mai vrea să finanțeze firmele implicate.\n\n## Cum te pregătești\n\n- Pune la zi contabilitatea înainte de cerere.\n- Fă o listă cu toate datoriile: cui, cât, până când.\n- Scrie încasările și plățile pe lună, pentru următoarele 12 luni.\n- Explică în câteva rânduri orice an slab.\n- Spune clar pentru ce vrei banii și din ce îi vei plăti.\n\nDacă nu poți scrie ultimul punct, nu e momentul pentru un credit. Dacă datoriile te apasă deja, citește [ghidul despre insolvență și restructurare](/finantare/ghiduri/insolventa-sau-restructurare). Pentru a alege finanțatorul, vezi [IFN sau bancă](/finantare/ghiduri/ifn-sau-banca).",
+      "faq": [
+        {
+          "question": "Un an slab înseamnă că nu primesc credit?",
+          "answer": "Nu neapărat. Depinde de finanțator și de explicație. Un an de secetă arată altfel decât o fermă în declin, dar analiza se uită și la datorii și cash-flow."
+        },
+        {
+          "question": "Ce este solvabilitatea?",
+          "answer": "Măsura în care firma se sprijină pe capital propriu, nu pe datorii. Scade când firma pierde bani sau când banii sunt scoși din firmă."
+        },
+        {
+          "question": "Trebuie să declar toate datoriile?",
+          "answer": "Da. Finanțatorul le poate vedea în evidențe, iar o datorie nedeclarată strică încrederea."
+        }
+      ],
+      "seo": {
+        "title": "Cum analizează un finanțator ferma: ce verifică",
+        "description": "Ce se uită un finanțator înainte să aprobe un credit agricol: îndatorare, solvabilitate, cash-flow, istoric de plată și ce poți pregăti din timp."
+      }
+    },
+    "en": {
+      "title": "How a lender assesses your farm",
+      "slug": "how-lenders-assess-a-farm",
+      "summary": "A lender wants to know what money will repay the loan. It looks at debt level, solvency, cash flow and payment history, and at the reality on the farm: areas, crops, yields, costs per hectare and contracts.",
+      "body": "## What a lender wants to know\n\nEvery credit analysis tries to answer one question: what money will repay the loan, and what happens if that money does not come? The rest is detail.\n\nFinancial statements are only the starting point. The balance sheet and trial balance show the past. A serious lender also tries to understand what is happening on the farm now.\n\n## What it looks at in the numbers\n\n| What it checks | What it means | Why it matters |\n| --- | --- | --- |\n| Debt level | how much of the farm is financed by debt | too much debt leaves little room for a weak year |\n| Solvency | how much equity the company has | equity absorbs losses |\n| Cash flow | when money comes in and goes out | profit on paper does not pay instalments |\n| Profitability | whether the farm earns, over several years | one good year does not tell it all |\n| Overdue debts | suppliers, the state, other lenders | arrears show where things are stuck |\n\n## Why the numbers can mislead\n\nA sound farm can look poor after a drought year. A farm that looks good on paper may in fact have debts that are hard to pay and overvalued stock. That is why analysis does not stop at the balance sheet.\n\nSome habits weaken a company's picture even in a good year:\n\n- **Taking money out of the company.** Dividends and loans to partners reduce equity and solvency.\n- **Putting personal costs through the company.** The lender sees costs unrelated to the farm.\n- **Not tracking crops separately.** Without costs per hectare, you cannot explain where the money went.\n- **Using short loans for investment.** Short debt squeezes cash flow.\n\n## What it looks at on the ground\n\nA lender who knows farming also asks:\n\n- what area you work, owned and rented, and how long the contracts run;\n- what crops you grow and what yields you got in recent years;\n- what machinery you have and what state it is in;\n- where you sell and what contracts you hold;\n- what your costs per hectare are;\n- who runs the farm and who will carry it on.\n\nIt helps to have these answers ready on one page. A farm that knows its numbers inspires confidence.\n\n## Payment history\n\nLenders check the Central Credit Register and the Credit Bureau. Arrears there weigh heavily, and with some fund guarantees they exclude you until they are paid. If you have had a problem, explain it directly. A lender will find it anyway.\n\n## What breaks trust\n\nTwo things are hard to repair. The first is incomplete information: an undeclared debt found during analysis usually ends the conversation. The second is moving land from one company to another to escape creditors. It is visible from outside, and afterwards nobody wants to finance the companies involved.\n\n## How to prepare\n\n- Bring the accounts up to date before you apply.\n- List all your debts: to whom, how much, until when.\n- Write income and payments by month for the next 12 months.\n- Explain any weak year in a few lines.\n- Say clearly what the money is for and how you will repay it.\n\nIf you cannot write that last point, this is not the time for a loan. If debts are already pressing, read the [guide to insolvency and restructuring](/en/financing/guides/insolvency-or-restructuring). To choose a lender, see [IFN or bank](/en/financing/guides/ifn-or-bank).",
+      "faq": [
+        {
+          "question": "Does a weak year mean I will not get a loan?",
+          "answer": "Not necessarily. It depends on the lender and the explanation. A drought year looks different from a farm in decline, but the analysis also looks at debts and cash flow."
+        },
+        {
+          "question": "What is solvency?",
+          "answer": "The extent to which the company rests on its own capital rather than debt. It falls when the company loses money or when money is taken out of it."
+        },
+        {
+          "question": "Must I declare all my debts?",
+          "answer": "Yes. The lender can see them in the records, and an undeclared debt damages trust."
+        }
+      ],
+      "seo": {
+        "title": "How a lender assesses a farm: what it checks",
+        "description": "What a lender looks at before approving a farm loan: debt level, solvency, cash flow, payment history and what you can prepare in advance."
+      }
+    }
+  }
+}

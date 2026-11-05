@@ -25,11 +25,13 @@ function enrichmentEpoch() {
       else if (entry.name.endsWith('.json')) hash.update(file).update(readFileSync(file))
     }
   }
-  for (const dir of ['products', 'hubs']) walk(path.join(dirname, 'data', dir))
+  for (const dir of ['products', 'hubs', 'finance']) walk(path.join(dirname, 'data', dir))
   for (const name of ['targets.json', 'pages.json']) {
     const file = path.join(dirname, 'data', name)
     if (existsSync(file)) hash.update(readFileSync(file))
   }
+  // The register rows that `apply:finance` adds to a live site come from the seed's data.
+  hash.update(readFileSync(path.join(dirname, 'scripts/seed/data.ts')))
   return hash.digest('hex').slice(0, 12)
 }
 

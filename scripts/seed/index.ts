@@ -4,13 +4,12 @@
  * pages with their content (content.ts).
  * Idempotent: every record is upserted by its key or slug. Run with `npm run seed`.
  */
-import { existsSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import config from '@payload-config'
 import { getPayload, type Payload, type Where } from 'payload'
 
-import type { FactStatus } from '@/fields'
 import { slugify } from '@/lib/slugify'
 import { contentFor, cropContent, cropFaq, type Ctx } from './content'
 import { contentEn, cropContentEn, cropFaqEn } from './content-en'
@@ -27,30 +26,11 @@ import {
 } from './data'
 import { footer, navigation, pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
+import { applyFinance } from '../finance/apply'
 import { applyEnrichment } from '../products/apply'
+import { registerConfirmation, registerStatuses } from './register'
 
 const context = { skipChildren: true }
-
-/** Status per register key, read from the register's tables (the source of truth). */
-function registerStatuses(): Map<string, FactStatus> {
-  const md = readFileSync(resolve('docs/audit/figures-register.md'), 'utf8')
-  const out = new Map<string, FactStatus>()
-  for (const line of md.split('\n')) {
-    const cells = line.split('|').map((c) => c.trim())
-    if (!/^[A-Z]\d+$/.test(cells[1] ?? '')) continue
-    const status =
-      cells.slice(3).find((c) => /to confirm|conflict|confirmed|snapshot|missing/i.test(c)) ?? ''
-    out.set(
-      cells[1],
-      /conflict/i.test(status)
-        ? 'conflict'
-        : /^confirmed/i.test(status.replace(/\*/g, ''))
-          ? 'confirmed'
-          : 'to-confirm',
-    )
-  }
-  return out
-}
 
 async function upsert<T extends 'counties' | 'bases' | 'crops' | 'people' | 'categories'>(
   payload: Payload,
@@ -79,8 +59,8 @@ async function upsert<T extends 'counties' | 'bases' | 'crops' | 'people' | 'cat
 }
 
 async function seedFigures(payload: Payload) {
-  const statuses = registerStatuses()
-  const statusOf = (key: string) => statuses.get(key.split('.')[0]) ?? 'to-confirm'
+  const statusOf = registerStatuses()
+  const confirmation = registerConfirmation()
   const rows = figures.map((f) => ({
     key: f.key,
     label: f.label.ro,
@@ -89,6 +69,7 @@ async function seedFigures(payload: Payload) {
     unit: f.unit?.ro,
     source: f.source,
     status: statusOf(f.key),
+    ...confirmation(f.key),
   }))
   const ro = await payload.updateGlobal({ slug: 'figures', data: { rows }, locale: 'ro', context })
   await payload.updateGlobal({
@@ -346,7 +327,9 @@ async function seedPages(payload: Payload, ctx: Ctx) {
       title: seed.ro.title,
       slug: seed.ro.slug,
       summary: seed.ro.summary,
-      seo: { title: seed.ro.seoTitle },
+      seo: { title: seed.ro.seoTitle, description: null },
+      // The seed replaced the page, so the apply step starts again from the seed's text.
+      enrichment: null,
       isHome: Boolean(seed.isHome),
       parent: seed.parent ? ids[seed.parent] : null,
       languages: seed.en ? (['ro', 'en'] as const) : (['ro'] as const),
@@ -375,7 +358,7 @@ async function seedPages(payload: Payload, ctx: Ctx) {
           title: seed.en.title,
           slug: seed.en.slug,
           summary: seed.en.summary,
-          seo: { title: seed.en.seoTitle },
+          seo: { title: seed.en.seoTitle, description: null },
           layout: english?.blocks ?? [],
           faq: english?.faq ?? [],
           _status: 'published',
@@ -485,6 +468,8 @@ const peopleIds = await seedPeople(payload)
 const mediaIds = await seedMedia(payload)
 await seedGlobals(payload)
 await seedPages(payload, { people: peopleIds, media: mediaIds })
+// After the pages and people it links to.
+await applyFinance(payload)
 
 // The seed writes outside Next.js, so its hooks cannot revalidate cache tags. Clear Next's
 // data cache instead, or the next build or dev run serves the pre-seed content.

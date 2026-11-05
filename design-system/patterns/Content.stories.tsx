@@ -333,7 +333,7 @@ export const Story_: Story = {
     return (
       <Page>
         <StorySection
-          kicker="Golden Relationship"
+          kicker="Logistică"
           title={l(
             locale,
             'Când un an greu nu e sfârșitul fermei',
@@ -473,7 +473,7 @@ export const Video: Story = {
         <div className="max-w-4xl">
           <VideoEmbed
             youtubeId="JOzMUJPyy40"
-            title="Agrinvest Golden Relationship – Constanța"
+            title="Agrinvest pe teren"
             poster={<Photo src={photos.combine.src} alt="" fill className="object-cover" />}
             labels={{
               play: l(locale, 'Pornește video', 'Play video'),

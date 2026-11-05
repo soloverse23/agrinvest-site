@@ -1,5 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { EXPERIMENTAL_TableFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { en } from '@payloadcms/translations/languages/en'
 import { ro } from '@payloadcms/translations/languages/ro'
@@ -15,6 +15,9 @@ import { Categories } from './collections/Categories'
 import { Counties } from './collections/Counties'
 import { Crops } from './collections/Crops'
 import { Documents } from './collections/Documents'
+import { FinanceApplications } from './collections/FinanceApplications'
+import { FinanceProducts } from './collections/FinanceProducts'
+import { Guides } from './collections/Guides'
 import { Leads } from './collections/Leads'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
@@ -75,6 +78,9 @@ export default buildConfig({
     PriceHistory,
     Carts,
     Orders,
+    FinanceProducts,
+    Guides,
+    FinanceApplications,
     People,
     Leads,
     Media,
@@ -82,7 +88,9 @@ export default buildConfig({
     Users,
   ],
   globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, EXPERIMENTAL_TableFeature()],
+  }),
   // Content locales (what visitors read). Romanian is the source language.
   localization: {
     locales: [

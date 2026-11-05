@@ -1,0 +1,78 @@
+{
+  "key": "credit-sau-grant-afir",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "irigatii"
+  ],
+  "relatedGuides": [
+    "fonduri-garantare",
+    "credit-sau-leasing-utilaje"
+  ],
+  "sources": [
+    {
+      "title": "Finanțare Agro: credite pentru cofinanțare",
+      "url": "https://finantareagro.ro/articol/credite-cofinantare-plantatie",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit sau grant AFIR: cum le folosești împreună",
+      "slug": "credit-sau-grant-afir",
+      "summary": "Un grant AFIR acoperă o parte din cheltuielile eligibile, iar creditul acoperă cofinanțarea, cheltuielile neeligibile și banii plătiți înainte de decontare. Majoritatea proiectelor au nevoie de amândouă, iar cofinanțarea se dovedește cu extras de cont sau contract de credit.",
+      "body": "## Nu trebuie să alegi între ele\n\nUn grant AFIR și un credit nu fac același lucru. Grantul acoperă o parte din cheltuielile eligibile ale proiectului. Creditul acoperă banii care îți lipsesc până când primești grantul și partea pe care grantul nu o plătește deloc. La majoritatea proiectelor ai nevoie de amândouă.\n\nUn proiect are, de fapt, două nevoi de bani:\n\n- **o nevoie permanentă:** cofinanțarea și cheltuielile neeligibile, pe care le plătești tu;\n- **o nevoie temporară:** banii pe care îi plătești furnizorilor înainte ca AFIR să îți deconteze tranșa.\n\n## Cât pui din buzunar\n\nContribuția proprie diferă de la o intervenție la alta. Situația de mai jos este cea publicată la 1 noiembrie 2026; sesiunile se schimbă des, deci verifică ghidul solicitantului în vigoare.\n\n| Intervenție | Sprijin maxim | Contribuția ta din eligibil | Stare la 1 noiembrie 2026 |\n| --- | --- | --- | --- |\n| DR-14, ferme mici | 50.000 euro, până la 85% | cel puțin 15% | deschisă până la 16 noiembrie 2026, pentru anumite sectoare |\n| DR-12, consolidarea exploatațiilor tinerilor fermieri | 200.000 euro; 80% până la 40 de ani, 65% pentru ceilalți | 20% sau 35% | deschisă până la 2 decembrie 2026 |\n| DR-15, exploatații pomicole | 1.500.000 euro, 65% | 35% în sesiunea 2024 | fără sesiune deschisă |\n\nPeste acestea vin cheltuielile neeligibile, pe care le plătești integral. La DR-14, TVA-ul este eligibil dacă nu ești plătitor de TVA; dacă îl poți recupera, îl plătești întâi din banii tăi și îl recuperezi ulterior. Și asta este o nevoie de bani, chiar dacă temporară.\n\n## Plătești înainte să primești\n\nAFIR decontează prin cereri de plată, după ce investiția este făcută. Până la încasarea tranșei, plătești furnizorii din bani proprii, din credit sau dintr-un avans.\n\nLa DR-14, avansul este plafonat la 50% din contribuția publică, se cere o singură dată și se acordă contra unei garanții de 100% din valoarea lui, sub formă de scrisoare de garanție bancară. Scrisoarea de garanție are și ea un cost, așa că un avans nu este bani gratuiți.\n\n## Cum dovedești cofinanțarea\n\nGhidurile DR-14 și DR-12 cer dovada cofinanțării private prin extras de cont și/sau contract de credit. Documentele se depun în cel mult 3 luni pentru achiziții simple și în cel mult 6 luni pentru achiziții complexe, de la notificarea selectării.\n\nDacă te bazezi pe credit, contează contractul semnat. Analiza finanțatorului, eventuala garanție și semnarea intră toate în acest termen, așa că începe discuția cu finanțatorul înainte de selecție, nu după.\n\n## Un exemplu simplu\n\nUn proiect DR-14 cu 58.823,53 euro cheltuieli eligibile: AFIR acoperă 50.000 de euro (85%), iar tu pui 8.823,53 euro, plus neeligibilul. Dacă un finanțator cu convenție îți dă un credit pentru această parte, FGCR poate garanta până la 80% din el. Citește [ghidul despre fondurile de garantare](/finantare/ghiduri/fonduri-garantare) pentru cost și condiții.\n\nDacă primești 50% avans, ai încasat 25.000 de euro, dar ai nevoie de o scrisoare de garanție pentru toată suma. Restul de 25.000 de euro îl plătești furnizorilor până la decontare.\n\n## Întrebări de pus înainte să depui proiectul\n\n- De unde vine cofinanțarea, și este bani reali sau o promisiune?\n- Cât durează între plata facturii și încasarea tranșei?\n- Ce se întâmplă cu ferma dacă decontarea întârzie câteva luni?\n- Poate duce ferma ratele și în anul cu recoltă slabă?\n- Investiția ar avea sens și fără grant?\n\nUltima întrebare este importantă. Un proiect slab nu devine bun pentru că o parte din el e plătită de altcineva. Ce rămâne de plătit trebuie să se întoarcă din activitatea fermei.\n\n## Când e mai bine doar creditul\n\nGrantul înseamnă bani pe care nu îi rambursezi, dar și termene, reguli de achiziție și obligații de monitorizare. Dacă ai nevoie de utilaj pentru campania care vine, dacă nu există sesiune deschisă sau dacă investiția nu se încadrează, un [credit obișnuit sau leasing](/finantare/ghiduri/credit-sau-leasing-utilaje) poate fi calea practică. Compară costul creditului cu valoarea grantului și cu timpul pe care îl pierzi așteptând.",
+      "faq": [
+        {
+          "question": "Pot dovedi cofinanțarea cu un contract de credit?",
+          "answer": "Da. Ghidurile DR-14 și DR-12 acceptă extras de cont și/sau contract de credit, în 3 luni pentru achiziții simple și 6 luni pentru achiziții complexe de la notificarea selectării."
+        },
+        {
+          "question": "Când primesc banii de la AFIR?",
+          "answer": "După ce faci investiția și depui cererea de plată. Până atunci plătești din bani proprii, credit sau avans."
+        },
+        {
+          "question": "Avansul AFIR este gratuit?",
+          "answer": "Nu chiar. La DR-14 se acordă contra unei garanții de 100% din valoarea lui, iar scrisoarea de garanție bancară are un cost."
+        },
+        {
+          "question": "Pot garanta creditul de cofinanțare prin FGCR?",
+          "answer": "FGCR are o garanție pentru proiectele cu contract AFIR, de până la 80% din credit, prin finanțatorii cu care are convenție."
+        }
+      ],
+      "seo": {
+        "title": "Credit sau grant AFIR: cofinanțare și decontare",
+        "description": "Cum se completează un grant AFIR cu un credit: cât pui din buzunar, cum dovedești cofinanțarea și cine plătește până la decontare, cu un exemplu DR-14."
+      }
+    },
+    "en": {
+      "title": "Loan or AFIR grant: how to use them together",
+      "slug": "credit-or-afir-grant",
+      "summary": "An AFIR grant covers part of the eligible costs, and a loan covers the cofinancing, ineligible costs and the money you pay before reimbursement. Most projects need both, and cofinancing is proved with a bank statement or loan contract.",
+      "body": "## You do not have to choose\n\nAn AFIR grant and a loan do different jobs. The grant covers part of a project's eligible costs. The loan covers the money you are short of until the grant arrives, and the part the grant never pays. Most projects need both.\n\nA project really has two money needs:\n\n- **a permanent one:** the cofinancing and the ineligible costs, which you pay;\n- **a temporary one:** what you pay suppliers before AFIR reimburses the instalment.\n\n## What you put in yourself\n\nYour own contribution differs by intervention. The position below is the one published on 1 November 2026. Sessions change often, so check the current applicant's guide.\n\n| Intervention | Largest support | Your share of eligible costs | Status on 1 November 2026 |\n| --- | --- | --- | --- |\n| DR-14, small farms | 50,000 euro, up to 85% | at least 15% | open until 16 November 2026, for certain sectors |\n| DR-12, young farmers' holdings | 200,000 euro; 80% up to age 40, 65% for others | 20% or 35% | open until 2 December 2026 |\n| DR-15, fruit holdings | 1,500,000 euro, 65% | 35% in the 2024 session | no open session |\n\nOn top of this come ineligible costs, which you pay in full. Under DR-14, VAT is eligible if you are not VAT-registered; if you can recover it, you pay it first from your own money and recover it later. That too is a money need, even if a temporary one.\n\n## You pay before you receive\n\nAFIR reimburses through payment claims, after the investment is made. Until the instalment arrives, you pay suppliers from your own money, a loan or an advance.\n\nUnder DR-14 the advance is capped at 50% of the public contribution, is requested once and is given against a guarantee of 100% of its value, as a bank guarantee letter. That letter has a cost too, so an advance is not free money.\n\n## How to prove cofinancing\n\nThe DR-14 and DR-12 guides ask for proof of private cofinancing through a bank statement and/or a loan contract. The documents are due within 3 months for simple purchases and 6 months for complex ones, from notice of selection.\n\nIf you rely on a loan, the signed contract is what counts. The lender's analysis, any guarantee and the signing all fall within that period, so start talking to the lender before selection, not after.\n\n## A simple example\n\nA DR-14 project with 58,823.53 euro of eligible costs: AFIR covers 50,000 euro (85%) and you put in 8,823.53 euro, plus the ineligible costs. If a lender with an agreement lends you this part, FGCR can guarantee up to 80% of it. See the [guide to guarantee funds](/en/financing/guides/guarantee-funds) for cost and conditions.\n\nIf you receive a 50% advance, you have 25,000 euro in hand but need a guarantee letter for the full amount. The other 25,000 euro you pay to suppliers until reimbursement.\n\n## Questions to ask before you file\n\n- Where does the cofinancing come from, and is it real money or a promise?\n- How long between paying the invoice and receiving the instalment?\n- What happens to the farm if reimbursement is a few months late?\n- Can the farm carry the instalments in a weak harvest year?\n- Would the investment make sense without the grant?\n\nThe last question matters. A weak project does not become good because someone else pays part of it. What is left to pay has to come back from the farm's work.\n\n## When a loan alone is better\n\nA grant is money you do not repay, but it also brings deadlines, purchasing rules and monitoring. If you need a machine for the coming season, if no session is open or if the investment does not fit, an ordinary [loan or lease](/en/financing/guides/credit-or-leasing-machinery) can be the practical route. Compare the cost of the loan with the value of the grant and the time lost waiting.",
+      "faq": [
+        {
+          "question": "Can I prove cofinancing with a loan contract?",
+          "answer": "Yes. The DR-14 and DR-12 guides accept a bank statement and/or a loan contract, within 3 months for simple purchases and 6 months for complex ones from notice of selection."
+        },
+        {
+          "question": "When do I get the money from AFIR?",
+          "answer": "After you make the investment and file the payment claim. Until then you pay from your own money, a loan or an advance."
+        },
+        {
+          "question": "Is the AFIR advance free?",
+          "answer": "Not quite. Under DR-14 it is given against a guarantee of 100% of its value, and the bank guarantee letter has a cost."
+        },
+        {
+          "question": "Can FGCR guarantee the cofinancing loan?",
+          "answer": "FGCR has a guarantee for projects with an AFIR contract, of up to 80% of the loan, through the lenders it has an agreement with."
+        }
+      ],
+      "seo": {
+        "title": "Loan or AFIR grant: cofinancing and reimbursement",
+        "description": "How an AFIR grant and a loan work together: what you pay yourself, how to prove cofinancing and who pays until reimbursement, with a DR-14 example."
+      }
+    }
+  }
+}

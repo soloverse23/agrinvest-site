@@ -1,0 +1,124 @@
+{
+  "key": "fonduri-garantare",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "restructurare"
+  ],
+  "relatedGuides": [
+    "credit-adeverinta-apia",
+    "plata-subventii-apia"
+  ],
+  "sources": [
+    {
+      "title": "FGCR: De trei ori subvenția",
+      "url": "https://fgcr.ro/produse/de-trei-ori-subventia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De cinci ori subvenția",
+      "url": "https://fgcr.ro/produse/de-cinci-ori-subventia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: Creditul Fermierului",
+      "url": "https://fgcr.ro/produse/creditul-fermierului/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: produse de garantare",
+      "url": "https://fgcr.ro/en/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Finanțare Agro: credite pentru cofinanțare",
+      "url": "https://finantareagro.ro/articol/credite-cofinantare-plantatie",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agerpres: FNGCIMM, convenții APIA 2026",
+      "url": "https://agerpres.ro/economic/2026/03/31/fngcimm-continua-parteneriatul-cu-agentia-de-plati-si-interventii-pentru-agricultura-si-principalele--1542747",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FNGCIMM: convenții de garantare pentru beneficiarii APIA",
+      "url": "http://www.fngcimm.ro/semnarea-conven%C8%9Biilor-de-garantare-pentru-beneficiarii-apia-acces-facilitat-la-finan%C8%9B%C4%83ri-pentru-agricultori",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Fonduri de garantare pentru fermieri: FGCR și FNGCIMM",
+      "slug": "fonduri-garantare",
+      "summary": "FGCR și FNGCIMM nu dau credite: ele garantează, de regulă până la 80%, creditul acordat de finanțator când fermierul nu are garanții suficiente. Garanția FGCR costă 1,6% pe an din suma garantată, iar datoria rămâne a fermierului.",
+      "body": "## Ce face un fond de garantare\n\nUn fond de garantare nu îți dă bani. El promite finanțatorului că va acoperi o parte din pierdere dacă tu nu plătești. Pentru un fermier cu garanții proprii insuficiente, această promisiune poate face diferența dintre un credit aprobat și unul respins.\n\nImportant de reținut: garanția protejează finanțatorul, nu pe tine. Datoria rămâne a ta. Dacă nu plătești, fondul poate plăti băncii partea garantată, dar obligația ta nu dispare, iar persoana care a semnat fidejusiunea răspunde în continuare.\n\nÎn agricultura din România sunt două fonduri importante:\n\n| Fond | Cui i se adresează | Cost |\n| --- | --- | --- |\n| FGCR, Fondul de Garantare a Creditului Rural | fermieri și activități din mediul rural, prin convenții cu finanțatorii | comision de 1,6% pe an pentru garanțiile din OUG 43/2013, aplicat sumei garantate |\n| FNGCIMM, Fondul Național de Garantare a Creditelor pentru IMM | IMM-uri, inclusiv beneficiari APIA, prin convenții cu băncile | un comision calculat pe baza ratingului dat de finanțator |\n\n## Garanțiile FGCR pe care le întâlnești des\n\n### Pentru credite pe baza adeverinței APIA\n\nProdusele „De trei ori subvenția” și „De cinci ori subvenția” garantează credite pentru activitatea curentă și capital de lucru. Le explicăm pas cu pas în [ghidul despre creditul pe adeverința APIA](/finantare/ghiduri/credit-adeverinta-apia). Pe scurt, FGCR garantează până la 80% din credit la produsul de cinci ori, iar creditul se rambursează la o scadență unică.\n\n### Pentru proiecte cu fonduri europene\n\nFGCR are o garanție pentru beneficiarii privați cu contract de finanțare AFIR, inclusiv din Planul Strategic PAC 2023–2027. Ea poate ajunge la 80% din credit și se adresează societăților, PFA, II, IF, societăților agricole, asociațiilor și cooperativelor. Este utilă pentru cofinanțare, adică pentru partea din proiect pe care fondurile europene nu o acoperă.\n\n### Pentru credite de valori mai mici\n\nConform informațiilor publicate, FGCR garantează până la 80% din credite de:\n\n| Tip de credit | Valoare maximă | Durată maximă |\n| --- | --- | --- |\n| Investiții | 1.000.000 lei | 84 de luni |\n| Capital de lucru | 500.000 lei | 36 de luni |\n| Credit mixt | 500.000 lei | 60 de luni |\n\n### Pentru refinanțare\n\nFGCR prezintă și credite de refinanțare non-revolving, în lei, care pot fi garantate în procent de cel mult 80%. Acestea pot conta pentru fermierii cu datorii scurte, greu de plătit la termen. Condițiile se discută cu fiecare finanțator.\n\n## Ce a fost Creditul Fermierului\n\nCreditul Fermierului a fost o schemă de ajutor de stat aprobată prin OUG 7/2024, derulată prin FGCR. Creditele erau non-revolving, pe cel mult 60 de luni, cu dobândă de ROBOR la 3 luni plus o marjă de maximum 1,95% pe an. Banii erau pentru capital de lucru, inclusiv pentru plata datoriilor restante către furnizorii de inputuri.\n\nÎn mai 2026 a fost anunțată o relansare a schemei, cu o marjă de maximum 1,95% și o garanție FGCR de până la 80%, tot pentru capital de lucru. O hotărâre de Guvern din februarie 2026 a schimbat și modul în care statul preia riscul garanțiilor. Astfel de scheme se schimbă des, deci verifică forma actuală la FGCR sau la finanțator înainte să te bazezi pe ele.\n\n## Garanțiile FNGCIMM pentru fermieri\n\nFNGCIMM lucrează prin convenții cu băncile și cu APIA. În convențiile din 2026 pentru beneficiarii intervenției DR-06, pachetele de bunăstare pentru porcine și păsări, garanția poate ajunge la 80% din finanțare, iar creditul la cel mult 90% din suma confirmată de APIA.\n\nCondițiile publicate pentru beneficiari sunt:\n\n- să fie IMM, conform legii, și să respecte criteriile finanțatorului;\n- să dețină adeverințe de la APIA;\n- să nu fie în dificultate financiară;\n- să nu beneficieze de garanții de la alte fonduri pentru aceeași finanțare.\n\nCostul garanției depinde de ratingul pe care banca îl dă fermierului. FNGCIMM a avut convenții similare și în anii trecuți, pentru alte tipuri de sprijin, deci merită să întrebi ce este activ în anul în care ceri creditul.\n\n## Cât costă, pe un exemplu\n\nSă presupunem un credit de investiții de 1.000.000 de lei, cu garanție FGCR de 80%.\n\n| Element | Calcul | Rezultat |\n| --- | --- | --- |\n| Suma garantată | 1.000.000 × 80% | 800.000 lei |\n| Comision pe primul an | 800.000 × 1,6% | 12.800 lei |\n| Partea negarantată | 1.000.000 − 800.000 | 200.000 lei |\n\nComisionul se aplică sumei garantate, iar aceasta scade de regulă pe măsură ce rambursezi. Exemplul folosește primul an, pentru simplitate. Comisionul poate crește în unele situații: o sursă de specialitate indică 6,3% pe an la prelungiri, la dificultăți de plată și în insolvență. Întreabă finanțatorul ce se aplică în cazul tău.\n\nPentru cei 200.000 de lei rămași, finanțatorul poate cere garanții proprii: bilete la ordin, utilaje, ipotecă pe teren sau alte bunuri.\n\n## Ce îți cere un fond de garantare\n\nCondițiile diferă de la un produs la altul, dar câteva se repetă:\n\n- **Ratingul.** Finanțatorul trebuie să te considere eligibil, iar ratingul trebuie să permită garanția.\n- **Situația financiară.** Nu poți fi în dificultate financiară sau în insolvență.\n- **Istoricul de plată.** La FGCR nu trebuie să ai restanțe în Centrala Riscului de Credit sau la Biroul de Credit, ori trebuie să le achiți până la aprobare.\n- **Fidejusiunea.** Cel puțin o persoană fizică, cum ar fi asociatul sau administratorul, răspunde personal.\n- **Documente fiscale.** La unele bănci, dosarul cere și certificat de atestare fiscală, iar la investiții, studiu de fezabilitate sau plan de afaceri.\n\nFGCR are condiții și documentație simplificate cu mai multe bănci. Pentru produsele mici, garanția poate fi obținută în cel mult 5 zile, potrivit informațiilor publicate.\n\n## Cine solicită garanția\n\nDe regulă, nu mergi tu direct la fond. Finanțatorul trimite cererea, pentru că garanția se acordă în favoarea lui, pe baza unei convenții de lucru. De aceea, prima întrebare pe care o pui la un finanțator este: „Aveți convenție cu FGCR sau FNGCIMM pentru produsul de care am nevoie?”. Fără convenție, garanția nu este posibilă la acel finanțator.\n\n## Când merită o garanție\n\nO garanție are sens când ai un proiect sau o activitate bună, dar nu ai suficiente bunuri de pus în garanție. Merită comparat costul ei cu alternativa:\n\n- dacă ai deja bunuri libere, poate fi mai ieftin să le folosești;\n- dacă ai nevoie de bunuri libere pentru alt credit, garanția de la fond îți păstrează spațiu;\n- dacă termenul este scurt, un comision anual contează mai puțin decât la un credit pe mai mulți ani.\n\nNu lua o garanție doar ca să poți împrumuta mai mult decât poate duce ferma. Suma garantată trebuie plătită la fel ca oricare alta. Vezi și [cum planifici încasările din subvenții](/finantare/ghiduri/plata-subventii-apia).\n\n## Ce se întâmplă dacă nu poți plăti\n\nDacă vezi din timp că nu poți plăti, vorbește cu finanțatorul înainte de scadență. O prelungire poate fi posibilă, dar poate schimba costul garanției. Dacă garanția este executată, fondul plătește finanțatorului partea garantată, iar recuperarea sumei continuă conform contractului și legii. Fidejusorul rămâne răspunzător, deci discută din timp cu toți cei care au semnat.",
+      "faq": [
+        {
+          "question": "FGCR îmi dă mie banii?",
+          "answer": "Nu. FGCR garantează creditul acordat de finanțator. Banii vin de la bancă sau de la altă instituție finanțatoare."
+        },
+        {
+          "question": "Cât costă garanția FGCR?",
+          "answer": "Pentru garanțiile din OUG 43/2013, comisionul este de 1,6% pe an și se aplică doar sumei garantate, nu întregului credit."
+        },
+        {
+          "question": "Cât din credit poate garanta FGCR?",
+          "answer": "La produsele prezentate aici, până la 80% din credit. Restul se acoperă cu garanții proprii."
+        },
+        {
+          "question": "Pot cere direct o garanție de la fond?",
+          "answer": "De regulă, nu. Cererea trece prin finanțator, care trebuie să aibă convenție cu fondul pentru acel produs."
+        },
+        {
+          "question": "Pot avea garanție dacă sunt în insolvență?",
+          "answer": "Nu. Condițiile publicate exclud beneficiarii în insolvență sau în dificultate financiară."
+        },
+        {
+          "question": "Scapă fidejusorul dacă fondul plătește banca?",
+          "answer": "Nu. Fidejusorul rămâne răspunzător conform contractului, iar suma plătită de fond nu șterge datoria."
+        }
+      ],
+      "seo": {
+        "title": "Fonduri de garantare pentru fermieri: FGCR și FNGCIMM",
+        "description": "Ce garantează FGCR și FNGCIMM, cât costă garanția, ce condiții ai de îndeplinit și de ce datoria rămâne a ta, cu un exemplu de calcul pe un credit."
+      }
+    },
+    "en": {
+      "title": "Guarantee funds for farmers: FGCR and FNGCIMM",
+      "slug": "guarantee-funds",
+      "summary": "FGCR and FNGCIMM do not lend: they guarantee, usually for up to 80%, the loan a lender gives when a farmer lacks enough collateral. The FGCR guarantee costs 1.6% a year of the guaranteed amount, and the debt stays with the farmer.",
+      "body": "## What a guarantee fund does\n\nA guarantee fund does not give you money. It promises the lender that it will cover part of the loss if you do not pay. For a farmer without enough assets of their own to pledge, that promise can decide whether a loan is approved.\n\nKeep one thing in mind: the guarantee protects the lender, not you. The debt stays yours. If you do not pay, the fund can pay the bank the guaranteed share, but your obligation does not disappear, and whoever signed the suretyship remains liable.\n\nTwo funds matter most for Romanian farming:\n\n| Fund | Who it serves | Cost |\n| --- | --- | --- |\n| FGCR, the Rural Credit Guarantee Fund | farmers and rural activities, through agreements with lenders | a fee of 1.6% a year for guarantees under OUG 43/2013, applied to the guaranteed amount |\n| FNGCIMM, the National Credit Guarantee Fund for SMEs | SMEs, including APIA beneficiaries, through agreements with banks | a fee based on the rating given by the lender |\n\n## The FGCR guarantees you meet most often\n\n### For loans based on the APIA certificate\n\nThe \"Three times the subsidy\" and \"Five times the subsidy\" products guarantee loans for current activity and working capital. We explain them step by step in the [guide to APIA certificate loans](/en/financing/guides/apia-certificate-credit). In short, FGCR guarantees up to 80% of the loan on the five-times product, and the loan is repaid on one single due date.\n\n### For projects with EU funds\n\nFGCR has a guarantee for private beneficiaries with an AFIR financing contract, including under the 2023–2027 CAP Strategic Plan. It can reach 80% of the loan and is open to companies, PFA, II, IF, agricultural companies, associations and cooperatives. It is useful for cofinancing, the part of a project that EU funds do not cover.\n\n### For smaller loans\n\nAccording to published information, FGCR guarantees up to 80% of loans of:\n\n| Type of loan | Largest amount | Longest term |\n| --- | --- | --- |\n| Investment | 1,000,000 lei | 84 months |\n| Working capital | 500,000 lei | 36 months |\n| Mixed loan | 500,000 lei | 60 months |\n\n### For refinancing\n\nFGCR also presents non-revolving refinancing loans in lei that can be guaranteed for up to 80%. These can matter to farmers with short debts that are hard to pay on time. The conditions are discussed with each lender.\n\n## What the Farmer's Credit was\n\nThe Farmer's Credit (Creditul Fermierului) was a state aid scheme approved by OUG 7/2024 and run through FGCR. Loans were non-revolving, for up to 60 months, at 3-month ROBOR plus a margin of at most 1.95% a year. The money was for working capital, including overdue debts to input suppliers.\n\nIn May 2026 a relaunch of the scheme was announced, with a margin of at most 1.95% and an FGCR guarantee of up to 80%, again for working capital. A government decision in February 2026 also changed how the state takes on the risk of the guarantees. Schemes like these change often, so check the current form with FGCR or your lender before you rely on one.\n\n## FNGCIMM guarantees for farmers\n\nFNGCIMM works through agreements with banks and APIA. In the 2026 agreements for beneficiaries of intervention DR-06, the welfare packages for pigs and poultry, the guarantee can reach 80% of the financing, and the loan at most 90% of the amount confirmed by APIA.\n\nThe published conditions for beneficiaries are:\n\n- to be an SME under the law and meet the lender's criteria;\n- to hold certificates from APIA;\n- not to be in financial difficulty;\n- not to have guarantees from other funds for the same financing.\n\nThe cost of the guarantee depends on the rating the bank gives the farmer. FNGCIMM had similar agreements in earlier years for other types of support, so it is worth asking what is active in the year you apply.\n\n## What it costs, in an example\n\nSuppose an investment loan of 1,000,000 lei with an 80% FGCR guarantee.\n\n| Item | Calculation | Result |\n| --- | --- | --- |\n| Guaranteed amount | 1,000,000 × 80% | 800,000 lei |\n| Fee for the first year | 800,000 × 1.6% | 12,800 lei |\n| Unguaranteed part | 1,000,000 − 800,000 | 200,000 lei |\n\nThe fee applies to the guaranteed amount, which normally falls as you repay. The example uses the first year to keep it simple. The fee can rise in some situations: one specialist source gives 6.3% a year for extensions, payment difficulties and insolvency. Ask your lender what applies to you.\n\nFor the remaining 200,000 lei, the lender may ask for guarantees of your own: promissory notes, machinery, a mortgage on land or other assets.\n\n## What a guarantee fund asks of you\n\nConditions differ from product to product, but a few come up again and again:\n\n- **Rating.** The lender has to consider you eligible, and your rating has to allow the guarantee.\n- **Financial position.** You cannot be in financial difficulty or insolvent.\n- **Payment history.** With FGCR you must have no arrears in the Central Credit Register or the Credit Bureau, or settle them before approval.\n- **Suretyship.** At least one individual, such as a partner or director, is personally liable.\n- **Tax documents.** Some banks also ask for a tax certificate and, for investments, a feasibility study or business plan.\n\nFGCR has simplified conditions and paperwork with several banks. For small products the guarantee can be obtained within 5 days, according to published information.\n\n## Who applies for the guarantee\n\nAs a rule you do not go to the fund yourself. The lender sends the request, because the guarantee is given in its favour under a working agreement. So the first question for any lender is: \"Do you have an agreement with FGCR or FNGCIMM for the product I need?\". Without one, the guarantee is not possible at that lender.\n\n## When a guarantee is worth it\n\nA guarantee makes sense when you have a good project or activity but not enough assets to pledge. Compare its cost with the alternative:\n\n- if you already have free assets, using them may be cheaper;\n- if you need free assets for another loan, a fund guarantee keeps that room open;\n- if the term is short, an annual fee matters less than on a loan over several years.\n\nDo not take a guarantee just to borrow more than the farm can carry. A guaranteed amount has to be paid like any other. See also [how to plan your subsidy income](/en/financing/guides/apia-subsidy-payments).\n\n## What happens if you cannot pay\n\nIf you can see early that you cannot pay, talk to the lender before the due date. An extension may be possible, but it can change the cost of the guarantee. If the guarantee is called, the fund pays the lender the guaranteed share, and recovery continues under the contract and the law. The surety stays liable, so talk early to everyone who signed.",
+      "faq": [
+        {
+          "question": "Does FGCR give me the money?",
+          "answer": "No. FGCR guarantees the loan given by the lender. The money comes from the bank or another lending institution."
+        },
+        {
+          "question": "What does an FGCR guarantee cost?",
+          "answer": "For guarantees under OUG 43/2013 the fee is 1.6% a year and applies only to the guaranteed amount, not to the whole loan."
+        },
+        {
+          "question": "How much of a loan can FGCR guarantee?",
+          "answer": "For the products shown here, up to 80% of the loan. The rest is covered by your own guarantees."
+        },
+        {
+          "question": "Can I ask a fund for a guarantee directly?",
+          "answer": "As a rule, no. The request goes through the lender, which must have an agreement with the fund for that product."
+        },
+        {
+          "question": "Can I get a guarantee if I am insolvent?",
+          "answer": "No. The published conditions exclude beneficiaries who are insolvent or in financial difficulty."
+        },
+        {
+          "question": "Is the surety released if the fund pays the bank?",
+          "answer": "No. The surety stays liable under the contract, and the amount the fund pays does not wipe out the debt."
+        }
+      ],
+      "seo": {
+        "title": "Guarantee funds for Romanian farmers: FGCR, FNGCIMM",
+        "description": "What FGCR and FNGCIMM guarantee, what a guarantee costs, the conditions you must meet and why the debt stays yours, with a worked example on an investment loan."
+      }
+    }
+  }
+}

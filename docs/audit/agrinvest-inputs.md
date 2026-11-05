@@ -10,19 +10,15 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 
 1. **O persoană de contact** care răspunde în aceeași zi și poate aduna răspunsuri de la departamente.
 2. **Acces la conturi:** găzduirea și domeniile agrinvest.ro și agrinvestshop.ro (DNS), Google Search Console, Google Analytics, Google Ads (pentru Keyword Planner), Google Business Profile.
-3. **Confirmarea registrului de cifre** (`figures-register.md`), în special:
-   - capacitatea silozurilor: pagina actuală spune 238.000 în total, dar capacitățile celor 17 baze adunate dau 252.000; unitatea (tone?);
-   - „22 de județe” față de cele 11 județe cu puncte de colectare;
-   - suprafața actuală din programul Golden Relationship.
+3. **Confirmarea registrului de cifre** (`figures-register.md`): rândurile rămase „de confirmat”; capacitățile pe fiecare siloz adunate dau 252.000 t, iar totalul confirmat este 275.000 t.
 4. **Pentru fiecare dintre cele 17 baze:** județ, adresă, coordonate GPS, telefon, persoană de contact, program, servicii (recepție, uscare, curățare, cântărire), fotografii, **tarife orientative de depozitare și uscare** (lei/t/lună). Niciun concurent nu publică tarife, deci este o oportunitate clară în Google.
-5. **Acordul de a folosi materialele video** de pe YouTube (filmul de brand din 2022, seria Golden Relationship, aparițiile Agro TV) pe site.
+5. **Acordul de a folosi materialele video** de pe YouTube (filmul de brand din 2022, aparițiile Agro TV) pe site.
 6. **Fotografii reale:** baze, echipă, flotă, câmpuri, evenimente. Fără fotografii de stoc.
    - **Sigla în format vectorial** (SVG, AI sau PDF) și eventualul manual de identitate. Până atunci folosim o retrasare a siglei actuale.
    - **Cine primește fiecare tip de cerere** de pe site (vânzare cereale, depozitare, inputuri, finanțare, logistică, parteneriate, cariere): nume, rol, telefon, e-mail și acordul de a afișa telefonul pe site.
    - **Politica de confidențialitate** pentru formulare (GDPR), aprobată de responsabilul cu protecția datelor (dpo@agrinvest.ro). Pagina există pe site, fără text final.
    - **Revizuirea textelor paginilor principale** (faza 2.2): textele în română sunt o schiță rescrisă după site-ul vechi; fiecare pagină are un rezumat, întrebări frecvente și cifre din registru.
    - **Condițiile de recepție pe cultură** (umiditate, impurități, masă hectolitrică) folosite de Agrinvest; paginile `/cereale/{cultură}` le afișează când sunt completate.
-   - **Calendarul ratelor IFN:** pagina veche spune „toamnă și primăvară”, schița aprobată spune „după recolta de vară și de toamnă”.
 
 ### Magazinul (faza 3)
 
@@ -41,7 +37,7 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 
 ### Finanțare – Agrinvest Credit IFN (faza 4)
 
-12. Lista actuală a produselor de creditare, cu sume, termene, garanții și eligibilitate (întrebările complete sunt în `ifn.md`).
+12. Lista actuală a produselor de creditare, cu sume, termene, garanții și eligibilitate (formularul de completat este `ifn-confirmare.md`).
 13. Ce cifre (dobândă, comisioane, exemple) pot fi publicate și cu ce formulare juridică.
 14. Participarea la schema de credit pe adeverința APIA.
 15. Consilierul juridic care aprobă conținutul financiar.
@@ -61,19 +57,15 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 
 1. **One contact person** who answers the same day and can collect answers from the departments.
 2. **Account access:** hosting and domains for agrinvest.ro and agrinvestshop.ro (DNS), Google Search Console, Google Analytics, Google Ads (for Keyword Planner), Google Business Profile.
-3. **Confirmation of the figures register** (`figures-register.md`), especially:
-   - silo capacity: the current page states 238,000 in total, but the 17 listed bases add up to 252,000; the unit (tonnes?);
-   - "22 counties" versus the 11 counties with collection points;
-   - the current area in the Golden Relationship programme.
+3. **Confirmation of the figures register** (`figures-register.md`): the rows still to confirm; the capacities per site add up to 252,000 t, while the confirmed total is 275,000 t.
 4. **For each of the 17 bases:** county, address, GPS coordinates, phone, contact person, hours, services (reception, drying, cleaning, weighing), photos, **indicative storage and drying tariffs** (lei/t/month). No competitor publishes tariffs, so this is a clear Google opportunity.
-5. **Permission to use the YouTube videos** (the 2022 brand film, the Golden Relationship series, the Agro TV appearances) on the site.
+5. **Permission to use the YouTube videos** (the 2022 brand film, the Agro TV appearances) on the site.
 6. **Real photos:** bases, team, fleet, fields, events. No stock photos.
    - **The logo as a vector file** (SVG, AI or PDF) and any brand guidelines. Until then we use a redrawn trace of the current logo.
    - **Who receives each type of enquiry** from the site (selling grain, storage, inputs, financing, logistics, partnerships, careers): name, role, phone, email, and consent to show the phone on the site.
    - **The privacy policy** for the forms (GDPR), approved by the data protection officer (dpo@agrinvest.ro). The page exists on the site without final text.
    - **A review of the core page copy** (phase 2.2): the Romanian text is a draft rewritten from the old site; every page has a summary, an FAQ and figures from the register.
    - **Reception standards per crop** (moisture, impurities, hectolitre mass) that Agrinvest applies; the `/cereale/{crop}` pages show them once filled in.
-   - **The IFN instalment calendar:** the old page says "autumn and spring", the approved sketch says "after the summer and autumn harvests".
 
 ### Shop (phase 3)
 
@@ -111,7 +103,7 @@ Pentru noul site agrinvest.ro. Ordonat după momentul în care este necesar. · 
 
 ### Finance – Agrinvest Credit IFN (phase 4)
 
-12. The current list of credit products, with amounts, terms, guarantees and eligibility (full questions in `ifn.md`).
+12. The current list of credit products, with amounts, terms, guarantees and eligibility (the form to fill in is `ifn-confirmare.md`).
 13. Which figures (interest, fees, examples) may be published, and with what legal wording.
 14. Participation in the APIA certificate credit scheme.
 15. The legal adviser who approves finance content.

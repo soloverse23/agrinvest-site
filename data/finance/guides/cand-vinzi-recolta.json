@@ -1,0 +1,65 @@
+{
+  "key": "cand-vinzi-recolta",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "depozitare",
+    "finantare-stocuri",
+    "credit-contracte-cereale"
+  ],
+  "relatedGuides": [
+    "plata-subventii-apia",
+    "costul-real-al-creditului"
+  ],
+  "sources": [],
+  "text": {
+    "ro": {
+      "title": "Când vinzi recolta: contract, recoltă sau stocare",
+      "slug": "cand-vinzi-recolta",
+      "summary": "Nu există o zi perfectă de vânzare. Mulți fermieri împart recolta: o parte pe contract, o parte la recoltă și o parte stocată. Stocarea merită doar dacă prețul viitor acoperă depozitarea, costul banilor și pierderile.",
+      "body": "## Nu există o zi perfectă\n\nNimeni nu știe dinainte care va fi prețul peste trei luni. Scopul nu este să prinzi vârful, ci să nu fii obligat să vinzi tot în momentul în care toată lumea vinde. Prețurile pot fi mai slabe la recoltă, când marfa multă vine deodată, deși nu în fiecare an.\n\nÎntrebarea practică este: cât poți să aștepți, cât te costă să aștepți și ce riști?\n\n## Trei moduri de a vinde\n\n| Mod | Ce obții | Ce riști |\n| --- | --- | --- |\n| Contract înainte de recoltă | un preț sigur pentru o parte din producție | să ai producție mai mică decât cantitatea din contract |\n| Vânzare la recoltă | bani repede, fără cost de stocare | un preț mai slab în perioada cu multă marfă |\n| Stocare și vânzare mai târziu | șansa unui preț mai bun | costuri de stocare, pierderi de calitate și un preț care poate scădea |\n\nMulți fermieri împart recolta în trei, în loc să aleagă un singur drum: o parte pe contract, o parte la recoltă pentru plățile imediate și o parte stocată. Proporțiile depind de datorii, de spațiul de depozitare și de cât poți suporta o scădere de preț.\n\n## Calculează prețul la care merită să aștepți\n\nStocarea are sens doar dacă prețul viitor acoperă costul așteptării. Costul are trei părți: depozitarea, banii blocați și pierderile.\n\nUn exemplu pentru 500 t, cu cifre inventate pentru ilustrare:\n\n| Element | Calcul | Pe tonă |\n| --- | --- | --- |\n| Preț la recoltă | | 1.000 lei |\n| Depozitare, 3 luni | 15 lei pe lună × 3 | 45 lei |\n| Costul banilor, 3 luni | 1.000 lei × 10% pe an × 3/12 | 25 lei |\n| Pierderi și manipulare | | 10 lei |\n| **Preț minim ca să nu pierzi** | | **1.080 lei** |\n\nDacă nu crezi că poți vinde peste 1.080 de lei, așteptarea nu are sens. Pune în locul acestor cifre tarifele tale, dobânda ta și prețul din oferta primită.\n\nCostul banilor există chiar dacă nu ai credit: dacă ai fi vândut, ai fi folosit banii să plătești o datorie sau furnizori.\n\n## Când nu poți aștepta\n\nDacă ai rate sau datorii la furnizori chiar după recoltă, ești obligat să vinzi o parte. De aceea, calendarul încasărilor contează înainte de semănat, nu după. Vezi cum îl faci în [ghidul despre plata subvențiilor](/finantare/ghiduri/plata-subventii-apia).\n\nCând marfa stocată poate fi finanțată, poți plăti datoriile fără să vinzi în grabă. Are un cost, așa că intră în calculul de mai sus la „costul banilor”. Dacă prețul nu crește, ai plătit dobândă degeaba.\n\n## Stochează bine, sau nu stoca\n\nO marfă stocată prost pierde din valoare. Înainte de stocare:\n\n- verifică umiditatea și impuritățile;\n- curăță spațiul;\n- urmărește temperatura și dăunătorii;\n- verifică asigurarea mărfii.\n\nDacă nu ai spațiu sau nu poți urmări marfa, un siloz cu [recepție și depozitare](/depozitare) poate fi mai sigur decât o magazie improvizată. Întreabă tarifele și condițiile de calitate înainte să aduci marfa.\n\n## Contractele înainte de recoltă\n\nUn contract îți dă un preț, dar și o obligație. Câteva reguli de prudență:\n\n- nu vinde pe contract toată producția estimată, pentru că un an secetos îți poate lăsa contractul neacoperit;\n- citește ce se întâmplă dacă nu livrezi cantitatea sau calitatea;\n- verifică cine plătește transportul și când primești banii;\n- verifică cine e cumpărătorul.\n\nLa Agrinvest, plata cerealelor se face {{C8}}. Lista culturilor și prețul se discută cu reprezentantul din zona ta, pe [pagina de cereale](/cereale).\n\n## Greșeli frecvente\n\n- Aștepți fără un preț-țintă.\n- Uiți costul depozitării sau al dobânzii.\n- Vinzi tot la recoltă pentru că o rată cade prea devreme.\n- Vinzi pe contract mai mult decât poți livra.\n- Compari prețuri fără să ții cont de transport și de deducerile de calitate.",
+      "faq": [
+        {
+          "question": "Cât costă să țin cerealele în depozit?",
+          "answer": "Depinde de tarif, durată și de cât te costă banii blocați. Adună depozitarea, dobânda sau costul de oportunitate și pierderile, pe tonă."
+        },
+        {
+          "question": "Pot vinde pe contract toată producția?",
+          "answer": "Nu e prudent. Un an slab îți poate lăsa contractul neacoperit, așa că păstrează o marjă față de producția estimată."
+        },
+        {
+          "question": "De ce sunt prețurile mai slabe la recoltă?",
+          "answer": "Pentru că multă marfă vine deodată, iar mulți fermieri au plăți de făcut. Nu se întâmplă în fiecare an."
+        }
+      ],
+      "seo": {
+        "title": "Când vinzi recolta: contract, recoltă sau stocare",
+        "description": "Cum alegi între contract, vânzare la recoltă și stocare, cum calculezi prețul minim la care merită să aștepți și ce greșeli să eviți."
+      }
+    },
+    "en": {
+      "title": "When to sell your harvest: contract, harvest or storage",
+      "slug": "when-to-sell-the-harvest",
+      "summary": "There is no perfect day to sell. Many farmers split the crop: part on contract, part at harvest and part stored. Storing pays only if the future price covers storage, the cost of money and losses.",
+      "body": "## There is no perfect day\n\nNobody knows the price three months ahead. The aim is not to catch the top but to avoid being forced to sell everything when everyone else is selling. Prices can be weaker at harvest, when a lot of grain comes at once, though not every year.\n\nThe practical question is: how long can you wait, what does waiting cost, and what do you risk?\n\n## Three ways to sell\n\n| Way | What you get | What you risk |\n| --- | --- | --- |\n| Contract before harvest | a sure price for part of the crop | a crop smaller than the contract quantity |\n| Selling at harvest | quick money, no storage cost | a weaker price while grain is plentiful |\n| Storing and selling later | the chance of a better price | storage costs, quality losses and a price that can fall |\n\nMany farmers split the harvest in three rather than choosing one path: part on contract, part at harvest for immediate payments and part stored. The shares depend on debts, storage space and how much of a price fall you can bear.\n\n## Work out the price that makes waiting worthwhile\n\nStoring makes sense only if the future price covers the cost of waiting. The cost has three parts: storage, tied-up money and losses.\n\nAn example for 500 t, with invented numbers for illustration:\n\n| Item | Calculation | Per tonne |\n| --- | --- | --- |\n| Price at harvest | | 1,000 lei |\n| Storage, 3 months | 15 lei a month × 3 | 45 lei |\n| Cost of money, 3 months | 1,000 lei × 10% a year × 3/12 | 25 lei |\n| Losses and handling | | 10 lei |\n| **Lowest price to avoid a loss** | | **1,080 lei** |\n\nIf you do not believe you can sell above 1,080 lei, waiting makes no sense. Put your own rates, interest and offered price in place of these numbers.\n\nThe cost of money exists even without a loan: had you sold, you would have used the money to pay a debt or suppliers.\n\n## When you cannot wait\n\nIf instalments or supplier debts fall right after harvest, you are forced to sell part of the crop. That is why the income calendar matters before sowing, not after. See how to build it in the [guide to subsidy payments](/en/financing/guides/apia-subsidy-payments).\n\nWhen stored grain can be financed, you can pay debts without selling in a hurry. It has a cost, so it goes into the calculation above as the \"cost of money\". If the price does not rise, you have paid interest for nothing.\n\n## Store well, or do not store\n\nBadly stored grain loses value. Before storing:\n\n- check moisture and impurities;\n- clean the space;\n- watch temperature and pests;\n- check the insurance on the grain.\n\nIf you have no space or cannot watch the grain, a silo with [reception and storage](/en/storage) can be safer than a makeshift shed. Ask about rates and quality conditions before you bring the grain.\n\n## Contracts before harvest\n\nA contract gives you a price, but also an obligation. A few cautious rules:\n\n- do not sell your whole estimated crop on contract, because a dry year can leave the contract uncovered;\n- read what happens if you do not deliver the quantity or quality;\n- check who pays for transport and when you get paid;\n- check who the buyer is.\n\nAt Agrinvest, grain is paid for {{C8}}. Crops and prices are discussed with the representative in your area, on the [grain page](/en/grain).\n\n## Common mistakes\n\n- Waiting without a target price.\n- Forgetting the cost of storage or interest.\n- Selling everything at harvest because an instalment falls too early.\n- Selling more on contract than you can deliver.\n- Comparing prices without allowing for transport and quality deductions.",
+      "faq": [
+        {
+          "question": "What does it cost to keep grain in store?",
+          "answer": "It depends on the rate, the time and what tied-up money costs you. Add up storage, interest or opportunity cost and losses, per tonne."
+        },
+        {
+          "question": "Can I sell my whole crop on contract?",
+          "answer": "That is not cautious. A weak year can leave the contract uncovered, so keep a margin against your estimated crop."
+        },
+        {
+          "question": "Why are prices weaker at harvest?",
+          "answer": "Because a lot of grain arrives at once and many farmers have payments to make. It does not happen every year."
+        }
+      ],
+      "seo": {
+        "title": "When to sell your harvest: contract or storage",
+        "description": "How to choose between a contract, selling at harvest and storage, how to work out the lowest price worth waiting for and which mistakes to avoid."
+      }
+    }
+  }
+}

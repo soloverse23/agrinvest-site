@@ -1,0 +1,397 @@
+{
+  "key": "glosar",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [],
+  "relatedGuides": [
+    "costul-real-al-creditului",
+    "fonduri-garantare"
+  ],
+  "sources": [],
+  "text": {
+    "ro": {
+      "title": "Glosar de finanțare agricolă",
+      "slug": "glosar",
+      "summary": "Termenii pe care îi întâlnești când vorbești cu un finanțator sau cu APIA, explicați pe scurt: de la marjă de dobândă și ROBOR până la adeverință APIA, fidejusiune și valoare reziduală.",
+      "body": "Termenii de mai jos apar în ghidurile noastre și în discuțiile cu finanțatorii. Dacă un termen dintr-un contract nu este clar, cere explicații înainte să semnezi. Vezi și [ghidul despre costul real al creditului](/finantare/ghiduri/costul-real-al-creditului).",
+      "terms": [
+        {
+          "term": "Adeverință APIA",
+          "definition": "Document eliberat de APIA la cerere, care confirmă suprafața determinată și condițiile generale la data emiterii. Finanțatorii îl folosesc pentru credite pe subvenție."
+        },
+        {
+          "term": "AFIR",
+          "definition": "Agenția pentru Finanțarea Investițiilor Rurale, care gestionează proiectele de investiții cu fonduri europene."
+        },
+        {
+          "term": "APIA",
+          "definition": "Agenția de Plăți și Intervenție pentru Agricultură, care plătește subvențiile."
+        },
+        {
+          "term": "Avans APIA",
+          "definition": "Partea din subvenție plătită înainte de plata finală. În campania 2026, a fost de cel mult 75% pentru plățile directe."
+        },
+        {
+          "term": "Bilanț",
+          "definition": "Situație financiară care arată ce deține firma și ce datorează la o anumită dată."
+        },
+        {
+          "term": "Bilet la ordin",
+          "definition": "Înscris prin care te obligi să plătești o sumă la o dată. Poate fi folosit de creditor direct, fără proces, așa că se semnează cu atenție."
+        },
+        {
+          "term": "Biroul de Credit",
+          "definition": "Instituție care păstrează istoricul de plată al clienților și îl pune la dispoziția finanțatorilor participanți."
+        },
+        {
+          "term": "BISS",
+          "definition": "Sprijinul de bază pentru venit, plătit pe hectar."
+        },
+        {
+          "term": "BNR",
+          "definition": "Banca Națională a României, care supraveghează băncile și IFN-urile."
+        },
+        {
+          "term": "Capital de lucru",
+          "definition": "Banii cu care ferma își plătește activitatea curentă: inputuri, arendă, salarii."
+        },
+        {
+          "term": "Cash-flow",
+          "definition": "Mișcarea reală a banilor: când intră și când ies."
+        },
+        {
+          "term": "Centrala Riscului de Credit",
+          "definition": "Evidența BNR cu expunerile de credit și restanțele."
+        },
+        {
+          "term": "Cofinanțare",
+          "definition": "Partea din cheltuielile eligibile ale unui proiect pe care o plătește beneficiarul."
+        },
+        {
+          "term": "Comision de acordare",
+          "definition": "Sumă plătită la începutul creditului, de regulă ca procent."
+        },
+        {
+          "term": "Concordat preventiv",
+          "definition": "Procedură judiciară pentru firmele în dificultate, cu un plan votat de creditori și omologat de judecător."
+        },
+        {
+          "term": "CRISS",
+          "definition": "Sprijinul redistributiv pentru venit, cu reguli proprii de suprafață."
+        },
+        {
+          "term": "DAE",
+          "definition": "Dobânda anuală efectivă: dobânda și costurile exprimate într-un singur procent, obligatorie la creditele pentru consumatori."
+        },
+        {
+          "term": "Decontare",
+          "definition": "Plata de către AFIR a cheltuielilor după ce au fost făcute și verificate."
+        },
+        {
+          "term": "Dobândă fixă",
+          "definition": "Dobândă care nu se schimbă pe perioada stabilită în contract."
+        },
+        {
+          "term": "Dobândă variabilă",
+          "definition": "Dobândă care urmează un indice de referință, de regulă ROBOR."
+        },
+        {
+          "term": "Executare silită",
+          "definition": "Recuperarea forțată a unei datorii, prin executor judecătoresc."
+        },
+        {
+          "term": "FGCR",
+          "definition": "Fondul de Garantare a Creditului Rural, care garantează credite pentru fermieri și mediul rural."
+        },
+        {
+          "term": "Fidejusiune",
+          "definition": "Contract prin care o persoană se obligă să plătească datoria altuia, dacă acesta nu plătește."
+        },
+        {
+          "term": "FNGCIMM",
+          "definition": "Fondul Național de Garantare a Creditelor pentru Întreprinderile Mici și Mijlocii."
+        },
+        {
+          "term": "Gaj",
+          "definition": "Garanție pe un bun mobil, de exemplu un utilaj. Se înscrie în Arhiva Electronică de Garanții Reale Mobiliare."
+        },
+        {
+          "term": "Grad de îndatorare",
+          "definition": "Măsură a cât din activitate este finanțat din datorii."
+        },
+        {
+          "term": "Grafic de rambursare",
+          "definition": "Lista datelor și sumelor pe care le ai de plătit."
+        },
+        {
+          "term": "Grant",
+          "definition": "Bani nerambursabili, acordați pentru un proiect, în anumite condiții."
+        },
+        {
+          "term": "IFN",
+          "definition": "Instituție financiară nebancară: acordă credite, dar nu poate atrage depozite de la public."
+        },
+        {
+          "term": "Insolvență",
+          "definition": "Situația în care o firmă nu își mai poate plăti datoriile scadente, și procedura judiciară care urmează."
+        },
+        {
+          "term": "Ipotecă",
+          "definition": "Garanție pe un bun imobil, de exemplu un teren."
+        },
+        {
+          "term": "Leasing financiar",
+          "definition": "Contract prin care folosești un bun al finanțatorului și poți deveni proprietar la final."
+        },
+        {
+          "term": "Marjă de dobândă",
+          "definition": "Partea din dobândă stabilită de finanțator, adăugată peste indicele de referință."
+        },
+        {
+          "term": "Perioadă de grație",
+          "definition": "Timp în care nu plătești rate de capital, deși dobânda poate curge."
+        },
+        {
+          "term": "Plată la recoltă",
+          "definition": "Plata unei datorii după ce ferma își încasează banii din recoltă."
+        },
+        {
+          "term": "Rambursare anticipată",
+          "definition": "Plata creditului, total sau parțial, înainte de termen."
+        },
+        {
+          "term": "Rată",
+          "definition": "Suma pe care o plătești la o scadență. Poate include capital și dobândă."
+        },
+        {
+          "term": "Reeșalonare",
+          "definition": "Schimbarea, cu acordul creditorului, a datelor și sumelor de plată."
+        },
+        {
+          "term": "Refinanțare",
+          "definition": "Un credit nou care înlocuiește unul sau mai multe credite existente."
+        },
+        {
+          "term": "Registrul special",
+          "definition": "Registrul BNR pentru IFN-urile care îndeplinesc criterii suplimentare."
+        },
+        {
+          "term": "ROBOR",
+          "definition": "Indice al dobânzii la care băncile își dau bani între ele, în lei. Se folosește ca bază pentru dobânzile variabile."
+        },
+        {
+          "term": "Scadență",
+          "definition": "Data la care trebuie plătită o sumă."
+        },
+        {
+          "term": "Solvabilitate",
+          "definition": "Capacitatea firmei de a-și acoperi datoriile din ce deține, măsurată prin capitalul propriu."
+        },
+        {
+          "term": "Suprafață determinată",
+          "definition": "Suprafața pe care APIA o acceptă la plată după verificări."
+        },
+        {
+          "term": "Valoare reziduală",
+          "definition": "Suma la care proprietatea unui bun în leasing trece la utilizator la final."
+        }
+      ],
+      "seo": {
+        "title": "Glosar de finanțare agricolă pentru fermieri",
+        "description": "Termeni de credit agricol explicați pe scurt: marjă, ROBOR, adeverință APIA, fidejusiune, gaj, ipotecă, leasing, cofinanțare și alții."
+      }
+    },
+    "en": {
+      "title": "Farm financing glossary",
+      "slug": "glossary",
+      "summary": "The terms you meet when talking to a lender or to APIA, explained briefly: from interest margin and ROBOR to the APIA certificate, suretyship and residual value.",
+      "body": "The terms below appear in our guides and in talks with lenders. If a term in a contract is unclear, ask for an explanation before you sign. See also the [guide to the true cost of credit](/en/financing/guides/true-cost-of-credit).",
+      "terms": [
+        {
+          "term": "AFIR",
+          "definition": "The Agency for Rural Investment Financing, which runs investment projects funded by the EU."
+        },
+        {
+          "term": "APIA",
+          "definition": "The Payments and Intervention Agency for Agriculture, which pays subsidies."
+        },
+        {
+          "term": "APIA advance",
+          "definition": "The part of the subsidy paid before the final payment. In the 2026 campaign it was at most 75% for direct payments."
+        },
+        {
+          "term": "APIA certificate",
+          "definition": "A document APIA issues on request, confirming the determined area and general conditions on the date issued. Lenders use it for subsidy loans."
+        },
+        {
+          "term": "Arrangement fee",
+          "definition": "An amount paid at the start of the loan, usually as a percentage."
+        },
+        {
+          "term": "Balance sheet",
+          "definition": "A financial statement showing what a company owns and owes on a given date."
+        },
+        {
+          "term": "BISS",
+          "definition": "Basic income support, paid per hectare."
+        },
+        {
+          "term": "BNR",
+          "definition": "The National Bank of Romania, which supervises banks and IFNs."
+        },
+        {
+          "term": "Cash flow",
+          "definition": "The real movement of money: when it comes in and goes out."
+        },
+        {
+          "term": "Central Credit Register",
+          "definition": "The BNR record of credit exposures and arrears."
+        },
+        {
+          "term": "Cofinancing",
+          "definition": "The part of a project's eligible costs paid by the beneficiary."
+        },
+        {
+          "term": "Credit Bureau",
+          "definition": "An institution that keeps clients' payment history and shares it with participating lenders."
+        },
+        {
+          "term": "CRISS",
+          "definition": "Redistributive income support, with its own area rules."
+        },
+        {
+          "term": "DAE",
+          "definition": "The annual percentage rate: interest and costs in a single percentage, required for consumer credit."
+        },
+        {
+          "term": "Debt level",
+          "definition": "A measure of how much of a business is financed by debt."
+        },
+        {
+          "term": "Determined area",
+          "definition": "The area APIA accepts for payment after checks."
+        },
+        {
+          "term": "Due date",
+          "definition": "The date on which an amount must be paid."
+        },
+        {
+          "term": "Early repayment",
+          "definition": "Paying the loan, in full or in part, before the due date."
+        },
+        {
+          "term": "Enforcement",
+          "definition": "The forced recovery of a debt, through a bailiff."
+        },
+        {
+          "term": "FGCR",
+          "definition": "The Rural Credit Guarantee Fund, which guarantees loans for farmers and rural activity."
+        },
+        {
+          "term": "Finance lease",
+          "definition": "A contract under which you use the lender's asset and can become the owner at the end."
+        },
+        {
+          "term": "Fixed rate",
+          "definition": "A rate that does not change for the period set in the contract."
+        },
+        {
+          "term": "FNGCIMM",
+          "definition": "The National Credit Guarantee Fund for SMEs."
+        },
+        {
+          "term": "Grace period",
+          "definition": "A time when you pay no principal, although interest may still run."
+        },
+        {
+          "term": "Grant",
+          "definition": "Non-repayable money given for a project, on certain conditions."
+        },
+        {
+          "term": "IFN",
+          "definition": "A non-bank financial institution: it lends but cannot take deposits from the public."
+        },
+        {
+          "term": "Insolvency",
+          "definition": "The state in which a company can no longer pay debts when due, and the court procedure that follows."
+        },
+        {
+          "term": "Instalment",
+          "definition": "The amount you pay on a due date. It can include principal and interest."
+        },
+        {
+          "term": "Interest margin",
+          "definition": "The part of the interest set by the lender, added on top of the reference index."
+        },
+        {
+          "term": "Mortgage",
+          "definition": "A guarantee over immovable property, such as land."
+        },
+        {
+          "term": "Payment at harvest",
+          "definition": "Paying a debt after the farm receives its harvest money."
+        },
+        {
+          "term": "Pledge",
+          "definition": "A guarantee over a movable asset, such as a machine. It is entered in the Electronic Archive of Security Interests."
+        },
+        {
+          "term": "Preventive concordat",
+          "definition": "A court procedure for companies in difficulty, with a plan voted by creditors and approved by the judge."
+        },
+        {
+          "term": "Promissory note",
+          "definition": "A written promise to pay an amount on a date. A creditor can use it directly, without a lawsuit, so sign with care."
+        },
+        {
+          "term": "Refinancing",
+          "definition": "A new loan that replaces one or more existing loans."
+        },
+        {
+          "term": "Reimbursement",
+          "definition": "AFIR's payment of costs after they are made and checked."
+        },
+        {
+          "term": "Repayment schedule",
+          "definition": "The list of dates and amounts you have to pay."
+        },
+        {
+          "term": "Rescheduling",
+          "definition": "Changing the payment dates and amounts, with the creditor's agreement."
+        },
+        {
+          "term": "Residual value",
+          "definition": "The amount at which ownership of a leased asset passes to the user at the end."
+        },
+        {
+          "term": "ROBOR",
+          "definition": "An index of the rate at which banks lend each other lei. It is the basis for variable rates."
+        },
+        {
+          "term": "Solvency",
+          "definition": "A company's ability to cover its debts from what it owns, measured through its equity."
+        },
+        {
+          "term": "Special Register",
+          "definition": "The BNR register for IFNs that meet additional criteria."
+        },
+        {
+          "term": "Suretyship",
+          "definition": "A contract by which a person agrees to pay another's debt if that party does not."
+        },
+        {
+          "term": "Variable rate",
+          "definition": "A rate that follows a reference index, usually ROBOR."
+        },
+        {
+          "term": "Working capital",
+          "definition": "The money a farm uses for current activity: inputs, land rent, wages."
+        }
+      ],
+      "seo": {
+        "title": "Farm financing glossary for Romanian farmers",
+        "description": "Farm credit terms explained briefly: margin, ROBOR, APIA certificate, suretyship, pledge, mortgage, leasing, cofinancing and more."
+      }
+    }
+  }
+}

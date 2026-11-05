@@ -18,6 +18,12 @@ export type Figure = {
 
 export type Figures = Record<string, Figure>
 
+/**
+ * Changes with the reviewed data (see `next.config.ts`). The apply step writes register rows
+ * outside Next.js, so only a new cache key brings them to the pages after a deploy.
+ */
+const epoch = process.env.ENRICHMENT_EPOCH ?? 'dev'
+
 /** The figures register for one locale, keyed by register key. */
 export const getFigures = unstable_cache(
   async (locale: Locale): Promise<Figures> => {
@@ -38,7 +44,7 @@ export const getFigures = unstable_cache(
       ]),
     )
   },
-  ['global:figures'],
+  [`global:figures:${epoch}`],
   { tags: [tags.global('figures')] },
 )
 

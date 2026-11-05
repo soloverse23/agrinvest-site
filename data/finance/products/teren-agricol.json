@@ -1,0 +1,215 @@
+{
+  "key": "teren-agricol",
+  "order": 24,
+  "borrowers": [
+    "pfa",
+    "ii",
+    "if",
+    "srl",
+    "sa",
+    "agricultural-company"
+  ],
+  "advisor": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii",
+    "credit-productie"
+  ],
+  "relatedGuides": [
+    "costul-real-al-creditului",
+    "cum-analizeaza-finantatorul-ferma"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Juridice.ro: vânzarea terenurilor agricole și dreptul de preempțiune",
+      "url": "https://www.juridice.ro/783146/darea-in-plata-a-terenurilor-agricole.html",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit pentru teren agricol",
+      "slug": "teren-agricol",
+      "answer": "Finanțăm cumpărarea de teren arabil, {{F5.term}}, cu rate legate de recoltă. Terenul este un activ solid, dar se plătește greu doar din ce produce, așa că merită calculat atent înainte.",
+      "fits": "Este pentru fermierii care vor să cumpere terenul pe care îl lucrează deja sau să își rotunjească ferma, și care au și alte venituri din care să acopere ratele. Cumpărarea terenului luat în arendă are un avantaj: îl cunoști deja, iar arenda pe care o plăteai rămâne în fermă.",
+      "notFor": "La prețurile actuale, terenul se amortizează greu. Dacă rata poate fi plătită doar dintr-un an excelent, nu cumpăra acum.\n\nNu este potrivit nici dacă, pentru a-l plăti, rămâi fără bani de campanie. Un teren bun cu o fermă fără inputuri nu produce nimic.",
+      "finances": "Finanțăm teren agricol arabil pentru activitatea fermei. La cumpărarea terenurilor din extravilan trebuie respectată Legea 17/2014, cu drept de preempțiune, în ordine: coproprietari și rude, arendași și proprietari de investiții agricole, vecini, tineri fermieri, instituții de cercetare, localnici și, la final, statul. Nerespectarea duce la nulitatea vânzării, deci discută cu notarul înainte să plătești un avans.",
+      "repayment": "Terenul nu aduce un venit nou, ci transformă arenda în proprietate. De aceea, durata lungă este importantă. Fă calculul pe hectar: rata de capital, plus dobânda, comparate cu ce rămâne după costuri într-un an normal.",
+      "example": {
+        "title": "20 ha cumpărate pe 10 ani",
+        "scenario": "Un fermier cumpără 20 ha la 50.000 de lei pe hectar și alege 10 ani, cu 2 rate pe an. Doar capitalul înseamnă 5.000 de lei pe hectar și an, ceea ce depășește de obicei ce rămâne după costuri pe acel hectar. Diferența trebuie să vină din restul fermei.",
+        "rows": [
+          {
+            "label": "Credit",
+            "value": "1.000.000 lei"
+          },
+          {
+            "label": "Număr de rate",
+            "value": "20"
+          },
+          {
+            "label": "Rată de capital",
+            "value": "50.000 lei"
+          },
+          {
+            "label": "Capital pe hectar și an",
+            "value": "5.000 lei"
+          }
+        ]
+      },
+      "risks": "Prețul terenului poate scădea, iar ipoteca blochează terenul până la rambursare. Verifică actele: cadastru, sarcini, contracte de arendă în vigoare. Dacă terenul este arendat altcuiva, nu îl vei lucra imediat.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "Terenul cumpărat garantează de obicei creditul prin ipotecă."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "Te obligi în scris să plătești suma la o dată."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Sumele de încasat de la APIA pot susține creditul."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "Trimiți cererea",
+          "body": "Ne spui ce vrei să finanțezi, suma și suprafața lucrată."
+        },
+        {
+          "title": "Analizăm ferma",
+          "body": "Discutăm cu tine și îți spunem ce documente sunt necesare. Răspunsul vine {{F4.reply}}."
+        },
+        {
+          "title": "Semnezi contractul",
+          "body": "Stabilim împreună suma, garanțiile și graficul ratelor."
+        },
+        {
+          "title": "Primești banii",
+          "body": "Banii ajung {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Pot cumpăra terenul pe care îl am în arendă?",
+          "answer": "Da, arendașii au și drept de preempțiune, în ordinea stabilită de Legea 17/2014. Verifică la notar."
+        },
+        {
+          "question": "Trebuie să am avans?",
+          "answer": "Depinde de analiză și de garanții. Întreabă echipa."
+        },
+        {
+          "question": "Cine poate cumpăra teren extravilan?",
+          "answer": "Legea 17/2014 stabilește o ordine de preemptori și condiții pentru ceilalți cumpărători. Verifică la notar înainte de semnare."
+        },
+        {
+          "question": "Pe ce durată pot lua creditul?",
+          "answer": "Durata ajunge {{F5.term}}."
+        }
+      ],
+      "seo": {
+        "title": "Credit pentru teren agricol pe termen lung",
+        "description": "Credit pentru cumpărarea de teren arabil, cu rate după recoltă. Ce spune Legea 17/2014 și cum calculezi dacă terenul se poate plăti."
+      }
+    },
+    "en": {
+      "title": "Loan for farmland",
+      "slug": "farmland",
+      "answer": "We finance the purchase of arable land, {{F5.term}}, with instalments tied to the harvest. Land is a solid asset, but it is hard to pay for from its output alone, so work it out carefully first.",
+      "fits": "It is for farmers who want to buy land they already work, or round off their farm, and who have other income to cover the instalments. Buying land you rent has one advantage: you already know it, and the rent you were paying stays in the farm.",
+      "notFor": "At today's prices, land pays back slowly. If the instalment can only be met from an excellent year, do not buy now.\n\nIt does not fit either if paying for it leaves you without money for the season. Good land on a farm with no inputs produces nothing.",
+      "finances": "We finance arable land for the farm's work. Purchases of land outside built-up areas must follow Law 17/2014, with rights of pre-emption in this order: co-owners and relatives, tenants and owners of farm investments, neighbours, young farmers, research bodies, local residents and finally the state. Breaking the rule makes the sale void, so talk to a notary before you pay a deposit.",
+      "repayment": "Land brings no new income; it turns rent into ownership. That is why the long term matters. Do the sum per hectare: the principal instalment, plus interest, against what is left after costs in a normal year.",
+      "example": {
+        "title": "20 ha bought over 10 years",
+        "scenario": "A farmer buys 20 ha at 50,000 lei per hectare and chooses 10 years, with 2 instalments a year. The principal alone comes to 5,000 lei per hectare a year, which usually exceeds what is left after costs on that hectare. The gap has to come from the rest of the farm.",
+        "rows": [
+          {
+            "label": "Loan",
+            "value": "1,000,000 lei"
+          },
+          {
+            "label": "Number of instalments",
+            "value": "20"
+          },
+          {
+            "label": "Principal per instalment",
+            "value": "50,000 lei"
+          },
+          {
+            "label": "Principal per hectare and year",
+            "value": "5,000 lei"
+          }
+        ]
+      },
+      "risks": "Land prices can fall, and a mortgage ties up the land until repayment. Check the papers: land registry, charges, rental contracts in force. If the land is rented to someone else, you will not work it straight away.",
+      "guarantees": [
+        {
+          "kind": "mortgage",
+          "note": "The purchased land usually guarantees the loan through a mortgage."
+        },
+        {
+          "kind": "promissory-note",
+          "note": "You commit in writing to pay the amount on a date."
+        },
+        {
+          "kind": "apia-subsidies",
+          "note": "Amounts due from APIA can support the loan."
+        }
+      ],
+      "documents": [],
+      "process": [
+        {
+          "title": "You send the request",
+          "body": "Tell us what you want to finance, the amount and the area you farm."
+        },
+        {
+          "title": "We look at the farm",
+          "body": "We talk with you and tell you which documents are needed. You get a reply {{F4.reply}}."
+        },
+        {
+          "title": "You sign the contract",
+          "body": "Together we set the amount, the guarantees and the instalment schedule."
+        },
+        {
+          "title": "You receive the money",
+          "body": "The money arrives {{F4.money}}."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Can I buy land I rent?",
+          "answer": "Yes, tenants also have a right of pre-emption, in the order set by Law 17/2014. Check with a notary."
+        },
+        {
+          "question": "Do I need a deposit?",
+          "answer": "It depends on the analysis and the guarantees. Ask the team."
+        },
+        {
+          "question": "Who can buy land outside built-up areas?",
+          "answer": "Law 17/2014 sets an order of pre-emption and conditions for other buyers. Check with a notary before signing."
+        },
+        {
+          "question": "For how long can I borrow?",
+          "answer": "Loans run {{F5.term}}."
+        }
+      ],
+      "seo": {
+        "title": "Loan for buying farmland in Romania, long term",
+        "description": "A loan to buy arable land, with instalments after harvest. What Law 17/2014 says and how to work out whether the land can pay."
+      }
+    }
+  },
+  "parent": "credit-investitii"
+}

@@ -1,0 +1,82 @@
+{
+  "key": "costul-real-al-creditului",
+  "section": "finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "credit-adeverinta-apia",
+    "ifn-sau-banca"
+  ],
+  "sources": [
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De trei ori subvenția",
+      "url": "https://fgcr.ro/produse/de-trei-ori-subventia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Costul real al unui credit agricol",
+      "slug": "costul-real-al-creditului",
+      "summary": "Costul real al unui credit agricol este dobânda (indice plus marjă) la care se adaugă comisioanele, evaluarea, notarul, asigurările și costul garanțiilor. Compară ofertele pe aceeași sumă și durată, pe total, nu doar pe dobândă.",
+      "body": "## Dobânda este doar o parte\n\nDouă credite cu aceeași dobândă pot costa foarte diferit. Costul real este tot ce plătești în plus față de suma împrumutată, de la prima semnătură până la ultima rată.\n\n## Cum se formează dobânda\n\nMulte credite agricole în lei au o dobândă variabilă:\n\n**dobânda = indice de referință + marjă**\n\n- **Indicele** este, de obicei, ROBOR la 3 sau 6 luni. Se schimbă cu piața și nu depinde de finanțator.\n- **Marja** este partea stabilită de finanțator, în funcție de risc și de costurile lui.\n\nDacă ROBOR crește, rata crește, chiar dacă marja rămâne aceeași. Întreabă la ce date se recalculează dobânda și pune în plan o creștere posibilă.\n\n## Procente și puncte procentuale\n\nAici apar adesea neînțelegeri. O reducere de 10% din marjă nu este același lucru cu 10 puncte procentuale. La o marjă de 5%, o reducere de 10% din marjă înseamnă 0,5 puncte, iar marja devine 4,5%. Când vezi o reducere, întreabă din ce se calculează.\n\n## Ce alte costuri pot apărea\n\n| Cost | Când apare | Ce întrebi |\n| --- | --- | --- |\n| Comision de acordare | la început | este procent din credit sau sumă fixă? |\n| Comision de administrare | pe parcurs | lunar, anual sau deloc? |\n| Evaluarea garanțiilor | la început | cine o face și cât costă? |\n| Notar și înscrieri | la început | ipotecă, gaj, Arhiva de Garanții |\n| Asigurări | anual | culturi, utilaje, clădiri: sunt obligatorii? |\n| Garanția unui fond | anual | se aplică doar sumei garantate? |\n| Rambursare anticipată | când plătești mai devreme | există comision? |\n| Întârziere | dacă plătești târziu | dobândă penalizatoare și costuri de recuperare |\n\n## Un exemplu de comparație\n\nUn credit de 100.000 de lei pe un an, rambursat la final. Toate cifrele sunt inventate pentru exemplu, iar ROBOR este presupus 6%.\n\n| | Oferta A | Oferta B |\n| --- | --- | --- |\n| Marjă | 3% | 2,5% |\n| Dobândă pe an | 9.000 lei | 8.500 lei |\n| Comision de acordare | 1.000 lei | 2.000 lei |\n| Evaluare și notar | 500 lei | 500 lei |\n| **Cost total** | **10.500 lei** | **11.000 lei** |\n\nOferta B are dobânda mai mică, dar costă mai mult. Pe mai mulți ani, ordinea se poate inversa, pentru că un comision plătit o singură dată se împarte pe mai mult timp. De aceea compari ofertele pe aceeași sumă și aceeași durată.\n\n## Costul rambursării sezoniere\n\nRatele după recoltă sunt mai ușor de plătit, dar suma rămâne împrumutată mai mult timp între rate, deci dobânda se calculează pe un sold mai mare. Asta nu e o problemă, ci prețul potrivirii cu ferma. Costul unei rate lunare pe care nu o poți plăti este mai mare: penalități, relații stricate cu finanțatorul și stres în campanie.\n\n## Dobânda anuală efectivă\n\nLa creditele pentru consumatori, finanțatorul trebuie să arate dobânda anuală efectivă (DAE), care adună dobânda și costurile într-un singur procent. Creditele pentru afaceri urmează alte reguli, așa că poți primi o ofertă fără DAE. Calculează atunci tu totalul, ca în exemplul de mai sus, sau cere finanțatorului graficul complet de rambursare.\n\n## Ce ceri în scris\n\n- marja și indicele, cu data recalculării;\n- lista tuturor comisioanelor;\n- graficul de rambursare;\n- costul garanțiilor și asigurărilor;\n- condițiile rambursării anticipate;\n- ce se întâmplă în caz de întârziere.\n\nPentru cazurile cu subvenții, vezi [creditul pe adeverința APIA](/finantare/ghiduri/credit-adeverinta-apia), iar pentru utilaje, [credit sau leasing](/finantare/ghiduri/credit-sau-leasing-utilaje).",
+      "faq": [
+        {
+          "question": "Ce este marja de dobândă?",
+          "answer": "Partea din dobândă stabilită de finanțator, adăugată peste un indice de referință precum ROBOR."
+        },
+        {
+          "question": "Ce înseamnă o reducere de 10% din marjă?",
+          "answer": "O scădere proporțională a marjei, nu 10 puncte procentuale. La o marjă de 5%, înseamnă 0,5 puncte."
+        },
+        {
+          "question": "De ce crește rata dacă nu am schimbat nimic?",
+          "answer": "La o dobândă variabilă, rata urmează indicele de referință. Dacă ROBOR crește, crește și dobânda."
+        },
+        {
+          "question": "Un credit pentru firmă are DAE?",
+          "answer": "Obligația de a afișa DAE vine din regulile pentru creditele de consum. La creditele pentru afaceri poți primi oferte fără DAE, așa că cere graficul complet."
+        }
+      ],
+      "seo": {
+        "title": "Costul real al unui credit agricol: dobândă și comisioane",
+        "description": "Din ce se compune costul unui credit pentru fermieri: ROBOR, marjă, comisioane, garanții și asigurări, cu un exemplu de comparație între două oferte."
+      }
+    },
+    "en": {
+      "title": "The true cost of a farm loan",
+      "slug": "true-cost-of-credit",
+      "summary": "The true cost of a farm loan is the interest (index plus margin) plus fees, valuation, notary, insurance and the cost of guarantees. Compare offers on the same amount and term, on the total, not just the rate.",
+      "body": "## Interest is only one part\n\nTwo loans at the same rate can cost very different amounts. The true cost is everything you pay on top of the sum borrowed, from the first signature to the last instalment.\n\n## How interest is built\n\nMany farm loans in lei have a variable rate:\n\n**interest = reference index + margin**\n\n- **The index** is usually 3-month or 6-month ROBOR. It moves with the market and does not depend on the lender.\n- **The margin** is the part set by the lender, based on risk and its own costs.\n\nIf ROBOR rises, the rate rises, even if the margin stays the same. Ask on which dates the rate is reset, and allow for a possible increase in your plan.\n\n## Per cent and percentage points\n\nThis is where misunderstandings often start. A 10% reduction of the margin is not the same as 10 percentage points. On a 5% margin, a 10% reduction of the margin means 0.5 points, and the margin becomes 4.5%. When you see a reduction, ask what it is calculated on.\n\n## What other costs can appear\n\n| Cost | When it appears | What to ask |\n| --- | --- | --- |\n| Arrangement fee | at the start | a percentage of the loan or a fixed amount? |\n| Administration fee | along the way | monthly, yearly or none? |\n| Valuation of guarantees | at the start | who does it and what does it cost? |\n| Notary and registration | at the start | mortgage, pledge, the Guarantees Archive |\n| Insurance | yearly | crops, machinery, buildings: compulsory? |\n| A fund's guarantee | yearly | does it apply only to the guaranteed amount? |\n| Early repayment | when you pay early | is there a fee? |\n| Late payment | if you pay late | penalty interest and recovery costs |\n\n## A comparison example\n\nA 100,000 lei loan for one year, repaid at the end. All figures are invented for the example, and ROBOR is assumed to be 6%.\n\n| | Offer A | Offer B |\n| --- | --- | --- |\n| Margin | 3% | 2.5% |\n| Interest for the year | 9,000 lei | 8,500 lei |\n| Arrangement fee | 1,000 lei | 2,000 lei |\n| Valuation and notary | 500 lei | 500 lei |\n| **Total cost** | **10,500 lei** | **11,000 lei** |\n\nOffer B has the lower rate but costs more. Over several years the order can flip, because a one-off fee is spread over more time. That is why you compare offers on the same amount and the same term.\n\n## The cost of seasonal repayment\n\nInstalments after harvest are easier to pay, but the money stays borrowed longer between instalments, so interest runs on a higher balance. That is not a problem; it is the price of fitting the farm. The cost of a monthly instalment you cannot pay is higher: penalties, a damaged relationship with the lender and stress in the season.\n\n## The annual percentage rate\n\nFor consumer credit, the lender must show the annual percentage rate (DAE in Romanian), which adds interest and costs into a single percentage. Business loans follow other rules, so you may receive an offer without one. In that case work out the total yourself, as in the example above, or ask the lender for the full repayment schedule.\n\n## What to ask for in writing\n\n- the margin and the index, with the reset date;\n- the list of all fees;\n- the repayment schedule;\n- the cost of guarantees and insurance;\n- the terms for early repayment;\n- what happens if you are late.\n\nFor subsidy cases, see [APIA certificate loans](/en/financing/guides/apia-certificate-credit), and for machinery, [loan or lease](/en/financing/guides/credit-or-leasing-machinery).",
+      "faq": [
+        {
+          "question": "What is the interest margin?",
+          "answer": "The part of the interest set by the lender, added on top of a reference index such as ROBOR."
+        },
+        {
+          "question": "What does a 10% reduction of the margin mean?",
+          "answer": "A proportional fall in the margin, not 10 percentage points. On a 5% margin it means 0.5 points."
+        },
+        {
+          "question": "Why did my instalment rise when nothing changed?",
+          "answer": "With a variable rate, the rate follows the reference index. If ROBOR rises, so does the interest."
+        },
+        {
+          "question": "Does a business loan have a DAE?",
+          "answer": "The duty to show the DAE comes from consumer credit rules. With business loans you may receive offers without one, so ask for the full schedule."
+        }
+      ],
+      "seo": {
+        "title": "The true cost of a farm loan: interest and fees",
+        "description": "What makes up the cost of a farm loan in Romania: ROBOR, margin, fees, guarantees and insurance, with an example comparing two offers side by side."
+      }
+    }
+  }
+}

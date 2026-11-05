@@ -23,22 +23,16 @@ export const figures: FigureSeed[] = [
     source: 'agrinvest.ro/despre-noi/',
   },
   {
-    key: 'C2',
-    label: { ro: 'Birou comercial', en: 'Commercial office' },
-    value: { ro: 'Bd. Pipera 1/1, Voluntari, Ilfov', en: 'Bd. Pipera 1/1, Voluntari, Ilfov' },
-    source: 'despre-noi, servicii-ifn',
-  },
-  {
     key: 'C3',
-    label: { ro: 'Sediul social (Agrinvest SRL)', en: 'Registered office (Agrinvest SRL)' },
+    label: { ro: 'Sediul central și social', en: 'Head and registered office' },
     value: { ro: 'Buzău, Tarlaua 41, Parcela 724', en: 'Buzău, Tarlaua 41, Parcela 724' },
     source: 'agrinvest.ro footer',
   },
   {
     key: 'C4',
     label: { ro: 'Județe în care suntem prezenți', en: 'Counties served' },
-    value: { ro: '22', en: '22' },
-    number: 22,
+    value: { ro: '11', en: '11' },
+    number: 11,
     source: 'despre-noi',
   },
   {
@@ -65,12 +59,6 @@ export const figures: FigureSeed[] = [
     source: 'flota-proprie',
   },
   {
-    key: 'C9.phone',
-    label: { ro: 'Telefon', en: 'Phone' },
-    value: { ro: '+40 786 222 238', en: '+40 786 222 238' },
-    source: 'site header/footer',
-  },
-  {
     key: 'C9.email',
     label: { ro: 'E-mail', en: 'Email' },
     value: { ro: 'office@agrinvest.ro', en: 'office@agrinvest.ro' },
@@ -78,7 +66,7 @@ export const figures: FigureSeed[] = [
   },
   {
     key: 'S1',
-    label: { ro: 'Baze de depozitare', en: 'Storage bases' },
+    label: { ro: 'Silozuri și depozite de cereale', en: 'Silos and grain warehouses' },
     value: { ro: '17', en: '17' },
     number: 17,
     source: 'silozuri, trading-cereale, despre-noi',
@@ -86,8 +74,8 @@ export const figures: FigureSeed[] = [
   {
     key: 'S2',
     label: { ro: 'Capacitate totală de depozitare', en: 'Total storage capacity' },
-    value: { ro: '238.000 t', en: '238,000 t' },
-    number: 238000,
+    value: { ro: '275.000 t', en: '275,000 t' },
+    number: 275000,
     unit: { ro: 't', en: 't' },
     source: 'silozuri',
   },
@@ -102,18 +90,21 @@ export const figures: FigureSeed[] = [
     key: 'L2',
     label: { ro: 'Alte vehicule', en: 'Other vehicles' },
     value: {
-      ro: '1 cisternă de îngrășăminte lichide, 2 dube, 70 de autoturisme',
-      en: '1 liquid-fertiliser tanker, 2 vans, 70 cars',
+      ro: '1 cisternă de îngrășăminte lichide, 2 dube și 70 de alte vehicule',
+      en: '1 liquid fertiliser tanker, 2 vans and 70 other vehicles',
     },
     source: 'flota-proprie',
   },
   {
-    key: 'P1',
-    label: { ro: 'Suprafață în Golden Relationship', en: 'Area in Golden Relationship' },
-    value: { ro: 'peste 6.000 ha', en: 'over 6,000 ha' },
-    number: 6000,
+    key: 'C10',
+    label: { ro: 'Teren arabil', en: 'Arable land' },
+    value: {
+      ro: '9.000 ha, peste 50% în proprietatea directă a companiei',
+      en: '9,000 ha, over 50% owned directly by the company',
+    },
+    number: 9000,
     unit: { ro: 'ha', en: 'ha' },
-    source: 'agrinvest-golden-relationships',
+    source: 'owner, 2026-11-05',
   },
   {
     key: 'F1',
@@ -140,22 +131,40 @@ export const figures: FigureSeed[] = [
     source: 'servicii-ifn, press',
   },
   {
-    key: 'F4',
+    key: 'F4.reply',
     label: { ro: 'Răspuns la cerere', en: 'Reply to an application' },
     value: { ro: 'în 24 h de la dosarul complet', en: 'within 24 h of complete documents' },
     number: 24,
     unit: { ro: 'h', en: 'h' },
-    source: 'servicii-ifn',
+    source: 'servicii-ifn; agrointel 03.06.2026',
   },
   {
-    key: 'F5',
-    label: { ro: 'Durată și rate', en: 'Term and instalments' },
+    key: 'F4.money',
+    label: { ro: 'Banii după semnare', en: 'Money after signing' },
+    value: { ro: 'în maximum 3 zile de la semnare', en: 'within 3 days of signing' },
+    number: 3,
+    unit: { ro: 'zile', en: 'days' },
+    source: 'servicii-ifn; the 2026 statements say 24 h',
+  },
+  {
+    key: 'F5.term',
+    label: { ro: 'Durata maximă', en: 'Longest term' },
     value: {
-      ro: 'până la 7 ani, maximum 2 rate pe an',
-      en: 'up to 7 years, at most 2 instalments a year',
+      ro: 'până la 10 ani pentru creditele de investiții',
+      en: 'up to 10 years for investment credit',
     },
-    number: 7,
+    number: 10,
     unit: { ro: 'ani', en: 'years' },
+    source: 'agrointel 03.06.2026; Agro TV 16.06.2026',
+  },
+  {
+    key: 'F5.instalments',
+    label: { ro: 'Rate', en: 'Instalments' },
+    value: {
+      ro: 'maximum 2 rate pe an, după recoltele de vară și de toamnă',
+      en: 'at most 2 instalments a year, after the summer and autumn harvests',
+    },
+    number: 2,
     source: 'servicii-ifn',
   },
   {
@@ -164,6 +173,24 @@ export const figures: FigureSeed[] = [
     value: { ro: 'peste 500', en: 'over 500' },
     number: 500,
     source: 'agrointel, Mar 2025',
+  },
+  {
+    key: 'F7.registered',
+    label: { ro: 'Sediul social IFN', en: 'IFN registered office' },
+    value: {
+      ro: 'Bd. Pipera nr. 1 I, et. 4, Voluntari, Ilfov',
+      en: 'Bd. Pipera nr. 1 I, floor 4, Voluntari, Ilfov',
+    },
+    source: 'ANAF 2026-11-05; servicii-ifn',
+  },
+  {
+    key: 'F7.office',
+    label: { ro: 'Birou IFN', en: 'IFN office' },
+    value: {
+      ro: 'Bd. Pipera nr. 1/1, et. 5, Voluntari, Ilfov',
+      en: 'Bd. Pipera nr. 1/1, floor 5, Voluntari, Ilfov',
+    },
+    source: 'servicii-ifn',
   },
   {
     key: 'F8.phone',
@@ -176,6 +203,60 @@ export const figures: FigureSeed[] = [
     label: { ro: 'E-mail IFN', en: 'IFN email' },
     value: { ro: 'office.ifn@agrinvest.ro', en: 'office.ifn@agrinvest.ro' },
     source: 'servicii-ifn',
+  },
+  {
+    key: 'F8.dpo',
+    label: { ro: 'Protecția datelor IFN', en: 'IFN data protection' },
+    value: { ro: 'dpo@agrinvest.ro', en: 'dpo@agrinvest.ro' },
+    source: 'servicii-ifn',
+  },
+  {
+    key: 'F9',
+    label: { ro: 'Reducerea marjei de dobândă', en: 'Interest margin reduction' },
+    value: {
+      ro: 'până la 10% din marja de dobândă, dacă respecți contractul și graficul de rambursare',
+      en: 'up to 10% of the interest margin, for keeping to the contract and repayment schedule',
+    },
+    number: 10,
+    unit: { ro: '%', en: '%' },
+    source: 'agrointel 03.06.2026; Agro TV 16.06.2026',
+  },
+  {
+    key: 'F10',
+    label: { ro: 'Credit pe contracte de vânzare', en: 'Credit on sale contracts' },
+    value: { ro: 'până la 35% din valoarea contractului', en: 'up to 35% of the contract value' },
+    number: 35,
+    unit: { ro: '%', en: '%' },
+    source: 'Financial Intelligence 27.01.2022',
+  },
+  {
+    key: 'F11',
+    label: { ro: 'Subvenții APIA ca garanție', en: 'APIA subsidies as collateral' },
+    value: {
+      ro: 'până la 200% din sumele de încasat de la APIA',
+      en: 'up to 200% of the amounts due from APIA',
+    },
+    number: 200,
+    unit: { ro: '%', en: '%' },
+    source: 'press 2022',
+  },
+  {
+    key: 'F12',
+    label: { ro: 'Producție agroalimentară', en: 'Agri-food production' },
+    value: {
+      ro: 'din 2024: carne, lapte și lactate, panificație și patiserie, nutrețuri combinate',
+      en: 'since 2024: meat, milk and dairy, bakery and pastry, compound feed',
+    },
+    source: 'agrointel 11.03.2025',
+  },
+  {
+    key: 'F14',
+    label: { ro: 'Plata cu produse agricole', en: 'Payment in farm produce' },
+    value: {
+      ro: 'o parte din achizițiile de cereale vin de la fermieri care au primit sprijin pentru înființarea culturilor și își achită datoria cu produse agricole, la recoltare',
+      en: 'part of the grain bought comes from farmers who received support to establish their crops and settle the debt in farm produce at harvest',
+    },
+    source: 'agrinvest.ro/flota-proprie/',
   },
 ]
 
@@ -400,7 +481,6 @@ export const people = [
     key: 'office',
     name: 'Agrinvest',
     role: { ro: 'Birou comercial', en: 'Commercial office' },
-    phone: '+40 786 222 238',
     email: 'office@agrinvest.ro',
   },
   {
@@ -419,10 +499,7 @@ export const people = [
   {
     key: 'agronomist',
     name: 'Dan N. Săvoiu',
-    role: {
-      ro: 'Inginer agronom, coordonator Golden Relationship',
-      en: 'Agronomist, Golden Relationship coordinator',
-    },
+    role: { ro: 'Inginer agronom', en: 'Agronomist' },
     author: true,
   },
   {

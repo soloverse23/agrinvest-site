@@ -1,5 +1,20 @@
 import type { Locale } from '@/i18n/config'
-import { basePath, categoryPath, cropPath, hubPath, productPath, shopPath } from '@/i18n/routes'
+import {
+  basePath,
+  categoryPath,
+  cropPath,
+  financeRoutePath,
+  financeRoutes,
+  hubPath,
+  productPath,
+  shopPath,
+} from '@/i18n/routes'
+import {
+  allGuideAlternates,
+  allProductAlternates,
+  getFinancePage,
+  listGuides,
+} from '@/lib/content/finance'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { alternatesOf, listPages, type Alternates } from '@/lib/content/pages'
 import {
@@ -62,6 +77,27 @@ export const segments = {
           alternates,
         }))
       })
+  },
+  finance: async (): Promise<SitemapEntry[]> => {
+    const [guides, list, products, about, faq] = await Promise.all([
+      allGuideAlternates(),
+      listGuides('ro'),
+      allProductAlternates(),
+      getFinancePage(financeRoutes.about.ro, 'ro'),
+      getFinancePage(financeRoutes.faq.ro, 'ro'),
+    ])
+    const routeAlternates = (route: 'about' | 'faq') => ({
+      ro: financeRoutePath(route, 'ro'),
+      en: financeRoutePath(route, 'en'),
+    })
+    const index = { ro: financeRoutePath('guides', 'ro'), en: financeRoutePath('guides', 'en') }
+    return [
+      ...(list.length ? entries(index) : []),
+      ...guides.flatMap((alternates) => entries(alternates)),
+      ...products.flatMap((alternates) => entries(alternates)),
+      ...(about ? entries(routeAlternates('about')) : []),
+      ...(faq ? entries(routeAlternates('faq')) : []),
+    ]
   },
   // Products share their slug across languages; their category slug is translated.
   products: async (): Promise<SitemapEntry[]> => {

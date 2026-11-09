@@ -38,6 +38,11 @@ export type CheckoutState = {
   message?: string
   /** Submitted values, so the form keeps them after an error without JavaScript. */
   values?: Partial<Record<CheckoutField, string>>
+  /**
+   * Changes on every failed attempt, so the form remounts with what was typed. React resets a
+   * form after an action, and a reset does not restore a select's value.
+   */
+  attempt?: number
   reference?: string
   assignee?: { name: string; role?: string | null }
 }

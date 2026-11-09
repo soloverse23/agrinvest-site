@@ -1,0 +1,81 @@
+{
+  "key": "aplica",
+  "section": "pagina-finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie",
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "cum-analizeaza-finantatorul-ferma"
+  ],
+  "sources": [],
+  "text": {
+    "ro": {
+      "title": "Cerere de credit agricol",
+      "slug": "aplica",
+      "summary": "Trimite o cerere de finanțare la Agrinvest Credit IFN în câteva minute. Nu încarci documente acum: echipa te contactează și îți spune ce mai trebuie.",
+      "body": "## Ce se întâmplă după ce trimiți\n\n1. Cererea ajunge la echipa Agrinvest Credit IFN, iar tu primești un număr de cerere.\n2. Cineva din echipă te contactează pentru o primă discuție despre fermă și despre ce vrei să finanțezi.\n3. Îți spunem ce documente sunt necesare pentru forma ta de organizare și pentru tipul de finanțare.\n4. Primești răspunsul {{F4.reply}}. Dacă cererea este aprobată, primești banii {{F4.money}}.\n\n## Ce nu îți cerem acum\n\nNu încarci documente și nu îți cerem codul numeric personal. Site-ul nu verifică istoricul tău de credit și nu ia nicio decizie. Cererea doar pornește discuția.\n\n## Cine trimite cererea\n\nCererea se face pentru o fermă sau o firmă înregistrată: PFA, întreprindere individuală sau familială, SRL, SA sau societate agricolă. De aceea îți cerem CUI-ul. Dacă nu ai încă o formă de organizare, [scrie-ne](/contact) și îți spunem ce opțiuni ai.\n\n## Înainte să trimiți\n\nNu trebuie să știi exact suma sau produsul. O estimare ajunge. Dacă vrei să vezi întâi cum ar cădea ratele după recolte, folosește [simulatorul](/finantare/simulator). Ca să știi ce urmărește un finanțator, citește [cum analizează finanțatorul ferma](/finantare/ghiduri/cum-analizeaza-finantatorul-ferma).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Trimiterea cererii mă obligă la ceva?",
+          "answer": "Nu. Cererea doar pornește discuția cu echipa Agrinvest Credit IFN."
+        },
+        {
+          "question": "Înseamnă că am primit creditul?",
+          "answer": "Nu. Aprobarea depinde de analiza dosarului, după ce vorbim și primim documentele."
+        },
+        {
+          "question": "De ce îmi cereți CUI-ul?",
+          "answer": "Pentru că finanțăm ferme și firme înregistrate, iar CUI-ul ne arată cine solicită. Cu el putem completa denumirea din datele publice ANAF."
+        },
+        {
+          "question": "Pot trimite cererea fără să știu suma exactă?",
+          "answer": "Da. Scrie o estimare, iar suma se stabilește împreună cu echipa."
+        },
+        {
+          "question": "Cât durează până primesc un răspuns?",
+          "answer": "Răspunsul vine {{F4.reply}}."
+        }
+      ],
+      "seo": {
+        "title": "Cerere credit agricol online, fără documente acum",
+        "description": "Trimite online o cerere de credit agricol la Agrinvest Credit IFN. Fără documente la început: echipa te contactează și îți spune ce mai trebuie."
+      }
+    },
+    "en": {
+      "title": "Farm loan application",
+      "slug": "apply",
+      "summary": "Send a financing application to Agrinvest Credit IFN in a few minutes. You upload no documents now: the team contacts you and tells you what else is needed.",
+      "body": "## What happens after you send it\n\n1. The application reaches the Agrinvest Credit IFN team, and you get an application number.\n2. Someone from the team contacts you for a first conversation about your farm and what you want to finance.\n3. We tell you which documents your legal form and type of financing need.\n4. You get a reply {{F4.reply}}. If the application is approved, you receive the money {{F4.money}}.\n\n## What we do not ask for now\n\nYou upload no documents and we do not ask for your personal numeric code. The site does not check your credit history and takes no decision. The application only starts the conversation.\n\n## Who applies\n\nThe application is made for a registered farm or company: PFA, sole or family enterprise, SRL, SA or agricultural company. That is why we ask for the tax ID (CUI). If you do not have a legal form yet, [write to us](/en/contact) and we will tell you your options.\n\n## Before you send it\n\nYou do not need to know the exact amount or product. An estimate is enough. To see first how instalments would fall after harvests, use the [simulator](/en/financing/simulator). To know what a lender looks at, read [how a lender reviews a farm](/en/financing/guides/how-lenders-assess-a-farm).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Does sending the application commit me to anything?",
+          "answer": "No. The application only starts the conversation with the Agrinvest Credit IFN team."
+        },
+        {
+          "question": "Does it mean I have the loan?",
+          "answer": "No. Approval depends on the review of the application, after we talk and receive the documents."
+        },
+        {
+          "question": "Why do you ask for the tax ID?",
+          "answer": "Because we finance registered farms and companies, and the tax ID shows who is applying. With it we can fill in the name from ANAF's public data."
+        },
+        {
+          "question": "Can I apply without knowing the exact amount?",
+          "answer": "Yes. Type an estimate, and the amount is agreed with the team."
+        },
+        {
+          "question": "How long until I get a reply?",
+          "answer": "The reply comes {{F4.reply}}."
+        }
+      ],
+      "seo": {
+        "title": "Apply for a farm loan online, no documents yet",
+        "description": "Send a farm loan application to Agrinvest Credit IFN online. No documents to start: the team contacts you and tells you what else is needed."
+      }
+    }
+  }
+}

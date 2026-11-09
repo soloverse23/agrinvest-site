@@ -42,11 +42,56 @@ export const financeUi = {
     documents: 'Documente',
     documentsBody:
       'Lista documentelor depinde de forma de organizare și de produs. Ți-o comunică echipa Agrinvest Credit IFN după prima discuție.',
-    contact: 'Vorbește cu noi',
-    contactBody:
-      'Spune-ne ce vrei să finanțezi și suprafața lucrată. Te contactează echipa Agrinvest Credit IFN.',
     products: 'Ce finanțăm',
     seeProduct: 'Vezi detalii',
+    tools: {
+      kicker: 'Agrinvest Credit IFN',
+      title: 'Vezi cum ar cădea ratele, apoi trimite cererea',
+      body: 'Simulatorul pune ratele pe recoltele tale. Cererea durează câteva minute, iar documentele ți le cerem după prima discuție.',
+      apply: 'Trimite o cerere',
+      simulate: 'Simulează ratele',
+      talk: 'Preferi să vorbim întâi?',
+      talkLink: 'Scrie-ne sau sună-ne',
+    },
+    simulator: {
+      form: 'Datele tale',
+      amount: 'Suma',
+      months: 'Durata',
+      monthsUnit: 'luni',
+      monthsHint: (max: number) => `În luni, până la ${max}.`,
+      crops: 'Ce cultivi',
+      cropsHint: 'Ratele cad după recoltele culturilor alese.',
+      start: 'Când ai nevoie de bani',
+      rate: 'Dobânda ta, ca să compari (opțional)',
+      rateHint:
+        'O dobândă anuală dintr-o altă ofertă sau o estimare a ta. Agrinvest nu publică o dobândă.',
+      submit: 'Calculează',
+      errors: {
+        amount: 'Scrie o sumă între 1.000 și 50.000.000 lei.',
+        months: (max: number) => `Scrie o durată între 1 și ${max} luni.`,
+        crops: 'Alege cel puțin o cultură.',
+        start: 'Alege o lună din listă.',
+        rate: 'Scrie o dobândă anuală mai mare de 0 și de cel mult 50%.',
+      },
+      resultTitle: 'Cum ar putea cădea ratele',
+      summary: (amount: string, months: number, start: string) =>
+        `${amount} pe ${months} luni, cu banii în ${start}.`,
+      heads: ['Recolta', 'Principal', 'Rămas de plată'],
+      interestHead: 'Dobânda ta',
+      total: 'Total',
+      season: { summer: 'vară', autumn: 'toamnă' },
+      interestNote: (rate: string) =>
+        `Dobânda este calculată cu ${rate} pe an, cifra scrisă de tine, pe suma rămasă de plată. Nu este dobânda Agrinvest și nu include comisioane, asigurări sau evaluări.`,
+      costLink: 'Ce intră în costul unui credit',
+      noteTitle: 'Un exemplu, nu o ofertă',
+      noteBody:
+        'Simularea arată cum ar putea cădea ratele după recolte. Echipa Agrinvest Credit IFN stabilește graficul real, dobânda și costurile după analiza cererii.',
+      noHarvest: (start: string, first: string, months: number) =>
+        `Nicio recoltă a culturilor alese nu cade în perioada aleasă. Cu banii în ${start}, prima recoltă este în ${first}, deci durata ar trebui să fie de cel puțin ${months} luni.`,
+      tryLonger: (months: number) => `Calculează cu ${months} luni`,
+      applyWith: 'Trimite o cerere cu aceste cifre',
+      change: 'Schimbă cifrele',
+    },
   },
   en: {
     section: 'Financing',
@@ -93,10 +138,55 @@ export const financeUi = {
     documents: 'Documents',
     documentsBody:
       'The documents depend on your legal form and the product. The Agrinvest Credit IFN team tells you which after the first conversation.',
-    contact: 'Talk to us',
-    contactBody:
-      'Tell us what you want to finance and the area you farm. The Agrinvest Credit IFN team will contact you.',
     products: 'What we finance',
     seeProduct: 'See details',
+    tools: {
+      kicker: 'Agrinvest Credit IFN',
+      title: 'See how instalments would fall, then apply',
+      body: 'The simulator places instalments on your harvests. The application takes a few minutes, and we ask for documents after the first conversation.',
+      apply: 'Apply',
+      simulate: 'Simulate instalments',
+      talk: 'Would you rather talk first?',
+      talkLink: 'Write to us or call',
+    },
+    simulator: {
+      form: 'Your figures',
+      amount: 'Amount',
+      months: 'Term',
+      monthsUnit: 'months',
+      monthsHint: (max: number) => `In months, up to ${max}.`,
+      crops: 'What you grow',
+      cropsHint: 'Instalments fall after the harvests of the crops you choose.',
+      start: 'When you need the money',
+      rate: 'Your own rate, to compare (optional)',
+      rateHint:
+        'An annual rate from another offer, or your own estimate. Agrinvest does not publish a rate.',
+      submit: 'Calculate',
+      errors: {
+        amount: 'Please enter an amount between 1,000 and 50,000,000 lei.',
+        months: (max: number) => `Please enter a term between 1 and ${max} months.`,
+        crops: 'Please choose at least one crop.',
+        start: 'Please choose a month from the list.',
+        rate: 'Please enter an annual rate above 0 and at most 50%.',
+      },
+      resultTitle: 'How instalments could fall',
+      summary: (amount: string, months: number, start: string) =>
+        `${amount} over ${months} months, with the money in ${start}.`,
+      heads: ['Harvest', 'Principal', 'Still owed'],
+      interestHead: 'Your interest',
+      total: 'Total',
+      season: { summer: 'summer', autumn: 'autumn' },
+      interestNote: (rate: string) =>
+        `Interest is worked out at ${rate} a year, the figure you typed, on the amount still owed. It is not an Agrinvest rate and leaves out fees, insurance and valuations.`,
+      costLink: 'What goes into the cost of a loan',
+      noteTitle: 'An example, not an offer',
+      noteBody:
+        'The simulation shows how instalments could fall after harvests. The Agrinvest Credit IFN team sets the real schedule, interest and costs after reviewing the application.',
+      noHarvest: (start: string, first: string, months: number) =>
+        `No harvest of the chosen crops falls inside this term. With the money in ${start}, the first harvest is in ${first}, so the term would need to be at least ${months} months.`,
+      tryLonger: (months: number) => `Calculate with ${months} months`,
+      applyWith: 'Apply with these figures',
+      change: 'Change the figures',
+    },
   },
 } as const satisfies Record<Locale, unknown>

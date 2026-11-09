@@ -1,7 +1,5 @@
 'use server'
 
-import { randomInt } from 'node:crypto'
-
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -10,6 +8,7 @@ import { cartPath } from '@/i18n/routes'
 import { payloadClient } from '@/lib/content/payload'
 import { CONSENT_VERSION } from '@/lib/leads/state'
 import { allow } from '@/lib/leads/rate-limit'
+import { newReference } from '@/lib/reference'
 
 import { lookupCached } from './anaf'
 import { cartItems, clearCart, pricedCart, productsBySku, saveItems } from './cart'
@@ -106,15 +105,6 @@ const fields: CheckoutField[] = [
   'terms',
 ]
 
-const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
-
-/** Hard to guess, easy to read over the phone: `AGR-2611-7KQ2M`. */
-const newReference = (now = new Date()) => {
-  const stamp = now.toISOString().slice(2, 7).replace('-', '')
-  const tail = Array.from({ length: 5 }, () => ALPHABET[randomInt(ALPHABET.length)]).join('')
-  return `AGR-${stamp}-${tail}`
-}
-
 /**
  * Turns the cart into an order. Prices, names and what may be ordered are read again here,
  * so nothing from the browser decides them; only the buyer's details come from the form.
@@ -129,8 +119,8 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
   const values = raw as CheckoutState['values']
 
   const cart = await pricedCart(locale)
-  if (!cart.lines.length) return { status: 'error', message: t.empty, values }
-  if (!cart.canOrder) return { status: 'error', message: t.blocked, values }
+  if (!cart.lines.length) return { status: 'error', message: t.empty, values, attempt: Date.now() }
+  if (!cart.canOrder) return { status: 'error', message: t.blocked, values, attempt: Date.now() }
 
   const parsed = checkoutSchema(locale, cart).safeParse(raw)
   if (!parsed.success) {
@@ -139,12 +129,12 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
       const field = issue.path[0] as CheckoutField
       if (fields.includes(field) && !errors[field]) errors[field] = issue.message
     }
-    return { status: 'error', errors, values }
+    return { status: 'error', errors, values, attempt: Date.now() }
   }
 
   const ip = await clientIp()
   if (process.env.NODE_ENV === 'production' && !allow(`order:${ip}`))
-    return { status: 'error', message: t.limit, values }
+    return { status: 'error', message: t.limit, values, attempt: Date.now() }
 
   const v = parsed.data
   const company = v.buyerType === 'company'
@@ -155,7 +145,7 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
       collection: 'orders',
       depth: 1,
       data: {
-        reference: newReference(),
+        reference: newReference('AGR'),
         status: 'new',
         lines: cart.lines.map((l) => ({
           sku: l.sku,
@@ -214,6 +204,6 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
     }
   } catch (error) {
     console.error('placeOrder failed', error)
-    return { status: 'error', message: t.failed, values }
+    return { status: 'error', message: t.failed, values, attempt: Date.now() }
   }
 }

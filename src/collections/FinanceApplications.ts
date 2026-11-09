@@ -36,7 +36,16 @@ export const FinanceApplications: CollectionConfig = {
   admin: {
     group: financeGroup,
     useAsTitle: 'reference',
-    defaultColumns: ['reference', 'name', 'phone', 'status', 'assignedTo', 'createdAt'],
+    defaultColumns: [
+      'reference',
+      'name',
+      'phone',
+      'product',
+      'amount',
+      'status',
+      'assignedTo',
+      'createdAt',
+    ],
     hidden: ({ user }) => !ifnRequest({ user: user as never }),
   },
   defaultSort: '-createdAt',

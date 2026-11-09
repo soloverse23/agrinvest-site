@@ -19,13 +19,20 @@ import { buildMetadata } from '@/lib/seo/metadata'
 
 /** Fixed pages of the finance section, kept in Guides: about the IFN and the FAQ. */
 type Route = 'about' | 'faq'
+/** The tools have their text in Guides too (`FinanceToolPage`). */
+type TextRoute = Route | 'simulator' | 'apply'
 
-const alternatesOf = (route: Route) => ({
+export const alternatesOf = (route: TextRoute) => ({
   ro: financeRoutePath(route, 'ro'),
   en: financeRoutePath(route, 'en'),
 })
 
-export async function financeFixedMetadata(locale: Locale, route: Route): Promise<Metadata> {
+/** `noindex` for a URL with parameters; the canonical stays the clean page. */
+export async function financeFixedMetadata(
+  locale: Locale,
+  route: TextRoute,
+  noindex = false,
+): Promise<Metadata> {
   const page = await getFinancePage(financeRoutes[route][locale], locale)
   if (!page) return {}
   const seo = await getSeoDefaults(locale)
@@ -38,6 +45,7 @@ export async function financeFixedMetadata(locale: Locale, route: Route): Promis
     description: page.seo?.description || page.summary,
     image: seo.ogImage,
     alternates: alternatesOf(route),
+    noindex,
   })
 }
 

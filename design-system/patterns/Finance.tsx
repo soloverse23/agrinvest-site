@@ -161,3 +161,80 @@ export function RepaymentCalendar({
     />
   )
 }
+
+/**
+ * A simulated repayment schedule: one row per instalment, then the totals. Numbers align right;
+ * on narrow phones the table scrolls inside itself, never the page.
+ */
+export function RepaymentSchedule({
+  caption,
+  heads,
+  rows,
+  totals,
+  phoneHidden = [],
+}: {
+  caption: string
+  /** Harvest, principal, principal left, and interest when a rate was given. */
+  heads: string[]
+  /** Columns left out below 640 px, so the rest fits a phone without scrolling. */
+  phoneHidden?: number[]
+  rows: { key: string; cells: ReactNode[] }[]
+  totals: { label: string; cells: ReactNode[] }
+}) {
+  const hide = (column: number) => (phoneHidden.includes(column) ? 'hidden sm:table-cell' : '')
+  return (
+    <div className="overflow-x-auto rounded-lg bg-raised shadow-soft ring-1 ring-line">
+      <table className="w-full min-w-[20rem] text-left text-small">
+        <caption className="sr-only">{caption}</caption>
+        <thead className="bg-surface text-caption text-muted">
+          <tr>
+            {heads.map((h, i) => (
+              <th
+                key={h}
+                scope="col"
+                className={`px-4 py-3 font-medium md:px-5 ${i ? 'text-right' : ''} ${hide(i)}`}
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-line">
+          {rows.map((row) => (
+            <tr key={row.key}>
+              {row.cells.map((cell, i) =>
+                i === 0 ? (
+                  <th key={i} scope="row" className="px-4 py-3 font-semibold text-ink md:px-5">
+                    {cell}
+                  </th>
+                ) : (
+                  <td
+                    key={i}
+                    className={`px-4 py-3 text-right text-muted tabular-nums md:px-5 ${hide(i)}`}
+                  >
+                    {cell}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+        <tfoot className="border-t border-line bg-surface">
+          <tr>
+            <th scope="row" className="px-4 py-3 font-semibold text-ink md:px-5">
+              {totals.label}
+            </th>
+            {totals.cells.map((cell, i) => (
+              <td
+                key={i}
+                className={`px-4 py-3 text-right font-semibold text-ink tabular-nums md:px-5 ${hide(i + 1)}`}
+              >
+                {cell}
+              </td>
+            ))}
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  )
+}

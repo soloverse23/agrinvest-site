@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { GuaranteeTable, RepaymentCalendar, ReviewNote, SourceList, WorkedExample } from './Finance'
+import {
+  GuaranteeTable,
+  RepaymentCalendar,
+  RepaymentSchedule,
+  ReviewNote,
+  SourceList,
+  WorkedExample,
+} from './Finance'
 
 const meta: Meta = { title: 'Patterns/Finance' }
 export default meta
@@ -59,6 +66,22 @@ export const Calendar: StoryObj = {
       caption="Când cad ratele"
       heads={['Rata', 'Culturi', 'Perioadă']}
       rows={[{ label: 'După recolta de vară', crops: 'grâu, orz, rapiță', when: 'iulie–august' }]}
+    />
+  ),
+}
+
+/** The simulator's output: principal on each harvest, with interest only from the farmer's rate. */
+export const Schedule: StoryObj = {
+  render: () => (
+    <RepaymentSchedule
+      caption="Rate simulate"
+      heads={['Recolta', 'Principal', 'Rămas de plată', 'Dobânda ta']}
+      rows={[
+        { key: '1', cells: ['noiembrie 2027', '100.000 lei', '200.000 lei', '23.750 lei'] },
+        { key: '2', cells: ['august 2028', '100.000 lei', '100.000 lei', '15.000 lei'] },
+        { key: '3', cells: ['noiembrie 2028', '100.000 lei', '0 lei', '2.500 lei'] },
+      ]}
+      totals={{ label: 'Total', cells: ['300.000 lei', '', '41.250 lei'] }}
     />
   ),
 }

@@ -4,10 +4,12 @@ import {
   categoryPath,
   cropPath,
   financeProductPath,
+  financeRoutePath,
+  financeRoutes,
   guidePath,
   productPath,
 } from '@/i18n/routes'
-import { listFinanceProducts, listGuides } from '@/lib/content/finance'
+import { getFinancePage, listFinanceProducts, listGuides } from '@/lib/content/finance'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { payloadClient } from '@/lib/content/payload'
@@ -60,6 +62,21 @@ export async function GET() {
     listFinanceProducts('ro'),
     listFinanceProducts('en'),
   ])
+  /** The finance tools: their text pages, when published. */
+  const tools = async (locale: 'ro' | 'en') =>
+    (
+      await Promise.all(
+        (['simulator', 'apply'] as const).map(async (route) => {
+          const page = await getFinancePage(financeRoutes[route][locale], locale)
+          return page
+            ? [
+                `- [${page.title}](${absoluteUrl(financeRoutePath(route, locale))}): ${page.summary}`,
+              ]
+            : []
+        }),
+      )
+    ).flat()
+  const [toolsRo, toolsEn] = await Promise.all([tools('ro'), tools('en')])
   const productLine = (locale: 'ro' | 'en') => (p: (typeof productsRo)[number]) =>
     `- [${p.title}](${absoluteUrl(financeProductPath(p.slug, locale, p.parentSlug))})`
   const guideLine = (locale: 'ro' | 'en') => (g: (typeof guidesRo)[number]) =>
@@ -80,9 +97,11 @@ export async function GET() {
     '',
     '## Credite (Agrinvest Credit IFN)',
     ...productsRo.map(productLine('ro')),
+    ...toolsRo,
     '',
     '## Credit products (Agrinvest Credit IFN)',
     ...productsEn.map(productLine('en')),
+    ...toolsEn,
     '',
     '## Ghiduri de finanțare',
     ...guidesRo.map(guideLine('ro')),

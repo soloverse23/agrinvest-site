@@ -79,14 +79,16 @@ export const segments = {
       })
   },
   finance: async (): Promise<SitemapEntry[]> => {
-    const [guides, list, products, about, faq] = await Promise.all([
+    const [guides, list, products, about, faq, simulator, apply] = await Promise.all([
       allGuideAlternates(),
       listGuides('ro'),
       allProductAlternates(),
       getFinancePage(financeRoutes.about.ro, 'ro'),
       getFinancePage(financeRoutes.faq.ro, 'ro'),
+      getFinancePage(financeRoutes.simulator.ro, 'ro'),
+      getFinancePage(financeRoutes.apply.ro, 'ro'),
     ])
-    const routeAlternates = (route: 'about' | 'faq') => ({
+    const routeAlternates = (route: 'about' | 'faq' | 'simulator' | 'apply') => ({
       ro: financeRoutePath(route, 'ro'),
       en: financeRoutePath(route, 'en'),
     })
@@ -97,6 +99,8 @@ export const segments = {
       ...products.flatMap((alternates) => entries(alternates)),
       ...(about ? entries(routeAlternates('about')) : []),
       ...(faq ? entries(routeAlternates('faq')) : []),
+      ...(simulator ? entries(routeAlternates('simulator')) : []),
+      ...(apply ? entries(routeAlternates('apply')) : []),
     ]
   },
   // Products share their slug across languages; their category slug is translated.

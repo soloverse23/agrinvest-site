@@ -10,16 +10,16 @@ import {
   SourceList,
   WorkedExample,
 } from '@ds/patterns/Finance'
-import { SectionHeading, Steps } from '@ds/patterns/Sections'
+import { CtaBand, SectionHeading, Steps } from '@ds/patterns/Sections'
 import { FactText, resolveFacts, schemaFaq } from '@/components/FactText'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
-import { LeadFormBlock, Prose } from '@/components/RenderBlocks'
+import { Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
-import { financePath, financeProductPath, guidePath } from '@/i18n/routes'
-import { ui } from '@/i18n/ui'
+import { financePath, financeProductPath, financeRoutePath, guidePath } from '@/i18n/routes'
+import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import { getFinanceProduct, listFinanceProducts, productAlternates } from '@/lib/content/finance'
 import { calendarRows } from '@/lib/finance/calendar'
@@ -276,17 +276,26 @@ export async function FinanceProductPage({
         )}
       </div>
       <Faq locale={locale} items={product.faq} />
-      <div className="mt-20 md:mt-28">
-        <LeadFormBlock
-          block={{
-            leadType: 'finantare',
-            extraFields: ['company', 'county'],
-            heading: t.contact,
-            body: t.contactBody,
+      <div className="mx-auto mt-20 grid max-w-page gap-4 px-4 md:mt-28 md:px-8">
+        <CtaBand
+          kicker={t.tools.kicker}
+          title={t.tools.title}
+          body={t.tools.body}
+          primary={{
+            href: `${financeRoutePath('apply', locale)}?produs=${product.slug as string}`,
+            label: t.tools.apply,
           }}
-          locale={locale}
-          path={url}
+          secondary={{ href: financeRoutePath('simulator', locale), label: t.tools.simulate }}
         />
+        <p className="text-small text-muted">
+          {t.tools.talk}{' '}
+          <Link
+            href={fixedUrl('contact', locale)}
+            className="text-accent underline underline-offset-2"
+          >
+            {t.tools.talkLink}
+          </Link>
+        </p>
       </div>
     </SiteShell>
   )

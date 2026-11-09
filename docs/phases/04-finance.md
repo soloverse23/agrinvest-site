@@ -2,7 +2,7 @@
 
 ## Finance (Agrinvest Credit IFN)
 
-Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
+Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 is on `main` (2026-11-09). 4.5 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
 
 ## Context
 
@@ -271,6 +271,116 @@ Plain server-rendered forms that work without JavaScript, as in the shop. Only 8
   - Needs, amount, guarantees and consents. GDPR and credit-bureau wording are marked drafts.
   - Reference number, routed to the `ifn` person, and a screen saying documents follow after contact.
   - The site runs no credit check and makes no decision.
+
+### 4.4 plan (2026-11-09)
+
+Branch `phase-4/tools` from `main`. Two page pairs: `/finantare/simulator` with `/en/financing/simulator`, and `/finantare/aplica` with `/en/financing/apply`. Both route words are already reserved in `financeRoutes`.
+
+#### Simulator
+
+**Inputs.** All are GET parameters, so the form posts back to the same URL and needs no client code:
+
+| Parameter | Field        | Rule                                                                                               |
+| --------- | ------------ | -------------------------------------------------------------------------------------------------- |
+| `suma`    | amount, lei  | whole number, 1,000 to 50,000,000. Bounds only stop typing errors and are never shown as a limit   |
+| `luni`    | term, months | 1 up to `F5.term` × 12. The register's `number` (10 today) is read from Figures, never typed again |
+| `culturi` | crops        | one or more of the 5 harvest crops in `instalmentSeasons`, matched by the Crops slug               |
+| `start`   | first month  | `YYYY-MM`, from the current month up to 12 months ahead; defaults to next month                    |
+| `dobanda` | own rate, %  | optional, above 0 and up to 50. Labelled as the farmer's own figure                                |
+
+English pages use the same parameter names, so a link works in both languages.
+
+**Schedule** (`src/lib/finance/simulator.ts`, pure functions):
+
+1. Each crop maps to its season in `calendar.ts`: wheat, barley and rapeseed to summer (August), maize and sunflower to autumn (November). The crops move from display strings to slugs there, so the pages and the simulator share one map.
+2. An instalment falls in every chosen season month after the start month and no later than the end of the term. Two seasons at most, so never more than 2 a year.
+3. The principal is split equally in whole lei, and the last instalment takes the rounding, so the instalments always add up to the amount.
+4. If no harvest falls inside the term, there is no schedule. The page names the first harvest month and the term that would reach it.
+5. With an own rate, interest runs on the remaining principal for the months between instalments (simple interest, rate ÷ 12 per month). The result shows interest for each instalment and in total, with a note that fees, insurance and valuation costs are left out (link to `costul-real-al-creditului`). It is never called DAE or "cost total".
+
+**Output.** A table (harvest, month, principal, principal left, interest when a rate is given) as a new `RepaymentSchedule` in `design-system/patterns/Finance.tsx`, with a story. Above it, the inputs as plain text; below it, the disclaimer as a `ReviewNote`: an example of how instalments could fall, not an offer; the IFN sets the real schedule and cost after analysis. Then two links: change the figures, and "Trimite o cerere cu aceste cifre", which opens the application with amount, term and crops filled in.
+
+**Page.** A `FinanceToolPage` template. The tool, then the page text: how the schedule is built, why it shows principal only, which farms it does not fit (livestock, monthly income: link to `ferme`), and a short FAQ. The text is a Guides entry with section `pagina-finantare`, like `despre-ifn`, so it goes through `apply:finance` and review status. Schema: `WebPage`, breadcrumbs and FAQ.
+
+#### Application
+
+**Form** (`ApplicationForm` client pattern, one page, three steps shown at once like checkout):
+
+1. **Who applies:** legal form (the 6 `borrowerKinds`), CUI with "Completează din ANAF", company name, contact name, phone, email, county.
+2. **What you need:** product (published finance products plus "Nu știu încă"), amount, term in months, crops, area in hectares, guarantees offered (the 6 `guaranteeKinds`, all optional), message.
+3. **Consents:** data processing (required), credit bureau check (optional). Both texts carry a "text în lucru" marker and a consent version such as `finance-draft-2026-11`, until the lawyer replaces them.
+
+**CUI is required for every legal form.** All six have one, and someone without a registered business would be a consumer under OUG 50/2010, which this site does not serve. The ANAF button fills the company name. If ANAF fails, the fields stay open for typing, as in checkout.
+
+**Prefill.** `?produs=`, `suma`, `luni` and `culturi` fill the form from a product page or the simulator. With parameters the page is noindex and canonical to the clean URL.
+
+**Server action** `submitApplication` (`src/lib/finance/actions.ts`), built like `placeOrder`:
+
+- Honeypot, then a zod schema in `src/lib/finance/application.ts` (reusing `cleanCui` and `normalizePhone`), then `allow('apply:' + ip)` in production.
+- The product is resolved from its slug with `overrideAccess: false`, so only a published product can be linked. Counties and crops are checked against their collections.
+- It creates the `finance-applications` row with a `CRD-2611-7KQ2M` reference. `newReference` moves from `src/lib/commerce/actions.ts` to `src/lib/reference.ts` and takes the prefix. The collection hook assigns the person who owns `finantare`.
+- `notifyApplication` is added as a no-op, like `notifyLead`, until the owner chooses a channel.
+- On a stored application, a failure later on still shows the reference.
+
+**Confirmation.** It replaces the form: the reference to quote on the phone, the assigned person's name and role when routing gives one, the reply time as `<Fact k="F4.reply" />`, and the next steps. Someone from the team calls, the documents are asked for after that call, and nothing has been decided or checked yet. No approval wording.
+
+**Collection.** No field changes are expected: the collection already holds everything above. The admin list gets `product` and `amount` columns. If a migration does turn up, it is rehearsed under the live-database rule.
+
+**Script budget.** The form is one client component. The company lookup moves out of `CheckoutForm` into a shared `CompanyLookupField`, so both forms reuse one chunk. The simulator ships no client code.
+
+#### Wiring and content
+
+- **Routes:** thin route files for both pages in `finantare/` and `financing/`.
+- **Links:** product pages and the hub link to both tools, and the product link carries `?produs=`. The FAQ and guides that say "use the form" are updated. The finance footer gets both links. This also meets the `check:finance` link rule in 4.6.
+- **Content:** two page pairs in `data/finance/guides/` (`simulator`, `aplica`), RO and EN, written to their natural length.
+- **SEO plumbing:** both clean pages go in the `finance` sitemap segment, `llms.txt` and the `check:seo` expected types. Lighthouse adds `/finantare/simulator`, a simulator URL with a result, and `/finantare/aplica`.
+
+#### Tests
+
+- **Unit (`simulator.ts`):** never more than 2 instalments in a calendar year, instalments always add up to the amount, a term reaching no harvest, mixed crops, a start in December rolling into the next year, the term cap read from Figures, interest on the remaining balance, no interest without a rate, and bad parameters returning errors and not throwing.
+- **Unit (`application.ts`):** CUI control digit, required fields by legal form, amount bounds, prefill parsing, the reference format.
+- **Integration:** the action stores the application with its routed person; the honeypot stores nothing; a staff user without `ifn` cannot read applications; a draft product slug is not linked.
+- **e2e with JavaScript off:** the simulator shows a schedule from a GET; an application goes through as SRL and as PFA and shows a reference; an ANAF failure leaves manual entry. Both pages return 200 in RO and EN. A simulator URL with parameters is noindex.
+- **Run:** the definition of done, `check:finance` once it exists, Lighthouse on the three URLs above, and `review:shoot` at 390 / 768 / 1440.
+
+**Exit:** both tools live in RO and EN, working without JavaScript; applications reach the admin with a reference, visible only to `ifn` users; product pages and the hub link to both tools.
+
+#### Decisions (2026-11-09)
+
+The owner left the three choices to the recommended answers:
+
+1. Product pages end with a "Simulează / Aplică" band and one contact line. The lead form is gone from product pages; the hub keeps one, reworded as "a question before you apply".
+2. The simulator result is a table only.
+3. A CUI is required for every legal form. Someone without a registered business is sent to the contact page.
+
+### 4.4 progress (2026-11-09)
+
+Branch `phase-4/tools`, merged to `main` 2026-11-09.
+
+**Built**
+
+- **Simulator:** `src/lib/finance/simulator.ts` (pure functions), the crop-to-season map in `calendar.ts`, `RepaymentSchedule` in `design-system/patterns/Finance.tsx`, and `FinanceToolPage.tsx`. A GET form with no client code. The longest term is read from `F5.term` in Figures.
+- **Application:** `ApplicationForm` (client), `submitApplication`, `application.ts` (zod), `choices.ts`, a no-op `notifyApplication`, and `FinanceApplicationPage.tsx`. References are `CRD-…` from `src/lib/reference.ts`, which checkout now shares (`AGR-…`).
+- **Shared ANAF field:** `CompanyLookupField`, now used by checkout and the application.
+- **Content:** `data/finance/guides/simulator.json` and `aplica.json` (RO and EN). The hub band and FAQ now point to both tools. The hub's lead form is reworded as "a question before you apply".
+- **Plumbing:** both pages in the `finance` sitemap segment and `llms.txt`, the admin list shows product and amount, and Lighthouse covers three new URLs.
+
+**Results**
+
+typecheck, lint, `next build`, `test:int` (145, 16 new), `test:e2e` (77, 5 new: both tools in RO and EN, simulator and PFA application with JavaScript off, an English company application after an error, product page links), `check:seo` (418 pages, 0 errors; keyword map 75 of 102 built), and `check:figures` (warnings only). Lighthouse, mobile with devtools throttling: 100/100/100, LCP about 1.35 s, CLS 0 on the simulator (with and without a result) and the application. Scripts: simulator 148 KB, application 159.5 KB. `format:check` fails only on a stray character in `docs/ROADMAP.md`, which was already in the working tree before this work.
+
+**Found**
+
+- **React resets a form after an action, and a select loses its value.** After an error, the legal form and county came back empty. This affected checkout too. The actions now return an `attempt` stamp, and both forms remount on it.
+- **One template file means one client bundle.** While the simulator shared a template file with the application, it loaded the form's code (161 KB). Each tool now has its own file.
+- **The application form's text was in its script.** It now arrives from the server in one language, which brought the page under 160 KB. Checkout is still 160.4 KB the same way; it is not in the Lighthouse list, and the same fix would apply.
+
+**Deploy rehearsal:** on a database built with `main`'s code, the new steps wrote the two tool pages, the FAQ and the hub once; a second run changed nothing, and all 227 existing page paths stayed the same.
+
+**Deviations**
+
+- **There is no `FinanceFooter`.** The 4.2 plan named one but it was never built. The footer and menu entry points go to 4.5 with the other entry points.
+- **The "ANAF failure leaves manual entry" e2e test** is covered by the no-JavaScript application, where the fields are always typed by hand. A live ANAF failure is not simulated in the browser.
 
 ## 4.5 Cross-selling
 

@@ -12,6 +12,9 @@
         "http://localhost:3100/depozitare",
         "http://localhost:3100/baze/pogoanele",
         "http://localhost:3100/finantare",
+        "http://localhost:3100/finantare/simulator",
+        "http://localhost:3100/finantare/simulator?suma=300000&luni=24&culturi=wheat,maize&dobanda=10",
+        "http://localhost:3100/finantare/aplica",
         "http://localhost:3100/contact",
         "http://localhost:3100/en/grain/wheat",
         "http://localhost:3100/en/bases/pogoanele",
@@ -31,16 +34,66 @@
     },
     "assert": {
       "assertions": {
-        "categories:performance": ["error", { "minScore": 0.95 }],
-        "categories:accessibility": ["error", { "minScore": 1 }],
-        "categories:best-practices": ["error", { "minScore": 1 }],
-        "largest-contentful-paint": ["error", { "maxNumericValue": 2000 }],
-        "first-contentful-paint": ["error", { "maxNumericValue": 1800 }],
-        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.05 }],
-        "total-blocking-time": ["error", { "maxNumericValue": 200 }],
-        "resource-summary:script:size": ["error", { "maxNumericValue": 160000 }],
-        "resource-summary:font:size": ["error", { "maxNumericValue": 32000 }],
-        "resource-summary:stylesheet:count": ["error", { "maxNumericValue": 0 }],
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "categories:best-practices": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "largest-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 2000
+          }
+        ],
+        "first-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 1800
+          }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          {
+            "maxNumericValue": 0.05
+          }
+        ],
+        "total-blocking-time": [
+          "error",
+          {
+            "maxNumericValue": 200
+          }
+        ],
+        "resource-summary:script:size": [
+          "error",
+          {
+            "maxNumericValue": 160000
+          }
+        ],
+        "resource-summary:font:size": [
+          "error",
+          {
+            "maxNumericValue": 32000
+          }
+        ],
+        "resource-summary:stylesheet:count": [
+          "error",
+          {
+            "maxNumericValue": 0
+          }
+        ],
         "document-title": "error",
         "meta-description": "error",
         "http-status-code": "error",

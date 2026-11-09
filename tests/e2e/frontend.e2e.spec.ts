@@ -377,3 +377,111 @@ test.describe('Shop orders', () => {
     }
   })
 })
+
+test.describe('Finance tools', () => {
+  test('both tools answer in Romanian and English', async ({ page }) => {
+    for (const url of [
+      '/finantare/simulator',
+      '/en/financing/simulator',
+      '/finantare/aplica',
+      '/en/financing/apply',
+    ]) {
+      const res = await page.goto(url)
+      expect(res?.status(), url).toBe(200)
+      await expect(page.locator('h1')).toHaveCount(1)
+    }
+  })
+
+  test('the simulator works without JavaScript and keeps the clean canonical', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/finantare/simulator')
+    await page.getByLabel('Suma').fill('300000')
+    await page.getByLabel('Durata').fill('24')
+    await page.getByLabel('Grâu').check()
+    await page.getByLabel('Porumb').check()
+    await page.getByRole('button', { name: 'Calculează' }).click()
+    await page.waitForURL(/suma=300000/)
+    const rows = page.locator('#rezultat tbody tr')
+    expect(await rows.count()).toBeGreaterThan(1)
+    expect(await rows.count()).toBeLessThanOrEqual(4)
+    await expect(page.locator('link[rel=canonical]')).toHaveAttribute(
+      'href',
+      /\/finantare\/simulator$/,
+    )
+    await page.getByRole('link', { name: 'Trimite o cerere cu aceste cifre' }).click()
+    await page.waitForURL(/\/finantare\/aplica\?/)
+    await expect(page.locator('[name=amount]')).toHaveValue('300000')
+    await expect(page.locator('[name=crops][value=wheat]')).toBeChecked()
+    await context.close()
+  })
+
+  test('a farm applies without JavaScript, as PFA, and the application reaches the IFN', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/finantare/aplica?produs=credit-productie')
+    await page.locator('[name=borrower]').selectOption('pfa')
+    await page.locator('[name=cui]').fill('14399840')
+    await page.locator('[name=company]').fill('Popescu Ion PFA')
+    await page.locator('[name=name]').fill('Test Cerere')
+    await page.locator('[name=phone]').fill('0741 201 056')
+    await page.locator('[name=email]').fill('test@example.ro')
+    await page.locator('[name=county]').selectOption({ index: 1 })
+    await page.locator('[name=amount]').fill('150000')
+    await page.locator('[name=consent]').check()
+    await page.getByRole('button', { name: 'Trimite cererea' }).click()
+    const reference = page.locator('[data-application-reference]')
+    await expect(reference).toHaveText(/^CRD-\d{4}-[A-Z2-9]{5}$/)
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'finance-applications',
+      where: { reference: { equals: await reference.textContent() } },
+      depth: 1,
+    })
+    expect(docs[0]).toMatchObject({ borrower: 'pfa', amount: 150_000, status: 'new' })
+    expect(typeof docs[0].product === 'object' && docs[0].product?.slug).toBe('credit-productie')
+    await payload.delete({ collection: 'finance-applications', id: docs[0].id })
+    await context.close()
+  })
+
+  test('a company applies in English and a bad tax ID keeps what was typed', async ({ page }) => {
+    await page.goto('/en/financing/apply')
+    await page.locator('[name=borrower]').selectOption('srl')
+    await page.locator('[name=cui]').fill('123')
+    await page.locator('[name=company]').fill('Test Farm SRL')
+    await page.locator('[name=name]').fill('Test Application')
+    await page.locator('[name=phone]').fill('0741 201 056')
+    await page.locator('[name=email]').fill('test@example.ro')
+    await page.locator('[name=county]').selectOption({ index: 1 })
+    await page.locator('[name=amount]').fill('500000')
+    await page.locator('[name=consent]').check()
+    await page.getByRole('button', { name: 'Send application' }).click()
+    await expect(page.locator('form [role=alert]')).toContainText('tax ID')
+    await expect(page.locator('[name=company]')).toHaveValue('Test Farm SRL')
+    await page.locator('[name=cui]').fill('14399840')
+    await page.getByRole('button', { name: 'Send application' }).click()
+    const reference = page.locator('[data-application-reference]')
+    await expect(reference).toBeVisible()
+    const payload = await getPayload({ config })
+    await payload.delete({
+      collection: 'finance-applications',
+      where: { reference: { equals: await reference.textContent() } },
+    })
+  })
+
+  test('product pages link to both tools', async ({ page }) => {
+    await page.goto('/finantare/credit-productie')
+    await expect(page.getByRole('link', { name: 'Trimite o cerere' }).last()).toHaveAttribute(
+      'href',
+      '/finantare/aplica?produs=credit-productie',
+    )
+    await expect(page.getByRole('link', { name: 'Simulează ratele' })).toHaveAttribute(
+      'href',
+      '/finantare/simulator',
+    )
+  })
+})

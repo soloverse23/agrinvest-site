@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect, useRef, useState, useTransition, type ReactNode } from 'react'
+import { useActionState, useEffect, useRef, type ReactNode } from 'react'
 
 import type { Locale } from '@/i18n/config'
 import {
@@ -13,6 +13,7 @@ import {
 import { ArrowRightIcon, CheckIcon } from '../icons/icons'
 import { Button } from '../primitives/Button'
 import { CheckboxField, SelectField, TextAreaField, TextField } from '../primitives/Field'
+import { CompanyLookupField } from './CompanyLookupField'
 
 type Option = { value: string; label: string }
 
@@ -203,9 +204,6 @@ export function CheckoutForm({
   const [state, formAction, pending] = useActionState(action, initialState, sourcePath)
   const t = copy[locale]
   const status = useRef<HTMLDivElement>(null)
-  const form = useRef<HTMLFormElement>(null)
-  const [lookupNote, setLookupNote] = useState<string>()
-  const [finding, startLookup] = useTransition()
 
   useEffect(() => {
     if (state.status !== 'idle') status.current?.focus()
@@ -252,32 +250,8 @@ export function CheckoutForm({
       </div>
     )
 
-  const fill = () => {
-    const inputs = form.current?.elements
-    const get = (name: string) => inputs?.namedItem(name) as HTMLInputElement | null
-    const cui = get('cui')?.value ?? ''
-    startLookup(async () => {
-      const result = await lookup(cui)
-      if (result.status === 'found') {
-        const set = (name: string, text: string) => {
-          const input = get(name)
-          if (input) input.value = text
-        }
-        set('company', result.name)
-        set('billingAddress', result.address)
-        set('regCom', result.regCom)
-        setLookupNote(t.found)
-      } else
-        setLookupNote(
-          { 'not-found': t.notFound, invalid: t.invalid, unavailable: t.unavailable }[
-            result.status
-          ],
-        )
-    })
-  }
-
   return (
-    <form ref={form} action={formAction} noValidate className="group grid gap-10">
+    <form key={state.attempt ?? 0} action={formAction} noValidate className="group grid gap-10">
       <p className="text-caption text-subtle">{t.required}</p>
       {(state.message || state.errors) && (
         <div
@@ -337,21 +311,13 @@ export function CheckoutForm({
           data-company-fields
           className="grid gap-4 group-has-[input[name=buyerType][value=person]:checked]:hidden"
         >
-          <div className="grid items-end gap-3 sm:grid-cols-[1fr_auto]">
-            <TextField
-              name="cui"
-              label={t.cui}
-              defaultValue={value('cui')}
-              error={error('cui')}
-              inputMode="text"
-            />
-            <Button type="button" variant="secondary" onClick={fill} disabled={finding}>
-              {finding ? t.finding : t.find}
-            </Button>
-          </div>
-          <p aria-live="polite" className="text-caption text-muted empty:hidden">
-            {lookupNote}
-          </p>
+          <CompanyLookupField
+            lookup={lookup}
+            labels={t}
+            fill={{ name: 'company', address: 'billingAddress', regCom: 'regCom' }}
+            defaultValue={value('cui')}
+            error={error('cui')}
+          />
           <TextField
             name="company"
             label={t.companyName}

@@ -1,0 +1,89 @@
+{
+  "key": "simulator",
+  "section": "pagina-finantare",
+  "author": "Agrinvest Credit IFN",
+  "relatedProducts": [
+    "credit-productie",
+    "credit-investitii"
+  ],
+  "relatedGuides": [
+    "costul-real-al-creditului"
+  ],
+  "sources": [],
+  "text": {
+    "ro": {
+      "title": "Simulator de rate pentru credit agricol",
+      "slug": "simulator",
+      "summary": "Vezi cum ar putea cădea ratele unui credit după recoltele tale: alegi suma, durata, culturile și luna în care ai nevoie de bani.",
+      "body": "## Cum se calculează\n\nSimulatorul pune ratele pe recoltele culturilor pe care le alegi. Grâul, orzul și rapița se recoltează vara, deci rata cade în august. Porumbul și floarea-soarelui se recoltează toamna, deci rata cade în noiembrie. Dacă alegi culturi din ambele grupe, ai două rate pe an. Regula Agrinvest Credit IFN este: {{F5.instalments}}.\n\nSuma împrumutată se împarte în părți egale pe recoltele din perioada aleasă. Ultima rată preia diferența de rotunjire, așa că ratele adunate dau exact suma.\n\n## De ce arată doar suma împrumutată\n\nAgrinvest Credit IFN nu publică o dobândă. Costul depinde de analiza fiecărei cereri: de fermă, de garanții și de durată. De aceea simulatorul arată doar cum se returnează suma împrumutată.\n\nDacă vrei să compari, poți scrie dobânda dintr-o altă ofertă sau o estimare a ta. Simulatorul calculează dobânda pe suma rămasă de plată, dar comisioanele, asigurările și evaluările nu intră în calcul. Ce mai intră în costul unui credit găsești în [costul real al creditului](/finantare/ghiduri/costul-real-al-creditului).\n\n## Când nu se potrivește\n\nSimulatorul presupune că ferma încasează după recoltele de cereale și oleaginoase. O fermă de animale, de legume sau o livadă încasează altfel, iar ratele se stabilesc după fluxul ei de bani: vezi [credit pentru ferme](/finantare/credit-investitii/ferme). Dacă ai deja datorii greu de plătit, citește despre [restructurare](/finantare/restructurare).\n\n## După simulare\n\nPoți [trimite o cerere](/finantare/aplica) cu aceleași cifre. Echipa te contactează și stabilește cu tine graficul real. Un credit poate dura {{F5.term}}. Pentru cheltuielile sezonului vezi [creditul de producție](/finantare/credit-productie), iar pentru utilaje, irigații sau depozitare vezi [creditul de investiții](/finantare/credit-investitii).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Simularea este o ofertă de credit?",
+          "answer": "Nu. Arată doar cum ar putea cădea ratele după recolte. Graficul real, dobânda și costurile se stabilesc după analiza cererii."
+        },
+        {
+          "question": "De ce cad ratele în august și noiembrie?",
+          "answer": "Pentru că atunci încasează fermele de cereale: după recolta de vară (grâu, orz, rapiță) și după cea de toamnă (porumb, floarea-soarelui). Regula este: {{F5.instalments}}."
+        },
+        {
+          "question": "Pot avea o singură rată?",
+          "answer": "Da, dacă perioada aleasă cuprinde o singură recoltă. Așa arată de obicei un credit pentru cheltuielile unui sezon."
+        },
+        {
+          "question": "Ce dobândă are Agrinvest Credit IFN?",
+          "answer": "Nu publicăm o dobândă. Ea depinde de analiza fiecărei cereri. O afli de la echipă după prima discuție."
+        },
+        {
+          "question": "Cât de lung poate fi un credit?",
+          "answer": "Poate dura {{F5.term}}."
+        },
+        {
+          "question": "Ce fac dacă nu cultiv cereale?",
+          "answer": "Simulatorul nu ți se potrivește. Trimite o cerere sau scrie-ne, iar ratele se stabilesc după cum încasează ferma ta."
+        }
+      ],
+      "seo": {
+        "title": "Simulator credit agricol: rate după recoltă",
+        "description": "Calculează cum ar cădea ratele unui credit agricol după recoltele de vară și de toamnă. Alegi suma, durata și culturile. Fără dobândă inventată."
+      }
+    },
+    "en": {
+      "title": "Farm loan repayment simulator",
+      "slug": "simulator",
+      "summary": "See how the instalments of a loan could fall after your harvests: choose the amount, the term, your crops and the month you need the money.",
+      "body": "## How it works\n\nThe simulator places instalments on the harvests of the crops you choose. Wheat, barley and rapeseed are harvested in summer, so the instalment falls in August. Maize and sunflower are harvested in autumn, so the instalment falls in November. If you choose crops from both groups, you have two instalments a year. The Agrinvest Credit IFN rule is: {{F5.instalments}}.\n\nThe amount borrowed is split equally across the harvests inside the term. The last instalment takes the rounding difference, so the instalments add up to exactly the amount.\n\n## Why it shows only the amount borrowed\n\nAgrinvest Credit IFN does not publish a rate. The cost depends on the review of each application: the farm, the guarantees and the term. So the simulator shows only how the amount borrowed is repaid.\n\nIf you want to compare, you can type the rate from another offer or your own estimate. The simulator works out interest on the amount still owed, but fees, insurance and valuations are left out. What else goes into the cost of a loan is in [the true cost of credit](/en/financing/guides/true-cost-of-credit).\n\n## When it does not fit\n\nThe simulator assumes the farm is paid after the grain and oilseed harvests. A livestock farm, a vegetable farm or an orchard is paid differently, and instalments follow its cash flow: see [credit for farms](/en/financing/investment-credit/farms). If you already have debts that are hard to pay, read about [restructuring](/en/financing/restructuring).\n\n## After the simulation\n\nYou can [send an application](/en/financing/apply) with the same figures. The team contacts you and agrees the real schedule with you. A loan can run {{F5.term}}. For a season's costs see [production credit](/en/financing/production-credit), and for machinery, irrigation or storage see [investment credit](/en/financing/investment-credit).",
+      "terms": [],
+      "faq": [
+        {
+          "question": "Is the simulation a credit offer?",
+          "answer": "No. It only shows how instalments could fall after harvests. The real schedule, interest and costs are set after the application is reviewed."
+        },
+        {
+          "question": "Why do instalments fall in August and November?",
+          "answer": "Because that is when grain farms are paid: after the summer harvest (wheat, barley, rapeseed) and after the autumn harvest (maize, sunflower). The rule is: {{F5.instalments}}."
+        },
+        {
+          "question": "Can I have a single instalment?",
+          "answer": "Yes, if the term covers only one harvest. That is how a loan for one season's costs usually looks."
+        },
+        {
+          "question": "What rate does Agrinvest Credit IFN charge?",
+          "answer": "We do not publish a rate. It depends on the review of each application. The team tells you after the first conversation."
+        },
+        {
+          "question": "How long can a loan be?",
+          "answer": "It can run {{F5.term}}."
+        },
+        {
+          "question": "What if I do not grow grain?",
+          "answer": "The simulator does not fit your farm. Send an application or write to us, and instalments are set by how your farm is paid."
+        }
+      ],
+      "seo": {
+        "title": "Farm loan simulator: instalments after harvest",
+        "description": "See how farm loan instalments would fall after the summer and autumn harvests in Romania. Choose the amount, term and crops. No made-up rate."
+      }
+    }
+  }
+}

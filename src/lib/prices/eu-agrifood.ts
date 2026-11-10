@@ -1,3 +1,4 @@
+import type { GrainKey } from '@/lib/crops'
 import { endpoints, fetchHeaders } from '@/lib/sources'
 import { slugify } from '@/lib/slugify'
 
@@ -72,12 +73,18 @@ export function parseCerealPrices(json: unknown, fetchedAt = new Date()): Market
   return rows
 }
 
-/** The site's crop key for an EU cereal product, or null for products we do not show. */
-export function cerealCrop(series: string): 'wheat' | 'maize' | 'barley' | null {
-  if (/durum/.test(series)) return null
+/**
+ * The site's crop key for an EU cereal or oilseed product, or null for products we do not show.
+ * Oilseeds (sunflower seed, rapeseed) are mapped ahead of the EU oilseed endpoint, which was
+ * suspended when Phase 5 was built (decision 0008).
+ */
+export function cerealCrop(series: string): GrainKey | null {
+  if (/durum|oil|meal|cake/.test(series)) return null
   if (/wheat/.test(series)) return 'wheat'
   if (/maize|corn/.test(series)) return 'maize'
   if (/barley/.test(series)) return 'barley'
+  if (/sunflower/.test(series)) return 'sunflower'
+  if (/rape/.test(series)) return 'rapeseed'
   return null
 }
 

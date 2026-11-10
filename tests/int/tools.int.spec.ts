@@ -124,6 +124,9 @@ describe('feed parsers (saved fixtures, 2026-11-10)', () => {
     expect(rows[0]).toMatchObject({ series: 'feed-maize', market: 'Constanța / FOB', price: 190 })
     expect(cerealCrop('feed-maize')).toBe('maize')
     expect(cerealCrop('durum-wheat')).toBeNull()
+    expect(cerealCrop('sunflower-seed')).toBe('sunflower')
+    expect(cerealCrop('rapeseed')).toBe('rapeseed')
+    expect(cerealCrop('sunflower-oil')).toBeNull()
 
     // Fields as in /agrifood/v3/api-docs/fertiliser (FertiliserPrice).
     const fert = parseFertiliserPrices(

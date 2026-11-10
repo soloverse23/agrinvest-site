@@ -532,6 +532,8 @@ _Analytics_
 
 ## Phase 7: Social integration and the positive loop
 
+> **Round 1 (2026-11-10), simple version only:** social icons and a hand-picked LinkedIn posts section. See `docs/phases/07-social.md`. The rest below is deferred.
+
 **Goal:** the site and the social channels strengthen each other automatically.
 
 **Inbound** (scheduled jobs)

@@ -9,6 +9,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import { HomeArticles } from '@/components/HomeArticles'
+import { HomeSocial } from '@/components/HomeSocial'
 import { TodayStrip } from '@/components/TodayStrip'
 import { pricesUi } from '@/i18n/prices'
 import { pricesPath } from '@/i18n/routes'
@@ -102,6 +103,7 @@ export default async function CmsPage(props: Props) {
           />
           <TodayStrip locale={locale} />
           <HomeArticles locale={locale} />
+          <HomeSocial locale={locale} />
           <div className="mt-16 md:mt-24">
             <RenderBlocks blocks={page.layout?.slice(1)} locale={locale} path={pagePath} />
           </div>

@@ -18,6 +18,7 @@ export const tags = {
   prices: 'prices',
   diesel: 'diesel',
   news: 'news',
+  social: 'social',
   global: (slug: string) => `global:${slug}`,
 } as const
 

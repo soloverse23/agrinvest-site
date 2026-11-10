@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { isStaff } from '@/access'
 import { dayOnly, publishedRowsOrStaff, publishStatus, toolsGroup } from '@/fields/tools'
+import { evaluateAlerts } from '@/lib/jobs/tasks'
 import { revalidate, tags } from '@/lib/revalidate'
 
 /**
@@ -23,7 +24,15 @@ export const BuyPrices: CollectionConfig = {
   defaultSort: '-validFrom',
   access: { read: publishedRowsOrStaff, create: isStaff, update: isStaff, delete: isStaff },
   hooks: {
-    afterChange: [() => revalidate(tags.prices)],
+    afterChange: [
+      async ({ doc, previousDoc, req, context }) => {
+        revalidate(tags.prices)
+        // Alerts after every write that changes what visitors see. Inside the request's
+        // transaction, so the new price is visible; the Outbox dedupe key stops repeats.
+        const visible = doc.status === 'published' || previousDoc?.status === 'published'
+        if (visible && !context.skipAlerts) await evaluateAlerts(req.payload, req)
+      },
+    ],
     afterDelete: [() => revalidate(tags.prices)],
   },
   fields: [

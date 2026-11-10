@@ -32,6 +32,8 @@ export type WidgetBaseProps = {
   source?: WidgetSource
   /** The tool's own page or the next step. */
   link?: WidgetLink
+  /** Heading level of the title: 2 when the widget sits right under the page title, else 3. */
+  level?: 2 | 3
   className?: string
 }
 

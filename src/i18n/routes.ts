@@ -10,6 +10,10 @@ export const sections = {
   crops: { ro: '/cereale', en: '/grain' },
   shop: { ro: '/magazin', en: '/shop' },
   finance: { ro: '/finantare', en: '/financing' },
+  prices: { ro: '/preturi', en: '/prices' },
+  market: { ro: '/piata', en: '/market' },
+  diesel: { ro: '/motorina', en: '/diesel' },
+  news: { ro: '/stiri', en: '/news' },
 } as const satisfies Record<string, Record<Locale, string>>
 
 export type Section = keyof typeof sections
@@ -84,3 +88,37 @@ export const financeRoutePath = (route: keyof typeof financeRoutes, locale: Loca
 /** A guide: `/finantare/ghiduri/glosar`, `/en/financing/guides/glossary`. */
 export const guidePath = (slug: string, locale: Locale) =>
   localePath(`${sections.finance[locale]}/${financeRoutes.guides[locale]}/${slug}`, locale)
+
+/** Price routes that are not crops. Their words are reserved: no crop slug may use them. */
+export const priceRoutes = {
+  netPrice: { ro: 'calculator-pret-net', en: 'net-price-calculator' },
+  fertilisers: { ro: 'ingrasaminte', en: 'fertilisers' },
+} as const satisfies Record<string, Record<Locale, string>>
+
+/** Price hub: `/preturi`, `/en/prices`. */
+export const pricesPath = (locale: Locale) => localePath(sections.prices[locale], locale)
+
+/** One crop's prices: `/preturi/grau`, `/en/prices/wheat` (the crop's own slug). */
+export const cropPricePath = (slug: string, locale: Locale) =>
+  localePath(`${sections.prices[locale]}/${slug}`, locale)
+
+/** The net-price calculator: `/preturi/calculator-pret-net`, `/en/prices/net-price-calculator`. */
+export const netPricePath = (locale: Locale) =>
+  localePath(`${sections.prices[locale]}/${priceRoutes.netPrice[locale]}`, locale)
+
+/** Weekly market notes: `/piata`, `/en/market`. */
+export const marketPath = (locale: Locale) => localePath(sections.market[locale], locale)
+
+/** One market note: `/piata/nota-2026-11-09`, `/en/market/note-2026-11-09`. */
+export const marketNotePath = (slug: string, locale: Locale) =>
+  localePath(`${sections.market[locale]}/${slug}`, locale)
+
+/** Fertiliser prices: `/preturi/ingrasaminte`, `/en/prices/fertilisers`. */
+export const fertiliserPricesPath = (locale: Locale) =>
+  localePath(`${sections.prices[locale]}/${priceRoutes.fertilisers[locale]}`, locale)
+
+/** Diesel: `/motorina`, `/en/diesel`. */
+export const dieselPath = (locale: Locale) => localePath(sections.diesel[locale], locale)
+
+/** News: `/stiri`, `/en/news`. */
+export const newsPath = (locale: Locale) => localePath(sections.news[locale], locale)

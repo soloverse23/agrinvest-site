@@ -5,13 +5,13 @@ import { toolsGroup } from '@/fields/tools'
 import { revalidate, tags } from '@/lib/revalidate'
 import { newsSourceKeys, newsSources } from '@/lib/sources'
 
-/** Visitors see approved headlines only. */
-const approvedOrStaff: Access = ({ req }) =>
-  staffRequest(req) ? true : { status: { equals: 'aprobat' } }
+/** Visitors see every headline staff have not hidden (5.6: shown unless hidden). */
+const visibleOrStaff: Access = ({ req }) =>
+  staffRequest(req) ? true : { status: { not_equals: 'ascuns' } }
 
 /**
  * Headlines from the partner feeds (`src/lib/sources.ts`). The `ingestNews` job adds them
- * as `nou`; staff approve or hide them, which makes this list the editor queue. We keep the
+ * as `nou` and they show at once; staff hide (`ascuns`) what does not belong on the site. We keep the
  * headline, date, link and, where the publisher allows it, a short excerpt from the feed.
  */
 export const NewsItems: CollectionConfig = {
@@ -26,7 +26,7 @@ export const NewsItems: CollectionConfig = {
     defaultColumns: ['title', 'source', 'publishedAt', 'status'],
   },
   defaultSort: '-publishedAt',
-  access: { read: approvedOrStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: { read: visibleOrStaff, create: () => false, update: isStaff, delete: isStaff },
   hooks: {
     afterChange: [() => revalidate(tags.news)],
     afterDelete: [() => revalidate(tags.news)],

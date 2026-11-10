@@ -1,4 +1,4 @@
-import type { Payload } from 'payload'
+import type { Payload, PayloadRequest } from 'payload'
 
 import type { Message, SendResult } from './types'
 
@@ -16,9 +16,15 @@ function provider(_channel: Message['channel']): Provider | null {
  * The only way the site sends anything. Every message is written to the Outbox first; with
  * no provider it stays there as `stubbed`, so staff can see what would have gone out.
  */
-export async function sendMessage(payload: Payload, message: Message): Promise<SendResult> {
+export async function sendMessage(
+  payload: Payload,
+  message: Message,
+  /** Inside a hook: the request, so the row joins its transaction. */
+  req?: PayloadRequest,
+): Promise<SendResult> {
   if (message.dedupeKey) {
     const existing = await payload.find({
+      req,
       collection: 'outbox',
       where: { dedupeKey: { equals: message.dedupeKey } },
       limit: 1,
@@ -41,6 +47,7 @@ export async function sendMessage(payload: Payload, message: Message): Promise<S
   }
 
   const row = await payload.create({
+    req,
     collection: 'outbox',
     depth: 0,
     data: {

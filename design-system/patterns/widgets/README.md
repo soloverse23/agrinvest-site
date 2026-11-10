@@ -13,3 +13,8 @@ Small views of the farmer tools (prices, diesel, weather, news) that pages place
 - **Charts** use `LineChart` (server SVG, data table under "Show the data"), never a chart library.
 - **A story for every widget**, with ready, stale and empty variants.
 - **Embedding in content:** the `toolWidget` page block (`src/blocks`) renders a widget by name, so any block-built page can embed a tool. Its renderer is `src/components/ToolWidget.tsx`.
+
+## Widgets
+
+- `GrainPrices` (5.2): per crop, Agrinvest's published range or "on request", next to the latest EU price with its weekly change. Props from `grainPricesProps` in `src/components/templates/PricePage.tsx`.
+- `NetPriceMini` (5.2): a GET form into the net-price calculator; no script.

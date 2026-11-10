@@ -6,7 +6,13 @@ import { formatNumber } from '@/lib/format'
 import { priceDate, weeklySeries } from '../../fixtures/sample'
 import { storyLocale } from '../../fixtures/story'
 import { LineChart } from '../LineChart'
+import { DieselCard } from './DieselCard'
+import { GrainPrices, type GrainPriceItem } from './GrainPrices'
+import { NewsList } from './NewsList'
+import { NetPriceMini } from './NetPriceMini'
 import { WidgetFrame } from './WidgetFrame'
+import { pricesUi } from '@/i18n/prices'
+import { toolsUi } from '@/i18n/tools'
 
 const meta: Meta = { title: 'Patterns/Widgets', parameters: { layout: 'padded' } }
 export default meta
@@ -151,6 +157,181 @@ export const Frame: Story = {
           {sampleBody(l)}
         </WidgetFrame>
         <WidgetFrame {...frameProps(l)} state="empty" emptyText={copy[l].onRequest} />
+      </div>
+    )
+  },
+}
+
+const grainItems = (l: Locale, own: boolean): GrainPriceItem[] => [
+  {
+    crop: 'wheat',
+    name: copy[l].wheat,
+    href: '#',
+    agrinvest: own ? { min: 930, max: 960 } : null,
+    market: { value: 214, unit: '€/t', change: 3.5 },
+  },
+  {
+    crop: 'maize',
+    name: copy[l].maize,
+    href: '#',
+    agrinvest: own ? { min: 820, max: 820 } : null,
+    market: { value: 188, unit: '€/t', change: -2 },
+  },
+  {
+    crop: 'sunflower',
+    name: l === 'ro' ? 'Floarea-soarelui' : 'Sunflower',
+    href: '#',
+    agrinvest: null,
+    market: null,
+  },
+]
+
+const grainProps = (l: Locale) => {
+  const w = pricesUi[l].widget
+  return {
+    locale: l,
+    title: w.grainTitle,
+    labels: { agrinvest: w.agrinvest, market: w.eu, onRequest: w.onRequest, empty: w.empty },
+    source: { name: copy[l].source, url: 'https://agridata.ec.europa.eu/', date: priceDate },
+    link: { href: '#', label: w.grainLink },
+  }
+}
+
+/**
+ * Grain prices: Agrinvest’s published price per crop, or “on request”, next to the latest EU
+ * price for Romania. Ready with own prices, stale with only old market data, and empty.
+ */
+export const GrainPricesStates: Story = {
+  name: 'Grain prices',
+  render: (_, { globals }) => {
+    const l = storyLocale(globals)
+    return (
+      <div className="grid max-w-5xl gap-4 lg:grid-cols-3">
+        <GrainPrices {...grainProps(l)} state="ready" items={grainItems(l, true)} />
+        <GrainPrices {...grainProps(l)} state="stale" items={grainItems(l, false)} />
+        <GrainPrices {...grainProps(l)} state="empty" items={[]} />
+      </div>
+    )
+  },
+}
+
+/** A plain GET form into the net-price calculator; no script. */
+export const NetPrice: Story = {
+  name: 'Net price (mini)',
+  render: (_, { globals }) => {
+    const l = storyLocale(globals)
+    const c = pricesUi[l].calc
+    return (
+      <div className="max-w-md">
+        <NetPriceMini
+          locale={l}
+          title={pricesUi[l].widget.netTitle}
+          action="#"
+          crop="wheat"
+          crops={[
+            { value: 'wheat', label: copy[l].wheat },
+            { value: 'maize', label: copy[l].maize },
+          ]}
+          link={{ href: '#', label: pricesUi[l].widget.netLink }}
+          labels={{
+            crop: c.crop,
+            choose: c.choose,
+            quantity: c.quantity,
+            price: c.price,
+            moisture: c.moisture,
+            impurities: c.impurities,
+            submit: c.submit,
+          }}
+        />
+      </div>
+    )
+  },
+}
+
+const dieselProps = (l: Locale) => {
+  const t = toolsUi[l].today
+  return {
+    locale: l,
+    title: t.diesel,
+    labels: {
+      agrinvest: t.agrinvest,
+      national: t.national,
+      onRequest: t.onRequest,
+      empty: t.dieselEmpty,
+    },
+    source: { name: 'European Commission, Weekly Oil Bulletin', url: '#', date: priceDate },
+    link: { href: '#', label: t.dieselLink },
+  }
+}
+
+/** Diesel: Agrinvest’s price, or “on request”, and Romania’s weekly average. */
+export const Diesel: Story = {
+  render: (_, { globals }) => {
+    const l = storyLocale(globals)
+    return (
+      <div className="grid max-w-4xl gap-4 md:grid-cols-3">
+        <DieselCard
+          {...dieselProps(l)}
+          state="ready"
+          own={{ price: 6.42, vat: toolsUi[l].diesel.vat['fara-tva'] }}
+          national={{ value: 2071, unit: '€/1000 l' }}
+        />
+        <DieselCard
+          {...dieselProps(l)}
+          state="ready"
+          own={null}
+          national={{ value: 2071, unit: '€/1000 l' }}
+        />
+        <DieselCard
+          {...dieselProps(l)}
+          state="stale"
+          own={null}
+          national={{ value: 2035, unit: '€/1000 l' }}
+        />
+      </div>
+    )
+  },
+}
+
+/** Headlines with source and date, each linking to the original; and the empty state. */
+export const News: Story = {
+  render: (_, { globals }) => {
+    const l = storyLocale(globals)
+    const t = toolsUi[l].today
+    const items = [
+      {
+        id: 1,
+        title: 'Prețul grâului a crescut în portul Constanța',
+        url: '#',
+        source: 'Agrointel',
+        date: priceDate,
+      },
+      {
+        id: 2,
+        title: 'APIA: calendarul plăților în avans pentru 2026',
+        url: '#',
+        source: 'Revista Ferma',
+        date: priceDate,
+      },
+      {
+        id: 3,
+        title: 'Semănatul grâului, aproape încheiat în sud',
+        url: '#',
+        source: 'Agrointel',
+        date: priceDate,
+      },
+    ]
+    return (
+      <div className="grid max-w-4xl gap-4 md:grid-cols-2">
+        <NewsList
+          locale={l}
+          title={t.news}
+          state="ready"
+          items={items}
+          emptyText={t.newsEmpty}
+          link={{ href: '#', label: t.newsLink }}
+        />
+        <NewsList locale={l} title={t.news} state="empty" items={[]} emptyText={t.newsEmpty} />
       </div>
     )
   },

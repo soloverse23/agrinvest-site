@@ -13,6 +13,7 @@ import type {
   Article,
   DefinedTermSet,
   LoanOrCredit,
+  Dataset,
 } from 'schema-dts'
 
 import { localePath, type Locale } from '@/i18n/config'
@@ -390,5 +391,47 @@ export function loanOrCredit(input: {
       input.confirmed && input.amountMax
         ? { '@type': 'MonetaryAmount', maxValue: input.amountMax, currency: 'RON' }
         : undefined,
+  }
+}
+
+/**
+ * A price page's data (Phase 5.2): what it measures, the period it covers, where each series
+ * comes from and under which licence. `temporalCoverage` is an ISO interval ("2025-11-10/2026-11-09").
+ * Agrinvest's own prices are published by the organisation; public series name their source.
+ */
+export function dataset(input: {
+  url: string
+  name: string
+  description: string
+  locale: Locale
+  temporalCoverage?: string
+  dateModified?: string
+  keywords?: string[]
+  variables: string[]
+  sources: { name: string; url: string; license?: string }[]
+}): WithContext<Dataset> {
+  const licences = [...new Set(input.sources.flatMap((s) => (s.license ? [s.license] : [])))]
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    '@id': `${absoluteUrl(input.url)}#dataset`,
+    url: absoluteUrl(input.url),
+    name: input.name,
+    description: input.description,
+    inLanguage: input.locale,
+    creator: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    isAccessibleForFree: true,
+    temporalCoverage: input.temporalCoverage,
+    dateModified: input.dateModified,
+    keywords: input.keywords,
+    variableMeasured: input.variables,
+    license: licences.length === 1 ? licences[0] : licences.length ? licences : undefined,
+    isBasedOn: input.sources.map((s) => ({
+      '@type': 'Dataset' as const,
+      name: s.name,
+      url: s.url,
+      ...(s.license ? { license: s.license } : {}),
+    })),
   }
 }

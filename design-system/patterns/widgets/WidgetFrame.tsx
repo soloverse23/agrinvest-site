@@ -19,12 +19,14 @@ export function WidgetFrame({
   state,
   source,
   link,
+  level = 3,
   className,
   emptyText,
   children,
 }: WidgetBaseProps & { emptyText?: ReactNode; children?: ReactNode }) {
   const t = widgetCopy[locale]
   const headingId = `w-${title.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`
+  const Heading = level === 2 ? 'h2' : 'h3'
   return (
     <section
       aria-labelledby={headingId}
@@ -34,9 +36,9 @@ export function WidgetFrame({
       )}
     >
       <header className="flex flex-wrap items-start justify-between gap-2">
-        <h3 id={headingId} className="text-body leading-tight font-semibold">
+        <Heading id={headingId} className="text-body leading-tight font-semibold">
           {title}
-        </h3>
+        </Heading>
         {state === 'stale' && (
           <Badge tone="warning" dot>
             {t.stale}

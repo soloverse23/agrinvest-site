@@ -175,6 +175,7 @@ export interface Config {
       fetchOilBulletin: TaskFetchOilBulletin;
       ingestNews: TaskIngestNews;
       evaluateAlerts: TaskEvaluateAlerts;
+      draftMarketNote: TaskDraftMarketNote;
       buildNewsletter: TaskBuildNewsletter;
       inline: {
         input: unknown;
@@ -2174,6 +2175,7 @@ export interface PayloadJob {
           | 'fetchOilBulletin'
           | 'ingestNews'
           | 'evaluateAlerts'
+          | 'draftMarketNote'
           | 'buildNewsletter';
         taskID: string;
         input?:
@@ -2215,6 +2217,7 @@ export interface PayloadJob {
         | 'fetchOilBulletin'
         | 'ingestNews'
         | 'evaluateAlerts'
+        | 'draftMarketNote'
         | 'buildNewsletter'
       )
     | null;
@@ -4112,6 +4115,14 @@ export interface TaskIngestNews {
  * via the `definition` "TaskEvaluateAlerts".
  */
 export interface TaskEvaluateAlerts {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskDraftMarketNote".
+ */
+export interface TaskDraftMarketNote {
   input?: unknown;
   output?: unknown;
 }

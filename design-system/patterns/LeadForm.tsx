@@ -11,7 +11,7 @@ import { Button } from '../primitives/Button'
 import { CheckboxField, SelectField, TextAreaField, TextField } from '../primitives/Field'
 
 type Option = { value: string; label: string }
-export type LeadExtraField = 'company' | 'county' | 'base' | 'crop'
+export type LeadExtraField = 'company' | 'county' | 'base' | 'crop' | 'quantity' | 'deliveryDate'
 
 export type LeadFormProps = {
   locale: Locale
@@ -44,6 +44,8 @@ const copy = {
     base: 'Baza cea mai apropiată',
     crop: 'Cultură',
     choose: 'Alege',
+    quantity: 'Cantitate (litri)',
+    deliveryDate: 'Data dorită pentru livrare (opțional)',
     message: 'Mesaj',
     messageHint: 'Cantitate, perioadă, orice ne ajută să-ți răspundem mai repede.',
     consent:
@@ -68,6 +70,8 @@ const copy = {
     base: 'Nearest base',
     crop: 'Crop',
     choose: 'Choose',
+    quantity: 'Quantity (litres)',
+    deliveryDate: 'Preferred delivery date (optional)',
     message: 'Message',
     messageHint: 'Quantity, timing, anything that helps us reply faster.',
     consent: 'I agree that Agrinvest may contact me by phone or email about this request.',
@@ -237,6 +241,26 @@ export function LeadForm({
         {select('county')}
         {select('crop')}
         {select('base')}
+        {has('quantity') && (
+          <TextField
+            name="quantity"
+            label={t.quantity}
+            inputMode="numeric"
+            suffix="l"
+            required
+            defaultValue={value('quantity')}
+            error={error('quantity')}
+          />
+        )}
+        {has('deliveryDate') && (
+          <TextField
+            name="deliveryDate"
+            type="date"
+            label={t.deliveryDate}
+            defaultValue={value('deliveryDate')}
+            error={error('deliveryDate')}
+          />
+        )}
         <TextAreaField
           name="message"
           label={t.message}

@@ -365,7 +365,7 @@ describe('tools data (Payload)', () => {
     expect(merged.consent?.text).toBe(subscriptionConsent.en)
   })
 
-  it('writes a price alert to the Outbox when a published price changes', async () => {
+  it('writes a price alert to the Outbox as soon as a published price changes', async () => {
     const email = `alert-${Date.now()}@example.ro`
     const sub = await storeSubscription(
       payload,
@@ -396,6 +396,12 @@ describe('tools data (Payload)', () => {
       })
       cleanup.push({ collection: 'buy-prices', id: p.id })
     }
+    // The BuyPrices hook already ran the alerts after the second write (5.2).
+    const afterWrite = await payload.find({
+      collection: 'outbox',
+      where: { to: { equals: email } },
+    })
+    expect(afterWrite.docs).toHaveLength(1)
     await evaluateAlerts(payload)
     const rows = await payload.find({
       collection: 'outbox',

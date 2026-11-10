@@ -17,7 +17,7 @@ import * as cheerio from 'cheerio'
 
 import { crawl, type CrawledPage } from './lib/site-crawl'
 import { locales } from '../../src/i18n/config'
-import { basePath, financeRoutes, sections, shopRoutes } from '../../src/i18n/routes'
+import { basePath, financeRoutes, priceRoutes, sections, shopRoutes } from '../../src/i18n/routes'
 
 const base = (process.argv[2] ?? 'http://localhost:3100').replace(/\/$/, '')
 const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? base).origin
@@ -46,6 +46,13 @@ function expectedTypes(path: string): string[] {
   if (locales.some((l) => path.startsWith(`${basePath('', l)}`)))
     return ['LocalBusiness', 'BreadcrumbList']
   for (const l of locales) {
+    const pre = l === 'en' ? '/en' : ''
+    // Price hub and crop prices carry a Dataset; the calculator is a plain tool page.
+    const prices = `${pre}${sections.prices[l]}`
+    if (path === prices) return ['WebPage', 'BreadcrumbList', 'Dataset']
+    if (path.startsWith(`${prices}/`) && path !== `${prices}/${priceRoutes.netPrice[l]}`)
+      return ['WebPage', 'BreadcrumbList', 'Dataset']
+    if (path.startsWith(`${pre}${sections.market[l]}/`)) return ['Article', 'BreadcrumbList']
     const guides = `${l === 'en' ? '/en' : ''}${sections.finance[l]}/${financeRoutes.guides[l]}`
     if (path.startsWith(`${guides}/`)) return ['Article', 'BreadcrumbList']
     if (path === guides) return ['WebPage', 'BreadcrumbList', 'ItemList']
@@ -216,7 +223,11 @@ for (const [cluster, targets] of clusters) {
         .map((_, el) => $(el).attr('href'))
         .get(),
     )
-    const peers = [...targets].filter((t) => t !== target && byPath.get(t)?.status === 200)
+    // Peers in the same language: a Romanian page does not link to English pages.
+    const lang = (p: string) => (p === '/en' || p.startsWith('/en/') ? 'en' : 'ro')
+    const peers = [...targets].filter(
+      (t) => t !== target && lang(t) === lang(target) && byPath.get(t)?.status === 200,
+    )
     if (peers.length && !peers.some((t) => links.has(t) || links.has(abs(t))))
       warn('keyword cluster', `${target} (${cluster}) links to none of: ${peers.join(', ')}`)
   }

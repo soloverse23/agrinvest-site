@@ -18,7 +18,7 @@ Goals, in priority order:
 1. **#1 in Google for Agrinvest's product and business keywords, in Romanian and English.** The keyword research already exists in `src/data/plan.ts` (`audiences`, `topOpportunities`).
 2. **A professional, formal, light-themed design** that is easy to use and doesn't look AI-generated. It is cinematic only in chosen places, using Agrinvest's own YouTube footage. It is built on a **complete, scalable design system**.
 3. **A strong shop** with precise, structured technical detail for every product.
-4. **Farmer tools, each also an SEO asset:** grain and input prices, diesel (buying, selling, prices), farm news, weather assistant.
+4. **Farmer tools, each also an SEO asset:** grain and input prices, diesel (buying, selling, prices), farm news.
 5. **A full finance section for Agrinvest Credit IFN:** products, simulator, eligibility checker, online application, knowledge hub. It is linked into the shop, the grain prices and the diesel page.
 6. **An article engine that wins keywords.**
 7. **Two-way social integration** (the Hamid Hosseini pattern, extended) so the site and the social channels keep feeding each other.
@@ -74,8 +74,6 @@ Quality bar: **everything clean.** Clean code, clean data model, clean URLs, cle
 | Weekly grain prices for RO regions and Constanța | EU Commission API `ec.europa.eu/agrifood/api/cereal/prices?memberStateCodes=RO` |
 | Fertiliser price index (EU level)                | EU Commission API `…/api/fertiliser/prices`                                     |
 | Weekly grain tables                              | brm.ro (also has RSS)                                                           |
-| Weather (rain, ET0, soil moisture)               | Open-Meteo                                                                      |
-| Weather (unofficial JSON)                        | ANM `meteoromania.ro/wp-json/meteoapi/v2/...`                                   |
 | Farm news RSS                                    | revista-ferma, agrimedia, agro-tv, agrointel, brm                               |
 | National diesel prices                           | EU Weekly Oil Bulletin                                                          |
 
@@ -146,7 +144,7 @@ site/
   src/app/(frontend)/[locale]/…   public pages
   src/app/(payload)/admin          admin
   src/collections/, src/globals/   content model
-  src/lib/          seo/, schema/, feeds/, prices/, weather/, social/
+  src/lib/          seo/, schema/, feeds/, prices/, social/
   scripts/          import/, crawl/, checks/
 ```
 
@@ -168,7 +166,7 @@ Romanian is the default language at `/`, English lives at `/en`. Slugs have no d
 **Storage**
 
 - `/depozitare`, `/depozitare/uscare`
-- **`/baze/{baza}`**: 17 base pages with map, capacity, contact, today's price, local weather and LocalBusiness schema.
+- **`/baze/{baza}`**: 17 base pages with map, capacity, contact, today's price and LocalBusiness schema.
 
 **Shop**
 
@@ -188,10 +186,6 @@ Romanian is the default language at `/`, English lives at `/en`. Slugs have no d
 
 - `/motorina`
 - `/motorina/calculator-acciza`: excise-refund calculator.
-
-**Weather**
-
-- `/meteo`, `/meteo/{judet}`
 
 **News**
 
@@ -292,14 +286,14 @@ Each phase lists: **Goal · Scope · Deliverables · Exit criteria.** Each one i
 
 - Navigation: header with mega-menu by need (sell grain, store, buy inputs, financing), mobile nav, footer, language switch.
 - Commerce: ProductCard, FacetPanel, ProductGallery, **DoseTable**, SpecSheet, PackSizeSelector, Cart line, Checkout steps.
-- Data: PriceBoard, PriceChart, NetPriceCalculator, WeatherCard, SprayWindow, BaseMap, BaseCard.
+- Data: PriceBoard, PriceChart, NetPriceCalculator, BaseMap, BaseCard.
 - Content: ArticleCard, AuthorBox, FAQ, TOC, CalloutFigure, VideoEmbed (click to load), SocialPost, UGC tile.
 - Conversion: LeadForm (by type), CTA band, Contact person card, Alert subscribe.
 - Cinematic: HeroVideo (poster-first, scrim, serif accent), CountUp figures, Story section. **Only for the home, brand and story pages.**
 
 **1.5 Templates (high fidelity)**
 
-- Home, service page, base page, product listing, product page, price tool, weather, article, author, stories/video hub, contact, cart and checkout.
+- Home, service page, base page, product listing, product page, price tool, article, author, stories/video hub, contact, cart and checkout.
 
 **1.6 Anti-"AI look" rules (enforced in review)**
 
@@ -508,12 +502,6 @@ _Analytics_
 - Agrinvest's price and the national weekly price.
 - Excise-refund calculator: hectares × litres per hectare × lei per litre.
 - A rules guide kept up to date.
-
-**Weather assistant**
-
-- Open-Meteo per base, county or the user's location: 7–14 day forecast, **spraying window**, frost alerts, growing degree days, soil moisture and ET0.
-- ANM warnings.
-- Indexable county pages; the interactive part is a small client island.
 
 **News**
 

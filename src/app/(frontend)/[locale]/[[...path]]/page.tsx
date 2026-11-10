@@ -8,6 +8,7 @@ import { Faq, PageTitle } from '@/components/PageParts'
 import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
+import { TodayStrip } from '@/components/TodayStrip'
 import { isLocale, localePath, type Locale } from '@/i18n/config'
 import { ui } from '@/i18n/ui'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
@@ -72,9 +73,20 @@ export default async function CmsPage(props: Props) {
           crumbs={crumbs}
         />
       )}
-      <div className={heroFirst ? undefined : 'mt-16 md:mt-24'}>
-        <RenderBlocks blocks={page.layout} locale={locale} path={pagePath} />
-      </div>
+      {page.isHome && heroFirst ? (
+        // Home: the hero, then today's prices, diesel and news (Phase 5), then the rest.
+        <>
+          <RenderBlocks blocks={page.layout?.slice(0, 1)} locale={locale} path={pagePath} />
+          <TodayStrip locale={locale} />
+          <div className="mt-16 md:mt-24">
+            <RenderBlocks blocks={page.layout?.slice(1)} locale={locale} path={pagePath} />
+          </div>
+        </>
+      ) : (
+        <div className={heroFirst ? undefined : 'mt-16 md:mt-24'}>
+          <RenderBlocks blocks={page.layout} locale={locale} path={pagePath} />
+        </div>
+      )}
       <Faq locale={locale} items={page.faq} />
     </SiteShell>
   )

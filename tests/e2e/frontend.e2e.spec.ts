@@ -526,3 +526,171 @@ test.describe('Finance cross-selling', () => {
     await expect(page.locator('footer a[href="/finantare/aplica"]')).toHaveCount(1)
   })
 })
+
+test.describe('Grain prices', () => {
+  const email = 'e2e-alert@example.ro'
+
+  test.afterAll(async () => {
+    const payload = await getPayload({ config })
+    await payload.delete({ collection: 'subscriptions', where: { email: { equals: email } } })
+  })
+
+  test('every price route answers in Romanian and English', async ({ page }) => {
+    for (const url of [
+      '/preturi',
+      '/preturi/grau',
+      '/preturi/porumb',
+      '/preturi/floarea-soarelui',
+      '/preturi/rapita',
+      '/preturi/orz',
+      '/preturi/calculator-pret-net',
+      '/piata',
+      '/en/prices',
+      '/en/prices/wheat',
+      '/en/prices/corn',
+      '/en/prices/sunflower',
+      '/en/prices/rapeseed',
+      '/en/prices/barley',
+      '/en/prices/net-price-calculator',
+      '/en/market',
+    ]) {
+      const res = await page.goto(url)
+      expect(res?.status(), url).toBe(200)
+      await expect(page.locator('h1'), url).toHaveCount(1)
+    }
+  })
+
+  test('a crop page carries Dataset JSON-LD and never shows an unpublished price', async ({
+    page,
+  }) => {
+    await page.goto('/preturi/orz')
+    const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join()
+    expect(ld).toContain('"Dataset"')
+    const payload = await getPayload({ config })
+    const barley = await payload.find({ collection: 'crops', where: { key: { equals: 'barley' } } })
+    const published = await payload.find({
+      collection: 'buy-prices',
+      where: { crop: { equals: barley.docs[0].id }, status: { equals: 'published' } },
+      limit: 1,
+    })
+    if (!published.docs.length) {
+      await expect(page.getByText('Preț la cerere')).toBeVisible()
+      await expect(page.locator('#pret-agrinvest ~ div table')).toHaveCount(0)
+    }
+  })
+
+  test('the calculator works without JavaScript and is noindex with parameters', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/preturi/calculator-pret-net')
+    await page.locator('[name=cultura]').selectOption('wheat')
+    await page.locator('[name=cantitate]').fill('25')
+    await page.locator('[name=pret]').fill('1000')
+    await page.locator('[name=umiditate]').fill('16')
+    await page.locator('[name=impuritati]').fill('3')
+    await page.locator('[name=umiditate_baza]').fill('14')
+    await page.locator('[name=impuritati_baza]').fill('2')
+    await page.getByRole('button', { name: 'Calculează' }).click()
+    await page.waitForURL(/cantitate=25/)
+    await expect(page.locator('#rezultat dl')).toContainText('24,169 t')
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/)
+    await expect(page.locator('link[rel=canonical]')).toHaveAttribute(
+      'href',
+      /\/preturi\/calculator-pret-net$/,
+    )
+    await context.close()
+  })
+
+  test('the price alert sign-up stores a pending subscription with its consent', async ({
+    page,
+  }) => {
+    await page.goto('/preturi/grau')
+    const form = page.locator('#alerta form')
+    await form.locator('[name=email]').fill(email)
+    await form.locator('[name=consent]').check()
+    await form.getByRole('button', { name: 'Activează alerta' }).click()
+    await expect(page.locator('#alerta').getByRole('status')).toContainText('Am salvat alerta')
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'subscriptions',
+      where: { email: { equals: email } },
+    })
+    expect(docs).toHaveLength(1)
+    expect(docs[0]).toMatchObject({ status: 'pending' })
+    expect(docs[0].topics?.[0]).toMatchObject({ kind: 'price-alert', rule: 'any' })
+  })
+})
+
+test.describe('Tools: fertilisers, diesel, news, home', () => {
+  const email = 'e2e-diesel@example.ro'
+
+  test.afterAll(async () => {
+    const payload = await getPayload({ config })
+    await payload.delete({ collection: 'leads', where: { email: { equals: email } } })
+  })
+
+  test('the tool pages answer in Romanian and English and link to each other', async ({ page }) => {
+    for (const url of [
+      '/preturi/ingrasaminte',
+      '/en/prices/fertilisers',
+      '/motorina',
+      '/en/diesel',
+      '/stiri',
+      '/en/news',
+    ]) {
+      const res = await page.goto(url)
+      expect(res?.status(), url).toBe(200)
+      await expect(page.locator('h1'), url).toHaveCount(1)
+    }
+    await page.goto('/motorina')
+    await expect(page.locator('main a[href="/preturi"]').first()).toBeAttached()
+    await expect(page.locator('main a[href="/stiri"]').first()).toBeAttached()
+  })
+
+  test('the fertiliser page lists shop products with a link to each', async ({ page }) => {
+    await page.goto('/preturi/ingrasaminte')
+    const rows = page.locator('main table tbody tr')
+    expect(await rows.count()).toBeGreaterThan(0)
+    await expect(page.locator('main table a[href^="/magazin/"]').first()).toBeAttached()
+  })
+
+  test('the home page shows today’s prices, diesel and news', async ({ page }) => {
+    await page.goto('/')
+    const today = page.locator('section[aria-labelledby="azi"]')
+    await expect(today).toBeVisible()
+    await expect(today.locator('section')).toHaveCount(3)
+    await expect(today.locator('a[href="/preturi"]').first()).toBeAttached()
+    await page.goto('/en')
+    await expect(
+      page.locator('section[aria-labelledby="azi"] a[href="/en/prices"]').first(),
+    ).toBeAttached()
+  })
+
+  test('the menu and footer link the prices section', async ({ page }) => {
+    await page.goto('/despre')
+    await expect(page.locator('header a[href="/preturi"]').first()).toBeAttached()
+    await expect(page.locator('footer a[href="/motorina"]').first()).toBeAttached()
+  })
+
+  test('a diesel quote creates a motorina lead with litres', async ({ page }) => {
+    await page.goto('/motorina')
+    const form = page.locator('#cerere form')
+    await form.locator('[name=name]').fill('Test Motorina')
+    await form.locator('[name=phone]').fill('0741 201 056')
+    await form.locator('[name=email]').fill(email)
+    await form.locator('[name=county]').selectOption({ index: 1 })
+    await form.locator('[name=quantity]').fill('5000')
+    await form.locator('[name=consent]').check()
+    await form.getByRole('button', { name: 'Trimite cererea' }).click()
+    await expect(page.locator('#cerere').getByRole('status')).toContainText('Mulțumim')
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'leads',
+      where: { email: { equals: email } },
+    })
+    expect(docs).toHaveLength(1)
+    expect(docs[0]).toMatchObject({ type: 'motorina', quantity: 5000 })
+  })
+})

@@ -10,6 +10,7 @@
     { "path": "/api/cron/fetchEuFertiliser", "schedule": "0 8 * * 1" },
     { "path": "/api/cron/evaluateAlerts", "schedule": "0 10 * * *" },
     { "path": "/api/cron/draftMarketNote", "schedule": "0 11 * * 4" },
-    { "path": "/api/cron/buildNewsletter", "schedule": "0 9 * * 5" }
+    { "path": "/api/cron/buildNewsletter", "schedule": "0 9 * * 5" },
+    { "path": "/api/cron/editorialDigest", "schedule": "0 9 * * 1" }
   ]
 }

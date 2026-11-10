@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { ArticleCard } from '@ds/patterns/Articles'
 import { LeadFormLazy, SubscribeFormLazy } from '@ds/patterns/Lazy'
 import { LineChart } from '@ds/patterns/LineChart'
 import { Callout, SectionHeading } from '@ds/patterns/Sections'
@@ -20,10 +21,12 @@ import {
   productPath,
   sections,
 } from '@/i18n/routes'
+import { articlesUi } from '@/i18n/articles'
 import { toolsUi } from '@/i18n/tools'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listCounties } from '@/lib/content/locations'
+import { listArticles } from '@/lib/content/articles'
 import { listMarketNotes } from '@/lib/content/market'
 import type { Alternates } from '@/lib/content/pages'
 import { listCategories, listProducts } from '@/lib/content/shop'
@@ -389,96 +392,168 @@ export async function DieselPage({ locale }: { locale: Locale }) {
 
 export const newsAlternates: Alternates = { ro: newsPath('ro'), en: newsPath('en') }
 
-export const newsMetadata = async (locale: Locale) =>
-  meta(locale, toolsUi[locale].news, newsAlternates, !(await listHeadlines(1)).length)
+export const newsMetadata = async (locale: Locale) => {
+  const [headlines, own] = await Promise.all([listHeadlines(1), listArticles(locale, 'stiri')])
+  return meta(locale, toolsUi[locale].news, newsAlternates, !headlines.length && !own.length)
+}
 
+/**
+ * `/stiri`: Agrinvest's own news first (a lead story and a grid of cards, written in the
+ * admin), then the farm-press headlines beside the market notes and the newsletter.
+ */
 export async function NewsPage({ locale }: { locale: Locale }) {
   const t = toolsUi[locale].news
+  const a = articlesUi[locale].news
   const p = pricesUi[locale]
   const url = newsPath(locale)
-  const [headlines, notes] = await Promise.all([listHeadlines(40), listMarketNotes(locale)])
+  const [headlines, notes, own] = await Promise.all([
+    listHeadlines(40),
+    listMarketNotes(locale),
+    listArticles(locale, 'stiri'),
+  ])
   const crumbs = [{ name: t.title, url }]
+  const [lead, ...more] = own
   return (
     <SiteShell locale={locale} alternates={newsAlternates}>
       <JsonLd
         data={[
           webPage({ url, name: t.seoTitle, description: t.description, locale }),
           breadcrumbs(locale, ui[locale].home, crumbs),
-          ...(headlines.length
-            ? [itemList(headlines.map((h) => ({ name: h.title, url: h.url })))]
+          ...(headlines.length || own.length
+            ? [
+                itemList([
+                  ...own.map((n) => ({ name: n.title, url: n.href })),
+                  ...headlines.map((h) => ({ name: h.title, url: h.url })),
+                ]),
+              ]
             : []),
         ]}
       />
       <PageTitle locale={locale} title={t.title} summary={t.summary} crumbs={crumbs} />
-      <div className="mx-auto mt-12 grid max-w-page gap-12 px-4 md:mt-16 md:px-8 lg:grid-cols-12">
-        <section aria-labelledby="flux" className="grid content-start gap-4 lg:col-span-8">
+      {lead && (
+        <section
+          aria-labelledby="agrinvest"
+          className="mx-auto mt-12 grid max-w-page gap-8 px-4 md:mt-16 md:px-8"
+        >
+          <SectionHeading id="agrinvest" kicker={a.kicker} title={a.latest} />
+          <ArticleCard
+            variant="feature"
+            locale={locale}
+            href={lead.href}
+            title={lead.title}
+            summary={lead.summary}
+            date={lead.date}
+            image={lead.image}
+            priority
+          />
+          {more.length > 0 && (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {more.slice(0, 9).map((n) => (
+                <ArticleCard
+                  key={n.id}
+                  locale={locale}
+                  href={n.href}
+                  title={n.title}
+                  summary={n.summary}
+                  date={n.date}
+                  image={n.image}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+      <div className="mx-auto mt-16 grid max-w-page gap-12 px-4 md:mt-20 md:px-8 lg:grid-cols-12">
+        <section aria-labelledby="flux" className="grid content-start gap-6 lg:col-span-8">
           <h2 id="flux" className="text-h3 font-semibold">
             {t.feed}
           </h2>
           {headlines.length ? (
-            <ul className="grid divide-y divide-line">
-              {headlines.map((h) => (
-                <li key={h.id} className="grid gap-1 py-4">
-                  <a href={h.url} rel="noopener" lang="ro" className="font-semibold text-ink">
-                    {h.title}
-                  </a>
-                  {h.excerpt && (
-                    <p lang="ro" className="text-small text-muted">
-                      {h.excerpt}
-                    </p>
-                  )}
-                  <span className="text-caption text-muted">
-                    {h.source} · {formatShortDate(new Date(h.publishedAt), locale)} ·{' '}
-                    <a href={h.url} rel="noopener" className="underline underline-offset-2">
-                      {t.readAt(h.source)}
-                    </a>
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <ol className="grid divide-y divide-line border-y border-line">
+              {headlines.map((h) => {
+                const date = new Date(h.publishedAt)
+                return (
+                  <li key={h.id} className="grid gap-4 py-5 md:grid-cols-[7rem_1fr] md:gap-6">
+                    <div className="flex items-baseline gap-2 text-caption text-subtle md:grid md:content-start md:gap-1">
+                      <time dateTime={date.toISOString()} className="font-semibold text-ink">
+                        {formatShortDate(date, locale)}
+                      </time>
+                      <span>{h.source}</span>
+                    </div>
+                    <div className="grid gap-1.5">
+                      <a
+                        href={h.url}
+                        rel="noopener"
+                        lang="ro"
+                        className="text-body leading-snug font-semibold text-ink hover:text-accent"
+                      >
+                        {h.title}
+                      </a>
+                      {h.excerpt && (
+                        <p lang="ro" className="text-small text-muted">
+                          {h.excerpt}
+                        </p>
+                      )}
+                      <a
+                        href={h.url}
+                        rel="noopener"
+                        className="w-fit text-caption text-muted underline underline-offset-2"
+                      >
+                        {t.readAt(h.source)}
+                      </a>
+                    </div>
+                  </li>
+                )
+              })}
+            </ol>
           ) : (
             <p className="text-body text-muted">{t.empty}</p>
           )}
         </section>
         <aside className="grid content-start gap-8 lg:col-span-4">
-          <section aria-labelledby="note" className="grid gap-3">
-            <h2 id="note" className="text-h4 font-semibold">
-              {t.own}
-            </h2>
-            {notes.length ? (
-              <ul className="grid gap-2">
-                {notes.slice(0, 5).map((n) => (
-                  <li key={n.id}>
-                    <Link
-                      href={marketNotePath(n.slug, locale)}
-                      className="text-small font-semibold text-ink"
-                    >
-                      {n.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-small text-muted">{p.market.empty}</p>
-            )}
-            <Link href={marketPath(locale)} className="text-small font-semibold text-accent">
-              {p.hub.allNotes}
-            </Link>
-          </section>
-          <div
-            id="buletin"
-            className="scroll-mt-24 rounded-xl bg-raised p-6 shadow-soft ring-1 ring-line"
-          >
-            <SubscribeFormLazy
-              locale={locale}
-              action={subscribe}
-              topic="newsletter"
-              heading={t.newsletterTitle}
-              body={t.newsletterBody}
-              sourcePath={url}
-              privacyHref={fixedUrl('privacy', locale)}
-              labels={{ ...p.alert, submit: t.newsletterSubmit }}
-            />
+          <div className="grid gap-8 lg:sticky lg:top-24">
+            <section
+              aria-labelledby="note"
+              className="grid gap-3 rounded-xl bg-surface p-6 ring-1 ring-line"
+            >
+              <h2 id="note" className="text-h4 font-semibold">
+                {t.own}
+              </h2>
+              {notes.length ? (
+                <ul className="grid gap-2">
+                  {notes.slice(0, 5).map((n) => (
+                    <li key={n.id}>
+                      <Link
+                        href={marketNotePath(n.slug, locale)}
+                        className="text-small font-semibold text-ink hover:text-accent"
+                      >
+                        {n.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-small text-muted">{p.market.empty}</p>
+              )}
+              <Link href={marketPath(locale)} className="text-small font-semibold text-accent">
+                {p.hub.allNotes}
+              </Link>
+            </section>
+            <div
+              id="buletin"
+              className="scroll-mt-24 rounded-xl bg-raised p-6 shadow-soft ring-1 ring-line"
+            >
+              <SubscribeFormLazy
+                locale={locale}
+                action={subscribe}
+                topic="newsletter"
+                heading={t.newsletterTitle}
+                body={t.newsletterBody}
+                sourcePath={url}
+                privacyHref={fixedUrl('privacy', locale)}
+                labels={{ ...p.alert, submit: t.newsletterSubmit }}
+              />
+            </div>
           </div>
         </aside>
       </div>

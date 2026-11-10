@@ -46,7 +46,9 @@
     "audit:verification": "tsx scripts/products/verification-list.ts",
     "apply:products": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/products/run.ts",
     "apply:finance": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/finance/run.ts",
-    "apply:tools": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/tools/run.ts"
+    "apply:tools": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/tools/run.ts",
+    "apply:articles": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/articles/run.ts",
+    "check:articles": "tsx --env-file-if-exists=.env scripts/checks/articles.ts"
   },
   "dependencies": {
     "@fontsource-variable/onest": "^5.3.1",

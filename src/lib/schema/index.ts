@@ -324,11 +324,22 @@ export function article(input: {
   dateModified?: string
   datePublished?: string
   authorName?: string | null
+  /** An author with a public page is a Person (E-E-A-T); otherwise the name stays an organisation. */
+  authorUrl?: string | null
+  image?: string | null
+  section?: string | null
+  /** `NewsArticle` for Agrinvest news. */
+  type?: 'Article' | 'NewsArticle'
   citations?: string[]
 }): WithContext<Article> {
+  const author = input.authorName
+    ? input.authorUrl
+      ? { '@type': 'Person' as const, name: input.authorName, url: absoluteUrl(input.authorUrl) }
+      : { '@type': 'Organization' as const, name: input.authorName }
+    : { '@id': ORG_ID }
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': input.type ?? 'Article',
     '@id': `${absoluteUrl(input.url)}#article`,
     url: absoluteUrl(input.url),
     headline: input.headline,
@@ -336,12 +347,13 @@ export function article(input: {
     inLanguage: input.locale,
     dateModified: input.dateModified,
     datePublished: input.datePublished,
-    author: input.authorName
-      ? { '@type': 'Organization', name: input.authorName }
-      : { '@id': ORG_ID },
+    author,
     publisher: { '@id': ORG_ID },
+    image: input.image ? absoluteUrl(input.image) : undefined,
+    articleSection: input.section ?? undefined,
+    mainEntityOfPage: absoluteUrl(input.url),
     citation: input.citations?.length ? input.citations : undefined,
-  }
+  } as WithContext<Article>
 }
 
 /** The glossary. */

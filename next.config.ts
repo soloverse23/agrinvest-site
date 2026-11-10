@@ -37,6 +37,8 @@ function enrichmentEpoch() {
     hash.update(readFileSync(path.join(dirname, 'scripts/finance', name)))
   // The price menu and footer column (`apply:tools`, Phase 5).
   hash.update(readFileSync(path.join(dirname, 'scripts/tools/entry-points.ts')))
+  // The guides menu and footer column (`apply:articles`, Phase 6).
+  hash.update(readFileSync(path.join(dirname, 'scripts/articles/entry-points.ts')))
   return hash.digest('hex').slice(0, 12)
 }
 

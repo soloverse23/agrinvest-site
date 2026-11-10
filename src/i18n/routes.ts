@@ -14,6 +14,8 @@ export const sections = {
   market: { ro: '/piata', en: '/market' },
   diesel: { ro: '/motorina', en: '/diesel' },
   news: { ro: '/stiri', en: '/news' },
+  guides: { ro: '/ghiduri', en: '/guides' },
+  authors: { ro: '/autori', en: '/authors' },
 } as const satisfies Record<string, Record<Locale, string>>
 
 export type Section = keyof typeof sections
@@ -122,3 +124,20 @@ export const dieselPath = (locale: Locale) => localePath(sections.diesel[locale]
 
 /** News: `/stiri`, `/en/news`. */
 export const newsPath = (locale: Locale) => localePath(sections.news[locale], locale)
+
+/** Farmer guides (Phase 6): `/ghiduri`, `/ghiduri/{pilon}`, `/ghiduri/{pilon}/{slug}`. */
+export const guidesHubPath = (locale: Locale) => localePath(sections.guides[locale], locale)
+
+export const pillarPath = (pillar: string, locale: Locale) =>
+  localePath(`${sections.guides[locale]}/${pillar}`, locale)
+
+export const articlePath = (pillar: string, slug: string, locale: Locale) =>
+  localePath(`${sections.guides[locale]}/${pillar}/${slug}`, locale)
+
+/** An Agrinvest news piece: `/stiri/{slug}`, `/en/news/{slug}`. */
+export const newsArticlePath = (slug: string, locale: Locale) =>
+  localePath(`${sections.news[locale]}/${slug}`, locale)
+
+/** An author: `/autori/{slug}`, `/en/authors/{slug}` (the slug is shared). */
+export const authorPath = (slug: string, locale: Locale) =>
+  localePath(`${sections.authors[locale]}/${slug}`, locale)

@@ -53,6 +53,18 @@ function expectedTypes(path: string): string[] {
     if (path.startsWith(`${prices}/`) && path !== `${prices}/${priceRoutes.netPrice[l]}`)
       return ['WebPage', 'BreadcrumbList', 'Dataset']
     if (path.startsWith(`${pre}${sections.market[l]}/`)) return ['Article', 'BreadcrumbList']
+    // Phase 6: guides hub and pillars list their guides; news pieces are NewsArticles.
+    const guidesHub = `${pre}${sections.guides[l]}`
+    if (
+      path === guidesHub ||
+      (path.startsWith(`${guidesHub}/`) &&
+        path.split('/').length === guidesHub.split('/').length + 1)
+    )
+      return ['WebPage', 'BreadcrumbList', 'ItemList']
+    if (path.startsWith(`${guidesHub}/`)) return ['Article', 'BreadcrumbList']
+    if (path.startsWith(`${pre}${sections.news[l]}/`)) return ['NewsArticle', 'BreadcrumbList']
+    if (path.startsWith(`${pre}${sections.authors[l]}/`))
+      return ['WebPage', 'BreadcrumbList', 'Person']
     const guides = `${l === 'en' ? '/en' : ''}${sections.finance[l]}/${financeRoutes.guides[l]}`
     if (path.startsWith(`${guides}/`)) return ['Article', 'BreadcrumbList']
     if (path === guides) return ['WebPage', 'BreadcrumbList', 'ItemList']

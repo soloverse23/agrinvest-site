@@ -1,0 +1,493 @@
+/**
+ * The first 20 guide briefs (Phase 6). The first ten are the `/ghiduri/*` targets of
+ * `docs/audit/keyword-map.csv`; the other ten fill the pillars the map leaves empty (their
+ * keywords still need a volume check in Keyword Planner, noted in `serp`).
+ *
+ * A brief becomes a draft guide with an empty text and no summary, so it cannot be published
+ * until an expert writes it. `sources` lists where to verify the facts: the 5.x checks found
+ * contract limits and national figures that disagree between sources, so nothing is assumed.
+ */
+type L = { ro: string; en: string }
+
+export type Brief = {
+  pillar: string
+  slug: L
+  title: L
+  keyword: L
+  secondary: L
+  intent: 'I' | 'C' | 'T'
+  /** ISO date: the editorial calendar (publish ahead of the season the question peaks). */
+  planned: string
+  /** ISO date when the text must be checked again (seasonal or yearly facts). */
+  refresh?: string
+  outline: string[]
+  links: string[]
+  faq: string[]
+  serp: string
+  sources: string[]
+}
+
+const INTAKE =
+  'Limitele de recepție vin din contractul Agrinvest (Crops.quality) sau din contractul fermierului; nu cita o valoare „STAS” fără numărul standardului.'
+
+export const briefs: Brief[] = [
+  {
+    pillar: 'grau',
+    slug: { ro: 'umiditate-grau-standard', en: 'standard-wheat-moisture' },
+    title: {
+      ro: 'Umiditatea standard la grâu: ce înseamnă și cum se scade',
+      en: 'Standard wheat moisture: what it means and how deductions work',
+    },
+    keyword: { ro: 'umiditate grâu standard', en: 'standard wheat moisture' },
+    secondary: {
+      ro: 'umiditate grâu recepție, scăzământ umiditate grâu, grâu umed',
+      en: 'wheat moisture deduction, wheat intake moisture',
+    },
+    intent: 'I',
+    planned: '2026-12-07',
+    refresh: '2027-06-01',
+    outline: [
+      'Răspuns direct: ce este umiditatea de bază din contract',
+      'Cum se măsoară la recepție (umidometru, probă)',
+      'Formula scăzământului, cu un exemplu (link spre calculator)',
+      'Când merită uscarea și cât costă (link /depozitare/uscare)',
+      'Ce să verifici în contract',
+    ],
+    links: ['/preturi/calculator-pret-net', '/depozitare/uscare', '/cereale/grau', '/preturi/grau'],
+    faq: ['Cât este umiditatea standard la grâu?', 'Cum se calculează scăzământul la umiditate?'],
+    serp: `Prioritate 1 în harta de cuvinte. ${INTAKE} Licitațiile publice văzute folosesc 13–15 %, deci valoarea depinde de contract.`,
+    sources: [
+      'FAO, exemplul de calcul la uscare (deja citat în net-price-rules.ts)',
+      'Contractul de achiziție Agrinvest',
+    ],
+  },
+  {
+    pillar: 'grau',
+    slug: { ro: 'greutate-hectolitrica-grau', en: 'wheat-hectolitre-weight' },
+    title: {
+      ro: 'Greutatea hectolitrică la grâu: cum se măsoară și de ce contează',
+      en: 'Wheat hectolitre weight: how it is measured and why it matters',
+    },
+    keyword: { ro: 'greutate hectolitrică grâu', en: 'wheat hectolitre weight' },
+    secondary: { ro: 'masa hectolitrică grâu, MH grâu', en: 'wheat test weight' },
+    intent: 'I',
+    planned: '2026-12-14',
+    refresh: '2027-06-01',
+    outline: [
+      'Răspuns direct: ce este MH și în ce unitate se dă',
+      'Cum se măsoară (metoda ISO 7971-3)',
+      'Ce o scade: umiditate, corpuri străine, boabe șiștave',
+      'Cum influențează prețul și clasa de calitate',
+    ],
+    links: ['/cereale/grau', '/preturi/grau', '/ghiduri/grau/calitate-grau-panificatie'],
+    faq: ['Ce greutate hectolitrică trebuie să aibă grâul de panificație?'],
+    serp: INTAKE,
+    sources: ['SR EN ISO 7971-3 (metoda de determinare)', 'Contractul de achiziție Agrinvest'],
+  },
+  {
+    pillar: 'grau',
+    slug: { ro: 'calitate-grau-panificatie', en: 'milling-wheat-quality' },
+    title: {
+      ro: 'Calitatea grâului de panificație: proteină, gluten, MH',
+      en: 'Milling wheat quality: protein, gluten, test weight',
+    },
+    keyword: { ro: 'calitate grâu panificație', en: 'milling wheat quality Romania' },
+    secondary: {
+      ro: 'grâu panificație proteină, gluten umed grâu, indice de cădere',
+      en: 'wheat protein content, falling number',
+    },
+    intent: 'I',
+    planned: '2027-01-11',
+    refresh: '2027-06-01',
+    outline: [
+      'Răspuns direct: ce parametri decid dacă grâul e de panificație',
+      'Proteină, gluten umed, indice de cădere, MH: ce înseamnă fiecare',
+      'Cum influențează fertilizarea calitatea (link fertilizare-grau)',
+      'Diferența de preț panificație/furajer (link prețuri)',
+    ],
+    links: ['/ghiduri/grau/fertilizare-grau', '/preturi/grau', '/cereale/grau'],
+    faq: ['Ce proteină trebuie să aibă grâul de panificație?'],
+    serp: INTAKE,
+    sources: [
+      'Contractul de achiziție Agrinvest',
+      'Fișele de soi INCDA Fundulea (incda-fundulea.ro/fise)',
+    ],
+  },
+  {
+    pillar: 'vanzare',
+    slug: { ro: 'documente-vanzare-cereale', en: 'grain-sale-documents' },
+    title: {
+      ro: 'Acte necesare la vânzarea cerealelor',
+      en: 'Documents needed to sell grain in Romania',
+    },
+    keyword: { ro: 'documente vânzare cereale', en: 'documents to sell grain Romania' },
+    secondary: {
+      ro: 'acte vânzare grâu persoană fizică, atestat producător, carnet de comercializare',
+      en: 'producer certificate Romania',
+    },
+    intent: 'T',
+    planned: '2027-01-18',
+    refresh: '2027-06-01',
+    outline: [
+      'Răspuns direct: actele pe forme de organizare (PF, PFA/II, firmă)',
+      'Persoană fizică: atestat de producător și carnet de comercializare (Legea 145/2014)',
+      'PFA și firme: factură, aviz de însoțire',
+      'Ce aduci la bază (link pagina bazei, programare)',
+    ],
+    links: ['/cereale', '/contact', '/finantare/credit-contracte-cereale'],
+    faq: ['Poate vinde cereale o persoană fizică fără firmă?', 'Ce acte îmi trebuie la bază?'],
+    serp: 'Rezultatele sunt forumuri și știri vechi: un răspuns clar, actualizat, câștigă.',
+    sources: [
+      'Legea 145/2014, forma consolidată (legislatie.just.ro), cu modificările din Legea 87/2016 și Legea 70/2018',
+      'Ordinul MADR-MDRAP 20/208/2015 (modelul carnetului)',
+      'Procedura internă de recepție Agrinvest',
+    ],
+  },
+  {
+    pillar: 'grau',
+    slug: { ro: 'productie-grau-la-hectar', en: 'wheat-yield-per-hectare' },
+    title: {
+      ro: 'Producția de grâu la hectar în România',
+      en: 'Wheat yield per hectare in Romania',
+    },
+    keyword: { ro: 'producție grâu la hectar', en: 'wheat yield per hectare Romania' },
+    secondary: { ro: 'randament grâu, câte tone de grâu la hectar', en: 'Romania wheat yield' },
+    intent: 'I',
+    planned: '2027-02-01',
+    refresh: '2027-09-01',
+    outline: [
+      'Răspuns direct: media națională pe ultimii ani (tabel INS)',
+      'Diferențe pe județe și ani secetoși',
+      'Ce ridică producția (soi, fertilizare, epocă)',
+      'Ce înseamnă în bani (link prețuri, calculator)',
+    ],
+    links: [
+      '/preturi/grau',
+      '/ghiduri/grau/fertilizare-grau',
+      '/ghiduri/grau/cand-se-seamana-graul',
+    ],
+    faq: ['Câte tone de grâu se fac la hectar?'],
+    serp: 'Știrile dau cifre diferite pentru 2025 (7,7 și 11,6 mil. t, ambele „INS”): folosește doar tabelul INS.',
+    sources: [
+      'INS, Producția medie la hectar a principalelor culturi (insse.ro)',
+      'Comisia Europeană, prognozele de recoltă (4,61 t/ha pentru 2024)',
+    ],
+  },
+  {
+    pillar: 'grau',
+    slug: { ro: 'fertilizare-grau', en: 'wheat-fertilisation' },
+    title: {
+      ro: 'Fertilizarea grâului: când și cu ce',
+      en: 'Wheat fertilisation: when and with what',
+    },
+    keyword: { ro: 'fertilizare grâu', en: 'wheat fertilisation' },
+    secondary: {
+      ro: 'fertilizare grâu primăvara, azotat de amoniu grâu, uree grâu',
+      en: 'wheat nitrogen top dressing',
+    },
+    intent: 'I',
+    planned: '2027-01-25',
+    refresh: '2028-01-15',
+    outline: [
+      'Răspuns direct: fertilizarea de bază și fazele de aplicare a azotului',
+      'Azotat sau uree (link ghid îngrășăminte azotate)',
+      'Fracționarea dozei și calitatea (proteina)',
+      'Prețuri și produse (link /preturi/ingrasaminte, magazin)',
+    ],
+    links: [
+      '/preturi/ingrasaminte',
+      '/magazin/ingrasaminte/azotat-de-amoniu',
+      '/magazin/ingrasaminte/uree',
+      '/finantare/inputuri-plata-la-recolta',
+    ],
+    faq: ['Când se dă azotat la grâu?', 'Câte kg de azot la hectar pentru grâu?'],
+    serp: 'Concurență: reviste agricole și producători de îngrășăminte. Diferențiere: link spre preț și plată la recoltă.',
+    sources: ['Recomandările agronomului Agrinvest', 'Fișele tehnice ale produselor din magazin'],
+  },
+  {
+    pillar: 'porumb',
+    slug: { ro: 'cel-mai-bun-hibrid-de-porumb', en: 'best-corn-hybrid' },
+    title: {
+      ro: 'Cum alegi hibridul de porumb potrivit',
+      en: 'How to choose the right corn hybrid',
+    },
+    keyword: { ro: 'cel mai bun hibrid de porumb', en: 'best corn hybrid Romania' },
+    secondary: { ro: 'hibrizi porumb FAO, semințe porumb', en: 'corn hybrid FAO maturity' },
+    intent: 'C',
+    planned: '2027-01-11',
+    refresh: '2028-01-05',
+    outline: [
+      'Răspuns direct: nu există un „cel mai bun” hibrid, ci unul potrivit zonei',
+      'Grupa FAO și zona (sud/est vs nord)',
+      'Toleranța la secetă, umiditatea la recoltare, costul uscării',
+      'Hibrizii din magazin, pe grupe FAO (link)',
+    ],
+    links: ['/magazin/seminte', '/magazin/cultura/porumb', '/depozitare/uscare', '/preturi/porumb'],
+    faq: ['Ce grupă FAO aleg pentru sudul României?'],
+    serp: 'SERP comercial dominat de producători de semințe; un ghid neutru, pe zone, are șanse.',
+    sources: [
+      'Fișele tehnice ale producătorilor (din magazin)',
+      'Rezultatele loturilor demonstrative, dacă există',
+    ],
+  },
+  {
+    pillar: 'porumb',
+    slug: { ro: 'densitate-semanat-porumb', en: 'corn-planting-density' },
+    title: {
+      ro: 'Densitatea la semănat la porumb',
+      en: 'Corn planting density',
+    },
+    keyword: { ro: 'densitate semănat porumb', en: 'corn planting density' },
+    secondary: { ro: 'câte boabe porumb la hectar', en: 'corn seeds per hectare' },
+    intent: 'I',
+    planned: '2027-02-15',
+    refresh: '2028-02-01',
+    outline: [
+      'Răspuns direct: intervalul de densitate și de ce depinde',
+      'Densitatea după hibrid și apă disponibilă',
+      'Calcul: boabe/ha → saci de sămânță',
+      'Greșeli frecvente',
+    ],
+    links: ['/magazin/seminte', '/ghiduri/porumb/cel-mai-bun-hibrid-de-porumb'],
+    faq: ['Câte boabe de porumb se seamănă la hectar?'],
+    serp: 'Prioritate 3. Cifrele de densitate vin din fișa hibridului, nu dintr-o regulă generală.',
+    sources: ['Fișele tehnice ale hibrizilor din magazin'],
+  },
+  {
+    pillar: 'porumb',
+    slug: { ro: 'tehnologia-de-cultura-a-porumbului', en: 'corn-crop-technology' },
+    title: {
+      ro: 'Tehnologia de cultură a porumbului, pe scurt',
+      en: 'Corn crop technology in short',
+    },
+    keyword: { ro: 'tehnologia de cultură a porumbului', en: 'corn growing guide Romania' },
+    secondary: { ro: 'cultura porumbului, lucrări porumb', en: 'how to grow corn' },
+    intent: 'I',
+    planned: '2027-02-22',
+    refresh: '2028-02-01',
+    outline: [
+      'Răspuns direct: etapele de la arătură la recoltare',
+      'Pregătire teren și fertilizare',
+      'Semănat (link densitate, hibrid)',
+      'Erbicidare (link ghid erbicidare)',
+      'Recoltare, uscare, vânzare (linkuri)',
+    ],
+    links: [
+      '/ghiduri/porumb/densitate-semanat-porumb',
+      '/ghiduri/protectia-plantelor/erbicidare-porumb',
+      '/depozitare/uscare',
+      '/cereale/porumb',
+    ],
+    faq: ['Când se seamănă porumbul?'],
+    serp: 'Prioritate 3; textul pilon al porumbului, leagă toate ghidurile de porumb.',
+    sources: ['Recomandările agronomului Agrinvest'],
+  },
+  {
+    pillar: 'grau',
+    slug: { ro: 'cand-se-seamana-graul', en: 'when-to-sow-wheat' },
+    title: { ro: 'Când se seamănă grâul de toamnă', en: 'When to sow winter wheat' },
+    keyword: { ro: 'când se seamănă grâul', en: 'when to sow wheat Romania' },
+    secondary: { ro: 'epoca de semănat grâu, densitate grâu', en: 'wheat sowing date' },
+    intent: 'I',
+    planned: '2027-08-16',
+    refresh: '2028-08-01',
+    outline: [
+      'Răspuns direct: fereastra optimă pe zone',
+      'Semănatul întârziat: ce pierzi și cum compensezi',
+      'Densitatea (boabe germinabile/m²) după soi',
+      'Sămânța certificată (link magazin)',
+    ],
+    links: ['/magazin/cultura/grau', '/ghiduri/grau/fertilizare-grau'],
+    faq: ['Până când se poate semăna grâul?'],
+    serp: 'Căutare sezonieră (sept–oct). Nicio sursă oficială găsită pentru „1–20 octombrie”: confirmă cu INCDA.',
+    sources: ['Fișele de soi INCDA Fundulea (incda-fundulea.ro/fise)'],
+  },
+  // Pillars the keyword map leaves empty. Keywords to check in Keyword Planner.
+  {
+    pillar: 'floarea-soarelui',
+    slug: { ro: 'densitate-semanat-floarea-soarelui', en: 'sunflower-planting-density' },
+    title: { ro: 'Densitatea la semănat la floarea-soarelui', en: 'Sunflower planting density' },
+    keyword: { ro: 'densitate floarea-soarelui', en: 'sunflower planting density' },
+    secondary: { ro: 'semănat floarea-soarelui', en: 'sunflower seeds per hectare' },
+    intent: 'I',
+    planned: '2027-03-01',
+    outline: ['Răspuns direct', 'După hibrid și zonă', 'Epoca de semănat', 'Hibrizi din magazin'],
+    links: ['/magazin/seminte', '/preturi/floarea-soarelui', '/cereale/floarea-soarelui'],
+    faq: ['Câte plante de floarea-soarelui la hectar?'],
+    serp: 'Volum de verificat.',
+    sources: ['Fișele tehnice ale hibrizilor din magazin'],
+  },
+  {
+    pillar: 'floarea-soarelui',
+    slug: { ro: 'recoltare-floarea-soarelui', en: 'sunflower-harvest' },
+    title: {
+      ro: 'Când se recoltează floarea-soarelui',
+      en: 'When to harvest sunflower',
+    },
+    keyword: { ro: 'recoltare floarea-soarelui', en: 'sunflower harvest moisture' },
+    secondary: { ro: 'umiditate floarea-soarelui recoltare', en: 'sunflower harvest timing' },
+    intent: 'I',
+    planned: '2027-08-02',
+    outline: [
+      'Răspuns direct',
+      'Semnele de maturitate',
+      'Umiditate și pierderi',
+      'Recepția la bază',
+    ],
+    links: ['/cereale/floarea-soarelui', '/preturi/floarea-soarelui', '/depozitare/uscare'],
+    faq: ['La ce umiditate se recoltează floarea-soarelui?'],
+    serp: `Volum de verificat. ${INTAKE}`,
+    sources: ['Contractul de achiziție Agrinvest'],
+  },
+  {
+    pillar: 'rapita',
+    slug: { ro: 'cand-se-seamana-rapita', en: 'when-to-sow-rapeseed' },
+    title: { ro: 'Când se seamănă rapița', en: 'When to sow rapeseed' },
+    keyword: { ro: 'când se seamănă rapița', en: 'when to sow rapeseed' },
+    secondary: { ro: 'semănat rapiță august', en: 'rapeseed sowing date' },
+    intent: 'I',
+    planned: '2027-07-12',
+    outline: ['Răspuns direct', 'Răsărirea în secetă', 'Densitate', 'Iernare'],
+    links: ['/magazin/cultura/rapita', '/preturi/rapita', '/cereale/rapita'],
+    faq: ['Până când se poate semăna rapița?'],
+    serp: 'Sezonier (iul–aug). Volum de verificat.',
+    sources: ['Fișele tehnice ale hibrizilor din magazin'],
+  },
+  {
+    pillar: 'rapita',
+    slug: { ro: 'daunatori-rapita-toamna', en: 'rapeseed-autumn-pests' },
+    title: { ro: 'Dăunătorii rapiței în toamnă', en: 'Rapeseed pests in autumn' },
+    keyword: { ro: 'dăunători rapiță', en: 'rapeseed pests' },
+    secondary: { ro: 'insecticid rapiță toamna, purici rapiță', en: 'flea beetle rapeseed' },
+    intent: 'C',
+    planned: '2027-09-06',
+    outline: ['Răspuns direct', 'Ce dăunători, când', 'Pragul de intervenție', 'Produse omologate'],
+    links: ['/magazin/insecticide', '/magazin/insecticide/karate-zeon'],
+    faq: ['Cu ce se tratează rapița în toamnă?'],
+    serp: '„insecticid rapiță” e în harta de cuvinte (/magazin/insecticide).',
+    sources: ['Etichetele produselor omologate (PEST-EXPERT / Comisia de omologare)'],
+  },
+  {
+    pillar: 'orz',
+    slug: { ro: 'orz-de-toamna-sau-de-primavara', en: 'winter-or-spring-barley' },
+    title: { ro: 'Orz de toamnă sau de primăvară?', en: 'Winter or spring barley?' },
+    keyword: { ro: 'orz de toamnă', en: 'winter barley Romania' },
+    secondary: { ro: 'orz de primăvară, orzoaică', en: 'malting barley' },
+    intent: 'I',
+    planned: '2027-08-09',
+    outline: ['Răspuns direct', 'Producție și risc', 'Orzoaică pentru bere', 'Vânzare'],
+    links: ['/preturi/orz', '/magazin/cultura/orz'],
+    faq: ['Ce aduce mai mult, orzul de toamnă sau cel de primăvară?'],
+    serp: 'Volum de verificat.',
+    sources: ['Recomandările agronomului Agrinvest'],
+  },
+  {
+    pillar: 'depozitare',
+    slug: { ro: 'umiditate-depozitare-cereale', en: 'grain-storage-moisture' },
+    title: {
+      ro: 'La ce umiditate se depozitează cerealele',
+      en: 'Safe moisture for storing grain',
+    },
+    keyword: { ro: 'umiditate depozitare cereale', en: 'safe grain storage moisture' },
+    secondary: { ro: 'păstrarea cerealelor, ventilare siloz', en: 'grain aeration' },
+    intent: 'I',
+    planned: '2027-05-17',
+    outline: [
+      'Răspuns direct',
+      'Pe culturi',
+      'Temperatura și ventilarea',
+      'Depozitare la Agrinvest',
+    ],
+    links: ['/depozitare', '/depozitare/uscare', '/finantare/finantare-stocuri'],
+    faq: ['La ce umiditate se poate depozita porumbul?'],
+    serp: 'Volum de verificat. Leagă serviciul de depozitare.',
+    sources: ['FAO, ghidurile de depozitare a cerealelor'],
+  },
+  {
+    pillar: 'depozitare',
+    slug: { ro: 'cost-uscare-porumb', en: 'corn-drying-cost' },
+    title: { ro: 'Cât costă uscarea porumbului', en: 'What corn drying costs' },
+    keyword: { ro: 'uscare porumb preț', en: 'corn drying cost' },
+    secondary: { ro: 'uscare cereale preț pe punct', en: 'grain drying price' },
+    intent: 'C',
+    planned: '2027-08-23',
+    refresh: '2028-08-01',
+    outline: [
+      'Răspuns direct',
+      'Cum se calculează (puncte de umiditate)',
+      'Exemplu',
+      'Uscare la baze',
+    ],
+    links: ['/depozitare/uscare', '/preturi/calculator-pret-net', '/preturi/porumb'],
+    faq: ['Cât costă uscarea unui punct de umiditate?'],
+    serp: '„uscare porumb preț” e ținta paginii /depozitare/uscare: ghidul o sprijină, nu o înlocuiește.',
+    sources: ['Tariful de uscare Agrinvest (registrul de cifre)'],
+  },
+  {
+    pillar: 'protectia-plantelor',
+    slug: { ro: 'erbicidare-porumb', en: 'corn-weed-control' },
+    title: {
+      ro: 'Erbicidarea porumbului: pre și postemergent',
+      en: 'Corn weed control: pre and post-emergence',
+    },
+    keyword: { ro: 'erbicidare porumb', en: 'corn herbicide program' },
+    secondary: { ro: 'erbicid porumb postemergent, Adengo', en: 'post-emergence corn herbicide' },
+    intent: 'C',
+    planned: '2027-03-22',
+    outline: ['Răspuns direct', 'Preemergent', 'Postemergent', 'Produse din magazin'],
+    links: ['/magazin/erbicide', '/magazin/erbicide/adengo', '/magazin/cultura/porumb'],
+    faq: ['Când se erbicidează porumbul?'],
+    serp: '„erbicid porumb” e în harta de cuvinte (/magazin/erbicide).',
+    sources: ['Etichetele produselor omologate din magazin'],
+  },
+  {
+    pillar: 'fertilizare',
+    slug: { ro: 'azotat-sau-uree', en: 'ammonium-nitrate-or-urea' },
+    title: { ro: 'Azotat de amoniu sau uree?', en: 'Ammonium nitrate or urea?' },
+    keyword: { ro: 'azotat sau uree', en: 'ammonium nitrate vs urea' },
+    secondary: { ro: 'diferența dintre azotat și uree', en: 'nitrogen fertiliser choice' },
+    intent: 'C',
+    planned: '2027-01-04',
+    outline: [
+      'Răspuns direct',
+      'Conținut de azot și preț pe kg N',
+      'Pierderi și momentul aplicării',
+      'Prețuri actuale',
+    ],
+    links: [
+      '/preturi/ingrasaminte',
+      '/magazin/ingrasaminte/azotat-de-amoniu',
+      '/magazin/ingrasaminte/uree',
+    ],
+    faq: ['Ce este mai ieftin pe kg de azot?'],
+    serp: 'Leagă prețurile de îngrășăminte (prioritate 1).',
+    sources: ['Fișele tehnice ale produselor din magazin'],
+  },
+  {
+    pillar: 'subventii-apia',
+    slug: { ro: 'calendar-apia', en: 'apia-calendar' },
+    title: {
+      ro: 'Calendarul APIA: cereri și plăți',
+      en: 'The APIA calendar: applications and payments',
+    },
+    keyword: { ro: 'calendar APIA', en: 'APIA payment calendar' },
+    secondary: { ro: 'plată subvenții APIA, avans APIA', en: 'APIA subsidy payment dates' },
+    intent: 'I',
+    planned: '2027-02-08',
+    refresh: '2027-10-01',
+    outline: [
+      'Răspuns direct',
+      'Campania de cereri',
+      'Avans și plata finală',
+      'Credit pe adeverință (link)',
+    ],
+    links: [
+      '/finantare/subventii-apia',
+      '/finantare/ghiduri/plata-subventii-apia',
+      '/finantare/ghiduri/credit-adeverinta-apia',
+    ],
+    faq: ['Când se dă avansul APIA?'],
+    serp: 'Datele se schimbă în fiecare an: refresh obligatoriu.',
+    sources: ['apia.org.ro, comunicatele campaniei curente'],
+  },
+]

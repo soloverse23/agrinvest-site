@@ -15,6 +15,8 @@ import {
   hubPath,
   productPath,
   shopPath,
+  guidesHubPath,
+  pillarPath,
 } from '@/i18n/routes'
 import {
   allGuideAlternates,
@@ -25,6 +27,13 @@ import {
 import { listBases, listCrops } from '@/lib/content/locations'
 import { allMarketNoteAlternates, listMarketNotes } from '@/lib/content/market'
 import { listHeadlines } from '@/lib/news/load'
+import { pillars } from '@/lib/articles/pillars'
+import {
+  articleAlternates,
+  authorAlternates,
+  listArticles,
+  listAuthors,
+} from '@/lib/content/articles'
 import { alternatesOf, listPages, type Alternates } from '@/lib/content/pages'
 import {
   hubIndexable,
@@ -114,12 +123,13 @@ export const segments = {
   },
   // Prices and tools (Phase 5): grain hub and crops, calculator, fertilisers, diesel, news, notes.
   prices: async (): Promise<SitemapEntry[]> => {
-    const [ro, en, notes, noteList, headlines] = await Promise.all([
+    const [ro, en, notes, noteList, headlines, ownNews] = await Promise.all([
       listCrops('ro'),
       listCrops('en'),
       allMarketNoteAlternates(),
       listMarketNotes('ro'),
       listHeadlines(1),
+      listArticles('ro', 'stiri'),
     ])
     return [
       ...entries({ ro: pricesPath('ro'), en: pricesPath('en') }),
@@ -133,7 +143,9 @@ export const segments = {
       ...entries({ ro: netPricePath('ro'), en: netPricePath('en') }),
       ...entries({ ro: fertiliserPricesPath('ro'), en: fertiliserPricesPath('en') }),
       ...entries({ ro: dieselPath('ro'), en: dieselPath('en') }),
-      ...(headlines.length ? entries({ ro: newsPath('ro'), en: newsPath('en') }) : []),
+      ...(headlines.length || ownNews.length
+        ? entries({ ro: newsPath('ro'), en: newsPath('en') })
+        : []),
       ...(noteList.length ? entries({ ro: marketPath('ro'), en: marketPath('en') }) : []),
       ...notes.flatMap((alternates) => entries(alternates)),
     ]
@@ -230,6 +242,42 @@ export const segments = {
           i.updatedAt,
         )
       }),
+    ]
+  },
+  // Farmer guides, pillars, Agrinvest news and authors (Phase 6).
+  articles: async (): Promise<SitemapEntry[]> => {
+    const [guidesRo, guidesEn, newsRo, newsEn, finance, authors] = await Promise.all([
+      listArticles('ro', 'ghid'),
+      listArticles('en', 'ghid'),
+      listArticles('ro', 'stiri'),
+      listArticles('en', 'stiri'),
+      listGuides('ro'),
+      listAuthors(),
+    ])
+    const live = (list: typeof guidesRo, key: string) => list.some((g) => g.pillar === key)
+    const pillarEntries = pillars.flatMap((p) => {
+      const pair: Alternates = {
+        ...(live(guidesRo, p.key) ? { ro: pillarPath(p.slug.ro, 'ro') } : {}),
+        ...(live(guidesEn, p.key) ? { en: pillarPath(p.slug.en, 'en') } : {}),
+      }
+      return entries(pair)
+    })
+    const updated = new Map(
+      [...guidesRo, ...guidesEn, ...newsRo, ...newsEn].map((a) => [a.id, a.updatedAt]),
+    )
+    const ids = [...guidesRo, ...guidesEn, ...newsRo, ...newsEn].map((a) => a.id)
+    const all = await Promise.all(
+      [...new Set(ids)].map((id) => articleAlternates(id).then((a) => ({ id, a }))),
+    )
+    return [
+      ...(guidesRo.length || finance.length
+        ? entries({ ro: guidesHubPath('ro'), en: guidesHubPath('en') })
+        : []),
+      ...pillarEntries,
+      ...all.flatMap(({ id, a }) => entries(a, updated.get(id))),
+      ...(await Promise.all(authors.map((p) => authorAlternates(p.id, p.slug as string)))).flatMap(
+        (a) => entries(a),
+      ),
     ]
   },
 } satisfies Record<string, () => Promise<SitemapEntry[]>>

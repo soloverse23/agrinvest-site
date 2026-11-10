@@ -1,35 +1,6 @@
-import type { ReactNode, SVGProps } from 'react'
+import { icon } from './factory'
 
-/**
- * Agrinvest line icons: 24 × 24 grid, 1.75 stroke, round caps and joins, colour from `currentColor`.
- * Decorative by default; pass `label` when the icon carries meaning on its own.
- */
-export type IconProps = Omit<SVGProps<SVGSVGElement>, 'children'> & { label?: string }
-
-function icon(name: string, body: ReactNode) {
-  function Icon({ label, className = 'size-6', ...props }: IconProps) {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.75}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={className}
-        role={label ? 'img' : undefined}
-        aria-label={label}
-        aria-hidden={label ? undefined : true}
-        focusable="false"
-        {...props}
-      >
-        {body}
-      </svg>
-    )
-  }
-  Icon.displayName = name
-  return Icon
-}
+export type { IconProps } from './factory'
 
 const grain = (y: number, side: 1 | -1) =>
   `M12 ${y}c${-2.2 * side} -0.4 ${-3.4 * side} -1.9 ${-3.4 * side} -3.6c${2.1 * side} 0.3 ${3.4 * side} 1.6 ${3.4 * side} 3.6z`

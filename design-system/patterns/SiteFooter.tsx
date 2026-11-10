@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { PhoneIcon } from '../icons/icons'
+import { socialIcons, socialNetworkOf } from '../icons/social'
 import { Lockup } from './parts'
 
 export type SiteFooterProps = {
@@ -112,18 +113,24 @@ export function SiteFooter({
             )}
             {extra}
             {social.length > 0 && (
-              <ul aria-label={labels.social} className="flex flex-wrap gap-x-4 gap-y-2">
-                {social.map((s) => (
-                  <li key={s.href}>
-                    <a
-                      href={s.href}
-                      rel="me noopener"
-                      className="text-on-forest-muted hover:text-on-forest"
-                    >
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
+              <ul aria-label={labels.social} className="flex flex-wrap items-center gap-3">
+                {social.map((s) => {
+                  const network = socialNetworkOf(s.href)
+                  const Icon = network ? socialIcons[network] : null
+                  return (
+                    <li key={s.href}>
+                      <a
+                        href={s.href}
+                        rel="me noopener"
+                        aria-label={s.label}
+                        title={s.label}
+                        className="inline-flex size-9 items-center justify-center rounded-full text-on-forest-muted ring-1 ring-on-forest/20 transition-colors hover:text-lime hover:ring-lime"
+                      >
+                        {Icon ? <Icon className="size-5" /> : s.label}
+                      </a>
+                    </li>
+                  )
+                })}
               </ul>
             )}
           </div>

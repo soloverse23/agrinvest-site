@@ -86,6 +86,7 @@ export interface Config {
     'market-prices': MarketPrice;
     'diesel-prices': DieselPrice;
     'news-items': NewsItem;
+    'social-posts': SocialPost;
     subscriptions: Subscription;
     outbox: Outbox;
     newsletters: Newsletter;
@@ -131,6 +132,7 @@ export interface Config {
     'market-prices': MarketPricesSelect<false> | MarketPricesSelect<true>;
     'diesel-prices': DieselPricesSelect<false> | DieselPricesSelect<true>;
     'news-items': NewsItemsSelect<false> | NewsItemsSelect<true>;
+    'social-posts': SocialPostsSelect<false> | SocialPostsSelect<true>;
     subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     outbox: OutboxSelect<false> | OutboxSelect<true>;
     newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
@@ -1976,6 +1978,31 @@ export interface NewsItem {
   createdAt: string;
 }
 /**
+ * Important LinkedIn posts shown on the home page. Add only what is worth seeing; the newest 3 show.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-posts".
+ */
+export interface SocialPost {
+  id: number;
+  /**
+   * On LinkedIn: ⋯ on the post → “Copy link to post”.
+   */
+  url: string;
+  postedAt: string;
+  /**
+   * The start of the post or a short summary, in the language it was written in.
+   */
+  text: string;
+  /**
+   * Optional. The post image, saved on the site.
+   */
+  image?: (number | null) | Media;
+  visible?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscriptions".
  */
@@ -2365,6 +2392,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news-items';
         value: number | NewsItem;
+      } | null)
+    | ({
+        relationTo: 'social-posts';
+        value: number | SocialPost;
       } | null)
     | ({
         relationTo: 'subscriptions';
@@ -3576,6 +3607,19 @@ export interface NewsItemsSelect<T extends boolean = true> {
   excerpt?: T;
   crops?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social-posts_select".
+ */
+export interface SocialPostsSelect<T extends boolean = true> {
+  url?: T;
+  postedAt?: T;
+  text?: T;
+  image?: T;
+  visible?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -9,6 +9,7 @@ import * as migration_20261105_104230_finance_calendar from './20261105_104230_f
 import * as migration_20261110_100846_phase5_platform from './20261110_100846_phase5_platform';
 import * as migration_20261110_103557_phase5_grain_prices from './20261110_103557_phase5_grain_prices';
 import * as migration_20261110_153625_phase6_articles from './20261110_153625_phase6_articles';
+import * as migration_20261110_160527_phase7_social from './20261110_160527_phase7_social';
 
 export const migrations = [
   {
@@ -64,6 +65,11 @@ export const migrations = [
   {
     up: migration_20261110_153625_phase6_articles.up,
     down: migration_20261110_153625_phase6_articles.down,
-    name: '20261110_153625_phase6_articles'
+    name: '20261110_153625_phase6_articles',
+  },
+  {
+    up: migration_20261110_160527_phase7_social.up,
+    down: migration_20261110_160527_phase7_social.down,
+    name: '20261110_160527_phase7_social'
   },
 ];

@@ -24,6 +24,7 @@ import { Leads } from './collections/Leads'
 import { MarketPrices } from './collections/MarketPrices'
 import { Media } from './collections/Media'
 import { NewsItems } from './collections/NewsItems'
+import { SocialPosts } from './collections/SocialPosts'
 import { Newsletters } from './collections/Newsletters'
 import { Outbox } from './collections/Outbox'
 import { Pages } from './collections/Pages'
@@ -94,6 +95,7 @@ export default buildConfig({
     MarketPrices,
     DieselPrices,
     NewsItems,
+    SocialPosts,
     Subscriptions,
     Outbox,
     Newsletters,

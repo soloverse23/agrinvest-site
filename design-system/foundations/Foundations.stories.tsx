@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { storyLocale } from '../fixtures/story'
-import * as Icons from '../icons/icons'
+import * as LineIcons from '../icons/icons'
+import { ExternalLinkIcon, socialIcons } from '../icons/social'
 
 const meta: Meta = {
   title: 'Foundations',
@@ -188,11 +189,17 @@ export const ShapeAndElevation: Story = {
   ),
 }
 
+/** Line icons plus the social set, which lives in its own module to stay out of client bundles. */
+const Icons = {
+  ...LineIcons,
+  ...Object.fromEntries(Object.values(socialIcons).map((Icon) => [Icon.displayName, Icon])),
+}
+
 export const IconSet: Story = {
   name: 'Icons',
   render: () => (
     <ul className="grid grid-cols-3 gap-3 md:grid-cols-6">
-      {Object.entries(Icons).map(([name, Icon]) => (
+      {Object.entries({ ...Icons, ExternalLinkIcon }).map(([name, Icon]) => (
         <li
           key={name}
           className="grid justify-items-center gap-2 rounded-lg bg-raised p-5 shadow-soft ring-1 ring-line"

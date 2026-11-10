@@ -1,7 +1,7 @@
 import type { Locale } from '@/i18n/config'
 import { formatDate } from '@/lib/format'
 
-import { ExternalLinkIcon, LinkedinIcon } from '../icons/icons'
+import { ExternalLinkIcon, LinkedinIcon } from '../icons/social'
 import { Photo } from './Photo'
 
 export type SocialPostCardProps = {

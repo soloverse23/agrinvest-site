@@ -485,3 +485,44 @@ test.describe('Finance tools', () => {
     )
   })
 })
+
+test.describe('Finance cross-selling', () => {
+  test('a shop product carries one brief hint to input financing', async ({ page }) => {
+    await page.goto('/magazin/ingrasaminte/uree')
+    const hint = page.getByRole('link', { name: 'Cum se pot finanța inputurile' })
+    await expect(hint).toHaveCount(1)
+    await expect(hint).toHaveAttribute('href', /^\/finantare\//)
+  })
+
+  test('the cart shows the financing callout, with the total in the simulator link', async ({
+    page,
+  }) => {
+    await page.goto('/magazin/ingrasaminte/uree')
+    await page.getByRole('button', { name: 'Adaugă în coș' }).first().click()
+    await page.waitForURL(/\/cos$/)
+    const callout = page.locator('aside', { hasText: 'Agrinvest Credit IFN' })
+    await expect(callout.getByRole('heading', { level: 2 })).toBeVisible()
+    await expect(callout).toContainText('Nu este o ofertă de credit')
+    await expect(callout.getByRole('link', { name: /Simulează ratele/ })).toHaveAttribute(
+      'href',
+      /^\/finantare\/simulator/,
+    )
+    await page.getByRole('button', { name: 'Șterge' }).click()
+  })
+
+  test('crop and base pages link to stock financing', async ({ page }) => {
+    for (const url of ['/cereale/grau', '/baze/pogoanele', '/en/grain/wheat']) {
+      await page.goto(url)
+      await expect(
+        page.locator('a[href$="/finantare-stocuri"], a[href$="/stock-financing"]').first(),
+      ).toBeVisible()
+    }
+  })
+
+  test('the menu and footer lead into the finance section', async ({ page }) => {
+    await page.goto('/')
+    // The desktop panel and the mobile menu both carry it.
+    await expect(page.locator('header a[href="/finantare/simulator"]').first()).toBeAttached()
+    await expect(page.locator('footer a[href="/finantare/aplica"]')).toHaveCount(1)
+  })
+})

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { ArrowRightIcon } from '@ds/icons/icons'
+import { FinanceLinks } from '@ds/patterns/Finance'
 import { CropBadge } from '@ds/patterns/parts'
 import { KeyFacts, SectionHeading } from '@ds/patterns/Sections'
 import { Button } from '@ds/primitives/Button'
@@ -12,8 +13,10 @@ import { Faq, PageTitle } from '@/components/PageParts'
 import { BaseListBlock, LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import { localePath, type Locale } from '@/i18n/config'
+import { financeUi } from '@/i18n/finance'
 import { cropPath, sections } from '@/i18n/routes'
 import { fixedPaths, ui } from '@/i18n/ui'
+import { financeLinks } from '@/lib/content/finance'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import { getCrop, listCrops } from '@/lib/content/locations'
 import { isGrainKey } from '@/lib/crops'
@@ -101,11 +104,21 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
   const t = copy[locale]
   const u = ui[locale]
   const path = cropPath(crop.slug, locale)
-  const [hub, figures, crops] = await Promise.all([
+  const [hub, figures, crops, finance] = await Promise.all([
     getPage(fixedPaths.grain[locale], locale).then((p) => p?.page),
     getFigures(locale),
     listCrops(locale),
+    financeLinks(['finantare-stocuri', 'credit-contracte-cereale'], locale),
   ])
+  const f = financeUi[locale].crossSell
+  // Until the Phase 5 price tool exists: stock financing and contract credit (4.5).
+  const financeItems = [
+    finance['finantare-stocuri'] && { ...finance['finantare-stocuri'], body: f.stock },
+    finance['credit-contracte-cereale'] && {
+      ...finance['credit-contracte-cereale'],
+      body: f.contract,
+    },
+  ].filter((x) => !!x)
   const title = t.title(lower)
   const crumbs = [
     ...(hub ? [{ name: hub.title, url: localePath(fixedPaths.grain[locale], locale) }] : []),
@@ -197,6 +210,7 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
           locale={locale}
           path={leadPath}
         />
+        <FinanceLinks kicker={f.cropKicker} title={f.cropTitle} items={financeItems} />
         <section className="mx-auto w-full max-w-page px-4 md:px-8">
           <SectionHeading kicker={u.crops} title={t.others} className="mb-8" />
           <ul className="flex flex-wrap gap-3">

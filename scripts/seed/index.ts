@@ -27,6 +27,7 @@ import {
 import { footer, navigation, pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
 import { applyFinance } from '../finance/apply'
+import { applyEntryPoints } from '../finance/entry-points'
 import { applyEnrichment } from '../products/apply'
 import { registerConfirmation, registerStatuses } from './register'
 
@@ -472,6 +473,7 @@ await seedGlobals(payload)
 await seedPages(payload, { people: peopleIds, media: mediaIds })
 // After the pages and people it links to.
 await applyFinance(payload)
+await applyEntryPoints(payload)
 
 // The seed writes outside Next.js, so its hooks cannot revalidate cache tags. Clear Next's
 // data cache instead, or the next build or dev run serves the pre-seed content.

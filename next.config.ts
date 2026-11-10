@@ -32,6 +32,9 @@ function enrichmentEpoch() {
   }
   // The register rows that `apply:finance` adds to a live site come from the seed's data.
   hash.update(readFileSync(path.join(dirname, 'scripts/seed/data.ts')))
+  // Steps that rewrite menus and page links on a live site (`apply:finance`).
+  for (const name of ['corrections.ts', 'entry-points.ts'])
+    hash.update(readFileSync(path.join(dirname, 'scripts/finance', name)))
   return hash.digest('hex').slice(0, 12)
 }
 

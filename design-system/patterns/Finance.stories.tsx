@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import {
+  FinanceCallout,
+  FinanceHint,
+  FinanceLinks,
   GuaranteeTable,
   RepaymentCalendar,
   RepaymentSchedule,
@@ -82,6 +85,59 @@ export const Schedule: StoryObj = {
         { key: '3', cells: ['noiembrie 2028', '100.000 lei', '0 lei', '2.500 lei'] },
       ]}
       totals={{ label: 'Total', cells: ['300.000 lei', '', '41.250 lei'] }}
+    />
+  ),
+}
+
+/** On a shop product page: one line, under the price note. */
+export const Hint: StoryObj = {
+  render: () => (
+    <FinanceHint
+      text="Cauți bani pentru inputurile sezonului?"
+      link={{ href: '#inputuri', label: 'Cum se pot finanța inputurile' }}
+    />
+  ),
+}
+
+/** In the cart, next to the summary. Never says the shopper qualifies. */
+export const CartCallout: StoryObj = {
+  render: () => (
+    <div className="max-w-md">
+      <FinanceCallout
+        kicker="Agrinvest Credit IFN"
+        title="Vrei să finanțezi inputurile din banii recoltei?"
+        body="Agrinvest Credit IFN acordă credite de producție, cu maximum 2 rate pe an, după recoltele de vară și de toamnă."
+        steps={[
+          { when: 'Acum', label: 'Cumperi inputurile' },
+          { when: 'August', label: 'Rată după recolta de vară' },
+          { when: 'Noiembrie', label: 'Rată după recolta de toamnă' },
+        ]}
+        primary={{ href: '#inputuri', label: 'Cum se finanțează inputurile' }}
+        secondary={{ href: '#simulator', label: 'Simulează ratele pentru 12.400 lei' }}
+        note="Comanda și creditul sunt separate. Nu este o ofertă de credit."
+      />
+    </div>
+  ),
+}
+
+/** On crop and base pages. */
+export const Links: StoryObj = {
+  render: () => (
+    <FinanceLinks
+      kicker="Finanțare"
+      title="Bani până vinzi recolta"
+      items={[
+        {
+          href: '#stocuri',
+          title: 'Finanțarea stocurilor',
+          body: 'Cum poți acoperi cheltuielile cât timp cerealele stau în depozit.',
+        },
+        {
+          href: '#contract',
+          title: 'Credit pe contract de cereale',
+          body: 'Bani înainte de livrare, pe baza unui contract de vânzare a cerealelor.',
+        },
+      ]}
     />
   ),
 }

@@ -2,7 +2,7 @@
 
 ## Finance (Agrinvest Credit IFN)
 
-Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 is on `main` (2026-11-09). 4.5 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
+Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 and 4.5 are on `main` (4.5 on 2026-11-10). 4.6 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
 
 ## Context
 
@@ -395,6 +395,41 @@ Make cross-selling feel like a useful hint, not a sales push. On product pages, 
 | Home, mega menu, footer | finance section entry points                                                                       |
 
 The price tool and diesel links go on the Phase 5 list. Pay-at-harvest checkout functionality stays out of scope; the cart callout links to finance information or the application only.
+
+### 4.5 progress (2026-11-10)
+
+Branch `phase-4/cross-selling`, merged to `main` 2026-11-10.
+
+**Built**
+
+- **Patterns** in `design-system/patterns/Finance.tsx`, with stories:
+  - `FinanceHint`: one line on shop product pages.
+  - `FinanceCallout`: the cart callout.
+  - `FinanceLinks`: two link cards on crop and base pages.
+- **Shop product:** one line under the price note, "Cauți bani pentru inputurile sezonului?", linking to `inputuri-plata-la-recolta`, or to `credit-productie` if that page is not published. The wording names no product, so it holds whatever the IFN answers about pay at harvest.
+- **Cart:** a forest callout under the order summary. It covers:
+  - production credit with `{{F5.instalments}}`;
+  - the farm year as three steps (now, August, November);
+  - a link to how inputs are financed, and the simulator opened with the cart total;
+  - a note that the order and the loan are separate and that this is not a credit offer.
+- **Crop pages:** stock financing and contract credit. **Base pages:** stock financing and the IFN's general contact (`/finantare#cerere`), until regional advisors are named.
+- **Links come from published products** (`financeLinks` by key), so no page links to a missing page.
+- **Menu, footer and home on the live site:** `scripts/finance/entry-points.ts` runs in `apply:finance` and at the end of the seed. It does three things:
+  - gives the finance menu item a panel (production, investment, simulator, guides);
+  - adds the simulator and application links to the footer after the finance link;
+  - changes three links: the home band's "Cere o ofertă" now goes to the application, and the storage page's financing card now goes to stock financing.
+
+  It only adds what is missing and rewrites only the seed's exact old links, so staff edits stay. The seed has the same text.
+
+**Found**
+
+- **The menu and footer caches never changed between deploys** (`global:navigation`, `global:footer`). A script writes them outside Next.js, so the live menu would have stayed old. They now carry the deploy epoch, and the epoch hashes `corrections.ts` and `entry-points.ts`. The finance product list's cache key also moved to `v2`, because its shape gained `key`.
+
+**Results**
+
+typecheck, lint, `next build`, `test:int` (149, 4 new), `test:e2e` (81, 4 new), and `check:seo` (0 errors). Lighthouse, mobile: performance 100 on the crop, base, storage and finance pages, and 99 on home and the shop product, whose LCP of 1.9 s is the product photo, as in Phase 3. Accessibility and best practices are 100, CLS is 0, and scripts stay at or under 156 KB.
+
+**Deploy rehearsal:** on a database built with `main`'s code, the first run added the menu panel and footer links and updated the links on home and storage, in both languages. A second run changed nothing, and all 231 page paths stayed the same.
 
 ## 4.6 SEO, compliance and the content gate
 

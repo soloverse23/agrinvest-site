@@ -1,4 +1,8 @@
+import Link from 'next/link'
 import type { ReactNode } from 'react'
+
+import { ArrowRightIcon, CoinsIcon } from '../icons/icons'
+import { Button } from '../primitives/Button'
 
 import { Callout } from './Sections'
 
@@ -236,5 +240,134 @@ export function RepaymentSchedule({
         </tfoot>
       </table>
     </div>
+  )
+}
+
+/**
+ * A one-line pointer to financing, for pages outside the section (a shop product). Brief and
+ * contextual: a hint, never an offer.
+ */
+export function FinanceHint({
+  text,
+  link,
+}: {
+  text: ReactNode
+  link: { href: string; label: string }
+}) {
+  return (
+    <p className="flex items-start gap-3 rounded-md bg-surface px-4 py-3 text-small text-muted ring-1 ring-line">
+      <CoinsIcon className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+      <span>
+        {text}{' '}
+        <Link href={link.href} className="font-medium text-accent underline underline-offset-2">
+          {link.label}
+        </Link>
+      </span>
+    </p>
+  )
+}
+
+/**
+ * The cart's financing callout: what the money could cover, when it would be repaid (the
+ * farm year as three steps), where to read more. It never says the shopper qualifies.
+ */
+export function FinanceCallout({
+  kicker,
+  title,
+  body,
+  steps,
+  primary,
+  secondary,
+  note,
+}: {
+  kicker: string
+  title: string
+  body: ReactNode
+  /** The farm year: now, then the harvests the instalments follow. */
+  steps: { when: string; label: string }[]
+  primary: { href: string; label: string }
+  secondary?: { href: string; label: string } | null
+  note: string
+}) {
+  return (
+    <aside className="grid gap-6 overflow-hidden rounded-xl bg-forest p-6 text-on-forest md:p-8">
+      <div className="grid gap-3">
+        <p className="flex items-center gap-3 text-small font-medium text-lime">
+          <CoinsIcon className="size-5" aria-hidden="true" />
+          {kicker}
+        </p>
+        <h2 className="text-h3 font-semibold text-balance">{title}</h2>
+        <p className="text-on-forest-muted">{body}</p>
+      </div>
+      <ol className="grid grid-cols-3 gap-2 border-t border-on-forest/20 pt-5">
+        {steps.map((step, i) => (
+          <li key={step.when} className="grid content-start gap-2">
+            <span className="flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className={`size-3 shrink-0 rounded-full ${i ? 'bg-lime' : 'border-2 border-lime'}`}
+              />
+              <span className="h-px flex-1 bg-on-forest/20" aria-hidden="true" />
+            </span>
+            <span className="text-small font-semibold">{step.when}</span>
+            <span className="text-caption text-on-forest-muted">{step.label}</span>
+          </li>
+        ))}
+      </ol>
+      <div className="flex flex-wrap gap-3">
+        <Button href={primary.href} variant="lime" icon={<ArrowRightIcon />}>
+          {primary.label}
+        </Button>
+        {secondary && (
+          <Button href={secondary.href} variant="on-dark">
+            {secondary.label}
+          </Button>
+        )}
+      </div>
+      <p className="text-caption text-on-forest-muted">{note}</p>
+    </aside>
+  )
+}
+
+/** Two or three financing links with a line each, for crop and base pages. */
+export function FinanceLinks({
+  kicker,
+  title,
+  items,
+}: {
+  kicker: string
+  title: string
+  items: { href: string; title: string; body: string }[]
+}) {
+  if (!items.length) return null
+  return (
+    <section className="mx-auto grid w-full max-w-page gap-6 px-4 md:px-8">
+      <div className="grid gap-2">
+        <p className="flex items-center gap-3 text-small font-medium text-accent">
+          <span className="h-px w-10 bg-accent" aria-hidden="true" />
+          {kicker}
+        </p>
+        <h2 className="text-h3 font-semibold text-balance">{title}</h2>
+      </div>
+      <ul className="grid gap-4 md:grid-cols-2">
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              className="group grid h-full gap-2 rounded-lg bg-raised p-5 shadow-soft ring-1 ring-line transition duration-150 ease-move hover:ring-accent md:p-6"
+            >
+              <span className="flex items-center justify-between gap-4 font-semibold text-ink">
+                {item.title}
+                <ArrowRightIcon
+                  className="size-5 shrink-0 text-accent transition-transform duration-150 ease-move group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+              <span className="text-small text-muted">{item.body}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }

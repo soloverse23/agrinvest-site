@@ -24,6 +24,7 @@ import {
   sameAs,
   shopCrops,
 } from './data'
+import { withGuidesFooter, withGuidesMenu } from '../articles/entry-points'
 import { applyToolsEntryPoints, withToolsFooter, withToolsMenu } from '../tools/entry-points'
 import { footer, navigation, pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
@@ -380,16 +381,20 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        // The prices panel comes from the same list the live step uses (Phase 5).
-        items: withToolsMenu(
-          navigation[locale].map(({ label, href, blurb, children }) => ({
-            link: { label, href },
-            blurb,
-            children: children?.map((c) => ({
-              link: { label: c.label, href: c.href },
-              description: c.description,
+        // The prices panel (Phase 5) and the guides panel (Phase 6) come from the same lists
+        // the live steps use.
+        items: withGuidesMenu(
+          withToolsMenu(
+            navigation[locale].map(({ label, href, blurb, children }) => ({
+              link: { label, href },
+              blurb,
+              children: children?.map((c) => ({
+                link: { label: c.label, href: c.href },
+                description: c.description,
+              })),
             })),
-          })),
+            locale,
+          ),
           locale,
         ) as never,
         cta: navigation.cta[locale],
@@ -400,11 +405,14 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        columns: withToolsFooter(
-          footer[locale].columns.map((col) => ({
-            title: col.title,
-            links: col.links.map(([label, href]) => ({ link: { label, href } })),
-          })),
+        columns: withGuidesFooter(
+          withToolsFooter(
+            footer[locale].columns.map((col) => ({
+              title: col.title,
+              links: col.links.map(([label, href]) => ({ link: { label, href } })),
+            })),
+            locale,
+          ),
           locale,
         ) as never,
         legal: footer[locale].legal,

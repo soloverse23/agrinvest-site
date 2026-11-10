@@ -2,6 +2,7 @@ import type { CollectionConfig, FieldAccess } from 'payload'
 
 import { anyone, isStaff } from '@/access'
 import { slug } from '@/fields'
+import { slugify } from '@/lib/slugify'
 import { revalidate, tags } from '@/lib/revalidate'
 
 /** Phone and email are public only when the person has agreed (`publishPhone`, `publishEmail`). */
@@ -20,6 +21,15 @@ export const People: CollectionConfig = {
   admin: { useAsTitle: 'name', defaultColumns: ['name', 'role', 'isAuthor'] },
   access: { read: anyone, create: isStaff, update: isStaff, delete: isStaff },
   hooks: {
+    // A person created by a script (the seed) has no slug yet: take it from the name, so the
+    // required check passes. Editors can still change it in the admin.
+    beforeValidate: [
+      ({ data, operation }) => {
+        if (operation === 'create' && data && !data.slug && typeof data.name === 'string')
+          data.slug = slugify(data.name)
+        return data
+      },
+    ],
     afterChange: [() => revalidate(tags.people)],
     afterDelete: [() => revalidate(tags.people)],
   },

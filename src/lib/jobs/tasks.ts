@@ -2,6 +2,7 @@ import type { Payload, PayloadRequest, TaskConfig } from 'payload'
 
 import type { Locale } from '@/i18n/config'
 import { locales } from '@/i18n/config'
+import { editorialDigest } from '@/lib/articles/digest'
 import { isGrainKey } from '@/lib/crops'
 import { parseOilBulletin } from '@/lib/diesel/oil-bulletin'
 import { canSend, sendMessage } from '@/lib/messaging/send'
@@ -338,6 +339,10 @@ export const jobTasks: TaskConfig[] = [
   {
     slug: 'draftMarketNote',
     handler: async ({ req }) => ({ output: await draftMarketNote(req.payload) }),
+  } as TaskConfig,
+  {
+    slug: 'editorialDigest',
+    handler: async ({ req }) => ({ output: await editorialDigest(req.payload) }),
   } as TaskConfig,
   {
     slug: 'buildNewsletter',

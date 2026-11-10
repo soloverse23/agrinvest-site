@@ -39,6 +39,12 @@ const widgets: Partial<Record<ToolWidgetBlock['widget'], (props: Props) => React
   ),
 }
 
+/** The widget alone, for article sidebars. */
+export function ToolWidgetCard({ block, locale }: Props) {
+  const Widget = widgets[block.widget]
+  return Widget ? <Widget block={block} locale={locale} /> : null
+}
+
 export function ToolWidget({ block, locale }: Props) {
   const Widget = widgets[block.widget]
   if (!Widget) return null

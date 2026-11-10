@@ -8,6 +8,7 @@ import { Faq, PageTitle } from '@/components/PageParts'
 import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
+import { HomeArticles } from '@/components/HomeArticles'
 import { TodayStrip } from '@/components/TodayStrip'
 import { pricesUi } from '@/i18n/prices'
 import { pricesPath } from '@/i18n/routes'
@@ -90,7 +91,8 @@ export default async function CmsPage(props: Props) {
         />
       )}
       {page.isHome && heroFirst ? (
-        // Home: the hero, then today's prices, diesel and news (Phase 5), then the rest.
+        // Home: the hero, today's prices, diesel and news (Phase 5), the latest guides and
+        // Agrinvest news (Phase 6), then the rest.
         <>
           <RenderBlocks
             blocks={page.layout?.slice(0, 1)}
@@ -99,6 +101,7 @@ export default async function CmsPage(props: Props) {
             heroPrices={heroPrices}
           />
           <TodayStrip locale={locale} />
+          <HomeArticles locale={locale} />
           <div className="mt-16 md:mt-24">
             <RenderBlocks blocks={page.layout?.slice(1)} locale={locale} path={pagePath} />
           </div>

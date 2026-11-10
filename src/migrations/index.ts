@@ -8,6 +8,7 @@ import * as migration_20261105_102608_finance_pages from './20261105_102608_fina
 import * as migration_20261105_104230_finance_calendar from './20261105_104230_finance_calendar';
 import * as migration_20261110_100846_phase5_platform from './20261110_100846_phase5_platform';
 import * as migration_20261110_103557_phase5_grain_prices from './20261110_103557_phase5_grain_prices';
+import * as migration_20261110_153625_phase6_articles from './20261110_153625_phase6_articles';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261110_103557_phase5_grain_prices.up,
     down: migration_20261110_103557_phase5_grain_prices.down,
-    name: '20261110_103557_phase5_grain_prices'
+    name: '20261110_103557_phase5_grain_prices',
+  },
+  {
+    up: migration_20261110_153625_phase6_articles.up,
+    down: migration_20261110_153625_phase6_articles.down,
+    name: '20261110_153625_phase6_articles'
   },
 ];

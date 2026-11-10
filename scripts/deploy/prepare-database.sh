@@ -14,5 +14,6 @@ SEED_ONLY_IF_EMPTY=true npm run seed
 npm run apply:products
 npm run apply:finance
 npm run apply:tools
+npm run apply:articles
 # A warning only: a changed ANAF address must not stop a deploy, the buyer can type the data.
 npm run check:anaf || true

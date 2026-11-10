@@ -176,6 +176,7 @@ export interface Config {
       ingestNews: TaskIngestNews;
       evaluateAlerts: TaskEvaluateAlerts;
       draftMarketNote: TaskDraftMarketNote;
+      editorialDigest: TaskEditorialDigest;
       buildNewsletter: TaskBuildNewsletter;
       inline: {
         input: unknown;
@@ -554,6 +555,11 @@ export interface StorySectionBlock {
 export interface Person {
   id: number;
   name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
   role?: string | null;
   photo?: (number | null) | Media;
   phone?: string | null;
@@ -561,7 +567,7 @@ export interface Person {
   email?: string | null;
   publishEmail?: boolean | null;
   /**
-   * Expert author for guides (author pages come in Phase 6).
+   * Expert author: gets a public author page (/autori/{slug}).
    */
   isAuthor?: boolean | null;
   author?: {
@@ -1685,6 +1691,8 @@ export interface FinanceProduct {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Guides, Agrinvest news, market notes and finance guides. Pick the section on the right.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "guides".
  */
@@ -1700,7 +1708,29 @@ export interface Guide {
    */
   generateSlug?: boolean | null;
   slug: string;
-  section: 'finantare' | 'pagina-finantare' | 'stiri' | 'piata';
+  section: 'finantare' | 'pagina-finantare' | 'stiri' | 'piata' | 'ghid';
+  pillar?:
+    | (
+        | 'grau'
+        | 'porumb'
+        | 'floarea-soarelui'
+        | 'rapita'
+        | 'orz'
+        | 'vanzare'
+        | 'depozitare'
+        | 'fertilizare'
+        | 'protectia-plantelor'
+        | 'subventii-apia'
+      )
+    | null;
+  /**
+   * Orders the news and shows on the page.
+   */
+  publishedAt?: string | null;
+  /**
+   * Optional. A landscape photo, at least 1600 px wide.
+   */
+  cover?: (number | null) | Media;
   summary: string;
   body: {
     root: {
@@ -1736,6 +1766,11 @@ export interface Guide {
     | null;
   author?: (number | null) | Person;
   reviewer?: (number | null) | Person;
+  /**
+   * Prices, net price calculator, diesel: shown beside the text.
+   */
+  tools?: ToolWidgetBlock[] | null;
+  shopProducts?: (number | Product)[] | null;
   relatedProducts?: (number | FinanceProduct)[] | null;
   relatedGuides?: (number | Guide)[] | null;
   sources?:
@@ -1755,11 +1790,30 @@ export interface Guide {
     image?: (number | null) | Media;
     noindex?: boolean | null;
   };
-  review: {
+  review?: {
     legalStatus: 'draft' | 'ifn-reviewed' | 'legal-approved';
     status: 'to-confirm' | 'conflict' | 'confirmed';
     reviewedAt?: string | null;
     reviewedBy?: string | null;
+  };
+  /**
+   * Staff only. See docs/guides/articles.md.
+   */
+  brief?: {
+    status?: ('idee' | 'brief' | 'aprobat' | 'in-lucru' | 'de-verificat' | 'publicat' | 'de-actualizat') | null;
+    intent?: ('I' | 'C' | 'T') | null;
+    plannedFor?: string | null;
+    primaryKeyword?: string | null;
+    secondaryKeywords?: string | null;
+    serpNotes?: string | null;
+    outline?: string | null;
+    /**
+     * One path per line. check:articles verifies them.
+     */
+    links?: string | null;
+    faqIdeas?: string | null;
+    expert?: (number | null) | Person;
+    refreshBy?: string | null;
   };
   enrichment?:
     | {
@@ -1963,7 +2017,7 @@ export interface Outbox {
   id: number;
   channel: 'email' | 'whatsapp';
   to: string;
-  template: 'price-alert' | 'frost-alert' | 'newsletter' | 'subscription-confirm';
+  template: 'price-alert' | 'frost-alert' | 'newsletter' | 'subscription-confirm' | 'editorial-digest';
   subject: string;
   body: string;
   payload?:
@@ -2176,6 +2230,7 @@ export interface PayloadJob {
           | 'ingestNews'
           | 'evaluateAlerts'
           | 'draftMarketNote'
+          | 'editorialDigest'
           | 'buildNewsletter';
         taskID: string;
         input?:
@@ -2218,6 +2273,7 @@ export interface PayloadJob {
         | 'ingestNews'
         | 'evaluateAlerts'
         | 'draftMarketNote'
+        | 'editorialDigest'
         | 'buildNewsletter'
       )
     | null;
@@ -3346,6 +3402,9 @@ export interface GuidesSelect<T extends boolean = true> {
   generateSlug?: T;
   slug?: T;
   section?: T;
+  pillar?: T;
+  publishedAt?: T;
+  cover?: T;
   summary?: T;
   body?: T;
   terms?:
@@ -3364,6 +3423,12 @@ export interface GuidesSelect<T extends boolean = true> {
       };
   author?: T;
   reviewer?: T;
+  tools?:
+    | T
+    | {
+        toolWidget?: T | ToolWidgetBlockSelect<T>;
+      };
+  shopProducts?: T;
   relatedProducts?: T;
   relatedGuides?: T;
   sources?:
@@ -3389,6 +3454,21 @@ export interface GuidesSelect<T extends boolean = true> {
         status?: T;
         reviewedAt?: T;
         reviewedBy?: T;
+      };
+  brief?:
+    | T
+    | {
+        status?: T;
+        intent?: T;
+        plannedFor?: T;
+        primaryKeyword?: T;
+        secondaryKeywords?: T;
+        serpNotes?: T;
+        outline?: T;
+        links?: T;
+        faqIdeas?: T;
+        expert?: T;
+        refreshBy?: T;
       };
   enrichment?: T;
   updatedAt?: T;
@@ -3570,6 +3650,8 @@ export interface NewslettersSelect<T extends boolean = true> {
  */
 export interface PeopleSelect<T extends boolean = true> {
   name?: T;
+  generateSlug?: T;
+  slug?: T;
   role?: T;
   photo?: T;
   phone?: T;
@@ -4123,6 +4205,14 @@ export interface TaskEvaluateAlerts {
  * via the `definition` "TaskDraftMarketNote".
  */
 export interface TaskDraftMarketNote {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskEditorialDigest".
+ */
+export interface TaskEditorialDigest {
   input?: unknown;
   output?: unknown;
 }

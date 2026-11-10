@@ -704,3 +704,38 @@ test('the logistics page shows the diesel card', async ({ page }) => {
     await expect(page.getByRole('heading', { name: title, exact: true }).first()).toBeVisible()
   }
 })
+
+test.describe('Guides and news (Phase 6)', () => {
+  test('the hub answers in both languages and lists the financing guides', async ({ page }) => {
+    for (const [url, finance] of [
+      ['/ghiduri', '/finantare/ghiduri'],
+      ['/en/guides', '/en/financing/guides'],
+    ]) {
+      const res = await page.goto(url)
+      expect(res?.status(), url).toBe(200)
+      await expect(page.locator('h1'), url).toHaveCount(1)
+      await expect(page.locator(`main a[href="${finance}"]`).first(), url).toBeAttached()
+    }
+  })
+
+  test('a brief that is not written yet has no page, and an empty pillar answers 404', async ({
+    page,
+  }) => {
+    for (const url of [
+      '/ghiduri/grau/umiditate-grau-standard',
+      '/ghiduri/grau',
+      '/en/guides/wheat',
+      '/stiri/nu-exista',
+      '/autori/nu-exista',
+    ]) {
+      const res = await page.goto(url)
+      expect(res?.status(), url).toBe(404)
+    }
+  })
+
+  test('the menu and footer link the guides', async ({ page }) => {
+    await page.goto('/despre')
+    await expect(page.locator('header a[href="/ghiduri"]').first()).toBeAttached()
+    await expect(page.locator('footer a[href="/ghiduri"]').first()).toBeAttached()
+  })
+})

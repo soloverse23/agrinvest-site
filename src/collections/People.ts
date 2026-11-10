@@ -1,6 +1,7 @@
 import type { CollectionConfig, FieldAccess } from 'payload'
 
 import { anyone, isStaff } from '@/access'
+import { slug } from '@/fields'
 import { revalidate, tags } from '@/lib/revalidate'
 
 /** Phone and email are public only when the person has agreed (`publishPhone`, `publishEmail`). */
@@ -10,16 +11,21 @@ const publishedContact =
     Boolean(req.user) || Boolean(doc?.[flag])
 
 /**
- * Named people: contacts per need, base contacts, lead owners, and expert authors (Phase 6).
+ * Named people: contacts per need, base contacts, lead owners, and expert authors. An author
+ * (`isAuthor`) has a public page at `/autori/{slug}` listing what they wrote and reviewed.
  */
 export const People: CollectionConfig = {
   slug: 'people',
   labels: { singular: { ro: 'Persoană', en: 'Person' }, plural: { ro: 'Persoane', en: 'People' } },
   admin: { useAsTitle: 'name', defaultColumns: ['name', 'role', 'isAuthor'] },
   access: { read: anyone, create: isStaff, update: isStaff, delete: isStaff },
-  hooks: { afterChange: [() => revalidate(tags.people)] },
+  hooks: {
+    afterChange: [() => revalidate(tags.people)],
+    afterDelete: [() => revalidate(tags.people)],
+  },
   fields: [
     { name: 'name', type: 'text', required: true },
+    slug('name'),
     { name: 'role', type: 'text', localized: true },
     { name: 'photo', type: 'upload', relationTo: 'media' },
     {
@@ -40,7 +46,7 @@ export const People: CollectionConfig = {
       name: 'isAuthor',
       type: 'checkbox',
       defaultValue: false,
-      admin: { description: 'Expert author for guides (author pages come in Phase 6).' },
+      admin: { description: 'Expert author: gets a public author page (/autori/{slug}).' },
     },
     {
       name: 'author',

@@ -6,6 +6,7 @@ export const messageTemplates = [
   'frost-alert',
   'newsletter',
   'subscription-confirm',
+  'editorial-digest',
 ] as const
 export type MessageTemplate = (typeof messageTemplates)[number]
 

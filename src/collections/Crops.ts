@@ -67,6 +67,15 @@ export const Crops: CollectionConfig = {
         { name: 'notes', type: 'textarea', localized: true },
       ],
     },
+    {
+      name: 'gddBase',
+      type: 'number',
+      label: { ro: 'Prag GDD (°C)', en: 'GDD base (°C)' },
+      admin: {
+        description:
+          'Base temperature for growing degree days on the weather pages. Leave empty to hide GDD for this crop.',
+      },
+    },
     faq,
     seo,
     {

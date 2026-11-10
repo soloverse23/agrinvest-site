@@ -32,7 +32,10 @@ async function reviewRules(files: File[]) {
       .map((r) => r.key),
   )
   for (const collection of ['finance-products', 'guides'] as const) {
-    const { docs } = await payload.find({ collection, depth: 0, pagination: false })
+    // Guides also hold news and the market note (Phase 5); only finance guides need legal review.
+    const where =
+      collection === 'guides' ? { section: { in: ['finantare', 'pagina-finantare'] } } : undefined
+    const { docs } = await payload.find({ collection, depth: 0, pagination: false, where })
     for (const doc of docs as {
       key?: string
       review?: { legalStatus?: string; reviewedAt?: string }

@@ -55,6 +55,11 @@ export function formatDate(date: Date, locale: Locale): string {
   }).format(date)
 }
 
+/** `2 nov.` (ro) / `2 Nov` (en): chart axes and dense tables. */
+export function formatShortDate(date: Date, locale: Locale): string {
+  return new Intl.DateTimeFormat(intl[locale], { day: 'numeric', month: 'short' }).format(date)
+}
+
 export type Direction = 'up' | 'down' | 'flat'
 export const direction = (value: number): Direction =>
   value > 0 ? 'up' : value < 0 ? 'down' : 'flat'

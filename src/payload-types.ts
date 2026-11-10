@@ -82,12 +82,20 @@ export interface Config {
     'finance-products': FinanceProduct;
     guides: Guide;
     'finance-applications': FinanceApplication;
+    'buy-prices': BuyPrice;
+    'market-prices': MarketPrice;
+    'diesel-prices': DieselPrice;
+    'news-items': NewsItem;
+    subscriptions: Subscription;
+    outbox: Outbox;
+    newsletters: Newsletter;
     people: Person;
     leads: Lead;
     media: Media;
     documents: ProductDocument;
     users: User;
     'payload-kv': PayloadKv;
+    'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -119,12 +127,20 @@ export interface Config {
     'finance-products': FinanceProductsSelect<false> | FinanceProductsSelect<true>;
     guides: GuidesSelect<false> | GuidesSelect<true>;
     'finance-applications': FinanceApplicationsSelect<false> | FinanceApplicationsSelect<true>;
+    'buy-prices': BuyPricesSelect<false> | BuyPricesSelect<true>;
+    'market-prices': MarketPricesSelect<false> | MarketPricesSelect<true>;
+    'diesel-prices': DieselPricesSelect<false> | DieselPricesSelect<true>;
+    'news-items': NewsItemsSelect<false> | NewsItemsSelect<true>;
+    subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
+    outbox: OutboxSelect<false> | OutboxSelect<true>;
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -153,7 +169,18 @@ export interface Config {
   };
   user: User;
   jobs: {
-    tasks: unknown;
+    tasks: {
+      fetchEuCereal: TaskFetchEuCereal;
+      fetchEuFertiliser: TaskFetchEuFertiliser;
+      fetchOilBulletin: TaskFetchOilBulletin;
+      ingestNews: TaskIngestNews;
+      evaluateAlerts: TaskEvaluateAlerts;
+      buildNewsletter: TaskBuildNewsletter;
+      inline: {
+        input: unknown;
+        output: unknown;
+      };
+    };
     workflows: unknown;
   };
 }
@@ -204,6 +231,7 @@ export interface Page {
         | ContactCardsBlock
         | VideoEmbedBlock
         | CalloutBlock
+        | ToolWidgetBlock
       )[]
     | null;
   faq?:
@@ -641,6 +669,10 @@ export interface Crop {
     hectolitre?: number | null;
     notes?: string | null;
   };
+  /**
+   * Base temperature for growing degree days on the weather pages. Leave empty to hide GDD for this crop.
+   */
+  gddBase?: number | null;
   faq?:
     | {
         question: string;
@@ -726,7 +758,15 @@ export interface LeadFormBlock {
   heading?: string | null;
   body?: string | null;
   leadType:
-    'vanzare-cereale' | 'depozitare' | 'inputuri' | 'finantare' | 'logistica' | 'parteneri' | 'cariere' | 'general';
+    | 'vanzare-cereale'
+    | 'depozitare'
+    | 'inputuri'
+    | 'finantare'
+    | 'logistica'
+    | 'motorina'
+    | 'parteneri'
+    | 'cariere'
+    | 'general';
   extraFields?: ('company' | 'county' | 'base' | 'crop')[] | null;
   id?: string | null;
   blockName?: string | null;
@@ -786,6 +826,23 @@ export interface CalloutBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'callout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ToolWidgetBlock".
+ */
+export interface ToolWidgetBlock {
+  widget: 'grainPrices' | 'netPrice' | 'diesel' | 'weather' | 'news';
+  /**
+   * Optional. Each widget has its own default title.
+   */
+  heading?: string | null;
+  crop?: (number | null) | Crop;
+  county?: (number | null) | County;
+  base?: (number | null) | Base;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'toolWidget';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1642,7 +1699,7 @@ export interface Guide {
    */
   generateSlug?: boolean | null;
   slug: string;
-  section: 'finantare' | 'pagina-finantare';
+  section: 'finantare' | 'pagina-finantare' | 'stiri' | 'piata';
   summary: string;
   body: {
     root: {
@@ -1759,11 +1816,223 @@ export interface FinanceApplication {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "buy-prices".
+ */
+export interface BuyPrice {
+  id: number;
+  crop: number | Crop;
+  /**
+   * Empty means the price applies at every base.
+   */
+  base?: (number | null) | Base;
+  /**
+   * Lei per tonne, before VAT.
+   */
+  price: number;
+  basis: 'la-baza' | 'la-ferma';
+  validFrom: string;
+  /**
+   * Shown under the price, e.g. quality terms or the harvest year.
+   */
+  note?: string | null;
+  status: 'draft' | 'published';
+  source: 'manual' | 'feed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "market-prices".
+ */
+export interface MarketPrice {
+  id: number;
+  /**
+   * source|series|market|period
+   */
+  key: string;
+  source: 'eu-agrifood' | 'eu-fertiliser' | 'eu-oil-bulletin';
+  /**
+   * Crop key, fertiliser product or fuel, e.g. "porumb", "diesel".
+   */
+  series: string;
+  /**
+   * Market or stage as the source names it.
+   */
+  market: string;
+  price: number;
+  currency: string;
+  /**
+   * e.g. t, 1000 l
+   */
+  unit: string;
+  /**
+   * Start of the week or month the price is for.
+   */
+  period: string;
+  fetchedAt: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "diesel-prices".
+ */
+export interface DieselPrice {
+  id: number;
+  /**
+   * Lei per litre.
+   */
+  price: number;
+  vat: 'fara-tva' | 'cu-tva';
+  validFrom: string;
+  /**
+   * Litres.
+   */
+  minimumLitres?: number | null;
+  /**
+   * Delivery counties. Empty means on request.
+   */
+  counties?: (number | County)[] | null;
+  note?: string | null;
+  status: 'draft' | 'published';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-items".
+ */
+export interface NewsItem {
+  id: number;
+  title: string;
+  url: string;
+  source: 'revista-ferma' | 'agrointel';
+  publishedAt: string;
+  /**
+   * From the feed, within the publisher’s limit.
+   */
+  excerpt?: string | null;
+  /**
+   * Shown on these crops’ price pages.
+   */
+  crops?: (number | Crop)[] | null;
+  status: 'nou' | 'aprobat' | 'ascuns';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions".
+ */
+export interface Subscription {
+  id: number;
+  channel: 'email' | 'whatsapp';
+  email?: string | null;
+  phone?: string | null;
+  locale: 'ro' | 'en';
+  topics?:
+    | {
+        kind: 'price-alert' | 'newsletter' | 'frost-alert';
+        crop?: (number | null) | Crop;
+        rule?: ('any' | 'above' | 'below') | null;
+        /**
+         * Lei per tonne.
+         */
+        threshold?: number | null;
+        county?: (number | null) | County;
+        id?: string | null;
+      }[]
+    | null;
+  status: 'pending' | 'confirmed' | 'unsubscribed';
+  consent: {
+    version: string;
+    at: string;
+    text: string;
+    sourcePath?: string | null;
+  };
+  token: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "outbox".
+ */
+export interface Outbox {
+  id: number;
+  channel: 'email' | 'whatsapp';
+  to: string;
+  template: 'price-alert' | 'frost-alert' | 'newsletter' | 'subscription-confirm';
+  subject: string;
+  body: string;
+  payload?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'stubbed' | 'sent' | 'failed';
+  subscription?: (number | null) | Subscription;
+  /**
+   * Stops the same alert from being written twice.
+   */
+  dedupeKey?: string | null;
+  error?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters".
+ */
+export interface Newsletter {
+  id: number;
+  /**
+   * week|locale
+   */
+  key: string;
+  /**
+   * Monday of the week.
+   */
+  week: string;
+  locale: 'ro' | 'en';
+  subject: string;
+  intro?: string | null;
+  /**
+   * Generated sections: market note, prices, headlines.
+   */
+  content?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'draft' | 'approved' | 'queued';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads".
  */
 export interface Lead {
   id: number;
-  type: 'vanzare-cereale' | 'depozitare' | 'inputuri' | 'finantare' | 'logistica' | 'parteneri' | 'cariere' | 'general';
+  type:
+    | 'vanzare-cereale'
+    | 'depozitare'
+    | 'inputuri'
+    | 'finantare'
+    | 'logistica'
+    | 'motorina'
+    | 'parteneri'
+    | 'cariere'
+    | 'general';
   status: 'new' | 'contacted' | 'closed';
   assignedTo?: (number | null) | Person;
   name: string;
@@ -1778,6 +2047,11 @@ export interface Lead {
    * The product or cart a quote request came from.
    */
   product?: (number | Product)[] | null;
+  /**
+   * Litres.
+   */
+  quantity?: number | null;
+  deliveryDate?: string | null;
   message?: string | null;
   meta?: {
     locale?: ('ro' | 'en') | null;
@@ -1840,6 +2114,115 @@ export interface PayloadKv {
     | number
     | boolean
     | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs".
+ */
+export interface PayloadJob {
+  id: number;
+  /**
+   * Input data provided to the job
+   */
+  input?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  taskStatus?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  completedAt?: string | null;
+  totalTried?: number | null;
+  /**
+   * If hasError is true this job will not be retried
+   */
+  hasError?: boolean | null;
+  /**
+   * If hasError is true, this is the error that caused it
+   */
+  error?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Task execution log
+   */
+  log?:
+    | {
+        executedAt: string;
+        completedAt: string;
+        taskSlug:
+          | 'inline'
+          | 'fetchEuCereal'
+          | 'fetchEuFertiliser'
+          | 'fetchOilBulletin'
+          | 'ingestNews'
+          | 'evaluateAlerts'
+          | 'buildNewsletter';
+        taskID: string;
+        input?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        output?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        state: 'failed' | 'succeeded';
+        error?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  taskSlug?:
+    | (
+        | 'inline'
+        | 'fetchEuCereal'
+        | 'fetchEuFertiliser'
+        | 'fetchOilBulletin'
+        | 'ingestNews'
+        | 'evaluateAlerts'
+        | 'buildNewsletter'
+      )
+    | null;
+  queue?: string | null;
+  waitUntil?: string | null;
+  processing?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1907,6 +2290,34 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'finance-applications';
         value: number | FinanceApplication;
+      } | null)
+    | ({
+        relationTo: 'buy-prices';
+        value: number | BuyPrice;
+      } | null)
+    | ({
+        relationTo: 'market-prices';
+        value: number | MarketPrice;
+      } | null)
+    | ({
+        relationTo: 'diesel-prices';
+        value: number | DieselPrice;
+      } | null)
+    | ({
+        relationTo: 'news-items';
+        value: number | NewsItem;
+      } | null)
+    | ({
+        relationTo: 'subscriptions';
+        value: number | Subscription;
+      } | null)
+    | ({
+        relationTo: 'outbox';
+        value: number | Outbox;
+      } | null)
+    | ({
+        relationTo: 'newsletters';
+        value: number | Newsletter;
       } | null)
     | ({
         relationTo: 'people';
@@ -1996,6 +2407,7 @@ export interface PagesSelect<T extends boolean = true> {
         contactCards?: T | ContactCardsBlockSelect<T>;
         videoEmbed?: T | VideoEmbedBlockSelect<T>;
         callout?: T | CalloutBlockSelect<T>;
+        toolWidget?: T | ToolWidgetBlockSelect<T>;
       };
   faq?:
     | T
@@ -2310,6 +2722,19 @@ export interface CalloutBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ToolWidgetBlock_select".
+ */
+export interface ToolWidgetBlockSelect<T extends boolean = true> {
+  widget?: T;
+  heading?: T;
+  crop?: T;
+  county?: T;
+  base?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "bases_select".
  */
 export interface BasesSelect<T extends boolean = true> {
@@ -2402,6 +2827,7 @@ export interface CropsSelect<T extends boolean = true> {
         hectolitre?: T;
         notes?: T;
       };
+  gddBase?: T;
   faq?:
     | T
     | {
@@ -3009,6 +3435,134 @@ export interface FinanceApplicationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "buy-prices_select".
+ */
+export interface BuyPricesSelect<T extends boolean = true> {
+  crop?: T;
+  base?: T;
+  price?: T;
+  basis?: T;
+  validFrom?: T;
+  note?: T;
+  status?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "market-prices_select".
+ */
+export interface MarketPricesSelect<T extends boolean = true> {
+  key?: T;
+  source?: T;
+  series?: T;
+  market?: T;
+  price?: T;
+  currency?: T;
+  unit?: T;
+  period?: T;
+  fetchedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "diesel-prices_select".
+ */
+export interface DieselPricesSelect<T extends boolean = true> {
+  price?: T;
+  vat?: T;
+  validFrom?: T;
+  minimumLitres?: T;
+  counties?: T;
+  note?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-items_select".
+ */
+export interface NewsItemsSelect<T extends boolean = true> {
+  title?: T;
+  url?: T;
+  source?: T;
+  publishedAt?: T;
+  excerpt?: T;
+  crops?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions_select".
+ */
+export interface SubscriptionsSelect<T extends boolean = true> {
+  channel?: T;
+  email?: T;
+  phone?: T;
+  locale?: T;
+  topics?:
+    | T
+    | {
+        kind?: T;
+        crop?: T;
+        rule?: T;
+        threshold?: T;
+        county?: T;
+        id?: T;
+      };
+  status?: T;
+  consent?:
+    | T
+    | {
+        version?: T;
+        at?: T;
+        text?: T;
+        sourcePath?: T;
+      };
+  token?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "outbox_select".
+ */
+export interface OutboxSelect<T extends boolean = true> {
+  channel?: T;
+  to?: T;
+  template?: T;
+  subject?: T;
+  body?: T;
+  payload?: T;
+  status?: T;
+  subscription?: T;
+  dedupeKey?: T;
+  error?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters_select".
+ */
+export interface NewslettersSelect<T extends boolean = true> {
+  key?: T;
+  week?: T;
+  locale?: T;
+  subject?: T;
+  intro?: T;
+  content?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people_select".
  */
 export interface PeopleSelect<T extends boolean = true> {
@@ -3052,6 +3606,8 @@ export interface LeadsSelect<T extends boolean = true> {
   base?: T;
   crop?: T;
   product?: T;
+  quantity?: T;
+  deliveryDate?: T;
   message?: T;
   meta?:
     | T
@@ -3146,6 +3702,37 @@ export interface UsersSelect<T extends boolean = true> {
 export interface PayloadKvSelect<T extends boolean = true> {
   key?: T;
   data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs_select".
+ */
+export interface PayloadJobsSelect<T extends boolean = true> {
+  input?: T;
+  taskStatus?: T;
+  completedAt?: T;
+  totalTried?: T;
+  hasError?: T;
+  error?: T;
+  log?:
+    | T
+    | {
+        executedAt?: T;
+        completedAt?: T;
+        taskSlug?: T;
+        taskID?: T;
+        input?: T;
+        output?: T;
+        state?: T;
+        error?: T;
+        id?: T;
+      };
+  taskSlug?: T;
+  queue?: T;
+  waitUntil?: T;
+  processing?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3323,6 +3910,7 @@ export interface LeadRouting {
           | 'inputuri'
           | 'finantare'
           | 'logistica'
+          | 'motorina'
           | 'parteneri'
           | 'cariere'
           | 'general';
@@ -3486,6 +4074,54 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskFetchEuCereal".
+ */
+export interface TaskFetchEuCereal {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskFetchEuFertiliser".
+ */
+export interface TaskFetchEuFertiliser {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskFetchOilBulletin".
+ */
+export interface TaskFetchOilBulletin {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskIngestNews".
+ */
+export interface TaskIngestNews {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskEvaluateAlerts".
+ */
+export interface TaskEvaluateAlerts {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskBuildNewsletter".
+ */
+export interface TaskBuildNewsletter {
+  input?: unknown;
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

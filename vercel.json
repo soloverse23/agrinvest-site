@@ -2,5 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "regions": ["fra1"],
-  "buildCommand": "sh scripts/deploy/prepare-database.sh && npm run build"
+  "buildCommand": "sh scripts/deploy/prepare-database.sh && npm run build",
+  "crons": [
+    { "path": "/api/cron/fetchEuCereal", "schedule": "0 5 * * *" },
+    { "path": "/api/cron/ingestNews", "schedule": "0 6 * * *" },
+    { "path": "/api/cron/fetchOilBulletin", "schedule": "0 7 * * *" },
+    { "path": "/api/cron/fetchEuFertiliser", "schedule": "0 8 * * 1" },
+    { "path": "/api/cron/evaluateAlerts", "schedule": "0 10 * * *" },
+    { "path": "/api/cron/buildNewsletter", "schedule": "0 9 * * 5" }
+  ]
 }

@@ -25,6 +25,8 @@ const messages = {
     email: 'Scrie o adresă de e-mail validă.',
     consent: 'Avem nevoie de acordul tău ca să te contactăm.',
     long: 'Textul este prea lung.',
+    quantity: 'Scrie cantitatea în litri.',
+    date: 'Alege o dată validă.',
   },
   en: {
     name: 'Please enter your name.',
@@ -32,6 +34,8 @@ const messages = {
     email: 'Please enter a valid email address.',
     consent: 'We need your consent to contact you.',
     long: 'This is too long.',
+    quantity: 'Enter the quantity in litres.',
+    date: 'Choose a valid date.',
   },
 } satisfies Record<Locale, Record<string, string>>
 
@@ -64,6 +68,23 @@ export function leadSchema(locale: Locale) {
     base: optionalId,
     crop: optionalId,
     message: optionalText(4000),
+    /** Diesel quotes (`motorina`): litres and the wanted delivery day. */
+    quantity: z.preprocess(
+      (v) => (v === '' ? undefined : v),
+      z.coerce
+        .number({ error: m.quantity })
+        .positive(m.quantity)
+        .max(1_000_000, m.quantity)
+        .optional(),
+    ),
+    deliveryDate: z.preprocess(
+      (v) => (v === '' ? undefined : v),
+      z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, m.date)
+        .refine((v) => !Number.isNaN(Date.parse(v)), m.date)
+        .optional(),
+    ),
     consent: z.literal('on', { error: m.consent }),
     sourcePath: z.string().max(300).optional(),
     product: z

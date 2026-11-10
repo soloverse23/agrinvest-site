@@ -11,21 +11,28 @@ import sharp from 'sharp'
 import { ActiveIngredients } from './collections/ActiveIngredients'
 import { Bases } from './collections/Bases'
 import { Brands } from './collections/Brands'
+import { BuyPrices } from './collections/BuyPrices'
 import { Categories } from './collections/Categories'
 import { Counties } from './collections/Counties'
 import { Crops } from './collections/Crops'
+import { DieselPrices } from './collections/DieselPrices'
 import { Documents } from './collections/Documents'
 import { FinanceApplications } from './collections/FinanceApplications'
 import { FinanceProducts } from './collections/FinanceProducts'
 import { Guides } from './collections/Guides'
 import { Leads } from './collections/Leads'
+import { MarketPrices } from './collections/MarketPrices'
 import { Media } from './collections/Media'
+import { NewsItems } from './collections/NewsItems'
+import { Newsletters } from './collections/Newsletters'
+import { Outbox } from './collections/Outbox'
 import { Pages } from './collections/Pages'
 import { People } from './collections/People'
 import { Carts } from './collections/Carts'
 import { Orders } from './collections/Orders'
 import { PriceHistory } from './collections/PriceHistory'
 import { Products } from './collections/Products'
+import { Subscriptions } from './collections/Subscriptions'
 import { Targets } from './collections/Targets'
 import { Users } from './collections/Users'
 import { Figures } from './globals/Figures'
@@ -33,7 +40,9 @@ import { Footer } from './globals/Footer'
 import { LeadRouting } from './globals/LeadRouting'
 import { Navigation } from './globals/Navigation'
 import { SeoDefaults } from './globals/SeoDefaults'
+import { toolsGroup } from './fields/tools'
 import { defaultLocale } from './i18n/config'
+import { jobTasks } from './lib/jobs/tasks'
 import { vercelBlob } from './lib/storage/blob'
 
 const filename = fileURLToPath(import.meta.url)
@@ -81,12 +90,29 @@ export default buildConfig({
     FinanceProducts,
     Guides,
     FinanceApplications,
+    BuyPrices,
+    MarketPrices,
+    DieselPrices,
+    NewsItems,
+    Subscriptions,
+    Outbox,
+    Newsletters,
     People,
     Leads,
     Media,
     Documents,
     Users,
   ],
+  // Background tasks, started by the cron route (`src/app/api/cron/[task]/route.ts`).
+  jobs: {
+    tasks: jobTasks,
+    // Failed runs stay in `payload-jobs` with their error; successful ones are removed.
+    deleteJobOnComplete: true,
+    jobsCollectionOverrides: ({ defaultJobsCollection }) => ({
+      ...defaultJobsCollection,
+      admin: { ...defaultJobsCollection.admin, hidden: false, group: toolsGroup },
+    }),
+  },
   globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, EXPERIMENTAL_TableFeature()],

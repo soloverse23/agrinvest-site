@@ -39,6 +39,7 @@ import type { Media, Page, Person } from '@/payload-types'
 import { FactMark } from './Fact'
 import { FactText } from './FactText'
 import { JsonLd } from './JsonLd'
+import { ToolWidget } from './ToolWidget'
 
 type Block = NonNullable<Page['layout']>[number]
 type BlockOf<T extends Block['blockType']> = Extract<Block, { blockType: T }>
@@ -389,6 +390,8 @@ async function renderBlock(block: Block, ctx: Ctx): Promise<ReactNode> {
           </Callout>
         </Section>
       )
+    case 'toolWidget':
+      return <ToolWidget key={block.id} block={block} locale={ctx.locale} />
     default:
       return null
   }

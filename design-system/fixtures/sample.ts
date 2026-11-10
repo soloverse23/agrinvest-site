@@ -232,3 +232,11 @@ export const copy = {
     language: { ro: 'Limba', en: 'Language' },
   },
 } as const
+
+/** 52 weekly points ending on `priceDate`, for charts. Illustrative, like the prices above. */
+export function weeklySeries(start: number, drift: number, swing: number, weeks = 52) {
+  return Array.from({ length: weeks }, (_, i) => ({
+    date: new Date(priceDate.getTime() - (weeks - 1 - i) * 7 * 86_400_000),
+    value: Math.round(start + drift * i + swing * Math.sin(i / 4)),
+  }))
+}

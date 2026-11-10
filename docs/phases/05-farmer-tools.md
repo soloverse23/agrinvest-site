@@ -2,7 +2,7 @@
 
 ## Farmer tools, tool widgets and the new home page
 
-Status: **Plan approved 2026-11-10. 5.0 setup done (2026-11-10); 5.1 platform next.** Sub-phases run in order: 5.0 setup → 5.1 platform → 5.2 grain prices → 5.3 input prices → 5.4 diesel → 5.5 weather → 5.6 news → 5.7 home and widgets → 5.8 gate. Branch: `phase-5/tools`. Decisions: `docs/decisions/0008-farmer-tools.md` (written in 5.0).
+Status: **Plan approved 2026-11-10. 5.0 setup and 5.1 platform done (2026-11-10); 5.2 grain prices next.** Sub-phases run in order: 5.0 setup → 5.1 platform → 5.2 grain prices → 5.3 input prices → 5.4 diesel → 5.5 weather → 5.6 news → 5.7 home and widgets → 5.8 gate. Branch: `phase-5/tools`. Decisions: `docs/decisions/0008-farmer-tools.md` (written in 5.0).
 
 ## Context
 
@@ -41,16 +41,16 @@ The user added two requirements:
 
 ### Data model (5.1)
 
-| Collection                            | Purpose                                 | Key fields                                                                                                                                                                                                                                                                      |
-| ------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BuyPrices`                           | Agrinvest's buy price per crop and base | crop, base (optional = all bases), price lei/t, basis (at base / delivered), validFrom, status (draft/published), source (`manual` / `feed`), note. Staff write, public read when published. REST with an API key, ready for a future automated feed                            |
-| `MarketPrices`                        | Public market series                    | source (`eu-agrifood`, `brm`, `eu-fertiliser`, `eu-oil-bulletin`), series (crop or product), market (RO region, Constanța FOB, national), price, currency, unit, period (week start), fetchedAt. Unique on source + series + market + period. Append-only, written by jobs only |
-| `DieselPrices`                        | Agrinvest's diesel price                | price lei/l, VAT basis, validFrom, minimum volume, status                                                                                                                                                                                                                       |
-| `NewsItems`                           | RSS ingestion and editor queue          | title, url (unique), source, publishedAt, excerpt (short, from the feed only), crops, status (`nou` / `aprobat` / `ascuns`)                                                                                                                                                     |
-| `Subscriptions`                       | Alerts and newsletter                   | email or WhatsApp number, topics (price alert per crop with a threshold or any change, weekly newsletter, frost alert per county), locale, consent text and timestamp, status (`pending` until sending exists, then `confirmed`), unsubscribe token                             |
-| `Outbox`                              | Every message the site would send       | channel, to, template, payload, status (`stubbed` / `sent` / `failed`). Staff-only. The owner can see what would have gone out                                                                                                                                                  |
-| `MarketNotes` (or a `Guides` section) | Weekly market note                      | Uses `Guides` with `section: 'piata'` so authors, reviewers and sources come free                                                                                                                                                                                               |
-| `Newsletters`                         | Weekly issue                            | week, locale, generated content (market note, prices, approved news, own pieces), status                                                                                                                                                                                        |
+| Collection                            | Purpose                                 | Key fields                                                                                                                                                                                                                                                                                               |
+| ------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BuyPrices`                           | Agrinvest's buy price per crop and base | crop, base (optional = all bases), price lei/t, basis (at base / delivered), validFrom, status (draft/published), source (`manual` / `feed`), note. Staff write, public read when published. REST with an API key, ready for a future automated feed                                                     |
+| `MarketPrices`                        | Public market series                    | source (`eu-agrifood`, `eu-fertiliser`, `eu-oil-bulletin`; `brm` dropped in 5.1, see 0008), series (crop or product), market (RO region, Constanța FOB, national), price, currency, unit, period (week start), fetchedAt. Unique on source + series + market + period. Append-only, written by jobs only |
+| `DieselPrices`                        | Agrinvest's diesel price                | price lei/l, VAT basis, validFrom, minimum volume, status                                                                                                                                                                                                                                                |
+| `NewsItems`                           | RSS ingestion and editor queue          | title, url (unique), source, publishedAt, excerpt (short, from the feed only), crops, status (`nou` / `aprobat` / `ascuns`)                                                                                                                                                                              |
+| `Subscriptions`                       | Alerts and newsletter                   | email or WhatsApp number, topics (price alert per crop with a threshold or any change, weekly newsletter, frost alert per county), locale, consent text and timestamp, status (`pending` until sending exists, then `confirmed`), unsubscribe token                                                      |
+| `Outbox`                              | Every message the site would send       | channel, to, template, payload, status (`stubbed` / `sent` / `failed`). Staff-only. The owner can see what would have gone out                                                                                                                                                                           |
+| `MarketNotes` (or a `Guides` section) | Weekly market note                      | Uses `Guides` with `section: 'piata'` so authors, reviewers and sources come free                                                                                                                                                                                                                        |
+| `Newsletters`                         | Weekly issue                            | week, locale, generated content (market note, prices, approved news, own pieces), status                                                                                                                                                                                                                 |
 
 Other model changes:
 
@@ -61,7 +61,7 @@ After every collection change, run `generate:types`, `generate:importmap` and `m
 
 ### Jobs and freshness (5.1)
 
-- **Jobs:** Payload `jobs` with tasks `fetchEuCereal`, `fetchBrm`, `fetchEuFertiliser`, `fetchOilBulletin`, `ingestNews`, `evaluateAlerts` and `buildNewsletter`.
+- **Jobs:** Payload `jobs` with tasks `fetchEuCereal`, `fetchEuFertiliser`, `fetchOilBulletin`, `ingestNews`, `evaluateAlerts` and `buildNewsletter`. (`fetchBrm` was dropped in 5.1: BRM's terms forbid reuse.)
 - **Cron route:** `src/app/api/cron/[task]/route.ts`, protected by a new `CRON_SECRET`, with schedules in `vercel.json`. Check the Vercel plan's cron limits first; on Hobby, crons run once a day, which is enough for weekly series.
 - **Revalidation:** new tags `prices`, `diesel` and `news` in `src/lib/revalidate.ts`. Jobs revalidate their tag after writing.
 - **Weather is not stored.** It is fetched with `next: { revalidate: 3600 }`. Coordinates are rounded to 0.1° so the cache is shared and the user's exact location is never kept.
@@ -109,6 +109,7 @@ After every collection change, run `generate:types`, `generate:importmap` and `m
 - The diesel price, minimum volume and delivery counties
 - An Open-Meteo commercial key, or approval of an alternative
 - Later: an email or WhatsApp provider
+- (5.1) `CRON_SECRET` in Vercel, and optionally written permission from BRM, Agrimedia or Agro TV
 
 ## 5.1 Platform
 
@@ -124,12 +125,48 @@ Build the collections, jobs, cron route, `sendMessage` with the Outbox, the `Sub
 
 Any source that can't be reached is recorded and dropped. It is never scraped against its terms.
 
+### 5.1 progress (2026-11-10)
+
+**Source check** (full table in decision 0008, "Update: source check"; registry in `src/lib/sources.ts`; fixtures in `tests/fixtures/feeds/`):
+
+- **Kept:** EU agri-food cereal and fertiliser prices (new host `api.tech.ec.europa.eu`), the EU Weekly Oil Bulletin (stable XLSX link), Open-Meteo (configurable base URL and key), and the RSS feeds of Revista Ferma (headlines only) and Agrointel (excerpts up to 500 characters, as its terms allow). All EU data is CC BY 4.0.
+- **Dropped on their terms:** BRM's table and feed, the ANM warnings feed, Agrimedia and Agro TV. All forbid reuse without written consent. The `fetchBrm` job is not built.
+- **EU agri-food API:** it throttled the check (HTTP 429) and then its backend was suspended (HTTP 500, "endpoint SUSPENDED") for the rest of the session, so there is no saved cereal or fertiliser fixture yet. The parsers follow the published OpenAPI schemas and are tested on schema-shaped samples. The oilseed (sunflower, rapeseed) spec also answered 500. All three are rechecked first thing in 5.2.
+
+**Built:**
+
+- **Collections:** `BuyPrices`, `MarketPrices`, `DieselPrices`, `NewsItems`, `Subscriptions`, `Outbox` and `Newsletters`, in a new "Prețuri și unelte" admin group. `Leads` has the `motorina` type plus `quantity` and `deliveryDate` (also in the lead validation and action). `Crops` has `gddBase`. `Guides` has the `stiri` and `piata` sections, and `check:finance` now reviews only the finance sections. Migration `20261110_100846_phase5_platform` is additive only.
+- **Access:** visitors read published `BuyPrices` and `DieselPrices` rows, approved `NewsItems` and all `MarketPrices`. Only jobs write market prices and headlines. `Subscriptions`, `Outbox` and `Newsletters` are staff-only, and the unsubscribe token is hidden.
+- **Jobs and cron:** Payload jobs `fetchEuCereal`, `fetchEuFertiliser`, `fetchOilBulletin`, `ingestNews`, `evaluateAlerts` and `buildNewsletter` (`src/lib/jobs/tasks.ts`). The route `src/app/api/cron/[task]/route.ts` checks `Authorization: Bearer $CRON_SECRET` with a constant-time comparison, and refuses every call when no secret is set. Schedules in `vercel.json` are daily or weekly, because Vercel Hobby allows at most one run a day per cron; the two agri-food calls are three hours apart. Successful jobs are deleted; failed ones stay in `payload-jobs` (visible in the admin) with their error. There are no retries: the next scheduled run is the retry.
+- **Upserts:** `MarketPrices.key` (`source|series|market|period`) is unique, so a rerun adds nothing. The series is append-only.
+- **Revalidation:** tags `prices`, `diesel` and `news`. Jobs and the collection hooks revalidate them.
+- **Messaging:** `sendMessage` (`src/lib/messaging/send.ts`) writes every message to the Outbox. With no provider, each row is `stubbed`. A `dedupeKey` stops a rerun from writing the same alert twice. While nothing can be sent, alerts and newsletters include pending subscribers, so the Outbox shows everything that would go out.
+- **Subscriptions:** the `subscribe` server action (`src/lib/subscriptions/actions.ts`) validates with zod, reports every missing field at once, uses `allow()` in production and stores the consent text the visitor saw (RO or EN), its version and the time. A second sign-up from the same address adds its topic to the same row.
+- **Alerts and newsletter:** `evaluateAlerts` compares each crop's latest published Agrinvest price (the highest across bases) with the one before, for the rules `any`, `above` and `below`. `buildNewsletter` drafts this week's issue in RO and EN from published prices, approved headlines and the latest `piata` note. When staff set an issue to `approved`, it goes to the Outbox once and becomes `queued`.
+- **Parsers:** pure and tested on fixtures. They cover the Oil Bulletin (a built-in XLSX reader, no new dependency), RSS (headline, link and date, the excerpt clipped to the source's limit, links to other sites dropped, `content:encoded` never read), Open-Meteo (coordinates rounded to 0.1°, the key sent only to the paid host, cached for an hour, not stored) and EU agri-food.
+- **Design system:** `LineChart` (server SVG, HTML axis labels, the last point marked, the second series dashed so colour is not the only cue, a data table under "Arată datele", the table alone below two points), the widget contract (`design-system/patterns/widgets/`: `types.ts`, `WidgetFrame`, `README.md`) with ready, stale and empty states, and stories for each. The `toolWidget` block (grainPrices, netPrice, diesel, weather, news; with crop, county and base) is in `pageBlocks`. Its renderer `src/components/ToolWidget.tsx` outputs nothing until each widget is built.
+- **Env:** `CRON_SECRET`, `OPEN_METEO_API_KEY` and `OPEN_METEO_BASE_URL` are in `.env.example`.
+
+**Verified:** `typecheck`, `lint`, `format:check` and `build` pass. `test:int` passes 177 of 177, including 24 new tests in `tests/int/tools.int.spec.ts`. `test:e2e` passes 81 of 81. `check:seo` reports 0 errors on 418 pages. `check:budget` puts all 20 URLs within budget, unchanged from 5.0. Storybook builds, and the widget stories were checked at 390 and 1200 px. On `npm start` with a local secret, `fetchOilBulletin`, `ingestNews`, `evaluateAlerts` and `buildNewsletter` ran through the cron route. They stored Romania's diesel price for the 2026-11-02 bulletin (2,070.93 €/1,000 l), 40 headlines (Agrointel excerpts at most 417 characters, Revista Ferma none) and two draft issues.
+
+**Found:**
+
+- The Oil Bulletin page lists the weekly file under an old filename date, but the document id serves the current week.
+- Payload's types make required fields that have defaults mandatory in `create` calls, so tests spell out `basis` and `source`.
+- `.prettierignore` now skips `tests/fixtures/feeds/`, so fixtures stay byte-for-byte as fetched.
+- **`BuyPrices` over REST with an API key is not switched on yet.** It needs `auth.useAPIKey` on `Users`, which would let every staff account, IFN included, create a key with its full access. When a price feed exists, enable it for a dedicated feed account (one line and a migration). Until then the collection's access rules already allow a staff writer.
+
+**Owner inputs added:**
+
+- Optional: written permission from BRM, Agrimedia or Agro TV, if the owner wants their data or headlines.
+- Set `CRON_SECRET` in Vercel before the first deploy with crons. Also confirm the plan: on Hobby, crons run once a day.
+
 ## 5.2 Grain prices
 
 Routes:
 
 - `/preturi`: the hub with a crops × markets table and the latest market note.
-- `/preturi/{grau|porumb|floarea-soarelui|rapita|orz}`: Agrinvest price by base when published, EU and BRM series, a 52-week `LineChart`, the "sell to the nearest base" CTA (a lead of type `vanzare-cereale` with the crop and base prefilled), and the alert sign-up.
+- `/preturi/{grau|porumb|floarea-soarelui|rapita|orz}`: Agrinvest price by base when published, the EU series for Romania (BRM dropped in 5.1), a 52-week `LineChart`, the "sell to the nearest base" CTA (a lead of type `vanzare-cereale` with the crop and base prefilled), and the alert sign-up.
 - `/preturi/calculator-pret-net`: a GET form that works without JavaScript, like the 4.4 simulator.
   - Inputs: crop, quantity, price, measured moisture, impurities, hectolitre weight.
   - Output: deductions under the standard scăzământ formula using the `Crops.quality` limits, then the net quantity and value. Every rule is cited.
@@ -168,7 +205,7 @@ Also in 5.2:
   - frost alerts (2 m and soil)
   - growing degree days per crop (`gddBase`)
   - soil moisture and ET0
-  - ANM warnings for the county, linked to the source
+  - a link to ANM's official warnings (the ANM feed's terms forbid reuse, so it is not shown on the page)
 - **All the calculations are pure** functions in `src/lib/weather/` with unit tests.
 - **Base pages** show their local weather, using the base coordinates or the county centroid.
 - **Frost alerts** go to subscribers through `evaluateAlerts`, and land in the Outbox.

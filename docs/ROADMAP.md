@@ -339,8 +339,8 @@ _Pages_
 - Despre and Cifre; Cereale and its crop pages; Depozitare plus the 17 base pages.
 - Finanțare, Logistica, Parteneri, Cariere, Contact.
 - The English business pages.
-ب
-_SEO plumbing_
+  ب
+  _SEO plumbing_
 
 - Metadata API, hreflang + x-default.
 - The JSON-LD library: Organization, LocalBusiness per base, BreadcrumbList, WebSite.

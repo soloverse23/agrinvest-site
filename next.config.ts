@@ -35,6 +35,8 @@ function enrichmentEpoch() {
   // Steps that rewrite menus and page links on a live site (`apply:finance`).
   for (const name of ['corrections.ts', 'entry-points.ts'])
     hash.update(readFileSync(path.join(dirname, 'scripts/finance', name)))
+  // The price menu and footer column (`apply:tools`, Phase 5).
+  hash.update(readFileSync(path.join(dirname, 'scripts/tools/entry-points.ts')))
   return hash.digest('hex').slice(0, 12)
 }
 

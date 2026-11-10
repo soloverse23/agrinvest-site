@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { FinanceLinks } from '@ds/patterns/Finance'
 import { KeyFacts, SectionHeading } from '@ds/patterns/Sections'
+import { GrainPrices } from '@ds/patterns/widgets/GrainPrices'
 import { Button } from '@ds/primitives/Button'
 import { FactMark } from '@/components/Fact'
 import { schemaFaq } from '@/components/FactText'
@@ -11,6 +12,10 @@ import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
 import { BaseListBlock, LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
+import { grainPricesProps } from '@/components/templates/PricePage'
+import { pricesUi } from '@/i18n/prices'
+import { grainItems } from '@/lib/prices/overview'
+import { priceRange } from '@/lib/prices/grain'
 import type { FactStatus } from '@/fields'
 import { localePath, locales, type Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
@@ -144,11 +149,17 @@ export async function BasePage({ locale, slug }: { locale: Locale; slug: string 
   const u = ui[locale]
   const path = basePath(base.slug, locale)
   const storage = fixedPaths.storage[locale]
-  const [parent, figures, finance] = await Promise.all([
+  const [parent, figures, finance, prices] = await Promise.all([
     getPage(storage, locale).then((p) => p?.page),
     getFigures(locale),
     financeLinks(['finantare-stocuri'], locale),
+    grainPricesProps(locale, pricesUi[locale].base.title(base.name)),
   ])
+  // This base's own prices: a row for this base, or one that applies at every base.
+  const here = prices.overview.map((c) => {
+    const rows = c.bases.filter((r) => !r.base || r.base.id === base.id)
+    return { ...c, range: priceRange(rows) }
+  })
   const f = financeUi[locale].crossSell
   // Stock financing, and the IFN's general contact until regional advisors are named (4.5).
   const financeItems = [
@@ -230,6 +241,11 @@ export async function BasePage({ locale, slug }: { locale: Locale; slug: string 
         aside={facts.length ? <KeyFacts items={facts} /> : undefined}
       />
       <div className="mt-16 grid gap-20 md:mt-24 md:gap-28">
+        <section className="mx-auto w-full max-w-page px-4 md:px-8">
+          <div className="max-w-2xl">
+            <GrainPrices {...prices.props} items={grainItems(here)} level={2} />
+          </div>
+        </section>
         <LeadFormBlock
           block={{
             leadType: 'depozitare',

@@ -30,6 +30,8 @@ const fieldNames: LeadField[] = [
   'base',
   'crop',
   'message',
+  'quantity',
+  'deliveryDate',
   'consent',
 ]
 

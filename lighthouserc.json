@@ -23,7 +23,18 @@
         "http://localhost:3100/magazin/erbicide",
         "http://localhost:3100/magazin/cultura/grau",
         "http://localhost:3100/magazin/insecticide/karate-zeon",
-        "http://localhost:3100/en/shop/insecticides/karate-zeon"
+        "http://localhost:3100/en/shop/insecticides/karate-zeon",
+        "http://localhost:3100/preturi",
+        "http://localhost:3100/preturi/grau",
+        "http://localhost:3100/preturi/calculator-pret-net",
+        "http://localhost:3100/en/prices/wheat",
+        "http://localhost:3100/preturi/ingrasaminte",
+        "http://localhost:3100/motorina",
+        "http://localhost:3100/stiri",
+        "http://localhost:3100/piata",
+        "http://localhost:3100/en/prices",
+        "http://localhost:3100/en/diesel",
+        "http://localhost:3100/en/news"
       ],
       "numberOfRuns": 3,
       "settings": {

@@ -16,6 +16,8 @@ export type LeadField =
   | 'base'
   | 'crop'
   | 'message'
+  | 'quantity'
+  | 'deliveryDate'
   | 'consent'
 
 export type LeadFormState = {

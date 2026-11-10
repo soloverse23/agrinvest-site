@@ -24,6 +24,7 @@ import {
   sameAs,
   shopCrops,
 } from './data'
+import { applyToolsEntryPoints, withToolsFooter, withToolsMenu } from '../tools/entry-points'
 import { footer, navigation, pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
 import { applyFinance } from '../finance/apply'
@@ -379,14 +380,18 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        items: navigation[locale].map(({ label, href, blurb, children }) => ({
-          link: { label, href },
-          blurb,
-          children: children?.map((c) => ({
-            link: { label: c.label, href: c.href },
-            description: c.description,
+        // The prices panel comes from the same list the live step uses (Phase 5).
+        items: withToolsMenu(
+          navigation[locale].map(({ label, href, blurb, children }) => ({
+            link: { label, href },
+            blurb,
+            children: children?.map((c) => ({
+              link: { label: c.label, href: c.href },
+              description: c.description,
+            })),
           })),
-        })),
+          locale,
+        ) as never,
         cta: navigation.cta[locale],
       },
     })
@@ -395,10 +400,13 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        columns: footer[locale].columns.map((col) => ({
-          title: col.title,
-          links: col.links.map(([label, href]) => ({ link: { label, href } })),
-        })),
+        columns: withToolsFooter(
+          footer[locale].columns.map((col) => ({
+            title: col.title,
+            links: col.links.map(([label, href]) => ({ link: { label, href } })),
+          })),
+          locale,
+        ) as never,
         legal: footer[locale].legal,
       },
     })
@@ -474,6 +482,8 @@ await seedPages(payload, { people: peopleIds, media: mediaIds })
 // After the pages and people it links to.
 await applyFinance(payload)
 await applyEntryPoints(payload)
+// Price menu, footer and the logistics diesel widget (Phase 5); the seed and deploys share it.
+await applyToolsEntryPoints(payload)
 
 // The seed writes outside Next.js, so its hooks cannot revalidate cache tags. Clear Next's
 // data cache instead, or the next build or dev run serves the pre-seed content.

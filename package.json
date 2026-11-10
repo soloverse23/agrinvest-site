@@ -40,10 +40,13 @@
     "check:aeo": "tsx scripts/checks/aeo.ts",
     "check:finance": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/checks/finance.ts",
     "check:anaf": "tsx scripts/checks/anaf.ts",
+    "check:budget": "tsx scripts/checks/budget.ts",
+    "check:tools": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/checks/tools.ts",
     "check:products": "tsx --env-file-if-exists=.env scripts/checks/products.ts",
     "audit:verification": "tsx scripts/products/verification-list.ts",
     "apply:products": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/products/run.ts",
-    "apply:finance": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/finance/run.ts"
+    "apply:finance": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/finance/run.ts",
+    "apply:tools": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/tools/run.ts"
   },
   "dependencies": {
     "@fontsource-variable/onest": "^5.3.1",

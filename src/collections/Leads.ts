@@ -80,6 +80,18 @@ export const Leads: CollectionConfig = {
       label: { ro: 'Produse', en: 'Products' },
       admin: { description: 'The product or cart a quote request came from.' },
     },
+    {
+      type: 'row',
+      admin: { condition: (data) => data?.type === 'motorina' },
+      fields: [
+        { name: 'quantity', type: 'number', min: 0, admin: { description: 'Litres.' } },
+        {
+          name: 'deliveryDate',
+          type: 'date',
+          admin: { date: { pickerAppearance: 'dayOnly' } },
+        },
+      ],
+    },
     { name: 'message', type: 'textarea' },
     {
       name: 'meta',

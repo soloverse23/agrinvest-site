@@ -39,6 +39,8 @@ export const Guides: CollectionConfig = {
       options: [
         { value: 'finantare', label: label('Finanțare', 'Financing') },
         { value: 'pagina-finantare', label: label('Pagină fixă', 'Fixed finance page') },
+        { value: 'stiri', label: label('Știri Agrinvest', 'Agrinvest news') },
+        { value: 'piata', label: label('Nota de piață', 'Market note') },
       ],
       admin: { position: 'sidebar' },
     },

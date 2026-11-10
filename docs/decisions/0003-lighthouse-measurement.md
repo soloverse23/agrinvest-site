@@ -35,3 +35,9 @@ Lantern rebuilds the load from the unthrottled trace and charges every request t
 - `font-display: optional` (revised in 2.2): with real page copy, `swap` made some text blocks rewrap when Onest arrived (the fallback matches Onest's width within 1% on average, but single lines vary by ±3%), and on `/despre` that pushed the page down by a line: CLS 0,2. With `optional` the preloaded font is used when it arrives with the first render; on a slow first visit that page stays in the metric-matched fallback and the next page uses the cached Onest. Text never jumps; CLS is 0 on every template.
 - Any new client component or dependency has to fit the 160 KB script budget.
 - `design-system/brand/fonts-src/Onest[wght].ttf` is the source of the served font; rerun `npm run brand:font` after updating it.
+
+## Update: Lighthouse once per phase (2026-11-10)
+
+- **Lighthouse no longer runs on every push.** At the owner's request it runs once, at the end of each phase, from `.github/workflows/lighthouse.yml` (started by hand) or locally with `npx @lhci/cli autorun`. The measurement rules above are unchanged.
+- **Every push is guarded by `npm run check:budget`** (`scripts/checks/budget.ts`, in `ci.yml`). It loads every URL in `lighthouserc.json` in mobile Chromium and fails above 160 KB of script, 32 KB of fonts, or any external stylesheet. It catches the regressions that matter most between runs, but not LCP, CLS or TBT; those wait for the phase-end run.
+- A new page joins both checks by adding its URL to `lighthouserc.json`.

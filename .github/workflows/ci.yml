@@ -60,6 +60,7 @@ jobs:
           npm run check:figures
           npm run check:products
           npm run check:finance
+          npm run check:tools
+          npm run check:budget
           kill %1
-      - name: Lighthouse (mobile budgets)
-        run: npx --yes @lhci/cli@0.15.x autorun
+      # Lighthouse runs once per phase, by hand: .github/workflows/lighthouse.yml (decision 0003).

@@ -7,3 +7,5 @@ docs/audit/*.json
 data/
 src/app/(frontend)/fonts.css
 design-system/patterns/map/counties.ts
+# Feed fixtures stay byte-for-byte as fetched
+tests/fixtures/feeds/

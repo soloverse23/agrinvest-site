@@ -3,6 +3,13 @@ import {
   basePath,
   categoryPath,
   cropPath,
+  cropPricePath,
+  dieselPath,
+  fertiliserPricesPath,
+  newsPath,
+  marketPath,
+  netPricePath,
+  pricesPath,
   financeRoutePath,
   financeRoutes,
   hubPath,
@@ -16,6 +23,8 @@ import {
   listGuides,
 } from '@/lib/content/finance'
 import { listBases, listCrops } from '@/lib/content/locations'
+import { allMarketNoteAlternates, listMarketNotes } from '@/lib/content/market'
+import { listHeadlines } from '@/lib/news/load'
 import { alternatesOf, listPages, type Alternates } from '@/lib/content/pages'
 import {
   hubIndexable,
@@ -101,6 +110,32 @@ export const segments = {
       ...(faq ? entries(routeAlternates('faq')) : []),
       ...(simulator ? entries(routeAlternates('simulator')) : []),
       ...(apply ? entries(routeAlternates('apply')) : []),
+    ]
+  },
+  // Prices and tools (Phase 5): grain hub and crops, calculator, fertilisers, diesel, news, notes.
+  prices: async (): Promise<SitemapEntry[]> => {
+    const [ro, en, notes, noteList, headlines] = await Promise.all([
+      listCrops('ro'),
+      listCrops('en'),
+      allMarketNoteAlternates(),
+      listMarketNotes('ro'),
+      listHeadlines(1),
+    ])
+    return [
+      ...entries({ ro: pricesPath('ro'), en: pricesPath('en') }),
+      ...ro.flatMap((c) => {
+        const twin = en.find((e) => e.id === c.id)
+        return entries({
+          ro: cropPricePath(c.slug as string, 'ro'),
+          ...(twin ? { en: cropPricePath(twin.slug as string, 'en') } : {}),
+        })
+      }),
+      ...entries({ ro: netPricePath('ro'), en: netPricePath('en') }),
+      ...entries({ ro: fertiliserPricesPath('ro'), en: fertiliserPricesPath('en') }),
+      ...entries({ ro: dieselPath('ro'), en: dieselPath('en') }),
+      ...(headlines.length ? entries({ ro: newsPath('ro'), en: newsPath('en') }) : []),
+      ...(noteList.length ? entries({ ro: marketPath('ro'), en: marketPath('en') }) : []),
+      ...notes.flatMap((alternates) => entries(alternates)),
     ]
   },
   // Products share their slug across languages; their category slug is translated.

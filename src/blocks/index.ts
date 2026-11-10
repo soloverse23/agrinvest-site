@@ -298,6 +298,66 @@ export const FinanceProductsBlock: Block = {
   fields: [...sectionHead(true)],
 }
 
+/** Tools a page can embed. Each name is rendered by `src/components/ToolWidget.tsx`. */
+export const toolWidgetNames = ['grainPrices', 'netPrice', 'diesel', 'weather', 'news'] as const
+
+/**
+ * A farmer tool inside a page (grain prices, net-price calculator, diesel, weather, news).
+ * Phase 6 articles reuse it. Crop, county and base narrow the widget where it supports them.
+ */
+export const ToolWidgetBlock: Block = {
+  slug: 'toolWidget',
+  interfaceName: 'ToolWidgetBlock',
+  labels: {
+    singular: { ro: 'Unealtă', en: 'Tool widget' },
+    plural: { ro: 'Unelte', en: 'Tool widgets' },
+  },
+  fields: [
+    {
+      name: 'widget',
+      type: 'select',
+      required: true,
+      options: [
+        { value: 'grainPrices', label: { ro: 'Prețuri cereale', en: 'Grain prices' } },
+        { value: 'netPrice', label: { ro: 'Calculator preț net', en: 'Net price calculator' } },
+        { value: 'diesel', label: { ro: 'Motorină', en: 'Diesel' } },
+        { value: 'weather', label: { ro: 'Meteo', en: 'Weather' } },
+        { value: 'news', label: { ro: 'Știri', en: 'News' } },
+      ],
+    },
+    {
+      name: 'heading',
+      type: 'text',
+      localized: true,
+      admin: { description: 'Optional. Each widget has its own default title.' },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'crop',
+          type: 'relationship',
+          relationTo: 'crops',
+          filterOptions: { isGrain: { equals: true } },
+          admin: { condition: (_, s) => ['grainPrices', 'netPrice', 'news'].includes(s?.widget) },
+        },
+        {
+          name: 'county',
+          type: 'relationship',
+          relationTo: 'counties',
+          admin: { condition: (_, s) => ['weather', 'diesel'].includes(s?.widget) },
+        },
+        {
+          name: 'base',
+          type: 'relationship',
+          relationTo: 'bases',
+          admin: { condition: (_, s) => ['grainPrices', 'weather'].includes(s?.widget) },
+        },
+      ],
+    },
+  ],
+}
+
 export const pageBlocks: Block[] = [
   HeroBlock,
   RichTextBlock,
@@ -315,4 +375,5 @@ export const pageBlocks: Block[] = [
   ContactCardsBlock,
   VideoEmbedBlock,
   CalloutBlock,
+  ToolWidgetBlock,
 ]

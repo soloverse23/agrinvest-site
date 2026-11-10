@@ -14,6 +14,10 @@ export const tags = {
   targets: 'targets',
   finance: 'finance',
   guides: 'guides',
+  /** Agrinvest buy prices and the public market series (Phase 5). */
+  prices: 'prices',
+  diesel: 'diesel',
+  news: 'news',
   global: (slug: string) => `global:${slug}`,
 } as const
 

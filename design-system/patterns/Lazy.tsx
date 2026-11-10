@@ -9,3 +9,6 @@ import dynamic from 'next/dynamic'
 export const BaseMapLazy = dynamic(() => import('./BaseMap').then((m) => m.BaseMap))
 export const VideoEmbedLazy = dynamic(() => import('./VideoEmbed').then((m) => m.VideoEmbed))
 export const LeadFormLazy = dynamic(() => import('./LeadForm').then((m) => m.LeadForm))
+export const SubscribeFormLazy = dynamic(() =>
+  import('./SubscribeForm').then((m) => m.SubscribeForm),
+)

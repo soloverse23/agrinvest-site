@@ -20,7 +20,11 @@ export type Manifest = {
   globals: Record<string, Partial<Record<Loc, Record<string, unknown>>>>
 }
 
+/** The one deliberate way past the local-only guard: the owner chose to seed the test domain. */
+export const remoteAllowed = () => process.env.DEMO_ALLOW_REMOTE === 'agrinvest-test-domain'
+
 export function assertLocal() {
+  if (remoteAllowed()) return
   const url = process.env.DATABASE_URL ?? ''
   if (!/@(localhost|127\.0\.0\.1)[:/]/.test(url) && !/^postgres(ql)?:\/\/localhost/.test(url))
     throw new Error('The demo seed only runs against a local database.')
@@ -29,7 +33,11 @@ export function assertLocal() {
 export const loadManifest = (): Manifest | null =>
   existsSync(manifestPath) ? (JSON.parse(readFileSync(manifestPath, 'utf8')) as Manifest) : null
 
-export const saveManifest = (m: Manifest) => writeFileSync(manifestPath, JSON.stringify(m))
+export const saveManifest = (m: Manifest) => {
+  writeFileSync(manifestPath, JSON.stringify(m))
+  // A deploy has no disk to keep: the build log is where the undo list survives.
+  if (remoteAllowed()) console.log(`DEMO_MANIFEST:${JSON.stringify(m)}`)
+}
 
 const pick = (doc: Record<string, unknown>, keys: string[]) =>
   Object.fromEntries(keys.map((k) => [k, doc[k] ?? null]))

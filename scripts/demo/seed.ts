@@ -22,6 +22,7 @@ import {
   Demo,
   demoPdf,
   loadManifest,
+  remoteAllowed,
   monday,
   rng,
   saveManifest,
@@ -33,6 +34,19 @@ if (loadManifest()) {
   process.exit(1)
 }
 const payload = await getPayload({ config })
+// Deploys repeat this step: once the demo staff account exists, the seed has run.
+if (remoteAllowed()) {
+  const done = await payload.find({
+    collection: 'users',
+    where: { email: { equals: 'demo-admin@agrinvest.test' } },
+    limit: 1,
+    depth: 0,
+  })
+  if (done.docs[0]) {
+    console.log('demo seed: already applied on this database, skipping')
+    process.exit(0)
+  }
+}
 const startedAt = new Date()
 const demo = new Demo(payload, {
   startedAt: startedAt.toISOString(),
@@ -83,6 +97,8 @@ const people = await all('people')
 const brands = await all('brands')
 
 /* ------------------------------------------------------------------ 1. staff accounts */
+if (remoteAllowed() && !process.env.DEMO_PASSWORD)
+  throw new Error('A remote demo seed needs DEMO_PASSWORD; the default password is public.')
 const password = process.env.DEMO_PASSWORD ?? 'Demo-Agrinvest-2026'
 const accounts = [
   { email: 'demo-admin@agrinvest.test', roles: ['admin'] },
@@ -98,7 +114,7 @@ for (const a of accounts) {
   })
   if (!found.docs[0]) await demo.create('users', { ...a, password })
 }
-log(`users: ${accounts.length} accounts (password ${password})`)
+log(`users: ${accounts.length} accounts`)
 
 /* ------------------------------------------------------------------ 2. reference data */
 // People: public contact details, so contact blocks render in full.
@@ -1125,5 +1141,5 @@ log(`leads ${leads.length}, orders ${orderStatuses.length}, applications ${appSt
 demo.save()
 clearNextCache()
 log('\nDone. Staff logins (admin panel /admin):')
-for (const a of accounts) log(`  ${a.email} / ${password}`)
+for (const a of accounts) log(`  ${a.email}${remoteAllowed() ? '' : ` / ${password}`}`)
 process.exit(0)

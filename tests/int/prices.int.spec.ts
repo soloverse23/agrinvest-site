@@ -318,3 +318,19 @@ describe('market note job (Payload)', () => {
     expect(visible.docs).toHaveLength(0)
   })
 })
+
+describe('Oil Bulletin price history (saved sample, 2026-11-10)', () => {
+  it('reads Romania’s weekly diesel price, newest first', async () => {
+    const { readFileSync } = await import('node:fs')
+    const { historyRows } = await import('@/lib/diesel/oil-bulletin')
+    const rows = JSON.parse(
+      readFileSync('tests/fixtures/feeds/oil-bulletin-history-sample.json', 'utf8'),
+    )
+    const out = historyRows(rows, 5)
+    expect(out).toHaveLength(5)
+    expect(out[0]).toMatchObject({ series: 'diesel', market: 'RO', price: 2070.93, unit: '1000 l' })
+    expect(out[0].period.toISOString().slice(0, 10)).toBe('2026-11-02')
+    expect(out[1].period.toISOString().slice(0, 10)).toBe('2026-10-26')
+    expect(() => historyRows([{ A: 'x' }, {}, {}])).toThrow(/no RO_price_with_tax_diesel/)
+  })
+})

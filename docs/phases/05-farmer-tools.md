@@ -349,6 +349,20 @@ Kept simple, as the owner asked: no home redesign and no new blocks or migration
   - **Deploy rehearsal:** on a copy of live data, as in Phase 4. Steps: migrations `20261110_100846_phase5_platform` and `20261110_103557_phase5_grain_prices`, then `apply:tools` run twice, then a check that the menu and footer gain one item each.
   - **The owner's review** of the Vercel preview.
 
+### Merge preparation (2026-11-10)
+
+- **Deploy rehearsal: passed.**
+  - _Setup:_ a worktree of `main` (44de301) built a separate database `agrinvest_rehearsal` the way `prepare-database.sh` does: migrate, seed, `apply:products`, `apply:finance`. A staff edit was simulated (menu "Logistică" → "Logistică și transport", footer "Cariere" → "Cariere la Agrinvest").
+  - _Steps on the branch:_ migrate (both Phase 5 migrations applied cleanly, 65 ms and 1 ms), seed (skipped: not empty), `apply:products` and `apply:finance` (nothing written), then `apply:tools` twice.
+  - _Result:_ every page, crop, category, product, guide, finance and base path is identical before and after. The menu gained exactly one item per language ("Prețuri" / "Prices" after the grain item, with its 5 children); every other submenu and blurb is unchanged. The footer gained exactly one column per language. Both staff edits were kept. The second `apply:tools` run changed nothing.
+- **EU agri-food recheck:** cereal (RO, 8 weeks) and fertiliser (2025–2026), one call each, more than a minute apart. Both returned HTTP 500 "The API cannot provide results". This now comes from the application, no longer the gateway's "SUSPENDED". The Commission's agriculture pages answered 429 to the source search. No fixture was saved; the EU grain and fertiliser series stay empty until the API answers, and `check:tools` warns about it.
+- **Diesel history filled from public data.** The Oil Bulletin's "Price developments 2005 onwards" file (`endpoints.oilBulletinHistory`, column `RO_price_with_tax_diesel`) gives Romania's weekly diesel price with taxes.
+  - `apply:tools` backfills the newest 53 weeks once, while fewer than 20 rows exist. It is idempotent and never stops a deploy.
+  - Locally: 53 weeks, 3 Nov 2025 (€1,525.12 / 1,000 l) to 2 Nov 2026 (€2,070.93). The newest week matches the weekly file. Parser test on a saved sample of the real rows: `tests/fixtures/feeds/oil-bulletin-history-sample.json`.
+  - The market cache also expires hourly, because this write happens outside Next.js. The backfill clears the local data cache, as the seed does.
+- **Agrinvest's own prices were not filled:** buy prices and the diesel price come only from the owner (decision 0008). Pages show "la cerere" until they are published in the admin. A guide to the admin and the automatic jobs is in `docs/guides/prices-admin.md`.
+- **Checks after these changes:** `typecheck`, `lint`, `format:check` and `build` pass; `test:int` 198 of 198 and `test:e2e` 90 of 90 pass. `check:seo` reports 0 errors on 440 pages, and all 31 URLs are within budget. No layout change, so no new Lighthouse run.
+
 **Owner inputs (requested in 5.0):**
 
 - Buy prices and how often they are updated

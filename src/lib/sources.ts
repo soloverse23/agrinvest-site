@@ -66,6 +66,9 @@ export const endpoints = {
   /** Stable document id; the file behind it is replaced each week (filename date is stale). */
   oilBulletin:
     'https://energy.ec.europa.eu/document/download/264c2d0f-f161-4ea3-a777-78faae59bea0_en',
+  /** "Price developments 2005 onwards" (about 4.5 MB): used once to fill the diesel history. */
+  oilBulletinHistory:
+    'https://energy.ec.europa.eu/document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en',
 } as const
 
 export type NewsSource = 'revista-ferma' | 'agrointel'

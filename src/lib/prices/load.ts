@@ -83,7 +83,9 @@ export const listMarketPoints = unstable_cache(
     }))
   },
   ['prices:market'],
-  { tags: [tags.prices] },
+  // Jobs revalidate the tag at once; the hour covers writes from outside Next.js (the
+  // deploy-time diesel backfill), which cannot reach the cache.
+  { tags: [tags.prices], revalidate: 3600 },
 )
 
 /** The start of the week a year (53 weeks) back, so the cache key changes once a week. */

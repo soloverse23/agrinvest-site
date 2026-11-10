@@ -15,5 +15,11 @@ npm run apply:products
 npm run apply:finance
 npm run apply:tools
 npm run apply:articles
+# One-time demo data on the test domain (owner's request, 2026-11-10). Runs only in the
+# production build and only while DEMO_PASSWORD is set in Vercel; skips itself once applied.
+# A failure must not stop the deploy. Remove DEMO_PASSWORD afterwards to switch it off.
+if [ "$VERCEL_ENV" = "production" ] && [ -n "$DEMO_PASSWORD" ]; then
+  DEMO_ALLOW_REMOTE=agrinvest-test-domain npm run seed:demo || echo "demo seed failed; see the log above"
+fi
 # A warning only: a changed ANAF address must not stop a deploy, the buyer can type the data.
 npm run check:anaf || true

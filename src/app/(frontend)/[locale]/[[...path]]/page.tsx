@@ -9,6 +9,9 @@ import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import { TodayStrip } from '@/components/TodayStrip'
+import { pricesUi } from '@/i18n/prices'
+import { pricesPath } from '@/i18n/routes'
+import { agrinvestRail } from '@/lib/prices/overview'
 import { isLocale, localePath, type Locale } from '@/i18n/config'
 import { ui } from '@/i18n/ui'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
@@ -60,6 +63,19 @@ export default async function CmsPage(props: Props) {
   const url = localePath(pagePath, locale)
   const crumbs = trailOf(page, locale)
   const heroFirst = page.layout?.[0]?.blockType === 'hero'
+  // Home: Agrinvest's published prices on the hero rail; without any, the hero keeps its links.
+  const rail = page.isHome && heroFirst ? await agrinvestRail(locale) : null
+  const r = pricesUi[locale].rail
+  const heroPrices = rail
+    ? {
+        title: r.title,
+        place: r.place,
+        unit: 'lei/t',
+        date: rail.date,
+        all: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
+        rows: rail.rows,
+      }
+    : undefined
 
   return (
     <SiteShell locale={locale} alternates={alternates} overlay={heroFirst}>
@@ -76,7 +92,12 @@ export default async function CmsPage(props: Props) {
       {page.isHome && heroFirst ? (
         // Home: the hero, then today's prices, diesel and news (Phase 5), then the rest.
         <>
-          <RenderBlocks blocks={page.layout?.slice(0, 1)} locale={locale} path={pagePath} />
+          <RenderBlocks
+            blocks={page.layout?.slice(0, 1)}
+            locale={locale}
+            path={pagePath}
+            heroPrices={heroPrices}
+          />
           <TodayStrip locale={locale} />
           <div className="mt-16 md:mt-24">
             <RenderBlocks blocks={page.layout?.slice(1)} locale={locale} path={pagePath} />

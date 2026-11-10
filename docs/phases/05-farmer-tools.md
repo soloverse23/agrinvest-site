@@ -2,7 +2,7 @@
 
 ## Farmer tools, tool widgets and the new home page
 
-Status: **Built (2026-11-10): 5.0–5.4, 5.6–5.8 done; 5.5 weather dropped. Waiting for the deploy rehearsal, the Vercel preview and the owner's review before merge.** Sub-phases run in order: 5.0 setup → 5.1 platform → 5.2 grain prices → 5.3 input prices → 5.4 diesel → 5.6 news (5.5 weather was dropped on 2026-11-10; the numbers are kept) → 5.7 home and widgets → 5.8 gate. Branch: `phase-5/tools`. Decisions: `docs/decisions/0008-farmer-tools.md` (written in 5.0).
+Status: **Done (2026-11-10): 5.0–5.4 and 5.6–5.8 built, 5.5 weather dropped; merged into `main` through PR #5.** Sub-phases run in order: 5.0 setup → 5.1 platform → 5.2 grain prices → 5.3 input prices → 5.4 diesel → 5.6 news (5.5 weather was dropped on 2026-11-10; the numbers are kept) → 5.7 home and widgets → 5.8 gate. Branch: `phase-5/tools`. Decisions: `docs/decisions/0008-farmer-tools.md` (written in 5.0).
 
 ## Context
 
@@ -317,7 +317,7 @@ Kept simple, as the owner asked: no home redesign and no new blocks or migration
   - Every tool page ends with links to the other tools (`src/components/ToolLinks.tsx`).
   - All five widgets (`grainPrices`, `netPrice`, `diesel`, `news`, and `weather`, which renders nothing) can be placed with the `toolWidget` block.
 - **Navigation:** a "Prețuri / Prices" menu panel after "Cereale / Grain" (grain prices, calculator, fertilisers, diesel, news) and a "Prețuri și unelte / Prices and tools" footer column. Both are defined once in `scripts/tools/entry-points.ts`, used by the seed and by `npm run apply:tools`, which runs on deploy after `apply:finance` and is safe to repeat. The file is part of the cache epoch in `next.config.ts`, so a deploy shows the new menu at once.
-- **Not built:** the header ticker, `/baze` index, `PriceTable` on finance pages and `DieselCard` on `/logistica`. The diesel page already links to logistics.
+- **Not built:** the `/baze` index and `PriceTable` on finance pages. The header ticker, the hero price rail and `DieselCard` on `/logistica` came in the finishing pass below.
 
 ## 5.8 Gate
 
@@ -362,6 +362,26 @@ Kept simple, as the owner asked: no home redesign and no new blocks or migration
   - The market cache also expires hourly, because this write happens outside Next.js. The backfill clears the local data cache, as the seed does.
 - **Agrinvest's own prices were not filled:** buy prices and the diesel price come only from the owner (decision 0008). Pages show "la cerere" until they are published in the admin. A guide to the admin and the automatic jobs is in `docs/guides/prices-admin.md`.
 - **Checks after these changes:** `typecheck`, `lint`, `format:check` and `build` pass; `test:int` 198 of 198 and `test:e2e` 90 of 90 pass. `check:seo` reports 0 errors on 440 pages, and all 31 URLs are within budget. No layout change, so no new Lighthouse run.
+
+- **PR #5** (`phase-5/tools` → `main`): CI `check` passed (11 min) and the Vercel preview deployment succeeded. The preview and production are both behind Vercel Deployment Protection (a Vercel login), so neither the site nor Google's Rich Results Test can reach them without the owner's account.
+  - **Open for the owner:** the Rich Results Test on `/preturi/grau`, `/motorina` and `/baze/pogoanele` (log in, or create a protection bypass link); `CRON_SECRET` in Vercel (Production and Preview); and the merge.
+  - **Watch out:** Preview and Production share one database, so the preview build has already run `apply:tools` on live data. The live menu now links to `/preturi`, which production serves only after the merge. No visitor sees it while production is protected.
+
+### Finishing pass (2026-11-10, owner: "finish Phase 5 completely, use every price you can find online, complete the designs, merge")
+
+- **Public prices searched again.**
+  - The EU agri-food API still answers 500, and the Commission's agriculture pages answered 404 or 429.
+  - The EU data portal's cereal dashboard is an embedded analytics app with no file download.
+  - Romania's open-data portal has no grain price set. Press articles quoting ministry prices are not a source with reuse rights.
+  - So the only public price series available today is the Oil Bulletin's diesel price, now 53 weeks long. EU grain and fertiliser prices arrive through the daily jobs as soon as the API answers.
+- **Agrinvest's own prices stay owner-only** (decision 0008). Every place built for them now appears by itself as soon as staff publish a row:
+  - **Hero rail on the home page** (`prices` prop of `Hero`, from `agrinvestRail`): each crop's best published price on its latest date, with the change from the date before. Until then the hero keeps its needs links.
+  - **Header ticker** (`ticker` prop of `SiteHeader`): three crops, a link to `/preturi`, and the phone once it is confirmed in the register. Hidden while no price is published.
+  - **Grain widget:** it now always lists every crop with its price or "la cerere" and a link to the crop's price page, instead of a single empty line.
+- **`/logistica` and `/en/logistics`:** the diesel card after the fleet figures, added by `apply:tools` (safe to repeat; it keeps the page's URL) and by the seed.
+- **Tests:** 201 of 201 integration tests (rail, logistics widget) and 91 of 91 e2e (the logistics card). `check:seo` reports 0 errors; 31 URLs are within budget.
+- **Lighthouse,** run only on the pages whose layout changed (`/`, `/en`, `/cereale/grau`, `/baze/pogoanele`, `/logistica`): 100/100/100, CLS 0.
+- **Home layout decision:** the "Today" row after the hero is the finished home design for Phase 5. The rest of the "Today first" plan (teaser cards replacing the map and figures, a compact services list, a `/baze` index) is not built. The owner chose the simpler finish, and Phase 6 changes the home again when articles arrive.
 
 **Owner inputs (requested in 5.0):**
 

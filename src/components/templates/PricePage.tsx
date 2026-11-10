@@ -114,13 +114,13 @@ export async function grainPricesProps(locale: Locale, title?: string) {
     .flatMap((c) => (c.latest ? [c.latest.date] : []))
     .sort((a, b) => +b - +a)[0]
   const own = overview.some((c) => c.range)
-  // Empty: nothing to show at all. Stale: only market data, and all of it old.
-  const state: WidgetState =
-    !own && !latest
-      ? 'empty'
-      : !own && overview.every((c) => c.state !== 'ready')
-        ? 'stale'
-        : 'ready'
+  // Every crop is listed, with its price or "la cerere" and a link to its page. Stale only
+  // when there is market data but all of it is old and no Agrinvest price is published.
+  const state: WidgetState = !items.length
+    ? 'empty'
+    : !own && latest && overview.every((c) => c.state !== 'ready')
+      ? 'stale'
+      : 'ready'
   return {
     overview,
     props: {

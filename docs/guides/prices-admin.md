@@ -20,7 +20,7 @@ One row per crop, and per base when the price differs by base.
 
 To change a price, **add a new row** with the new date; don't edit the old one. The history is the list of rows.
 
-Where it shows: `/preturi`, `/preturi/{crop}`, the crop pages `/cereale/{crop}`, every base page, the home "Azi" row and the weekly newsletter. Without a published row the site says **"Preț la cerere"**.
+Where it shows: `/preturi`, `/preturi/{crop}`, the crop pages `/cereale/{crop}`, every base page, the home "Azi" row, the price rail on the home hero, the price ticker above the header on every page, and the weekly newsletter. Without a published row the site says **"Preț la cerere"**.
 
 Price alerts run the moment a published price changes. Each subscriber whose rule matches (any change, or crossing a threshold) gets a message in the Outbox (see "Messages" below).
 
@@ -36,7 +36,7 @@ Price alerts run the moment a published price changes. Each subscriber whose rul
 | Note           | Optional, in RO and EN                      |
 | Status         | Draft or Published                          |
 
-The newest published row shows on `/motorina` and in the home "Azi" row. Quote requests from `/motorina` arrive as leads of type **Motorină** (`/admin/collections/leads`), with the litres and the wanted date.
+The newest published row shows on `/motorina`, on `/logistica` and in the home "Azi" row. Quote requests from `/motorina` arrive as leads of type **Motorină** (`/admin/collections/leads`), with the litres and the wanted date.
 
 ### Reception limits: `/admin/collections/crops` → each crop → "Quality"
 

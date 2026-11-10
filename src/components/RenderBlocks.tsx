@@ -65,7 +65,14 @@ const Section = ({
   </section>
 )
 
-type Ctx = { locale: Locale; path: string; first: boolean; figures: Figures }
+type HeroPrices = NonNullable<Parameters<typeof Hero>[0]['prices']>
+type Ctx = {
+  locale: Locale
+  path: string
+  first: boolean
+  figures: Figures
+  heroPrices?: HeroPrices
+}
 
 /** Renders text with `{{KEY}}` register facts. */
 const fact = (text: string | null | undefined, ctx: Pick<Ctx, 'figures' | 'locale'>) =>
@@ -146,16 +153,27 @@ export async function RenderBlocks({
   blocks,
   locale,
   path,
+  heroPrices,
 }: {
   blocks: Page['layout']
   locale: Locale
   /** Locale-relative path of the page, stored with leads. */
   path: string
+  /** Today's Agrinvest prices on the rail of the opening hero (home page, Phase 5). */
+  heroPrices?: HeroPrices
 }) {
   if (!blocks?.length) return null
   const figures = await getFigures(locale)
   const rendered = await Promise.all(
-    blocks.map((block, i) => renderBlock(block, { locale, path, first: i === 0, figures })),
+    blocks.map((block, i) =>
+      renderBlock(block, {
+        locale,
+        path,
+        first: i === 0,
+        figures,
+        heroPrices: i === 0 ? heroPrices : undefined,
+      }),
+    ),
   )
   return <div className="grid gap-20 md:gap-28">{rendered}</div>
 }
@@ -397,7 +415,13 @@ async function renderBlock(block: Block, ctx: Ctx): Promise<ReactNode> {
   }
 }
 
-function HeroBlock({ block, first, figures, locale }: { block: BlockOf<'hero'> } & Ctx) {
+function HeroBlock({
+  block,
+  first,
+  figures,
+  locale,
+  heroPrices,
+}: { block: BlockOf<'hero'> } & Ctx) {
   const image = media(block.image)
   return (
     <Hero
@@ -418,6 +442,7 @@ function HeroBlock({ block, first, figures, locale }: { block: BlockOf<'hero'> }
           ? { href: block.secondary.href, label: block.secondary.label }
           : null
       }
+      prices={heroPrices}
       needs={(block.needs ?? []).map((n) => ({
         href: n.link.href,
         label: n.link.label,

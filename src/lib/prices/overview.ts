@@ -75,3 +75,41 @@ export function grainItems(overview: CropOverview[]) {
         : null,
   }))
 }
+
+export type RailRow = { crop: GrainKey; name: string; price: number; change: number }
+
+/**
+ * Agrinvest's published prices for the hero rail and the header ticker: per crop, the highest
+ * price on its latest date and the change from the date before. Null while nothing is
+ * published, so both stay hidden instead of showing a zero.
+ */
+export function railRows(
+  crops: { id: number; key: string; name: string }[],
+  buy: BuyPriceRow[],
+): { rows: RailRow[]; date: Date } | null {
+  const rows: RailRow[] = []
+  let latest = ''
+  for (const c of crops) {
+    if (!isGrainKey(c.key)) continue
+    const byDay = new Map<string, number>()
+    for (const r of buy) {
+      if (r.crop !== c.id) continue
+      const day = r.validFrom.slice(0, 10)
+      byDay.set(day, Math.max(byDay.get(day) ?? 0, r.price))
+    }
+    const [last, before] = [...byDay.keys()].sort().reverse()
+    if (!last) continue
+    if (last > latest) latest = last
+    const price = byDay.get(last)!
+    rows.push({ crop: c.key, name: c.name, price, change: before ? price - byDay.get(before)! : 0 })
+  }
+  return rows.length ? { rows, date: new Date(latest) } : null
+}
+
+export async function agrinvestRail(locale: Locale) {
+  const [crops, buy] = await Promise.all([listCrops(locale), listBuyPrices(locale)])
+  return railRows(
+    crops.map((c) => ({ id: c.id, key: c.key, name: c.name })),
+    buy,
+  )
+}

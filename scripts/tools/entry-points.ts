@@ -5,6 +5,8 @@
  */
 import type { Payload } from 'payload'
 
+import { keepUrl } from '../finance/corrections'
+
 type Locale = 'ro' | 'en'
 type Link = { label: string; href: string }
 
@@ -125,6 +127,18 @@ export function withToolsFooter(columns: FooterColumn[], locale: Locale): Footer
   return [...columns.slice(0, 1), column, ...columns.slice(1)]
 }
 
+type Block = { blockType?: string; widget?: string; [k: string]: unknown }
+
+/** The logistics page with the diesel widget after the fleet figures, unless it has one. */
+export function withDieselWidget(layout: Block[]): Block[] {
+  if (layout.some((b) => b.blockType === 'toolWidget' && b.widget === 'diesel')) return layout
+  const block: Block = { blockType: 'toolWidget', widget: 'diesel' }
+  let at = layout.findIndex((b) => b.blockType === 'figureTable')
+  if (at < 0) at = layout.findIndex((b) => b.blockType === 'contactCards') - 1
+  if (at < 0) return [...layout, block]
+  return [...layout.slice(0, at + 1), block, ...layout.slice(at + 1)]
+}
+
 export async function applyToolsEntryPoints(
   payload: Payload,
   log: (s: string) => void = console.log,
@@ -141,6 +155,39 @@ export async function applyToolsEntryPoints(
     if (columns.length !== (footer.columns ?? []).length) {
       await payload.updateGlobal({ slug: 'footer', locale, data: { columns } as never })
       log(`entry points: prices footer column (${locale}) added`)
+    }
+    // The diesel card on the logistics page (5.7).
+    // Found by its Romanian path, then edited in each language.
+    const { docs } = await payload.find({
+      collection: 'pages',
+      where: { path: { equals: '/logistica' } },
+      locale: 'ro',
+      depth: 0,
+      limit: 1,
+      draft: true,
+    })
+    const page = docs[0]
+      ? await payload.findByID({
+          collection: 'pages',
+          id: docs[0].id,
+          locale,
+          depth: 0,
+          draft: true,
+        })
+      : undefined
+    if (page) {
+      const layout = (page.layout ?? []) as Block[]
+      const next = withDieselWidget(layout)
+      if (next !== layout) {
+        await payload.update({
+          collection: 'pages',
+          id: page.id,
+          locale,
+          data: { layout: next, ...keepUrl(page.path, page.slug) } as never,
+          draft: page._status === 'draft',
+        })
+        log(`entry points: diesel widget on ${page.path} (${locale}) added`)
+      }
     }
   }
 }

@@ -478,6 +478,8 @@ _Analytics_
 
 ## Phase 5: Farmer tools
 
+**Status: done (2026-11-10).** Built as described in `docs/phases/05-farmer-tools.md`, which also lists what was simplified or deferred (weather dropped, excise calculator waiting for confirmed rates).
+
 **Goal:** daily-use tools that win the high-volume searches and bring farmers back.
 
 **Prices: grains**

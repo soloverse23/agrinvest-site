@@ -4,7 +4,14 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 import { netPriceSources } from '@/lib/prices/net-price-rules'
 
-import { toolsMenu, withToolsFooter, withToolsMenu } from '../../scripts/tools/entry-points'
+import { railRows } from '@/lib/prices/overview'
+
+import {
+  toolsMenu,
+  withDieselWidget,
+  withToolsFooter,
+  withToolsMenu,
+} from '../../scripts/tools/entry-points'
 import { ruleFindings, seriesFindings } from '../../scripts/tools/gate'
 
 describe('check:tools rules', () => {
@@ -87,5 +94,56 @@ describe('news visibility (Payload)', () => {
       overrideAccess: false,
     })
     expect(visible.docs.map((d) => d.status)).toEqual(['nou'])
+  })
+})
+
+describe('logistics diesel widget', () => {
+  it('goes after the fleet figures, once', () => {
+    const layout = [
+      { blockType: 'serviceGrid' },
+      { blockType: 'figureTable' },
+      { blockType: 'contactCards' },
+    ]
+    const once = withDieselWidget(layout)
+    expect(once.map((b) => b.blockType)).toEqual([
+      'serviceGrid',
+      'figureTable',
+      'toolWidget',
+      'contactCards',
+    ])
+    expect(withDieselWidget(once)).toBe(once)
+  })
+})
+
+describe('Agrinvest price rail', () => {
+  const crops = [
+    { id: 1, key: 'wheat', name: 'Grâu' },
+    { id: 2, key: 'maize', name: 'Porumb' },
+    { id: 3, key: 'soybean', name: 'Soia' },
+  ]
+  const row = (crop: number, price: number, validFrom: string, base: number | null = null) => ({
+    crop,
+    base: base ? { id: base, name: 'B', slug: 'b' } : null,
+    price,
+    basis: 'la-baza' as const,
+    validFrom,
+  })
+
+  it('stays hidden with no published price', () => {
+    expect(railRows(crops, [])).toBeNull()
+  })
+
+  it('takes each crop’s best price on its latest date and the change from the date before', () => {
+    const rail = railRows(crops, [
+      row(1, 950, '2026-11-02', 7),
+      row(1, 970, '2026-11-02', 8),
+      row(1, 940, '2026-10-26'),
+      row(2, 800, '2026-11-01'),
+    ])!
+    expect(rail.rows).toEqual([
+      { crop: 'wheat', name: 'Grâu', price: 970, change: 30 },
+      { crop: 'maize', name: 'Porumb', price: 800, change: 0 },
+    ])
+    expect(rail.date.toISOString().slice(0, 10)).toBe('2026-11-02')
   })
 })

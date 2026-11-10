@@ -43,7 +43,9 @@ export type SiteHeaderProps = {
   /** Optional strip above the header with today's prices and the phone number. */
   ticker?: {
     crops: { crop: CropKey; name: string; price: number; change: number }[]
-    phone: string
+    phone?: string
+    /** Where the prices link to, and its label for screen readers. */
+    link?: { href: string; label: string }
   }
 }
 
@@ -83,13 +85,26 @@ export function SiteHeader({
                 </li>
               ))}
             </ul>
-            <a
-              href={`tel:${ticker.phone.replace(/\s/g, '')}`}
-              className="ml-auto flex shrink-0 items-center gap-2 font-medium text-on-forest no-underline hover:text-lime"
-            >
-              <PhoneIcon className="size-4" />
-              <span className="tabular-nums">{ticker.phone}</span>
-            </a>
+            {ticker.link && (
+              <Link
+                href={ticker.link.href}
+                className="ml-auto shrink-0 font-semibold text-lime no-underline hover:underline"
+              >
+                {ticker.link.label}
+              </Link>
+            )}
+            {ticker.phone && (
+              <a
+                href={`tel:${ticker.phone!.replace(/\s/g, '')}`}
+                className={cx(
+                  'flex shrink-0 items-center gap-2 font-medium text-on-forest no-underline hover:text-lime',
+                  !ticker.link && 'ml-auto',
+                )}
+              >
+                <PhoneIcon className="size-4" />
+                <span className="tabular-nums">{ticker.phone}</span>
+              </a>
+            )}
           </div>
         </div>
       )}

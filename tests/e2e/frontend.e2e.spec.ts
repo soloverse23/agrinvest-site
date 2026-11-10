@@ -694,3 +694,13 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     expect(docs[0]).toMatchObject({ type: 'motorina', quantity: 5000 })
   })
 })
+
+test('the logistics page shows the diesel card', async ({ page }) => {
+  for (const [url, title] of [
+    ['/logistica', 'Motorină'],
+    ['/en/logistics', 'Diesel'],
+  ] as const) {
+    await page.goto(url)
+    await expect(page.getByRole('heading', { name: title, exact: true }).first()).toBeVisible()
+  }
+})

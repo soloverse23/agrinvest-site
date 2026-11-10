@@ -4,10 +4,12 @@ import { SiteFooter } from '@ds/patterns/SiteFooter'
 import { SiteHeader } from '@ds/patterns/SiteHeader'
 import { commerceUi } from '@/i18n/commerce'
 import { localePath, type Locale } from '@/i18n/config'
-import { cartPath } from '@/i18n/routes'
+import { pricesUi } from '@/i18n/prices'
+import { cartPath, pricesPath } from '@/i18n/routes'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, getFooter, getNavigation, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
+import { agrinvestRail } from '@/lib/prices/overview'
 
 import { CookieSettings } from './CookieSettings'
 import { FactMark } from './Fact'
@@ -37,11 +39,12 @@ export async function SiteShell({
   overlay?: boolean
   children: ReactNode
 }) {
-  const [nav, footer, figures, seo] = await Promise.all([
+  const [nav, footer, figures, seo, rail] = await Promise.all([
     getNavigation(locale),
     getFooter(locale),
     getFigures(locale),
     getSeoDefaults(locale),
+    agrinvestRail(locale),
   ])
   const t = ui[locale]
   const items = (nav.items ?? []).map((i) => ({
@@ -69,6 +72,16 @@ export async function SiteShell({
       // The menu repeats the phone without a marker, so only once it is confirmed.
       phone={phone?.status === 'confirmed' ? phone.value : undefined}
       cart={{ href: cartPath(locale), label: commerceUi[locale].cart }}
+      // Agrinvest's published prices (Phase 5); hidden until there are any.
+      ticker={
+        rail
+          ? {
+              crops: rail.rows.slice(0, 3),
+              phone: phone?.status === 'confirmed' ? phone.value : undefined,
+              link: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
+            }
+          : undefined
+      }
       cta={{
         href: nav.cta?.href || fixedUrl('contact', locale),
         label: nav.cta?.label || t.contact,

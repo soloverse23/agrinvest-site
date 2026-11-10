@@ -24,7 +24,7 @@ import {
   sameAs,
   shopCrops,
 } from './data'
-import { withToolsFooter, withToolsMenu } from '../tools/entry-points'
+import { applyToolsEntryPoints, withToolsFooter, withToolsMenu } from '../tools/entry-points'
 import { footer, navigation, pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
 import { applyFinance } from '../finance/apply'
@@ -482,6 +482,8 @@ await seedPages(payload, { people: peopleIds, media: mediaIds })
 // After the pages and people it links to.
 await applyFinance(payload)
 await applyEntryPoints(payload)
+// Price menu, footer and the logistics diesel widget (Phase 5); the seed and deploys share it.
+await applyToolsEntryPoints(payload)
 
 // The seed writes outside Next.js, so its hooks cannot revalidate cache tags. Clear Next's
 // data cache instead, or the next build or dev run serves the pre-seed content.

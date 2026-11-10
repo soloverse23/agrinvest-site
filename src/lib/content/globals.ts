@@ -53,7 +53,7 @@ export const getNavigation = unstable_cache(
     const payload = await payloadClient()
     return payload.findGlobal({ slug: 'navigation', locale, depth: 0 })
   },
-  ['global:navigation'],
+  [`global:navigation:${epoch}`],
   { tags: [tags.global('navigation')] },
 )
 
@@ -62,7 +62,7 @@ export const getFooter = unstable_cache(
     const payload = await payloadClient()
     return payload.findGlobal({ slug: 'footer', locale, depth: 0 })
   },
-  ['global:footer'],
+  [`global:footer:${epoch}`],
   { tags: [tags.global('footer')] },
 )
 

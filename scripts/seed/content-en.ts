@@ -127,7 +127,7 @@ export function contentEn(
             heading: 'Financing repaid after the harvest',
             lead: 'Loans in lei for production and investment, with a reply {{F4.reply}}. Repayments follow the farm: {{F5.term}}, {{F5.instalments}}.',
             primary: { label: 'About financing', href: '/en/financing' },
-            secondary: { label: 'Ask for an offer', href: '/en/financing#cerere' },
+            secondary: { label: 'Apply', href: '/en/financing/apply' },
             instalments,
           },
           {
@@ -348,7 +348,7 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
                 icon: 'coins',
                 title: 'Financing',
                 body: 'Need cash before you sell? Talk to Agrinvest Credit IFN.',
-                link: { label: 'Financing', href: '/en/financing' },
+                link: { label: 'Stock financing', href: '/en/financing/stock-financing' },
               },
             ],
           },

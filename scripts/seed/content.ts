@@ -129,7 +129,7 @@ export function contentFor(key: string, ctx: Ctx): Content | null {
             heading: 'Finanțare cu rate după recoltă',
             lead: 'Credite în lei pentru producție și investiții, cu răspuns {{F4.reply}}. Rambursezi în ritmul fermei: {{F5.term}}, {{F5.instalments}}.',
             primary: { label: 'Despre finanțare', href: '/finantare' },
-            secondary: { label: 'Cere o ofertă', href: '/finantare#cerere' },
+            secondary: { label: 'Trimite o cerere', href: '/finantare/aplica' },
             instalments: [
               { when: 'Rata 1 · după recolta de vară', label: 'grâu, orz, rapiță' },
               { when: 'Rata 2 · după recolta de toamnă', label: 'porumb, floarea-soarelui' },
@@ -374,7 +374,7 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
                 icon: 'coins',
                 title: 'Finanțare',
                 body: 'Ai nevoie de bani până la vânzare? Vorbește cu Agrinvest Credit IFN.',
-                link: { label: 'Finanțare', href: '/finantare' },
+                link: { label: 'Finanțarea stocurilor', href: '/finantare/finantare-stocuri' },
               },
             ],
           },

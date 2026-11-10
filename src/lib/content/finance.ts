@@ -105,6 +105,8 @@ export const getFinancePage = (slug: string, locale: Locale) =>
 
 export type ProductCard = {
   id: number
+  /** The reviewed file's key: the same in every language (`data/finance/products`). */
+  key: string
   slug: string
   title: string
   answer: string
@@ -120,13 +122,14 @@ export const listFinanceProducts = unstable_cache(
       ...read(locale),
       depth: 1,
       sort: 'order',
-      select: { slug: true, title: true, answer: true, parent: true, updatedAt: true },
+      select: { key: true, slug: true, title: true, answer: true, parent: true, updatedAt: true },
     })
     return docs.flatMap((d) =>
       d.slug && d.title
         ? [
             {
               id: d.id,
+              key: d.key,
               slug: d.slug,
               title: d.title,
               answer: d.answer,
@@ -137,9 +140,23 @@ export const listFinanceProducts = unstable_cache(
         : [],
     )
   },
-  [`finance:products:${epoch}`],
+  [`finance:products:v2:${epoch}`],
   { tags: [tags.finance] },
 )
+
+/**
+ * Links to finance products by key, for pages outside the section (shop, cart, crops, bases).
+ * A product that is not published is left out, so no page links to a missing page.
+ */
+export async function financeLinks<K extends string>(keys: readonly K[], locale: Locale) {
+  const products = await listFinanceProducts(locale)
+  const out: Partial<Record<K, { href: string; title: string }>> = {}
+  for (const key of keys) {
+    const p = products.find((x) => x.key === key)
+    if (p) out[key] = { href: financeProductPath(p.slug, locale, p.parentSlug), title: p.title }
+  }
+  return out
+}
 
 export async function productAlternates(id: number): Promise<Alternates> {
   const [ro, en] = await Promise.all([listFinanceProducts('ro'), listFinanceProducts('en')])

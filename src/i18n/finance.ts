@@ -53,6 +53,30 @@ export const financeUi = {
       talk: 'Preferi să vorbim întâi?',
       talkLink: 'Scrie-ne sau sună-ne',
     },
+    crossSell: {
+      hint: 'Cauți bani pentru inputurile sezonului?',
+      hintLink: 'Cum se pot finanța inputurile',
+      cartKicker: 'Agrinvest Credit IFN',
+      cartTitle: 'Vrei să finanțezi inputurile din banii recoltei?',
+      cartBody:
+        'Agrinvest Credit IFN acordă credite de producție, cu {{F5.instalments}}. Dobânda și condițiile se stabilesc după analiza fiecărei cereri.',
+      steps: [
+        { when: 'Acum', label: 'Cumperi inputurile' },
+        { when: 'August', label: 'Rată după recolta de vară' },
+        { when: 'Noiembrie', label: 'Rată după recolta de toamnă' },
+      ],
+      cartPrimary: 'Cum se finanțează inputurile',
+      cartSimulate: (amount: string) => `Simulează ratele pentru ${amount}`,
+      cartNote:
+        'Comanda și creditul sunt separate: comanda o plătești ca de obicei, iar finanțarea o discuți cu echipa IFN. Nu este o ofertă de credit.',
+      cropKicker: 'Finanțare',
+      cropTitle: 'Bani până vinzi recolta',
+      baseTitle: 'Finanțare pentru marfa din depozit',
+      stock: 'Cum poți acoperi cheltuielile cât timp cerealele stau în depozit.',
+      contract: 'Bani înainte de livrare, pe baza unui contract de vânzare a cerealelor.',
+      talk: 'Vorbește cu Agrinvest Credit IFN',
+      talkBody: 'Pentru orice întrebare despre finanțare, scrie echipei IFN.',
+    },
     simulator: {
       form: 'Datele tale',
       amount: 'Suma',
@@ -148,6 +172,30 @@ export const financeUi = {
       simulate: 'Simulate instalments',
       talk: 'Would you rather talk first?',
       talkLink: 'Write to us or call',
+    },
+    crossSell: {
+      hint: 'Looking for money for this season’s inputs?',
+      hintLink: 'How inputs can be financed',
+      cartKicker: 'Agrinvest Credit IFN',
+      cartTitle: 'Want to pay for inputs from your harvest money?',
+      cartBody:
+        'Agrinvest Credit IFN offers production loans, with {{F5.instalments}}. Interest and terms are set after reviewing each application.',
+      steps: [
+        { when: 'Now', label: 'You buy the inputs' },
+        { when: 'August', label: 'Instalment after the summer harvest' },
+        { when: 'November', label: 'Instalment after the autumn harvest' },
+      ],
+      cartPrimary: 'How inputs are financed',
+      cartSimulate: (amount: string) => `Simulate instalments for ${amount}`,
+      cartNote:
+        'The order and the loan are separate: you pay the order as usual, and you discuss financing with the IFN team. This is not a credit offer.',
+      cropKicker: 'Financing',
+      cropTitle: 'Money until you sell the harvest',
+      baseTitle: 'Financing for grain in store',
+      stock: 'How to cover costs while your grain stays in store.',
+      contract: 'Money before delivery, based on a grain sale contract.',
+      talk: 'Talk to Agrinvest Credit IFN',
+      talkBody: 'For any question about financing, write to the IFN team.',
     },
     simulator: {
       form: 'Your figures',

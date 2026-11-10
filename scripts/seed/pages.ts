@@ -1,3 +1,5 @@
+import { financeMenu } from '../finance/entry-points'
+
 /**
  * Core pages for Phase 2 (their blocks and FAQ are in content.ts). Each page has its SEO title
  * (30–60 characters) and a summary that doubles as the meta description (70–160).
@@ -276,7 +278,7 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
         },
       ],
     },
-    { label: 'Finanțare', href: '/finantare' },
+    { label: 'Finanțare', ...financeMenu.ro },
     { label: 'Logistică', href: '/logistica' },
     {
       label: 'Despre',
@@ -341,7 +343,7 @@ export const navigation: Record<'ro' | 'en', MenuItem[]> & { cta: Record<'ro' | 
         },
       ],
     },
-    { label: 'Financing', href: '/en/financing' },
+    { label: 'Financing', ...financeMenu.en },
     { label: 'Logistics', href: '/en/logistics' },
     {
       label: 'About',
@@ -375,6 +377,8 @@ export const footer = {
           ['Depozitare', '/depozitare'],
           ['Uscare și precurățare', '/depozitare/uscare'],
           ['Finanțare', '/finantare'],
+          ['Simulator de rate', '/finantare/simulator'],
+          ['Cerere de credit', '/finantare/aplica'],
           ['Logistică', '/logistica'],
         ],
       },
@@ -406,6 +410,8 @@ export const footer = {
           ['Storage', '/en/storage'],
           ['Drying and cleaning', '/en/storage/drying'],
           ['Financing', '/en/financing'],
+          ['Repayment simulator', '/en/financing/simulator'],
+          ['Loan application', '/en/financing/apply'],
           ['Logistics', '/en/logistics'],
         ],
       },

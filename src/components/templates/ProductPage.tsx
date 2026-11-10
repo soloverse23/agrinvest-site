@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { AddToCartForm, OrderNotice } from '@ds/patterns/Commerce'
+import { FinanceHint } from '@ds/patterns/Finance'
 import { SectionHeading, Updated } from '@ds/patterns/Sections'
 import {
   DocumentList,
@@ -18,11 +19,13 @@ import { Crumbs, Faq } from '@/components/PageParts'
 import { LeadFormBlock, Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import { commerceUi } from '@/i18n/commerce'
+import { financeUi } from '@/i18n/finance'
 import { type Locale } from '@/i18n/config'
 import { categoryPath, hubPath, productPath, sections, shopPath } from '@/i18n/routes'
 import { fitTitle, shopUi } from '@/i18n/shop'
 import { ui } from '@/i18n/ui'
 import { addToCart } from '@/lib/commerce/actions'
+import { financeLinks } from '@/lib/content/finance'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
 import { getProduct, listCategories, listProducts } from '@/lib/content/shop'
@@ -248,10 +251,13 @@ export async function ProductPage({
   const t = shopUi[locale]
   const u = ui[locale]
   const path = productPath(card.category.slug, slug, locale)
-  const [figures, romanian] = await Promise.all([
+  const [figures, romanian, finance] = await Promise.all([
     getFigures(locale),
     locale === 'ro' ? null : getProduct(slug, 'ro'),
+    financeLinks(['inputuri-plata-la-recolta', 'credit-productie'], locale),
   ])
+  // A hint, not an offer (4.5): the inputs page, or the production loan if it is not published.
+  const inputsFinance = finance['inputuri-plata-la-recolta'] ?? finance['credit-productie']
   const summary = summaryOf(found, locale)
   const crumbs = [
     { name: t.shop, url: shopPath(locale) },
@@ -343,6 +349,12 @@ export async function ProductPage({
                 </OrderNotice>
               )}
               <p className="text-caption text-muted">{t.priceNote}</p>
+              {inputsFinance && (
+                <FinanceHint
+                  text={financeUi[locale].crossSell.hint}
+                  link={{ href: inputsFinance.href, label: financeUi[locale].crossSell.hintLink }}
+                />
+              )}
               <div className="flex flex-wrap gap-3">
                 <Button href="#cerere">{t.requestQuote}</Button>
               </div>

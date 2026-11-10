@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { ArrowRightIcon } from '@ds/icons/icons'
+import { FinanceLinks } from '@ds/patterns/Finance'
 import { KeyFacts, SectionHeading } from '@ds/patterns/Sections'
 import { Button } from '@ds/primitives/Button'
 import { FactMark } from '@/components/Fact'
@@ -12,8 +13,10 @@ import { BaseListBlock, LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import type { FactStatus } from '@/fields'
 import { localePath, locales, type Locale } from '@/i18n/config'
-import { basePath, sections } from '@/i18n/routes'
+import { financeUi } from '@/i18n/finance'
+import { basePath, financePath, sections } from '@/i18n/routes'
 import { fixedPaths, ui } from '@/i18n/ui'
+import { financeLinks } from '@/lib/content/finance'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import { getBase, listBases } from '@/lib/content/locations'
 import { getPage, type Alternates } from '@/lib/content/pages'
@@ -141,10 +144,17 @@ export async function BasePage({ locale, slug }: { locale: Locale; slug: string 
   const u = ui[locale]
   const path = basePath(base.slug, locale)
   const storage = fixedPaths.storage[locale]
-  const [parent, figures] = await Promise.all([
+  const [parent, figures, finance] = await Promise.all([
     getPage(storage, locale).then((p) => p?.page),
     getFigures(locale),
+    financeLinks(['finantare-stocuri'], locale),
   ])
+  const f = financeUi[locale].crossSell
+  // Stock financing, and the IFN's general contact until regional advisors are named (4.5).
+  const financeItems = [
+    finance['finantare-stocuri'] && { ...finance['finantare-stocuri'], body: f.stock },
+    { href: `${financePath(locale)}#cerere`, title: f.talk, body: f.talkBody },
+  ].filter((x) => !!x)
   const crumbs = [
     ...(parent ? [{ name: parent.title, url: localePath(storage, locale) }] : []),
     { name: t.crumb(base.name), url: path },
@@ -231,6 +241,7 @@ export async function BasePage({ locale, slug }: { locale: Locale; slug: string 
           locale={locale}
           path={`${sections.bases[locale]}/${base.slug}`}
         />
+        <FinanceLinks kicker={f.cropKicker} title={f.baseTitle} items={financeItems} />
         <BaseListBlock
           block={{ showMap: true }}
           ctx={{ locale }}

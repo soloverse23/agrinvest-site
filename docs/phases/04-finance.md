@@ -2,7 +2,7 @@
 
 ## Finance (Agrinvest Credit IFN)
 
-Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.4 and 4.5 are on `main` (4.5 on 2026-11-10). 4.6 next.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
+Status: **4.1, 4.2, the owner's corrections and all of 4.3 are on `main`. `inputuri-plata-la-recolta` stays as written until the owner talks to the IFN. 4.1 to 4.6 are built and on `main` (2026-11-10). What remains is outside the build: the IFN's answers, the lawyer's approval and the owner's preview review.** Plan approved 2026-11-05. Sub-phases run in order: 4.1 confirmation → 4.2 model → 4.3 content → 4.4 tools → 4.5 and 4.6 cross-selling, SEO and gate. Decisions: `docs/decisions/0007-finance.md`.
 
 ## Context
 
@@ -446,6 +446,21 @@ typecheck, lint, `next build`, `test:int` (149, 4 new), `test:e2e` (81, 4 new), 
 | Internal links: simulator, application, at least 2 related pages                        | fail | fail                       |
 | Review date older than 12 months                                                        | warn | fail                       |
 | `legalStatus` not `legal-approved`, or any unconfirmed fact on the page                 | warn | **fail**                   |
+
+### 4.6 progress (2026-11-10)
+
+Branch `phase-4/gate`, merged to `main` 2026-11-10.
+
+- **`npm run check:finance`** (`scripts/checks/finance.ts`, rules in `scripts/finance/gate.ts`), now in CI after `check:products`. It reads the files in `data/finance` and, from the database, only review status and register facts.
+  - Always fails on: under 150 words, a product with fewer than 4 FAQ, fewer than 2 internal links, a forbidden claim, an interest or margin percentage on a product or the hub (public ROBOR caps excepted), or siblings sharing over 30% of 6-word phrases (today's highest pair is 18%).
+  - Warns now, and fails with `SITE_INDEXABLE=true`, on: a page not `legal-approved`, a review older than 12 months, an unconfirmed register fact. Today that is 0 errors and 46 warnings.
+- **AEO:** questions 40–59 cover the finance pages, all answered in the HTML. Question 34 fails only on the local database, as noted in 4.2.
+
+**Deviations:**
+
+- **The FAQ floor is 4, not 6.** Every product has at least 4 real questions, and the owner asked not to pad.
+- **There is no `financialService` schema yet.** The IFN's register facts are unconfirmed, so it would carry only a name and a URL; add it at launch with the confirmed facts.
+- **"An Agrinvest number typed instead of a register key" is not automated.** A text rule cannot tell it apart from public figures. `check:figures` and the IFN review cover it.
 
 ## Phase exit
 

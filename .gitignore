@@ -59,3 +59,7 @@ node_modules/
 
 # build caches (fonts for metric calculation)
 /.cache/
+
+# demo seed: backups and the manifest of what it created
+/data/backups/
+/scripts/demo/manifest.json

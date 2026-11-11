@@ -229,7 +229,8 @@ test.describe('Core page content', () => {
   test('the menu lists sub-pages in the HTML (no JavaScript needed)', async ({ page }) => {
     await page.goto('/')
     const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
-    await expect(nav.locator('a[href="/cereale/grau"]')).toHaveCount(1)
+    await expect(nav.locator('a[href="/preturi/grau"]')).toHaveCount(1)
+    await expect(nav.locator('a[href="/cereale"]')).toHaveCount(1)
     await expect(nav.locator('a[href="/depozitare"]')).toHaveCount(1)
   })
 

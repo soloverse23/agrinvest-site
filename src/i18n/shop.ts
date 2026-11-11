@@ -282,7 +282,8 @@ export const shopUi = {
     searchPlaceholder: 'Produs, substanță activă, cultură',
     searchTitle: 'Caută în magazin',
     searchResults: (q: string) => `Rezultate pentru „${q}”`,
-    searchSummary: 'Caută după numele produsului, substanța activă, cultură sau producător.',
+    searchSummary:
+      'Caută în magazinul Agrinvest după numele produsului, substanța activă, cultură sau producător, cu doze și prețuri pe ambalaj.',
     pack: 'Ambalaj',
     price: 'Preț',
     unitPrice: 'Preț pe unitate',
@@ -666,7 +667,8 @@ export const shopUi = {
     searchPlaceholder: 'Product, active ingredient, crop',
     searchTitle: 'Search the shop',
     searchResults: (q: string) => `Results for “${q}”`,
-    searchSummary: 'Search by product name, active ingredient, crop or brand.',
+    searchSummary:
+      'Search the Agrinvest shop by product name, active ingredient, crop or brand, with doses and prices per pack.',
     pack: 'Pack',
     price: 'Price',
     unitPrice: 'Unit price',

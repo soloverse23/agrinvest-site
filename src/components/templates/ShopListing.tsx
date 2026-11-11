@@ -709,6 +709,9 @@ export async function ShopHome({ locale }: { locale: Locale }) {
         kicker={L.kicker}
         title={t.title}
         counts={[L.products(products.length), L.inStock(products.filter(inStock).length)]}
+        updated={
+          latest(products) && <Updated locale={locale} label={u.updated} date={latest(products)!} />
+        }
         search={
           <ShopSearchLazy
             action={searchPath(locale)}
@@ -851,6 +854,18 @@ export async function SearchPage({ locale, params }: { locale: Locale; params: S
   }
   return (
     <SiteShell locale={locale} alternates={listing.alternates}>
+      {/* A noindex page still states what it is: the page type and where it sits. */}
+      <JsonLd
+        data={[
+          webPage({
+            url: path,
+            name: listing.title,
+            description: listing.description,
+            locale,
+          }),
+          breadcrumbs(locale, ui[locale].home, listing.crumbs),
+        ]}
+      />
       <ListingView
         listing={listing}
         state={readListing(params, locale)}

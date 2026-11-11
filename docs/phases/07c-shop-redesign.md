@@ -624,3 +624,16 @@ Owner, 2026-11-11: "that is enough for now, make everything production ready wit
 - The GHS drawings: replace them with the official UNECE artwork.
 - The English pages' RSC prefetch 404 for the Romanian URL (language switcher, since 7c.2).
 - The `sm:` classes in `CheckoutForm`, `Hero`, `HomeSections` and `ApplicationForm`.
+
+## 7c.4 notes (2026-11-11, CI fixes before the merge)
+
+PR #11's CI was red. Four e2e tests failed on `main` too (the 7b merge): the header ticker, the county map, the live panel and the home page. They were added in 7b and only ever ran against local data. A fresh `npm run seed` leaves out what Agrinvest has not confirmed: buy prices, the diesel price and the county of every base (S4). The pages built on that data stayed empty.
+
+- `scripts/seed/ci-fixtures.ts` (`npm run seed:ci`, a CI step after the seed): 6 published buy prices on 3 crops, one diesel price, and Pogoanele linked to Buzău. It is idempotent and is **not** part of `prepare-database.sh`: it publishes sample prices, so it must never run on a live database.
+- Further failures that only a fresh seed showed:
+  - `/magazin` and `/en/shop` had no update date (my 7c.2 landing), so `check:aeo` exited 1. The hero has an `updated` slot with the latest product update.
+  - The search page had no WebPage or BreadcrumbList JSON-LD, and its English description was 57 characters. It now has both types and longer descriptions in both languages.
+- Verified on a fresh CI-like database (seed, fixtures, a clean `.next`, build): e2e 99 of 99, test:int 259 of 259, and `check:seo` (0 errors), `check:aeo` (56 of 56), `check:figures`, `check:products`, `check:finance`, `check:tools` and `check:budget` (0 over) all exit 0. Lint, format, Storybook and the drift check pass.
+- Trap: `.next/cache` keeps the tagged data cache across builds, so after changing the database, build from a clean `.next` (CI always does).
+- Trap: run the checks with `NEXT_PUBLIC_SITE_URL=http://localhost:3100`, as CI does. `.env`'s `:3200` makes every canonical an error.
+- Open for 7b: its `apply:redesign` re-saves the home slide media on every deploy (identical values).

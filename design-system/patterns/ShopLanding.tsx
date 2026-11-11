@@ -36,6 +36,8 @@ export type ShopHeroProps = {
   counts: string[]
   /** The search island (ShopSearch). */
   search: ReactNode
+  /** The update date line (`Updated`), under the counts: the page's attributable date. */
+  updated?: ReactNode
   crops: {
     label: string
     items: { href: string; label: string }[]
@@ -56,6 +58,7 @@ export function ShopHero({
   kicker,
   title,
   counts,
+  updated,
   search,
   crops,
   promo,
@@ -107,6 +110,7 @@ export function ShopHero({
                   ))}
                 </p>
               )}
+              {updated && <div className="*:text-on-forest-muted!">{updated}</div>}
             </div>
             {search}
             {crops.items.length > 0 && (

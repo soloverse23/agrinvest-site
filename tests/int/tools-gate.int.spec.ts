@@ -141,9 +141,18 @@ describe('Agrinvest price rail', () => {
       row(2, 800, '2026-11-01'),
     ])!
     expect(rail.rows).toEqual([
-      { crop: 'wheat', slug: 'wheat', name: 'Grâu', price: 970, change: 30 },
-      { crop: 'maize', slug: 'maize', name: 'Porumb', price: 800, change: 0 },
+      { crop: 'wheat', slug: 'wheat', name: 'Grâu', price: 970, change: 30, points: [940, 970] },
+      { crop: 'maize', slug: 'maize', name: 'Porumb', price: 800, change: 0, points: [800] },
     ])
     expect(rail.date.toISOString().slice(0, 10)).toBe('2026-11-02')
+  })
+
+  it('draws the trend line from the last 30 days only', () => {
+    const rail = railRows(crops, [
+      row(1, 900, '2026-09-20'),
+      row(1, 930, '2026-10-05'),
+      row(1, 950, '2026-11-02'),
+    ])!
+    expect(rail.rows[0]!.points).toEqual([930, 950])
   })
 })

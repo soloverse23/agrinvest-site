@@ -1,11 +1,9 @@
 import Link from 'next/link'
 
 import { localePath, type Locale } from '@/i18n/config'
-import { formatNumber } from '@/lib/format'
 
 import type { CropKey } from '../fixtures/sample'
 import { ChevronDownIcon, MenuIcon, PhoneIcon } from '../icons/icons'
-import { FuelIcon, TrendDownIcon, TrendFlatIcon, TrendUpIcon } from '../icons/server'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
 import { CartLink } from './CartLink'
@@ -20,6 +18,7 @@ import {
 } from './MenuPanels'
 import { linkBase, linkState } from './nav-styles'
 import { Lockup } from './parts'
+import { QuoteStrip, type Quote } from './QuoteStrip'
 
 export type { NavChild, NavItem, ShopPanelData } from './MenuPanels'
 
@@ -47,37 +46,28 @@ export type SiteHeaderProps = {
   alternates?: Partial<Record<Locale, string>>
   /** Optional strip above the header with today's prices and the phone number. */
   ticker?: {
-    crops: { crop: CropKey; name: string; price: number; change: number; href: string }[]
-    /** Diesel as one more price, with a fuel icon; `unit` is shown after the number. */
-    fuel?: { name: string; price: number; unit: string; change?: number; href: string }
+    crops: {
+      crop: CropKey
+      name: string
+      price: number
+      change: number
+      href: string
+      /** The last 30 days, oldest first (trend line). */
+      points?: number[]
+    }[]
+    /** Diesel as one more price, with a fuel icon. */
+    fuel?: {
+      name: string
+      price: number
+      unit: string
+      change?: number
+      href: string
+      points?: number[]
+    }
     phone?: string
     /** Where the prices link to, and its label for screen readers. */
     link?: { href: string; label: string }
   }
-}
-
-const trendWords = {
-  ro: { up: 'în creștere', down: 'în scădere', flat: 'neschimbat' },
-  en: { up: 'up', down: 'down', flat: 'unchanged' },
-}
-
-/** Price direction as a small arrow with a slow 2px drift; no number, no box. */
-function Trend({ change, locale }: { change: number; locale: Locale }) {
-  const dir = change > 0 ? 'up' : change < 0 ? 'down' : 'flat'
-  const Icon = { up: TrendUpIcon, down: TrendDownIcon, flat: TrendFlatIcon }[dir]
-  return (
-    <span
-      className={cx(
-        'inline-flex',
-        dir === 'up' && 'text-lime motion-safe:animate-trend-up',
-        dir === 'down' && 'text-down-on-forest motion-safe:animate-trend-down',
-        dir === 'flat' && 'text-on-forest-muted',
-      )}
-    >
-      <Icon className="size-4" />
-      <span className="sr-only">{trendWords[locale][dir]}</span>
-    </span>
-  )
 }
 
 /** Site header: logo, sections, language, one call to action. Mobile menu needs no JavaScript. */
@@ -96,31 +86,26 @@ export function SiteHeader({
   openPanel,
 }: SiteHeaderProps) {
   const overlay = tone === 'overlay'
-  // What fits shows: one price on a phone, three from `md`, diesel from `xl`, all crops on
-  // the widest screens. The strip never wraps or scrolls.
-  const tickerItems = ticker
-    ? [
-        ...ticker.crops.slice(0, 3).map((c, i) => ({
-          href: c.href,
-          name: c.name,
-          price: c.price,
-          unit: 'lei/t',
-          change: c.change as number | undefined,
-          fuel: false,
-          show: i === 0 ? 'block' : 'hidden md:block',
-        })),
-        ...(ticker.fuel ? [{ ...ticker.fuel, fuel: true, show: 'hidden xl:block' }] : []),
-        ...ticker.crops.slice(3).map((c) => ({
-          href: c.href,
-          name: c.name,
-          price: c.price,
-          unit: 'lei/t',
-          change: c.change as number | undefined,
-          fuel: false,
-          show: 'hidden 2xl:block',
-        })),
-      ]
+  // Diesel sits after the first three crops, as it always has.
+  const quotes: Quote[] = ticker
+    ? ticker.crops.map((c) => ({
+        key: c.crop,
+        name: c.name,
+        href: c.href,
+        price: c.price,
+        unit: 'lei/t',
+        change: c.change,
+        points: c.points,
+      }))
     : []
+  if (ticker?.fuel)
+    quotes.splice(Math.min(3, quotes.length), 0, {
+      key: 'diesel',
+      ...ticker.fuel,
+      decimals: 2,
+      fuel: true,
+      showUnit: true,
+    })
   const mega = nav.map((item) => {
     const shopPanel = item.panel === 'shop' && shop
     const hasPanel = shopPanel || !!item.children?.length
@@ -142,31 +127,18 @@ export function SiteHeader({
     <div className={cx(overlay && 'relative z-30')}>
       {ticker && (
         <div className="bg-forest text-caption text-on-forest">
-          <div className="mx-auto flex h-10 max-w-page items-center gap-6 px-4 md:px-8">
-            <ul className="flex min-w-0 items-center gap-5 overflow-hidden">
-              {tickerItems.map((t) => (
-                <li key={t.href} className={cx('whitespace-nowrap', t.show)}>
-                  <Link
-                    href={t.href}
-                    className="flex items-center gap-2 text-on-forest no-underline hover:text-lime"
-                  >
-                    {t.fuel && <FuelIcon className="size-4 text-lime" />}
-                    <span className="text-on-forest-muted">{t.name}</span>
-                    <span className="font-semibold tabular-nums">
-                      {formatNumber(t.price, locale)}
-                      {t.unit && (
-                        <span className="ml-1 font-normal text-on-forest-muted">{t.unit}</span>
-                      )}
-                    </span>
-                    {t.change !== undefined && <Trend change={t.change} locale={locale} />}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="mx-auto flex h-10 max-w-page items-center gap-4 px-4 md:gap-6 md:px-8">
+            <QuoteStrip
+              id="ticker-prices"
+              locale={locale}
+              quotes={quotes}
+              variant="bar"
+              className="-ml-4 flex-1 md:-ml-8"
+            />
             {ticker.link && (
               <Link
                 href={ticker.link.href}
-                className="ml-auto shrink-0 font-semibold text-lime no-underline hover:underline"
+                className="hidden shrink-0 font-semibold text-lime no-underline hover:underline lg:inline"
               >
                 {ticker.link.label}
               </Link>
@@ -174,13 +146,11 @@ export function SiteHeader({
             {ticker.phone && (
               <a
                 href={`tel:${ticker.phone!.replace(/\s/g, '')}`}
-                className={cx(
-                  'flex shrink-0 items-center gap-2 font-medium text-on-forest no-underline hover:text-lime',
-                  !ticker.link && 'ml-auto',
-                )}
+                aria-label={ticker.phone}
+                className="flex shrink-0 items-center gap-2 font-medium text-on-forest no-underline hover:text-lime"
               >
                 <PhoneIcon className="size-4" />
-                <span className="tabular-nums">{ticker.phone}</span>
+                <span className="hidden tabular-nums md:inline">{ticker.phone}</span>
               </a>
             )}
           </div>

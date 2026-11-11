@@ -1,13 +1,16 @@
 /**
  * Media uploads shared by the seed and `apply:redesign`: one upload per file, the hero
- * posters and the stills' focal points (Phase 7b).
+ * posters, the stills' focal points (Phase 7b) and the article covers.
  */
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import type { Payload } from 'payload'
 
+import type { Media } from '@/payload-types'
+
 import { posterAlt } from '../site/hero'
+import { coverBySlug, covers, genericStill } from './covers'
 import { posterKey } from './home'
 
 /**
@@ -69,4 +72,61 @@ export async function uploadPosters(payload: Payload) {
     })
   }
   return ids
+}
+
+/**
+ * The article covers (`./covers.ts`) into Media, each uploaded once. An existing upload is left
+ * as it is, so an editor's alt text or focal point survives later deploys.
+ */
+export async function uploadCovers(payload: Payload) {
+  const ids: Record<string, number> = {}
+  for (const [name, c] of Object.entries(covers)) {
+    const [existing] = await findUploads(payload, name)
+    if (existing) {
+      ids[name] = existing.id
+      continue
+    }
+    const filePath = resolve('scripts/seed/assets/covers', `${name}.webp`)
+    if (!existsSync(filePath)) continue
+    ids[name] = await uploadOnce(payload, filePath, name, c.alt, {
+      credit: 'Agrinvest (YouTube, 2022)',
+      focalX: c.focalX,
+      focalY: c.focalY,
+    })
+  }
+  return ids
+}
+
+/**
+ * Gives each guide and news piece its topic cover (by Romanian slug) while it has no cover or
+ * still shows one of the five generic stills. A cover an editor chose is never replaced.
+ * Drafts stay drafts. Returns how many texts changed.
+ */
+export async function assignCovers(payload: Payload, ids: Record<string, number>) {
+  const { docs } = await payload.find({
+    collection: 'guides',
+    where: { section: { in: ['ghid', 'stiri'] } },
+    locale: 'ro',
+    depth: 1,
+    draft: true,
+    pagination: false,
+    select: { slug: true, cover: true, _status: true },
+  })
+  let changed = 0
+  for (const doc of docs) {
+    const id = ids[coverBySlug.get(doc.slug ?? '') ?? '']
+    const cover = doc.cover as Media | number | null | undefined
+    const current = typeof cover === 'object' ? cover : null
+    if (!id || (cover && !(current?.filename && genericStill.test(current.filename)))) continue
+    await payload.update({
+      collection: 'guides',
+      id: doc.id,
+      locale: 'ro',
+      data: { cover: id } as never,
+      draft: doc._status !== 'published',
+      context: { skipChildren: true },
+    })
+    changed++
+  }
+  return changed
 }

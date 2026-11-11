@@ -31,6 +31,7 @@ import { applyToolsEntryPoints } from '../tools/entry-points'
 import { pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
 import { applyFinance } from '../finance/apply'
+import { refreshSectionNav } from '../site/refresh-nav'
 import { applyEntryPoints } from '../finance/entry-points'
 import { applyEnrichment } from '../products/apply'
 import { registerConfirmation, registerStatuses } from './register'
@@ -463,6 +464,7 @@ await seedPages(payload, { people: peopleIds, media: mediaIds })
 // After the pages and people it links to.
 await applyFinance(payload)
 await applyEntryPoints(payload)
+await refreshSectionNav(payload)
 // Price menu, footer and the logistics diesel widget (Phase 5); the seed and deploys share it.
 await applyToolsEntryPoints(payload)
 

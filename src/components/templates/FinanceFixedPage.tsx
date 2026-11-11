@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { ReviewNote, SourceList } from '@ds/patterns/Finance'
 import { schemaFaq } from '@/components/FactText'
+import { FinanceNav } from '@/components/FinanceNav'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
 import { Prose } from '@/components/RenderBlocks'
@@ -84,6 +85,7 @@ export async function FinanceFixedPage({ locale, route }: { locale: Locale; rout
         crumbs={crumbs}
         kicker={t.section}
       />
+      <FinanceNav locale={locale} current={route} />
       <div className="mx-auto mt-12 grid max-w-page gap-10 px-4 md:mt-16 md:px-8">
         {page.review?.legalStatus !== 'legal-approved' && (
           <div className="max-w-text">

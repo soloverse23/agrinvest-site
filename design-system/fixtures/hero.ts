@@ -1,5 +1,6 @@
 /** The home slider with the draft copy (scripts/site/hero.ts) for stories and shots. */
 import type { Locale } from '@/i18n/config'
+import { pricesUi } from '@/i18n/prices'
 import { sliderUi } from '@/i18n/ui'
 
 import { heroSlides } from '../../scripts/site/hero'
@@ -44,6 +45,7 @@ export const heroSliderProps = (
           price: c.prices[0],
           change: c.change,
           href: `/preturi/${c.key}`,
+          points: c.trend,
         })),
         fuel: {
           name: locale === 'ro' ? 'Motorină' : 'Diesel',
@@ -51,7 +53,9 @@ export const heroSliderProps = (
           unit: 'lei/l',
           change: -0.04,
           href: '/motorina',
+          points: [7.2, 7.18, 7.16, 7.16, 7.12],
         },
+        nav: { prev: pricesUi[locale].rail.prev, next: pricesUi[locale].rail.next },
       }
     : undefined,
   needs: [

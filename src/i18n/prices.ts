@@ -146,7 +146,12 @@ export const pricesUi = {
       privacy: 'Cum folosim datele',
     },
     base: { title: (base: string) => `Prețuri azi la ${base}` },
-    rail: { title: 'Prețul Agrinvest azi', place: 'Cel mai bun preț din baze' },
+    rail: {
+      title: 'Prețul Agrinvest azi',
+      place: 'Cel mai bun preț din baze',
+      prev: 'Prețurile anterioare',
+      next: 'Prețurile următoare',
+    },
     widget: {
       grainTitle: 'Prețuri cereale',
       grainLink: 'Toate prețurile',
@@ -305,7 +310,12 @@ export const pricesUi = {
       privacy: 'How we use your data',
     },
     base: { title: (base: string) => `Prices today at ${base}` },
-    rail: { title: 'Agrinvest’s price today', place: 'Best price across our bases' },
+    rail: {
+      title: 'Agrinvest’s price today',
+      place: 'Best price across our bases',
+      prev: 'Previous prices',
+      next: 'Next prices',
+    },
     widget: {
       grainTitle: 'Grain prices',
       grainLink: 'All prices',

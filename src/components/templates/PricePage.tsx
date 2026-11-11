@@ -9,7 +9,6 @@ import { SubscribeFormLazy } from '@ds/patterns/Lazy'
 import { CropBadge } from '@ds/patterns/parts'
 import { Callout, SectionHeading } from '@ds/patterns/Sections'
 import { GrainPrices } from '@ds/patterns/widgets/GrainPrices'
-import { NetPriceMini } from '@ds/patterns/widgets/NetPriceMini'
 import type { WidgetState } from '@ds/patterns/widgets/types'
 import { Badge } from '@ds/primitives/Badge'
 import { Button } from '@ds/primitives/Button'
@@ -153,11 +152,10 @@ export async function PricesHubPage({ locale }: { locale: Locale }) {
   const p = pricesUi[locale]
   const t = p.hub
   const url = pricesPath(locale)
-  const [{ overview, props }, notes, finance, mini] = await Promise.all([
+  const [{ overview, props }, notes, finance] = await Promise.all([
     grainPricesProps(locale, t.tableTitle),
     listMarketNotes(locale),
     financeItems(locale),
-    netPriceMiniProps(locale),
   ])
   const note = notes[0]
   const crumbs = [{ name: p.section, url }]
@@ -206,7 +204,6 @@ export async function PricesHubPage({ locale }: { locale: Locale }) {
               {t.allNotes}
             </Link>
           </section>
-          <NetPriceMini {...mini} />
         </div>
       </div>
       <div className="mt-16 grid gap-16 md:mt-24">
@@ -291,10 +288,7 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
   const p = pricesUi[locale]
   const t = p.crop
   const u = ui[locale]
-  const [finance, mini] = await Promise.all([
-    financeItems(locale),
-    netPriceMiniProps(locale, crop.key),
-  ])
+  const finance = await financeItems(locale)
   const crumbs = [
     { name: p.section, url: pricesPath(locale) },
     { name: crop.name, url: crop.href },
@@ -424,10 +418,10 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
           locale={locale}
           path={leadPath}
         />
-        <section className="mx-auto grid w-full max-w-page gap-8 px-4 md:px-8 lg:grid-cols-12">
+        <section className="mx-auto w-full max-w-page px-4 md:px-8">
           <div
             id="alerta"
-            className="scroll-mt-24 rounded-xl bg-raised p-6 shadow-raised ring-1 ring-line md:p-8 lg:col-span-7"
+            className="mx-auto max-w-3xl scroll-mt-24 rounded-xl bg-raised p-6 shadow-raised ring-1 ring-line md:p-8"
           >
             <SubscribeFormLazy
               locale={locale}
@@ -439,9 +433,6 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
               privacyHref={fixedUrl('privacy', locale)}
               labels={p.alert}
             />
-          </div>
-          <div className="lg:col-span-5">
-            <NetPriceMini {...mini} />
           </div>
         </section>
         <FinanceLinks kicker={t.financeKicker} title={t.financeTitle} items={finance} />

@@ -6,6 +6,7 @@ import { ui } from '@/i18n/ui'
 import { getFigures } from '@/lib/content/globals'
 
 import { FactText } from './FactText'
+import { SectionNav } from './SectionNav'
 
 /** Visible breadcrumb trail from home; matches the BreadcrumbList JSON-LD. */
 export function Crumbs({
@@ -44,15 +45,20 @@ export function PageTitle({
   aside?: ReactNode
 }) {
   return (
-    <PageHeader
-      breadcrumbs={<Crumbs locale={locale} items={crumbs} />}
-      kicker={kicker}
-      title={title}
-      summary={summary}
-      actions={actions}
-      aside={aside}
-      updated={updatedAt && <Updated locale={locale} label={ui[locale].updated} date={updatedAt} />}
-    />
+    <>
+      <PageHeader
+        breadcrumbs={<Crumbs locale={locale} items={crumbs} />}
+        kicker={kicker}
+        title={title}
+        summary={summary}
+        actions={actions}
+        aside={aside}
+        updated={
+          updatedAt && <Updated locale={locale} label={ui[locale].updated} date={updatedAt} />
+        }
+      />
+      <SectionNav locale={locale} url={crumbs[crumbs.length - 1]?.url ?? ''} />
+    </>
   )
 }
 

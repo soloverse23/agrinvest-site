@@ -401,3 +401,32 @@ Rehearse it per the deploy-rehearsal rule:
 - Manual: reduced-motion and Save-Data show posters only; keyboard through the slider and mega menu; mobile menu without JS.
 - Lighthouse **once** at the end (applied throttling, decision 0003): home LCP < 2.0 s with a poster LCP, CLS < 0.05.
 - Rich Results Test on the preview; owner review; merge only when asked.
+
+## 7b.5 Guides and news carousel (2026-11-11, uncommitted)
+
+Owner request: guides and news on the home page under the shop, as a simple card carousel with
+better cover photos.
+
+- `HomeStories` (`src/components/HomeStories.tsx`) → `StoryCarousel` (`design-system/patterns/StoryCarousel.tsx`,
+  story included): the 8 newest guides and news, covered pieces first; 4:5 photo cards, pillar or
+  "Știri Agrinvest" chip, date, title, two-line summary. CSS scroll-snap track (swipe works with
+  no script); the arrow pair is `CarouselNav` through `Lazy.tsx`, wide screens only.
+- Covers: 21 topic stills from the 1080p brand film (x5wm8dXlJt4), listed in
+  `scripts/seed/covers.ts` with alt text, focal point and the slugs they go on;
+  `npm run brand:covers` rebuilds them into `scripts/seed/assets/covers/` (yt-dlp command in
+  `scripts/brand/covers.ts`). Rights pending, as with the other stills.
+- `apply:redesign` step 4 uploads them once (cloud storage only) and sets them on guides and news
+  that have no cover or still show a generic still: the 20 briefs (drafts stay drafts), the demo
+  guides and the demo news. An editor's chosen cover is never replaced. Second run is a no-op.
+- Image `sizes` account for the 16:9 → 4:5 crop (about 2.2× the card width), or the cards look soft.
+- Pre-existing, not from this step: on a 390 px phone the "În direct din câmp" section makes the
+  home page 580 px wide (sideways scroll).
+
+## 7b.6 Quote strip for prices (2026-11-11, uncommitted)
+
+The owner found the boxed hero rail and the arrow-only header ticker weak, and asked for a market-quote strip instead (name, price, small trend line, change in lei and %). They approved the concept shots: hero strip + header bar + phone, a 30-day trend line, and swipe with ‹ › buttons (nothing auto-scrolls).
+
+- `design-system/patterns/QuoteStrip.tsx` (server, no script): `hero` variant under the home slider, `bar` variant above the header on inner pages. Each line has a dot on today; the hero line also has a dotted mark at the previous price. Colours come from the existing forest tokens (`lime` up, `down-on-forest` down). Crop prices show no unit because the strip title says lei/t; diesel shows its own unit.
+- Data: `railRows` now returns `points` (the best price per day over the 30 days up to the latest); `dieselTicker` returns the Oil Bulletin weeks of the last 30 days, and no line when Agrinvest's own diesel price is published.
+- ‹ › buttons: only in the hero (`CarouselNav` got `tone="forest"` and `hideIdle`). In the header bar, buttons put `/finantare/aplica` over the 160 KB budget (160.9 KB), so the bar swipes and fades at the right edge instead. Now 159.4 KB; 0 pages over budget.
+- Checks: typecheck, lint, build and budget pass. The ticker and home e2e tests pass against `next start`. `test:int` still has only the known demo-data alert failure.

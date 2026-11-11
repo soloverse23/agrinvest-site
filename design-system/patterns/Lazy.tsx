@@ -29,3 +29,5 @@ export const BuyFormLazy = dynamic(() => import('./BuyForm').then((m) => m.BuyFo
 export const DoseCalculatorLazy = dynamic(() =>
   import('./DoseCalculator').then((m) => m.DoseCalculator),
 )
+/** The home guides carousel's arrows: only the home page downloads them. */
+export const CarouselNavLazy = dynamic(() => import('./CarouselNav').then((m) => m.CarouselNav))

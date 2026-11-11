@@ -27,7 +27,10 @@ import { basePath, cropPath } from '@/i18n/routes'
 import { isGrainKey } from '@/lib/crops'
 import { fixedUrl, sliderUi, ui } from '@/i18n/ui'
 import { slugify } from '@/lib/slugify'
+import { financeUi } from '@/i18n/finance'
+import { innerUi } from '@/i18n/inner'
 import { financeProductPath } from '@/i18n/routes'
+import { byFinanceOrder, financeGroupIds, groupFor } from '@/lib/finance/groups'
 import { listFinanceProducts } from '@/lib/content/finance'
 import { getFigures, type Figures } from '@/lib/content/globals'
 import { listBases, listCounties, listCrops } from '@/lib/content/locations'
@@ -643,32 +646,68 @@ export async function LeadFormBlock({
     extra.includes('crop') ? listCrops(locale) : [],
     extra.includes('base') ? listBases(locale) : [],
   ])
+  const form = (
+    <LeadForm
+      locale={locale}
+      type={block.leadType}
+      action={submitLead}
+      heading={block.heading}
+      body={block.body}
+      extra={extra}
+      defaults={preset}
+      products={products}
+      options={{
+        county: counties.map((c) => ({ value: String(c.id), label: c.name })),
+        crop: crops.map((c) => ({ value: String(c.id), label: c.name })),
+        base: bases.map((b) => ({ value: String(b.id), label: b.name })),
+      }}
+      sourcePath={localePath(path, locale)}
+      privacyHref={fixedUrl('privacy', locale)}
+    />
+  )
+  // The contact page is the form. Everywhere else the long form stays closed until asked for,
+  // so it no longer splits the page; a link to `#cerere` opens it.
+  const isContact =
+    `/${path}`
+      .replace(/^\/+/, '/')
+      .replace(/^\/en(?=\/|$)/, '')
+      .replace(/\/$/, '') === '/contact'
+  const t = innerUi[locale].request
   return (
-    <Section id="cerere">
-      <div className="mx-auto max-w-3xl rounded-xl bg-raised p-6 shadow-raised ring-1 ring-line md:p-10">
-        <LeadForm
-          locale={locale}
-          type={block.leadType}
-          action={submitLead}
-          heading={block.heading}
-          body={block.body}
-          extra={extra}
-          defaults={preset}
-          products={products}
-          options={{
-            county: counties.map((c) => ({ value: String(c.id), label: c.name })),
-            crop: crops.map((c) => ({ value: String(c.id), label: c.name })),
-            base: bases.map((b) => ({ value: String(b.id), label: b.name })),
-          }}
-          sourcePath={localePath(path, locale)}
-          privacyHref={fixedUrl('privacy', locale)}
-        />
-      </div>
+    <Section>
+      {isContact ? (
+        <div
+          id="cerere"
+          className="mx-auto max-w-3xl rounded-xl bg-raised p-6 shadow-raised ring-1 ring-line md:p-10"
+        >
+          {form}
+        </div>
+      ) : (
+        <details
+          id="cerere"
+          className="group mx-auto max-w-3xl scroll-mt-24 rounded-xl bg-raised shadow-raised ring-1 ring-line"
+        >
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 md:px-10 [&::-webkit-details-marker]:hidden">
+            <span className="text-h4 font-semibold text-ink">{t.prompt}</span>
+            <span className="inline-flex h-12 items-center rounded-md bg-accent px-6 font-semibold text-on-accent group-open:hidden">
+              {t.open}
+            </span>
+          </summary>
+          <div className="p-6 pt-0 md:p-10 md:pt-0">{form}</div>
+          <script
+            // Opens the section the address points to (#cerere); costs no client bundle.
+            dangerouslySetInnerHTML={{
+              __html:
+                "(function(){function o(){var e=document.getElementById(decodeURIComponent(location.hash.slice(1))),b=e&&(e.tagName=='DETAILS'?e:e.closest('details'));if(b&&!b.open){b.open=true;b.scrollIntoView()}}o();addEventListener('hashchange',o)})()",
+            }}
+          />
+        </details>
+      )}
     </Section>
   )
 }
 
-/** The credit products on the finance hub. Nested pages appear under their parent. */
+/** The credit products on the finance hub, in three groups by need. Nested pages sit under their parent. */
 async function FinanceProductsSection({
   block,
   locale,
@@ -679,42 +718,57 @@ async function FinanceProductsSection({
   figures: Figures
 }) {
   const products = await listFinanceProducts(locale)
-  const top = products.filter((p) => !p.parentSlug)
+  const top = byFinanceOrder(products.filter((p) => !p.parentSlug))
+  const groupsUi = financeUi[locale].groups
   return (
     <Section id="produse">
       <SectionHeading kicker={block.kicker} title={block.heading} lead={block.lead} />
-      <ul className="mt-8 grid gap-4 md:grid-cols-2">
-        {top.map((p) => {
-          const children = products.filter((c) => c.parentSlug === p.slug)
+      <div className="mt-8 grid gap-10">
+        {financeGroupIds.map((id) => {
+          const inGroup = top.filter((p) => groupFor(p.slug) === id)
+          if (!inGroup.length) return null
           return (
-            <li
-              key={p.id}
-              className="grid content-start gap-3 rounded-lg bg-raised p-6 ring-1 ring-line"
-            >
-              <h3 className="text-h4 font-semibold">
-                <Link href={financeProductPath(p.slug, locale)} className="text-ink">
-                  {p.title}
-                </Link>
-              </h3>
-              <p className="text-small text-muted">{fact(p.answer, { figures, locale })}</p>
-              {children.length > 0 && (
-                <ul className="flex flex-wrap gap-x-4 gap-y-1 text-small">
-                  {children.map((c) => (
-                    <li key={c.id}>
-                      <Link
-                        href={financeProductPath(c.slug, locale, p.slug)}
-                        className="text-accent underline underline-offset-2"
-                      >
-                        {c.title}
-                      </Link>
+            <div key={id} id={`grupa-${id}`} className="grid gap-4">
+              <div>
+                <h3 className="text-h3 font-semibold">{groupsUi[id].title}</h3>
+                <p className="mt-1 text-small text-muted">{groupsUi[id].lead}</p>
+              </div>
+              <ul className="grid gap-4 md:grid-cols-2">
+                {inGroup.map((p) => {
+                  const children = products.filter((c) => c.parentSlug === p.slug)
+                  return (
+                    <li
+                      key={p.id}
+                      className="grid content-start gap-3 rounded-lg bg-raised p-6 ring-1 ring-line"
+                    >
+                      <h4 className="text-h4 font-semibold">
+                        <Link href={financeProductPath(p.slug, locale)} className="text-ink">
+                          {p.title}
+                        </Link>
+                      </h4>
+                      <p className="text-small text-muted">{fact(p.answer, { figures, locale })}</p>
+                      {children.length > 0 && (
+                        <ul className="flex flex-wrap gap-x-4 gap-y-1 text-small">
+                          {children.map((c) => (
+                            <li key={c.id}>
+                              <Link
+                                href={financeProductPath(c.slug, locale, p.slug)}
+                                className="text-accent underline underline-offset-2"
+                              >
+                                {c.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
-                  ))}
-                </ul>
-              )}
-            </li>
+                  )
+                })}
+              </ul>
+            </div>
           )
         })}
-      </ul>
+      </div>
     </Section>
   )
 }

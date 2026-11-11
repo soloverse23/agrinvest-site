@@ -2,16 +2,15 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import type { Locale } from '@/i18n/config'
-import { formatDate, formatNumber } from '@/lib/format'
+import { formatDate } from '@/lib/format'
 
 import type { CropKey } from '../fixtures/sample'
 import { ArrowRightIcon } from '../icons/icons'
-import { FuelIcon } from '../icons/server'
-import { Delta } from '../primitives/Delta'
 import { HeroCopy, type HeroProps } from './Hero'
 import type { CarouselLabels } from './HeroCarousel'
-import { HeroCarouselLazy as HeroCarousel } from './Lazy'
+import { CarouselNavLazy as CarouselNav, HeroCarouselLazy as HeroCarousel } from './Lazy'
 import { Photo } from './Photo'
+import { QuoteStrip, type Quote } from './QuoteStrip'
 
 export type HeroSlide = {
   eyebrow: string
@@ -35,9 +34,26 @@ export type HeroRailPrices = {
   unit: string
   date: Date
   all: { href: string; label: string }
-  rows: { crop: CropKey; name: string; price: number; change: number; href: string }[]
+  rows: {
+    crop: CropKey
+    name: string
+    price: number
+    change: number
+    href: string
+    /** The last 30 days, oldest first (trend line). */
+    points?: number[]
+  }[]
   /** Diesel: Agrinvest's own price, else the EU Oil Bulletin average. */
-  fuel?: { name: string; price: number; unit: string; change?: number; href: string } | null
+  fuel?: {
+    name: string
+    price: number
+    unit: string
+    change?: number
+    href: string
+    points?: number[]
+  } | null
+  /** The ‹ › buttons' names, when the prices don't fit. */
+  nav: { prev: string; next: string }
 }
 
 export type HeroSliderProps = {
@@ -129,76 +145,60 @@ export function HeroSlider({
   )
 }
 
-/** Each price links to its own page; on phones the row scrolls sideways inside itself. */
+/**
+ * Today's prices as a quote strip: each price links to its own page, with its 30-day line and
+ * the change in lei and percent. On phones the row swipes sideways.
+ */
 function PriceRail({ locale, prices }: { locale: Locale; prices: HeroRailPrices }) {
-  const item =
-    'flex w-full min-w-32 shrink-0 snap-start flex-col gap-1 rounded-md px-3 py-2 text-on-forest no-underline ring-1 ring-on-forest/15 transition-colors duration-150 hover:bg-on-forest/10 hover:ring-on-forest/30 lg:min-w-0'
+  const quotes: Quote[] = [
+    ...prices.rows.map((r) => ({
+      key: r.crop,
+      name: r.name,
+      href: r.href,
+      price: r.price,
+      unit: prices.unit,
+      change: r.change,
+      points: r.points,
+    })),
+    ...(prices.fuel
+      ? [{ key: 'diesel', ...prices.fuel, decimals: 2, fuel: true, showUnit: true } satisfies Quote]
+      : []),
+  ]
   return (
     <aside
       aria-label={prices.title}
-      className="grid gap-3 border-t border-on-forest/20 py-4 md:py-5 lg:grid-cols-12 lg:items-center lg:gap-6"
+      className="grid gap-2 border-t border-on-forest/20 py-3 md:py-4 lg:flex lg:items-center lg:gap-4"
     >
-      <div className="flex items-baseline justify-between gap-4 lg:col-span-3 lg:grid lg:justify-start lg:gap-1">
-        <h2 className="text-small font-semibold">{prices.title}</h2>
-        <p className="text-caption text-on-forest-muted">
-          {prices.place} · {formatDate(prices.date, locale)}
-          <span className="block">{prices.unit}</span>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5 lg:w-48 lg:flex-nowrap lg:shrink-0 lg:flex-col lg:items-start lg:gap-1 lg:border-r lg:border-on-forest/15 lg:pr-5">
+        <h2 className="text-small font-semibold whitespace-nowrap">{prices.title}</h2>
+        <p className="order-last basis-full text-caption text-on-forest-muted lg:order-none lg:basis-auto">
+          {formatDate(prices.date, locale)} · {prices.unit}
+          <span className="hidden lg:block">{prices.place}</span>
         </p>
         <Link
           href={prices.all.href}
-          className="hidden items-center gap-1.5 pt-1 text-small font-semibold text-lime no-underline hover:underline lg:inline-flex"
+          className="inline-flex shrink-0 items-center gap-1.5 text-caption font-semibold text-lime no-underline hover:underline lg:pt-1 lg:text-small"
         >
           {prices.all.label}
           <ArrowRightIcon className="size-4" />
         </Link>
       </div>
-      <ul
-        data-scroll-x
-        className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 [scrollbar-width:none] md:mx-0 md:px-0 lg:col-span-9 lg:grid lg:auto-cols-fr lg:grid-flow-col lg:overflow-visible"
-      >
-        {prices.rows.map((row) => (
-          <li key={row.crop} className="flex shrink-0 lg:min-w-0">
-            <Link href={row.href} className={item}>
-              <span className="truncate text-caption text-on-forest-muted">{row.name}</span>
-              <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-h4 font-semibold tabular-nums">
-                  {formatNumber(row.price, locale)}
-                </span>
-                <Delta value={row.change} locale={locale} size="sm" />
-              </span>
-            </Link>
-          </li>
-        ))}
-        {prices.fuel && (
-          <li className="flex shrink-0 lg:min-w-0">
-            <Link href={prices.fuel.href} className={item}>
-              <span className="flex items-center gap-1.5 truncate text-caption text-on-forest-muted">
-                <FuelIcon className="size-3.5 shrink-0 text-lime" />
-                {prices.fuel.name}
-              </span>
-              <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-h4 font-semibold whitespace-nowrap tabular-nums">
-                  {formatNumber(prices.fuel.price, locale, 2)}
-                  <span className="ml-1 text-caption font-normal text-on-forest-muted">
-                    {prices.fuel.unit}
-                  </span>
-                </span>
-                {prices.fuel.change != null && (
-                  <Delta value={prices.fuel.change} locale={locale} size="sm" />
-                )}
-              </span>
-            </Link>
-          </li>
-        )}
-        <li className="flex lg:hidden">
-          <Link href={prices.all.href} className={`${item} justify-center font-semibold text-lime`}>
-            <span className="inline-flex items-center gap-1.5 text-small">
-              {prices.all.label}
-              <ArrowRightIcon className="size-4" />
-            </span>
-          </Link>
-        </li>
-      </ul>
+      <QuoteStrip
+        id="hero-prices"
+        locale={locale}
+        quotes={quotes}
+        variant="hero"
+        nav={
+          <CarouselNav
+            track="hero-prices"
+            labels={prices.nav}
+            tone="forest"
+            hideIdle
+            className="hidden shrink-0 md:flex"
+          />
+        }
+        className="-mx-3 min-w-0 flex-1 lg:mx-0"
+      />
     </aside>
   )
 }

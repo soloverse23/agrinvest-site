@@ -229,7 +229,8 @@ test.describe('Core page content', () => {
   test('the menu lists sub-pages in the HTML (no JavaScript needed)', async ({ page }) => {
     await page.goto('/')
     const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
-    await expect(nav.locator('a[href="/cereale/grau"]')).toHaveCount(1)
+    await expect(nav.locator('a[href="/preturi/grau"]')).toHaveCount(1)
+    await expect(nav.locator('a[href="/cereale"]')).toHaveCount(1)
     await expect(nav.locator('a[href="/depozitare"]')).toHaveCount(1)
   })
 
@@ -548,7 +549,7 @@ test.describe('Finance tools', () => {
       'href',
       '/finantare/aplica?produs=credit-productie',
     )
-    await expect(page.getByRole('link', { name: 'Simulează ratele' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Simulează ratele' }).first()).toHaveAttribute(
       'href',
       '/finantare/simulator',
     )
@@ -587,7 +588,9 @@ test.describe('Finance cross-selling', () => {
     for (const url of ['/cereale/grau', '/baze/pogoanele', '/en/grain/wheat']) {
       await page.goto(url)
       await expect(
-        page.locator('a[href$="/finantare-stocuri"], a[href$="/stock-financing"]').first(),
+        page
+          .locator('main a[href$="/finantare-stocuri"], main a[href$="/stock-financing"]')
+          .first(),
       ).toBeVisible()
     }
   })
@@ -844,5 +847,52 @@ test.describe('Guides and news (Phase 6)', () => {
     await page.goto('/despre')
     await expect(page.locator('header a[href="/ghiduri"]').first()).toBeAttached()
     await expect(page.locator('footer a[href="/ghiduri"]').first()).toBeAttached()
+  })
+})
+
+test.describe('Inner pages are tidied (Phase 7d)', () => {
+  test('a page shows the links of its section under the title', async ({ page }) => {
+    await page.goto('/cereale/grau')
+    const nav = page.getByRole('navigation', { name: 'În secțiunea Prețuri și vânzare' })
+    await expect(nav.getByRole('link', { name: 'Vinde cereale' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+    await expect(nav.getByRole('link', { name: 'Prețuri cereale' })).toBeVisible()
+  })
+
+  test('the long request form stays closed until asked for', async ({ page }) => {
+    await page.goto('/cereale/grau')
+    const box = page.locator('details#cerere')
+    await expect(box).not.toHaveAttribute('open', '')
+    await box.getByText('Completează cererea').click()
+    await expect(box.getByLabel('Nume și prenume', { exact: true })).toBeVisible()
+  })
+
+  test('a link to the request form opens it', async ({ page }) => {
+    await page.goto('/cereale/grau#cerere')
+    await expect(page.locator('details#cerere')).toHaveAttribute('open', '')
+  })
+
+  test('a finance page links to the rest of the section', async ({ page }) => {
+    await page.goto('/finantare/credit-productie')
+    const nav = page.getByRole('navigation', { name: 'În secțiunea Finanțare' })
+    await expect(nav.getByRole('link', { name: 'Simulator de rate' })).toBeVisible()
+    await expect(nav.getByRole('link', { name: 'Despre IFN' })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Trimite o cerere' }).first()).toBeVisible()
+  })
+
+  test('the finance hub groups its loans by need', async ({ page }) => {
+    await page.goto('/finantare')
+    for (const title of ['Bani pentru sezon', 'Investiții în fermă', 'Situații speciale'])
+      await expect(page.getByRole('heading', { name: title, level: 3 })).toBeVisible()
+  })
+
+  test('the price page no longer repeats the calculator', async ({ page }) => {
+    await page.goto('/preturi/grau')
+    await expect(page.getByRole('heading', { name: 'Calculează prețul net' })).toHaveCount(0)
+    await expect(
+      page.getByRole('navigation', { name: 'Pasul următor' }).getByRole('link').first(),
+    ).toBeVisible()
   })
 })

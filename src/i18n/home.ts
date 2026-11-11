@@ -49,6 +49,15 @@ export const homeUi = {
       picks: 'Din magazin',
       all: 'Toate produsele',
     },
+    stories: {
+      kicker: 'Ghiduri și noutăți',
+      title: 'Ce merită știut în fermă, sezon de sezon',
+      all: 'Toate ghidurile',
+      news: 'Știri Agrinvest',
+      read: 'Citește',
+      prev: 'Articolele anterioare',
+      next: 'Articolele următoare',
+    },
     finance: {
       kicker: 'Agrinvest Credit IFN',
       title: 'Rate după recoltă',
@@ -121,6 +130,15 @@ export const homeUi = {
       crops: 'For your crop',
       picks: 'From the shop',
       all: 'All products',
+    },
+    stories: {
+      kicker: 'Guides and news',
+      title: 'What is worth knowing on the farm, season by season',
+      all: 'All guides',
+      news: 'Agrinvest news',
+      read: 'Read',
+      prev: 'Previous articles',
+      next: 'Next articles',
     },
     finance: {
       kicker: 'Agrinvest Credit IFN',

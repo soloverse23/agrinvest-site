@@ -11,6 +11,7 @@ import { SiteShell } from '@/components/SiteShell'
 import { HomeCompany, HomeFinanceTools } from '@/components/HomeCompany'
 import { HomeLive } from '@/components/HomeLive'
 import { HomeShop } from '@/components/HomeShop'
+import { HomeStories } from '@/components/HomeStories'
 import { pricesUi } from '@/i18n/prices'
 import { cropPricePath, dieselPath, pricesPath } from '@/i18n/routes'
 import { toolsUi } from '@/i18n/tools'
@@ -80,6 +81,7 @@ export default async function CmsPage(props: Props) {
         unit: 'lei/t',
         date: rail.date,
         all: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
+        nav: { prev: r.prev, next: r.next },
         // Each price opens its own page; diesel rides along (the slider's rail shows it).
         rows: rail.rows.map((row) => ({ ...row, href: cropPricePath(row.slug, locale) })),
         fuel: fuel
@@ -108,7 +110,8 @@ export default async function CmsPage(props: Props) {
       )}
       {page.isHome && heroFirst ? (
         // Home (Phase 7b): the hero slider, then sections drawn in code: live prices and
-        // updates, the shop, financing and tools, the company. The CMS keeps only the hero.
+        // updates, the shop, guides and news, financing and tools, the company. The CMS keeps
+        // only the hero.
         <>
           <RenderBlocks
             blocks={page.layout?.slice(0, 1)}
@@ -119,6 +122,7 @@ export default async function CmsPage(props: Props) {
           <div className="mt-12 grid gap-20 md:mt-16 md:gap-28">
             <HomeLive locale={locale} />
             <HomeShop locale={locale} />
+            <HomeStories locale={locale} />
             <HomeFinanceTools locale={locale} />
             <HomeCompany locale={locale} />
           </div>

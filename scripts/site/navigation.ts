@@ -8,7 +8,12 @@
  * panel shows live categories with counts; the children listed here are what the mobile
  * menu and a crawler without the panel see.
  */
-import { financeMenu } from '../finance/entry-points'
+import {
+  financeFooterColumn,
+  financeGroups,
+  financeLoanCount,
+  financeMenu,
+} from '../finance/entry-points'
 
 export type Locale = 'ro' | 'en'
 type Link = { label: string; href: string }
@@ -38,12 +43,6 @@ const cropNames: Record<Locale, [string, string][]> = {
     ['rapeseed', 'Rapeseed'],
     ['barley', 'Barley'],
   ],
-}
-
-/** Group headings that the finance panel's four links fall under, in order. */
-const financeGroups: Record<Locale, [string, string]> = {
-  ro: ['Credite', 'Instrumente'],
-  en: ['Loans', 'Tools'],
 }
 
 function build(locale: Locale): NavEntry[] {
@@ -127,6 +126,12 @@ function build(locale: Locale): NavEntry[] {
           group: ro ? 'Prețuri la cereale' : 'Grain prices',
         })),
         {
+          label: ro ? 'Vinde cereale' : 'Sell grain',
+          href: path.grain,
+          description: ro ? 'Oferta pentru toate culturile' : 'An offer for every crop',
+          group: ro ? 'Vinde cereale' : 'Sell grain',
+        },
+        {
           label: ro ? 'Îngrășăminte' : 'Fertilisers',
           href: ro ? '/preturi/ingrasaminte' : '/en/prices/fertilisers',
           description: ro ? 'Pe ambalaj și pe kg' : 'Per pack and per kg',
@@ -164,7 +169,10 @@ function build(locale: Locale): NavEntry[] {
       href: finance.href,
       panel: 'links',
       blurb: finance.blurb,
-      children: finance.children.map((c, i) => ({ ...c, group: i < 2 ? loans : instruments })),
+      children: finance.children.map((c, i) => ({
+        ...c,
+        group: i < financeLoanCount ? loans : instruments,
+      })),
     },
     {
       label: ro ? 'Compania' : 'Company',
@@ -174,17 +182,6 @@ function build(locale: Locale): NavEntry[] {
         ? 'O companie agricolă cu capital românesc, care lucrează direct cu fermierii.'
         : 'A Romanian-owned agribusiness that works directly with farmers.',
       children: [
-        {
-          label: ro ? 'Vinde cereale' : 'Sell grain',
-          href: path.grain,
-          description: ro ? 'Oferta pentru toate culturile' : 'An offer for every crop',
-          group: ro ? 'Vinde cereale' : 'Sell grain',
-        },
-        ...crops.map(([slug, label]) => ({
-          label,
-          href: `${path.grain}/${slug}`,
-          group: ro ? 'Vinde cereale' : 'Sell grain',
-        })),
         {
           label: ro ? 'Depozitare și uscare' : 'Storage and drying',
           href: path.storage,
@@ -287,6 +284,7 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
         title: 'Prețuri și unelte',
         links: [
           { label: 'Prețuri cereale', href: '/preturi' },
+          { label: 'Vinde cereale', href: '/cereale' },
           { label: 'Calculator preț net', href: '/preturi/calculator-pret-net' },
           { label: 'Prețuri îngrășăminte', href: '/preturi/ingrasaminte' },
           { label: 'Motorină', href: '/motorina' },
@@ -295,18 +293,11 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
       },
       {
         title: 'Finanțare',
-        links: [
-          { label: 'Finanțare', href: '/finantare' },
-          { label: 'Credit de producție', href: '/finantare/credit-productie' },
-          { label: 'Credit de investiții', href: '/finantare/credit-investitii' },
-          { label: 'Simulator de rate', href: '/finantare/simulator' },
-          { label: 'Cerere de credit', href: '/finantare/aplica' },
-        ],
+        links: financeFooterColumn.ro,
       },
       {
         title: 'Compania',
         links: [
-          { label: 'Vinde cereale', href: '/cereale' },
           { label: 'Depozitare', href: '/depozitare' },
           { label: 'Uscare și precurățare', href: '/depozitare/uscare' },
           { label: 'Logistică', href: '/logistica' },
@@ -347,6 +338,7 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
         title: 'Prices and tools',
         links: [
           { label: 'Grain prices', href: '/en/prices' },
+          { label: 'Sell grain', href: '/en/grain' },
           { label: 'Net price calculator', href: '/en/prices/net-price-calculator' },
           { label: 'Fertiliser prices', href: '/en/prices/fertilisers' },
           { label: 'Diesel', href: '/en/diesel' },
@@ -355,18 +347,11 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
       },
       {
         title: 'Financing',
-        links: [
-          { label: 'Financing', href: '/en/financing' },
-          { label: 'Production credit', href: '/en/financing/production-credit' },
-          { label: 'Investment credit', href: '/en/financing/investment-credit' },
-          { label: 'Repayment simulator', href: '/en/financing/simulator' },
-          { label: 'Loan application', href: '/en/financing/apply' },
-        ],
+        links: financeFooterColumn.en,
       },
       {
         title: 'Company',
         links: [
-          { label: 'Sell grain', href: '/en/grain' },
           { label: 'Storage', href: '/en/storage' },
           { label: 'Drying and cleaning', href: '/en/storage/drying' },
           { label: 'Logistics', href: '/en/logistics' },

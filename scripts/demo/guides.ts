@@ -11,6 +11,8 @@ import { getPayload } from 'payload'
 
 import { rt } from '@/lib/richtext'
 
+import { assignCovers, uploadCovers } from '../seed/media'
+
 import { assertLocal, clearNextCache, Demo, loadManifest, monday, rng, saveManifest } from './kit'
 
 assertLocal()
@@ -410,6 +412,10 @@ for (const [i, doc] of guidesDone ? [] : news.entries())
 const team = await media('team-2.webp')
 if (author && team && !guidesDone)
   await demo.change('people', author.id, ['photo'], { photo: team })
+
+// Topic covers from the brand film in place of the generic stills (as `apply:redesign` does).
+const coverIds = await uploadCovers(payload)
+await assignCovers(payload, coverIds)
 
 demo.save()
 clearNextCache()

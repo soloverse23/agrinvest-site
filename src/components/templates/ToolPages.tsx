@@ -42,6 +42,7 @@ import { subscribe } from '@/lib/subscriptions/actions'
 import { packLabel, PriceMark, unitPriceLabel } from './ShopParts'
 import { CC_BY } from './PricePage'
 import { ToolLinks } from '@/components/ToolLinks'
+import { innerUi } from '@/i18n/inner'
 
 /**
  * Fertiliser prices (5.3), diesel (5.4) and news (5.6): one page each, in both languages. Kept
@@ -397,6 +398,40 @@ export const newsMetadata = async (locale: Locale) => {
   return meta(locale, toolsUi[locale].news, newsAlternates, !headlines.length && !own.length)
 }
 
+/** The press feed shows this many headlines; the rest wait behind one button. */
+const FEED_FIRST = 12
+
+type Headline = Awaited<ReturnType<typeof listHeadlines>>[number]
+
+/** A compact list: date and source, then the headline. The summary stays on the source. */
+function HeadlineList({ headlines, locale }: { headlines: Headline[]; locale: Locale }) {
+  return (
+    <ol className="grid divide-y divide-line border-y border-line">
+      {headlines.map((h) => {
+        const date = new Date(h.publishedAt)
+        return (
+          <li key={h.id} className="grid gap-1 py-4 md:grid-cols-[9rem_1fr] md:gap-6">
+            <div className="flex items-baseline gap-2 text-caption text-subtle md:grid md:content-start md:gap-0.5">
+              <time dateTime={date.toISOString()} className="font-semibold text-ink">
+                {formatShortDate(date, locale)}
+              </time>
+              <span>{h.source}</span>
+            </div>
+            <a
+              href={h.url}
+              rel="noopener"
+              lang="ro"
+              className="text-body leading-snug font-semibold text-ink hover:text-accent"
+            >
+              {h.title}
+            </a>
+          </li>
+        )
+      })}
+    </ol>
+  )
+}
+
 /**
  * `/stiri`: Agrinvest's own news first (a lead story and a grid of cards, written in the
  * admin), then the farm-press headlines beside the market notes and the newsletter.
@@ -469,43 +504,17 @@ export async function NewsPage({ locale }: { locale: Locale }) {
             {t.feed}
           </h2>
           {headlines.length ? (
-            <ol className="grid divide-y divide-line border-y border-line">
-              {headlines.map((h) => {
-                const date = new Date(h.publishedAt)
-                return (
-                  <li key={h.id} className="grid gap-4 py-5 md:grid-cols-[7rem_1fr] md:gap-6">
-                    <div className="flex items-baseline gap-2 text-caption text-subtle md:grid md:content-start md:gap-1">
-                      <time dateTime={date.toISOString()} className="font-semibold text-ink">
-                        {formatShortDate(date, locale)}
-                      </time>
-                      <span>{h.source}</span>
-                    </div>
-                    <div className="grid gap-1.5">
-                      <a
-                        href={h.url}
-                        rel="noopener"
-                        lang="ro"
-                        className="text-body leading-snug font-semibold text-ink hover:text-accent"
-                      >
-                        {h.title}
-                      </a>
-                      {h.excerpt && (
-                        <p lang="ro" className="text-small text-muted">
-                          {h.excerpt}
-                        </p>
-                      )}
-                      <a
-                        href={h.url}
-                        rel="noopener"
-                        className="w-fit text-caption text-muted underline underline-offset-2"
-                      >
-                        {t.readAt(h.source)}
-                      </a>
-                    </div>
-                  </li>
-                )
-              })}
-            </ol>
+            <>
+              <HeadlineList headlines={headlines.slice(0, FEED_FIRST)} locale={locale} />
+              {headlines.length > FEED_FIRST && (
+                <details className="group">
+                  <summary className="inline-flex h-12 cursor-pointer list-none items-center rounded-md bg-raised px-6 font-semibold text-ink shadow-soft ring-1 ring-line-strong ring-inset group-open:hidden [&::-webkit-details-marker]:hidden">
+                    {innerUi[locale].moreNews(headlines.length - FEED_FIRST)}
+                  </summary>
+                  <HeadlineList headlines={headlines.slice(FEED_FIRST)} locale={locale} />
+                </details>
+              )}
+            </>
           ) : (
             <p className="text-body text-muted">{t.empty}</p>
           )}

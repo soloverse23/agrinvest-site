@@ -55,7 +55,8 @@
     "apply:articles": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/articles/run.ts",
     "apply:redesign": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/redesign/run.ts",
     "apply:shop": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/shop-redesign/run.ts",
-    "check:articles": "tsx --env-file-if-exists=.env scripts/checks/articles.ts"
+    "check:articles": "tsx --env-file-if-exists=.env scripts/checks/articles.ts",
+    "brand:covers": "tsx scripts/brand/covers.ts"
   },
   "dependencies": {
     "@fontsource-variable/onest": "^5.3.1",

@@ -27,12 +27,15 @@ export const headerProps = (locale: Locale): SiteHeaderProps => ({
       price: c.prices[0],
       change: c.change,
       href: `/preturi/${c.key}`,
+      points: c.trend,
     })),
     fuel: {
       name: locale === 'ro' ? 'Motorină' : 'Diesel',
       price: 7.12,
       unit: 'lei/l',
+      change: -0.04,
       href: '/motorina',
+      points: [7.2, 7.18, 7.16, 7.16, 7.12],
     },
   },
 })

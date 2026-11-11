@@ -7,14 +7,13 @@ import { FinanceLinks } from '@ds/patterns/Finance'
 import { CropBadge } from '@ds/patterns/parts'
 import { KeyFacts, SectionHeading } from '@ds/patterns/Sections'
 import { GrainPrices } from '@ds/patterns/widgets/GrainPrices'
-import { NetPriceMini } from '@ds/patterns/widgets/NetPriceMini'
 import { Button } from '@ds/primitives/Button'
 import { FactText, resolveFacts, schemaFaq } from '@/components/FactText'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
 import { LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
-import { grainPricesProps, netPriceMiniProps } from '@/components/templates/PricePage'
+import { grainPricesProps } from '@/components/templates/PricePage'
 import { grainItems } from '@/lib/prices/overview'
 import { localePath, type Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
@@ -102,13 +101,12 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
   const t = copy[locale]
   const u = ui[locale]
   const path = cropPath(crop.slug, locale)
-  const [hub, figures, crops, finance, prices, mini] = await Promise.all([
+  const [hub, figures, crops, finance, prices] = await Promise.all([
     getPage(fixedPaths.grain[locale], locale).then((p) => p?.page),
     getFigures(locale),
     listCrops(locale),
     financeLinks(['finantare-stocuri', 'credit-contracte-cereale'], locale),
     grainPricesProps(locale),
-    netPriceMiniProps(locale, crop.key),
   ])
   const priceOf = prices.overview.filter((c) => c.id === crop.id)
   const f = financeUi[locale].crossSell
@@ -188,7 +186,7 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
         }
       />
       <div className="mt-16 grid gap-20 md:mt-24 md:gap-28">
-        <section className="mx-auto grid w-full max-w-page gap-6 px-4 md:px-8 lg:grid-cols-2">
+        <section className="mx-auto w-full max-w-page px-4 md:px-8">
           <GrainPrices
             {...prices.props}
             level={2}
@@ -199,7 +197,6 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
               label: prices.props.link.label,
             }}
           />
-          <NetPriceMini {...mini} level={2} />
         </section>
         <LeadFormBlock
           block={{

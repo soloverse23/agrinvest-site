@@ -561,6 +561,29 @@ _Analytics_
 
 **Exit:** feeds sync reliably, failures raise alerts, and every outbound card is generated correctly.
 
+## Phase 7c: Shop redesign and purchase funnel
+
+> Planned 2026-11-11 after the owner's shop review. See `docs/phases/07c-shop-redesign.md` and decision `0010-quick-request.md`.
+
+**Goal:** the shop looks and works like a real store, with no change to URLs or SEO. It covers:
+
+- a search-first shop hero;
+- e-commerce listings;
+- product pages with a sticky buy box and a dose calculator;
+- a one-field quick request;
+- a one-page checkout with numbered cards.
+
+## Phase 7d: Inner pages, forms and navigation
+
+> Planned 2026-11-11 after the owner's review of the inner pages. See `docs/phases/07d-inner-pages.md`.
+
+**Goal:** every inner page (finance, prices, selling grain, tools, company, news, guides) works the same way, with no change to URLs. It covers:
+
+- one shell: a title band, a section strip, a sticky tab bar, single-column content and one action;
+- the long in-page lead forms replaced by a short request drawer;
+- Finance grouped by need (season · investments · special cases), with one path: Simulator → Cerere;
+- price and sell-grain pages given separate roles, with "Prețuri și vânzare" in the menu.
+
 ## Phase 8: Launch and migration
 
 **Goal:** switch over without losing any ranking or order.

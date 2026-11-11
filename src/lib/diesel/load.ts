@@ -46,17 +46,23 @@ export async function nationalDiesel(now = new Date()) {
 
 /**
  * Diesel for the header ticker: Agrinvest's own price when one is published, otherwise the
- * Oil Bulletin average for Romania with its change since the week before. Null with neither.
+ * Oil Bulletin average for Romania with its change since the week before and its last 30 days
+ * (the trend line). Null with neither.
  */
 export async function dieselTicker(locale: Locale) {
   const [own, series] = await Promise.all([getDieselPrice(locale), nationalDiesel()])
-  if (own) return { price: own.price, unit: 'lei/l', change: undefined }
+  if (own) return { price: own.price, unit: 'lei/l', change: undefined, points: undefined }
   const last = series[series.length - 1]
   if (!last) return null
   const before = series[series.length - 2]
+  // The weekly points of the last 30 days, plus the week before, so the line always has two.
+  const from = last.date.getTime() - 30 * 86_400_000
+  const recent = series.filter((p) => p.date.getTime() >= from)
+  const points = (recent.length > 1 ? recent : series.slice(-2)).map((p) => p.value)
   return {
     price: last.value,
     unit: `€/${last.unit}`,
     change: before ? last.value - before.value : undefined,
+    points,
   }
 }

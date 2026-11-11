@@ -10,13 +10,15 @@
  * 2. Home: the hero with three slides, the FAQ and the SEO text, in both languages. The posters
  *    go to Media when cloud storage is set (else the slides have none); stills get focal points.
  * 3. Bases: off the home page and /cereale, onto /despre/cifre under "Baze și capacitate".
+ * 4. Article covers: one still per topic (`scripts/seed/covers.ts`) on guides and news that have
+ *    none or a generic still (cloud storage only).
  */
 import type { Payload } from 'payload'
 
 import { canUploadPhotos } from '../import/woo'
 import { keepUrl } from '../finance/corrections'
 import { homeFaqFor, homeLayout, posterKey } from '../seed/home'
-import { findUploads, stillFocus, uploadPosters } from '../seed/media'
+import { assignCovers, findUploads, stillFocus, uploadCovers, uploadPosters } from '../seed/media'
 import { heroSlides } from '../site/hero'
 import { homeSeo } from '../site/home'
 import { footerColumns, navigationItems, siteCta, siteFooter } from '../site/navigation'
@@ -199,4 +201,11 @@ export async function applyRedesign(payload: Payload, log: Log = console.log) {
   const media = await applyMedia(payload, log)
   await applyHome(payload, media, log)
   await applyBases(payload, log)
+  await applyCovers(payload, log)
+}
+
+async function applyCovers(payload: Payload, log: Log) {
+  if (!canUploadPhotos()) return
+  const changed = await assignCovers(payload, await uploadCovers(payload))
+  if (changed) log(`redesign: topic covers on ${changed} guides and news`)
 }

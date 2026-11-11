@@ -84,7 +84,13 @@ export type RailRow = {
   name: string
   price: number
   change: number
+  /** The best price per day over the 30 days up to the latest, oldest first (trend line). */
+  points: number[]
 }
+
+/** How far back the rail's trend lines reach. */
+export const RAIL_DAYS = 30
+const DAY = 86_400_000
 
 /** A crop's Agrinvest price per day: the highest published price that day, by ISO day. */
 function bestByDay(buy: BuyPriceRow[], crop: number): Map<string, number> {
@@ -111,16 +117,19 @@ export function railRows(
   for (const c of crops) {
     if (!isGrainKey(c.key)) continue
     const byDay = bestByDay(buy, c.id)
-    const [last, before] = [...byDay.keys()].sort().reverse()
+    const days = [...byDay.keys()].sort()
+    const [last, before] = [...days].reverse()
     if (!last) continue
     if (last > latest) latest = last
     const price = byDay.get(last)!
+    const from = new Date(Date.parse(last) - RAIL_DAYS * DAY).toISOString().slice(0, 10)
     rows.push({
       crop: c.key,
       slug: c.slug ?? c.key,
       name: c.name,
       price,
       change: before ? price - byDay.get(before)! : 0,
+      points: days.filter((d) => d >= from).map((d) => byDay.get(d)!),
     })
   }
   return rows.length ? { rows, date: new Date(latest) } : null

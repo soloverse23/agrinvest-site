@@ -7,6 +7,7 @@ import { Button } from '@ds/primitives/Button'
 import { CheckboxField, SelectField, TextField } from '@ds/primitives/Field'
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { schemaFaq } from '@/components/FactText'
+import { FinanceNav } from '@/components/FinanceNav'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
 import { Prose } from '@/components/RenderBlocks'
@@ -95,6 +96,7 @@ export async function ToolFrame({
         crumbs={crumbs}
         kicker={t.section}
       />
+      <FinanceNav locale={locale} current={tool} />
       {children}
       <div className="mx-auto mt-16 grid max-w-page gap-10 px-4 md:mt-20 md:px-8">
         {page.review?.legalStatus !== 'legal-approved' && (

@@ -44,6 +44,37 @@ export const financeUi = {
       'Lista documentelor depinde de forma de organizare și de produs. Ți-o comunică echipa Agrinvest Credit IFN după prima discuție.',
     products: 'Ce finanțăm',
     seeProduct: 'Vezi detalii',
+    nav: {
+      label: 'În secțiunea Finanțare',
+      credits: 'Toate creditele',
+      simulator: 'Simulator de rate',
+      apply: 'Cerere de credit',
+      guides: 'Ghiduri',
+      about: 'Despre IFN',
+      faq: 'Întrebări frecvente',
+    },
+    groups: {
+      season: {
+        title: 'Bani pentru sezon',
+        lead: 'Inputuri, lucrări și bani până încasezi recolta sau subvenția.',
+      },
+      invest: {
+        title: 'Investiții în fermă',
+        lead: 'Utilaje, irigații, depozitare, teren, ferme.',
+      },
+      special: {
+        title: 'Situații speciale',
+        lead: 'Stocuri, procesare și datorii greu de plătit.',
+      },
+    },
+    page: {
+      contents: 'În această pagină',
+      byType: 'Alege după ce finanțezi',
+      sameGroup: 'Alte credite din grupa',
+      actionsTitle: 'Următorul pas',
+      actionsBody: 'Vezi ratele pe recoltele tale, apoi trimite cererea.',
+      allGuides: 'Toate ghidurile de finanțare',
+    },
     tools: {
       kicker: 'Agrinvest Credit IFN',
       title: 'Vezi cum ar cădea ratele, apoi trimite cererea',
@@ -164,6 +195,37 @@ export const financeUi = {
       'The documents depend on your legal form and the product. The Agrinvest Credit IFN team tells you which after the first conversation.',
     products: 'What we finance',
     seeProduct: 'See details',
+    nav: {
+      label: 'In the Financing section',
+      credits: 'All loans',
+      simulator: 'Repayment simulator',
+      apply: 'Loan application',
+      guides: 'Guides',
+      about: 'About the IFN',
+      faq: 'FAQ',
+    },
+    groups: {
+      season: {
+        title: 'Money for the season',
+        lead: 'Inputs, field work and cash until the harvest or subsidy pays.',
+      },
+      invest: {
+        title: 'Investing in the farm',
+        lead: 'Machinery, irrigation, storage, land, farms.',
+      },
+      special: {
+        title: 'Special cases',
+        lead: 'Stock, processing and debts that are hard to pay.',
+      },
+    },
+    page: {
+      contents: 'On this page',
+      byType: 'Choose by what you finance',
+      sameGroup: 'Other loans in this group',
+      actionsTitle: 'Next step',
+      actionsBody: 'See the instalments on your harvests, then send the application.',
+      allGuides: 'All financing guides',
+    },
     tools: {
       kicker: 'Agrinvest Credit IFN',
       title: 'See how instalments would fall, then apply',

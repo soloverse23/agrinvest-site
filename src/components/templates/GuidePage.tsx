@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { ReviewNote, SourceList } from '@ds/patterns/Finance'
-import { Toc } from '@ds/patterns/Sections'
+import { CtaBand, Toc } from '@ds/patterns/Sections'
 import { schemaFaq } from '@/components/FactText'
+import { FinanceNav } from '@/components/FinanceNav'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
 import { headingsOf, Prose } from '@/components/RenderBlocks'
@@ -92,6 +93,7 @@ export async function GuidePage({ locale, slug }: { locale: Locale; slug: string
         crumbs={crumbs}
         kicker={t.guides}
       />
+      <FinanceNav locale={locale} current="guides" />
       <div className="mx-auto mt-12 grid max-w-page gap-10 px-4 md:mt-16 md:px-8 lg:grid-cols-12">
         <aside className="lg:col-span-3 lg:row-start-1">
           <div className="grid gap-6 lg:sticky lg:top-24">
@@ -175,6 +177,23 @@ export async function GuidePage({ locale, slug }: { locale: Locale; slug: string
           </ul>
         </section>
       )}
+      <div className="mx-auto mt-16 grid max-w-page gap-4 px-4 md:mt-20 md:px-8">
+        <CtaBand
+          kicker={t.tools.kicker}
+          title={t.tools.title}
+          body={t.tools.body}
+          primary={{ href: financeRoutePath('apply', locale), label: t.tools.apply }}
+          secondary={{ href: financeRoutePath('simulator', locale), label: t.tools.simulate }}
+        />
+        <p className="text-small">
+          <Link
+            href={financeRoutePath('guides', locale)}
+            className="text-accent underline underline-offset-2"
+          >
+            {t.page.allGuides}
+          </Link>
+        </p>
+      </div>
     </SiteShell>
   )
 }

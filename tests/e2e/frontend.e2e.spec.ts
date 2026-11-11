@@ -90,11 +90,16 @@ test.describe('Core pages', () => {
     page,
   }) => {
     await page.goto('/magazin/insecticide/lamdex-extra')
-    await expect(page.getByRole('rowheader', { name: '1 kg' })).toBeVisible()
-    await expect(page.getByRole('rowheader', { name: '5 kg' })).toBeVisible()
-    await expect(page.getByText('862 lei')).toBeVisible()
+    // Pack chips are radios, so the choice works without JavaScript.
+    await expect(page.getByRole('radio', { name: /^1 kg/ })).toBeAttached()
+    await expect(page.getByRole('radio', { name: /^5 kg/ })).toBeAttached()
+    await expect(page.getByText('862 lei').first()).toBeVisible()
     await expect(page.getByText('de confirmat').first()).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Doze recomandate' })).toHaveCount(1)
+    await expect(page.getByRole('group', { name: 'Calculator de doză' })).toBeVisible()
+    // The quick request replaces the long form; old #cerere links land on it.
+    await expect(page.locator('#cerere').getByRole('textbox')).toBeVisible()
+    await expect(page.getByRole('heading', { name: /Cere ofertă pentru/ })).toHaveCount(0)
     const schema = await page.locator('script[type="application/ld+json"]').allTextContents()
     expect(schema.join()).toContain('"Product"')
     expect(schema.join()).not.toContain('Offer')
@@ -342,7 +347,13 @@ test.describe('Shop orders', () => {
       .getByRole('button', { name: /Adaugă în coș|Add to cart/ })
       .first()
       .click()
-    await page.waitForURL(/\/(cos|cart)$/)
+    // With JavaScript the buy box keeps the visitor on the page and offers the cart link;
+    // without it the form posts and the cart opens.
+    const cart = /\/(cos|cart)$/
+    const link = page.getByRole('link', { name: /Vezi coșul|View cart/ }).first()
+    await Promise.race([page.waitForURL(cart).catch(() => {}), link.waitFor().catch(() => {})])
+    if (!cart.test(new URL(page.url()).pathname)) await link.click()
+    await page.waitForURL(cart)
   }
   const buyer = async (page: import('@playwright/test').Page) => {
     await page.locator('[name=name]').fill('Test Comandă')
@@ -558,6 +569,7 @@ test.describe('Finance cross-selling', () => {
   }) => {
     await page.goto('/magazin/ingrasaminte/uree')
     await page.getByRole('button', { name: 'Adaugă în coș' }).first().click()
+    await page.getByRole('link', { name: 'Vezi coșul' }).first().click()
     await page.waitForURL(/\/cos$/)
     const callout = page.locator('aside', { hasText: 'Agrinvest Credit IFN' })
     await expect(callout.getByRole('heading', { level: 2 })).toBeVisible()

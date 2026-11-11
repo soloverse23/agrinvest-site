@@ -2,7 +2,9 @@ import config from '@payload-config'
 import { getPayload, type Payload } from 'payload'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
+import { leadContactErrors } from '@/collections/Leads'
 import { leadSchema, normalizePhone } from '@/lib/leads/form'
+import { checkFollowUp, FOLLOW_UP_MS, followUpToken, parseContact } from '@/lib/leads/quick'
 import { allow } from '@/lib/leads/rate-limit'
 
 describe('lead validation', () => {
@@ -44,6 +46,48 @@ describe('lead validation', () => {
     for (let i = 0; i < 5; i++) expect(allow('test-ip', t + i)).toBe(true)
     expect(allow('test-ip', t + 6)).toBe(false)
     expect(allow('test-ip', t + 11 * 60 * 1000)).toBe(true)
+  })
+})
+
+describe('quick request (decision 0010)', () => {
+  it('reads one field as a phone or an email', () => {
+    expect(parseContact(' 0741 201 056 ')).toEqual({ phone: '0741201056' })
+    expect(parseContact('+40 741 201 056')).toEqual({ phone: '+40741201056' })
+    expect(parseContact('Ion@Ferma.RO')).toEqual({ email: 'ion@ferma.ro' })
+    expect(parseContact('ion@')).toBeNull()
+    expect(parseContact('0741')).toBeNull()
+    expect(parseContact('')).toBeNull()
+  })
+
+  it('needs one contact for a quick request and all three for the others', () => {
+    expect(leadContactErrors({ type: 'quick', phone: '0741201056' })).toEqual([])
+    expect(leadContactErrors({ type: 'quick', email: 'a@b.ro' })).toEqual([])
+    expect(leadContactErrors({ type: 'quick' })).toHaveLength(1)
+    expect(leadContactErrors({ type: 'general', phone: '0741201056' }).map((e) => e.path)).toEqual([
+      'name',
+      'email',
+    ])
+  })
+
+  it('rejects the quick type in the full form', () => {
+    const result = leadSchema('ro').safeParse({
+      type: 'quick',
+      name: 'Ion Popescu',
+      phone: '0741201056',
+      email: 'ion@example.ro',
+      consent: 'on',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('signs the follow-up for one lead, for an hour', () => {
+    const now = Date.now()
+    const token = followUpToken(42, now)
+    expect(checkFollowUp(42, token, now + 1000)).toBe(true)
+    expect(checkFollowUp(43, token, now + 1000)).toBe(false)
+    expect(checkFollowUp(42, token, now + FOLLOW_UP_MS + 1)).toBe(false)
+    expect(checkFollowUp(42, `${now}.forged`, now)).toBe(false)
+    expect(checkFollowUp(42, 'garbage', now)).toBe(false)
   })
 })
 
@@ -94,6 +138,33 @@ describe('Leads collection', () => {
     created.push(lead.id)
     const assigned = typeof lead.assignedTo === 'object' ? lead.assignedTo?.id : lead.assignedTo
     expect(assigned).toBe(general?.primary)
+  })
+
+  it('stores a quick request with one contact, routed to the inputs owner', async () => {
+    const routing = await payload.findGlobal({ slug: 'lead-routing', depth: 0 })
+    const inputs = routing.routes?.find((r) => r.type === 'inputuri')
+    const lead = await payload.create({
+      collection: 'leads',
+      data: { type: 'quick', phone: '0741201056', status: 'new', hectares: 12.5 },
+    })
+    created.push(lead.id)
+    expect(lead.name).toBeFalsy()
+    const assigned = typeof lead.assignedTo === 'object' ? lead.assignedTo?.id : lead.assignedTo
+    const general = routing.routes?.find((r) => r.type === 'general')
+    if (!routing.routes?.some((r) => r.type === 'quick'))
+      expect(assigned).toBe((inputs ?? general)?.primary)
+  })
+
+  it('refuses a lead without the contacts its type needs', async () => {
+    await expect(
+      payload.create({ collection: 'leads', data: { type: 'quick', status: 'new' } }),
+    ).rejects.toThrow()
+    await expect(
+      payload.create({
+        collection: 'leads',
+        data: { type: 'general', name: 'Ion', phone: '0741201056', status: 'new' },
+      }),
+    ).rejects.toThrow()
   })
 
   it('cannot be created or read through the public API', async () => {

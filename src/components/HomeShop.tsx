@@ -10,7 +10,6 @@ import type { ProductCardData } from '@/lib/shop/catalogue'
 
 const TILES = 3
 const PICKS = 6
-const icons = new Set(['leaf', 'drop', 'scale'])
 
 /** The top-level category a product sits under. */
 const topOf = (p: ProductCardData) => p.category.parent ?? p.category.id
@@ -59,7 +58,7 @@ export async function HomeShop({ locale }: { locale: Locale }) {
       href: categoryPath(c.slug, locale),
       title: c.name,
       count: t.products(c.count),
-      icon: (doc?.icon && icons.has(doc.icon) ? doc.icon : 'leaf') as ShowcaseCategory['icon'],
+      icon: doc?.icon ?? 'other',
       images: images.map((p) => ({ src: p.image!.url, alt: p.image!.alt ?? '' })),
       links: children.slice(0, 3).map((child) => ({
         href: categoryPath(child.slug, locale),

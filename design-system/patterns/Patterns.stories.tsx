@@ -7,14 +7,12 @@ import {
   heroProps,
   priceTableProps,
   priceTiles,
-  productCards,
 } from '../fixtures/props'
 import { storyLocale } from '../fixtures/story'
 import { FigureStrip, FinanceBand } from './Bands'
 import { Hero } from './Hero'
 import { PriceTable } from './PriceTable'
 import { PriceTile } from './PriceTile'
-import { ProductCard } from './ProductCard'
 import { SiteHeader } from './SiteHeader'
 
 const meta: Meta = { title: 'Patterns', parameters: { layout: 'fullscreen' } }
@@ -67,22 +65,6 @@ export const Prices: Story = {
   render: (_, { globals }) => (
     <Page>
       <PriceTable {...priceTableProps(storyLocale(globals))} />
-    </Page>
-  ),
-}
-
-/** Crops and dose first, then price; out-of-stock products offer a quote instead. */
-export const ProductCards: Story = {
-  name: 'Product cards',
-  render: (_, { globals }) => (
-    <Page>
-      <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {productCards(storyLocale(globals)).map((p) => (
-          <li key={p.href}>
-            <ProductCard {...p} className="h-full" />
-          </li>
-        ))}
-      </ul>
     </Page>
   ),
 }

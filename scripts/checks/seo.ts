@@ -174,7 +174,10 @@ for (const page of pages) {
 
   const robots = $('meta[name="robots"]').attr('content') ?? ''
   // Offers state a price: a product still marked to confirm must not publish one.
-  const unconfirmed = $('[data-fact^="product:"][data-fact-status="to-confirm"]').length > 0
+  // Only the page's own product counts: cards of other products (the shelves) carry their own.
+  const own = p.split('/').filter(Boolean).at(-1)
+  const unconfirmed =
+    $(`[data-fact="product:${own}:price"][data-fact-status="to-confirm"]`).length > 0
   if (unconfirmed && $('script[type="application/ld+json"]').text().includes('"Offer"'))
     error('json-ld', `${p}: an Offer on a product Agrinvest has not confirmed`)
   if (indexable && page.inSitemap && /noindex/.test(robots))

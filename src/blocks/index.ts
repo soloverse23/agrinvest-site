@@ -2,7 +2,7 @@ import type { Block, Field } from 'payload'
 
 import { sectionIconKeys } from '@ds/icons/keys'
 import { link } from '@/fields'
-import { leadTypeOptions } from '@/lib/leads/types'
+import { formLeadTypeOptions } from '@/lib/leads/types'
 
 /**
  * Page blocks. Each block maps to one design-system pattern (rendered by
@@ -277,7 +277,7 @@ export const LeadFormBlock: Block = {
   fields: [
     { name: 'heading', type: 'text', localized: true },
     { name: 'body', type: 'textarea', localized: true },
-    { name: 'leadType', type: 'select', required: true, options: leadTypeOptions },
+    { name: 'leadType', type: 'select', required: true, options: formLeadTypeOptions },
     {
       name: 'extraFields',
       type: 'select',

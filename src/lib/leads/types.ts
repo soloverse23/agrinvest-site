@@ -11,6 +11,7 @@ export const leadTypes = [
   'parteneri',
   'cariere',
   'general',
+  'quick',
 ] as const
 
 export type LeadType = (typeof leadTypes)[number]
@@ -25,9 +26,16 @@ export const leadTypeLabels: Record<LeadType, Record<Locale, string>> = {
   parteneri: { ro: 'Parteneriat', en: 'Partnership' },
   cariere: { ro: 'Cariere', en: 'Careers' },
   general: { ro: 'General', en: 'General' },
+  quick: { ro: 'Cerere rapidă', en: 'Quick request' },
 }
 
 export const leadTypeOptions = leadTypes.map((value) => ({ value, label: leadTypeLabels[value] }))
+
+/** Types a full lead form can have. `quick` comes only from the one-field quick request. */
+export const formLeadTypes = leadTypes.filter((t): t is Exclude<LeadType, 'quick'> => t !== 'quick')
+export type FormLeadType = (typeof formLeadTypes)[number]
+
+export const formLeadTypeOptions = leadTypeOptions.filter((o) => o.value !== 'quick')
 
 export const isLeadType = (value: unknown): value is LeadType =>
   (leadTypes as readonly unknown[]).includes(value)

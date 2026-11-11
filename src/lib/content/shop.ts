@@ -2,7 +2,8 @@ import { unstable_cache } from 'next/cache'
 
 import type { Locale } from '@/i18n/config'
 import { tags } from '@/lib/revalidate'
-import type { ProductCardData, Ref } from '@/lib/shop/catalogue'
+import type { ProductCardData, Ref, ShopPromo } from '@/lib/shop/catalogue'
+import { doseSummary } from '@/lib/shop/dose'
 import { isHubIndexable } from '@/lib/shop/rules'
 import type { ActiveIngredient, Brand, Category, Crop, Media, Product } from '@/payload-types'
 
@@ -67,6 +68,16 @@ function toCard(p: Product): ProductCardData | null {
         : []
     }),
     formulation: p.protection?.formulation,
+    nutrients: (p.fertiliser?.nutrients ?? []).flatMap((n) =>
+      n.nutrient ? [{ nutrient: n.nutrient, percent: n.percent }] : [],
+    ),
+    form: p.fertiliser?.form ?? p.seed?.variety ?? null,
+    order: {
+      saleStopped: Boolean(p.saleBlock?.trim()),
+      ghs06: Boolean(p.protection?.ghs06),
+      registered: Boolean(p.protection?.registrationNumber),
+      validUntil: p.protection?.registrationValidUntil ?? null,
+    },
     variants: (p.variants ?? []).map((v) => ({
       sku: v.sku,
       size: v.size,
@@ -76,6 +87,19 @@ function toCard(p: Product): ProductCardData | null {
       stock: v.stock,
     })),
     image: photo?.url ? { url: photo.url, alt: photo.alt } : null,
+    dose: doseSummary([
+      ...(p.protection?.doses ?? []).map((d) => ({
+        min: d.doseMin,
+        max: d.doseMax,
+        unit: d.doseUnit,
+      })),
+      ...(p.fertiliser?.rates ?? []).map((r) => ({
+        min: r.rateMin,
+        max: r.rateMax,
+        unit: r.rateUnit,
+      })),
+    ]),
+    createdAt: p.createdAt,
     updatedAt: p.updatedAt,
   }
 }
@@ -100,7 +124,22 @@ export const listProducts = unstable_cache(
         crops: true,
         gallery: true,
         variants: true,
-        protection: { activeIngredients: true, formulation: true },
+        saleBlock: true,
+        protection: {
+          activeIngredients: true,
+          formulation: true,
+          ghs06: true,
+          registrationNumber: true,
+          registrationValidUntil: true,
+          doses: { doseMin: true, doseMax: true, doseUnit: true },
+        },
+        fertiliser: {
+          nutrients: true,
+          form: true,
+          rates: { rateMin: true, rateMax: true, rateUnit: true },
+        },
+        seed: { variety: true },
+        createdAt: true,
         updatedAt: true,
       },
       populate: {
@@ -114,7 +153,7 @@ export const listProducts = unstable_cache(
     })
     return docs.flatMap((p) => toCard(p as Product) ?? [])
   },
-  [`shop:products:${epoch}`],
+  [`shop:products:v2:${epoch}`],
   { tags: shopTags },
 )
 
@@ -304,4 +343,31 @@ export const getShopMenu = unstable_cache(
   },
   [`shop:menu:${epoch}`],
   { tags: shopTags },
+)
+
+/** The shop landing's promo card and featured products (ShopHome global). */
+export const getShopHome = unstable_cache(
+  async (locale: Locale): Promise<{ promo: ShopPromo | null; featured: number[] }> => {
+    const payload = await payloadClient()
+    const doc = await payload.findGlobal({
+      slug: 'shop-home',
+      locale,
+      fallbackLocale: false,
+      depth: 1,
+      populate: { media: { url: true, alt: true, filename: true }, products: { slug: true } },
+    })
+    const image = object<Media>(doc.promo?.image)
+    return {
+      promo: doc.promo
+        ? {
+            ...doc.promo,
+            image: image?.url ? { url: image.url, alt: image.alt } : null,
+          }
+        : null,
+      // Featured products resolve against the published catalogue, so a draft never shows.
+      featured: (doc.featured ?? []).map((p) => (typeof p === 'object' ? p.id : p)),
+    }
+  },
+  [`global:shop-home:${epoch}`],
+  { tags: [tags.global('shop-home')] },
 )

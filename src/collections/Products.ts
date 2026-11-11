@@ -4,7 +4,13 @@ import { isStaff, isStaffField, publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
 import { enrichmentLedger, shopGroup, verified } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
-import { gapOptions, liveBlockers, productGaps, unitPriceOf } from '@/lib/shop/rules'
+import {
+  gapOptions,
+  ghsPictogramOptions,
+  liveBlockers,
+  productGaps,
+  unitPriceOf,
+} from '@/lib/shop/rules'
 import type { Product } from '@/payload-types'
 
 const ofType = (type: Product['productType']) => (data: Partial<Product>) =>
@@ -235,10 +241,51 @@ const protection: Field = {
     },
     note('safety', 'Toxicitate și siguranță', 'Toxicity and safety'),
     {
+      type: 'collapsible',
+      label: { ro: 'Eticheta de pericol', en: 'Hazard label' },
+      admin: {
+        description:
+          'From the product label only (CLP section). Products without it keep the safety text.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'signalWord',
+              type: 'select',
+              label: { ro: 'Cuvânt de avertizare', en: 'Signal word' },
+              options: [
+                { label: { ro: 'Atenție', en: 'Warning' }, value: 'warning' },
+                { label: { ro: 'Pericol', en: 'Danger' }, value: 'danger' },
+              ],
+            },
+            {
+              name: 'ghsPictograms',
+              type: 'select',
+              hasMany: true,
+              label: { ro: 'Pictograme GHS', en: 'GHS pictograms' },
+              options: ghsPictogramOptions,
+            },
+          ],
+        },
+        note('hazardStatements', 'Fraze de pericol (H)', 'Hazard statements (H)'),
+        text('bufferZone', 'Zonă tampon', 'Buffer zone'),
+      ],
+    },
+    {
       name: 'ghs06',
       type: 'checkbox',
       label: { ro: 'Toxicitate acută 1–3 (pictograma GHS06)', en: 'Acute toxicity 1–3 (GHS06)' },
       admin: { description: 'OUG 53/2025 art. 40: cannot be sold online.' },
+      hooks: {
+        // The skull pictogram on the label means the same ban, whichever box staff tick.
+        beforeChange: [
+          ({ value, siblingData }) =>
+            Boolean(value) ||
+            ((siblingData?.ghsPictograms as string[] | undefined) ?? []).includes('GHS06'),
+        ],
+      },
     },
     {
       name: 'professionalUse',

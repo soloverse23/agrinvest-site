@@ -34,3 +34,34 @@ export const CalculatorIcon = icon(
     <path d="M8 7h8M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5" />
   </>,
 )
+
+/** Shop listings (Phase 7c.3): the grid/list view toggle, the phone filter button, close. */
+export const GridIcon = icon(
+  'GridIcon',
+  <>
+    <rect x="4" y="4" width="6.5" height="6.5" rx="1.5" />
+    <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" />
+    <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" />
+    <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" />
+  </>,
+)
+
+export const ListIcon = icon(
+  'ListIcon',
+  <>
+    <rect x="4" y="4.5" width="5" height="5" rx="1.2" />
+    <rect x="4" y="14.5" width="5" height="5" rx="1.2" />
+    <path d="M12 6h8M12 8.5h5M12 16h8M12 18.5h5" />
+  </>,
+)
+
+export const FilterIcon = icon(
+  'FilterIcon',
+  <>
+    <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+    <circle cx="15" cy="7" r="2" />
+    <circle cx="9" cy="17" r="2" />
+  </>,
+)
+
+export const CloseIcon = icon('CloseIcon', <path d="M6 6l12 12M18 6 6 18" />)

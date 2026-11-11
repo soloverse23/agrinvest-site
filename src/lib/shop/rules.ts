@@ -1,3 +1,4 @@
+import { categoryIconKeys, type CategoryIcon } from '@ds/icons/keys'
 import type { Product } from '@/payload-types'
 
 /**
@@ -148,3 +149,47 @@ export const reservedCategorySlugs = [
   'brand',
   'search',
 ] as const
+
+const categoryIconLabels: Record<CategoryIcon, { ro: string; en: string }> = {
+  seed: { ro: 'Sămânță', en: 'Seed' },
+  protection: { ro: 'Protecția plantelor', en: 'Crop protection' },
+  herbicide: { ro: 'Erbicid', en: 'Herbicide' },
+  fungicide: { ro: 'Fungicid', en: 'Fungicide' },
+  insecticide: { ro: 'Insecticid', en: 'Insecticide' },
+  'seed-treatment': { ro: 'Tratament sămânță', en: 'Seed treatment' },
+  adjuvant: { ro: 'Adjuvant', en: 'Adjuvant' },
+  growth: { ro: 'Regulator de creștere', en: 'Growth regulator' },
+  fertiliser: { ro: 'Îngrășământ', en: 'Fertiliser' },
+  foliar: { ro: 'Foliar', en: 'Foliar' },
+  bio: { ro: 'Bio', en: 'Organic' },
+  other: { ro: 'Altele', en: 'Other' },
+}
+
+/** The category icon select (Categories `icon`). */
+export const categoryIconOptions = categoryIconKeys.map((value) => ({
+  value,
+  label: categoryIconLabels[value],
+}))
+
+/** CLP hazard pictograms (Regulation 1272/2008, Annex V), as printed on the label. */
+export const ghsPictograms = {
+  GHS01: { ro: 'Exploziv', en: 'Explosive' },
+  GHS02: { ro: 'Inflamabil', en: 'Flammable' },
+  GHS03: { ro: 'Oxidant', en: 'Oxidising' },
+  GHS04: { ro: 'Gaz sub presiune', en: 'Gas under pressure' },
+  GHS05: { ro: 'Coroziv', en: 'Corrosive' },
+  GHS06: { ro: 'Toxicitate acută', en: 'Acute toxicity' },
+  GHS07: { ro: 'Nociv sau iritant', en: 'Harmful or irritant' },
+  GHS08: { ro: 'Pericol grav pentru sănătate', en: 'Serious health hazard' },
+  GHS09: { ro: 'Periculos pentru mediu', en: 'Hazardous to the environment' },
+} as const
+
+export type GhsPictogram = keyof typeof ghsPictograms
+
+export const ghsPictogramOptions = (Object.keys(ghsPictograms) as GhsPictogram[]).map((value) => ({
+  value,
+  label: {
+    ro: `${value} · ${ghsPictograms[value].ro}`,
+    en: `${value} · ${ghsPictograms[value].en}`,
+  },
+}))

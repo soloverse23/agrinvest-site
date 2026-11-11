@@ -11,9 +11,7 @@ import type {
   ShopShowcaseProps,
 } from '../patterns/HomeSections'
 import type { FeedItem, LivePanelProps } from '../patterns/LivePanel'
-import type { ProductCardProps } from '../patterns/ProductCard'
-import { productCardProps } from './props'
-import { crops, priceDate, products, weeklySeries } from './sample'
+import { crops, priceDate, weeklySeries } from './sample'
 
 const at = (hoursBefore: number) => new Date(priceDate.getTime() - hoursBefore * 3_600_000)
 const l = (locale: Locale, ro: string, en: string) => (locale === 'ro' ? ro : en)
@@ -170,73 +168,6 @@ export const livePanelProps = (
   }
 }
 
-/** Three more cards so the strip has six, across seeds, protection and nutrition. */
-const extraCards = (locale: Locale): ProductCardProps[] => {
-  const base = productCardProps(products[0], locale)
-  const card = (
-    slug: string,
-    name: string,
-    pack: string,
-    image: string,
-    category: string,
-    price: number,
-    unitPrice: string,
-    crops: string,
-  ): ProductCardProps => ({
-    ...base,
-    href: `/magazin/${slug}`,
-    name,
-    pack,
-    image,
-    category,
-    active: undefined,
-    crops,
-    dose: undefined,
-    price,
-    unitPrice,
-    inStock: true,
-    payAtHarvestHref: undefined,
-  })
-  return [
-    card(
-      'seminte/avenue',
-      'Grâu Avenue C1',
-      '800 kg',
-      '/products/samanta-grau-avenue-c1-800-kg-1.webp',
-      l(locale, 'Semințe', 'Seeds'),
-      2_480,
-      '3,10 lei/kg',
-      l(locale, 'Grâu de toamnă', 'Winter wheat'),
-    ),
-    card(
-      'ingrasaminte/uree',
-      l(locale, 'Uree 46%', 'Urea 46%'),
-      '500 kg',
-      '/products/uree-egipt-1.webp',
-      l(locale, 'Îngrășăminte', 'Fertilisers'),
-      1_350,
-      '2,70 lei/kg',
-      l(locale, 'Grâu, porumb, rapiță', 'Wheat, maize, rapeseed'),
-    ),
-    card(
-      'foliare/amino',
-      'Amino',
-      '20 L',
-      '/products/amino-20l-1.png',
-      l(locale, 'Foliare', 'Foliar'),
-      640,
-      '32 lei/l',
-      l(locale, 'Toate culturile', 'All crops'),
-    ),
-  ]
-}
-
-export const shopCards = (locale: Locale) => [
-  ...extraCards(locale).slice(0, 2),
-  ...products.map((p) => productCardProps(p, locale)),
-  ...extraCards(locale).slice(2),
-]
-
 export const shopShowcaseProps = (
   locale: Locale,
 ): Omit<ShopShowcaseProps, 'products'> & { products: { label: string } } => {
@@ -249,7 +180,7 @@ export const shopShowcaseProps = (
         href: '/magazin/seminte',
         title: l(locale, 'Semințe', 'Seeds'),
         count: t.products(17),
-        icon: 'leaf',
+        icon: 'seed',
         images: [
           { src: '/products/samanta-grau-avenue-c1-800-kg-1.webp', alt: '' },
           { src: '/products/samanta-orz-cardinal-c1-600kg-1.png', alt: '' },
@@ -265,7 +196,7 @@ export const shopShowcaseProps = (
         href: '/magazin/protectia-plantelor',
         title: l(locale, 'Protecția plantelor', 'Crop protection'),
         count: t.products(36),
-        icon: 'drop',
+        icon: 'protection',
         images: [
           { src: '/products/wing-p-1.png', alt: '' },
           { src: '/products/karate-zeon-1-l-1.png', alt: '' },
@@ -281,7 +212,7 @@ export const shopShowcaseProps = (
         href: '/magazin/nutritie',
         title: l(locale, 'Nutriție', 'Nutrition'),
         count: t.products(18),
-        icon: 'scale',
+        icon: 'fertiliser',
         images: [
           { src: '/products/uree-egipt-1.webp', alt: '' },
           { src: '/products/napekhem-20-20-0-plus-20l-1.png', alt: '' },

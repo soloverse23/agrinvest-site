@@ -41,6 +41,7 @@ import { Footer } from './globals/Footer'
 import { LeadRouting } from './globals/LeadRouting'
 import { Navigation } from './globals/Navigation'
 import { SeoDefaults } from './globals/SeoDefaults'
+import { ShopHome } from './globals/ShopHome'
 import { toolsGroup } from './fields/tools'
 import { defaultLocale } from './i18n/config'
 import { jobTasks } from './lib/jobs/tasks'
@@ -115,7 +116,7 @@ export default buildConfig({
       admin: { ...defaultJobsCollection.admin, hidden: false, group: toolsGroup },
     }),
   },
-  globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting],
+  globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting, ShopHome],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, EXPERIMENTAL_TableFeature()],
   }),

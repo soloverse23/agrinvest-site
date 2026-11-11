@@ -17,7 +17,13 @@ import { issueInvoice } from './invoice'
 import { notifyOrder } from './notify'
 import { startPayment } from './payment'
 import { addItem, cleanQuantity, priceLines } from './pricing'
-import { TERMS_VERSION, type CheckoutField, type CheckoutState, type CompanyLookup } from './state'
+import {
+  TERMS_VERSION,
+  type CheckoutField,
+  type CheckoutState,
+  type CompanyLookup,
+  type QuickAddState,
+} from './state'
 
 const localeOf = (form: FormData): Locale => {
   const value = form.get('locale')
@@ -39,6 +45,48 @@ export async function addToCart(form: FormData) {
   // The button is not shown for a pack that cannot be ordered; a forged request ends here.
   if (canOrder) await saveItems(addItem(await cartItems(), sku, quantity))
   redirect(cartPath(locale))
+}
+
+/**
+ * The card's quick add. With JavaScript the visitor stays on the listing and the header count
+ * updates; without it the form's permalink opens the cart, as `addToCart` does. Same checks.
+ */
+export async function quickAddToCart(_prev: QuickAddState, form: FormData): Promise<QuickAddState> {
+  const locale = localeOf(form)
+  const sku = String(form.get('sku') ?? '')
+  const quantity = cleanQuantity(form.get('quantity')) ?? 1
+  const products = await productsBySku([sku], locale)
+  const { canOrder } = priceLines([{ sku, quantity }], products)
+  if (!canOrder) return { status: 'error' }
+  const items = addItem(await cartItems(), sku, quantity)
+  await saveItems(items)
+  return { status: 'added', count: items.reduce((sum, i) => sum + i.quantity, 0) }
+}
+
+/**
+ * The dose calculator's "add these packs": repeated `sku` and `quantity` fields, one pair per
+ * pack of the mix. The same checks as `addToCart` on every line, and all or nothing: a mix
+ * with one pack that cannot be ordered adds none. Without JavaScript the cart opens.
+ */
+export async function addManyToCart(_prev: QuickAddState, form: FormData): Promise<QuickAddState> {
+  const locale = localeOf(form)
+  const skus = form.getAll('sku').map(String)
+  const quantities = form.getAll('quantity').map(cleanQuantity)
+  if (!skus.length || skus.length > 10 || skus.length !== quantities.length)
+    return { status: 'error' }
+  const wanted = skus.map((sku, i) => ({ sku, quantity: quantities[i] }))
+  if (wanted.some((w) => !w.sku || w.quantity == null)) return { status: 'error' }
+  const lines = wanted as { sku: string; quantity: number }[]
+  const products = await productsBySku(
+    lines.map((l) => l.sku),
+    locale,
+  )
+  const { canOrder } = priceLines(lines, products)
+  if (!canOrder) return { status: 'error' }
+  let items = await cartItems()
+  for (const l of lines) items = addItem(items, l.sku, l.quantity)
+  await saveItems(items)
+  return { status: 'added', count: items.reduce((sum, i) => sum + i.quantity, 0) }
 }
 
 /** Changes a line's quantity, or removes it. An invalid quantity changes nothing. */

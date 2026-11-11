@@ -12,6 +12,7 @@ import * as migration_20261110_153625_phase6_articles from './20261110_153625_ph
 import * as migration_20261110_160527_phase7_social from './20261110_160527_phase7_social';
 import * as migration_20261110_183406_home_nav from './20261110_183406_home_nav';
 import * as migration_20261111_065829_home_slides from './20261111_065829_home_slides';
+import * as migration_20261111_155707_shop_foundations from './20261111_155707_shop_foundations';
 
 export const migrations = [
   {
@@ -82,6 +83,11 @@ export const migrations = [
   {
     up: migration_20261111_065829_home_slides.up,
     down: migration_20261111_065829_home_slides.down,
-    name: '20261111_065829_home_slides'
+    name: '20261111_065829_home_slides',
+  },
+  {
+    up: migration_20261111_155707_shop_foundations.up,
+    down: migration_20261111_155707_shop_foundations.down,
+    name: '20261111_155707_shop_foundations'
   },
 ];

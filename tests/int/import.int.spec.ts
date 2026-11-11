@@ -4,10 +4,16 @@ import { product } from '@/lib/schema'
 import { blobBaseUrl } from '@/lib/storage/blob'
 import {
   applyFilters,
-  facetHref,
   facetOptions,
+  hasListingParams,
+  listingHref,
+  priceRangeOf,
   readFilters,
+  readListing,
   searchProducts,
+  sortListing,
+  toggleFilter,
+  type ListingState,
   type ProductCardData,
 } from '@/lib/shop/catalogue'
 
@@ -177,9 +183,53 @@ describe('catalogue', () => {
     expect(applyFilters(products, { crop: 'porumb', stock: '1' }).map((p) => p.id)).toEqual([2])
   })
 
+  const plain: ListingState = { filters: {}, sort: 'relevance', view: 'grid', page: 1 }
+
   it('turns a filter off when it is already on', () => {
-    expect(facetHref('/m', {}, 'crop', 'grau', 'ro')).toBe('/m?cultura=grau')
-    expect(facetHref('/m', { crop: 'grau' }, 'crop', 'grau', 'ro')).toBe('/m')
+    const on = toggleFilter(plain, 'crop', 'grau')
+    expect(listingHref('/m', on, 'ro')).toBe('/m?cultura=grau')
+    expect(listingHref('/m', toggleFilter(on, 'crop', 'grau'), 'ro')).toBe('/m')
+  })
+
+  it('keeps sort and view on filter links and goes back to page 1', () => {
+    const state: ListingState = { filters: {}, sort: 'price-desc', view: 'list', page: 3 }
+    expect(listingHref('/m', toggleFilter(state, 'stock', '1'), 'ro')).toBe(
+      '/m?stoc=1&ordine=pret-desc&afisare=lista',
+    )
+    expect(listingHref('/en/shop/search', state, 'en', { q: 'grau' })).toBe(
+      '/en/shop/search?q=grau&sort=price-desc&view=list&page=3',
+    )
+  })
+
+  it('reads sort, view, page and price per language', () => {
+    expect(
+      readListing({ ordine: 'pret-unitar', afisare: 'lista', pagina: '2', pret: '100-300' }, 'ro'),
+    ).toEqual({ filters: { price: '100-300' }, sort: 'unit-price', view: 'list', page: 2 })
+    // English names on a Romanian URL, a bad page and an unknown price range are ignored.
+    expect(readListing({ sort: 'price', page: '-1', pret: '5-6' }, 'ro')).toEqual(plain)
+    expect(readListing({ pagina: '1.5' }, 'ro').page).toBe(1)
+  })
+
+  it('makes any listing parameter a noindex URL, the query alone not', () => {
+    expect(hasListingParams({ pagina: '1' }, 'ro')).toBe(true)
+    expect(hasListingParams({ afisare: 'lista' }, 'ro')).toBe(true)
+    expect(hasListingParams({ price: '0-100' }, 'en')).toBe(true)
+    expect(hasListingParams({ utm_source: 'x' }, 'ro')).toBe(false)
+    expect(hasListingParams({ sort: 'name' }, 'ro')).toBe(false)
+  })
+
+  it('sorts by price with unpriced products last', () => {
+    const priced = (id: number, price: number | null, unitPrice?: number) =>
+      card({
+        id,
+        name: `P${id}`,
+        variants: [{ sku: `S${id}`, size: 1, unit: 'l', price, unitPrice, stock: 'in-stock' }],
+      })
+    const list = [priced(1, 300, 30), priced(2, null), priced(3, 50, 50), priced(4, 1200, 12)]
+    expect(sortListing(list, 'price-asc', 'ro').map((p) => p.id)).toEqual([3, 1, 4, 2])
+    expect(sortListing(list, 'price-desc', 'ro').map((p) => p.id)).toEqual([4, 1, 3, 2])
+    expect(sortListing(list, 'unit-price', 'ro').map((p) => p.id)).toEqual([4, 1, 3, 2])
+    expect(list.map(priceRangeOf)).toEqual(['300-1000', null, '0-100', '1000-'])
   })
 
   it('searches without diacritics', () => {

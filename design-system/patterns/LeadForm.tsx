@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef } from 'react'
 
 import type { Locale } from '@/i18n/config'
 import { initialLeadState, type LeadField, type LeadFormState } from '@/lib/leads/state'
-import type { LeadType } from '@/lib/leads/types'
+import type { FormLeadType } from '@/lib/leads/types'
 
 import { ArrowRightIcon, CheckIcon } from '../icons/icons'
 import { Button } from '../primitives/Button'
@@ -15,7 +15,7 @@ export type LeadExtraField = 'company' | 'county' | 'base' | 'crop' | 'quantity'
 
 export type LeadFormProps = {
   locale: Locale
-  type: LeadType
+  type: FormLeadType
   action: (state: LeadFormState, form: FormData) => Promise<LeadFormState>
   heading?: string | null
   body?: string | null

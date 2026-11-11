@@ -1,22 +1,10 @@
 /** Component props built from the sample content, shared by pattern and page stories. */
 import type { Locale } from '@/i18n/config'
-import { formatNumber } from '@/lib/format'
 
 import type { HeroProps } from '../patterns/Hero'
 import type { PriceTableProps } from '../patterns/PriceTable'
-import type { ProductCardProps } from '../patterns/ProductCard'
 import type { SiteHeaderProps } from '../patterns/SiteHeader'
-import {
-  bases,
-  copy,
-  crops,
-  figures,
-  nav,
-  photos,
-  priceDate,
-  products,
-  type SampleProduct,
-} from './sample'
+import { bases, copy, crops, figures, nav, photos, priceDate } from './sample'
 
 /** Main phone, figures register C9 (to confirm). */
 const PHONE = '+40 786 222 238'
@@ -106,34 +94,6 @@ export const priceTiles = (locale: Locale) =>
     locale,
     href: `/preturi/${c.key}`,
   }))
-
-export const productCardProps = (p: SampleProduct, locale: Locale): ProductCardProps => ({
-  locale,
-  href: `/magazin/erbicide/${p.slug}`,
-  name: p.name,
-  pack: p.pack,
-  image: p.image,
-  category: p.category[locale],
-  active: p.active[locale],
-  crops: p.crops[locale],
-  dose: p.dose[locale],
-  price: p.price,
-  unitPrice: `${formatNumber(p.price / p.amount, locale)} lei/${p.amountUnit}`,
-  inStock: p.inStock,
-  payAtHarvestHref: '/finantare/inputuri-plata-la-recolta',
-  labels: {
-    crops: copy.product.cropsLabel[locale],
-    dose: copy.product.doseLabel[locale],
-    inStock: copy.product.inStock[locale],
-    outOfStock: copy.product.outOfStock[locale],
-    details: copy.product.details[locale],
-    from: copy.product.from[locale],
-    askPrice: copy.product.askPrice[locale],
-    payAtHarvest: copy.product.payAtHarvest[locale],
-  },
-})
-
-export const productCards = (locale: Locale) => products.map((p) => productCardProps(p, locale))
 
 export const figureItems = (locale: Locale) =>
   figures.map((f) => ({

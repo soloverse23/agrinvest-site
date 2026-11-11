@@ -8,6 +8,7 @@ import type { Guide, Media, Person } from '@/payload-types'
 
 import type { Alternates } from './pages'
 import { payloadClient } from './payload'
+import { focusOf, type Focus } from '@ds/lib/media'
 
 /**
  * Farmer guides (`section: 'ghid'`) and Agrinvest news (`section: 'stiri'`), both `Guides`.
@@ -31,13 +32,13 @@ export type ArticleCardData = {
   pillar: string | null
   date: string
   updatedAt: string
-  image: { src: string; alt: string } | null
+  image: { src: string; alt: string; focus?: Focus } | null
   href: string
 }
 
 export const imageOf = (media: Guide['cover'] | Person['photo']) =>
   typeof media === 'object' && media?.url
-    ? { src: media.url, alt: (media as Media).alt ?? '' }
+    ? { src: media.url, alt: (media as Media).alt ?? '', focus: focusOf(media as Media) }
     : null
 
 /** The public URL of a text in a language, or null if it has none there. */

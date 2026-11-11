@@ -12,14 +12,14 @@ import { Button } from '@ds/primitives/Button'
 import { FactText, resolveFacts, schemaFaq } from '@/components/FactText'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
-import { BaseListBlock, LeadFormBlock } from '@/components/RenderBlocks'
+import { LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import { grainPricesProps, netPriceMiniProps } from '@/components/templates/PricePage'
 import { grainItems } from '@/lib/prices/overview'
 import { localePath, type Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
 import { cropPath, sections } from '@/i18n/routes'
-import { fixedPaths, ui } from '@/i18n/ui'
+import { fixedPaths, fixedUrl, ui } from '@/i18n/ui'
 import { financeLinks } from '@/lib/content/finance'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import { getCrop, listCrops } from '@/lib/content/locations'
@@ -41,9 +41,6 @@ const copy = {
       `Cumpărăm ${crop} direct de la fermieri: recepție în bazele Agrinvest, analiza calității, transport cu flota proprie și ofertă rapidă.`,
     offer: 'Cere o ofertă',
     seeBases: 'Vezi bazele',
-    where: (crop: string) => `Unde livrezi ${crop}`,
-    whereLead:
-      'Alege baza cea mai apropiată de fermă. Fiecare bază are pagina ei, cu serviciile și capacitatea.',
     form: (crop: string) => `Cere o ofertă pentru ${crop}`,
     formBody: 'Spune-ne cantitatea și unde se află marfa. Te sună reprezentantul din zona ta.',
     others: 'Alte culturi pe care le cumpărăm',
@@ -55,9 +52,6 @@ const copy = {
       `Agrinvest buys ${crop} directly from Romanian farmers, receives it at its own bases, checks its quality and moves it with its own fleet.`,
     offer: 'Send an enquiry',
     seeBases: 'See the bases',
-    where: (crop: string) => `Where ${crop} is received`,
-    whereLead:
-      'Our bases receive, check and store grain across southern and eastern Romania. Each base has its own page.',
     form: (crop: string) => `Ask about ${crop}`,
     formBody:
       'Tell us the quantity and timing you need, or what you want to sell. The right person replies.',
@@ -174,7 +168,7 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
             <Button href="#cerere" icon={<ArrowRightIcon />}>
               {t.offer}
             </Button>
-            <Button href="#baze" variant="secondary">
+            <Button href={fixedUrl('storage', locale)} variant="secondary">
               {t.seeBases}
             </Button>
           </>
@@ -207,18 +201,6 @@ export async function CropPage({ locale, slug }: { locale: Locale; slug: string 
           />
           <NetPriceMini {...mini} level={2} />
         </section>
-        <BaseListBlock
-          block={{ showMap: true }}
-          ctx={{ locale }}
-          head={
-            <SectionHeading
-              kicker={u.bases}
-              title={t.where(lower)}
-              lead={t.whereLead}
-              className="mb-10 md:mb-12"
-            />
-          }
-        />
         <LeadFormBlock
           block={{
             leadType: 'vanzare-cereale',

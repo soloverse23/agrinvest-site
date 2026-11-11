@@ -8,6 +8,7 @@
  */
 import type { Page } from '@/payload-types'
 
+import { homeFaqFor, homeLayout } from './home'
 import { rt } from './richtext'
 
 type Blocks = NonNullable<Page['layout']>
@@ -30,136 +31,8 @@ export function contentFor(key: string, ctx: Ctx): Content | null {
   const { people, media } = ctx
   switch (key) {
     case 'home':
-      return {
-        ro: [
-          {
-            blockType: 'hero',
-            eyebrow: 'Cereale · Depozitare · Finanțare · Logistică',
-            title: 'Cumpărăm, depozităm și finanțăm recolta ta.',
-            accent: 'recolta ta',
-            lead: 'Cumpărăm cereale direct de la fermieri, le recepționăm în bazele noastre, le transportăm cu flota proprie și finanțăm producția prin Agrinvest Credit IFN.',
-            image: media['harvest-sunflower'],
-            primary: { label: 'Vinde cereale', href: '/cereale' },
-            secondary: { label: 'Vorbește cu noi', href: '/contact' },
-            needs: [
-              { link: { label: 'Vinde cereale', href: '/cereale' }, hint: 'Plata {{C8}}' },
-              {
-                link: { label: 'Depozitare', href: '/depozitare' },
-                hint: 'Recepție, uscare, păstrare',
-              },
-              { link: { label: 'Finanțare', href: '/finantare' }, hint: 'Rate după recoltă' },
-              {
-                link: { label: 'Logistică', href: '/logistica' },
-                hint: 'Transport cu flota proprie',
-              },
-            ],
-          },
-          figures(['S1', 'S2', 'L1']),
-          {
-            blockType: 'serviceGrid',
-            kicker: 'Ce facem',
-            heading: 'Tot ce are nevoie ferma, de la un singur partener',
-            lead: 'Lucrăm direct cu fermierii, de la semănat până la vânzarea recoltei. Fiecare serviciu se leagă de celelalte, așa că vorbești cu o singură echipă.',
-            items: [
-              {
-                icon: 'wheat',
-                title: 'Comerț cu cereale',
-                body: 'Cumpărăm grâu, porumb, floarea-soarelui, rapiță, orz și alte culturi, la recoltă sau din stoc.',
-                link: { label: 'Vinde cereale', href: '/cereale' },
-              },
-              {
-                icon: 'silo',
-                title: 'Depozitare și uscare',
-                body: 'Recepție, cântărire, precurățare și uscare în bazele noastre, cu acces direct la vânzare.',
-                link: { label: 'Vezi bazele', href: '/depozitare' },
-              },
-              {
-                icon: 'coins',
-                title: 'Finanțare agricolă',
-                body: 'Credite pentru producție și investiții prin Agrinvest Credit IFN, cu rate aliniate la recoltă.',
-                link: { label: 'Despre finanțare', href: '/finantare' },
-              },
-              {
-                icon: 'truck',
-                title: 'Transport și logistică',
-                body: 'Ridicăm cerealele de la fermă și livrăm semințe, îngrășăminte și produse de protecția plantelor.',
-                link: { label: 'Logistică', href: '/logistica' },
-              },
-              {
-                icon: 'leaf',
-                title: 'Consultanță tehnică',
-                body: 'Agronomii noștri te ajută să alegi tehnologia potrivită pentru fiecare cultură și fiecare sezon.',
-                link: { label: 'Vorbește cu un agronom', href: '/contact' },
-              },
-            ],
-          },
-          {
-            blockType: 'baseList',
-            kicker: 'Baze',
-            heading: 'Livrezi la baza cea mai apropiată',
-            lead: 'Bazele de recepție și depozitare sunt în județele din sudul și estul țării. Fiecare bază are pagina ei, cu serviciile și datele de contact.',
-            showMap: true,
-          },
-          {
-            blockType: 'steps',
-            kicker: 'Pas cu pas',
-            heading: 'Cum vinzi cereale la Agrinvest',
-            items: [
-              {
-                title: 'Ne spui ce ai',
-                body: 'Cultura, cantitatea, unde se află marfa și când e gata. Prin telefon sau prin formular.',
-              },
-              {
-                title: 'Primești prețul',
-                body: 'Reprezentantul din zona ta îți dă prețul pentru baza cea mai apropiată și condițiile de livrare.',
-              },
-              {
-                title: 'Livrezi sau ridicăm noi',
-                body: 'Aduci marfa la bază sau o ridicăm de la fermă cu camioanele noastre.',
-              },
-              {
-                title: 'Recepție și plată',
-                body: 'Marfa e cântărită și analizată la recepție, iar plata se face {{C8}}.',
-              },
-            ],
-          },
-          {
-            blockType: 'financeBand',
-            kicker: 'Agrinvest Credit IFN',
-            heading: 'Finanțare cu rate după recoltă',
-            lead: 'Credite în lei pentru producție și investiții, cu răspuns {{F4.reply}}. Rambursezi în ritmul fermei: {{F5.term}}, {{F5.instalments}}.',
-            primary: { label: 'Despre finanțare', href: '/finantare' },
-            secondary: { label: 'Trimite o cerere', href: '/finantare/aplica' },
-            instalments: [
-              { when: 'Rata 1 · după recolta de vară', label: 'grâu, orz, rapiță' },
-              { when: 'Rata 2 · după recolta de toamnă', label: 'porumb, floarea-soarelui' },
-            ],
-          },
-          {
-            blockType: 'ctaBand',
-            tone: 'surface',
-            heading: 'Ai o întrebare? Îți răspunde direct omul responsabil.',
-            body: 'Spune-ne de ce ai nevoie: vânzare de cereale, depozitare, transport sau finanțare. Cererea ajunge direct la persoana care se ocupă de ea.',
-            primary: { label: 'Contactează-ne', href: '/contact' },
-          },
-        ],
-        faq: {
-          ro: [
-            q(
-              'Ce cereale cumpără Agrinvest?',
-              'Cumpărăm {{C7}}, direct de la fermieri, la recoltă sau din stoc.',
-            ),
-            q(
-              'Când primesc banii pentru cereale?',
-              'Plata se face {{C8}}, după cântărire și analiza calității.',
-            ),
-            q(
-              'Unde sunt bazele Agrinvest?',
-              'Bazele de recepție și depozitare sunt în județele din sudul și estul țării. Lista completă, cu pagina fiecărei baze, este pe pagina Depozitare.',
-            ),
-          ],
-        },
-      }
+      // Phase 7b: the hero slider only; the sections below it are drawn in code.
+      return { ro: homeLayout('ro', media), faq: { ro: homeFaqFor('ro') } }
 
     case 'despre':
       return {
@@ -240,6 +113,7 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             heading: 'Baze și capacitate',
             keys: ['S1', 'S2'],
           },
+          { blockType: 'baseList', showMap: true },
           { blockType: 'figureTable', kicker: 'Logistică', heading: 'Flota', keys: ['L1', 'L2'] },
           {
             blockType: 'figureTable',
@@ -299,12 +173,6 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             kicker: 'Culturi',
             heading: 'Ce cumpărăm',
             lead: 'Cumpărăm {{C7}}. Alege cultura ca să vezi cum se face recepția și cum se stabilește prețul.',
-          },
-          {
-            blockType: 'baseList',
-            kicker: 'Baze',
-            heading: 'Baza cea mai apropiată de ferma ta',
-            showMap: true,
           },
           {
             blockType: 'leadForm',

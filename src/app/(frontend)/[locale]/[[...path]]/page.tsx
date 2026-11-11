@@ -8,11 +8,13 @@ import { Faq, PageTitle } from '@/components/PageParts'
 import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
-import { HomeArticles } from '@/components/HomeArticles'
-import { HomeSocial } from '@/components/HomeSocial'
-import { TodayStrip } from '@/components/TodayStrip'
+import { HomeCompany, HomeFinanceTools } from '@/components/HomeCompany'
+import { HomeLive } from '@/components/HomeLive'
+import { HomeShop } from '@/components/HomeShop'
 import { pricesUi } from '@/i18n/prices'
-import { pricesPath } from '@/i18n/routes'
+import { cropPricePath, dieselPath, pricesPath } from '@/i18n/routes'
+import { toolsUi } from '@/i18n/tools'
+import { dieselTicker } from '@/lib/diesel/load'
 import { agrinvestRail } from '@/lib/prices/overview'
 import { isLocale, localePath, type Locale } from '@/i18n/config'
 import { ui } from '@/i18n/ui'
@@ -66,7 +68,10 @@ export default async function CmsPage(props: Props) {
   const crumbs = trailOf(page, locale)
   const heroFirst = page.layout?.[0]?.blockType === 'hero'
   // Home: Agrinvest's published prices on the hero rail; without any, the hero keeps its links.
-  const rail = page.isHome && heroFirst ? await agrinvestRail(locale) : null
+  const [rail, fuel] =
+    page.isHome && heroFirst
+      ? await Promise.all([agrinvestRail(locale), dieselTicker(locale)])
+      : [null, null]
   const r = pricesUi[locale].rail
   const heroPrices = rail
     ? {
@@ -75,12 +80,22 @@ export default async function CmsPage(props: Props) {
         unit: 'lei/t',
         date: rail.date,
         all: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
-        rows: rail.rows,
+        // Each price opens its own page; diesel rides along (the slider's rail shows it).
+        rows: rail.rows.map((row) => ({ ...row, href: cropPricePath(row.slug, locale) })),
+        fuel: fuel
+          ? { ...fuel, name: toolsUi[locale].today.diesel, href: dieselPath(locale) }
+          : null,
       }
     : undefined
 
   return (
-    <SiteShell locale={locale} alternates={alternates} overlay={heroFirst}>
+    <SiteShell
+      locale={locale}
+      alternates={alternates}
+      overlay={heroFirst}
+      // Home has its own prices (the hero rail and the live panel): no ticker there.
+      ticker={!(page.isHome && heroFirst)}
+    >
       <PageJsonLd page={page} locale={locale} url={url} crumbs={crumbs} />
       {!heroFirst && (
         <PageTitle
@@ -92,8 +107,8 @@ export default async function CmsPage(props: Props) {
         />
       )}
       {page.isHome && heroFirst ? (
-        // Home: the hero, today's prices, diesel and news (Phase 5), the latest guides and
-        // Agrinvest news (Phase 6), then the rest.
+        // Home (Phase 7b): the hero slider, then sections drawn in code: live prices and
+        // updates, the shop, financing and tools, the company. The CMS keeps only the hero.
         <>
           <RenderBlocks
             blocks={page.layout?.slice(0, 1)}
@@ -101,11 +116,11 @@ export default async function CmsPage(props: Props) {
             path={pagePath}
             heroPrices={heroPrices}
           />
-          <TodayStrip locale={locale} />
-          <HomeArticles locale={locale} />
-          <HomeSocial locale={locale} />
-          <div className="mt-16 md:mt-24">
-            <RenderBlocks blocks={page.layout?.slice(1)} locale={locale} path={pagePath} />
+          <div className="mt-12 grid gap-20 md:mt-16 md:gap-28">
+            <HomeLive locale={locale} />
+            <HomeShop locale={locale} />
+            <HomeFinanceTools locale={locale} />
+            <HomeCompany locale={locale} />
           </div>
         </>
       ) : (

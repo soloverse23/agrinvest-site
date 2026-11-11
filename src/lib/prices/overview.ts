@@ -11,6 +11,7 @@ import {
   priceRange,
   type BuyPriceRow,
   type Freshness,
+  type MarketPoint,
   type SeriesLine,
 } from './grain'
 import { listBuyPrices, listMarketPoints, yearAgo } from './load'
@@ -76,7 +77,25 @@ export function grainItems(overview: CropOverview[]) {
   }))
 }
 
-export type RailRow = { crop: GrainKey; name: string; price: number; change: number }
+export type RailRow = {
+  crop: GrainKey
+  /** The crop's own slug, for its price page. */
+  slug: string
+  name: string
+  price: number
+  change: number
+}
+
+/** A crop's Agrinvest price per day: the highest published price that day, by ISO day. */
+function bestByDay(buy: BuyPriceRow[], crop: number): Map<string, number> {
+  const byDay = new Map<string, number>()
+  for (const r of buy) {
+    if (r.crop !== crop) continue
+    const day = r.validFrom.slice(0, 10)
+    byDay.set(day, Math.max(byDay.get(day) ?? 0, r.price))
+  }
+  return byDay
+}
 
 /**
  * Agrinvest's published prices for the hero rail and the header ticker: per crop, the highest
@@ -84,24 +103,25 @@ export type RailRow = { crop: GrainKey; name: string; price: number; change: num
  * published, so both stay hidden instead of showing a zero.
  */
 export function railRows(
-  crops: { id: number; key: string; name: string }[],
+  crops: { id: number; key: string; name: string; slug?: string }[],
   buy: BuyPriceRow[],
 ): { rows: RailRow[]; date: Date } | null {
   const rows: RailRow[] = []
   let latest = ''
   for (const c of crops) {
     if (!isGrainKey(c.key)) continue
-    const byDay = new Map<string, number>()
-    for (const r of buy) {
-      if (r.crop !== c.id) continue
-      const day = r.validFrom.slice(0, 10)
-      byDay.set(day, Math.max(byDay.get(day) ?? 0, r.price))
-    }
+    const byDay = bestByDay(buy, c.id)
     const [last, before] = [...byDay.keys()].sort().reverse()
     if (!last) continue
     if (last > latest) latest = last
     const price = byDay.get(last)!
-    rows.push({ crop: c.key, name: c.name, price, change: before ? price - byDay.get(before)! : 0 })
+    rows.push({
+      crop: c.key,
+      slug: c.slug ?? c.key,
+      name: c.name,
+      price,
+      change: before ? price - byDay.get(before)! : 0,
+    })
   }
   return rows.length ? { rows, date: new Date(latest) } : null
 }
@@ -109,7 +129,67 @@ export function railRows(
 export async function agrinvestRail(locale: Locale) {
   const [crops, buy] = await Promise.all([listCrops(locale), listBuyPrices(locale)])
   return railRows(
-    crops.map((c) => ({ id: c.id, key: c.key, name: c.name })),
+    crops.map((c) => ({ id: c.id, key: c.key, name: c.name, slug: c.slug })),
     buy,
+  )
+}
+
+export type CropSeries = {
+  crop: GrainKey
+  slug: string
+  name: string
+  /** Agrinvest's best price per day; the EU market line when Agrinvest has fewer than two days. */
+  source: 'agrinvest' | 'market'
+  unit: string
+  points: { date: Date; value: number }[]
+}
+
+/**
+ * Per crop, the line the home "Live from the field" chart draws: Agrinvest's best published
+ * price per day (the same numbers as the rail), oldest first. A crop with fewer than two such
+ * days falls back to its EU market line, so the chart never draws a single dot. Crops with
+ * neither are left out.
+ */
+export function cropSeries(
+  crops: { id: number; key: string; name: string; slug?: string }[],
+  buy: BuyPriceRow[],
+  market: MarketPoint[],
+  now = new Date(),
+): CropSeries[] {
+  return crops.flatMap((c): CropSeries[] => {
+    if (!isGrainKey(c.key)) return []
+    const slug = c.slug ?? c.key
+    const own = [...bestByDay(buy, c.id)]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([day, value]) => ({ date: new Date(day), value }))
+    if (own.length > 1)
+      return [{ crop: c.key, slug, name: c.name, source: 'agrinvest', unit: 'lei/t', points: own }]
+    const line = cropLines(market, c.key, now)[0]
+    if (!line || line.points.length < 2) return []
+    const currency = line.currency === 'EUR' ? '€' : line.currency
+    return [
+      {
+        crop: c.key,
+        slug,
+        name: c.name,
+        source: 'market',
+        unit: `${currency}/${line.unit}`,
+        points: line.points,
+      },
+    ]
+  })
+}
+
+export async function agrinvestSeries(locale: Locale, now = new Date()) {
+  const [crops, buy, market] = await Promise.all([
+    listCrops(locale),
+    listBuyPrices(locale),
+    listMarketPoints(yearAgo(now)),
+  ])
+  return cropSeries(
+    crops.map((c) => ({ id: c.id, key: c.key, name: c.name, slug: c.slug })),
+    buy,
+    market,
+    now,
   )
 }

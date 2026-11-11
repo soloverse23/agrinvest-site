@@ -80,6 +80,21 @@ export const crops: {
 
 export const priceDate = new Date('2026-11-02T12:00:00Z')
 
+/** Storage capacity per county: the bases' totals in the local data (2026-11-11), to confirm. */
+export const countyCapacity = [
+  { code: 'BZ', capacity: 86_000 },
+  { code: 'GR', capacity: 31_000 },
+  { code: 'PH', capacity: 27_000 },
+  { code: 'VS', capacity: 20_000 },
+  { code: 'BR', capacity: 19_500 },
+  { code: 'IL', capacity: 18_000 },
+  { code: 'TR', capacity: 18_000 },
+  { code: 'AG', capacity: 13_500 },
+  { code: 'GL', capacity: 10_000 },
+  { code: 'DJ', capacity: 7_000 },
+  { code: 'TL', capacity: 2_000 },
+]
+
 export type SampleProduct = {
   slug: string
   name: string

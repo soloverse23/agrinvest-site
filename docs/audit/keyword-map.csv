@@ -182,3 +182,6 @@ Romanian non-bank agricultural lender,en,Farmers (English),Financing,C,L,L,M,3,,
 machinery financing Romania farm,en,Farmers (English),Financing,T,L,L,L,3,,/en/financing/investment-credit/machinery,/en/financing,"tiers are estimates, no Planner data"
 grain stock financing Romania,en,Farmers (English),Financing,T,L,L,M,3,,/en/financing/stock-financing,/en/financing,"tiers are estimates, no Planner data"
 APIA subsidy loan Romania,en,Farmers (English),Financing,I,L,L,L,3,,/en/financing/guides/apia-certificate-credit,/en/financing,"tiers are estimates, no Planner data"
+calculator agricol,ro,Farmers (Romanian),Grain prices and selling,T,L,L,M,2,,/unelte,/preturi,tools hub (Phase 7b); no Planner data
+unelte fermieri,ro,Farmers (Romanian),Grain prices and selling,T,L,L,M,2,,/unelte,/preturi,tools hub (Phase 7b); no Planner data
+calculator preț net cereale,ro,Farmers (Romanian),Grain prices and selling,T,L,L,H,1,,/preturi/calculator-pret-net,/unelte,linked from the tools hub (Phase 7b); no Planner data

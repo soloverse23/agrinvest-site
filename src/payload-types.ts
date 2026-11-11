@@ -320,6 +320,37 @@ export interface HeroBlock {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional. With slides the hero becomes a slider: the first slide’s title is the page’s H1 and replaces the fields above.
+   */
+  slides?:
+    | {
+        /**
+         * Also the slide’s tab label.
+         */
+        eyebrow: string;
+        title: string;
+        /**
+         * Part of the title set in the accent colour.
+         */
+        accent?: string | null;
+        lead?: string | null;
+        poster?: (number | null) | Media;
+        /**
+         * Base path of the silent loops, e.g. /media/hero/grain (npm run brand:clips writes .webm and .mp4, plus -tall versions and a -tall.webp poster for phones).
+         */
+        clip?: string | null;
+        primary?: {
+          label?: string | null;
+          href?: string | null;
+        };
+        secondary?: {
+          label?: string | null;
+          href?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -2560,6 +2591,29 @@ export interface HeroBlockSelect<T extends boolean = true> {
         hint?: T;
         id?: T;
       };
+  slides?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        accent?: T;
+        lead?: T;
+        poster?: T;
+        clip?: T;
+        primary?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        secondary?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -3941,6 +3995,21 @@ export interface Navigation {
          * One sentence shown in the menu panel next to the sub-pages.
          */
         blurb?: string | null;
+        /**
+         * The shop panel lists the categories, crops and brands with their product counts.
+         */
+        panel?: ('links' | 'shop') | null;
+        /**
+         * Optional card on the right of the panel. Leave empty for none.
+         */
+        promo?: {
+          title?: string | null;
+          text?: string | null;
+          link?: {
+            label?: string | null;
+            href?: string | null;
+          };
+        };
         children?:
           | {
               link: {
@@ -3948,6 +4017,10 @@ export interface Navigation {
                 href: string;
               };
               description?: string | null;
+              /**
+               * Column heading. Links with the same heading share a column.
+               */
+              group?: string | null;
               id?: string | null;
             }[]
           | null;
@@ -4090,6 +4163,19 @@ export interface NavigationSelect<T extends boolean = true> {
               href?: T;
             };
         blurb?: T;
+        panel?: T;
+        promo?:
+          | T
+          | {
+              title?: T;
+              text?: T;
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+            };
         children?:
           | T
           | {
@@ -4100,6 +4186,7 @@ export interface NavigationSelect<T extends boolean = true> {
                     href?: T;
                   };
               description?: T;
+              group?: T;
               id?: T;
             };
         id?: T;

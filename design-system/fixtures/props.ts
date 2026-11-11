@@ -33,9 +33,19 @@ export const headerProps = (locale: Locale): SiteHeaderProps => ({
   },
   ticker: {
     phone: PHONE,
-    crops: crops
-      .slice(0, 4)
-      .map((c) => ({ crop: c.key, name: c.name[locale], price: c.prices[0], change: c.change })),
+    crops: crops.slice(0, 4).map((c) => ({
+      crop: c.key,
+      name: c.name[locale],
+      price: c.prices[0],
+      change: c.change,
+      href: `/preturi/${c.key}`,
+    })),
+    fuel: {
+      name: locale === 'ro' ? 'Motorină' : 'Diesel',
+      price: 7.12,
+      unit: 'lei/l',
+      href: '/motorina',
+    },
   },
 })
 

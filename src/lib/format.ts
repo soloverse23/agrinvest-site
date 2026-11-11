@@ -60,6 +60,29 @@ export function formatShortDate(date: Date, locale: Locale): string {
   return new Intl.DateTimeFormat(intl[locale], { day: 'numeric', month: 'short' }).format(date)
 }
 
+/**
+ * `11 nov., 09:40` (ro) / `11 Nov, 09:40` (en), in Romanian time; just the date at midnight,
+ * which is how day-only sources (prices, feeds without a time) arrive. Absolute on purpose:
+ * pages are cached, so "2 hours ago" would go stale.
+ */
+export function formatWhen(date: Date, locale: Locale): string {
+  const zone = 'Europe/Bucharest'
+  const time = new Intl.DateTimeFormat('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+    timeZone: zone,
+  }).format(date)
+  const day = new Intl.DateTimeFormat(intl[locale], {
+    day: 'numeric',
+    month: 'short',
+    timeZone: zone,
+  }).format(date)
+  return time === '00:00' || date.getUTCHours() + date.getUTCMinutes() === 0
+    ? day
+    : `${day}, ${time}`
+}
+
 export type Direction = 'up' | 'down' | 'flat'
 export const direction = (value: number): Direction =>
   value > 0 ? 'up' : value < 0 ? 'down' : 'flat'

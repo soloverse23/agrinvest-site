@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import type { Locale } from '@/i18n/config'
 
 import { headerProps, heroProps } from '../fixtures/props'
-import { photos } from '../fixtures/sample'
+import { countyCapacity, photos } from '../fixtures/sample'
 import { storyLocale } from '../fixtures/story'
 import { Button } from '../primitives/Button'
-import { BaseMap, type MapBase } from './BaseMap'
+import { CountyMap } from './CountyMap'
 import { ConsentBanner } from './ConsentBanner'
 import { FactTable } from './FactTable'
 import { Hero } from './Hero'
@@ -39,23 +39,6 @@ const Page = ({ children }: { children: React.ReactNode }) => (
 )
 
 const l = (locale: Locale, ro: string, en: string) => (locale === 'ro' ? ro : en)
-
-/** Capacities from the figures register (S3), to confirm. */
-const sampleBases: MapBase[] = [
-  ['Pogoanele', 86_000],
-  ['Crețești', 20_000],
-  ['Sărățuica', 18_000],
-  ['Vedea', 17_500],
-  ['Mihăilești', 13_500],
-  ['Fulga', 13_000],
-].map(([name, capacity]) => ({
-  name: name as string,
-  capacity: capacity as number,
-  href: `/baze/${String(name).toLowerCase()}`,
-}))
-
-/** Collection-point counties named on the old site (C4, to confirm). */
-const sampleCounties = ['BZ', 'IL', 'PH', 'GR', 'TR', 'DJ', 'AG', 'GL', 'BR', 'VS', 'TL']
 
 /** Mega menu: hover or focus a section with sub-pages (no JavaScript). */
 export const HeaderMegaMenu: Story = {
@@ -197,47 +180,31 @@ export const ContentHeader: Story = {
   },
 }
 
-/** Counties tinted, the list carries the bases while their positions are unconfirmed. */
+/** Counties with bases, shaded by total capacity (local data, 2026-11-11); no pins, no script. */
 export const Map: Story = {
-  name: 'Base map',
+  name: 'County map',
   render: (_, { globals }) => {
     const locale = storyLocale(globals)
     return (
       <Page>
         <SectionHeading
           kicker={l(locale, 'Baze', 'Bases')}
-          title={l(locale, 'Livrezi la baza cea mai apropiată', 'Deliver to the nearest base')}
+          title={l(locale, 'Bazele de depozitare', 'Storage bases')}
         />
-        <BaseMap
-          locale={locale}
-          bases={sampleBases}
-          counties={sampleCounties}
-          current="/baze/pogoanele"
-          pendingNote={l(
-            locale,
-            'Pozițiile bazelor sunt în curs de confirmare.',
-            'Base positions are being confirmed.',
-          )}
-        />
+        <CountyMap locale={locale} counties={countyCapacity} />
       </Page>
     )
   },
 }
 
-/** Example data: bases placed at their county centre, as the map does without GPS. */
-export const MapWithPoints: Story = {
-  name: 'Base map, with positions (example data)',
+/** On a base page: its county outlined in lime. */
+export const MapCurrent: Story = {
+  name: 'County map, on a base page',
   render: (_, { globals }) => {
     const locale = storyLocale(globals)
-    const counties = ['BZ', 'IL', 'BZ', 'TR', 'GR', 'BR']
     return (
       <Page>
-        <BaseMap
-          locale={locale}
-          counties={sampleCounties}
-          current="/baze/pogoanele"
-          bases={sampleBases.map((b, i) => ({ ...b, county: counties[i] }))}
-        />
+        <CountyMap locale={locale} counties={countyCapacity} current="BZ" />
       </Page>
     )
   },

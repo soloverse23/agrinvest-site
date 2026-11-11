@@ -1,8 +1,3 @@
-import { SectionHeading } from '@ds/patterns/Sections'
-import { DieselCard } from '@ds/patterns/widgets/DieselCard'
-import { GrainPrices } from '@ds/patterns/widgets/GrainPrices'
-import { NewsList } from '@ds/patterns/widgets/NewsList'
-import { grainPricesProps } from '@/components/templates/PricePage'
 import type { Locale } from '@/i18n/config'
 import { dieselPath, newsPath } from '@/i18n/routes'
 import { toolsUi } from '@/i18n/tools'
@@ -51,27 +46,4 @@ export async function newsListProps(locale: Locale, title?: string, count = 4) {
     emptyText: t.newsEmpty,
     link: { href: newsPath(locale), label: t.newsLink },
   }
-}
-
-/** Home "Today" row: grain prices, diesel and the latest headlines. Server-rendered, no script. */
-export async function TodayStrip({ locale }: { locale: Locale }) {
-  const t = toolsUi[locale].today
-  const [{ props: grain }, diesel, news] = await Promise.all([
-    grainPricesProps(locale),
-    dieselCardProps(locale),
-    newsListProps(locale),
-  ])
-  return (
-    <section
-      aria-labelledby="azi"
-      className="mx-auto mt-12 w-full max-w-page px-4 md:mt-16 md:px-8"
-    >
-      <SectionHeading id="azi" kicker={t.kicker} title={t.title} className="mb-8" />
-      <div className="grid gap-6 lg:grid-cols-3">
-        <GrainPrices {...grain} />
-        <DieselCard {...diesel} />
-        <NewsList {...news} />
-      </div>
-    </section>
-  )
 }

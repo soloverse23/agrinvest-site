@@ -1,5 +1,5 @@
 /**
- * Builds the county outlines for BaseMap from Natural Earth admin-1 (public domain):
+ * Builds the county outlines for CountyMap from Natural Earth admin-1 (public domain):
  * projects each Romanian county and simplifies it (Douglas–Peucker). Writes
  * - public/maps/romania-counties.svg: the outlines, one <path id="BZ"> per county inside
  *   <g id="all">, without fill or stroke so the page styles them through <use>;

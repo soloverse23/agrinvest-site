@@ -48,6 +48,9 @@ function expectedTypes(path: string): string[] {
   for (const l of locales) {
     const pre = l === 'en' ? '/en' : ''
     // Price hub and crop prices carry a Dataset; the calculator is a plain tool page.
+    // The tools hub (Phase 7b) is a collection of its tools.
+    if (path === `${pre}${sections.tools[l]}`)
+      return ['CollectionPage', 'BreadcrumbList', 'ItemList']
     const prices = `${pre}${sections.prices[l]}`
     if (path === prices) return ['WebPage', 'BreadcrumbList', 'Dataset']
     if (path.startsWith(`${prices}/`) && path !== `${prices}/${priceRoutes.netPrice[l]}`)

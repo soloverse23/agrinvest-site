@@ -73,6 +73,41 @@ export const toolsUi = {
         'Prețurile, nota de piață și cele mai importante știri ale săptămânii, o dată pe săptămână.',
       newsletterSubmit: 'Mă abonez',
     },
+    hub: {
+      title: 'Unelte pentru fermieri',
+      seoTitle: 'Unelte pentru fermieri: calculatoare și prețuri',
+      description:
+        'Calculator de preț net la cereale, prețuri la cereale, îngrășăminte și motorină, simulator de rate și cerere de credit, într-un singur loc.',
+      summary:
+        'Ce poți calcula sau verifica înainte să vinzi cereale, să cumperi inputuri sau să ceri un credit.',
+      list: 'Uneltele Agrinvest',
+      cards: {
+        prices: {
+          title: 'Prețuri cereale',
+          text: 'Prețul zilei pe fiecare cultură, la bazele Agrinvest și pe piața UE.',
+        },
+        net: {
+          title: 'Calculator preț net',
+          text: 'Află cât primești pe tonă după scăzământul de umiditate și impurități.',
+        },
+        fert: {
+          title: 'Prețuri îngrășăminte',
+          text: 'Prețul fiecărui îngrășământ din magazin, pe ambalaj și pe kilogram.',
+        },
+        diesel: {
+          title: 'Motorină',
+          text: 'Prețul Agrinvest și media din România, cu livrare la fermă.',
+        },
+        simulator: {
+          title: 'Simulator de rate',
+          text: 'Vezi cum se împart ratele pe recoltele tale.',
+        },
+        apply: {
+          title: 'Cerere de credit',
+          text: 'Trimite online cererea către Agrinvest Credit IFN.',
+        },
+      },
+    },
     today: {
       kicker: 'Azi',
       title: 'Prețuri, motorină și știri',
@@ -153,6 +188,41 @@ export const toolsUi = {
       newsletterTitle: 'The Agrinvest weekly',
       newsletterBody: 'Prices, the market note and the week’s main news, once a week.',
       newsletterSubmit: 'Subscribe',
+    },
+    hub: {
+      title: 'Tools for farmers',
+      seoTitle: 'Farm tools: calculators and prices',
+      description:
+        'A net price calculator, grain, fertiliser and diesel prices, a repayment simulator and the loan application, in one place.',
+      summary:
+        'What you can calculate or check before you sell grain, buy inputs or apply for a loan.',
+      list: 'Agrinvest tools',
+      cards: {
+        prices: {
+          title: 'Grain prices',
+          text: 'Today’s price for each crop, at Agrinvest bases and on the EU market.',
+        },
+        net: {
+          title: 'Net price calculator',
+          text: 'See what you get per tonne after moisture and impurity deductions.',
+        },
+        fert: {
+          title: 'Fertiliser prices',
+          text: 'The price of every fertiliser in the shop, per pack and per kilogram.',
+        },
+        diesel: {
+          title: 'Diesel',
+          text: 'The Agrinvest price and the Romanian average, with delivery to the farm.',
+        },
+        simulator: {
+          title: 'Repayment simulator',
+          text: 'See how the instalments split across your harvests.',
+        },
+        apply: {
+          title: 'Loan application',
+          text: 'Send your application to Agrinvest Credit IFN online.',
+        },
+      },
     },
     today: {
       kicker: 'Today',

@@ -141,8 +141,8 @@ describe('Agrinvest price rail', () => {
       row(2, 800, '2026-11-01'),
     ])!
     expect(rail.rows).toEqual([
-      { crop: 'wheat', name: 'Grâu', price: 970, change: 30 },
-      { crop: 'maize', name: 'Porumb', price: 800, change: 0 },
+      { crop: 'wheat', slug: 'wheat', name: 'Grâu', price: 970, change: 30 },
+      { crop: 'maize', slug: 'maize', name: 'Porumb', price: 800, change: 0 },
     ])
     expect(rail.date.toISOString().slice(0, 10)).toBe('2026-11-02')
   })

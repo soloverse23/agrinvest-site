@@ -4,13 +4,14 @@ import { tags } from '@/lib/revalidate'
 import type { Media } from '@/payload-types'
 
 import { payloadClient } from './payload'
+import { focusOf, type Focus } from '@ds/lib/media'
 
 export type SocialPostData = {
   id: number
   url: string
   text: string
   date: string
-  image: { src: string; alt: string } | null
+  image: { src: string; alt: string; focus?: Focus } | null
 }
 
 /** The newest visible LinkedIn posts (Phase 7), staff-picked. */
@@ -32,7 +33,11 @@ export const listSocialPosts = unstable_cache(
       date: d.postedAt,
       image:
         typeof d.image === 'object' && d.image?.url
-          ? { src: d.image.url, alt: (d.image as Media).alt ?? '' }
+          ? {
+              src: d.image.url,
+              alt: (d.image as Media).alt ?? '',
+              focus: focusOf(d.image as Media),
+            }
           : null,
     }))
   },

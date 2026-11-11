@@ -27,7 +27,6 @@ export const ui = {
     value: 'Valoare',
     source: 'Sursă',
     play: 'Pornește video',
-    pendingMap: 'Pozițiile bazelor pe hartă sunt în curs de confirmare.',
     season: 'Sezon de recoltă',
     payment: 'Plata',
     deliver: 'Livrare',
@@ -71,7 +70,6 @@ export const ui = {
     value: 'Value',
     source: 'Source',
     play: 'Play video',
-    pendingMap: 'Base positions on the map are being confirmed.',
     season: 'Harvest season',
     payment: 'Payment',
     deliver: 'Delivery',
@@ -105,3 +103,21 @@ export const fixedPaths = {
 
 export const fixedUrl = (page: keyof typeof fixedPaths, locale: Locale) =>
   localePath(fixedPaths[page][locale], locale)
+
+/** The home hero slider's controls (HeroCarousel). */
+export const sliderUi = {
+  ro: {
+    carousel: 'Ce face Agrinvest',
+    slide: '{n} din {total}',
+    pause: 'Oprește derularea',
+    play: 'Pornește derularea',
+    tabs: 'Alege subiectul',
+  },
+  en: {
+    carousel: 'What Agrinvest does',
+    slide: '{n} of {total}',
+    pause: 'Pause the slides',
+    play: 'Play the slides',
+    tabs: 'Choose a topic',
+  },
+} satisfies Record<Locale, Record<string, string>>

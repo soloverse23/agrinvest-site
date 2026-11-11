@@ -7,6 +7,7 @@ import { formatDate, formatNumber } from '@/lib/format'
 import type { CropKey } from '../fixtures/sample'
 import { ArrowRightIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
+import { type Focus } from '../lib/media'
 import { Button } from '../primitives/Button'
 import { Photo } from './Photo'
 import { Delta } from '../primitives/Delta'
@@ -23,7 +24,7 @@ export type HeroProps = {
   primary?: { href: string; label: string } | null
   secondary?: { href: string; label: string } | null
   /** Without a photo the hero is a forest panel (e.g. while footage rights are open). */
-  photo?: { src: string; alt: string } | null
+  photo?: { src: string; alt: string; focus?: Focus } | null
   /** Heading level: h1 when the hero opens the page. */
   as?: 'h1' | 'h2'
   /** Entry points by need, on the rail along the bottom of the image (when there are no prices). */
@@ -59,13 +60,13 @@ export function Hero({
   prices,
   as: Heading = 'h1',
 }: HeroProps) {
-  const [before, after] = accent && title.includes(accent) ? title.split(accent) : [title, '']
   return (
     <section className="relative isolate flex min-h-svh flex-col overflow-hidden bg-ink text-on-forest">
       {photo ? (
         <Photo
           src={photo.src}
           alt={photo.alt}
+          focus={photo.focus}
           fill
           priority
           sizes="100vw"
@@ -85,32 +86,16 @@ export function Hero({
       {header}
 
       <div className="mx-auto flex w-full max-w-page flex-1 flex-col justify-end px-4 pt-32 md:px-8">
-        <div className="grid max-w-5xl gap-6 pb-10 md:pb-14">
-          <p className="flex items-center gap-3 text-small font-medium text-lime">
-            <span className="h-px w-10 bg-lime" aria-hidden="true" />
-            {eyebrow}
-          </p>
-          <Heading className="text-hero font-semibold text-balance">
-            {before}
-            {accent && <span className="text-lime">{accent}</span>}
-            {after}
-          </Heading>
-          {lead && <p className="max-w-2xl text-lead text-on-forest-muted">{lead}</p>}
-          {(primary || secondary) && (
-            <div className="flex flex-wrap gap-3 pt-2">
-              {primary && (
-                <Button href={primary.href} variant="lime" size="lg" icon={<ArrowRightIcon />}>
-                  {primary.label}
-                </Button>
-              )}
-              {secondary && (
-                <Button href={secondary.href} variant="on-dark" size="lg">
-                  {secondary.label}
-                </Button>
-              )}
-            </div>
-          )}
-        </div>
+        <HeroCopy
+          eyebrow={eyebrow}
+          title={title}
+          accent={accent}
+          lead={lead}
+          primary={primary}
+          secondary={secondary}
+          as={Heading}
+          className="pb-10 md:pb-14"
+        />
 
         {prices ? (
           <aside
@@ -168,5 +153,62 @@ export function Hero({
         ) : null}
       </div>
     </section>
+  )
+}
+
+type HeroCopyProps = Pick<
+  HeroProps,
+  'eyebrow' | 'title' | 'accent' | 'lead' | 'primary' | 'secondary' | 'as'
+> & {
+  className?: string
+  /** `display`: a step smaller, for the slider, where three headlines share one height. */
+  size?: 'hero' | 'display'
+}
+
+/** The hero's text: eyebrow, headline with its lime accent, one line and two buttons. */
+export function HeroCopy({
+  eyebrow,
+  title,
+  accent,
+  lead,
+  primary,
+  secondary,
+  as: Heading = 'h1',
+  className,
+  size = 'hero',
+}: HeroCopyProps) {
+  const [before, after] = accent && title.includes(accent) ? title.split(accent) : [title, '']
+  return (
+    <div className={cx('grid max-w-5xl gap-6', className)}>
+      <p className="flex items-center gap-3 text-small font-medium text-lime">
+        <span className="h-px w-10 bg-lime" aria-hidden="true" />
+        {eyebrow}
+      </p>
+      <Heading
+        className={cx(
+          'font-semibold text-balance',
+          size === 'hero' ? 'text-hero' : 'text-h1 md:text-display',
+        )}
+      >
+        {before}
+        {accent && <span className="text-lime">{accent}</span>}
+        {after}
+      </Heading>
+      {lead && <p className="max-w-2xl text-lead text-on-forest-muted">{lead}</p>}
+      {(primary || secondary) && (
+        <div className="flex flex-wrap gap-3 pt-2">
+          {primary && (
+            <Button href={primary.href} variant="lime" size="lg" icon={<ArrowRightIcon />}>
+              {primary.label}
+            </Button>
+          )}
+          {secondary && (
+            <Button href={secondary.href} variant="on-dark" size="lg">
+              {secondary.label}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
   )
 }

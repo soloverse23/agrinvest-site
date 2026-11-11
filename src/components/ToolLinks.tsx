@@ -31,7 +31,7 @@ function stepsFor(locale: Locale, current: string): Step[] {
     body: t.simulatorBody,
   }
   const stock: Step = {
-    href: financeProductPath('finantare-stocuri', locale),
+    href: financeProductPath(locale === 'ro' ? 'finantare-stocuri' : 'stock-financing', locale),
     label: t.stock,
     body: t.stockBody,
   }

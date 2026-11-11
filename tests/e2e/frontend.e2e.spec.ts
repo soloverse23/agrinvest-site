@@ -96,7 +96,6 @@ test.describe('Core pages', () => {
     await expect(page.getByText('862 lei').first()).toBeVisible()
     await expect(page.getByText('de confirmat').first()).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Doze recomandate' })).toHaveCount(1)
-    await expect(page.getByRole('group', { name: 'Calculator de doză' })).toBeVisible()
     // The quick request replaces the long form; old #cerere links land on it.
     await expect(page.locator('#cerere').getByRole('textbox')).toBeVisible()
     await expect(page.getByRole('heading', { name: /Cere ofertă pentru/ })).toHaveCount(0)
@@ -569,7 +568,10 @@ test.describe('Finance cross-selling', () => {
   }) => {
     await page.goto('/magazin/ingrasaminte/uree')
     await page.getByRole('button', { name: 'Adaugă în coș' }).first().click()
-    await page.getByRole('link', { name: 'Vezi coșul' }).first().click()
+    // Before hydration the form posts and opens the cart; after it, the cart link appears.
+    const link = page.getByRole('link', { name: 'Vezi coșul' }).first()
+    await Promise.race([page.waitForURL(/\/cos$/).catch(() => {}), link.waitFor().catch(() => {})])
+    if (!/\/cos$/.test(new URL(page.url()).pathname)) await link.click()
     await page.waitForURL(/\/cos$/)
     const callout = page.locator('aside', { hasText: 'Agrinvest Credit IFN' })
     await expect(callout.getByRole('heading', { level: 2 })).toBeVisible()

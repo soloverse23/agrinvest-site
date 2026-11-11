@@ -28,6 +28,7 @@ import {
 } from '../icons/icons'
 import type { SectionIcon } from '../icons/keys'
 import { cx } from '../lib/cx'
+import { type Focus } from '../lib/media'
 import { Button } from '../primitives/Button'
 import { Photo } from './Photo'
 
@@ -449,7 +450,7 @@ export function StorySection({
   title: string
   children?: ReactNode
   quote?: { text: string; name?: string | null; role?: string | null } | null
-  image?: { src: string; alt: string; width: number; height: number } | null
+  image?: { src: string; alt: string; width: number; height: number; focus?: Focus } | null
   reverse?: boolean
 }) {
   return (
@@ -475,6 +476,7 @@ export function StorySection({
           <Photo
             src={image.src}
             alt={image.alt}
+            focus={image.focus}
             width={image.width}
             height={image.height}
             sizes="(min-width: 1024px) 50vw, 100vw"

@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:17-alpine
@@ -48,7 +48,7 @@ jobs:
         run: npm run seed
       - run: npm run build
       - run: npm run build-storybook
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install chromium
       - run: npm run test:int
       - run: npm run test:e2e
       - name: SEO, AEO and figures checks

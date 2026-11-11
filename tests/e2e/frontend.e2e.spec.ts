@@ -109,7 +109,10 @@ test.describe('Core pages', () => {
     const page = await context.newPage()
     await page.goto('/magazin/erbicide')
     const all = await page.locator('h3').count()
-    await page.getByRole('link', { name: /^Porumb/ }).click()
+    await page
+      .locator('main')
+      .getByRole('link', { name: /^Porumb/ })
+      .click()
     await expect(page).toHaveURL(/\/magazin\/erbicide\?cultura=porumb/)
     expect(await page.locator('h3').count()).toBeLessThan(all)
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -223,7 +226,45 @@ test.describe('Core page content', () => {
     await page.goto('/')
     const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
     await expect(nav.locator('a[href="/cereale/grau"]')).toHaveCount(1)
-    await expect(nav.locator('a[href="/depozitare/uscare"]')).toHaveCount(1)
+    await expect(nav.locator('a[href="/depozitare"]')).toHaveCount(1)
+  })
+
+  test('the shop panel lists live categories, crops and brands in the HTML', async ({ page }) => {
+    await page.goto('/despre')
+    const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
+    await expect(nav.locator('a[href="/magazin/erbicide"]')).toHaveCount(1)
+    await expect(nav.locator('a[href^="/magazin/cultura/"]').first()).toBeAttached()
+    await expect(nav.locator('a[href^="/magazin/producator/"]').first()).toBeAttached()
+    await expect(nav.locator('form[role="search"]')).toHaveCount(1)
+  })
+
+  test('the tools hub renders with its tools and a CollectionPage', async ({ page }) => {
+    await page.goto('/unelte')
+    await expect(page.locator('h1')).toHaveCount(1)
+    for (const href of [
+      '/preturi',
+      '/preturi/calculator-pret-net',
+      '/motorina',
+      '/finantare/simulator',
+    ])
+      await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached()
+    expect(await page.locator('script[type="application/ld+json"]').allTextContents()).toEqual(
+      expect.arrayContaining([expect.stringContaining('CollectionPage')]),
+    )
+    await page.goto('/en/tools')
+    await expect(page.locator('h1')).toHaveCount(1)
+  })
+
+  test('the price ticker is on shop pages, links every price, and is not on home', async ({
+    page,
+  }) => {
+    await page.goto('/magazin')
+    const strip = page.locator('div.bg-forest').first()
+    await expect(strip.locator('a[href^="/preturi/"]').first()).toBeAttached()
+    await expect(strip.locator('a[href="/motorina"]')).toHaveCount(1)
+    await page.goto('/')
+    await expect(page.locator('h1')).toHaveCount(1)
+    await expect(page.locator('div.bg-forest a[href="/motorina"]')).toHaveCount(0)
   })
 
   test('a base page pre-selects its base in the delivery form', async ({ page }) => {
@@ -248,28 +289,46 @@ test.describe('Core page content', () => {
 })
 
 test.describe('Interactions', () => {
-  test('the mega menu stays open on a diagonal move across a neighbour', async ({ page }) => {
+  test('the mega menu stays open on a diagonal move to a panel link', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/despre')
     const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
-    const item = await nav.getByRole('link', { name: 'Vinde cereale' }).boundingBox()
+    const item = await nav
+      .getByRole('link', { name: 'Prețuri și unelte', exact: true })
+      .boundingBox()
     await page.mouse.move(item!.x + item!.width / 2, item!.y + item!.height / 2)
-    // Porumb sits right of the item: the path crosses "Depozitare".
-    const target = nav.locator('a[href="/cereale/porumb"]')
+    const target = nav.locator('a[href="/preturi/porumb"]')
+    await expect(target).toBeVisible()
     const box = await target.boundingBox()
     await page.mouse.move(box!.x + 20, box!.y + 10, { steps: 25 })
     await expect(target).toBeVisible()
     await target.click()
-    await expect(page).toHaveURL(/\/cereale\/porumb$/)
+    await expect(page).toHaveURL(/\/preturi\/porumb$/)
   })
 
-  test('a county shows its name and area on hover', async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 })
+  test('the county map shades the counties with bases and names each on hover', async ({
+    page,
+  }) => {
     await page.goto('/depozitare')
-    await page.locator('#baze use[aria-label="Buzău"]').hover()
-    const card = page.locator('#baze [role=status]')
-    await expect(card).toContainText('Buzău')
-    await expect(card).toContainText('6.103 km²')
+    const map = page.locator('#baze figure svg[role=img]')
+    await expect(map).toHaveAttribute('aria-label', /Buzău/)
+    await expect(page.locator('#baze figure use[class*="fill-surface"]')).not.toHaveCount(0)
+    await expect(page.locator('#baze figure title', { hasText: /^Buzău: / })).toHaveCount(1)
+    await expect(page.locator('#baze figcaption')).toContainText('Capacitate pe județ')
+  })
+
+  test('the live panel switches prices without JavaScript', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/')
+    const tabs = page.locator('input[name="live-crop"]')
+    expect(await tabs.count()).toBeGreaterThan(1)
+    const second = await tabs.nth(1).getAttribute('value')
+    // The radio is visually hidden; its label is the tab.
+    await tabs.nth(1).locator('xpath=..').click()
+    await expect(page.locator(`[data-crop="${second}"]`)).toBeVisible()
+    await expect(page.locator('[data-crop]:visible')).toHaveCount(1)
+    await context.close()
   })
 })
 
@@ -656,16 +715,50 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     await expect(page.locator('main table a[href^="/magazin/"]').first()).toBeAttached()
   })
 
-  test('the home page shows today’s prices, diesel and news', async ({ page }) => {
+  test('the home page: slider, live prices and updates, shop, tools, company', async ({ page }) => {
     await page.goto('/')
-    const today = page.locator('section[aria-labelledby="azi"]')
-    await expect(today).toBeVisible()
-    await expect(today.locator('section')).toHaveCount(3)
-    await expect(today.locator('a[href="/preturi"]').first()).toBeAttached()
-    await page.goto('/en')
+    await expect(page.locator('h1')).toHaveCount(1)
+    // No ticker on home; the hero rail links each price to its own page.
+    await expect(page.locator('header div.bg-forest a[href="/motorina"]')).toHaveCount(0)
+    const rail = page.locator('aside', { hasText: 'Prețul Agrinvest azi' })
+    await expect(rail.locator('a[href^="/preturi/"]').first()).toBeAttached()
+    const live = page.locator('section[aria-labelledby="live-title"]')
+    await expect(live.getByRole('heading', { name: 'În direct din câmp' })).toBeVisible()
+    await expect(live.locator('a[href="/stiri"]')).toBeAttached()
+    await expect(live.locator('a[href="/preturi"]')).toBeAttached()
+    const shop = page.locator('section[aria-labelledby="magazin"]')
+    await expect(shop.locator('a[href="/magazin/seminte"]').first()).toBeAttached()
+    await expect(shop.locator('a[href^="/magazin/cultura/"]').first()).toBeAttached()
+    await expect(page.locator('section[aria-labelledby="unelte"] a[href="/unelte"]')).toBeAttached()
     await expect(
-      page.locator('section[aria-labelledby="azi"] a[href="/en/prices"]').first(),
+      page.locator('section[aria-labelledby="agrinvest"] a[href="/cereale"]'),
     ).toBeAttached()
+    const jsonLd = (
+      await page.locator('script[type="application/ld+json"]').allTextContents()
+    ).join('')
+    expect(jsonLd).toContain('"FAQPage"')
+    expect(jsonLd).toContain('"ItemList"')
+    await page.goto('/en')
+    await expect(page.locator('h1')).toHaveCount(1)
+    await expect(
+      page.locator('section[aria-labelledby="live-title"] a[href="/en/prices"]'),
+    ).toBeAttached()
+    await expect(
+      page.locator('section[aria-labelledby="magazin"] a[href="/en/shop"]').first(),
+    ).toBeAttached()
+  })
+
+  test('crop pages and the grain page have no bases section; the figures page has the map', async ({
+    page,
+  }) => {
+    for (const path of ['/cereale/grau', '/en/grain/wheat', '/cereale', '/en/grain', '/']) {
+      await page.goto(path)
+      await expect(page.locator('#baze')).toHaveCount(0)
+    }
+    await page.goto('/cereale/grau')
+    await expect(page.locator('main')).not.toContainText('Unde livrezi')
+    await page.goto('/despre/cifre')
+    await expect(page.locator('#baze figure svg[role=img]')).toBeVisible()
   })
 
   test('the menu and footer link the prices section', async ({ page }) => {

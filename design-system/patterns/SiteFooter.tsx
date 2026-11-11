@@ -40,8 +40,8 @@ export function SiteFooter({
 }: SiteFooterProps) {
   return (
     <footer aria-label={labels.footer} className="mt-24 bg-forest text-on-forest md:mt-32">
-      <div className="mx-auto grid max-w-page gap-12 px-4 py-14 md:px-8 md:py-16 lg:grid-cols-12">
-        <div className="grid content-start gap-6 lg:col-span-4">
+      <div className="mx-auto grid max-w-page gap-12 px-4 py-14 md:px-8 md:py-16 lg:grid-cols-[minmax(0,1.5fr)_repeat(5,minmax(0,1fr))] lg:gap-8 xl:gap-12">
+        <div className="grid content-start gap-6">
           <Link href={homeHref} className="w-fit no-underline" aria-label="Agrinvest">
             <Lockup tone="light" />
           </Link>
@@ -67,9 +67,30 @@ export function SiteFooter({
               ))}
             </ul>
           </div>
+          {social.length > 0 && (
+            <ul aria-label={labels.social} className="flex flex-wrap items-center gap-2">
+              {social.map((s) => {
+                const network = socialNetworkOf(s.href)
+                const Icon = network ? socialIcons[network] : null
+                return (
+                  <li key={s.href}>
+                    <a
+                      href={s.href}
+                      rel="me noopener"
+                      aria-label={s.label}
+                      title={s.label}
+                      className="inline-flex size-10 items-center justify-center rounded-full text-on-forest-muted ring-1 ring-on-forest/20 transition-colors hover:text-lime hover:ring-lime"
+                    >
+                      {Icon ? <Icon className="size-5" /> : s.label}
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:col-span-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:contents">
           {columns.map((col) => (
             <nav key={col.title} aria-label={col.title} className="grid content-start gap-3">
               <h2 className="text-caption font-medium text-on-forest-muted">{col.title}</h2>
@@ -112,27 +133,6 @@ export function SiteFooter({
               ),
             )}
             {extra}
-            {social.length > 0 && (
-              <ul aria-label={labels.social} className="flex flex-wrap items-center gap-3">
-                {social.map((s) => {
-                  const network = socialNetworkOf(s.href)
-                  const Icon = network ? socialIcons[network] : null
-                  return (
-                    <li key={s.href}>
-                      <a
-                        href={s.href}
-                        rel="me noopener"
-                        aria-label={s.label}
-                        title={s.label}
-                        className="inline-flex size-9 items-center justify-center rounded-full text-on-forest-muted ring-1 ring-on-forest/20 transition-colors hover:text-lime hover:ring-lime"
-                      >
-                        {Icon ? <Icon className="size-5" /> : s.label}
-                      </a>
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
           </div>
         </div>
       </div>

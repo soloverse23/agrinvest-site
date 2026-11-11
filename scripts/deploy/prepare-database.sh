@@ -15,6 +15,8 @@ npm run apply:products
 npm run apply:finance
 npm run apply:tools
 npm run apply:articles
+# Phase 7b menu, footer and home on a live site; after the entry points, which then skip.
+npm run apply:redesign
 # One-time demo data on the test domain (owner's request, 2026-11-10). Runs only in the
 # production build and only while DEMO_PASSWORD is set in Vercel; skips itself once applied.
 # A failure must not stop the deploy. Remove DEMO_PASSWORD afterwards to switch it off.

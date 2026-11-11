@@ -234,3 +234,74 @@ export const hubIndexable = (hub: Hub, productCount: number) =>
     noindex: hub.seo?.noindex,
     productCount,
   })
+
+/** A line of the shop menu: its slug, name and how many products it holds. */
+export type MenuCount = { slug: string; name: string; count: number }
+
+export type ShopMenu = {
+  /** Every published product. */
+  total: number
+  /** Top-level categories with their non-empty subcategories. */
+  categories: (MenuCount & { children: MenuCount[] })[]
+  /** Crops with products, most products first. */
+  crops: MenuCount[]
+  /** Brands with products, most products first. */
+  brands: MenuCount[]
+}
+
+const byCount = (a: MenuCount, b: MenuCount) => b.count - a.count || a.name.localeCompare(b.name)
+
+/**
+ * What the header's shop panel shows, counted from the published products at render time, so
+ * the numbers never go stale. Names the language does not have yet are left out.
+ */
+export const getShopMenu = unstable_cache(
+  async (locale: Locale): Promise<ShopMenu> => {
+    const [categories, products, crops, brands] = await Promise.all([
+      listCategories(locale),
+      listProducts(locale),
+      listShopCrops(locale),
+      listBrands(locale),
+    ])
+    const named = categories.filter((c) => c.slug && c.name)
+    const parentOf = (c: Category) => object<Category>(c.parent)?.id ?? (c.parent as number | null)
+    const line = (c: Category): MenuCount => ({
+      slug: c.slug as string,
+      name: c.name,
+      count: inCategory(products, c).length,
+    })
+    return {
+      total: products.length,
+      categories: named
+        .filter((c) => !parentOf(c))
+        .map((c) => ({
+          ...line(c),
+          children: named
+            .filter((child) => parentOf(child) === c.id)
+            .map(line)
+            .filter((child) => child.count > 0),
+        }))
+        .filter((c) => c.count > 0),
+      crops: crops
+        .filter((c) => c.slug && c.name)
+        .map((c) => ({
+          slug: c.slug,
+          name: c.name,
+          count: products.filter((p) => p.crops.some((pc) => pc.id === c.id)).length,
+        }))
+        .filter((c) => c.count > 0)
+        .sort(byCount),
+      brands: brands
+        .filter((b) => b.slug && b.name)
+        .map((b) => ({
+          slug: b.slug,
+          name: b.name,
+          count: products.filter((p) => p.brand?.id === b.id).length,
+        }))
+        .filter((b) => b.count > 0)
+        .sort(byCount),
+    }
+  },
+  [`shop:menu:${epoch}`],
+  { tags: shopTags },
+)

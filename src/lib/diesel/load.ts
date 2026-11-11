@@ -43,3 +43,20 @@ export async function nationalDiesel(now = new Date()) {
     .filter((p) => p.source === 'eu-oil-bulletin' && p.series === 'diesel' && p.market === 'RO')
     .map((p) => ({ date: new Date(p.period), value: p.price, unit: p.unit, currency: p.currency }))
 }
+
+/**
+ * Diesel for the header ticker: Agrinvest's own price when one is published, otherwise the
+ * Oil Bulletin average for Romania with its change since the week before. Null with neither.
+ */
+export async function dieselTicker(locale: Locale) {
+  const [own, series] = await Promise.all([getDieselPrice(locale), nationalDiesel()])
+  if (own) return { price: own.price, unit: 'lei/l', change: undefined }
+  const last = series[series.length - 1]
+  if (!last) return null
+  const before = series[series.length - 2]
+  return {
+    price: last.value,
+    unit: `€/${last.unit}`,
+    change: before ? last.value - before.value : undefined,
+  }
+}

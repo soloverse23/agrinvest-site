@@ -6,11 +6,9 @@ import type { ReactNode } from 'react'
 import { FigureStrip, FinanceBand } from '@ds/patterns/Bands'
 import { FactTable } from '@ds/patterns/FactTable'
 import { Hero } from '@ds/patterns/Hero'
-import {
-  BaseMapLazy as BaseMap,
-  LeadFormLazy as LeadForm,
-  VideoEmbedLazy as VideoEmbed,
-} from '@ds/patterns/Lazy'
+import { HeroSlider, type HeroRailPrices } from '@ds/patterns/HeroSlider'
+import { CountyMap } from '@ds/patterns/CountyMap'
+import { LeadFormLazy as LeadForm, VideoEmbedLazy as VideoEmbed } from '@ds/patterns/Lazy'
 import { CropBadge } from '@ds/patterns/parts'
 import { Photo } from '@ds/patterns/Photo'
 import {
@@ -23,10 +21,11 @@ import {
   StorySection,
 } from '@ds/patterns/Sections'
 import { ArrowRightIcon } from '@ds/icons/icons'
+import { focusOf } from '@ds/lib/media'
 import { localePath, type Locale } from '@/i18n/config'
 import { basePath, cropPath } from '@/i18n/routes'
 import { isGrainKey } from '@/lib/crops'
-import { fixedUrl, ui } from '@/i18n/ui'
+import { fixedUrl, sliderUi, ui } from '@/i18n/ui'
 import { slugify } from '@/lib/slugify'
 import { financeProductPath } from '@/i18n/routes'
 import { listFinanceProducts } from '@/lib/content/finance'
@@ -65,7 +64,8 @@ const Section = ({
   </section>
 )
 
-type HeroPrices = NonNullable<Parameters<typeof Hero>[0]['prices']>
+/** Today's prices for the home hero: each crop with its own page, plus diesel. */
+type HeroPrices = HeroRailPrices
 type Ctx = {
   locale: Locale
   path: string
@@ -294,6 +294,7 @@ async function renderBlock(block: Block, ctx: Ctx): Promise<ReactNode> {
                 ? {
                     src: image.url as string,
                     alt: image.alt,
+                    focus: focusOf(image),
                     width: image.width ?? 1600,
                     height: image.height ?? 900,
                   }
@@ -423,6 +424,37 @@ function HeroBlock({
   heroPrices,
 }: { block: BlockOf<'hero'> } & Ctx) {
   const image = media(block.image)
+  const needs = (block.needs ?? []).map((n) => ({
+    href: n.link.href,
+    label: n.link.label,
+    hint: fact(n.hint, { figures, locale }),
+  }))
+  const linkOf = (l?: { href?: string | null; label?: string | null } | null) =>
+    l?.href && l.label ? { href: l.href, label: l.label } : null
+  if (block.slides?.length) {
+    return (
+      <HeroSlider
+        locale={locale}
+        labels={sliderUi[locale]}
+        prices={heroPrices}
+        needs={needs}
+        as={first ? 'h1' : 'h2'}
+        slides={block.slides.map((slide) => {
+          const poster = media(slide.poster)
+          return {
+            eyebrow: slide.eyebrow,
+            title: slide.title,
+            accent: slide.accent ?? undefined,
+            lead: fact(slide.lead, { figures, locale }),
+            primary: linkOf(slide.primary),
+            secondary: linkOf(slide.secondary),
+            poster: poster ? { src: poster.url as string, alt: poster.alt } : null,
+            clip: slide.clip,
+          }
+        })}
+      />
+    )
+  }
   return (
     <Hero
       locale={locale}
@@ -431,7 +463,7 @@ function HeroBlock({
       title={block.title}
       accent={block.accent ?? undefined}
       lead={fact(block.lead, { figures, locale })}
-      photo={image ? { src: image.url as string, alt: image.alt } : null}
+      photo={image ? { src: image.url as string, alt: image.alt, focus: focusOf(image) } : null}
       primary={
         block.primary?.href && block.primary.label
           ? { href: block.primary.href, label: block.primary.label }
@@ -443,11 +475,7 @@ function HeroBlock({
           : null
       }
       prices={heroPrices}
-      needs={(block.needs ?? []).map((n) => ({
-        href: n.link.href,
-        label: n.link.label,
-        hint: fact(n.hint, { figures, locale }),
-      }))}
+      needs={needs}
     />
   )
 }
@@ -483,7 +511,10 @@ function FigureStripBlock({
   )
 }
 
-/** Bases on the county map, with links to every base page. */
+/**
+ * Bases: the county map shaded by storage capacity (when `showMap`), then a link to every base
+ * page. Server-rendered, no script; on a base page its county is outlined and its link marked.
+ */
 export async function BaseListBlock({
   block,
   ctx,
@@ -496,41 +527,63 @@ export async function BaseListBlock({
   current?: string
 }) {
   const only = new Set((block.counties ?? []).map((c) => (typeof c === 'object' ? c.id : c)))
-  const [bases, counties] = await Promise.all([listBases(ctx.locale), listCounties()])
-  const shown = bases.filter((b) => {
-    const county = typeof b.county === 'object' && b.county ? b.county.id : b.county
-    return !only.size || (county != null && only.has(county))
+  const bases = await listBases(ctx.locale)
+  const rows = bases.flatMap((b) => {
+    const county = typeof b.county === 'object' && b.county ? b.county : null
+    if (only.size && (!county || !only.has(county.id))) return []
+    return [{ base: b, href: basePath(b.slug, ctx.locale), county: county?.code ?? null }]
   })
-  // The base links carry one shared marker when every capacity has the same status.
-  const statuses = new Set(shown.map((b) => b.capacityStatus))
-  const shared = statuses.size === 1 ? shown[0]?.capacityStatus : undefined
+  const totals = new Map<string, number>()
+  for (const r of rows)
+    if (r.county) totals.set(r.county, (totals.get(r.county) ?? 0) + (r.base.capacity ?? 0))
+  // One shared marker when every capacity has the same status.
+  const statuses = new Set(rows.map((r) => r.base.capacityStatus))
+  const shared = statuses.size === 1 ? rows[0]?.base.capacityStatus : undefined
+  const mark = shared && (
+    <FactMark
+      figure={{ key: 'bases:capacity', label: '', value: '', status: shared }}
+      locale={ctx.locale}
+    />
+  )
+  const sorted = [...rows].sort((a, b) => (b.base.capacity ?? 0) - (a.base.capacity ?? 0))
+  const t = ui[ctx.locale]
   return (
     <Section id="baze">
       {head}
-      <BaseMap
-        locale={ctx.locale}
-        current={current}
-        counties={counties.map((c) => c.code)}
-        pendingNote={ui[ctx.locale].pendingMap}
-        listNote={
-          shared && (
-            <FactMark
-              figure={{ key: 'bases:capacity', label: '', value: '', status: shared }}
-              locale={ctx.locale}
-            />
-          )
-        }
-        bases={shown.map((b) => {
-          const county = typeof b.county === 'object' && b.county ? b.county : null
-          return {
-            name: b.name,
-            href: basePath(b.slug, ctx.locale),
-            capacity: b.capacity,
-            county: county?.code,
-            geo: b.geo,
-          }
-        })}
-      />
+      <div className="mx-auto grid w-full max-w-3xl gap-5">
+        {block.showMap !== false && (
+          <CountyMap
+            locale={ctx.locale}
+            counties={[...totals].map(([code, capacity]) => ({ code, capacity }))}
+            current={rows.find((r) => r.href === current)?.county}
+            note={mark}
+          />
+        )}
+        <nav
+          aria-label={t.bases}
+          className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line pt-4"
+        >
+          <span className="flex items-center gap-1 text-small font-semibold text-ink">
+            {t.bases}
+            {block.showMap === false && mark}
+          </span>
+          {sorted.map((r) => (
+            <Link
+              key={r.href}
+              href={r.href}
+              prefetch={false}
+              aria-current={r.href === current ? 'page' : undefined}
+              className={
+                r.href === current
+                  ? 'text-small font-semibold text-accent no-underline hover:underline'
+                  : 'text-small text-muted no-underline hover:text-ink hover:underline'
+              }
+            >
+              {r.base.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </Section>
   )
 }

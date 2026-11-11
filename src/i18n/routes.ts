@@ -13,6 +13,7 @@ export const sections = {
   prices: { ro: '/preturi', en: '/prices' },
   market: { ro: '/piata', en: '/market' },
   diesel: { ro: '/motorina', en: '/diesel' },
+  tools: { ro: '/unelte', en: '/tools' },
   news: { ro: '/stiri', en: '/news' },
   guides: { ro: '/ghiduri', en: '/guides' },
   authors: { ro: '/autori', en: '/authors' },
@@ -121,6 +122,9 @@ export const fertiliserPricesPath = (locale: Locale) =>
 
 /** Diesel: `/motorina`, `/en/diesel`. */
 export const dieselPath = (locale: Locale) => localePath(sections.diesel[locale], locale)
+
+/** The tools hub (Phase 7b): `/unelte`, `/en/tools`. */
+export const toolsHubPath = (locale: Locale) => localePath(sections.tools[locale], locale)
 
 /** News: `/stiri`, `/en/news`. */
 export const newsPath = (locale: Locale) => localePath(sections.news[locale], locale)

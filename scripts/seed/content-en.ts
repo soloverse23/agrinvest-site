@@ -6,6 +6,7 @@
 import type { Page } from '@/payload-types'
 
 import type { Ctx } from './content'
+import { homeFaqFor, homeLayout } from './home'
 import { rt } from './richtext'
 
 type Blocks = NonNullable<Page['layout']>
@@ -53,106 +54,8 @@ export function contentEn(
 ): { blocks: Blocks; faq: Faq } | null {
   switch (key) {
     case 'home':
-      return {
-        blocks: [
-          {
-            blockType: 'hero',
-            eyebrow: 'Grain · Storage · Financing · Logistics',
-            title: 'We buy, store and finance your harvest.',
-            accent: 'your harvest',
-            lead: 'We buy grain directly from Romanian farmers, receive it at our own bases, move it with our own fleet and finance production through Agrinvest Credit IFN.',
-            image: media['harvest-sunflower'],
-            primary: { label: 'Grain', href: '/en/grain' },
-            secondary: { label: 'Talk to us', href: '/en/contact' },
-            needs: [
-              { link: { label: 'Grain', href: '/en/grain' }, hint: 'Paid {{C8}}' },
-              {
-                link: { label: 'Storage', href: '/en/storage' },
-                hint: 'Reception, drying, storage',
-              },
-              { link: { label: 'Financing', href: '/en/financing' }, hint: 'Repay after harvest' },
-              { link: { label: 'Logistics', href: '/en/logistics' }, hint: 'Our own truck fleet' },
-            ],
-          },
-          figures(['S1', 'S2', 'L1']),
-          {
-            blockType: 'serviceGrid',
-            kicker: 'What we do',
-            heading: 'Everything a farm needs, from one partner',
-            lead: 'We work directly with farmers, from sowing to selling the harvest. Every service connects to the others, so you deal with a single team.',
-            items: [
-              {
-                icon: 'wheat',
-                title: 'Grain trading',
-                body: 'We buy wheat, corn, sunflower, rapeseed, barley and other crops, at harvest or from stock.',
-                link: { label: 'Grain', href: '/en/grain' },
-              },
-              {
-                icon: 'silo',
-                title: 'Storage and drying',
-                body: 'Reception, weighing, cleaning and drying at our own bases, with direct access to sales.',
-                link: { label: 'See the bases', href: '/en/storage' },
-              },
-              {
-                icon: 'coins',
-                title: 'Farm financing',
-                body: 'Loans for production and investment through Agrinvest Credit IFN, repaid in line with the harvest.',
-                link: { label: 'About financing', href: '/en/financing' },
-              },
-              {
-                icon: 'truck',
-                title: 'Transport and logistics',
-                body: 'We collect grain from the farm and deliver seed, fertiliser and crop protection products.',
-                link: { label: 'Logistics', href: '/en/logistics' },
-              },
-              {
-                icon: 'leaf',
-                title: 'Agronomic advice',
-                body: 'Our agronomists help choose the right technology for each crop and each season.',
-                link: { label: 'Talk to an agronomist', href: '/en/contact' },
-              },
-            ],
-          },
-          {
-            blockType: 'baseList',
-            kicker: 'Bases',
-            heading: 'Deliver to the nearest base',
-            lead: 'Our reception and storage bases are in the counties of southern and eastern Romania. Each base has its own page with its services and contacts.',
-            showMap: true,
-          },
-          sellingSteps,
-          {
-            blockType: 'financeBand',
-            kicker: 'Agrinvest Credit IFN',
-            heading: 'Financing repaid after the harvest',
-            lead: 'Loans in lei for production and investment, with a reply {{F4.reply}}. Repayments follow the farm: {{F5.term}}, {{F5.instalments}}.',
-            primary: { label: 'About financing', href: '/en/financing' },
-            secondary: { label: 'Apply', href: '/en/financing/apply' },
-            instalments,
-          },
-          {
-            blockType: 'ctaBand',
-            tone: 'surface',
-            heading: 'A question? The person responsible replies directly.',
-            body: 'Tell us what you need: selling grain, storage, transport or financing. Your enquiry goes straight to the person who handles it.',
-            primary: { label: 'Contact us', href: '/en/contact' },
-          },
-        ],
-        faq: [
-          q(
-            'Which crops does Agrinvest buy?',
-            'We buy {{C7}}, directly from farmers, at harvest or from stock.',
-          ),
-          q(
-            'When are farmers paid for their grain?',
-            'Payment is made {{C8}}, after weighing and quality analysis.',
-          ),
-          q(
-            'Where are the Agrinvest bases?',
-            'Our reception and storage bases are in the counties of southern and eastern Romania. The full list, with a page for each base, is on the Storage page.',
-          ),
-        ],
-      }
+      // Phase 7b: the hero slider only; the sections below it are drawn in code.
+      return { blocks: homeLayout('en', media), faq: homeFaqFor('en') }
 
     case 'despre':
       return {
@@ -235,6 +138,7 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
             heading: 'Bases and capacity',
             keys: ['S1', 'S2'],
           },
+          { blockType: 'baseList', showMap: true },
           {
             blockType: 'figureTable',
             kicker: 'Logistics',
@@ -275,12 +179,6 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
             kicker: 'Crops',
             heading: 'What we buy',
             lead: 'We buy {{C7}}. Choose a crop to see how reception works and how the price is set.',
-          },
-          {
-            blockType: 'baseList',
-            kicker: 'Bases',
-            heading: 'The nearest base to the farm',
-            showMap: true,
           },
           {
             blockType: 'leadForm',

@@ -40,6 +40,7 @@
     "check:figures": "tsx --env-file-if-exists=.env scripts/checks/figures.ts",
     "brand:font": "tsx scripts/brand/subset-font.ts",
     "brand:map": "tsx scripts/brand/build-map.ts",
+    "brand:clips": "tsx scripts/brand/clips.ts",
     "check:aeo": "tsx scripts/checks/aeo.ts",
     "check:finance": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/checks/finance.ts",
     "check:anaf": "tsx scripts/checks/anaf.ts",
@@ -51,6 +52,7 @@
     "apply:finance": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/finance/run.ts",
     "apply:tools": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/tools/run.ts",
     "apply:articles": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/articles/run.ts",
+    "apply:redesign": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/redesign/run.ts",
     "check:articles": "tsx --env-file-if-exists=.env scripts/checks/articles.ts"
   },
   "dependencies": {
@@ -93,6 +95,7 @@
     "csv-stringify": "^6.9.0",
     "eslint": "^9.16.0",
     "eslint-config-next": "16.3.3",
+    "ffmpeg-static": "^5.3.0",
     "fontkit": "^2.0.4",
     "jsdom": "28.0.0",
     "prettier": "^3.4.2",

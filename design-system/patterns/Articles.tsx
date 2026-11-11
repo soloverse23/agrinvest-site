@@ -6,6 +6,7 @@ import { formatDate } from '@/lib/format'
 
 import { ArrowRightIcon, ClockIcon, LeafIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
+import { type Focus } from '../lib/media'
 import { Photo } from './Photo'
 
 /**
@@ -21,7 +22,7 @@ export type ArticleCardProps = {
   locale: Locale
   /** ISO date shown under the title. */
   date?: string | null
-  image?: { src: string; alt: string } | null
+  image?: { src: string; alt: string; focus?: Focus } | null
   /** `feature`: the lead story, image beside the text from md up. `compact`: a text row. */
   variant?: 'feature' | 'default' | 'compact'
   /** Heading level inside the page outline. */
@@ -98,6 +99,7 @@ export function ArticleCard({
             <Photo
               src={image.src}
               alt={image.alt}
+              focus={image.focus}
               fill
               priority={priority}
               sizes={feature ? '(min-width: 768px) 58vw, 100vw' : '(min-width: 1024px) 33vw, 100vw'}

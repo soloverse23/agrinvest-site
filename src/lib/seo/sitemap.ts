@@ -10,6 +10,7 @@ import {
   marketPath,
   netPricePath,
   pricesPath,
+  toolsHubPath,
   financeRoutePath,
   financeRoutes,
   hubPath,
@@ -143,6 +144,7 @@ export const segments = {
       ...entries({ ro: netPricePath('ro'), en: netPricePath('en') }),
       ...entries({ ro: fertiliserPricesPath('ro'), en: fertiliserPricesPath('en') }),
       ...entries({ ro: dieselPath('ro'), en: dieselPath('en') }),
+      ...entries({ ro: toolsHubPath('ro'), en: toolsHubPath('en') }),
       ...(headlines.length || ownNews.length
         ? entries({ ro: newsPath('ro'), en: newsPath('en') })
         : []),

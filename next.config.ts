@@ -39,6 +39,9 @@ function enrichmentEpoch() {
   hash.update(readFileSync(path.join(dirname, 'scripts/tools/entry-points.ts')))
   // The guides menu and footer column (`apply:articles`, Phase 6).
   hash.update(readFileSync(path.join(dirname, 'scripts/articles/entry-points.ts')))
+  // The menu and footer, and the check the older steps use to leave them alone (Phase 7b).
+  for (const name of ['navigation.ts', 'hrefs.ts'])
+    hash.update(readFileSync(path.join(dirname, 'scripts/site', name)))
   return hash.digest('hex').slice(0, 12)
 }
 

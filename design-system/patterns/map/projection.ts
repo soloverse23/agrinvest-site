@@ -1,7 +1,7 @@
 /**
  * Projection for the Romania map: equirectangular, scaled by cos(46°N) so the country keeps
- * its shape. Used by scripts/brand/build-map.ts for the county outlines and by BaseMap for
- * the base points, so both land in the same coordinates.
+ * its shape. Used by scripts/brand/build-map.ts for the county outlines and by CountyMap for
+ * the county shading, so both land in the same coordinates.
  */
 export const BOUNDS = { west: 20.2, east: 29.75, north: 48.3, south: 43.6 } as const
 export const WIDTH = 1000

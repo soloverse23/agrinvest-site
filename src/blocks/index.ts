@@ -61,6 +61,48 @@ export const HeroBlock: Block = {
       },
       fields: [link('link', true), { name: 'hint', type: 'text', localized: true }],
     },
+    {
+      name: 'slides',
+      type: 'array',
+      maxRows: 4,
+      admin: {
+        description:
+          'Optional. With slides the hero becomes a slider: the first slide’s title is the page’s H1 and replaces the fields above.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'eyebrow',
+              type: 'text',
+              localized: true,
+              required: true,
+              admin: { width: '35%', description: 'Also the slide’s tab label.' },
+            },
+            { name: 'title', type: 'text', localized: true, required: true },
+          ],
+        },
+        {
+          name: 'accent',
+          type: 'text',
+          localized: true,
+          admin: { description: 'Part of the title set in the accent colour.' },
+        },
+        { name: 'lead', type: 'textarea', localized: true },
+        { name: 'poster', type: 'upload', relationTo: 'media' },
+        {
+          name: 'clip',
+          type: 'text',
+          admin: {
+            description:
+              'Base path of the silent loops, e.g. /media/hero/grain (npm run brand:clips writes .webm and .mp4, plus -tall versions and a -tall.webp poster for phones).',
+          },
+        },
+        link('primary'),
+        link('secondary'),
+      ],
+    },
   ],
 }
 

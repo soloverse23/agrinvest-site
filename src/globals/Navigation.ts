@@ -23,9 +23,42 @@ export const Navigation: GlobalConfig = {
           admin: { description: 'One sentence shown in the menu panel next to the sub-pages.' },
         },
         {
+          name: 'panel',
+          type: 'select',
+          defaultValue: 'links',
+          options: [
+            { label: 'Links in columns', value: 'links' },
+            { label: 'Shop (built from the live categories)', value: 'shop' },
+          ],
+          admin: {
+            description:
+              'The shop panel lists the categories, crops and brands with their product counts.',
+          },
+        },
+        {
+          name: 'promo',
+          type: 'group',
+          admin: { description: 'Optional card on the right of the panel. Leave empty for none.' },
+          fields: [
+            { name: 'title', type: 'text' },
+            { name: 'text', type: 'textarea' },
+            link('link'),
+          ],
+        },
+        {
           name: 'children',
           type: 'array',
-          fields: [link('link', true), { name: 'description', type: 'text' }],
+          fields: [
+            link('link', true),
+            { name: 'description', type: 'text' },
+            {
+              name: 'group',
+              type: 'text',
+              admin: {
+                description: 'Column heading. Links with the same heading share a column.',
+              },
+            },
+          ],
         },
       ],
     },

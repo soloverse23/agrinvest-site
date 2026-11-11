@@ -4,6 +4,8 @@
  */
 import type { Payload } from 'payload'
 
+import { menuHasHref } from '../site/hrefs'
+
 type Locale = 'ro' | 'en'
 type Link = { label: string; href: string }
 
@@ -72,6 +74,7 @@ export const guidesFooter: Record<Locale, { title: string; links: Link[] }> = {
 
 type NavItem = {
   link?: { label?: string | null; href?: string | null } | null
+  children?: NavItem[] | null
   [k: string]: unknown
 }
 type FooterColumn = {
@@ -81,7 +84,7 @@ type FooterColumn = {
 
 export function withGuidesMenu(items: NavItem[], locale: Locale): NavItem[] {
   const m = guidesMenu[locale]
-  if (items.some((i) => i.link?.href === m.href)) return items
+  if (menuHasHref(items, m.href)) return items
   const item: NavItem = {
     link: { label: m.label, href: m.href },
     blurb: m.blurb,

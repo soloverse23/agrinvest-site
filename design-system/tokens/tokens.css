@@ -42,6 +42,7 @@
   --color-up-soft: #e3f0e6;
   --color-down: #b4441f;
   --color-down-soft: #f9e7df;
+  --color-down-on-forest: #f2a98f; /* the down arrow on the forest strip */
   --color-flat: #4d5a52;
   --color-flat-soft: #eceee9;
   --color-warning: #8a5d00;
@@ -118,6 +119,39 @@
   --ease-enter: cubic-bezier(0.2, 0, 0, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --ease-move: cubic-bezier(0.2, 0, 0.2, 1);
+
+  /* The price trend arrow: a 2px drift, nothing more. */
+  --animate-trend-up: trend-up 2.6s var(--ease-move) infinite;
+  --animate-trend-down: trend-down 2.6s var(--ease-move) infinite;
+  @keyframes trend-up {
+    0%,
+    100% {
+      transform: translateY(1px);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+  @keyframes trend-down {
+    0%,
+    100% {
+      transform: translateY(-1px);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+  }
+
+  /* Hero slider: the active tab's bar fills over the slide's time (duration set inline). */
+  --animate-hero-progress: hero-progress linear both;
+  @keyframes hero-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
 
   /* Cinematic only (home, brand and story heroes): a slow settle of the photo. */
   --animate-hero-settle: hero-settle 30s var(--ease-move) both;

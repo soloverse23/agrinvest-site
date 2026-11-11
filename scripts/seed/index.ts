@@ -11,7 +11,9 @@ import config from '@payload-config'
 import { getPayload, type Payload, type Where } from 'payload'
 
 import { slugify } from '@/lib/slugify'
+import { homeSeo } from '../site/home'
 import { contentFor, cropContent, cropFaq, type Ctx } from './content'
+import { stillFocus, uploadOnce, uploadPosters } from './media'
 import { contentEn, cropContentEn, cropFaqEn } from './content-en'
 import {
   bases,
@@ -24,9 +26,9 @@ import {
   sameAs,
   shopCrops,
 } from './data'
-import { withGuidesFooter, withGuidesMenu } from '../articles/entry-points'
-import { applyToolsEntryPoints, withToolsFooter, withToolsMenu } from '../tools/entry-points'
-import { footer, navigation, pages } from './pages'
+import { siteCta, siteFooter, footerColumns, navigationItems } from '../site/navigation'
+import { applyToolsEntryPoints } from '../tools/entry-points'
+import { pages } from './pages'
 import { attachProductPhotos, canUploadPhotos, importProducts } from '../import/woo'
 import { applyFinance } from '../finance/apply'
 import { applyEntryPoints } from '../finance/entry-points'
@@ -290,20 +292,14 @@ async function seedMedia(payload: Payload): Promise<Ctx['media']> {
   for (const [name, alt] of Object.entries(frames)) {
     const filePath = resolve(dir, `${name}.webp`)
     if (!existsSync(filePath)) continue
-    const found = await payload.find({
-      collection: 'media',
-      where: { filename: { equals: `${name}.webp` } },
-      limit: 1,
-      depth: 0,
+    ids[name] = await uploadOnce(payload, filePath, name, alt, {
+      credit: 'Agrinvest (YouTube, 2022)',
+      ...stillFocus[name],
     })
-    const data = { alt: alt.ro, rights: 'pending' as const, credit: 'Agrinvest (YouTube, 2022)' }
-    const doc = found.docs[0]
-      ? await payload.update({ collection: 'media', id: found.docs[0].id, data, locale: 'ro' })
-      : await payload.create({ collection: 'media', data, filePath, locale: 'ro' })
-    await payload.update({ collection: 'media', id: doc.id, data: { alt: alt.en }, locale: 'en' })
-    ids[name] = doc.id
   }
-  console.log(`media: ${Object.keys(ids).length} frames (rights pending)`)
+  // The home slider's posters (Phase 7b).
+  Object.assign(ids, await uploadPosters(payload))
+  console.log(`media: ${Object.keys(ids).length} frames and posters (rights pending)`)
   return ids
 }
 
@@ -330,7 +326,7 @@ async function seedPages(payload: Payload, ctx: Ctx) {
       title: seed.ro.title,
       slug: seed.ro.slug,
       summary: seed.ro.summary,
-      seo: { title: seed.ro.seoTitle, description: null },
+      seo: seed.isHome ? homeSeo.ro : { title: seed.ro.seoTitle, description: null },
       // The seed replaced the page, so the apply step starts again from the seed's text.
       enrichment: null,
       isHome: Boolean(seed.isHome),
@@ -363,7 +359,7 @@ async function seedPages(payload: Payload, ctx: Ctx) {
           // Or Payload makes the slug from the title, and it no longer matches the path.
           generateSlug: false,
           summary: seed.en.summary,
-          seo: { title: seed.en.seoTitle, description: null },
+          seo: seed.isHome ? homeSeo.en : { title: seed.en.seoTitle, description: null },
           layout: english?.blocks ?? [],
           faq: english?.faq ?? [],
           _status: 'published',
@@ -381,23 +377,9 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        // The prices panel (Phase 5) and the guides panel (Phase 6) come from the same lists
-        // the live steps use.
-        items: withGuidesMenu(
-          withToolsMenu(
-            navigation[locale].map(({ label, href, blurb, children }) => ({
-              link: { label, href },
-              blurb,
-              children: children?.map((c) => ({
-                link: { label: c.label, href: c.href },
-                description: c.description,
-              })),
-            })),
-            locale,
-          ),
-          locale,
-        ) as never,
-        cta: navigation.cta[locale],
+        // One source for the menu and footer (Phase 7b); the live deploy step uses it too.
+        items: navigationItems(locale) as never,
+        cta: siteCta[locale],
       },
     })
     await payload.updateGlobal({
@@ -405,17 +387,8 @@ async function seedGlobals(payload: Payload) {
       locale,
       context,
       data: {
-        columns: withGuidesFooter(
-          withToolsFooter(
-            footer[locale].columns.map((col) => ({
-              title: col.title,
-              links: col.links.map(([label, href]) => ({ link: { label, href } })),
-            })),
-            locale,
-          ),
-          locale,
-        ) as never,
-        legal: footer[locale].legal,
+        columns: footerColumns(locale) as never,
+        legal: siteFooter[locale].legal,
       },
     })
   }

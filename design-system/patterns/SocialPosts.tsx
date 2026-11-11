@@ -3,13 +3,14 @@ import { formatDate } from '@/lib/format'
 
 import { ExternalLinkIcon, LinkedinIcon } from '../icons/social'
 import { Photo } from './Photo'
+import { type Focus } from '../lib/media'
 
 export type SocialPostCardProps = {
   url: string
   text: string
   /** ISO date of the post. */
   date: string
-  image?: { src: string; alt: string } | null
+  image?: { src: string; alt: string; focus?: Focus } | null
   locale: Locale
   labels: { network: string; view: string }
 }
@@ -26,6 +27,7 @@ export function SocialPostCard({ url, text, date, image, locale, labels }: Socia
           <Photo
             src={image.src}
             alt={image.alt}
+            focus={image.focus}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"

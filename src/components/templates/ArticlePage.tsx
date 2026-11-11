@@ -199,6 +199,7 @@ export async function ArticlePage({ where, locale }: { where: Where; locale: Loc
             <Photo
               src={cover.src}
               alt={cover.alt}
+              focus={cover.focus}
               fill
               priority
               sizes="(min-width: 1312px) 1248px, 100vw"

@@ -9,7 +9,6 @@ import {
   heroProps,
   priceTableProps,
   priceTiles,
-  productCards,
 } from '../fixtures/props'
 import { storyLocale } from '../fixtures/story'
 import { ArrowRightIcon } from '../icons/icons'
@@ -18,6 +17,7 @@ import { Hero } from '../patterns/Hero'
 import { PriceTable } from '../patterns/PriceTable'
 import { PriceTile } from '../patterns/PriceTile'
 import { ProductCard } from '../patterns/ProductCard'
+import { cardLabels, sampleCards } from '../fixtures/shop'
 import { SiteHeader } from '../patterns/SiteHeader'
 import { Button } from '../primitives/Button'
 
@@ -104,11 +104,18 @@ function HomeSketch({ locale }: { locale: Locale }) {
             }
           />
           <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {productCards(locale).map((p) => (
-              <li key={p.href}>
-                <ProductCard {...p} className="h-full" />
-              </li>
-            ))}
+            {sampleCards(locale)
+              .slice(0, 3)
+              .map((p) => (
+                <li key={p.href}>
+                  <ProductCard
+                    {...p}
+                    locale={locale}
+                    labels={cardLabels(locale)}
+                    className="h-full"
+                  />
+                </li>
+              ))}
           </ul>
         </section>
 

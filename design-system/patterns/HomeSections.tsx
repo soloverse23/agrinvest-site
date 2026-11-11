@@ -1,14 +1,9 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import {
-  ArrowRightIcon,
-  CoinsIcon,
-  DropIcon,
-  LeafIcon,
-  ScaleIcon,
-  type IconProps,
-} from '../icons/icons'
+import { CategoryGlyph } from '../icons/categories'
+import { ArrowRightIcon, CoinsIcon, DropIcon, type IconProps } from '../icons/icons'
+import type { CategoryIcon } from '../icons/keys'
 import { CalculatorIcon, FuelIcon } from '../icons/server'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
@@ -39,7 +34,7 @@ export type ShowcaseCategory = {
   title: string
   /** "17 produse" */
   count: string
-  icon: 'leaf' | 'drop' | 'scale'
+  icon: CategoryIcon
   /** Up to three product photos from the category (packshots on white). */
   images: { src: string; alt: string }[]
   /** Two or three subcategories. */
@@ -58,12 +53,6 @@ export type ShopShowcaseProps = {
   className?: string
 }
 
-const categoryIcons: Record<ShowcaseCategory['icon'], (props: IconProps) => ReactNode> = {
-  leaf: LeafIcon,
-  drop: DropIcon,
-  scale: ScaleIcon,
-}
-
 /** Where each packshot sits in a tile's photo well: back left, back right, front centre. */
 const packSpots = [
   'left-[8%] top-[14%] w-[38%] -rotate-6',
@@ -72,7 +61,6 @@ const packSpots = [
 ]
 
 function CategoryTile({ c }: { c: ShowcaseCategory }) {
-  const Icon = categoryIcons[c.icon]
   return (
     <li className="group relative flex flex-col overflow-hidden rounded-xl bg-raised shadow-soft ring-1 ring-line transition duration-200 ease-move hover:shadow-raised hover:ring-line-strong">
       <div
@@ -99,7 +87,10 @@ function CategoryTile({ c }: { c: ShowcaseCategory }) {
             </div>
           ))
         ) : (
-          <Icon className="absolute inset-0 m-auto size-16 text-line-strong" />
+          <CategoryGlyph
+            icon={c.icon}
+            className="absolute inset-0 m-auto size-16 text-line-strong"
+          />
         )}
       </div>
       <div className="flex flex-1 flex-col gap-4 p-5 md:p-6">

@@ -2,14 +2,41 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
 
-import { Kicker, SectionHeading } from '@ds/patterns/Sections'
-import { FacetPanel, ShopTile, type FacetGroup } from '@ds/patterns/Shop'
+import { SearchIcon } from '@ds/icons/server'
+import { CategoryRail, type RailCategory } from '@ds/patterns/CategoryRail'
+import { DrawerKeysLazy, QuickRequestLazy, ShopSearchLazy } from '@ds/patterns/Lazy'
+import { Accordion, SectionHeading, Updated } from '@ds/patterns/Sections'
+import {
+  FacetCard,
+  FacetGroups,
+  FilterDrawer,
+  ListingEmpty,
+  ListingHeader,
+  ListingLayout,
+  ListingToolbar,
+  Pagination,
+  type ActiveFilter,
+  type FacetGroupV2,
+  type ListingChip,
+  type ListingTile,
+  type SortOption,
+} from '@ds/patterns/ShopListing'
+import {
+  BrandStrip,
+  CropTiles,
+  PromoCard,
+  ShopHero,
+  TrustRow,
+  type BrandItem,
+  type CropTile,
+} from '@ds/patterns/ShopLanding'
 import { Button } from '@ds/primitives/Button'
+import { Fact } from '@/components/Fact'
 import { JsonLd } from '@/components/JsonLd'
-import { Faq, PageTitle } from '@/components/PageParts'
+import { Crumbs, Faq } from '@/components/PageParts'
 import { Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
-import type { Locale } from '@/i18n/config'
+import { localePath, type Locale } from '@/i18n/config'
 import {
   categoryPath,
   hubPath,
@@ -19,7 +46,8 @@ import {
   type HubKind,
 } from '@/i18n/routes'
 import { fitTitle, shopUi } from '@/i18n/shop'
-import { ui } from '@/i18n/ui'
+import { fixedUrl, ui } from '@/i18n/ui'
+import { financeLinks } from '@/lib/content/finance'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
 import {
@@ -30,24 +58,37 @@ import {
   listIngredients,
   listProducts,
   listShopCrops,
+  getShopHome,
+  getShopMenu,
 } from '@/lib/content/shop'
 import { breadcrumbs, faqPage, itemList, webPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
+import { submitQuickRequest } from '@/lib/leads/actions'
 import {
+  activePromo,
   applyFilters,
-  facetHref,
   facetOptions,
-  readFilters,
+  hasListingParams,
+  inStock,
+  listingHref,
+  PAGE_SIZE,
+  priceRanges,
+  readListing,
   searchProducts,
+  seasonalCategory,
+  sortListing,
   sortProducts,
+  sortValues,
+  toggleFilter,
   type FacetKey,
-  type Filters,
+  type ListingState,
   type ProductCardData,
   type SearchParams,
+  type SortKey,
 } from '@/lib/shop/catalogue'
 import type { Category } from '@/payload-types'
 
-import { ProductGrid } from './ShopParts'
+import { ProductGrid, ProductList } from './ShopParts'
 
 const other = (locale: Locale): Locale => (locale === 'ro' ? 'en' : 'ro')
 
@@ -66,9 +107,26 @@ type Listing = {
   crumbs: { name: string; url: string }[]
   facets: FacetKey[]
   faq?: { id?: string | null; question: string; answer: string }[] | null
-  extra?: ReactNode
+  /** A top category's subcategories, as icon tiles. */
+  tiles?: ListingTile[]
+  /** A subcategory's siblings (itself active), as chips. */
+  chips?: ListingChip[]
   body?: Category['buyingAdvice']
   updatedAt?: string
+}
+
+/**
+ * The intro's lead (about two lines: whole sentences up to ~170 characters, at least one) and
+ * the rest, which folds behind "mai mult" but stays in the HTML.
+ */
+function splitIntro(text: string): { lead: string; rest?: string } {
+  const sentences = text.trim().split(/(?<=[.!?])\s+/)
+  let lead = sentences[0]
+  let i = 1
+  while (i < sentences.length && `${lead} ${sentences[i]}`.length <= 170)
+    lead += ` ${sentences[i++]}`
+  const rest = sentences.slice(i).join(' ')
+  return rest ? { lead, rest } : { lead }
 }
 
 /** A listing is as recent as its newest product. */
@@ -93,6 +151,7 @@ async function categoryListing(locale: Locale, slug: string): Promise<Listing | 
   const list = inCategory(products, category)
   const parent = categories.find((c) => c.id === category.parent)
   const children = categories.filter((c) => c.parent === category.id)
+  const siblings = parent ? categories.filter((c) => c.parent === parent.id) : []
   const path = categoryPath(category.slug, locale)
   return {
     path,
@@ -111,25 +170,29 @@ async function categoryListing(locale: Locale, slug: string): Promise<Listing | 
       ...(parent ? [{ name: parent.name, url: categoryPath(parent.slug, locale) }] : []),
       { name: category.name, url: path },
     ],
-    facets: (category.facets ?? ['crop', 'brand', 'stock']).filter(
-      (f): f is FacetKey => f !== 'target',
+    facets: (category.facets ?? ['crop', 'brand', 'stock']).flatMap((f) =>
+      f === 'target' ? [] : [f],
     ),
     faq: category.faq,
     body: category.buyingAdvice,
     updatedAt: category.updatedAt,
-    extra: children.length > 0 && (
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {children.map((c) => (
-          <li key={c.id}>
-            <ShopTile
-              href={categoryPath(c.slug, locale)}
-              title={c.name}
-              meta={t.products(inCategory(products, c).length)}
-            />
-          </li>
-        ))}
-      </ul>
-    ),
+    tiles: children.length
+      ? children.map((c) => ({
+          href: categoryPath(c.slug, locale),
+          label: c.name,
+          count: t.products(inCategory(products, c).length),
+          icon: c.icon,
+        }))
+      : undefined,
+    chips:
+      !children.length && siblings.length > 1
+        ? siblings.map((c) => ({
+            href: categoryPath(c.slug, locale),
+            label: c.name,
+            count: inCategory(products, c).length,
+            active: c.id === category.id,
+          }))
+        : undefined,
   }
 }
 
@@ -210,47 +273,195 @@ async function hubListing(kind: HubKind, locale: Locale, slug: string): Promise<
   }
 }
 
-function FilteredList({
+/** Facet order: stock first, then the listing's first facet, price, and the rest. */
+function facetOrder(facets: FacetKey[]): FacetKey[] {
+  const others = facets.filter((f) => f !== 'stock' && f !== 'price')
+  return [
+    ...(facets.includes('stock') ? (['stock'] as const) : []),
+    ...others.slice(0, 1),
+    'price',
+    ...others.slice(1),
+  ]
+}
+
+/**
+ * Header, toolbar, facets, results (grid or list, 24 a page) and the empty state of every
+ * listing. Filter, sort, view and page are links, so it all works without JavaScript.
+ */
+function ListingView({
   listing,
-  filters,
+  state,
   locale,
+  search,
+  extra,
 }: {
   listing: Listing
-  filters: Filters
+  state: ListingState
   locale: Locale
+  /** The search page's form under the title. */
+  search?: ReactNode
+  /** Parameters every link keeps (the search query). */
+  extra?: Record<string, string>
 }) {
   const t = shopUi[locale]
-  const shown = sortProducts(applyFilters(listing.products, filters), locale)
-  const groups: FacetGroup[] = listing.facets.map((key) => ({
-    key,
-    label: t[key],
-    options: facetOptions(listing.products, key, filters).map((option) => ({
-      label: key === 'stock' ? t.inStockOnly : capitalise(option.label),
-      count: option.count,
-      active: filters[key] === option.value,
-      href: facetHref(listing.path, filters, key, option.value, locale),
-    })),
+  const L = t.listing
+  const u = ui[locale]
+  const href = (next: ListingState) => listingHref(listing.path, next, locale, extra)
+  const filtered = applyFilters(listing.products, state.filters)
+  const sorted = sortListing(filtered, state.sort, locale)
+  const pages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE))
+  const page = Math.min(state.page, pages)
+  const shown = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
+  const optionLabel = (key: FacetKey, value: string, label: string) =>
+    key === 'stock'
+      ? t.inStockOnly
+      : key === 'price'
+        ? L.priceRanges[value as keyof typeof L.priceRanges]
+        : capitalise(label)
+
+  const groups: FacetGroupV2[] = facetOrder(listing.facets).map((key) => {
+    const options = facetOptions(listing.products, key, state.filters)
+    if (key === 'price')
+      options.sort(
+        (a, b) =>
+          priceRanges.indexOf(a.value as (typeof priceRanges)[number]) -
+          priceRanges.indexOf(b.value as (typeof priceRanges)[number]),
+      )
+    return {
+      key,
+      label: key === 'price' ? L.price : t[key],
+      kind: key === 'stock' ? 'toggle' : 'radio',
+      options: options.map((option) => ({
+        label: optionLabel(key, option.value, option.label),
+        count: option.count,
+        active: state.filters[key] === option.value,
+        href: href(toggleFilter(state, key, option.value)),
+      })),
+    }
+  })
+
+  const active: ActiveFilter[] = (Object.entries(state.filters) as [FacetKey, string][]).map(
+    ([key, value]) => {
+      const group = groups.find((g) => g.key === key)
+      return {
+        group: group?.label ?? (key === 'price' ? L.price : t[key]),
+        label: group?.options.find((o) => o.active)?.label ?? optionLabel(key, value, value),
+        href: href(toggleFilter(state, key, value)),
+      }
+    },
+  )
+  const clear = active.length
+    ? { href: href({ ...state, filters: {}, page: 1 }), label: t.clear }
+    : undefined
+
+  const sortKeys: SortKey[] = ['relevance', ...(Object.keys(sortValues) as SortKey[])]
+  const sort: SortOption[] = sortKeys.map((key) => ({
+    href: href({ ...state, sort: key, page: 1 }),
+    label: L.sort[key],
+    active: state.sort === key,
   }))
+
+  const hasFacets = groups.some((g) => g.options.length)
+  const facetLabels = { showAll: L.showAll, less: L.less }
+
   return (
-    <div className="mx-auto mt-10 grid max-w-page gap-8 px-4 md:mt-14 md:px-8 lg:grid-cols-12">
-      <aside className="lg:col-span-3">
-        <FacetPanel
-          title={t.filters}
-          groups={groups}
-          clear={Object.keys(filters).length ? { href: listing.path, label: t.clear } : undefined}
+    <>
+      <ListingHeader
+        breadcrumbs={<Crumbs locale={locale} items={listing.crumbs} />}
+        title={listing.title}
+        intro={listing.summary ? splitIntro(listing.summary) : undefined}
+        labels={{ more: L.more, less: L.less }}
+        tiles={listing.tiles}
+        chips={listing.chips}
+        chipsLabel={L.subcategories}
+        search={search}
+        updated={
+          listing.updatedAt && (
+            <Updated locale={locale} label={u.updated} date={listing.updatedAt} />
+          )
+        }
+      />
+      <ListingLayout
+        aside={
+          hasFacets && (
+            <FacetCard title={t.filters} clear={clear}>
+              <FacetGroups groups={groups} labels={facetLabels} />
+            </FacetCard>
+          )
+        }
+      >
+        <ListingToolbar
+          count={t.products(sorted.length)}
+          sort={sorted.length > 1 ? sort : []}
+          view={
+            sorted.length
+              ? {
+                  grid: href({ ...state, view: 'grid' }),
+                  list: href({ ...state, view: 'list' }),
+                  current: state.view,
+                }
+              : undefined
+          }
+          active={active}
+          clear={clear}
+          labels={{
+            sort: L.sortLabel,
+            view: L.view,
+            grid: L.grid,
+            list: L.list,
+            active: L.active,
+            remove: L.remove,
+          }}
+          drawer={
+            hasFacets && (
+              <FilterDrawer
+                title={t.filters}
+                button={L.openFilters(active.length)}
+                results={L.showResults(sorted.length)}
+                clear={clear}
+              >
+                <FacetGroups groups={groups} labels={facetLabels} />
+                <DrawerKeysLazy />
+              </FilterDrawer>
+            )
+          }
         />
-      </aside>
-      <div className="grid content-start gap-5 lg:col-span-9">
-        <p className="text-small text-muted" role="status">
-          {t.products(shown.length)}
-        </p>
-        {shown.length ? (
-          <ProductGrid products={shown} locale={locale} />
+        {shown.length === 0 ? (
+          <ListingEmpty
+            title={L.emptyTitle}
+            text={extra?.q && !active.length ? L.emptySearchText : L.emptyText}
+            clear={clear}
+            request={
+              <QuickRequestLazy
+                locale={locale}
+                action={submitQuickRequest}
+                layout="inline"
+                sourcePath={listing.path}
+                privacyHref={fixedUrl('privacy', locale)}
+                label={L.emptyRequest}
+                submitLabel={L.emptySubmit}
+              />
+            }
+          />
+        ) : state.view === 'list' ? (
+          <ProductList products={shown} locale={locale} sourcePath={listing.path} />
         ) : (
-          <p className="rounded-lg bg-raised p-6 ring-1 ring-line">{t.noResults}</p>
+          <ProductGrid
+            products={shown}
+            locale={locale}
+            columns="md:grid-cols-3"
+            sourcePath={listing.path}
+          />
         )}
-      </div>
-    </div>
+        <Pagination
+          page={page}
+          pages={pages}
+          href={(n) => href({ ...state, page: n })}
+          labels={{ nav: L.pages, prev: L.prev, next: L.next, page: L.page }}
+        />
+      </ListingLayout>
+    </>
   )
 }
 
@@ -267,7 +478,7 @@ function listingMetadata(
     description: listing.description,
     siteName: seo.siteName,
     image: seo.ogImage,
-    // Filter URLs keep the clean listing as their canonical and stay out of the index.
+    // Filter, sort, view and page URLs keep the clean listing as canonical, out of the index.
     noindex: filtered || !listing.indexable,
     alternates: listing.alternates,
   })
@@ -283,7 +494,7 @@ async function ListingPage({
   params: SearchParams
 }) {
   const u = ui[locale]
-  const filters = readFilters(params, locale)
+  // The structured data lists every product, whatever the URL's filters, sort or page.
   const items = sortProducts(listing.products, locale).map((p) => ({
     name: p.name,
     url: productPath(p.category.slug, p.slug, locale),
@@ -304,17 +515,11 @@ async function ListingPage({
           ...(listing.faq?.length ? [faqPage(listing.faq)] : []),
         ]}
       />
-      <PageTitle
+      <ListingView
+        listing={{ ...listing, updatedAt: latest(listing.products) ?? listing.updatedAt }}
+        state={readListing(params, locale)}
         locale={locale}
-        title={listing.title}
-        summary={listing.summary}
-        updatedAt={latest(listing.products) ?? listing.updatedAt}
-        crumbs={listing.crumbs}
       />
-      {listing.extra && (
-        <div className="mx-auto mt-10 max-w-page px-4 md:px-8">{listing.extra}</div>
-      )}
-      <FilteredList listing={listing} filters={filters} locale={locale} />
       {listing.body && (
         <section className="mx-auto mt-20 max-w-3xl px-4 md:px-8">
           <Prose data={listing.body} ctx={{ figures: await getFigures(locale), locale }} />
@@ -336,7 +541,7 @@ export async function categoryMetadata(
 ): Promise<Metadata> {
   const [listing, seo] = await Promise.all([categoryListing(locale, slug), getSeoDefaults(locale)])
   if (!listing) return {}
-  return listingMetadata(listing, locale, seo, Object.keys(readFilters(params, locale)).length > 0)
+  return listingMetadata(listing, locale, seo, hasListingParams(params, locale))
 }
 
 export async function CategoryPage(props: { locale: Locale; slug: string; params: SearchParams }) {
@@ -353,7 +558,7 @@ export async function hubMetadata(
 ): Promise<Metadata> {
   const [listing, seo] = await Promise.all([hubListing(kind, locale, slug), getSeoDefaults(locale)])
   if (!listing) return {}
-  return listingMetadata(listing, locale, seo, Object.keys(readFilters(params, locale)).length > 0)
+  return listingMetadata(listing, locale, seo, hasListingParams(params, locale))
 }
 
 export async function HubPage(props: {
@@ -370,7 +575,7 @@ export async function HubPage(props: {
 function SearchForm({ locale, query }: { locale: Locale; query?: string }) {
   const t = shopUi[locale]
   return (
-    <form action={searchPath(locale)} role="search" className="flex w-full max-w-xl min-w-72 gap-2">
+    <form action={searchPath(locale)} role="search" className="flex w-full max-w-xl gap-2">
       <label htmlFor="shop-search" className="sr-only">
         {t.searchLabel}
       </label>
@@ -380,7 +585,7 @@ function SearchForm({ locale, query }: { locale: Locale; query?: string }) {
         type="search"
         defaultValue={query}
         placeholder={t.searchPlaceholder}
-        className="min-h-11 w-full flex-1 rounded-md border border-field-line bg-raised px-3 text-ink"
+        className="min-h-11 w-full min-w-0 flex-1 rounded-md border border-field-line bg-raised px-3 text-ink"
       />
       <Button type="submit">{t.search}</Button>
     </form>
@@ -403,20 +608,88 @@ export async function shopMetadata(locale: Locale): Promise<Metadata> {
 
 export async function ShopHome({ locale }: { locale: Locale }) {
   const t = shopUi[locale]
+  const L = t.landing
   const u = ui[locale]
-  const [categories, products, crops] = await Promise.all([
-    listCategories(locale),
+  const [products, menu, categories, crops, home, finance] = await Promise.all([
     listProducts(locale),
+    getShopMenu(locale),
+    listCategories(locale),
     listShopCrops(locale),
+    getShopHome(locale),
+    financeLinks(['inputuri-plata-la-recolta', 'credit-productie'], locale),
   ])
+  const inputsFinance = finance['inputuri-plata-la-recolta'] ?? finance['credit-productie']
   const alternates = { ro: shopPath('ro'), en: shopPath('en') }
   const crumbs = [shopCrumb(locale)]
-  const top = categories.filter((c) => !c.parent)
-  const withProducts = crops.flatMap((crop) => {
-    const count = products.filter((p) => p.crops.some((c) => c.id === crop.id)).length
-    return count ? [{ crop, count }] : []
-  })
-  const featured = sortProducts(products, locale).slice(0, 6)
+  const docs = new Map(categories.map((c) => [c.slug, c]))
+  const cropKeys = new Map(crops.map((c) => [c.slug, c.key]))
+
+  const rail: RailCategory[] = menu.categories.map((c) => ({
+    href: categoryPath(c.slug, locale),
+    label: c.name,
+    count: L.products(c.count),
+    icon: docs.get(c.slug)?.icon ?? 'other',
+    children: c.children.map((child) => ({
+      href: categoryPath(child.slug, locale),
+      label: child.name,
+    })),
+  }))
+
+  // The staff promo while it runs; otherwise the category that is in season.
+  const staff = activePromo(home.promo)
+  const season = staff ? null : seasonalCategory(products)
+  const seasonDoc = season ? docs.get(season.slug) : undefined
+  const promo = staff ? (
+    <PromoCard
+      kicker={staff.kicker || L.seasonKicker}
+      title={staff.title as string}
+      text={staff.text}
+      href={staff.link?.href as string}
+      linkLabel={staff.link?.label || L.promoLink}
+      image={staff.image ? { src: staff.image.url, alt: staff.image.alt } : null}
+    />
+  ) : season ? (
+    <PromoCard
+      kicker={L.seasonKicker}
+      title={season.name}
+      text={L.seasonText(season.inStock)}
+      href={categoryPath(season.slug, locale)}
+      linkLabel={L.seasonLink(season.name)}
+      icon={seasonDoc?.icon}
+      packshots={products
+        .filter(
+          (p) =>
+            inStock(p) &&
+            p.image &&
+            (p.category.id === season.id || p.category.parent === season.id),
+        )
+        .slice(0, 3)
+        .map((p) => (p.image as { url: string }).url)}
+    />
+  ) : null
+
+  const featuredIds = new Set(home.featured)
+  const picked = products.filter((p) => featuredIds.has(p.id))
+  const recommended = (
+    picked.length
+      ? picked
+      : [...products]
+          .filter(inStock)
+          .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || a.name.localeCompare(b.name))
+  ).slice(0, 8)
+
+  const cropTiles: CropTile[] = menu.crops.slice(0, 12).map((c) => ({
+    href: hubPath('crop', c.slug, locale),
+    label: c.name,
+    count: L.products(c.count),
+    crop: cropKeys.get(c.slug),
+  }))
+  const brandItems: BrandItem[] = menu.brands.slice(0, 11).map((b) => ({
+    href: hubPath('brand', b.slug, locale),
+    name: b.name,
+    count: L.products(b.count),
+  }))
+
   return (
     <SiteShell locale={locale} alternates={alternates}>
       <JsonLd
@@ -425,43 +698,120 @@ export async function ShopHome({ locale }: { locale: Locale }) {
           breadcrumbs(locale, u.home, crumbs),
         ]}
       />
-      <PageTitle
-        locale={locale}
+      <ShopHero
+        crumbs={{
+          label: u.breadcrumb,
+          items: [
+            { name: u.home, url: localePath('/', locale) },
+            ...crumbs.map((c) => ({ name: c.name, url: c.url })),
+          ],
+        }}
+        kicker={L.kicker}
         title={t.title}
-        summary={t.summary}
-        updatedAt={latest(products)}
-        crumbs={crumbs}
-        actions={<SearchForm locale={locale} />}
+        counts={[L.products(products.length), L.inStock(products.filter(inStock).length)]}
+        updated={
+          latest(products) && <Updated locale={locale} label={u.updated} date={latest(products)!} />
+        }
+        search={
+          <ShopSearchLazy
+            action={searchPath(locale)}
+            indexUrl={`/shop-index.json?l=${locale}`}
+            icon={<SearchIcon className="size-6" />}
+            labels={{
+              label: t.searchLabel,
+              placeholder: L.searchPlaceholder,
+              submit: t.search,
+              searchAll: L.searchAll,
+              kinds: L.kinds,
+              products: L.suggestCount,
+            }}
+          />
+        }
+        crops={{
+          label: L.cropsLabel,
+          items: menu.crops.slice(0, 6).map((c) => ({
+            href: hubPath('crop', c.slug, locale),
+            label: c.name,
+          })),
+          all: { href: '#culturi', label: L.allCrops },
+        }}
+        promo={promo}
+        rail={<CategoryRail label={t.categories} items={rail} />}
       />
-      <section className="mx-auto mt-14 grid max-w-page gap-6 px-4 md:px-8">
-        <Kicker>{t.categories}</Kicker>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {top.map((c) => (
-            <li key={c.id}>
-              <ShopTile
-                href={categoryPath(c.slug, locale)}
-                title={c.name}
-                meta={t.products(inCategory(products, c).length)}
-              />
-            </li>
-          ))}
-        </ul>
+      {recommended.length > 0 && (
+        <section
+          aria-labelledby="recomandate"
+          className="mx-auto mt-14 grid max-w-page gap-8 px-4 md:mt-20 md:px-8"
+        >
+          <SectionHeading
+            id="recomandate"
+            title={picked.length ? L.recommended : L.newest}
+            action={{ href: searchPath(locale), label: L.allProducts }}
+          />
+          <ProductGrid products={recommended} locale={locale} columns="md:grid-cols-4" />
+        </section>
+      )}
+      {cropTiles.length > 0 && (
+        <section
+          aria-labelledby="culturi"
+          className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-24 md:px-8"
+        >
+          <SectionHeading id="culturi" title={L.byCrop} />
+          <CropTiles items={cropTiles} />
+        </section>
+      )}
+      {brandItems.length > 0 && (
+        <section
+          aria-labelledby="producatori"
+          className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-24 md:px-8"
+        >
+          <SectionHeading id="producatori" title={L.brands} />
+          <BrandStrip items={brandItems} />
+        </section>
+      )}
+      <section
+        aria-labelledby="incredere"
+        className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-24 md:px-8"
+      >
+        <h2 id="incredere" className="sr-only">
+          {L.trust}
+        </h2>
+        <TrustRow
+          items={[
+            { icon: 'consultant', ...L.trustItems.consultant },
+            {
+              icon: 'pickup',
+              title: L.trustItems.pickup.title,
+              text: (
+                <>
+                  {L.trustItems.pickup.before}
+                  <Fact k="S1" locale={locale} />
+                  {L.trustItems.pickup.after}
+                </>
+              ),
+            },
+            {
+              icon: 'finance',
+              title: L.trustItems.finance.title,
+              text: L.trustItems.finance.text,
+              link: inputsFinance
+                ? { href: inputsFinance.href, label: L.trustItems.finance.link }
+                : null,
+            },
+            { icon: 'certificate', ...L.trustItems.certificate },
+          ]}
+        />
       </section>
-      <section className="mx-auto mt-14 grid max-w-page gap-6 px-4 md:px-8">
-        <Kicker>{t.byCrop}</Kicker>
-        <ul className="flex flex-wrap gap-2">
-          {withProducts.map(({ crop, count }) => (
-            <li key={crop.id}>
-              <Button href={hubPath('crop', crop.slug, locale)} variant="secondary" size="sm">
-                {`${crop.name} · ${count}`}
-              </Button>
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:px-8">
-        <SectionHeading title={t.popular} />
-        <ProductGrid products={featured} locale={locale} />
+      <section
+        aria-labelledby="intrebari"
+        className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-24 md:px-8 lg:grid-cols-12"
+      >
+        <div className="lg:col-span-4">
+          <SectionHeading id="intrebari" title={L.faq} />
+        </div>
+        <div className="lg:col-span-8">
+          <Accordion items={L.faqItems} />
+        </div>
       </section>
     </SiteShell>
   )
@@ -481,31 +831,48 @@ export async function searchMetadata(locale: Locale): Promise<Metadata> {
   })
 }
 
+/**
+ * Search results in the listing template. Without a query it lists the whole catalogue, so
+ * "Toate produsele" has somewhere to go. Always noindex.
+ */
 export async function SearchPage({ locale, params }: { locale: Locale; params: SearchParams }) {
   const t = shopUi[locale]
   const query = typeof params.q === 'string' ? params.q.trim().slice(0, 80) : ''
-  const results = sortProducts(searchProducts(await listProducts(locale), query), locale)
+  const all = await listProducts(locale)
   const path = searchPath(locale)
+  const listing: Listing = {
+    path,
+    alternates: { ro: searchPath('ro'), en: searchPath('en') },
+    title: query ? t.searchResults(query) : t.searchTitle,
+    seoTitle: t.searchTitle,
+    description: t.searchSummary,
+    summary: t.searchSummary,
+    indexable: false,
+    products: query ? searchProducts(all, query) : all,
+    crumbs: [shopCrumb(locale), { name: t.search, url: path }],
+    facets: ['stock', 'crop', 'brand'],
+  }
   return (
-    <SiteShell locale={locale} alternates={{ ro: searchPath('ro'), en: searchPath('en') }}>
-      <PageTitle
-        locale={locale}
-        title={query ? t.searchResults(query) : t.searchTitle}
-        summary={t.searchSummary}
-        crumbs={[shopCrumb(locale), { name: t.search, url: path }]}
-        actions={<SearchForm locale={locale} query={query} />}
+    <SiteShell locale={locale} alternates={listing.alternates}>
+      {/* A noindex page still states what it is: the page type and where it sits. */}
+      <JsonLd
+        data={[
+          webPage({
+            url: path,
+            name: listing.title,
+            description: listing.description,
+            locale,
+          }),
+          breadcrumbs(locale, ui[locale].home, listing.crumbs),
+        ]}
       />
-      <div className="mx-auto mt-10 grid max-w-page gap-5 px-4 md:px-8">
-        {query && (
-          <p className="text-small text-muted" role="status">
-            {t.products(results.length)}
-          </p>
-        )}
-        {query && !results.length && (
-          <p className="rounded-lg bg-raised p-6 ring-1 ring-line">{t.noResults}</p>
-        )}
-        <ProductGrid products={results} locale={locale} columns="lg:grid-cols-4" />
-      </div>
+      <ListingView
+        listing={listing}
+        state={readListing(params, locale)}
+        locale={locale}
+        search={<SearchForm locale={locale} query={query} />}
+        extra={query ? { q: query } : undefined}
+      />
     </SiteShell>
   )
 }

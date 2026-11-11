@@ -30,7 +30,7 @@ New agrinvest.ro: public site, shop, farmer tools, finance (Agrinvest Credit IFN
 - **Facts and numbers** about Agrinvest come from the figures register (Payload global "Figures", rendered with `<Fact k="S1" />`), never typed ad hoc. JSON-LD states a fact only once it is confirmed.
 - **Staff access** means `users` accounts only (`src/access`); never test for just `req.user`.
 - **Public data reads** use `overrideAccess: false`, so drafts and unpublished contact details never reach a page.
-- **Leads** collect phone and email; `notifyLead` stays a no-op until the owner chooses a channel.
+- **Leads** collect phone and email, except the one-field quick request (lead type `quick`, decision 0010: a phone or an email); `notifyLead` stays a no-op until the owner chooses a channel.
 - After changing collections: `npm run generate:types`, `npm run generate:importmap` and `npm run migrate:create <name>` (production changes only through `src/migrations/`).
 
 ## Definition of done

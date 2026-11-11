@@ -357,7 +357,7 @@ export const categories = [
     name: { ro: 'Semințe', en: 'Seeds' },
     slug: { ro: 'seminte', en: 'seeds' },
     role: 'category',
-    icon: 'leaf',
+    icon: 'seed',
     intro: {
       ro: 'Sămânță certificată de grâu, orz, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.',
       en: 'Certified wheat, barley, rapeseed and chickpea seed, with the variety, seed class and pack of each product.',
@@ -367,7 +367,7 @@ export const categories = [
     name: { ro: 'Protecția plantelor', en: 'Crop protection' },
     slug: { ro: 'protectia-plantelor', en: 'crop-protection' },
     role: 'group',
-    icon: 'drop',
+    icon: 'protection',
     intro: {
       ro: 'Erbicide, fungicide, insecticide, tratamente pentru sămânță și adjuvanți, cu substanța activă și dozele pe cultură.',
       en: 'Herbicides, fungicides, insecticides, seed treatments and adjuvants, with the active ingredient and doses by crop.',
@@ -377,6 +377,7 @@ export const categories = [
     name: { ro: 'Erbicide', en: 'Herbicides' },
     slug: { ro: 'erbicide', en: 'herbicides' },
     role: 'category',
+    icon: 'herbicide',
     parent: 'protectia-plantelor',
     intro: {
       ro: 'Erbicide pentru cereale, porumb, floarea-soarelui și rapiță. Alege după cultură, substanța activă și momentul aplicării.',
@@ -387,6 +388,7 @@ export const categories = [
     name: { ro: 'Fungicide', en: 'Fungicides' },
     slug: { ro: 'fungicide', en: 'fungicides' },
     role: 'category',
+    icon: 'fungicide',
     parent: 'protectia-plantelor',
     intro: {
       ro: 'Fungicide pentru combaterea bolilor din culturile de câmp, cu dozele și stadiile de aplicare pe fiecare cultură.',
@@ -397,6 +399,7 @@ export const categories = [
     name: { ro: 'Insecticide', en: 'Insecticides' },
     slug: { ro: 'insecticide', en: 'insecticides' },
     role: 'category',
+    icon: 'insecticide',
     parent: 'protectia-plantelor',
     intro: {
       ro: 'Insecticide pentru dăunătorii din culturile de câmp, cu substanța activă, doza și timpul de pauză al fiecărui produs.',
@@ -407,6 +410,7 @@ export const categories = [
     name: { ro: 'Tratament sămânță', en: 'Seed treatment' },
     slug: { ro: 'tratament-samanta', en: 'seed-treatment' },
     role: 'category',
+    icon: 'seed-treatment',
     parent: 'protectia-plantelor',
     intro: {
       ro: 'Produse pentru tratarea seminței înainte de semănat, cu doza la 100 kg de sămânță și bolile combătute.',
@@ -417,6 +421,7 @@ export const categories = [
     name: { ro: 'Adjuvanți', en: 'Adjuvants' },
     slug: { ro: 'adjuvanti', en: 'adjuvants' },
     role: 'category',
+    icon: 'adjuvant',
     parent: 'protectia-plantelor',
     intro: {
       ro: 'Adjuvanți care se aplică împreună cu tratamentele, pentru o acoperire mai bună a frunzelor și pierderi mai mici.',
@@ -427,6 +432,7 @@ export const categories = [
     name: { ro: 'Regulatori de creștere', en: 'Growth regulators' },
     slug: { ro: 'regulatori-de-crestere', en: 'growth-regulators' },
     role: 'category',
+    icon: 'growth',
     parent: 'protectia-plantelor',
     intro: {
       ro: 'Regulatori de creștere pentru cereale, cu dozele și stadiile de aplicare recomandate pe cultură.',
@@ -437,7 +443,7 @@ export const categories = [
     name: { ro: 'Nutriție', en: 'Plant nutrition' },
     slug: { ro: 'nutritie', en: 'plant-nutrition' },
     role: 'group',
-    icon: 'scale',
+    icon: 'fertiliser',
     intro: {
       ro: 'Îngrășăminte granulate și fertilizanți foliari pentru nutriția culturilor, cu compoziția și ambalajul fiecărui produs.',
       en: 'Granular fertilisers and foliar products for crop nutrition, with the composition and pack of each product.',
@@ -447,6 +453,7 @@ export const categories = [
     name: { ro: 'Îngrășăminte', en: 'Fertilisers' },
     slug: { ro: 'ingrasaminte', en: 'fertilisers' },
     role: 'category',
+    icon: 'fertiliser',
     parent: 'nutritie',
     intro: {
       ro: 'Îngrășăminte cu azot și fosfor, în saci mari sau ambalaje mici, inclusiv produse pentru agricultura ecologică.',
@@ -457,6 +464,7 @@ export const categories = [
     name: { ro: 'Fertilizanți foliari', en: 'Foliar fertilisers' },
     slug: { ro: 'fertilizanti-foliare', en: 'foliar-fertilisers' },
     role: 'category',
+    icon: 'foliar',
     parent: 'nutritie',
     intro: {
       ro: 'Fertilizanți foliari cu macro și microelemente, pentru corectarea carențelor în perioada de vegetație.',
@@ -467,7 +475,7 @@ export const categories = [
     name: { ro: 'Agricultură bio', en: 'Organic farming' },
     slug: { ro: 'agricultura-bio', en: 'organic-farming' },
     role: 'theme',
-    icon: 'leaf',
+    icon: 'bio',
     intro: {
       ro: 'Produse pentru fermele ecologice: îngrășăminte biologice și roci naturale, cu compoziția și modul de folosire.',
       en: 'Products for organic farms: biological fertilisers and natural rock, with composition and how to use them.',

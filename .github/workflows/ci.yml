@@ -46,6 +46,10 @@ jobs:
           test -z "$(git ls-files --others --exclude-standard src/migrations)"
       - name: Seed content (schema push + Phase 2 seed)
         run: npm run seed
+      # Sample prices and one base county, which the seed leaves out (unconfirmed): the ticker,
+      # home price rail, live panel and county map tests need them. CI only.
+      - name: Fixtures for the end-to-end tests
+        run: npm run seed:ci
       - run: npm run build
       - run: npm run build-storybook
       - run: npx playwright install chromium

@@ -8,7 +8,6 @@ import {
   companyProps,
   financeToolsProps,
   livePanelProps,
-  shopCards,
   shopShowcaseProps,
 } from '../fixtures/home'
 import { menuNav } from '../fixtures/menu'
@@ -18,6 +17,7 @@ import { HeroSlider } from './HeroSlider'
 import { CompanySection, FinanceToolsRow, ShopShowcase } from './HomeSections'
 import { LivePanel } from './LivePanel'
 import { ProductCard } from './ProductCard'
+import { cardLabels, sampleCards } from '../fixtures/shop'
 import { Accordion, SectionHeading } from './Sections'
 import { SiteHeader } from './SiteHeader'
 
@@ -48,7 +48,17 @@ const shop = (locale: Locale) => (
     {...shopShowcaseProps(locale)}
     products={{
       label: shopShowcaseProps(locale).products.label,
-      cards: shopCards(locale).map((p) => <ProductCard key={p.href} {...p} className="w-full" />),
+      cards: sampleCards(locale)
+        .slice(0, 6)
+        .map((p) => (
+          <ProductCard
+            key={p.href}
+            {...p}
+            locale={locale}
+            labels={cardLabels(locale)}
+            className="w-full"
+          />
+        )),
     }}
   />
 )

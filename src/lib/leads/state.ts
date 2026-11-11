@@ -32,3 +32,19 @@ export type LeadFormState = {
 }
 
 export const initialLeadState: LeadFormState = { status: 'idle' }
+
+/** The one-field quick request (decision 0010). */
+export type QuickRequestState = {
+  status: 'idle' | 'error' | 'success'
+  /** What the visitor typed, kept after an error so the field is not emptied. */
+  value?: string
+  error?: string
+  /** Which contact was given; after an email the success state offers to add a phone. */
+  contact?: 'phone' | 'email'
+  /** Lets the same visitor add a phone to the lead just stored (signed, short-lived). */
+  followUp?: { lead: number; token: string }
+  /** True once the phone was added to an earlier quick request. */
+  completed?: boolean
+}
+
+export const initialQuickState: QuickRequestState = { status: 'idle' }

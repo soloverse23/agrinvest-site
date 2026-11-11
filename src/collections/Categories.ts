@@ -4,7 +4,7 @@ import { isStaff, publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
 import { enrichmentLedger, featuredProducts, hubFields, shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
-import { reservedCategorySlugs } from '@/lib/shop/rules'
+import { categoryIconOptions, reservedCategorySlugs } from '@/lib/shop/rules'
 
 /**
  * Shop categories, two levels deep. Every category has a one-segment URL
@@ -84,7 +84,8 @@ export const Categories: CollectionConfig = {
       name: 'icon',
       type: 'select',
       label: { ro: 'Pictogramă', en: 'Icon' },
-      options: ['leaf', 'drop', 'silo', 'scale', 'document'],
+      options: categoryIconOptions,
+      admin: { description: 'Shown on the shop rail, the home tiles and the menu.' },
     },
     ...hubFields,
     {

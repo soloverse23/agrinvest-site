@@ -157,6 +157,7 @@ export interface Config {
     footer: Footer;
     'seo-defaults': SeoDefault;
     'lead-routing': LeadRouting;
+    'shop-home': ShopHome;
   };
   globalsSelect: {
     figures: FiguresSelect<false> | FiguresSelect<true>;
@@ -164,6 +165,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
     'lead-routing': LeadRoutingSelect<false> | LeadRoutingSelect<true>;
+    'shop-home': ShopHomeSelect<false> | ShopHomeSelect<true>;
   };
   locale: 'ro' | 'en';
   widgets: {
@@ -1081,6 +1083,10 @@ export interface Product {
     resistanceGroup?: string | null;
     toxicityClass?: string | null;
     safety?: string | null;
+    signalWord?: ('warning' | 'danger') | null;
+    ghsPictograms?: ('GHS01' | 'GHS02' | 'GHS03' | 'GHS04' | 'GHS05' | 'GHS06' | 'GHS07' | 'GHS08' | 'GHS09')[] | null;
+    hazardStatements?: string | null;
+    bufferZone?: string | null;
     /**
      * OUG 53/2025 art. 40: cannot be sold online.
      */
@@ -1184,7 +1190,25 @@ export interface Category {
   role: 'group' | 'category' | 'theme';
   parent?: (number | null) | Category;
   order?: number | null;
-  icon?: ('leaf' | 'drop' | 'silo' | 'scale' | 'document') | null;
+  /**
+   * Shown on the shop rail, the home tiles and the menu.
+   */
+  icon?:
+    | (
+        | 'seed'
+        | 'protection'
+        | 'herbicide'
+        | 'fungicide'
+        | 'insecticide'
+        | 'seed-treatment'
+        | 'adjuvant'
+        | 'growth'
+        | 'fertiliser'
+        | 'foliar'
+        | 'bio'
+        | 'other'
+      )
+    | null;
   /**
    * Required before the hub can be indexed.
    */
@@ -2145,12 +2169,13 @@ export interface Lead {
     | 'motorina'
     | 'parteneri'
     | 'cariere'
-    | 'general';
+    | 'general'
+    | 'quick';
   status: 'new' | 'contacted' | 'closed';
   assignedTo?: (number | null) | Person;
-  name: string;
-  phone: string;
-  email: string;
+  name?: string | null;
+  phone?: string | null;
+  email?: string | null;
   company?: string | null;
   cui?: string | null;
   county?: (number | null) | County;
@@ -2161,10 +2186,15 @@ export interface Lead {
    */
   product?: (number | Product)[] | null;
   /**
-   * Litres.
+   * Diesel: litres. Quick request: packs.
    */
   quantity?: number | null;
   deliveryDate?: string | null;
+  variant?: string | null;
+  /**
+   * From the dose calculator, when the visitor used it.
+   */
+  hectares?: number | null;
   message?: string | null;
   meta?: {
     locale?: ('ro' | 'en') | null;
@@ -3078,6 +3108,10 @@ export interface ProductsSelect<T extends boolean = true> {
         resistanceGroup?: T;
         toxicityClass?: T;
         safety?: T;
+        signalWord?: T;
+        ghsPictograms?: T;
+        hazardStatements?: T;
+        bufferZone?: T;
         ghs06?: T;
         professionalUse?: T;
         compatibility?: T;
@@ -3791,6 +3825,8 @@ export interface LeadsSelect<T extends boolean = true> {
   product?: T;
   quantity?: T;
   deliveryDate?: T;
+  variant?: T;
+  hectares?: T;
   message?: T;
   meta?:
     | T
@@ -4115,12 +4151,40 @@ export interface LeadRouting {
           | 'motorina'
           | 'parteneri'
           | 'cariere'
-          | 'general';
+          | 'general'
+          | 'quick';
         primary: number | Person;
         fallback?: (number | null) | Person;
         id?: string | null;
       }[]
     | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shop-home".
+ */
+export interface ShopHome {
+  id: number;
+  /**
+   * Shown in the hero while it has a title and a link and its end date has not passed.
+   */
+  promo?: {
+    kicker?: string | null;
+    endsAt?: string | null;
+    title?: string | null;
+    text?: string | null;
+    link?: {
+      label?: string | null;
+      href?: string | null;
+    };
+    image?: (number | null) | Media;
+  };
+  /**
+   * Up to 8. Empty: the newest in stock.
+   */
+  featured?: (number | Product)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -4277,6 +4341,31 @@ export interface LeadRoutingSelect<T extends boolean = true> {
         fallback?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shop-home_select".
+ */
+export interface ShopHomeSelect<T extends boolean = true> {
+  promo?:
+    | T
+    | {
+        kicker?: T;
+        endsAt?: T;
+        title?: T;
+        text?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        image?: T;
+      };
+  featured?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

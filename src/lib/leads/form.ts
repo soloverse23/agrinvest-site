@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import type { Locale } from '@/i18n/config'
 
-import { leadTypes } from './types'
+import { formLeadTypes } from './types'
 
 export { CONSENT_VERSION, initialLeadState, type LeadField, type LeadFormState } from './state'
 
@@ -54,7 +54,7 @@ export function leadSchema(locale: Locale) {
       .optional()
       .transform((v) => v || undefined)
   return z.object({
-    type: z.enum(leadTypes),
+    type: z.enum(formLeadTypes),
     name: z.string().trim().min(2, m.name).max(120, m.long),
     phone: z.string().transform((v, ctx) => {
       const phone = normalizePhone(v)

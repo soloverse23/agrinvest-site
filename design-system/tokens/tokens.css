@@ -184,6 +184,12 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
+  /* The open phone filter drawer (ShopListing FilterDrawer) holds the page still; below `lg`. */
+  @media (width < 1024px) {
+    body:has([data-filter-drawer][open]) {
+      overflow: hidden;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

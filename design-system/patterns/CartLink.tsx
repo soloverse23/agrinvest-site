@@ -9,7 +9,11 @@ import { cx } from '../lib/cx'
 const readCount = () =>
   Number(document.cookie.match(/(?:^|; )agrinvest_cart_count=(\d+)/)?.[1] ?? 0)
 
-const never = () => () => {}
+/** A quick add on the page announces itself, so the count changes without a reload. */
+const subscribe = (change: () => void) => {
+  window.addEventListener('agrinvest:cart', change)
+  return () => window.removeEventListener('agrinvest:cart', change)
+}
 
 /**
  * The cart in the header. The count comes from a small cookie, so pages stay static and no
@@ -24,7 +28,7 @@ export function CartLink({
   label: string
   overlay?: boolean
 }) {
-  const count = useSyncExternalStore(never, readCount, () => 0)
+  const count = useSyncExternalStore(subscribe, readCount, () => 0)
   return (
     <Link
       href={href}

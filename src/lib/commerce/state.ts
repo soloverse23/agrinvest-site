@@ -52,3 +52,8 @@ export const initialCheckoutState: CheckoutState = { status: 'idle' }
 export type CompanyLookup =
   | { status: 'found'; name: string; address: string; regCom: string }
   | { status: 'not-found' | 'invalid' | 'unavailable' }
+
+/** The card's quick add: the result shown in place, without leaving the listing. */
+export type QuickAddState = { status: 'idle' | 'added' | 'error'; count?: number }
+
+export const initialQuickAddState: QuickAddState = { status: 'idle' }

@@ -95,6 +95,8 @@ async function main() {
             }
             window.scrollTo(0, 0)
           })
+          // Let scroll-driven UI (the product page's phone buy bar) finish its 200 ms transition.
+          await page.waitForTimeout(300)
           await page.waitForLoadState('networkidle')
           // Horizontal page scroll is a rubric fail: report the elements that cause it.
           const overflow = await page.evaluate((w) => {

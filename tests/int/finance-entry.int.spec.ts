@@ -14,7 +14,7 @@ describe('finance entry points', () => {
   it('fills the finance menu panel only when staff have not given it one', () => {
     const plain = [{ link: { label: 'Finanțare', href: '/finantare' } }]
     const [item] = withFinanceMenu(plain, 'ro')
-    expect(item.children?.length).toBe(4)
+    expect(item.children?.length).toBe(8)
     expect(item.blurb).toBeTruthy()
     const edited = [
       { link: { label: 'Finanțare', href: '/finantare' }, children: [{ link: { label: 'X' } }] },

@@ -10,7 +10,6 @@ import { HeroSlider, type HeroRailPrices } from '@ds/patterns/HeroSlider'
 import { CountyMap } from '@ds/patterns/CountyMap'
 import { LeadFormLazy as LeadForm, VideoEmbedLazy as VideoEmbed } from '@ds/patterns/Lazy'
 import { CropBadge } from '@ds/patterns/parts'
-import { OpenOnHash } from '@ds/patterns/OpenOnHash'
 import { Photo } from '@ds/patterns/Photo'
 import {
   Callout,
@@ -695,7 +694,13 @@ export async function LeadFormBlock({
             </span>
           </summary>
           <div className="p-6 pt-0 md:p-10 md:pt-0">{form}</div>
-          <OpenOnHash />
+          <script
+            // Opens the section the address points to (#cerere); costs no client bundle.
+            dangerouslySetInnerHTML={{
+              __html:
+                "(function(){function o(){var e=document.getElementById(decodeURIComponent(location.hash.slice(1))),b=e&&(e.tagName=='DETAILS'?e:e.closest('details'));if(b&&!b.open){b.open=true;b.scrollIntoView()}}o();addEventListener('hashchange',o)})()",
+            }}
+          />
         </details>
       )}
     </Section>

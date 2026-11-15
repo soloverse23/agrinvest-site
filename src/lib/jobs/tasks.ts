@@ -1,10 +1,13 @@
 import type { Payload, PayloadRequest, TaskConfig } from 'payload'
 
+import type { BuyPrice } from '@/payload-types'
+
 import type { Locale } from '@/i18n/config'
 import { locales } from '@/i18n/config'
 import { editorialDigest } from '@/lib/articles/digest'
 import { isGrainKey } from '@/lib/crops'
 import { parseOilBulletin } from '@/lib/diesel/oil-bulletin'
+import { daysAgo, fetchBrent, fetchEcbRates, fetchWorldBank } from '@/lib/markets/fetch'
 import { canSend, sendMessage } from '@/lib/messaging/send'
 import { buildIssue, weekStart } from '@/lib/news/newsletter'
 import { parseRss } from '@/lib/news/rss'
@@ -13,6 +16,7 @@ import { cropLines, latestByBase, priceRange, type BuyPriceRow } from '@/lib/pri
 import { marketNoteDraft } from '@/lib/prices/market-note'
 import { rt } from '@/lib/richtext'
 import { upsertMarketPrices } from '@/lib/prices/store'
+import { showOwnPrices } from '@/lib/prices/visibility'
 import { revalidate, tags } from '@/lib/revalidate'
 import { endpoints, fetchHeaders, marketSources, newsSourceKeys, newsSources } from '@/lib/sources'
 import { cropChanges, priceAlertMessages, type AlertSubscriber } from '@/lib/subscriptions/alerts'
@@ -24,6 +28,8 @@ import { cropChanges, priceAlertMessages, type AlertSubscriber } from '@/lib/sub
  * nothing, and the pages keep showing the last good data with its date. No retries: the next
  * scheduled run is the retry.
  */
+
+type BuyPriceDoc = BuyPrice
 
 /** Markets kept from the EU fertiliser series (it reports few member states). */
 export const fertiliserMarkets = ['Romania', 'EU'] as const
@@ -83,6 +89,8 @@ export async function ingestNews(payload: Payload) {
  * transaction) and daily from cron. The Outbox's dedupe key makes a second run add nothing.
  */
 export async function evaluateAlerts(payload: Payload, req?: PayloadRequest) {
+  // Agrinvest's prices are hidden (Phase 7f): no alert may announce one.
+  if (!showOwnPrices) return { changes: 0, messages: 0 }
   const [prices, crops, subs] = await Promise.all([
     payload.find({
       req,
@@ -138,14 +146,16 @@ export async function buildNewsletter(payload: Payload, now = new Date()) {
     if (existing.docs[0] && existing.docs[0].status !== 'draft') continue
 
     const [prices, news, notes] = await Promise.all([
-      payload.find({
-        collection: 'buy-prices',
-        where: { status: { equals: 'published' } },
-        sort: '-validFrom',
-        limit: 50,
-        depth: 1,
-        locale,
-      }),
+      showOwnPrices
+        ? payload.find({
+            collection: 'buy-prices',
+            where: { status: { equals: 'published' } },
+            sort: '-validFrom',
+            limit: 50,
+            depth: 1,
+            locale,
+          })
+        : { docs: [] as BuyPriceDoc[] },
       payload.find({
         collection: 'news-items',
         where: {
@@ -224,12 +234,14 @@ export async function draftMarketNote(payload: Payload, now = new Date()) {
       pagination: false,
       depth: 0,
     }),
-    payload.find({
-      collection: 'buy-prices',
-      where: { status: { equals: 'published' } },
-      pagination: false,
-      depth: 0,
-    }),
+    showOwnPrices
+      ? payload.find({
+          collection: 'buy-prices',
+          where: { status: { equals: 'published' } },
+          pagination: false,
+          depth: 0,
+        })
+      : { docs: [] as BuyPriceDoc[] },
     payload.find({
       collection: 'crops',
       where: { isGrain: { equals: true } },
@@ -307,7 +319,7 @@ export async function draftMarketNote(payload: Payload, now = new Date()) {
 const fetchTask = (
   slug: string,
   fetchRows: (now: Date) => Promise<Parameters<typeof upsertMarketPrices>[1]>,
-  tag: string,
+  tag: string | string[],
 ): TaskConfig =>
   ({
     slug,
@@ -315,7 +327,7 @@ const fetchTask = (
       const rows = await fetchRows(new Date())
       if (!rows.length) throw new Error(`${slug}: the source returned no rows`)
       const result = await upsertMarketPrices(req.payload, rows)
-      if (result.created) revalidate(tag)
+      if (result.created) for (const t of [tag].flat()) revalidate(t)
       return { output: result }
     },
   }) as TaskConfig
@@ -327,7 +339,11 @@ export const jobTasks: TaskConfig[] = [
     (now) => fetchFertiliserPrices(fertiliserMarkets, now),
     tags.prices,
   ),
-  fetchTask('fetchOilBulletin', fetchOilBulletin, tags.diesel),
+  fetchTask('fetchOilBulletin', fetchOilBulletin, [tags.diesel, tags.prices]),
+  // Phase 7f. A short window each run: missed days are caught up, stored ones are skipped.
+  fetchTask('fetchBrent', (now) => fetchBrent(daysAgo(30, now), now), tags.prices),
+  fetchTask('fetchEcbRates', (now) => fetchEcbRates(daysAgo(30, now), now), tags.prices),
+  fetchTask('fetchWorldBank', (now) => fetchWorldBank(daysAgo(400, now), now), tags.prices),
   {
     slug: 'ingestNews',
     handler: async ({ req }) => ({ output: await ingestNews(req.payload) }),

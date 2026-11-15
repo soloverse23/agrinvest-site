@@ -28,6 +28,44 @@ export type NavEntry = Link & {
 }
 export type FooterColumnData = { title: string; links: Link[] }
 
+/** Phase 7f market pages in the Prices panel, group "Piețe" / "Markets". */
+export function marketLinks(locale: Locale): NavChild[] {
+  const ro = locale === 'ro'
+  const group = ro ? 'Piețe' : 'Markets'
+  return [
+    {
+      label: ro ? 'Carburanți' : 'Fuel prices',
+      href: ro ? '/preturi/carburanti' : '/en/prices/fuel-prices',
+      description: ro ? 'Motorină și benzină, România și UE' : 'Diesel and petrol, Romania and EU',
+      group,
+    },
+    {
+      label: ro ? 'Petrol Brent' : 'Brent crude',
+      href: ro ? '/preturi/petrol-brent' : '/en/prices/brent-crude-oil',
+      description: ro ? 'Dolari pe baril, zilnic' : 'Dollars per barrel, daily',
+      group,
+    },
+    {
+      label: ro ? 'Îngrășăminte' : 'Fertilisers',
+      href: ro ? '/preturi/ingrasaminte' : '/en/prices/fertilisers',
+      description: ro ? 'Uree, DAP, potasiu' : 'Urea, DAP, potash',
+      group,
+    },
+    {
+      label: ro ? 'Gaze naturale' : 'Natural gas',
+      href: ro ? '/preturi/gaze-naturale' : '/en/prices/natural-gas',
+      description: ro ? 'Europa, TTF' : 'Europe, TTF',
+      group,
+    },
+    {
+      label: ro ? 'Curs euro-leu' : 'Euro to leu rate',
+      href: ro ? '/preturi/curs-euro-leu' : '/en/prices/euro-leu-exchange-rate',
+      description: ro ? 'Cursul BCE și istoricul' : 'The ECB rate and its history',
+      group,
+    },
+  ]
+}
+
 const cropNames: Record<Locale, [string, string][]> = {
   ro: [
     ['grau', 'Grâu'],
@@ -117,8 +155,8 @@ function build(locale: Locale): NavEntry[] {
       href: path.prices,
       panel: 'links',
       blurb: ro
-        ? 'Prețul zilei la cereale, îngrășăminte și motorină, cu sursa fiecărui număr.'
-        : 'Today’s grain, fertiliser and diesel prices, each with its source.',
+        ? 'Cereale, motorină, Brent, îngrășăminte și curs euro, cu sursa fiecărui număr.'
+        : 'Grain, diesel, Brent, fertiliser and the euro rate, each with its source.',
       children: [
         ...crops.map(([slug, label]) => ({
           label,
@@ -131,17 +169,12 @@ function build(locale: Locale): NavEntry[] {
           description: ro ? 'Oferta pentru toate culturile' : 'An offer for every crop',
           group: ro ? 'Vinde cereale' : 'Sell grain',
         },
+        ...marketLinks(locale),
         {
-          label: ro ? 'Îngrășăminte' : 'Fertilisers',
-          href: ro ? '/preturi/ingrasaminte' : '/en/prices/fertilisers',
-          description: ro ? 'Pe ambalaj și pe kg' : 'Per pack and per kg',
-          group: ro ? 'Alte prețuri' : 'Other prices',
-        },
-        {
-          label: ro ? 'Motorină' : 'Diesel',
+          label: ro ? 'Motorină la fermă' : 'Diesel to the farm',
           href: ro ? '/motorina' : '/en/diesel',
-          description: ro ? 'Preț și livrare la fermă' : 'Price and farm delivery',
-          group: ro ? 'Alte prețuri' : 'Other prices',
+          description: ro ? 'Livrare și ofertă' : 'Delivery and a quote',
+          group: ro ? 'Vinde cereale' : 'Sell grain',
         },
         {
           label: ro ? 'Calculator preț net' : 'Net price calculator',
@@ -283,10 +316,12 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
       {
         title: 'Prețuri și unelte',
         links: [
-          { label: 'Prețuri cereale', href: '/preturi' },
+          { label: 'Prețuri agricole', href: '/preturi' },
           { label: 'Vinde cereale', href: '/cereale' },
           { label: 'Calculator preț net', href: '/preturi/calculator-pret-net' },
           { label: 'Prețuri îngrășăminte', href: '/preturi/ingrasaminte' },
+          { label: 'Petrol Brent', href: '/preturi/petrol-brent' },
+          { label: 'Curs euro-leu', href: '/preturi/curs-euro-leu' },
           { label: 'Motorină', href: '/motorina' },
           { label: 'Toate uneltele', href: '/unelte' },
         ],
@@ -337,10 +372,12 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
       {
         title: 'Prices and tools',
         links: [
-          { label: 'Grain prices', href: '/en/prices' },
+          { label: 'Farm market prices', href: '/en/prices' },
           { label: 'Sell grain', href: '/en/grain' },
           { label: 'Net price calculator', href: '/en/prices/net-price-calculator' },
           { label: 'Fertiliser prices', href: '/en/prices/fertilisers' },
+          { label: 'Brent crude', href: '/en/prices/brent-crude-oil' },
+          { label: 'Euro to leu rate', href: '/en/prices/euro-leu-exchange-rate' },
           { label: 'Diesel', href: '/en/diesel' },
           { label: 'All tools', href: '/en/tools' },
         ],

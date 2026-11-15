@@ -6,24 +6,14 @@ import type { NavItem, ShopPanelData } from '@ds/patterns/SiteHeader'
 import { commerceUi } from '@/i18n/commerce'
 import { localePath, type Locale } from '@/i18n/config'
 import { pricesUi } from '@/i18n/prices'
-import {
-  cartPath,
-  categoryPath,
-  cropPricePath,
-  dieselPath,
-  hubPath,
-  pricesPath,
-  searchPath,
-  shopPath,
-} from '@/i18n/routes'
+import { cartPath, categoryPath, hubPath, pricesPath, searchPath, shopPath } from '@/i18n/routes'
 import { shopUi } from '@/i18n/shop'
-import { toolsUi } from '@/i18n/tools'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getFigures, getFooter, getNavigation, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
 import { getShopMenu } from '@/lib/content/shop'
-import { dieselTicker } from '@/lib/diesel/load'
-import { agrinvestRail } from '@/lib/prices/overview'
+import { marketHrefs } from '@/lib/markets/links'
+import { marketTicker } from '@/lib/markets/ticker'
 
 import { CookieSettings } from './CookieSettings'
 import { FactMark } from './Fact'
@@ -93,14 +83,13 @@ export async function SiteShell({
   ticker?: boolean
   children: ReactNode
 }) {
-  const [nav, footer, figures, seo, rail, shop, fuel] = await Promise.all([
+  const [nav, footer, figures, seo, markets, shop] = await Promise.all([
     getNavigation(locale),
     getFooter(locale),
     getFigures(locale),
     getSeoDefaults(locale),
-    ticker ? agrinvestRail(locale) : null,
+    ticker ? marketHrefs(locale).then((hrefs) => marketTicker(locale, hrefs)) : null,
     shopPanel(locale),
-    ticker ? dieselTicker(locale) : null,
   ])
   const t = ui[locale]
   const items: NavItem[] = (nav.items ?? []).map((i) => ({
@@ -147,14 +136,11 @@ export async function SiteShell({
       phone={phone?.status === 'confirmed' ? phone.value : undefined}
       shop={shop}
       cart={{ href: cartPath(locale), label: commerceUi[locale].cart }}
-      // Agrinvest's published prices (Phase 5); hidden until there are any.
+      // Market quotes (Phase 7f): Brent, EUR/RON, diesel, wheat, urea; hidden before any data.
       ticker={
-        rail
+        markets
           ? {
-              crops: rail.rows.map((r) => ({ ...r, href: cropPricePath(r.slug, locale) })),
-              fuel: fuel
-                ? { ...fuel, name: toolsUi[locale].today.diesel, href: dieselPath(locale) }
-                : undefined,
+              quotes: markets.quotes,
               phone: phone?.status === 'confirmed' ? phone.value : undefined,
               link: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
             }

@@ -96,7 +96,16 @@ export const guidePath = (slug: string, locale: Locale) =>
 export const priceRoutes = {
   netPrice: { ro: 'calculator-pret-net', en: 'net-price-calculator' },
   fertilisers: { ro: 'ingrasaminte', en: 'fertilisers' },
+  // Phase 7f market pages; `src/lib/markets/registry.ts` maps each to its markets.
+  brent: { ro: 'petrol-brent', en: 'brent-crude-oil' },
+  fuel: { ro: 'carburanti', en: 'fuel-prices' },
+  gas: { ro: 'gaze-naturale', en: 'natural-gas' },
+  fx: { ro: 'curs-euro-leu', en: 'euro-leu-exchange-rate' },
 } as const satisfies Record<string, Record<Locale, string>>
+
+/** A market page: `/preturi/petrol-brent`, `/en/prices/brent-crude-oil` and so on. */
+export const marketPagePath = (id: 'brent' | 'fuel' | 'gas' | 'fx', locale: Locale) =>
+  localePath(`${sections.prices[locale]}/${priceRoutes[id][locale]}`, locale)
 
 /** Price hub: `/preturi`, `/en/prices`. */
 export const pricesPath = (locale: Locale) => localePath(sections.prices[locale], locale)

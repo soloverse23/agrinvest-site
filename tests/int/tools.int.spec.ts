@@ -23,6 +23,7 @@ import { subscriptionSchema } from '@/lib/subscriptions/form'
 import { subscriptionConsent } from '@/lib/subscriptions/state'
 import { storeSubscription } from '@/lib/subscriptions/store'
 import { forecastUrl, parseForecast, weatherConfig } from '@/lib/weather/open-meteo'
+import { showOwnPrices } from '@/lib/prices/visibility'
 
 const fixture = (name: string) => readFileSync(`tests/fixtures/feeds/${name}`)
 
@@ -260,7 +261,8 @@ describe('newsletter (pure)', () => {
       prices: [],
       headlines: [],
     })
-    expect(issue.intro).toMatch(/la cerere/)
+    // With Agrinvest's prices hidden (Phase 7f) the issue does not mention them at all.
+    expect(issue.intro).toMatch(showOwnPrices ? /la cerere/ : /Prețurile pieței/)
     expect(issue.content.prices).toEqual([])
   })
 })
@@ -404,6 +406,14 @@ describe('tools data (Payload)', () => {
       collection: 'outbox',
       where: { to: { equals: email } },
     })
+    // Phase 7f: while Agrinvest's prices are hidden, no alert may announce one.
+    if (!showOwnPrices) {
+      expect(afterWrite.docs).toHaveLength(0)
+      await evaluateAlerts(payload)
+      const none = await payload.find({ collection: 'outbox', where: { to: { equals: email } } })
+      expect(none.docs).toHaveLength(0)
+      return
+    }
     expect(afterWrite.docs).toHaveLength(1)
     await evaluateAlerts(payload)
     const rows = await payload.find({

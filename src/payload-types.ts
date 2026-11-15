@@ -177,6 +177,9 @@ export interface Config {
       fetchEuCereal: TaskFetchEuCereal;
       fetchEuFertiliser: TaskFetchEuFertiliser;
       fetchOilBulletin: TaskFetchOilBulletin;
+      fetchBrent: TaskFetchBrent;
+      fetchEcbRates: TaskFetchEcbRates;
+      fetchWorldBank: TaskFetchWorldBank;
       ingestNews: TaskIngestNews;
       evaluateAlerts: TaskEvaluateAlerts;
       draftMarketNote: TaskDraftMarketNote;
@@ -1962,7 +1965,7 @@ export interface MarketPrice {
    * source|series|market|period
    */
   key: string;
-  source: 'eu-agrifood' | 'eu-fertiliser' | 'eu-oil-bulletin';
+  source: 'eu-agrifood' | 'eu-fertiliser' | 'eu-oil-bulletin' | 'eia-brent' | 'ecb' | 'world-bank';
   /**
    * Crop key, fertiliser product or fuel, e.g. "porumb", "diesel".
    */
@@ -2315,6 +2318,9 @@ export interface PayloadJob {
           | 'fetchEuCereal'
           | 'fetchEuFertiliser'
           | 'fetchOilBulletin'
+          | 'fetchBrent'
+          | 'fetchEcbRates'
+          | 'fetchWorldBank'
           | 'ingestNews'
           | 'evaluateAlerts'
           | 'draftMarketNote'
@@ -2358,6 +2364,9 @@ export interface PayloadJob {
         | 'fetchEuCereal'
         | 'fetchEuFertiliser'
         | 'fetchOilBulletin'
+        | 'fetchBrent'
+        | 'fetchEcbRates'
+        | 'fetchWorldBank'
         | 'ingestNews'
         | 'evaluateAlerts'
         | 'draftMarketNote'
@@ -4401,6 +4410,30 @@ export interface TaskFetchEuFertiliser {
  * via the `definition` "TaskFetchOilBulletin".
  */
 export interface TaskFetchOilBulletin {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskFetchBrent".
+ */
+export interface TaskFetchBrent {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskFetchEcbRates".
+ */
+export interface TaskFetchEcbRates {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskFetchWorldBank".
+ */
+export interface TaskFetchWorldBank {
   input?: unknown;
   output?: unknown;
 }

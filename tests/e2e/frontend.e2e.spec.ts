@@ -266,10 +266,18 @@ test.describe('Core page content', () => {
     await page.goto('/magazin')
     const strip = page.locator('div.bg-forest').first()
     await expect(strip.locator('a[href^="/preturi/"]').first()).toBeAttached()
-    await expect(strip.locator('a[href="/motorina"]')).toHaveCount(1)
+    // Phase 7f: market quotes; diesel opens the fuel page.
+    await expect(strip.locator('a[href="/preturi/carburanti"]')).toHaveCount(1)
+    await expect(strip.locator('a[href="/preturi/petrol-brent"]')).toHaveCount(1)
     await page.goto('/')
     await expect(page.locator('h1')).toHaveCount(1)
-    await expect(page.locator('div.bg-forest a[href="/motorina"]')).toHaveCount(0)
+    // No ticker on home; the hero rail carries the market quotes instead.
+    await expect(page.locator('header div.bg-forest a[href="/preturi/petrol-brent"]')).toHaveCount(
+      0,
+    )
+    await expect(
+      page.locator('aside[aria-label="Piețele azi"] a[href="/preturi/petrol-brent"]'),
+    ).toHaveCount(1)
   })
 
   test('a base page pre-selects its base in the delivery form', async ({ page }) => {
@@ -604,13 +612,6 @@ test.describe('Finance cross-selling', () => {
 })
 
 test.describe('Grain prices', () => {
-  const email = 'e2e-alert@example.ro'
-
-  test.afterAll(async () => {
-    const payload = await getPayload({ config })
-    await payload.delete({ collection: 'subscriptions', where: { email: { equals: email } } })
-  })
-
   test('every price route answers in Romanian and English', async ({ page }) => {
     for (const url of [
       '/preturi',
@@ -620,6 +621,10 @@ test.describe('Grain prices', () => {
       '/preturi/rapita',
       '/preturi/orz',
       '/preturi/calculator-pret-net',
+      '/preturi/petrol-brent',
+      '/preturi/carburanti',
+      '/preturi/gaze-naturale',
+      '/preturi/curs-euro-leu',
       '/piata',
       '/en/prices',
       '/en/prices/wheat',
@@ -628,6 +633,10 @@ test.describe('Grain prices', () => {
       '/en/prices/rapeseed',
       '/en/prices/barley',
       '/en/prices/net-price-calculator',
+      '/en/prices/brent-crude-oil',
+      '/en/prices/fuel-prices',
+      '/en/prices/natural-gas',
+      '/en/prices/euro-leu-exchange-rate',
       '/en/market',
     ]) {
       const res = await page.goto(url)
@@ -636,23 +645,17 @@ test.describe('Grain prices', () => {
     }
   })
 
-  test('a crop page carries Dataset JSON-LD and never shows an unpublished price', async ({
+  test('a crop page carries Dataset JSON-LD and shows no Agrinvest price (Phase 7f)', async ({
     page,
   }) => {
-    await page.goto('/preturi/orz')
+    await page.goto('/preturi/grau')
     const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join()
     expect(ld).toContain('"Dataset"')
-    const payload = await getPayload({ config })
-    const barley = await payload.find({ collection: 'crops', where: { key: { equals: 'barley' } } })
-    const published = await payload.find({
-      collection: 'buy-prices',
-      where: { crop: { equals: barley.docs[0].id }, status: { equals: 'published' } },
-      limit: 1,
-    })
-    if (!published.docs.length) {
-      await expect(page.getByText('Preț la cerere')).toBeVisible()
-      await expect(page.locator('#pret-agrinvest ~ div table')).toHaveCount(0)
-    }
+    expect(ld).toContain('"FAQPage"')
+    await expect(page.locator('#pret-agrinvest')).toHaveCount(0)
+    await expect(page.locator('#alerta')).toHaveCount(0)
+    await expect(page.getByText('Preț la cerere')).toHaveCount(0)
+    await expect(page.locator('main a[href="/cereale/grau"]').first()).toBeAttached()
   })
 
   test('the calculator works without JavaScript and is noindex with parameters', async ({
@@ -679,23 +682,29 @@ test.describe('Grain prices', () => {
     await context.close()
   })
 
-  test('the price alert sign-up stores a pending subscription with its consent', async ({
+  test('the market hub and pages answer from the market API, with the chart loaded late', async ({
     page,
   }) => {
-    await page.goto('/preturi/grau')
-    const form = page.locator('#alerta form')
-    await form.locator('[name=email]').fill(email)
-    await form.locator('[name=consent]').check()
-    await form.getByRole('button', { name: 'Activează alerta' }).click()
-    await expect(page.locator('#alerta').getByRole('status')).toContainText('Am salvat alerta')
-    const payload = await getPayload({ config })
-    const { docs } = await payload.find({
-      collection: 'subscriptions',
-      where: { email: { equals: email } },
-    })
-    expect(docs).toHaveLength(1)
-    expect(docs[0]).toMatchObject({ status: 'pending' })
-    expect(docs[0].topics?.[0]).toMatchObject({ kind: 'price-alert', rule: 'any' })
+    const api = await page.request.get('/api/markets/eur-ron')
+    expect(api.status()).toBe(200)
+    expect((await api.json()).points.length).toBeGreaterThan(0)
+    expect((await page.request.get('/api/markets/nope')).status()).toBe(404)
+
+    const charts: string[] = []
+    page.on('request', (r) => r.url().includes('/api/markets/') && charts.push(r.url()))
+    await page.goto('/preturi/petrol-brent', { waitUntil: 'networkidle' })
+    // The server draws the figure, the static line and the history; no chart code yet.
+    await expect(page.locator('h1')).toHaveText('Prețul petrolului Brent azi')
+    await expect(
+      page.locator('#istoric ~ * table, section:has(#istoric) table').first(),
+    ).toBeAttached()
+    expect(charts).toHaveLength(0)
+    await expect(page.locator('main canvas')).toHaveCount(0)
+    // The first interaction loads it.
+    await page.mouse.move(300, 400)
+    await page.mouse.wheel(0, 200)
+    await expect(page.locator('main canvas').first()).toBeVisible()
+    expect(charts.some((u) => u.endsWith('/api/markets/brent'))).toBe(true)
   })
 })
 
@@ -725,11 +734,13 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     await expect(page.locator('main a[href="/stiri"]').first()).toBeAttached()
   })
 
-  test('the fertiliser page lists shop products with a link to each', async ({ page }) => {
+  test('the fertiliser page shows market prices, not the shop table (Phase 7f)', async ({
+    page,
+  }) => {
     await page.goto('/preturi/ingrasaminte')
-    const rows = page.locator('main table tbody tr')
-    expect(await rows.count()).toBeGreaterThan(0)
-    await expect(page.locator('main table a[href^="/magazin/"]').first()).toBeAttached()
+    await expect(page.locator('#piata-mondiala')).toBeAttached()
+    await expect(page.locator('main table a[href^="/magazin/"]')).toHaveCount(0)
+    await expect(page.locator('main a[href="/magazin"]').first()).toBeAttached()
   })
 
   test('the home page: slider, live prices and updates, shop, tools, company', async ({ page }) => {
@@ -737,7 +748,7 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     await expect(page.locator('h1')).toHaveCount(1)
     // No ticker on home; the hero rail links each price to its own page.
     await expect(page.locator('header div.bg-forest a[href="/motorina"]')).toHaveCount(0)
-    const rail = page.locator('aside', { hasText: 'Prețul Agrinvest azi' })
+    const rail = page.locator('aside[aria-label="Piețele azi"]')
     await expect(rail.locator('a[href^="/preturi/"]').first()).toBeAttached()
     const live = page.locator('section[aria-labelledby="live-title"]')
     await expect(live.getByRole('heading', { name: 'În direct din câmp' })).toBeVisible()
@@ -858,7 +869,8 @@ test.describe('Inner pages are tidied (Phase 7d)', () => {
       'aria-current',
       'page',
     )
-    await expect(nav.getByRole('link', { name: 'Prețuri cereale' })).toBeVisible()
+    await expect(nav.getByRole('link', { name: 'Prețuri agricole' })).toBeVisible()
+    await expect(nav.getByRole('link', { name: 'Curs euro-leu' })).toBeVisible()
   })
 
   test('the long request form stays closed until asked for', async ({ page }) => {

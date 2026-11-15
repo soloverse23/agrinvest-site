@@ -8,12 +8,39 @@ import type { Locale } from './config'
 export const toolsUi = {
   ro: {
     fert: {
-      title: 'Prețuri îngrășăminte',
-      seoTitle: 'Prețuri îngrășăminte: azotat, uree, NPK, foliare',
+      title: 'Prețul îngrășămintelor',
+      seoTitle: 'Preț îngrășăminte: uree, DAP, potasiu, piața UE și mondială',
       description:
-        'Prețurile îngrășămintelor din magazinul Agrinvest, pe ambalaj și pe kilogram, cu legătură spre fiecare produs.',
+        'Prețul ureei, al fosfaților și al potasiului pe piața mondială, în dolari și în lei pe tonă, și prețurile UE pentru România, cu grafic și istoric.',
       summary:
-        'Prețul fiecărui îngrășământ din magazinul Agrinvest, pe ambalaj și pe kilogram sau litru. Fiecare rând duce la pagina produsului.',
+        'Cum se mișcă prețul îngrășămintelor pe piața mondială și în România, ca să știi când merită să cumperi. Fiecare cifră are sursa și data ei.',
+      euTitle: 'Piața UE, România',
+      euLead:
+        'Prețurile lunare publicate de Comisia Europeană pentru România și media UE, în euro pe tonă.',
+      euProduct: 'Îngrășământ',
+      euRomania: 'România',
+      euAverage: 'Media UE',
+      euMonth: 'Luna',
+      worldTitle: 'Piața mondială',
+      worldLead:
+        'Cotațiile lunare de referință publicate de Banca Mondială, în dolari pe tonă. Arată direcția pieței; prețul franco fermă din România include transportul și TVA.',
+      about: {
+        title: 'Ce mișcă prețul îngrășămintelor',
+        body: [
+          'Îngrășămintele cu azot, ca ureea și azotatul de amoniu, se fac din amoniac, iar amoniacul se face din gaz natural. De aceea prețul gazului în Europa se vede, în timp, în prețul lor.',
+          'Fosfații (DAP, superfosfatul triplu) și potasiul vin din minereuri extrase în puține țări, așa că prețul lor depinde mai mult de comerțul mondial și de transport.',
+        ],
+      },
+      faq: [
+        {
+          q: 'Este prețul cu care cumpăr în România?',
+          a: 'Nu. Cotațiile mondiale sunt prețuri la export sau import, în porturi, fără transport până la fermă și fără TVA. Ele arată direcția pieței.',
+        },
+        {
+          q: 'Cât de des se actualizează?',
+          a: 'Lunar. Banca Mondială publică media lunii la începutul lunii următoare.',
+        },
+      ],
       product: 'Produs',
       pack: 'Ambalaj',
       price: 'Preț',
@@ -31,9 +58,10 @@ export const toolsUi = {
       title: 'Motorină pentru fermieri',
       seoTitle: 'Motorină pentru fermieri: preț și livrare la fermă',
       description:
-        'Cere o ofertă de motorină livrată la fermă. Prețul Agrinvest când e publicat și prețul național săptămânal din Weekly Oil Bulletin al Comisiei Europene.',
+        'Cere o ofertă de motorină livrată la fermă și vezi prețul mediu săptămânal al motorinei în România, din Buletinul petrolier al Comisiei Europene.',
       summary:
-        'Livrăm motorină la fermă. Vezi prețul Agrinvest, când e publicat, și prețul mediu din România pe săptămână, apoi cere o ofertă pentru cantitatea ta.',
+        'Livrăm motorină la fermă. Vezi cum s-a mișcat prețul mediu din România, apoi cere o ofertă pentru cantitatea ta.',
+      market: 'Prețul motorinei și benzinei, comparat cu media UE',
       ownTitle: 'Prețul Agrinvest',
       ownLead: 'Lei pe litru, pentru livrare la fermă.',
       onRequest: 'Preț la cerere',
@@ -92,11 +120,11 @@ export const toolsUi = {
         },
         fert: {
           title: 'Prețuri îngrășăminte',
-          text: 'Prețul fiecărui îngrășământ din magazin, pe ambalaj și pe kilogram.',
+          text: 'Ureea, fosfații și potasiul pe piața mondială și în România.',
         },
         diesel: {
           title: 'Motorină',
-          text: 'Prețul Agrinvest și media din România, cu livrare la fermă.',
+          text: 'Media din România pe săptămână și livrare la fermă.',
         },
         simulator: {
           title: 'Simulator de rate',
@@ -125,11 +153,38 @@ export const toolsUi = {
   en: {
     fert: {
       title: 'Fertiliser prices',
-      seoTitle: 'Fertiliser prices in Romania: AN, urea, NPK, foliar',
+      seoTitle: 'Fertiliser prices: urea, DAP, potash, EU and world markets',
       description:
-        'Prices of the fertilisers in the Agrinvest shop, per pack and per kilogram, with a link to each product.',
+        'Urea, phosphate and potash prices on the world market, in dollars and lei per tonne, and the EU’s prices for Romania, with a chart and history.',
       summary:
-        'The price of every fertiliser in the Agrinvest shop, per pack and per kilogram or litre. Each row leads to the product page.',
+        'How fertiliser prices move on the world market and in Romania, so you know when it pays to buy. Every figure carries its source and date.',
+      euTitle: 'EU market, Romania',
+      euLead:
+        'Monthly prices the European Commission publishes for Romania and the EU average, in euro per tonne.',
+      euProduct: 'Fertiliser',
+      euRomania: 'Romania',
+      euAverage: 'EU average',
+      euMonth: 'Month',
+      worldTitle: 'World market',
+      worldLead:
+        'The World Bank’s monthly benchmark prices, in US dollars per tonne. They show where the market is going; a delivered price in Romania adds transport and VAT.',
+      about: {
+        title: 'What moves fertiliser prices',
+        body: [
+          'Nitrogen fertilisers such as urea and ammonium nitrate are made from ammonia, and ammonia is made from natural gas. That is why the price of gas in Europe shows up, over time, in theirs.',
+          'Phosphates (DAP, triple superphosphate) and potash come from ores mined in a few countries, so their price depends more on world trade and freight.',
+        ],
+      },
+      faq: [
+        {
+          q: 'Is this what I pay in Romania?',
+          a: 'No. World benchmarks are export or import prices at ports, without transport to the farm and without VAT. They show where the market is going.',
+        },
+        {
+          q: 'How often is it updated?',
+          a: 'Monthly. The World Bank publishes each month’s average early the following month.',
+        },
+      ],
       product: 'Product',
       pack: 'Pack',
       price: 'Price',
@@ -147,9 +202,10 @@ export const toolsUi = {
       title: 'Diesel for farms',
       seoTitle: 'Diesel for farms in Romania: price and delivery',
       description:
-        'Ask for diesel delivered to your farm. Agrinvest’s price once published, and Romania’s weekly average from the European Commission’s Weekly Oil Bulletin.',
+        'Ask for diesel delivered to your farm and see Romania’s weekly average diesel price from the European Commission’s Weekly Oil Bulletin.',
       summary:
-        'We deliver diesel to farms. See Agrinvest’s price, once published, and Romania’s weekly average, then ask for a quote for your quantity.',
+        'We deliver diesel to farms. See how Romania’s average price moved, then ask for a quote for your quantity.',
+      market: 'Diesel and petrol prices, compared with the EU average',
       ownTitle: 'Agrinvest’s price',
       ownLead: 'Lei per litre, delivered to the farm.',
       onRequest: 'Price on request',
@@ -208,11 +264,11 @@ export const toolsUi = {
         },
         fert: {
           title: 'Fertiliser prices',
-          text: 'The price of every fertiliser in the shop, per pack and per kilogram.',
+          text: 'Urea, phosphates and potash on the world market and in Romania.',
         },
         diesel: {
           title: 'Diesel',
-          text: 'The Agrinvest price and the Romanian average, with delivery to the farm.',
+          text: 'The weekly Romanian average and delivery to the farm.',
         },
         simulator: {
           title: 'Repayment simulator',

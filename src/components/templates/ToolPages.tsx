@@ -5,16 +5,19 @@ import { ArticleCard } from '@ds/patterns/Articles'
 import { LeadFormLazy, SubscribeFormLazy } from '@ds/patterns/Lazy'
 import { LineChart } from '@ds/patterns/LineChart'
 import { Callout, SectionHeading } from '@ds/patterns/Sections'
+import { Button } from '@ds/primitives/Button'
 import { JsonLd } from '@/components/JsonLd'
 import { PageTitle } from '@/components/PageParts'
 import { SiteShell } from '@/components/SiteShell'
 import { localePath, type Locale } from '@/i18n/config'
+import { marketsUi } from '@/i18n/markets'
 import { pricesUi } from '@/i18n/prices'
 import {
   categoryPath,
   dieselPath,
   fertiliserPricesPath,
   marketNotePath,
+  marketPagePath,
   marketPath,
   newsPath,
   pricesPath,
@@ -34,12 +37,28 @@ import { getDieselPrice, nationalDiesel } from '@/lib/diesel/load'
 import { formatDate, formatNumber, formatShortDate } from '@/lib/format'
 import { submitLead } from '@/lib/leads/actions'
 import { listHeadlines } from '@/lib/news/load'
-import { breadcrumbs, dataset, itemList, webPage } from '@/lib/schema'
+import { latestRates } from '@/lib/markets/load'
+import { listMarketPoints, yearAgo } from '@/lib/prices/load'
+import { seriesLabel } from '@/lib/prices/grain'
+import { showOwnPrices } from '@/lib/prices/visibility'
+import { breadcrumbs, dataset, faqPage, itemList, webPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
 import { marketSources } from '@/lib/sources'
 import { subscribe } from '@/lib/subscriptions/actions'
 
 import { packLabel, PriceMark, unitPriceLabel } from './ShopParts'
+import {
+  coverageOf,
+  latestOf,
+  MarketAbout,
+  MarketBlock,
+  MarketFaq,
+  MarketHistory,
+  marketViews,
+  RelatedMarkets,
+  sourcesOf,
+  unitOf,
+} from './MarketPages'
 import { CC_BY } from './PricePage'
 import { ToolLinks } from '@/components/ToolLinks'
 import { innerUi } from '@/i18n/inner'
@@ -107,14 +126,50 @@ async function fertiliserProducts(locale: Locale) {
 export const fertiliserMetadata = (locale: Locale) =>
   meta(locale, toolsUi[locale].fert, fertiliserAlternates)
 
+/** Names of the EU portal's fertiliser series; others fall back to the series' own words. */
+const euFertiliserNames: Record<string, Record<Locale, string>> = {
+  urea: { ro: 'Uree', en: 'Urea' },
+  dap: { ro: 'DAP', en: 'DAP' },
+  'calcium-ammonium-nitrate-can-27': {
+    ro: 'Nitrocalcar (CAN 27)',
+    en: 'Calcium ammonium nitrate (CAN 27)',
+  },
+  'npk-15-15-15': { ro: 'NPK 15-15-15', en: 'NPK 15-15-15' },
+}
+
+/** The EU portal's latest monthly fertiliser prices: Romania and the EU average, per product. */
+async function euFertiliser() {
+  const points = (await listMarketPoints(yearAgo())).filter((p) => p.source === 'eu-fertiliser')
+  const latest = new Map<string, { ro?: number; eu?: number; period: string; unit: string }>()
+  for (const p of points) {
+    const row = latest.get(p.series)
+    if (row && row.period > p.period) continue
+    const next = row && row.period === p.period ? row : { period: p.period, unit: p.unit }
+    if (p.market === 'Romania') next.ro = p.price
+    if (p.market === 'EU') next.eu = p.price
+    latest.set(p.series, next)
+  }
+  return [...latest].map(([series, r]) => ({ series, ...r }))
+}
+
 export async function FertiliserPricesPage({ locale }: { locale: Locale }) {
   const t = toolsUi[locale].fert
   const p = pricesUi[locale]
   const url = fertiliserPricesPath(locale)
-  const groups = await fertiliserProducts(locale)
+  const [groups, views, rates, eu] = await Promise.all([
+    showOwnPrices ? fertiliserProducts(locale) : Promise.resolve([]),
+    marketViews(['urea', 'dap', 'tsp', 'potash'], locale),
+    latestRates(),
+    euFertiliser(),
+  ])
   const all = groups.flatMap((g) => g.products)
-  const updated = all
-    .map((x) => x.updatedAt)
+  const euSource = marketSources['eu-fertiliser']
+  const updated = [
+    ...all.map((x) => x.updatedAt),
+    latestOf(views)?.toISOString(),
+    ...eu.map((r) => r.period),
+  ]
+    .filter((d): d is string => !!d)
     .sort()
     .pop()
   const crumbs = [
@@ -135,13 +190,25 @@ export async function FertiliserPricesPage({ locale }: { locale: Locale }) {
           breadcrumbs(locale, ui[locale].home, crumbs),
           dataset({
             url,
-            name: t.dataset,
-            description: t.datasetDescription,
+            name: t.seoTitle,
+            description: t.description,
             locale,
+            temporalCoverage: coverageOf(views),
             dateModified: updated,
-            variables: all.map((x) => x.name),
-            sources: [{ name: 'Agrinvest', url: localePath(sections.shop[locale], locale) }],
+            variables: [
+              ...views.map((v) => `${v.name} (${unitOf(v.m)})`),
+              ...eu.map((r) => euFertiliserNames[r.series]?.[locale] ?? seriesLabel(r.series)),
+              ...all.map((x) => x.name),
+            ],
+            sources: [
+              ...sourcesOf(views).map((s) => ({ name: s.name, url: s.url, license: s.licenceUrl })),
+              ...(eu.length ? [{ name: euSource.name, url: euSource.url, license: CC_BY }] : []),
+              ...(all.length
+                ? [{ name: 'Agrinvest', url: localePath(sections.shop[locale], locale) }]
+                : []),
+            ],
           }),
+          faqPage(t.faq.map((f) => ({ question: f.q, answer: f.a }))),
         ]}
       />
       <PageTitle
@@ -151,90 +218,178 @@ export async function FertiliserPricesPage({ locale }: { locale: Locale }) {
         updatedAt={updated}
         crumbs={crumbs}
         kicker={p.section}
+        actions={
+          <Button href={localePath(sections.shop[locale], locale)} variant="secondary">
+            {marketsUi[locale].ui.shopFertilisers}
+          </Button>
+        }
       />
-      <div className="mx-auto mt-12 grid max-w-page gap-12 px-4 md:mt-16 md:px-8">
-        {groups.length === 0 && <p className="text-body text-muted">{t.empty}</p>}
-        {groups.map((g) => (
-          <section key={g.id} aria-labelledby={`grupa-${g.id}`} className="grid gap-4">
-            <h2 id={`grupa-${g.id}`} className="text-h3 font-semibold">
-              <Link href={g.href} className="text-ink">
-                {g.name}
-              </Link>
-            </h2>
-            <div className="overflow-hidden rounded-lg bg-raised shadow-soft ring-1 ring-line">
-              <table className="w-full border-collapse text-left">
-                <caption className="sr-only">
-                  {t.title}: {g.name}
-                </caption>
+      <div className="mx-auto mt-12 grid max-w-page gap-16 px-4 md:mt-16 md:px-8">
+        {views.length > 0 && (
+          <section aria-labelledby="piata-mondiala" className="grid gap-5">
+            <SectionHeading id="piata-mondiala" title={t.worldTitle} lead={t.worldLead} />
+            <MarketBlock views={views} locale={locale} rates={rates} headingLevel={3} />
+          </section>
+        )}
+        {eu.length > 0 && (
+          <section aria-labelledby="piata-ue" className="grid gap-5">
+            <SectionHeading id="piata-ue" title={t.euTitle} lead={t.euLead} />
+            <div className="overflow-x-auto rounded-lg bg-raised shadow-soft ring-1 ring-line">
+              <table className="w-full border-collapse text-left text-small">
+                <caption className="sr-only">{t.euTitle}</caption>
                 <thead>
-                  <tr className="bg-surface text-small text-muted">
-                    <th scope="col" className="py-3 pr-3 pl-4 font-medium md:pl-6">
-                      {t.product}
+                  <tr className="bg-surface text-muted">
+                    <th scope="col" className="py-2.5 pr-3 pl-4 font-medium">
+                      {t.euProduct}
                     </th>
-                    <th scope="col" className="hidden px-3 py-3 font-medium sm:table-cell">
-                      {t.pack}
+                    <th scope="col" className="px-3 py-2.5 text-right font-medium">
+                      {t.euRomania}
                     </th>
-                    <th scope="col" className="px-3 py-3 text-right font-medium">
-                      {t.price}
+                    <th scope="col" className="px-3 py-2.5 text-right font-medium">
+                      {t.euAverage}
                     </th>
-                    <th
-                      scope="col"
-                      className="hidden py-3 pr-4 pl-3 text-right font-medium md:table-cell md:pr-6"
-                    >
-                      {t.perUnit}
+                    <th scope="col" className="py-2.5 pr-4 pl-3 font-medium">
+                      {t.euMonth}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {g.products.flatMap((x) => {
-                    const variants = x.variants.length ? x.variants : [null]
-                    return variants.map((v, i) => (
-                      <tr key={`${x.id}-${v?.sku ?? i}`} className="border-t border-line align-top">
-                        <th scope="row" className="py-3 pr-3 pl-4 font-semibold md:pl-6">
-                          {i === 0 ? (
-                            <Link
-                              href={productPath(x.category.slug, x.slug, locale)}
-                              className="text-ink"
-                            >
-                              {x.name}
-                            </Link>
-                          ) : (
-                            <span className="sr-only">{x.name}</span>
-                          )}
-                          {v && (
-                            <span className="block text-caption font-normal text-muted sm:hidden">
-                              {packLabel(v, locale)}
-                            </span>
-                          )}
-                        </th>
-                        <td className="hidden px-3 py-3 text-small text-muted sm:table-cell">
-                          {v ? packLabel(v, locale) : ''}
-                        </td>
-                        <td className="px-3 py-3 text-right whitespace-nowrap tabular-nums">
-                          {v?.price != null ? (
-                            <>
-                              {formatNumber(v.price, locale)} lei{' '}
-                              <PriceMark product={x} locale={locale} />
-                            </>
-                          ) : (
-                            <span className="text-small text-muted">{t.noPrice}</span>
-                          )}
-                        </td>
-                        <td className="hidden py-3 pr-4 pl-3 text-right text-small whitespace-nowrap text-muted tabular-nums md:table-cell md:pr-6">
-                          {v ? (unitPriceLabel(v, locale) ?? '') : ''}
-                        </td>
-                      </tr>
-                    ))
-                  })}
+                  {eu.map((r) => (
+                    <tr key={r.series} className="border-t border-line">
+                      <th scope="row" className="py-2 pr-3 pl-4 font-medium">
+                        {euFertiliserNames[r.series]?.[locale] ?? seriesLabel(r.series)}
+                      </th>
+                      <td className="px-3 py-2 text-right whitespace-nowrap tabular-nums">
+                        {r.ro != null ? `${formatNumber(r.ro, locale, 0)} €/${r.unit}` : '–'}
+                      </td>
+                      <td className="px-3 py-2 text-right whitespace-nowrap tabular-nums">
+                        {r.eu != null ? `${formatNumber(r.eu, locale, 0)} €/${r.unit}` : '–'}
+                      </td>
+                      <td className="py-2 pr-4 pl-3 whitespace-nowrap text-muted">
+                        {new Intl.DateTimeFormat(locale === 'ro' ? 'ro-RO' : 'en-GB', {
+                          month: 'short',
+                          year: 'numeric',
+                          timeZone: 'UTC',
+                        }).format(new Date(r.period))}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
+            <p className="text-caption text-muted">
+              <a href={euSource.url} rel="noopener" className="underline underline-offset-2">
+                {euSource.attribution[locale]}
+              </a>{' '}
+              ·{' '}
+              <a href={CC_BY} rel="license noopener" className="underline underline-offset-2">
+                CC BY 4.0
+              </a>
+            </p>
           </section>
+        )}
+        {views.length === 0 && eu.length === 0 && groups.length === 0 && (
+          <p className="text-body text-muted">{marketsUi[locale].ui.noData}</p>
+        )}
+        <MarketAbout {...t.about} />
+        <MarketHistory views={views} locale={locale} />
+        {/* The shop's own price table only while Agrinvest's prices are public (Phase 7f). */}
+        {groups.map((g) => (
+          <ShopFertiliserTable key={g.id} group={g} locale={locale} />
         ))}
-        <p className="max-w-text text-small text-muted">{t.note}</p>
+        {groups.length > 0 && <p className="max-w-text text-small text-muted">{t.note}</p>}
+        <MarketFaq items={t.faq} locale={locale} />
+        <RelatedMarkets locale={locale} current={url} />
       </div>
       <ToolLinks locale={locale} current={url} />
     </SiteShell>
+  )
+}
+
+function ShopFertiliserTable({
+  group: g,
+  locale,
+}: {
+  group: Awaited<ReturnType<typeof fertiliserProducts>>[number]
+  locale: Locale
+}) {
+  const t = toolsUi[locale].fert
+  return (
+    <section key={g.id} aria-labelledby={`grupa-${g.id}`} className="grid gap-4">
+      <h2 id={`grupa-${g.id}`} className="text-h3 font-semibold">
+        <Link href={g.href} className="text-ink">
+          {g.name}
+        </Link>
+      </h2>
+      <div className="overflow-hidden rounded-lg bg-raised shadow-soft ring-1 ring-line">
+        <table className="w-full border-collapse text-left">
+          <caption className="sr-only">
+            {t.title}: {g.name}
+          </caption>
+          <thead>
+            <tr className="bg-surface text-small text-muted">
+              <th scope="col" className="py-3 pr-3 pl-4 font-medium md:pl-6">
+                {t.product}
+              </th>
+              <th scope="col" className="hidden px-3 py-3 font-medium sm:table-cell">
+                {t.pack}
+              </th>
+              <th scope="col" className="px-3 py-3 text-right font-medium">
+                {t.price}
+              </th>
+              <th
+                scope="col"
+                className="hidden py-3 pr-4 pl-3 text-right font-medium md:table-cell md:pr-6"
+              >
+                {t.perUnit}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {g.products.flatMap((x) => {
+              const variants = x.variants.length ? x.variants : [null]
+              return variants.map((v, i) => (
+                <tr key={`${x.id}-${v?.sku ?? i}`} className="border-t border-line align-top">
+                  <th scope="row" className="py-3 pr-3 pl-4 font-semibold md:pl-6">
+                    {i === 0 ? (
+                      <Link
+                        href={productPath(x.category.slug, x.slug, locale)}
+                        className="text-ink"
+                      >
+                        {x.name}
+                      </Link>
+                    ) : (
+                      <span className="sr-only">{x.name}</span>
+                    )}
+                    {v && (
+                      <span className="block text-caption font-normal text-muted sm:hidden">
+                        {packLabel(v, locale)}
+                      </span>
+                    )}
+                  </th>
+                  <td className="hidden px-3 py-3 text-small text-muted sm:table-cell">
+                    {v ? packLabel(v, locale) : ''}
+                  </td>
+                  <td className="px-3 py-3 text-right whitespace-nowrap tabular-nums">
+                    {v?.price != null ? (
+                      <>
+                        {formatNumber(v.price, locale)} lei{' '}
+                        <PriceMark product={x} locale={locale} />
+                      </>
+                    ) : (
+                      <span className="text-small text-muted">{t.noPrice}</span>
+                    )}
+                  </td>
+                  <td className="hidden py-3 pr-4 pl-3 text-right text-small whitespace-nowrap text-muted tabular-nums md:table-cell md:pr-6">
+                    {v ? (unitPriceLabel(v, locale) ?? '') : ''}
+                  </td>
+                </tr>
+              ))
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
   )
 }
 
@@ -295,35 +450,38 @@ export async function DieselPage({ locale }: { locale: Locale }) {
         kicker={pricesUi[locale].section}
       />
       <div className="mx-auto mt-12 grid max-w-page gap-16 px-4 md:mt-16 md:px-8">
-        <section aria-labelledby="pret-motorina" className="grid gap-5">
-          <SectionHeading id="pret-motorina" title={t.ownTitle} lead={t.ownLead} />
-          {own ? (
-            <div className="grid max-w-text gap-2 rounded-lg bg-raised p-6 shadow-soft ring-1 ring-line">
-              <p className="text-figure font-semibold tabular-nums">
-                {formatNumber(own.price, locale)}{' '}
-                <span className="text-body font-normal text-muted">lei/l, {t.vat[own.vat]}</span>
-              </p>
-              <p className="text-small text-muted">
-                {t.validFrom} {formatDate(new Date(own.validFrom), locale)}
-              </p>
-              {own.minimumLitres != null && (
-                <p className="text-small text-muted">
-                  {t.minimum(formatNumber(own.minimumLitres, locale))}
+        {/* Agrinvest's own price only while its prices are public (Phase 7f switch). */}
+        {showOwnPrices && (
+          <section aria-labelledby="pret-motorina" className="grid gap-5">
+            <SectionHeading id="pret-motorina" title={t.ownTitle} lead={t.ownLead} />
+            {own ? (
+              <div className="grid max-w-text gap-2 rounded-lg bg-raised p-6 shadow-soft ring-1 ring-line">
+                <p className="text-figure font-semibold tabular-nums">
+                  {formatNumber(own.price, locale)}{' '}
+                  <span className="text-body font-normal text-muted">lei/l, {t.vat[own.vat]}</span>
                 </p>
-              )}
-              {own.counties.length > 0 && (
                 <p className="text-small text-muted">
-                  {t.counties}: {own.counties.join(', ')}
+                  {t.validFrom} {formatDate(new Date(own.validFrom), locale)}
                 </p>
-              )}
-              {own.note && <p className="text-small text-muted">{own.note}</p>}
-            </div>
-          ) : (
-            <Callout tone="note" title={t.onRequest}>
-              {t.onRequestBody}
-            </Callout>
-          )}
-        </section>
+                {own.minimumLitres != null && (
+                  <p className="text-small text-muted">
+                    {t.minimum(formatNumber(own.minimumLitres, locale))}
+                  </p>
+                )}
+                {own.counties.length > 0 && (
+                  <p className="text-small text-muted">
+                    {t.counties}: {own.counties.join(', ')}
+                  </p>
+                )}
+                {own.note && <p className="text-small text-muted">{own.note}</p>}
+              </div>
+            ) : (
+              <Callout tone="note" title={t.onRequest}>
+                {t.onRequestBody}
+              </Callout>
+            )}
+          </section>
+        )}
         <section aria-labelledby="pret-national" className="grid gap-5">
           <SectionHeading id="pret-national" title={t.nationalTitle} lead={t.nationalLead} />
           {last ? (
@@ -355,6 +513,11 @@ export async function DieselPage({ locale }: { locale: Locale }) {
             <a href={CC_BY} rel="license noopener" className="underline underline-offset-2">
               CC BY 4.0
             </a>
+          </p>
+          <p>
+            <Link href={marketPagePath('fuel', locale)} className="font-semibold text-accent">
+              {t.market}
+            </Link>
           </p>
         </section>
       </div>

@@ -5,9 +5,8 @@ import { notFound } from 'next/navigation'
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { FinanceLinks } from '@ds/patterns/Finance'
 import { LineChart } from '@ds/patterns/LineChart'
-import { SubscribeFormLazy } from '@ds/patterns/Lazy'
 import { CropBadge } from '@ds/patterns/parts'
-import { Callout, SectionHeading } from '@ds/patterns/Sections'
+import { SectionHeading } from '@ds/patterns/Sections'
 import { GrainPrices } from '@ds/patterns/widgets/GrainPrices'
 import type { WidgetState } from '@ds/patterns/widgets/types'
 import { Badge } from '@ds/primitives/Badge'
@@ -15,10 +14,10 @@ import { Button } from '@ds/primitives/Button'
 import { JsonLd } from '@/components/JsonLd'
 import { ToolLinks } from '@/components/ToolLinks'
 import { PageTitle } from '@/components/PageParts'
-import { LeadFormBlock } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
+import { marketsUi } from '@/i18n/markets'
 import { pricesUi } from '@/i18n/prices'
 import {
   cropPath,
@@ -27,35 +26,49 @@ import {
   marketPath,
   netPricePath,
   pricesPath,
-  sections,
 } from '@/i18n/routes'
-import { fixedUrl, ui } from '@/i18n/ui'
+import { ui } from '@/i18n/ui'
 import { financeLinks } from '@/lib/content/finance'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listCrops } from '@/lib/content/locations'
 import { listMarketNotes } from '@/lib/content/market'
 import type { Alternates } from '@/lib/content/pages'
 import { formatDate, formatNumber } from '@/lib/format'
+import { latestRates } from '@/lib/markets/load'
+import { cropMarkets } from '@/lib/markets/registry'
 import { seriesLabel, type SeriesLine } from '@/lib/prices/grain'
 import { grainItems, grainOverview, type CropOverview } from '@/lib/prices/overview'
-import { breadcrumbs, dataset, webPage } from '@/lib/schema'
+import { showOwnPrices } from '@/lib/prices/visibility'
+import { breadcrumbs, dataset, faqPage, webPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
 import { marketSources } from '@/lib/sources'
-import { subscribe } from '@/lib/subscriptions/actions'
+
+import {
+  coverageOf,
+  latestOf,
+  MarketBlock,
+  MarketFaq,
+  MarketHistory,
+  MarketHub,
+  marketViews,
+  pricesHubMetadata,
+  RelatedMarkets,
+  sourcesOf,
+  unitOf,
+} from './MarketPages'
 
 /**
- * Grain prices (Phase 5.2): the hub `/preturi` (`/en/prices`) and one page per grain crop,
- * `/preturi/{crop}` (`/en/prices/{crop}`). Agrinvest's price shows only from published
- * `BuyPrices` rows, otherwise "price on request"; the market series are the EU's weekly prices
- * for Romania, each with its source and date.
+ * Grain prices: the hub `/preturi` (`/en/prices`, now the Phase 7f market dashboard in
+ * `MarketPages`) and one page per grain crop, `/preturi/{crop}` (`/en/prices/{crop}`): the EU's
+ * weekly prices for Romania and the crop's world benchmark (World Bank, monthly). Agrinvest's
+ * own prices are hidden while `showOwnPrices` is off (`@/lib/prices/visibility`).
  */
 
 export const CC_BY = 'https://creativecommons.org/licenses/by/4.0/'
 const eu = marketSources['eu-agrifood']
 
-export const hubAlternates: Alternates = { ro: pricesPath('ro'), en: pricesPath('en') }
-
-const unitOf = (line: SeriesLine) => `${line.currency === 'EUR' ? '€' : line.currency}/${line.unit}`
+const unitOfLine = (line: SeriesLine) =>
+  `${line.currency === 'EUR' ? '€' : line.currency}/${line.unit}`
 
 /** `2025-11-10/2026-11-09` from the lines' first and last points. */
 function coverage(lines: SeriesLine[]) {
@@ -128,62 +141,44 @@ export async function grainPricesProps(locale: Locale, title?: string) {
       state,
       items,
       labels: widgetLabels(locale),
+      own: showOwnPrices,
       source: latest ? { name: eu.name, url: eu.url, date: latest } : undefined,
       link: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
     },
   }
 }
 
-export async function pricesHubMetadata(locale: Locale): Promise<Metadata> {
-  const t = pricesUi[locale].hub
-  const seo = await getSeoDefaults(locale)
-  return buildMetadata({
-    locale,
-    title: t.title,
-    seoTitle: t.seoTitle,
-    siteName: seo.siteName,
-    description: t.description,
-    image: seo.ogImage,
-    alternates: hubAlternates,
-  })
-}
+export { pricesHubMetadata }
 
+/**
+ * The hub (Phase 7f): the market dashboard, with the EU's weekly grain prices for Romania after
+ * the world grain tiles (when the EU portal has data), then the market note and finance.
+ */
 export async function PricesHubPage({ locale }: { locale: Locale }) {
   const p = pricesUi[locale]
   const t = p.hub
-  const url = pricesPath(locale)
+  const m = marketsUi[locale].hub
   const [{ overview, props }, notes, finance] = await Promise.all([
-    grainPricesProps(locale, t.tableTitle),
+    grainPricesProps(locale, m.grainLocal),
     listMarketNotes(locale),
     financeItems(locale),
   ])
   const note = notes[0]
-  const crumbs = [{ name: p.section, url }]
-  const lines = overview.flatMap((c) => c.lines)
+  const hasEu = overview.some((c) => c.lines.length)
   return (
-    <SiteShell locale={locale} alternates={hubAlternates}>
-      <JsonLd
-        data={[
-          webPage({ url, name: t.seoTitle, description: t.description, locale }),
-          breadcrumbs(locale, ui[locale].home, crumbs),
-          dataset({
-            url,
-            name: p.dataset.hubName,
-            description: p.dataset.hubDescription,
-            locale,
-            temporalCoverage: coverage(lines),
-            variables: overview.map((c) => c.name),
-            sources: [{ name: eu.name, url: eu.url, license: CC_BY }],
-          }),
-        ]}
-      />
-      <PageTitle locale={locale} title={t.title} summary={t.summary} crumbs={crumbs} />
-      <div className="mx-auto mt-12 grid max-w-page gap-10 px-4 md:mt-16 md:px-8 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <GrainPrices {...props} level={2} />
-        </div>
-        <div className="grid content-start gap-6 lg:col-span-5">
-          <section className="grid gap-3 rounded-lg bg-surface p-5 ring-1 ring-line">
+    <MarketHub
+      locale={locale}
+      afterGrain={
+        hasEu ? (
+          <div className="grid gap-3 lg:max-w-3xl">
+            <GrainPrices {...props} level={3} />
+            <p className="text-caption text-muted">{m.grainLocalLead}</p>
+          </div>
+        ) : null
+      }
+      after={
+        <>
+          <section className="grid gap-3 rounded-lg bg-surface p-5 ring-1 ring-line md:max-w-3xl">
             <p className="text-small font-medium text-accent">{t.noteKicker}</p>
             {note ? (
               <>
@@ -204,17 +199,10 @@ export async function PricesHubPage({ locale }: { locale: Locale }) {
               {t.allNotes}
             </Link>
           </section>
-        </div>
-      </div>
-      <div className="mt-16 grid gap-16 md:mt-24">
-        <section className="mx-auto w-full max-w-page px-4 md:px-8">
-          <SectionHeading kicker={ui[locale].crops} title={p.crop.others} className="mb-8" />
-          <CropLinks locale={locale} overview={overview} />
-        </section>
-        <FinanceLinks kicker={p.crop.financeKicker} title={p.crop.financeTitle} items={finance} />
-      </div>
-      <ToolLinks locale={locale} current={pricesPath(locale)} />
-    </SiteShell>
+          <FinanceLinks kicker={p.crop.financeKicker} title={p.crop.financeTitle} items={finance} />
+        </>
+      }
+    />
   )
 }
 
@@ -288,15 +276,20 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
   const p = pricesUi[locale]
   const t = p.crop
   const u = ui[locale]
-  const finance = await financeItems(locale)
+  const [finance, views, rates] = await Promise.all([
+    financeItems(locale),
+    marketViews(cropMarkets[crop.key], locale),
+    latestRates(),
+  ])
   const crumbs = [
     { name: p.section, url: pricesPath(locale) },
     { name: crop.name, url: crop.href },
   ]
   const title = t.title(lower)
   const lastDate = crop.latest?.date
-  const leadPath = `${sections.prices[locale]}/${crop.slug}`
-  const updated = crop.range?.date ?? lastDate
+  const world = latestOf(views)
+  const updated = [lastDate, world].filter((d): d is Date => !!d).sort((a, b) => +b - +a)[0]
+  const faq = t.faq(lower).filter((f) => views.length || !f.world)
   return (
     <SiteShell locale={locale} alternates={alternates}>
       <JsonLd
@@ -314,17 +307,18 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
             name: p.dataset.name(lower),
             description: p.dataset.description(lower),
             locale,
-            temporalCoverage: coverage(crop.lines),
+            temporalCoverage: coverage(crop.lines) ?? coverageOf(views),
             dateModified: updated?.toISOString(),
             variables: [
-              p.hub.agrinvest,
               ...crop.lines.map((l) => `${seriesLabel(l.series)} (${l.market})`),
+              ...views.map((v) => `${v.name} (${unitOf(v.m)})`),
             ],
             sources: [
-              { name: 'Agrinvest', url: crop.href },
               ...(crop.lines.length ? [{ name: eu.name, url: eu.url, license: CC_BY }] : []),
+              ...sourcesOf(views).map((s) => ({ name: s.name, url: s.url, license: s.licenceUrl })),
             ],
           }),
+          faqPage(faq.map((f) => ({ question: f.q, answer: f.a }))),
         ]}
       />
       <PageTitle
@@ -335,29 +329,13 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
         crumbs={crumbs}
         kicker={p.section}
         actions={
-          <>
-            <Button href="#cerere" icon={<ArrowRightIcon />}>
-              {t.askPrice}
-            </Button>
-            <Button href="#alerta" variant="secondary">
-              {p.alert.submit}
-            </Button>
-          </>
+          <Button href={cropPath(crop.slug, locale)} icon={<ArrowRightIcon />}>
+            {marketsUi[locale].ui.sellGrain(lower)}
+          </Button>
         }
       />
 
       <div className="mx-auto mt-12 grid max-w-page gap-16 px-4 md:mt-16 md:px-8">
-        <section aria-labelledby="pret-agrinvest" className="grid gap-5">
-          <SectionHeading id="pret-agrinvest" title={t.agrinvestTitle} lead={t.agrinvestLead} />
-          {crop.bases.length ? (
-            <BaseTable locale={locale} rows={crop.bases} />
-          ) : (
-            <Callout tone="note" title={t.onRequest}>
-              {t.onRequestBody}
-            </Callout>
-          )}
-        </section>
-
         <section aria-labelledby="piata-ue" className="grid gap-5">
           <SectionHeading id="piata-ue" title={t.marketTitle} lead={t.marketLead} />
           {crop.state === 'stale' && lastDate && (
@@ -373,7 +351,7 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
                 <p className="text-body">
                   {t.latest}:{' '}
                   <strong className="tabular-nums">
-                    {formatNumber(crop.latest.value, locale)} {unitOf(crop.lines[0])}
+                    {formatNumber(crop.latest.value, locale)} {unitOfLine(crop.lines[0])}
                   </strong>{' '}
                   ({formatDate(crop.latest.date, locale)}), {crop.latest.change > 0 ? '+' : ''}
                   {formatNumber(crop.latest.change, locale)} {t.change}.
@@ -381,7 +359,7 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
               )}
               <LineChart
                 title={t.marketTitle}
-                unit={unitOf(crop.lines[0])}
+                unit={unitOfLine(crop.lines[0])}
                 locale={locale}
                 labels={t.chart}
                 series={crop.lines.map((l, i) => ({
@@ -390,112 +368,47 @@ export async function CropPricePage({ locale, slug }: { locale: Locale; slug: st
                   tone: (['accent', 'info', 'muted'] as const)[i],
                 }))}
               />
+              <p className="text-caption text-muted">
+                <a href={eu.url} rel="noopener" className="underline underline-offset-2">
+                  {eu.attribution[locale]}
+                </a>
+                {lastDate && ` · ${formatDate(lastDate, locale)}`} ·{' '}
+                <a href={CC_BY} rel="license noopener" className="underline underline-offset-2">
+                  CC BY 4.0
+                </a>
+              </p>
             </>
           ) : (
             <p className="max-w-text text-body text-muted">{t.marketEmpty}</p>
           )}
-          <p className="text-caption text-muted">
-            <a href={eu.url} rel="noopener" className="underline underline-offset-2">
-              {eu.attribution[locale]}
-            </a>
-            {lastDate && ` · ${formatDate(lastDate, locale)}`} ·{' '}
-            <a href={CC_BY} rel="license noopener" className="underline underline-offset-2">
-              CC BY 4.0
-            </a>
-          </p>
         </section>
+
+        {views.length > 0 && (
+          <section aria-labelledby="piata-mondiala" className="grid gap-5">
+            <SectionHeading id="piata-mondiala" title={t.worldTitle} lead={t.worldLead} />
+            <MarketBlock views={views} locale={locale} rates={rates} headingLevel={3} />
+          </section>
+        )}
+        <MarketHistory views={views} locale={locale} />
+        <MarketFaq items={faq} locale={locale} />
       </div>
 
       <div className="mt-16 grid gap-20 md:mt-24 md:gap-28">
-        <LeadFormBlock
-          block={{
-            leadType: 'vanzare-cereale',
-            extraFields: ['county', 'crop', 'base'],
-            heading: t.sellTitle(lower),
-            body: t.sellBody,
-          }}
-          preset={{ crop: String(crop.id) }}
-          locale={locale}
-          path={leadPath}
-        />
-        <section className="mx-auto w-full max-w-page px-4 md:px-8">
-          <div
-            id="alerta"
-            className="mx-auto max-w-3xl scroll-mt-24 rounded-xl bg-raised p-6 shadow-raised ring-1 ring-line md:p-8"
-          >
-            <SubscribeFormLazy
-              locale={locale}
-              action={subscribe}
-              heading={t.alertTitle(lower)}
-              body={t.alertBody}
-              crop={String(crop.id)}
-              sourcePath={crop.href}
-              privacyHref={fixedUrl('privacy', locale)}
-              labels={p.alert}
-            />
-          </div>
-        </section>
         <FinanceLinks kicker={t.financeKicker} title={t.financeTitle} items={finance} />
-        <section className="mx-auto w-full max-w-page px-4 md:px-8">
-          <SectionHeading kicker={u.crops} title={t.others} className="mb-8" />
-          <CropLinks locale={locale} overview={overview} except={crop.id} />
-          <p className="mt-6 text-small">
-            <Link href={cropPath(crop.slug, locale)} className="font-semibold text-accent">
-              {t.cropPage(lower)}
-            </Link>
-          </p>
+        <section className="mx-auto grid w-full max-w-page gap-12 px-4 md:px-8">
+          <div>
+            <SectionHeading kicker={u.crops} title={t.others} className="mb-8" />
+            <CropLinks locale={locale} overview={overview} except={crop.id} />
+            <p className="mt-6 text-small">
+              <Link href={cropPath(crop.slug, locale)} className="font-semibold text-accent">
+                {t.cropPage(lower)}
+              </Link>
+            </p>
+          </div>
+          <RelatedMarkets locale={locale} current={crop.href} />
         </section>
       </div>
       <ToolLinks locale={locale} current={crop.href} />
     </SiteShell>
-  )
-}
-
-function BaseTable({ locale, rows }: { locale: Locale; rows: CropOverview['bases'] }) {
-  const t = pricesUi[locale].crop
-  return (
-    <div className="overflow-hidden rounded-lg bg-raised shadow-soft ring-1 ring-line">
-      <table className="w-full border-collapse text-left">
-        <caption className="sr-only">{t.agrinvestTitle}</caption>
-        <thead>
-          <tr className="bg-surface text-small text-muted">
-            <th scope="col" className="py-3 pr-3 pl-4 font-medium md:pl-6">
-              {t.base}
-            </th>
-            <th scope="col" className="px-3 py-3 text-right font-medium">
-              {t.price}
-            </th>
-            <th scope="col" className="hidden px-3 py-3 font-medium md:table-cell">
-              {t.basis}
-            </th>
-            <th scope="col" className="py-3 pr-4 pl-3 font-medium md:pr-6">
-              {t.validFrom}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.base?.id ?? 'all'} className="border-t border-line align-top">
-              <th scope="row" className="py-3 pr-3 pl-4 font-semibold md:pl-6">
-                {r.base?.name ?? t.allBases}
-                {r.note && (
-                  <span className="block text-caption font-normal text-muted">{r.note}</span>
-                )}
-              </th>
-              <td className="px-3 py-3 text-right font-semibold whitespace-nowrap tabular-nums">
-                {formatNumber(r.price, locale, 0)}{' '}
-                <span className="text-caption font-normal text-muted">lei/t</span>
-              </td>
-              <td className="hidden px-3 py-3 text-small text-muted md:table-cell">
-                {t.basisLabel[r.basis]}
-              </td>
-              <td className="py-3 pr-4 pl-3 text-small whitespace-nowrap text-muted md:pr-6">
-                {formatDate(new Date(r.validFrom), locale)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
   )
 }

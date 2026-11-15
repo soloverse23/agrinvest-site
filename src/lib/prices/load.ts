@@ -5,6 +5,7 @@ import { payloadClient } from '@/lib/content/payload'
 import { tags } from '@/lib/revalidate'
 
 import type { BuyPriceRow, MarketPoint } from './grain'
+import { showOwnPrices } from './visibility'
 
 /**
  * Cached reads for the price pages and widgets. Public reads only (`overrideAccess: false`),
@@ -15,6 +16,7 @@ import type { BuyPriceRow, MarketPoint } from './grain'
 /** Published Agrinvest buy prices, newest first, with the base's name in `locale`. */
 export const listBuyPrices = unstable_cache(
   async (locale: Locale): Promise<BuyPriceRow[]> => {
+    if (!showOwnPrices) return []
     const payload = await payloadClient()
     const { docs } = await payload.find({
       collection: 'buy-prices',
@@ -56,7 +58,13 @@ export const listMarketPoints = unstable_cache(
     const payload = await payloadClient()
     const { docs } = await payload.find({
       collection: 'market-prices',
-      where: { period: { greater_than_equal: since } },
+      // The Phase 5 weekly sources only: the daily series (Brent, ECB) live in `@/lib/markets`.
+      where: {
+        and: [
+          { period: { greater_than_equal: since } },
+          { source: { in: ['eu-agrifood', 'eu-fertiliser', 'eu-oil-bulletin'] } },
+        ],
+      },
       sort: 'period',
       limit: 5000,
       pagination: false,

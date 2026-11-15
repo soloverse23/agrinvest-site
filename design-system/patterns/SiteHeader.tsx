@@ -46,7 +46,9 @@ export type SiteHeaderProps = {
   alternates?: Partial<Record<Locale, string>>
   /** Optional strip above the header with today's prices and the phone number. */
   ticker?: {
-    crops: {
+    /** Ready-made quotes (Phase 7f market data); when set, `crops` and `fuel` are ignored. */
+    quotes?: Quote[]
+    crops?: {
       crop: CropKey
       name: string
       price: number
@@ -87,18 +89,20 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const overlay = tone === 'overlay'
   // Diesel sits after the first three crops, as it always has.
-  const quotes: Quote[] = ticker
-    ? ticker.crops.map((c) => ({
-        key: c.crop,
-        name: c.name,
-        href: c.href,
-        price: c.price,
-        unit: 'lei/t',
-        change: c.change,
-        points: c.points,
-      }))
-    : []
-  if (ticker?.fuel)
+  const quotes: Quote[] = ticker?.quotes
+    ? [...ticker.quotes]
+    : ticker?.crops
+      ? ticker.crops.map((c) => ({
+          key: c.crop,
+          name: c.name,
+          href: c.href,
+          price: c.price,
+          unit: 'lei/t',
+          change: c.change,
+          points: c.points,
+        }))
+      : []
+  if (ticker?.fuel && !ticker.quotes)
     quotes.splice(Math.min(3, quotes.length), 0, {
       key: 'diesel',
       ...ticker.fuel,

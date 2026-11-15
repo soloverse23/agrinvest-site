@@ -6,7 +6,8 @@
  * consent.
  */
 
-export type MarketSource = 'eu-agrifood' | 'eu-fertiliser' | 'eu-oil-bulletin'
+export type MarketSource =
+  'eu-agrifood' | 'eu-fertiliser' | 'eu-oil-bulletin' | 'eia-brent' | 'ecb' | 'world-bank'
 
 export type SourceInfo = {
   name: string
@@ -56,6 +57,41 @@ export const marketSources: Record<MarketSource, SourceInfo> = {
     },
     cadenceDays: 7,
   },
+  // Phase 7f (checked 2026-11-15). EIA data is U.S. public domain; FRED serves the same
+  // series as CSV without a key and asks to be cited with the original source.
+  'eia-brent': {
+    name: 'U.S. Energy Information Administration, Brent spot price (via FRED)',
+    url: 'https://fred.stlouisfed.org/series/DCOILBRENTEU',
+    licence: 'Public domain (U.S. EIA)',
+    licenceUrl: 'https://www.eia.gov/about/copyrights_reuse.php',
+    attribution: {
+      ro: 'Sursa: U.S. Energy Information Administration, prin FRED (Federal Reserve Bank of St. Louis)',
+      en: 'Source: U.S. Energy Information Administration, via FRED (Federal Reserve Bank of St. Louis)',
+    },
+    cadenceDays: 7,
+  },
+  ecb: {
+    name: 'European Central Bank, euro foreign exchange reference rates',
+    url: 'https://data.ecb.europa.eu/data/datasets/EXR',
+    licence: 'Reuse permitted with the source cited (ECB)',
+    licenceUrl: 'https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html',
+    attribution: {
+      ro: 'Sursa: Banca Centrală Europeană, cursuri de referință',
+      en: 'Source: European Central Bank, euro reference rates',
+    },
+    cadenceDays: 4,
+  },
+  'world-bank': {
+    name: 'World Bank, Commodity Price Data (The Pink Sheet)',
+    url: 'https://www.worldbank.org/en/research/commodity-markets',
+    licence: 'CC BY 4.0',
+    licenceUrl: 'https://creativecommons.org/licenses/by/4.0/',
+    attribution: {
+      ro: 'Sursa: Banca Mondială, Commodity Price Data (Pink Sheet)',
+      en: 'Source: World Bank, Commodity Price Data (Pink Sheet)',
+    },
+    cadenceDays: 45,
+  },
 }
 
 export const marketSourceKeys = Object.keys(marketSources) as MarketSource[]
@@ -69,6 +105,15 @@ export const endpoints = {
   /** "Price developments 2005 onwards" (about 4.5 MB): used once to fill the diesel history. */
   oilBulletinHistory:
     'https://energy.ec.europa.eu/document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en',
+  /** Daily Brent as CSV, `&cosd=YYYY-MM-DD` for the first day. */
+  fredBrent: 'https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU',
+  /** EUR/RON and EUR/USD, `&startPeriod=YYYY-MM-DD`. */
+  ecbRates: 'https://data-api.ecb.europa.eu/service/data/EXR/D.RON+USD.EUR.SP00.A?format=csvdata',
+  /**
+   * The World Bank's commodity page. The monthly workbook's address changes with each release,
+   * so the job reads the current link (`CMO-Historical-Data-Monthly.xlsx`) from this page.
+   */
+  worldBankPage: 'https://www.worldbank.org/en/research/commodity-markets',
 } as const
 
 export type NewsSource = 'revista-ferma' | 'agrointel'

@@ -27,6 +27,7 @@ export default defineConfig([
   globalIgnores([
     'src/migrations/',
     '.next/',
+    '.next-*/',
     'storybook-static/',
     'data/',
     'src/payload-types.ts',

@@ -3,11 +3,13 @@ import { unstable_cache } from 'next/cache'
 import type { Locale } from '@/i18n/config'
 import { payloadClient } from '@/lib/content/payload'
 import { listMarketPoints, yearAgo } from '@/lib/prices/load'
+import { showOwnPrices } from '@/lib/prices/visibility'
 import { tags } from '@/lib/revalidate'
 
 /** Agrinvest's latest published diesel price, with its delivery counties; null → on request. */
 export const getDieselPrice = unstable_cache(
   async (locale: Locale) => {
+    if (!showOwnPrices) return null
     const payload = await payloadClient()
     const { docs } = await payload.find({
       collection: 'diesel-prices',

@@ -31,11 +31,31 @@ export const pricesUi = {
     },
     crop: {
       title: (crop: string) => `Preț ${crop} azi`,
-      seoTitle: (crop: string) => `Preț ${crop} azi: Agrinvest pe baze și piața UE`,
+      seoTitle: (crop: string) => `Preț ${crop} azi: piața UE și cotația mondială`,
       description: (crop: string) =>
-        `Prețul cu care Agrinvest cumpără ${crop} în fiecare bază, când e publicat, și evoluția pe 52 de săptămâni a prețului UE pentru România.`,
+        `Prețul la ${crop} în România, din datele săptămânale ale Comisiei Europene, și cotația mondială de referință, cu grafic, istoric și surse.`,
       summary: (crop: string) =>
-        `Cât plătește Agrinvest pentru ${crop} la fiecare bază și cum s-a mișcat piața în ultimul an.`,
+        `Cum s-a mișcat prețul la ${crop} în România și pe piața mondială. Fiecare cifră are sursa și data ei.`,
+      worldTitle: 'Piața mondială',
+      worldLead:
+        'Cotația lunară de referință publicată de Banca Mondială, în dolari pe tonă. Arată direcția pieței mondiale; nu e un preț din România.',
+      faq: (crop: string) => [
+        {
+          q: `Care e prețul la ${crop} azi în România?`,
+          a: 'Prețurile UE de pe această pagină sunt cele raportate săptămânal de România Comisiei Europene: la export prin Constanța (FOB) și franco depozit. Prețul pe care îl primești depinde de calitate, cantitate și locul de livrare. Agrinvest îți spune prețul la cerere.',
+          world: false,
+        },
+        {
+          q: 'De ce arătați și o cotație din afara României?',
+          a: 'Cotația mondială publicată de Banca Mondială arată încotro merge piața internațională, care trage după ea și prețurile din România. Nu este un preț pe care îl poți obține în România.',
+          world: true,
+        },
+        {
+          q: 'Cât de des se actualizează prețurile?',
+          a: 'Prețurile UE pentru România apar o dată pe săptămână. Cotația mondială a Băncii Mondiale apare o dată pe lună, la începutul lunii următoare.',
+          world: false,
+        },
+      ],
       agrinvestTitle: 'Prețul Agrinvest pe baze',
       agrinvestLead: 'Lei pe tonă, fără TVA. Prețul ține de calitatea mărfii la recepție.',
       base: 'Baza',
@@ -50,7 +70,7 @@ export const pricesUi = {
       askPrice: 'Cere prețul',
       marketTitle: 'Piața UE pentru România, 52 de săptămâni',
       marketLead:
-        'Prețurile săptămânale raportate de România Comisiei Europene, în euro pe tonă. Arată direcția pieței; nu sunt prețul Agrinvest.',
+        'Prețurile săptămânale raportate de România Comisiei Europene, în euro pe tonă: export prin Constanța și franco depozit.',
       marketEmpty:
         'Nu avem încă prețuri UE pentru această cultură. Le arătăm aici imediat ce sursa le publică.',
       marketStale: (date: string) =>
@@ -163,9 +183,9 @@ export const pricesUi = {
       empty: 'Nu avem încă prețuri publicate. Sună-ne pentru prețul zilei.',
     },
     dataset: {
-      name: (crop: string) => `Prețuri ${crop}: Agrinvest și piața UE pentru România`,
+      name: (crop: string) => `Prețuri ${crop}: piața UE pentru România și cotația mondială`,
       description: (crop: string) =>
-        `Prețul de achiziție Agrinvest pentru ${crop} pe baze, în lei pe tonă fără TVA, și prețurile săptămânale raportate de România Comisiei Europene, în euro pe tonă.`,
+        `Prețurile săptămânale la ${crop} raportate de România Comisiei Europene, în euro pe tonă, și cotația mondială lunară a Băncii Mondiale, în dolari pe tonă.`,
       hubName: 'Prețuri cereale în România: Agrinvest și piața UE',
       hubDescription:
         'Prețurile de achiziție Agrinvest pe culturi și baze și prețurile săptămânale ale cerealelor raportate de România Comisiei Europene.',
@@ -196,11 +216,31 @@ export const pricesUi = {
     },
     crop: {
       title: (crop: string) => `${crop} price in Romania today`,
-      seoTitle: (crop: string) => `${crop} price in Romania: Agrinvest and the EU market`,
+      seoTitle: (crop: string) => `${crop} price in Romania today: EU and world markets`,
       description: (crop: string) =>
-        `What Agrinvest pays for ${crop.toLowerCase()} at each base, once published, and 52 weeks of the EU’s price for Romania.`,
+        `The ${crop.toLowerCase()} price in Romania from the European Commission’s weekly data, and the world benchmark, with a chart, history and the source of every figure.`,
       summary: (crop: string) =>
-        `What Agrinvest pays for ${crop.toLowerCase()} at each base, and how the market moved over the last year.`,
+        `How the ${crop.toLowerCase()} price moved in Romania and on the world market. Every figure carries its source and date.`,
+      worldTitle: 'World market',
+      worldLead:
+        'The monthly benchmark the World Bank publishes, in US dollars per tonne. It shows where the world market is going; it is not a Romanian price.',
+      faq: (crop: string) => [
+        {
+          q: `What is the ${crop.toLowerCase()} price in Romania today?`,
+          a: 'The EU prices on this page are the ones Romania reports weekly to the European Commission: export through Constanța (FOB) and ex-works. The price you get depends on quality, quantity and where you deliver. Agrinvest gives its price on request.',
+          world: false,
+        },
+        {
+          q: 'Why show a price from outside Romania?',
+          a: 'The World Bank’s world benchmark shows where the international market is going, and Romanian prices follow it. It is not a price you can get in Romania.',
+          world: true,
+        },
+        {
+          q: 'How often are the prices updated?',
+          a: 'The EU’s prices for Romania appear once a week. The World Bank’s benchmark appears once a month, early the following month.',
+          world: false,
+        },
+      ],
       agrinvestTitle: 'Agrinvest’s price by base',
       agrinvestLead: 'Lei per tonne, before VAT. The price depends on quality at reception.',
       base: 'Base',
@@ -215,7 +255,7 @@ export const pricesUi = {
       askPrice: 'Ask for the price',
       marketTitle: 'EU market for Romania, 52 weeks',
       marketLead:
-        'Weekly prices Romania reports to the European Commission, in euro per tonne. They show where the market is going; they are not Agrinvest’s price.',
+        'Weekly prices Romania reports to the European Commission, in euro per tonne: export through Constanța and ex-works.',
       marketEmpty:
         'There are no EU prices for this crop yet. They appear here as soon as the source publishes them.',
       marketStale: (date: string) =>
@@ -327,9 +367,9 @@ export const pricesUi = {
       empty: 'No prices are published yet. Call us for today’s price.',
     },
     dataset: {
-      name: (crop: string) => `${crop} prices: Agrinvest and the EU market for Romania`,
+      name: (crop: string) => `${crop} prices: the EU market for Romania and the world benchmark`,
       description: (crop: string) =>
-        `Agrinvest’s buying price for ${crop.toLowerCase()} by base, in lei per tonne before VAT, and the weekly prices Romania reports to the European Commission, in euro per tonne.`,
+        `The weekly ${crop.toLowerCase()} prices Romania reports to the European Commission, in euro per tonne, and the World Bank’s monthly world benchmark, in US dollars per tonne.`,
       hubName: 'Grain prices in Romania: Agrinvest and the EU market',
       hubDescription:
         'Agrinvest’s buying prices by crop and base, and the weekly grain prices Romania reports to the European Commission.',

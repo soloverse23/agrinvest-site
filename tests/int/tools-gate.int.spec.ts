@@ -26,6 +26,9 @@ describe('check:tools rules', () => {
     expect(soft.map((f) => f.message)).toEqual([
       'eu-agrifood: newest period 40 days old (limit 14)',
       'eu-fertiliser: no data',
+      'eia-brent: no data',
+      'ecb: no data',
+      'world-bank: no data',
     ])
     expect(soft.every((f) => f.level === 'warning')).toBe(true)
     expect(seriesFindings(latest, now, true).every((f) => f.level === 'error')).toBe(true)

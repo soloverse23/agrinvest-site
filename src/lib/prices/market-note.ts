@@ -7,6 +7,7 @@ import type { Locale } from '@/i18n/config'
 import { formatDate, formatNumber, formatSigned } from '@/lib/format'
 
 import { seriesLabel, type SeriesLine } from './grain'
+import { showOwnPrices } from './visibility'
 
 export type NoteCrop = {
   name: string
@@ -113,8 +114,13 @@ export function marketNoteDraft(week: Date, crops: NoteCrop[], locale: Locale): 
         )
         return `- ${head}${parts.length ? `, ${parts.join(', ')}` : ''}.`
       })
-    const own = c.agrinvest ? w.agrinvest(n(c.agrinvest.min), n(c.agrinvest.max)) : w.onRequest
-    return [`## ${c.name}`, items.join('\n'), own].join('\n\n')
+    // Agrinvest's line only while its prices are public (Phase 7f switch).
+    const own = !showOwnPrices
+      ? null
+      : c.agrinvest
+        ? w.agrinvest(n(c.agrinvest.min), n(c.agrinvest.max))
+        : w.onRequest
+    return [`## ${c.name}`, items.join('\n'), own].filter(Boolean).join('\n\n')
   })
   const day = week.toISOString().slice(0, 10)
   return {

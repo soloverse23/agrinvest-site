@@ -584,6 +584,14 @@ _Analytics_
 - Finance grouped by need (season · investments · special cases), with one path: Simulator → Cerere;
 - price and sell-grain pages given separate roles, with "Prețuri și vânzare" in the menu.
 
+## Phase 7e: Hourly news automation
+
+**Goal:** every hour, fetch agriculture news (Reuters headlines through Google News, licence-checked Romanian outlets, official sources), group stories about the same event, rank them with rules (no AI), and publish `/stiri` and a daily edition with references, with no staff step. Plan: `docs/phases/07e-news-automation.md`.
+
+## Phase 7f: Prices become market data
+
+**Goal:** `/preturi` becomes a market dashboard (Brent, fuel, EU gas, world grain and fertiliser benchmarks, EUR/RON and EUR/USD) with one indexable page per market and lazy TradingView charts on inner pages; Agrinvest's own prices are hidden behind one switch. Plan: `docs/phases/07f-market-prices.md`.
+
 ## Phase 8: Launch and migration
 
 **Goal:** switch over without losing any ranking or order.

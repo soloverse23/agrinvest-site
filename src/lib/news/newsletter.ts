@@ -1,5 +1,6 @@
 import type { Locale } from '@/i18n/config'
 import { formatDate, formatNumber } from '@/lib/format'
+import { showOwnPrices } from '@/lib/prices/visibility'
 
 export type IssueInput = {
   week: Date
@@ -33,11 +34,13 @@ const copy = {
     subject: (d: string) => `Agrinvest: piața săptămânii ${d}`,
     intro: 'Prețurile Agrinvest, nota de piață și știrile agricole ale săptămânii.',
     noPrices: 'Prețurile Agrinvest se dau la cerere: sună-ne sau trimite o cerere.',
+    market: 'Prețurile pieței, nota de piață și știrile agricole ale săptămânii.',
   },
   en: {
     subject: (d: string) => `Agrinvest: the market in the week of ${d}`,
     intro: "Agrinvest's prices, the market note and the week's farm news.",
     noPrices: "Agrinvest's prices are given on request: call us or send a request.",
+    market: "Market prices, the market note and the week's farm news.",
   },
 }
 
@@ -49,7 +52,10 @@ export function buildIssue(input: IssueInput): IssueContent {
   )
   return {
     subject: c.subject(formatDate(input.week, input.locale)),
-    intro: [c.intro, lines.length ? lines.join('\n') : c.noPrices].join('\n\n'),
+    // While Agrinvest's prices are hidden (Phase 7f) the issue does not mention them at all.
+    intro: showOwnPrices
+      ? [c.intro, lines.length ? lines.join('\n') : c.noPrices].join('\n\n')
+      : c.market,
     content: { note: input.note ?? null, prices: input.prices, headlines: input.headlines },
   }
 }

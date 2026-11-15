@@ -8,6 +8,7 @@ import {
   fertiliserPricesPath,
   newsPath,
   marketPath,
+  marketPagePath,
   netPricePath,
   pricesPath,
   toolsHubPath,
@@ -143,6 +144,10 @@ export const segments = {
       }),
       ...entries({ ro: netPricePath('ro'), en: netPricePath('en') }),
       ...entries({ ro: fertiliserPricesPath('ro'), en: fertiliserPricesPath('en') }),
+      // Phase 7f market pages.
+      ...(['brent', 'fuel', 'gas', 'fx'] as const).flatMap((id) =>
+        entries({ ro: marketPagePath(id, 'ro'), en: marketPagePath(id, 'en') }),
+      ),
       ...entries({ ro: dieselPath('ro'), en: dieselPath('en') }),
       ...entries({ ro: toolsHubPath('ro'), en: toolsHubPath('en') }),
       ...(headlines.length || ownNews.length

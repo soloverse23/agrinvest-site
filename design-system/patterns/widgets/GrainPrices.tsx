@@ -21,13 +21,15 @@ export type GrainPriceItem = {
 export type GrainPricesProps = WidgetBaseProps & {
   items: GrainPriceItem[]
   labels: { agrinvest: string; market: string; onRequest: string; empty: string }
+  /** Show Agrinvest's column ("on request" when a crop has no price). */
+  own?: boolean
 }
 
 /**
  * Grain prices in a card: per crop, Agrinvest's published price (or "on request") and the
  * latest EU price for Romania with its weekly change. No script.
  */
-export function GrainPrices({ items, labels, ...frame }: GrainPricesProps) {
+export function GrainPrices({ items, labels, own = false, ...frame }: GrainPricesProps) {
   const { locale } = frame
   const lei = (v: number) => formatNumber(v, locale, 0)
   return (
@@ -50,19 +52,22 @@ export function GrainPrices({ items, labels, ...frame }: GrainPricesProps) {
                 </span>
               )}
             </div>
-            <div className="grid shrink-0 text-right">
-              <span className="text-caption text-muted">{labels.agrinvest}</span>
-              {item.agrinvest ? (
-                <span className="font-semibold text-ink tabular-nums">
-                  {item.agrinvest.min === item.agrinvest.max
-                    ? lei(item.agrinvest.min)
-                    : `${lei(item.agrinvest.min)}–${lei(item.agrinvest.max)}`}{' '}
-                  <span className="text-caption font-normal text-muted">lei/t</span>
-                </span>
-              ) : (
-                <span className="text-small font-medium text-muted">{labels.onRequest}</span>
-              )}
-            </div>
+            {/* Agrinvest's column only while its prices are public (Phase 7f switch). */}
+            {own && (
+              <div className="grid shrink-0 text-right">
+                <span className="text-caption text-muted">{labels.agrinvest}</span>
+                {item.agrinvest ? (
+                  <span className="font-semibold text-ink tabular-nums">
+                    {item.agrinvest.min === item.agrinvest.max
+                      ? lei(item.agrinvest.min)
+                      : `${lei(item.agrinvest.min)}–${lei(item.agrinvest.max)}`}{' '}
+                    <span className="text-caption font-normal text-muted">lei/t</span>
+                  </span>
+                ) : (
+                  <span className="text-small font-medium text-muted">{labels.onRequest}</span>
+                )}
+              </div>
+            )}
           </li>
         ))}
       </ul>

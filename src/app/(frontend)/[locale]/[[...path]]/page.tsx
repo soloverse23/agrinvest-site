@@ -12,11 +12,11 @@ import { HomeCompany, HomeFinanceTools } from '@/components/HomeCompany'
 import { HomeLive } from '@/components/HomeLive'
 import { HomeShop } from '@/components/HomeShop'
 import { HomeStories } from '@/components/HomeStories'
+import { marketsUi } from '@/i18n/markets'
 import { pricesUi } from '@/i18n/prices'
-import { cropPricePath, dieselPath, pricesPath } from '@/i18n/routes'
-import { toolsUi } from '@/i18n/tools'
-import { dieselTicker } from '@/lib/diesel/load'
-import { agrinvestRail } from '@/lib/prices/overview'
+import { pricesPath } from '@/i18n/routes'
+import { marketHrefs } from '@/lib/markets/links'
+import { marketTicker } from '@/lib/markets/ticker'
 import { isLocale, localePath, type Locale } from '@/i18n/config'
 import { ui } from '@/i18n/ui'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
@@ -68,25 +68,24 @@ export default async function CmsPage(props: Props) {
   const url = localePath(pagePath, locale)
   const crumbs = trailOf(page, locale)
   const heroFirst = page.layout?.[0]?.blockType === 'hero'
-  // Home: Agrinvest's published prices on the hero rail; without any, the hero keeps its links.
-  const [rail, fuel] =
+  // Home: market quotes on the hero rail (Phase 7f); without any, the hero keeps its links.
+  const markets =
     page.isHome && heroFirst
-      ? await Promise.all([agrinvestRail(locale), dieselTicker(locale)])
-      : [null, null]
+      ? await marketHrefs(locale).then((hrefs) => marketTicker(locale, hrefs))
+      : null
   const r = pricesUi[locale].rail
-  const heroPrices = rail
+  const m = marketsUi[locale].ticker
+  const heroPrices = markets
     ? {
-        title: r.title,
-        place: r.place,
-        unit: 'lei/t',
-        date: rail.date,
+        title: m.title,
+        place: m.place,
+        unit: '',
+        date: markets.date,
         all: { href: pricesPath(locale), label: pricesUi[locale].widget.grainLink },
         nav: { prev: r.prev, next: r.next },
-        // Each price opens its own page; diesel rides along (the slider's rail shows it).
-        rows: rail.rows.map((row) => ({ ...row, href: cropPricePath(row.slug, locale) })),
-        fuel: fuel
-          ? { ...fuel, name: toolsUi[locale].today.diesel, href: dieselPath(locale) }
-          : null,
+        quotes: markets.quotes,
+        rows: [],
+        fuel: null,
       }
     : undefined
 

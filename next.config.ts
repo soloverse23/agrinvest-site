@@ -42,10 +42,14 @@ function enrichmentEpoch() {
   // The menu and footer, and the check the older steps use to leave them alone (Phase 7b).
   for (const name of ['navigation.ts', 'hrefs.ts'])
     hash.update(readFileSync(path.join(dirname, 'scripts/site', name)))
+  // The Prices panel and footer column with the market pages (`apply:markets`, Phase 7f).
+  hash.update(readFileSync(path.join(dirname, 'scripts/markets/nav.ts')))
   return hash.digest('hex').slice(0, 12)
 }
 
 const nextConfig: NextConfig = {
+  // A second build next to a running dev server (rehearsals, shots) without sharing `.next`.
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   env: { ENRICHMENT_EPOCH: enrichmentEpoch() },
   experimental: {
     // Tailwind's CSS is small: inlining it removes the render-blocking stylesheet request.

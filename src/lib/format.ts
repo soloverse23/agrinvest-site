@@ -20,6 +20,14 @@ function numberFormat(locale: Locale, options: Intl.NumberFormatOptions = {}): I
   return format
 }
 
+/** Always `decimals` decimals: `5.3494` → `5,3494` (rates and prices quoted to a fixed precision). */
+export function formatFixed(value: number, locale: Locale, decimals: number): string {
+  return numberFormat(locale, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(value)
+}
+
 /** `1020` → `1.020` (ro) / `1,020` (en). */
 export function formatNumber(value: number, locale: Locale, maxDecimals = 2): string {
   return numberFormat(locale, { maximumFractionDigits: maxDecimals }).format(value)

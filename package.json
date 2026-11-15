@@ -54,6 +54,7 @@
     "apply:tools": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/tools/run.ts",
     "apply:articles": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/articles/run.ts",
     "apply:redesign": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/redesign/run.ts",
+    "apply:markets": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/markets/run.ts",
     "apply:shop": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/shop-redesign/run.ts",
     "check:articles": "tsx --env-file-if-exists=.env scripts/checks/articles.ts",
     "brand:covers": "tsx scripts/brand/covers.ts"
@@ -72,6 +73,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
+    "lightweight-charts": "5.2.1",
     "next": "16.3.3",
     "payload": "3.92.1",
     "postcss": "^8.5.32",

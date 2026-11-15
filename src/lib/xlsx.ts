@@ -47,6 +47,29 @@ export function readFirstSheet(buffer: Buffer): SheetRow[] {
   const files = unzip(buffer)
   const sheet = files.get('xl/worksheets/sheet1.xml')?.toString('utf8')
   if (!sheet) throw new Error('No first worksheet')
+  return sheetRows(files, sheet)
+}
+
+/** Rows of the worksheet called `name` (the World Bank's file starts with a hidden sheet). */
+export function readSheet(buffer: Buffer, name: string): SheetRow[] {
+  const files = unzip(buffer)
+  const book = files.get('xl/workbook.xml')?.toString('utf8') ?? ''
+  const rels = files.get('xl/_rels/workbook.xml.rels')?.toString('utf8') ?? ''
+  const sheetTag = [...book.matchAll(/<sheet\b[^>]*>/g)]
+    .map((m) => m[0])
+    .find((tag) => decodeXml(/name="([^"]*)"/.exec(tag)?.[1] ?? '') === name)
+  const rid = sheetTag && /r:id="([^"]*)"/.exec(sheetTag)?.[1]
+  const rel =
+    rid && [...rels.matchAll(/<Relationship\b[^>]*>/g)].find((m) => m[0].includes(`Id="${rid}"`))
+  const target = rel && /Target="([^"]*)"/.exec(rel[0])?.[1]
+  if (!target) throw new Error(`No worksheet "${name}"`)
+  const path = target.startsWith('/') ? target.slice(1) : `xl/${target}`
+  const sheet = files.get(path)?.toString('utf8')
+  if (!sheet) throw new Error(`Worksheet "${name}" is missing`)
+  return sheetRows(files, sheet)
+}
+
+function sheetRows(files: Map<string, Buffer>, sheet: string): SheetRow[] {
   const shared = [
     ...(files.get('xl/sharedStrings.xml')?.toString('utf8') ?? '').matchAll(
       /<si>([\s\S]*?)<\/si>/g,

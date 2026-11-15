@@ -185,3 +185,14 @@ APIA subsidy loan Romania,en,Farmers (English),Financing,I,L,L,L,3,,/en/financin
 calculator agricol,ro,Farmers (Romanian),Grain prices and selling,T,L,L,M,2,,/unelte,/preturi,tools hub (Phase 7b); no Planner data
 unelte fermieri,ro,Farmers (Romanian),Grain prices and selling,T,L,L,M,2,,/unelte,/preturi,tools hub (Phase 7b); no Planner data
 calculator preț net cereale,ro,Farmers (Romanian),Grain prices and selling,T,L,L,H,1,,/preturi/calculator-pret-net,/unelte,linked from the tools hub (Phase 7b); no Planner data
+preț petrol Brent azi,ro,Farmers (Romanian),Market prices,I,M,M,M,2,,/preturi/petrol-brent,/preturi,Phase 7f; EIA daily via FRED; tiers are estimates
+preț motorină azi,ro,Farmers (Romanian),Market prices,I,H,H,M,2,,/preturi/carburanti,/preturi,Phase 7f; EU Oil Bulletin weekly; /motorina keeps the delivery intent
+preț benzină azi,ro,Farmers (Romanian),Market prices,I,H,H,L,3,,/preturi/carburanti,/preturi,Phase 7f
+curs euro leu,ro,Farmers (Romanian),Market prices,I,H,H,M,2,,/preturi/curs-euro-leu,/preturi,Phase 7f; ECB rate (BNR feed unavailable 2026-11-15)
+curs euro leu istoric,ro,Farmers (Romanian),Market prices,I,M,M,M,2,,/preturi/curs-euro-leu,/preturi,Phase 7f; monthly and yearly averages
+preț gaze naturale Europa,ro,Farmers (Romanian),Market prices,I,M,M,L,3,,/preturi/gaze-naturale,/preturi,Phase 7f; World Bank TTF monthly
+preț uree tona,ro,Farmers (Romanian),Fertilisers,I,M,M,H,2,,/preturi/ingrasaminte,/preturi/ingrasaminte,Phase 7f; World Bank monthly + EU portal for Romania
+prețuri agricole azi,ro,Farmers (Romanian),Market prices,I,M,M,H,1,,/preturi,/preturi,Phase 7f hub
+Brent crude oil price today,en,Press and investors,Market prices,I,H,H,L,3,,/en/prices/brent-crude-oil,/en/prices,Phase 7f
+euro to leu exchange rate,en,Potential partners (RO + EN),Market prices,I,M,M,M,2,,/en/prices/euro-leu-exchange-rate,/en/prices,Phase 7f
+diesel price Romania,en,Potential partners (RO + EN),Market prices,I,M,M,M,2,,/en/prices/fuel-prices,/en/prices,Phase 7f

@@ -31,3 +31,8 @@ export const DoseCalculatorLazy = dynamic(() =>
 )
 /** The home guides carousel's arrows: only the home page downloads them. */
 export const CarouselNavLazy = dynamic(() => import('./CarouselNav').then((m) => m.CarouselNav))
+/**
+ * The market pages' TradingView chart (Phase 7f). Its own chunk; the chart library itself is a
+ * second, later import made only after the visitor interacts (see `MarketChart`).
+ */
+export const MarketChartLazy = dynamic(() => import('./MarketChart').then((m) => m.MarketChart))

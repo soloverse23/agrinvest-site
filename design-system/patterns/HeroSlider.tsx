@@ -34,6 +34,8 @@ export type HeroRailPrices = {
   unit: string
   date: Date
   all: { href: string; label: string }
+  /** Ready-made quotes (Phase 7f market data, each with its own unit); replace `rows`/`fuel`. */
+  quotes?: Quote[]
   rows: {
     crop: CropKey
     name: string
@@ -150,7 +152,7 @@ export function HeroSlider({
  * the change in lei and percent. On phones the row swipes sideways.
  */
 function PriceRail({ locale, prices }: { locale: Locale; prices: HeroRailPrices }) {
-  const quotes: Quote[] = [
+  const quotes: Quote[] = prices.quotes ?? [
     ...prices.rows.map((r) => ({
       key: r.crop,
       name: r.name,
@@ -172,7 +174,8 @@ function PriceRail({ locale, prices }: { locale: Locale; prices: HeroRailPrices 
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5 lg:w-48 lg:flex-nowrap lg:shrink-0 lg:flex-col lg:items-start lg:gap-1 lg:border-r lg:border-on-forest/15 lg:pr-5">
         <h2 className="text-small font-semibold whitespace-nowrap">{prices.title}</h2>
         <p className="order-last basis-full text-caption text-on-forest-muted lg:order-none lg:basis-auto">
-          {formatDate(prices.date, locale)} · {prices.unit}
+          {formatDate(prices.date, locale)}
+          {prices.unit && ` · ${prices.unit}`}
           <span className="hidden lg:block">{prices.place}</span>
         </p>
         <Link

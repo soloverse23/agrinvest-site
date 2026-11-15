@@ -19,6 +19,7 @@ import { netPriceRules, netPriceSources } from '@/lib/prices/net-price-rules'
 import { yearAgo } from '@/lib/prices/load'
 import { upsertMarketPrices } from '@/lib/prices/store'
 import { dataset } from '@/lib/schema'
+import { showOwnPrices } from '@/lib/prices/visibility'
 
 const crops = ['wheat', 'maize', 'sunflower', 'rapeseed', 'barley']
 const noLimits = () => undefined
@@ -220,14 +221,18 @@ describe('market note draft (pure)', () => {
     expect(ro.markdown).toContain('Milling wheat')
     expect(ro.markdown).toContain('+4 față de săptămâna dinainte')
     expect(ro.markdown).toContain('+6 în patru săptămâni')
-    expect(ro.markdown).toContain('Prețul Agrinvest: la cerere.')
+    // Agrinvest's line appears only while its prices are public (Phase 7f switch).
+    if (showOwnPrices) expect(ro.markdown).toContain('Prețul Agrinvest: la cerere.')
+    else expect(ro.markdown).not.toContain('Agrinvest cumpără')
     const en = marketNoteDraft(
       week,
       [{ name: 'Wheat', lines, agrinvest: { min: 950, max: 980 } }],
       'en',
     )!
     expect(en.slug).toBe('note-2026-11-09')
-    expect(en.markdown).toContain('Agrinvest buys at 950–980 lei/t, by base.')
+    // Even a published range stays out while the switch is off.
+    if (showOwnPrices) expect(en.markdown).toContain('Agrinvest buys at 950–980 lei/t, by base.')
+    else expect(en.markdown).not.toContain('Agrinvest buys')
   })
 
   it('writes nothing without data', () => {

@@ -1,19 +1,19 @@
-# Hourly news run (Phase 7e, decision 0011).
+# News run every 6 hours (Phase 7e, decision 0011).
 #
 # Vercel Hobby runs a cron at most once a day, so this workflow calls the site's protected cron
-# route every hour instead. The daily Vercel cron in vercel.json stays as a backup.
+# route every 6 hours instead. The daily Vercel cron in vercel.json stays as a backup.
 #
 # Repository secrets (Settings → Secrets and variables → Actions):
 #   NEWS_SITE_URL  the production URL, e.g. https://agrinvest.ro (no trailing slash)
 #   CRON_SECRET    the same value as CRON_SECRET in Vercel
 #
 # Without both secrets the job stops with a notice instead of failing every hour.
-name: News hourly
+name: News every 6 hours
 
 on:
   schedule:
-    # Minute 7 avoids the top of the hour, when GitHub's scheduler is busiest.
-    - cron: '7 * * * *'
+    # Every 6 hours at minute 7; avoids the top of the hour, when GitHub's scheduler is busiest.
+    - cron: '7 */6 * * *'
   workflow_dispatch:
 
 permissions: {}

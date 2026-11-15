@@ -637,3 +637,14 @@ PR #11's CI was red. Four e2e tests failed on `main` too (the 7b merge): the hea
 - Trap: `.next/cache` keeps the tagged data cache across builds, so after changing the database, build from a clean `.next` (CI always does).
 - Trap: run the checks with `NEXT_PUBLIC_SITE_URL=http://localhost:3100`, as CI does. `.env`'s `:3200` makes every canonical an error.
 - Open for 7b: its `apply:redesign` re-saves the home slide media on every deploy (identical values).
+
+## 7c.5 checkout notes (2026-11-15)
+
+Owner request: "make the checkout page and its form much better and simpler; next to 'we will call you back' add online payment, inactive, coming soon; the call-back page should be much better." Branch `redesign/checkout` (from `main`), worktree `../site-shop`. The cart page `/cos` is not part of this step.
+
+- `/comanda`: a compact title with the progress steps (Coș ✓ → Detalii → Confirmare) instead of the big title band. One form card with numbered sections (Datele tale, Livrare, Certificat when needed, Plată); a person/company pill switch; phone and email side by side; delivery as icon tiles, county and address on one row; the message folded; the consents grouped; the submit button carries the total. The summary stays in view on large screens and folds to "Comanda ta · total" on phones.
+- Payment: "Te sunăm noi" (value `consultant`, the only one offered) and "Plată online cu cardul" disabled with an "În curând" badge. The proforma option is no longer offered: the call-back note says payment is by bank transfer against the proforma. `paymentMethods` still accepts `proforma`, so older orders stay valid.
+- Errors: a list at the top (each item focuses its field) plus the inline messages; focus moves to the first invalid field.
+- Confirmation ("we will call you back"): thanks by first name, "Te sunăm noi" with the buyer's phone, the order number, who will call, three next steps (call → proforma by email → delivery or pickup), what was ordered, and links to the shop and contact. `placeOrder` now returns these details (`CheckoutState.order`); order logic is unchanged.
+- Fixed in passing: `sm:` classes in the checkout and `CompanyLookupField` did nothing (the design system has no `sm` breakpoint).
+- Shots: `docs/design-review/shots/2026-11-15-checkout/`. The "Shop orders" e2e tests pass (6/6) against :3200.

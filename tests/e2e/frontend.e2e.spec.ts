@@ -326,17 +326,21 @@ test.describe('Interactions', () => {
     await expect(page.locator('#baze [aria-live]')).toContainText('Pogoanele')
   })
 
-  test('the live panel switches prices without JavaScript', async ({ browser }) => {
+  test('the live panel is plain links without JavaScript, and has no price tabs', async ({
+    browser,
+  }) => {
     const context = await browser.newContext({ javaScriptEnabled: false })
     const page = await context.newPage()
     await page.goto('/')
-    const tabs = page.locator('input[name="live-crop"]')
-    expect(await tabs.count()).toBeGreaterThan(1)
-    const second = await tabs.nth(1).getAttribute('value')
-    // The radio is visually hidden; its label is the tab.
-    await tabs.nth(1).locator('xpath=..').click()
-    await expect(page.locator(`[data-crop="${second}"]`)).toBeVisible()
-    await expect(page.locator('[data-crop]:visible')).toHaveCount(1)
+    const live = page.locator('section[aria-labelledby="live-title"]')
+    await expect(live.getByRole('link', { name: 'Toate știrile' })).toBeVisible()
+    // Prices moved to the hero (owner, 2026-11-15).
+    await expect(live.locator('input[type="radio"]')).toHaveCount(0)
+    // Every card is a link that works without script.
+    for (const href of await live
+      .locator('li a')
+      .evaluateAll((as) => as.map((a) => a.getAttribute('href'))))
+      expect(href).toBeTruthy()
     await context.close()
   })
 })

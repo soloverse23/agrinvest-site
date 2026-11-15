@@ -4,6 +4,7 @@ import { createHash } from 'crypto'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { allNewsImageHosts } from './src/lib/news/image-hosts'
 
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
@@ -62,7 +63,16 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      // Agrinvest's topic photos for stories without a feed photo (Phase 7e).
+      { pathname: '/news/**' },
     ],
+    // News thumbnails from the publishers' own image hosts (decision 0011, owner exception):
+    // resized here to a few KB, so visitors never load the full photo from the publisher.
+    remotePatterns: allNewsImageHosts.map((h) => ({
+      protocol: 'https' as const,
+      hostname: h.hostname,
+      pathname: h.pathname,
+    })),
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { ReactNode } from 'react'
 
 import type { Locale } from '@/i18n/config'
@@ -35,6 +36,11 @@ export type StoryCardData = {
   excerpt?: { text: string; source: string } | null
   /** The first is the publisher the headline links to. */
   sources: StorySource[]
+  /**
+   * The story's thumbnail: a publisher's own photo (decision 0011, owner exception), or one of
+   * Agrinvest's topic photos when the feed has none (`own`).
+   */
+  image?: { src: string; source: string; own?: boolean } | null
   pinned?: boolean
 }
 
@@ -45,6 +51,37 @@ export type StoryLabels = {
 }
 
 type Size = 'lg' | 'md' | 'sm'
+
+/** Where a story's photo goes: a short strip on top of a card, a thumbnail beside a list item. */
+type Media = 'none' | 'top' | 'side'
+
+/**
+ * A publisher's photo, resized by `next/image` to a few KB. Decorative (the headline is right
+ * there), so `alt` is empty; the title names whose photo it is.
+ */
+function Thumb({
+  image,
+  className,
+  sizes,
+}: {
+  image: NonNullable<StoryCardData['image']>
+  className: string
+  sizes: string
+}) {
+  return (
+    <span className={cx('relative block overflow-hidden rounded-md bg-surface', className)}>
+      <Image
+        src={image.src}
+        alt=""
+        title={`Foto: ${image.source}`}
+        fill
+        sizes={sizes}
+        className="object-cover"
+        loading="lazy"
+      />
+    </span>
+  )
+}
 
 const titleSize: Record<Size, string> = {
   lg: 'text-h3 font-semibold',
@@ -124,6 +161,7 @@ export function NewsItem({
   level = 3,
   showExcerpt = false,
   fill = false,
+  media = 'none',
   className,
 }: {
   story: StoryCardData
@@ -134,14 +172,16 @@ export function NewsItem({
   showExcerpt?: boolean
   /** Fills its card: the source line sits at the bottom, so a row of cards lines up. */
   fill?: boolean
+  /** `top`: a short photo strip (or the source name when there is no photo); `side`: a thumbnail. */
+  media?: Media
   className?: string
 }) {
-  return (
+  const body = (
     <article
       className={cx(
-        fill ? 'flex h-full flex-col' : 'grid',
+        fill ? 'flex min-h-0 flex-1 flex-col' : 'grid',
         size === 'lg' ? 'gap-3' : 'gap-1.5',
-        className,
+        media === 'none' || (media === 'side' && !story.image) ? className : undefined,
       )}
     >
       <Heading level={level} className={titleSize[size]}>
@@ -169,6 +209,38 @@ export function NewsItem({
       </div>
     </article>
   )
+  if (media === 'top')
+    return (
+      <div className={cx('flex h-full flex-col gap-3', className)}>
+        {story.image ? (
+          <Thumb
+            image={story.image}
+            className="h-24 w-full shrink-0"
+            sizes="(min-width: 1024px) 15vw, 80vw"
+          />
+        ) : (
+          <span
+            aria-hidden="true"
+            className="flex h-24 w-full shrink-0 items-center justify-center rounded-md bg-surface text-small font-semibold text-subtle"
+          >
+            {story.sources[0]?.name}
+          </span>
+        )}
+        {body}
+      </div>
+    )
+  if (media === 'side' && story.image)
+    return (
+      <div className={cx('grid grid-cols-[1fr_auto] items-start gap-4', className)}>
+        {body}
+        <Thumb
+          image={story.image}
+          className={size === 'lg' ? 'h-28 w-40 md:h-32 md:w-48' : 'h-14 w-20 md:h-16 md:w-24'}
+          sizes={size === 'lg' ? '192px' : '96px'}
+        />
+      </div>
+    )
+  return body
 }
 
 /** A plain list of stories, one rule between them. */
@@ -179,6 +251,7 @@ export function NewsList({
   size = 'md',
   level = 3,
   excerptFirst = false,
+  media = 'none',
   className,
 }: {
   stories: StoryCardData[]
@@ -188,6 +261,7 @@ export function NewsList({
   level?: 2 | 3 | 4
   /** Shows the first story's excerpt (the lead of a short list). */
   excerptFirst?: boolean
+  media?: Media
   className?: string
 }) {
   return (
@@ -201,6 +275,7 @@ export function NewsList({
             size={size}
             level={level}
             showExcerpt={excerptFirst && i === 0}
+            media={media}
           />
         </li>
       ))}
@@ -231,6 +306,7 @@ export function ImportantNow({
         labels={labels}
         size="lg"
         showExcerpt
+        media="side"
         className="content-start lg:col-span-7"
       />
       {rest.length > 0 && (
@@ -238,6 +314,7 @@ export function ImportantNow({
           stories={rest}
           locale={locale}
           labels={labels}
+          media="side"
           className="border-t border-line pt-6 lg:col-span-5 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12"
         />
       )}

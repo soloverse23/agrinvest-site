@@ -7,7 +7,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { group, sameEvent } from '@/lib/news/group'
 import { classify, isExcluded } from '@/lib/news/lexicon'
 import { acceptable, ingestNews } from '@/lib/news/pipeline'
-import { parseRss, validate } from '@/lib/news/rss'
+import { feedImage, parseRss, validate } from '@/lib/news/rss'
 import { defaultWeights, score } from '@/lib/news/score'
 import { newsSources } from '@/lib/sources'
 
@@ -53,9 +53,32 @@ describe('news feeds', () => {
     }
   })
 
+  it('keeps a feed photo only on the source’s own image hosts', () => {
+    const items = parseRss(fixture('news-g4media.xml'), 'g4media')
+    for (const i of items)
+      expect(i.image).toMatch(/^https:\/\/www\.g4media\.ro\/wp-content\/uploads\//)
+    expect(parseRss(fixture('rss-agrointel.xml'), 'agrointel').every((i) => i.image === null)).toBe(
+      true,
+    )
+    const foreign = `<item><title>Fermierii primesc plata în avans APIA</title><link>https://www.zf.ro/a</link><pubDate>Tue, 10 Nov 2026 08:00:00 +0000</pubDate><enclosure url="https://evil.example/x.jpg" type="image/jpeg"/></item>`
+    expect(feedImage(foreign, 'zf')).toBeNull()
+    const own = foreign.replace(
+      'https://evil.example/x.jpg',
+      'https://storage0.dms.mpinteractiv.ro/media/1/x.jpg?width=700',
+    )
+    expect(feedImage(own, 'zf')).toBe(
+      'https://storage0.dms.mpinteractiv.ro/media/1/x.jpg?width=700',
+    )
+  })
+
   it('refuses a headline from the future, an old one and a too-short one', () => {
     const now = new Date('2026-11-15T12:00:00Z')
-    const base = { source: 'agrointel' as const, url: 'https://agrointel.ro/x', excerpt: '' }
+    const base = {
+      source: 'agrointel' as const,
+      url: 'https://agrointel.ro/x',
+      excerpt: '',
+      image: null,
+    }
     expect(
       validate({ ...base, title: 'Prețul grâului crește în port', publishedAt: now }, now),
     ).toBeNull()
@@ -122,6 +145,7 @@ describe('agriculture lexicon', () => {
       url: `https://www.zf.ro/${encodeURIComponent(title)}`,
       publishedAt: now,
       excerpt: '',
+      image: null,
     })
     const { kept, refused } = acceptable(
       [

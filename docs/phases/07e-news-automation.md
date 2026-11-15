@@ -168,3 +168,10 @@ Run `generate:types`, `generate:importmap` and `migrate:create` after the change
 
 - GitHub repository secrets `NEWS_SITE_URL` (the production URL) and `CRON_SECRET` (the same value as in Vercel). Until both exist the hourly workflow skips with a notice; the daily Vercel cron still runs.
 - Optional: `EDITORIAL_EMAIL` for the `news-health` alert; topic weights in `News settings`.
+
+### Later the same day (owner review)
+
+- **Simpler news design:** headline, then the source in bold, the time and "+N surse"; no rank numbers or topic chips; topics only as section headings on `/stiri`. Guides hub: topics as one row of links, newest guides first.
+- **"În direct din câmp" is news only:** no prices (the hero shows them). One row of five cards, then Agrinvest's own updates; phones swipe each row sideways.
+- **Thumbnails:** publishers' feed photos where present (owner exception), else Agrinvest's topic photos (decision 0011, update "thumbnails"). New column `news_items.image` (migration `20261115_160912_news_images`); `check:news` also checks photo hosts.
+- **Phones no longer scroll sideways:** the top price strip's `sr-only` text escaped its scroller (now `relative`); market tiles wrap.

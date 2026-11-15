@@ -8,7 +8,7 @@ import type { EditionEntry, StoryReference } from './types'
 
 /** A stored headline as a story reference. Excerpts are cut to the publisher's limit again. */
 export function referenceOf(
-  item: Pick<NewsItem, 'title' | 'url' | 'source' | 'excerpt' | 'publishedAt'>,
+  item: Pick<NewsItem, 'title' | 'url' | 'source' | 'excerpt' | 'publishedAt' | 'image'>,
 ): StoryReference {
   const info = newsSources[item.source as NewsSource]
   return {
@@ -18,6 +18,7 @@ export function referenceOf(
     excerpt: info?.excerptMax ? (item.excerpt ?? '').slice(0, info.excerptMax) : '',
     publishedAt: item.publishedAt,
     viaGoogle: info?.linkHosts.includes('news.google.com') ?? false,
+    image: item.image ?? null,
   }
 }
 

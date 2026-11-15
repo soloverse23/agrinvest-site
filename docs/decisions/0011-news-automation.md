@@ -46,3 +46,11 @@ Each feed was fetched once and its terms read. Fixtures are in `tests/fixtures/f
 - If Google or Reuters objects, Reuters is switched off in the admin; nothing else changes.
 - Stories in English (Reuters, EC) and Romanian are ranked side by side but grouped only within one language.
 - A source whose terms change is removed from `src/lib/sources.ts`, and its stored items with it.
+
+## Update: thumbnails (2026-11-15)
+
+The owner asked for small photos on the news, to make the home section and `/stiri` look better.
+
+- **Publishers' photos: owner exception.** The feed's own photo (`media:content`, an image `enclosure`, or the first `<img>` in the description) is shown as a small thumbnail where the feed has one: ZF, Mediafax, G4Media, Profit.ro, Revista Ferma, the Commission, sometimes MADR. None of the terms checked above allows reusing photos (they allow short text quotes at most); the owner accepted this, as with Reuters through Google News. Only images on each source's own hosts are kept (`src/lib/news/image-hosts.ts`); they are resized by `next/image`, so visitors load a few KB from our domain, never the full photo from the publisher. Agrointel and Reuters carry no photo.
+- **Agrinvest's own photos otherwise.** A story without a feed photo shows one of 15 stills from Agrinvest's brand film, chosen by topic (`src/lib/news/topic-photos.ts`, `public/news/`), never repeated within a row while another is free. The title says "Foto: Agrinvest", so it is not presented as the article's photo.
+- To stop using publishers' photos, empty a source's list in `image-hosts.ts`: its stories fall back to Agrinvest's photos.

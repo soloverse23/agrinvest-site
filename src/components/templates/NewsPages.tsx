@@ -6,7 +6,7 @@ import { SubscribeFormLazy } from '@ds/patterns/Lazy'
 import { ImportantNow, NewsList } from '@ds/patterns/NewsStories'
 import { SectionHeading } from '@ds/patterns/Sections'
 import { JsonLd } from '@/components/JsonLd'
-import { storyCard, storyLabels } from '@/components/NewsCards'
+import { storyCards, storyLabels } from '@/components/NewsCards'
 import { PageTitle } from '@/components/PageParts'
 import { SiteShell } from '@/components/SiteShell'
 import { ToolLinks } from '@/components/ToolLinks'
@@ -87,8 +87,8 @@ export async function NewsPage({ locale }: { locale: Locale }) {
     listArticles(locale, 'stiri'),
   ])
   const labels = storyLabels(locale)
-  const cards = stories.map((s) => storyCard(s, s.rank, locale))
-  const top = cards.slice(0, IMPORTANT)
+  const cards = storyCards(stories.slice(0, IMPORTANT), locale)
+  const top = cards
   const rest = stories.slice(IMPORTANT)
   // Topics in the order of their best story.
   const byTopic = new Map<NewsTopic, typeof rest>()
@@ -154,10 +154,11 @@ export async function NewsPage({ locale }: { locale: Locale }) {
                   {topicLabels[topic][locale]}
                 </h3>
                 <NewsList
-                  stories={list.slice(0, PER_TOPIC).map((x) => storyCard(x, x.rank, locale))}
+                  stories={storyCards(list.slice(0, PER_TOPIC), locale)}
                   locale={locale}
                   labels={labels}
                   level={4}
+                  media="side"
                   className="border-t border-line pt-4"
                 />
               </section>
@@ -222,10 +223,7 @@ export async function NewsPage({ locale }: { locale: Locale }) {
               {p.hub.allNotes}
             </Link>
           </section>
-          <div
-            id="buletin"
-            className="scroll-mt-24 rounded-xl bg-raised p-6 shadow-soft ring-1 ring-line"
-          >
+          <div id="buletin" className="rounded-xl bg-raised p-6 shadow-soft ring-1 ring-line">
             <SubscribeFormLazy
               locale={locale}
               action={subscribe}
@@ -325,10 +323,11 @@ export async function NewsDayPage({ locale, date }: { locale: Locale; date: stri
       <div className="mx-auto mt-10 grid max-w-3xl gap-8 px-4 md:mt-14 md:px-8">
         {entries.length ? (
           <NewsList
-            stories={entries.map((e, k) => storyCard(e, k + 1, locale))}
+            stories={storyCards(entries, locale)}
             locale={locale}
             labels={labels}
             level={2}
+            media="side"
             className="border-y border-line py-6"
           />
         ) : (

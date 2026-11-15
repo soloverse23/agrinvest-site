@@ -1,12 +1,19 @@
 /**
  * Rules for `npm run check:news` (Phase 7e, decision 0011). Pure: the runner reads the data.
  */
+import { imageAllowed } from '../../src/lib/news/image-hosts'
 import { hostAllowed } from '../../src/lib/news/rss'
 import { newsSources, type NewsSource } from '../../src/lib/sources'
 
 export type Finding = { level: 'error' | 'warning'; rule: string; message: string }
 
-export type GateItem = { id: number; source: string; url: string; excerpt?: string | null }
+export type GateItem = {
+  id: number
+  source: string
+  url: string
+  excerpt?: string | null
+  image?: string | null
+}
 export type GateStory = { id: number; key: string; items: number }
 
 /** Every stored headline comes from a registered source, links to its hosts, and its excerpt is within the publisher's limit. */
@@ -27,6 +34,12 @@ export function itemFindings(items: GateItem[]): Finding[] {
         level: 'error',
         rule: 'host',
         message: `item ${i.id}: ${i.url} is outside ${info.name}'s hosts`,
+      })
+    if (i.image && !imageAllowed(i.source, i.image))
+      out.push({
+        level: 'error',
+        rule: 'image',
+        message: `item ${i.id}: photo ${i.image} is not on ${info.name}'s image hosts`,
       })
     const len = (i.excerpt ?? '').length
     if (len > info.excerptMax)

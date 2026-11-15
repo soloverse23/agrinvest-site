@@ -557,20 +557,32 @@ export async function ingestNews(
       if (!f) continue
       const { kept, refused } = acceptable(f.parsed, now)
       const urls = kept.map((i) => i.url)
-      const [known, blocked] = await Promise.all(
-        (['news-items', 'news-blocked'] as const).map((collection) =>
-          urls.length
-            ? payload.find({
-                collection,
-                where: { url: { in: urls } },
-                pagination: false,
-                depth: 0,
-                select: { url: true },
-              })
-            : Promise.resolve({ docs: [] as { url: string }[] }),
-        ),
-      )
+      const [known, blocked] = urls.length
+        ? await Promise.all([
+            payload.find({
+              collection: 'news-items',
+              where: { url: { in: urls } },
+              pagination: false,
+              depth: 0,
+              select: { url: true, image: true },
+            }),
+            payload.find({
+              collection: 'news-blocked',
+              where: { url: { in: urls } },
+              pagination: false,
+              depth: 0,
+              select: { url: true },
+            }),
+          ])
+        : [{ docs: [] }, { docs: [] }]
       const skip = new Set([...known.docs, ...blocked.docs].map((d) => d.url))
+      // A headline stored before it had a photo gets the feed's photo now.
+      const imageOf = new Map(kept.map((i) => [i.url, i.image]))
+      for (const d of known.docs as { id: number; url: string; image?: string | null }[]) {
+        const image = imageOf.get(d.url)
+        if (image && !d.image)
+          await payload.update({ collection: 'news-items', id: d.id, data: { image }, depth: 0 })
+      }
       let added = 0
       for (const item of kept) {
         if (skip.has(item.url)) continue
@@ -584,6 +596,7 @@ export async function ingestNews(
             url: item.url,
             publishedAt: item.publishedAt.toISOString(),
             excerpt: item.excerpt || undefined,
+            image: item.image ?? undefined,
             topics: item.topics,
             lang: item.lang,
             status: 'nou',

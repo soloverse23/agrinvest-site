@@ -1,5 +1,5 @@
 import { LivePanel, type FeedItem } from '@ds/patterns/LivePanel'
-import { storyCard, storyLabels } from '@/components/NewsCards'
+import { storyCards, storyLabels } from '@/components/NewsCards'
 import type { Locale } from '@/i18n/config'
 import { homeUi } from '@/i18n/home'
 import { newsUi } from '@/i18n/news'
@@ -85,7 +85,7 @@ export async function HomeLive({ locale }: { locale: Locale }) {
       title={t.title}
       updated={status.updated ? new Date(status.updated) : null}
       storySources={status.sources}
-      stories={ranked.map((r) => storyCard(r, r.rank, locale))}
+      stories={storyCards(ranked, locale)}
       feed={feed}
       links={{ news: { href: newsPath(locale), label: t.allNews } }}
       labels={{

@@ -15,7 +15,7 @@ const [items, stories, runs] = await Promise.all([
     collection: 'news-items',
     pagination: false,
     depth: 0,
-    select: { source: true, url: true, excerpt: true },
+    select: { source: true, url: true, excerpt: true, image: true },
   }),
   payload.find({
     collection: 'news-stories',

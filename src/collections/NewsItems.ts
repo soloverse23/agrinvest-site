@@ -73,6 +73,14 @@ export const NewsItems: CollectionConfig = {
       ],
     },
     {
+      name: 'image',
+      type: 'text',
+      admin: {
+        readOnly: true,
+        description: 'The feed’s own photo, shown as a small thumbnail (decision 0011).',
+      },
+    },
+    {
       name: 'excerpt',
       type: 'textarea',
       maxLength: 500,

@@ -11,6 +11,8 @@ export type StoryReference = {
   publishedAt: string
   /** True for links that go through Google News (Reuters). */
   viaGoogle: boolean
+  /** The feed's own photo for this headline, when it has one. */
+  image?: string | null
 }
 
 /** A story as the pages show it, and as a daily edition stores it. */

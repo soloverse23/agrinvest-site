@@ -16,6 +16,7 @@ import * as migration_20261111_155707_shop_foundations from './20261111_155707_s
 import * as migration_20261115_095627_market_sources from './20261115_095627_market_sources';
 import * as migration_20261115_100616_finance_questions from './20261115_100616_finance_questions';
 import * as migration_20261115_113857_news_automation from './20261115_113857_news_automation';
+import * as migration_20261115_160912_news_images from './20261115_160912_news_images';
 
 export const migrations = [
   {
@@ -106,6 +107,11 @@ export const migrations = [
   {
     up: migration_20261115_113857_news_automation.up,
     down: migration_20261115_113857_news_automation.down,
-    name: '20261115_113857_news_automation'
+    name: '20261115_113857_news_automation',
+  },
+  {
+    up: migration_20261115_160912_news_images.up,
+    down: migration_20261115_160912_news_images.down,
+    name: '20261115_160912_news_images'
   },
 ];

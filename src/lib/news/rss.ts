@@ -1,6 +1,8 @@
 import { newsSources, type NewsSource } from '@/lib/sources'
 import { decodeXml } from '@/lib/xml'
 
+import { imageAllowed } from './image-hosts'
+
 export type FeedItem = {
   source: NewsSource
   title: string
@@ -8,6 +10,8 @@ export type FeedItem = {
   publishedAt: Date
   /** Plain text, within the publisher's limit; empty when only headlines are allowed. */
   excerpt: string
+  /** The feed's own photo for the item, on one of the source's image hosts; else null. */
+  image: string | null
 }
 
 const tag = (xml: string, name: string) => {
@@ -35,6 +39,34 @@ export function clip(text: string, max: number): string {
   const cut = text.slice(0, max - 1)
   const space = cut.lastIndexOf(' ')
   return `${(space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,.;:–-]+$/, '')}…`
+}
+
+const attr = (tagText: string, name: string) =>
+  new RegExp(`\\s${name}="([^"]+)"`).exec(tagText)?.[1]
+
+/**
+ * The item's photo: `media:content` or `media:thumbnail`, an image `enclosure`, else the first
+ * `<img>` in the description (raw or entity-encoded). Kept only on the source's image hosts.
+ */
+export function feedImage(item: string, source: NewsSource): string | null {
+  const candidates: string[] = []
+  for (const m of item.matchAll(/<media:(?:content|thumbnail)\b[^>]*>/g)) {
+    const url = attr(m[0], 'url')
+    const medium = attr(m[0], 'medium') ?? attr(m[0], 'type') ?? 'image'
+    if (url && /image/.test(medium)) candidates.push(url)
+  }
+  for (const m of item.matchAll(/<enclosure\b[^>]*>/g)) {
+    const url = attr(m[0], 'url')
+    if (url && /^image\//.test(attr(m[0], 'type') ?? '')) candidates.push(url)
+  }
+  const desc = decodeXml(item.replace(/<!\[CDATA\[|\]\]>/g, ''))
+  const img = /<img\b[^>]*\ssrc="([^"]+)"/.exec(desc)?.[1]
+  if (img) candidates.push(img)
+  for (const c of candidates) {
+    const url = decodeXml(c).trim()
+    if (imageAllowed(source, url)) return url
+  }
+  return null
 }
 
 /** True when `host` is one of `allowed` or a subdomain of one. */
@@ -75,6 +107,7 @@ export function parseRss(xml: string, source: NewsSource): FeedItem[] {
       url,
       publishedAt,
       excerpt: viaGoogle ? '' : clip(plainText(tag(item, 'description')), max),
+      image: viaGoogle ? null : feedImage(item, source),
     })
   }
   return items

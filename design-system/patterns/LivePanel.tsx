@@ -154,7 +154,7 @@ export function LivePanel({
           <CardRow cols={5} label={title}>
             {stories.map((s, i) => (
               <li key={s.key} className={card}>
-                <div className="h-full rounded-lg p-4 ring-1 ring-line">
+                <div className="h-full rounded-lg p-3 ring-1 ring-line">
                   <NewsItem
                     story={s}
                     locale={locale}
@@ -163,6 +163,7 @@ export function LivePanel({
                     level={3}
                     showExcerpt={i === 0}
                     fill
+                    media="top"
                   />
                 </div>
               </li>

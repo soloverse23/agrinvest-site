@@ -2134,6 +2134,10 @@ export interface NewsItem {
   source: 'revista-ferma' | 'agrointel' | 'reuters' | 'zf' | 'mediafax' | 'g4media' | 'profit' | 'madr' | 'ec-agri';
   publishedAt: string;
   /**
+   * The feed’s own photo, shown as a small thumbnail (decision 0011).
+   */
+  image?: string | null;
+  /**
    * From the feed, within the publisher’s limit.
    */
   excerpt?: string | null;
@@ -3995,6 +3999,7 @@ export interface NewsItemsSelect<T extends boolean = true> {
   url?: T;
   source?: T;
   publishedAt?: T;
+  image?: T;
   excerpt?: T;
   topics?: T;
   lang?: T;

@@ -38091,7 +38091,10 @@
       "values": [
         "eu-agrifood",
         "eu-fertiliser",
-        "eu-oil-bulletin"
+        "eu-oil-bulletin",
+        "eia-brent",
+        "ecb",
+        "world-bank"
       ]
     },
     "public.enum_diesel_prices_vat": {
@@ -38299,6 +38302,9 @@
         "fetchEuCereal",
         "fetchEuFertiliser",
         "fetchOilBulletin",
+        "fetchBrent",
+        "fetchEcbRates",
+        "fetchWorldBank",
         "ingestNews",
         "evaluateAlerts",
         "draftMarketNote",
@@ -38322,6 +38328,9 @@
         "fetchEuCereal",
         "fetchEuFertiliser",
         "fetchOilBulletin",
+        "fetchBrent",
+        "fetchEcbRates",
+        "fetchWorldBank",
         "ingestNews",
         "evaluateAlerts",
         "draftMarketNote",
@@ -38373,6 +38382,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "a8a51d49-ca68-42ea-a969-01dcdf4359fa",
+  "id": "463daacd-fc7c-40c1-8dd3-1dbddd83c0ff",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

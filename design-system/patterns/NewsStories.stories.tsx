@@ -3,21 +3,14 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { newsUi } from '@/i18n/news'
 
 import { storyLocale } from '../fixtures/story'
-import {
-  ImportantNow,
-  StoryRow,
-  TopicChip,
-  type StoryCardData,
-  type StoryLabels,
-} from './NewsStories'
+import { ImportantNow, NewsList, type StoryCardData, type StoryLabels } from './NewsStories'
 
 const meta: Meta = { title: 'Patterns/News stories', parameters: { layout: 'padded' } }
 export default meta
 type Story = StoryObj
 
 const labels = (locale: 'ro' | 'en'): StoryLabels => ({
-  sources: newsUi[locale].sources,
-  references: newsUi[locale].references,
+  more: newsUi[locale].more,
   via: newsUi[locale].via,
 })
 
@@ -29,7 +22,7 @@ const sample: StoryCardData[] = [
     rank: 1,
     title: 'APIA începe plata în avans pentru fermieri de luni',
     href: '#',
-    topic: { label: 'Subvenții', tone: 'support' },
+    topic: { label: 'Subvenții' },
     lang: 'ro',
     date: at(9),
     excerpt: {
@@ -52,7 +45,7 @@ const sample: StoryCardData[] = [
     rank: 2,
     title: 'Ukraine hopes for grain exports breakthrough',
     href: '#',
-    topic: { label: 'Prețuri', tone: 'price' },
+    topic: { label: 'Prețuri' },
     lang: 'en',
     date: at(7),
     sources: [
@@ -69,7 +62,7 @@ const sample: StoryCardData[] = [
     rank: 3,
     title: 'Seceta lovește culturile de rapiță din Dobrogea',
     href: '#',
-    topic: { label: 'Vreme', tone: 'weather' },
+    topic: { label: 'Vreme' },
     lang: 'ro',
     date: at(6),
     sources: [
@@ -86,7 +79,7 @@ const sample: StoryCardData[] = [
     rank: 4,
     title: 'Comisia Europeană propune noi cote pentru importurile din Ucraina',
     href: '#',
-    topic: { label: 'Comerț UE', tone: 'trade' },
+    topic: { label: 'Comerț UE' },
     lang: 'ro',
     date: at(5),
     sources: [{ name: 'Mediafax', title: 'Noi cote pentru importurile din Ucraina', url: '#g' }],
@@ -96,7 +89,7 @@ const sample: StoryCardData[] = [
     rank: 5,
     title: 'Focar de pestă porcină africană confirmat în Tulcea',
     href: '#',
-    topic: { label: 'Boli', tone: 'disease' },
+    topic: { label: 'Boli' },
     lang: 'ro',
     date: at(4),
     sources: [{ name: 'Agrointel', title: 'Focar de pestă porcină africană în Tulcea', url: '#h' }],
@@ -115,28 +108,26 @@ export const Important: Story = {
   },
 }
 
-/** A daily edition entry: every source with its own headline. */
-export const EditionEntry: Story = {
+/** A list (topic sections on `/stiri`, daily editions); "+2 surse" opens the other outlets. */
+export const List: Story = {
   render: (_, { globals }) => {
     const locale = storyLocale(globals)
     return (
       <div className="max-w-3xl">
-        <StoryRow story={sample[0]} locale={locale} labels={labels(locale)} references level={2} />
+        <NewsList stories={sample} locale={locale} labels={labels(locale)} />
       </div>
     )
   },
 }
 
-/** The topic chips in every tone. */
-export const Chips: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-2">
-      <TopicChip label="Prețuri" tone="price" />
-      <TopicChip label="Subvenții" tone="support" />
-      <TopicChip label="Vreme" tone="weather" />
-      <TopicChip label="Boli" tone="disease" />
-      <TopicChip label="Comerț UE" tone="trade" />
-      <TopicChip label="Fermă" tone="neutral" />
-    </div>
-  ),
+/** The home panel's column: small type, the first story with its excerpt. */
+export const Compact: Story = {
+  render: (_, { globals }) => {
+    const locale = storyLocale(globals)
+    return (
+      <div className="max-w-md rounded-xl bg-surface p-6">
+        <NewsList stories={sample} locale={locale} labels={labels(locale)} size="sm" excerptFirst />
+      </div>
+    )
+  },
 }

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { ArticleCard } from '@ds/patterns/Articles'
 import { SubscribeFormLazy } from '@ds/patterns/Lazy'
-import { ImportantNow, StoryRow } from '@ds/patterns/NewsStories'
+import { ImportantNow, NewsList } from '@ds/patterns/NewsStories'
 import { SectionHeading } from '@ds/patterns/Sections'
 import { JsonLd } from '@/components/JsonLd'
 import { storyCard, storyLabels } from '@/components/NewsCards'
@@ -93,8 +93,9 @@ export async function NewsPage({ locale }: { locale: Locale }) {
   // Topics in the order of their best story.
   const byTopic = new Map<NewsTopic, typeof rest>()
   for (const s of rest) byTopic.set(s.topic, [...(byTopic.get(s.topic) ?? []), s])
+  // Generic farming goes last: the specific topics are what a farmer scans for.
+  const topicGroups = [...byTopic].sort(([a], [b]) => Number(a === 'ferma') - Number(b === 'ferma'))
   const crumbs = [{ name: t.title, url }]
-  const [lead, ...more] = own
   const today = editions[0]?.date
 
   return (
@@ -120,7 +121,7 @@ export async function NewsPage({ locale }: { locale: Locale }) {
         className="mx-auto mt-10 grid max-w-page gap-6 px-4 md:mt-14 md:px-8"
       >
         <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
-          <SectionHeading id="important" kicker={n.kicker} title={n.important} />
+          <SectionHeading id="important" title={n.important} />
           {status.updated && (
             <p className="flex items-center gap-2 text-small text-muted">
               <span className="relative flex size-2.5" aria-hidden="true">
@@ -138,62 +139,27 @@ export async function NewsPage({ locale }: { locale: Locale }) {
         )}
       </section>
 
-      {lead && (
-        <section
-          aria-labelledby="agrinvest"
-          className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-20 md:px-8"
-        >
-          <SectionHeading id="agrinvest" kicker={a.kicker} title={a.latest} />
-          <ArticleCard
-            variant="feature"
-            locale={locale}
-            href={lead.href}
-            title={lead.title}
-            summary={lead.summary}
-            date={lead.date}
-            image={lead.image}
-          />
-          {more.length > 0 && (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {more.slice(0, 9).map((o) => (
-                <ArticleCard
-                  key={o.id}
-                  locale={locale}
-                  href={o.href}
-                  title={o.title}
-                  summary={o.summary}
-                  date={o.date}
-                  image={o.image}
-                />
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-
       <div className="mx-auto mt-16 grid max-w-page gap-12 px-4 md:mt-20 md:px-8 lg:grid-cols-12">
-        <section aria-labelledby="rest" className="grid content-start gap-8 lg:col-span-8">
+        <section aria-labelledby="rest" className="grid content-start gap-10 lg:col-span-8">
           <h2 id="rest" className="text-h3 font-semibold">
             {n.rest}
           </h2>
           {byTopic.size ? (
-            [...byTopic].map(([topic, list]) => (
-              <section key={topic} aria-labelledby={`t-${topic}`} className="grid gap-4">
-                <h3 id={`t-${topic}`} className="text-h4 font-semibold">
+            topicGroups.map(([topic, list]) => (
+              <section key={topic} aria-labelledby={`t-${topic}`} className="grid gap-3">
+                <h3
+                  id={`t-${topic}`}
+                  className="text-caption font-semibold tracking-wide text-subtle uppercase"
+                >
                   {topicLabels[topic][locale]}
                 </h3>
-                <ol className="grid divide-y divide-line border-y border-line">
-                  {list.slice(0, PER_TOPIC).map((s) => (
-                    <li key={s.key} className="py-4">
-                      <StoryRow
-                        story={storyCard(s, s.rank, locale)}
-                        locale={locale}
-                        labels={labels}
-                        level={4}
-                      />
-                    </li>
-                  ))}
-                </ol>
+                <NewsList
+                  stories={list.slice(0, PER_TOPIC).map((x) => storyCard(x, x.rank, locale))}
+                  locale={locale}
+                  labels={labels}
+                  level={4}
+                  className="border-t border-line pt-4"
+                />
               </section>
             ))
           ) : (
@@ -273,6 +239,27 @@ export async function NewsPage({ locale }: { locale: Locale }) {
           </div>
         </aside>
       </div>
+      {own.length > 0 && (
+        <section
+          aria-labelledby="agrinvest"
+          className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-20 md:px-8"
+        >
+          <SectionHeading id="agrinvest" title={a.latest} />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {own.slice(0, 6).map((o) => (
+              <ArticleCard
+                key={o.id}
+                locale={locale}
+                href={o.href}
+                title={o.title}
+                summary={o.summary}
+                date={o.date}
+                image={o.image}
+              />
+            ))}
+          </div>
+        </section>
+      )}
       <ToolLinks locale={locale} current={url} />
     </SiteShell>
   )
@@ -337,19 +324,13 @@ export async function NewsDayPage({ locale, date }: { locale: Locale; date: stri
       <PageTitle locale={locale} title={title} summary={n.editionSummary} crumbs={crumbs} />
       <div className="mx-auto mt-10 grid max-w-3xl gap-8 px-4 md:mt-14 md:px-8">
         {entries.length ? (
-          <ol className="grid divide-y divide-line border-y border-line">
-            {entries.map((e, k) => (
-              <li key={e.key} className="py-6">
-                <StoryRow
-                  story={storyCard(e, k + 1, locale)}
-                  locale={locale}
-                  labels={labels}
-                  level={2}
-                  references
-                />
-              </li>
-            ))}
-          </ol>
+          <NewsList
+            stories={entries.map((e, k) => storyCard(e, k + 1, locale))}
+            locale={locale}
+            labels={labels}
+            level={2}
+            className="border-y border-line py-6"
+          />
         ) : (
           <p className="text-body text-muted">{n.editionEmpty}</p>
         )}

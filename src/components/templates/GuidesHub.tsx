@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { ArticleCard, NextSteps, PillarCard } from '@ds/patterns/Articles'
+import { ArticleCard, NextSteps } from '@ds/patterns/Articles'
 import { SectionHeading } from '@ds/patterns/Sections'
 import { JsonLd } from '@/components/JsonLd'
 import { PageTitle } from '@/components/PageParts'
@@ -69,35 +70,48 @@ export async function GuidesHubPage({ locale }: { locale: Locale }) {
       />
       <PageTitle locale={locale} title={t.title} summary={t.summary} crumbs={crumbs} />
 
-      <section
+      <nav
         aria-labelledby="teme"
-        className="mx-auto mt-12 grid max-w-page gap-8 px-4 md:mt-16 md:px-8"
+        className="mx-auto mt-8 grid max-w-page gap-3 px-4 md:mt-10 md:px-8"
       >
-        <SectionHeading id="teme" title={t.pillars} />
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {live.map((p) => (
-            <PillarCard
-              key={p.key}
-              href={pillarPath(p.slug[locale], locale)}
-              title={p.name[locale]}
-              intro={p.intro[locale]}
-              count={t.count(by(p).length)}
-            />
+        <h2 id="teme" className="text-caption font-semibold tracking-wide text-subtle uppercase">
+          {t.pillars}
+        </h2>
+        <ul className="flex flex-wrap gap-x-1 gap-y-2 border-b border-line pb-6">
+          {[
+            ...live.map((p) => ({
+              key: p.key,
+              href: pillarPath(p.slug[locale], locale),
+              name: p.name[locale],
+              n: by(p).length,
+            })),
+            ...(finance.length
+              ? [
+                  {
+                    key: 'finance',
+                    href: financeRoutePath('guides', locale),
+                    name: t.finance.title,
+                    n: finance.length,
+                  },
+                ]
+              : []),
+          ].map((topic) => (
+            <li key={topic.key}>
+              <Link
+                href={topic.href}
+                className="inline-flex items-baseline gap-1.5 rounded-full px-3 py-1.5 text-small font-semibold text-ink no-underline hover:bg-surface hover:text-accent"
+              >
+                {topic.name}
+                <span className="text-caption font-medium text-subtle tabular-nums">{topic.n}</span>
+              </Link>
+            </li>
           ))}
-          {finance.length > 0 && (
-            <PillarCard
-              href={financeRoutePath('guides', locale)}
-              title={t.finance.title}
-              intro={t.finance.intro}
-              count={t.count(finance.length)}
-            />
-          )}
-        </div>
-      </section>
+        </ul>
+      </nav>
 
       <section
         aria-labelledby="noi"
-        className="mx-auto mt-16 grid max-w-page gap-8 px-4 md:mt-24 md:px-8"
+        className="mx-auto mt-10 grid max-w-page gap-8 px-4 md:mt-12 md:px-8"
       >
         <SectionHeading id="noi" title={t.latest} />
         {lead ? (

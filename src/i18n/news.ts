@@ -13,18 +13,6 @@ export const topicLabels: Record<NewsTopic, Record<Locale, string>> = {
   ferma: { ro: 'Din fermă', en: 'Farming' },
 }
 
-/** Short topic names for chips. */
-export const topicChips: Record<NewsTopic, Record<Locale, string>> = {
-  preturi: { ro: 'Prețuri', en: 'Prices' },
-  subventii: { ro: 'Subvenții', en: 'Subsidies' },
-  vreme: { ro: 'Vreme', en: 'Weather' },
-  inputuri: { ro: 'Inputuri', en: 'Inputs' },
-  boli: { ro: 'Boli', en: 'Disease' },
-  comert: { ro: 'Comerț UE', en: 'EU trade' },
-  finantare: { ro: 'Finanțare', en: 'Finance' },
-  ferma: { ro: 'Fermă', en: 'Farming' },
-}
-
 export const newsUi = {
   ro: {
     important: 'Important acum',
@@ -33,6 +21,7 @@ export const newsUi = {
       `Actualizat ${when} · din ${n} ${n === 1 ? 'sursă' : 'surse'}`,
     sources: (n: number) => `${n} ${n === 1 ? 'sursă' : 'surse'}`,
     references: 'Surse',
+    more: (n: number) => `+${n} ${n === 1 ? 'sursă' : 'surse'}`,
     rest: 'Ultimele 48 de ore, pe subiecte',
     archive: 'Arhiva pe zile',
     archiveNone: 'Arhiva apare după prima zi încheiată.',
@@ -55,6 +44,7 @@ export const newsUi = {
       `Updated ${when} · from ${n} ${n === 1 ? 'source' : 'sources'}`,
     sources: (n: number) => `${n} ${n === 1 ? 'source' : 'sources'}`,
     references: 'Sources',
+    more: (n: number) => `+${n} ${n === 1 ? 'source' : 'sources'}`,
     rest: 'The last 48 hours, by topic',
     archive: 'Archive by day',
     archiveNone: 'The archive starts after the first full day.',

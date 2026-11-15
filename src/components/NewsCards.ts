@@ -1,23 +1,14 @@
-import type { StoryCardData, StoryLabels, StoryTone } from '@ds/patterns/NewsStories'
+import type { StoryCardData, StoryLabels } from '@ds/patterns/NewsStories'
 import type { Locale } from '@/i18n/config'
-import { newsUi, topicChips } from '@/i18n/news'
-import type { NewsTopic } from '@/lib/news/lexicon'
+import { newsUi, topicLabels } from '@/i18n/news'
 import type { EditionEntry } from '@/lib/news/types'
 
 /** News stories as cards, shared by `/stiri`, the daily editions and the home panel (7e). */
 
-const topicTone: Record<NewsTopic, StoryTone> = {
-  preturi: 'price',
-  subventii: 'support',
-  vreme: 'weather',
-  boli: 'disease',
-  comert: 'trade',
-  inputuri: 'neutral',
-  finantare: 'neutral',
-  ferma: 'neutral',
-}
-
-/** A ranked story or an edition entry as a card. */
+/**
+ * A ranked story or an edition entry as a card. The time is the first publisher's, because
+ * it is shown next to that publisher's name.
+ */
 export function storyCard(e: EditionEntry, rank: number, locale: Locale): StoryCardData {
   const lead = e.references[0]
   return {
@@ -25,9 +16,9 @@ export function storyCard(e: EditionEntry, rank: number, locale: Locale): StoryC
     rank,
     title: e.title,
     href: lead.url,
-    topic: { label: topicChips[e.topic][locale], tone: topicTone[e.topic] },
+    topic: { label: topicLabels[e.topic][locale] },
     lang: e.lang,
-    date: new Date(e.lastSeen),
+    date: new Date(lead.publishedAt),
     excerpt: lead.excerpt ? { text: lead.excerpt, source: lead.name } : null,
     sources: e.references.map((r) => ({
       name: r.name,
@@ -39,7 +30,6 @@ export function storyCard(e: EditionEntry, rank: number, locale: Locale): StoryC
 }
 
 export const storyLabels = (locale: Locale): StoryLabels => ({
-  sources: newsUi[locale].sources,
-  references: newsUi[locale].references,
+  more: newsUi[locale].more,
   via: newsUi[locale].via,
 })

@@ -8,21 +8,16 @@ import type { CropKey } from '../fixtures/sample'
 import {
   ArrowRightIcon,
   BarleyIcon,
-  DocumentIcon,
-  HandshakeIcon,
-  LeafIcon,
   MaizeIcon,
   RapeseedIcon,
-  ScaleIcon,
   SunflowerIcon,
   WheatIcon,
   type IconProps,
 } from '../icons/icons'
-import { FuelIcon, TrendDownIcon, TrendFlatIcon, TrendUpIcon } from '../icons/server'
-import { LinkedinIcon } from '../icons/social'
+import { FuelIcon } from '../icons/server'
 import { cx } from '../lib/cx'
 import { LiveRotatorLazy } from './Lazy'
-import { StoryRow, type StoryCardData, type StoryLabels } from './NewsStories'
+import { NewsList, type StoryCardData, type StoryLabels } from './NewsStories'
 import { PriceChart } from './PriceChart'
 
 export type LiveKey = CropKey | 'diesel'
@@ -107,42 +102,6 @@ const showWhen: Record<string, Record<LiveKey, string>> = {
   },
 }
 
-const kindIcons: Record<Exclude<FeedKind, 'price'>, (props: IconProps) => ReactNode> = {
-  news: DocumentIcon,
-  agrinvest: HandshakeIcon,
-  guide: LeafIcon,
-  note: ScaleIcon,
-  social: LinkedinIcon,
-}
-
-function FeedIcon({ item }: { item: FeedItem }) {
-  const Icon =
-    item.kind === 'price'
-      ? (item.change ?? 0) > 0
-        ? TrendUpIcon
-        : (item.change ?? 0) < 0
-          ? TrendDownIcon
-          : TrendFlatIcon
-      : kindIcons[item.kind]
-  return (
-    <span
-      className={cx(
-        'inline-flex size-9 shrink-0 items-center justify-center rounded-full',
-        item.kind === 'price'
-          ? (item.change ?? 0) < 0
-            ? 'bg-down-soft text-down'
-            : 'bg-up-soft text-up'
-          : item.kind === 'news' || item.kind === 'social'
-            ? 'bg-raised text-muted ring-1 ring-line'
-            : 'bg-lime-soft text-forest',
-      )}
-      aria-hidden="true"
-    >
-      <Icon className="size-4.5" />
-    </span>
-  )
-}
-
 /** One price as a tab: icon and name, then its latest value and change. A radio underneath. */
 const tabIcons: Record<LiveKey, (props: IconProps) => ReactNode> = {
   wheat: WheatIcon,
@@ -181,34 +140,26 @@ function OwnFeed({
   locale: Locale
   labels: LivePanelProps['labels']
 }) {
+  const title =
+    'line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent'
   return (
     <ol className="grid divide-y divide-line">
       {feed.map((item) => (
-        <li key={item.id} className="flex gap-3 py-3.5 first:pt-0 last:pb-0">
-          <FeedIcon item={item} />
-          <div className="grid min-w-0 gap-0.5">
-            <p className="text-caption text-muted">
-              <span className="font-medium text-ink">{labels.kinds[item.kind]}</span>
-              {item.source && <> · {item.source}</>} ·{' '}
-              <time dateTime={item.date.toISOString()}>{formatWhen(item.date, locale)}</time>
-            </p>
-            {item.external ? (
-              <a
-                href={item.href}
-                rel="noopener"
-                className="line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent hover:underline"
-              >
-                {item.title}
-              </a>
-            ) : (
-              <Link
-                href={item.href}
-                className="line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent hover:underline"
-              >
-                {item.title}
-              </Link>
-            )}
-          </div>
+        <li key={item.id} className="grid gap-1 py-3 first:pt-0 last:pb-0">
+          {item.external ? (
+            <a href={item.href} rel="noopener" className={title}>
+              {item.title}
+            </a>
+          ) : (
+            <Link href={item.href} className={title}>
+              {item.title}
+            </Link>
+          )}
+          <p className="text-caption text-muted">
+            <span className="font-semibold text-ink">{labels.kinds[item.kind]}</span>
+            {item.source && <> · {item.source}</>} ·{' '}
+            <time dateTime={item.date.toISOString()}>{formatWhen(item.date, locale)}</time>
+          </p>
         </li>
       ))}
     </ol>
@@ -220,8 +171,9 @@ function OwnFeed({
  * The tabs are radio inputs named after each price, so switching needs no JavaScript; a
  * small island (`LiveRotator`) moves to the next tab every few seconds until the visitor
  * picks one, and holds while the pointer or focus is on the panel. Beside it, the news ranked
- * by the hourly job (Phase 7e: topic, sources, freshness), each story with its numbered
- * sources, then Agrinvest's own latest updates. Server-rendered; every link is in the HTML.
+ * by the hourly job (Phase 7e): each headline with its source in bold and the time, then
+ * Agrinvest's own latest updates in the same plain form. Server-rendered; every link is in the
+ * HTML.
  */
 export function LivePanel({
   locale,
@@ -312,19 +264,14 @@ export function LivePanel({
                     <p className="text-caption text-muted">{labels.sourcesLine(storySources)}</p>
                   ) : null}
                 </div>
-                <ol className="grid divide-y divide-line">
-                  {stories.map((s, i) => (
-                    <li key={s.key} className="py-4 first:pt-0 last:pb-0">
-                      <StoryRow
-                        story={s}
-                        locale={locale}
-                        labels={labels.story!}
-                        level={4}
-                        showExcerpt={i === 0}
-                      />
-                    </li>
-                  ))}
-                </ol>
+                <NewsList
+                  stories={stories}
+                  locale={locale}
+                  labels={labels.story!}
+                  size="sm"
+                  level={4}
+                  excerptFirst
+                />
                 {feed.length > 0 && (
                   <div className="grid gap-3 border-t border-line pt-4">
                     <h3 className="text-caption font-semibold tracking-wide text-subtle uppercase">

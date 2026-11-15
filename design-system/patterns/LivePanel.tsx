@@ -131,21 +131,54 @@ function LiveTab({ c, id, first }: { c: LiveChart; id: string; first: boolean })
 }
 
 /** Agrinvest's own updates: an icon per kind, the kind and time, then the title. */
+/** "Toate știrile →": closes a column, pinned to its bottom so both columns end level. */
+function PanelLink({
+  link,
+  plain = false,
+}: {
+  link: { href: string; label: string }
+  /** Inside a row of links: no top rule, no auto margin. */
+  plain?: boolean
+}) {
+  return (
+    <Link
+      href={link.href}
+      className={cx(
+        'group inline-flex items-center gap-1.5 text-small font-semibold text-accent no-underline hover:underline',
+        !plain && 'mt-auto w-full border-t border-line pt-4',
+      )}
+    >
+      {link.label}
+      <ArrowRightIcon className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
+    </Link>
+  )
+}
+
 function OwnFeed({
   feed,
   locale,
   labels,
+  layout = 'list',
 }: {
   feed: FeedItem[]
   locale: Locale
   labels: LivePanelProps['labels']
+  /** `row`: side by side under the chart (three short entries). */
+  layout?: 'list' | 'row'
 }) {
   const title =
     'line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent'
   return (
-    <ol className="grid divide-y divide-line">
+    <ol
+      className={cx(
+        'grid',
+        layout === 'row'
+          ? 'gap-4 md:grid-cols-3 md:gap-6'
+          : 'divide-y divide-line [&>li]:py-3 [&>li:first-child]:pt-0 [&>li:last-child]:pb-0',
+      )}
+    >
       {feed.map((item) => (
-        <li key={item.id} className="grid gap-1 py-3 first:pt-0 last:pb-0">
+        <li key={item.id} className="grid content-start gap-1">
           {item.external ? (
             <a href={item.href} rel="noopener" className={title}>
               {item.title}
@@ -221,8 +254,13 @@ export function LivePanel({
           </div>
         </header>
 
-        <div className="grid lg:grid-cols-12">
-          <div className="group/live grid content-start gap-6 p-5 md:p-8 lg:col-span-7">
+        {/*
+          Desktop: the chart top left, Agrinvest's own updates bottom left (side by side), the
+          news down the whole right column, so both columns end level. Phones: chart, news,
+          then the updates.
+        */}
+        <div className="grid lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
+          <div className="group/live grid content-start gap-6 p-5 md:p-8 lg:col-span-7 lg:row-start-1">
             {charts.length > 0 ? (
               <>
                 <fieldset className="min-w-0">
@@ -254,8 +292,7 @@ export function LivePanel({
               <p className="text-small text-muted">{labels.chart.empty}</p>
             )}
           </div>
-
-          <div className="grid content-start gap-5 border-t border-line bg-surface p-5 md:p-8 lg:col-span-5 lg:border-t-0 lg:border-l">
+          <div className="flex flex-col gap-5 border-t border-line bg-surface p-5 md:p-8 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:border-t-0 lg:border-l">
             {ranked ? (
               <>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -272,14 +309,7 @@ export function LivePanel({
                   level={4}
                   excerptFirst
                 />
-                {feed.length > 0 && (
-                  <div className="grid gap-3 border-t border-line pt-4">
-                    <h3 className="text-caption font-semibold tracking-wide text-subtle uppercase">
-                      {labels.own}
-                    </h3>
-                    <OwnFeed feed={feed.slice(0, 3)} locale={locale} labels={labels} />
-                  </div>
-                )}
+                <PanelLink link={links.news} />
               </>
             ) : (
               <>
@@ -289,21 +319,26 @@ export function LivePanel({
                 ) : (
                   <p className="text-small text-muted">{labels.feedEmpty}</p>
                 )}
+                <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-4">
+                  <PanelLink link={links.news} plain />
+                  <PanelLink link={links.prices} plain />
+                </div>
               </>
             )}
-            <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-4">
-              {[links.news, links.prices].map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="group inline-flex items-center gap-1.5 text-small font-semibold text-accent no-underline hover:underline"
-                >
-                  {l.label}
-                  <ArrowRightIcon className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
-                </Link>
-              ))}
-            </div>
           </div>
+          {ranked && (
+            <div className="flex flex-col gap-5 border-t border-line p-5 md:p-8 lg:col-span-7 lg:row-start-2 lg:border-t-0 lg:pt-0">
+              {feed.length > 0 && (
+                <section className="grid gap-3 lg:border-t lg:border-line lg:pt-6">
+                  <h3 className="text-caption font-semibold tracking-wide text-subtle uppercase">
+                    {labels.own}
+                  </h3>
+                  <OwnFeed feed={feed.slice(0, 3)} locale={locale} labels={labels} layout="row" />
+                </section>
+              )}
+              <PanelLink link={links.prices} />
+            </div>
+          )}
         </div>
       </div>
     </section>

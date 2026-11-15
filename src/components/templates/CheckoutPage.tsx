@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 
 import { CheckoutForm } from '@ds/patterns/CheckoutForm'
-import { OrderSummary } from '@ds/patterns/Commerce'
 import { JsonLd } from '@/components/JsonLd'
-import { PageTitle } from '@/components/PageParts'
+import { Crumbs } from '@/components/PageParts'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { commerceUi } from '@/i18n/commerce'
@@ -60,51 +59,42 @@ export async function CheckoutPage({ locale }: { locale: Locale }) {
           ]),
         ]}
       />
-      <PageTitle
+      <CheckoutForm
         locale={locale}
-        title={t.checkoutTitle}
-        summary={t.checkoutSummary}
-        crumbs={[
-          { name: t.cartTitle, url: cartPath(locale) },
-          { name: t.checkoutTitle, url: checkoutPath(locale) },
-        ]}
-      />
-      <div className="mx-auto mt-10 grid max-w-page gap-8 px-4 md:px-8 lg:grid-cols-12">
-        <div className="lg:col-span-8">
-          <CheckoutForm
+        action={placeOrder}
+        lookup={lookupCompany}
+        counties={counties.map((c) => ({ value: String(c.id), label: c.name }))}
+        bases={bases.map((b) => ({ value: String(b.id), label: b.name }))}
+        needsCertificate={cart.needsCertificate}
+        hasProtection={cart.hasProtection}
+        empty={cart.lines.length === 0}
+        lines={cart.lines.map((l) => ({
+          sku: l.sku,
+          name: l.name ?? l.sku,
+          pack:
+            l.size && l.unit
+              ? (packLabel({ size: l.size, unit: l.unit }, locale) ?? undefined)
+              : undefined,
+          quantity: l.quantity,
+          total: l.lineTotal === null ? '–' : money(l.lineTotal),
+        }))}
+        total={money(cart.total)}
+        crumbs={
+          <Crumbs
             locale={locale}
-            action={placeOrder}
-            lookup={lookupCompany}
-            counties={counties.map((c) => ({ value: String(c.id), label: c.name }))}
-            bases={bases.map((b) => ({ value: String(b.id), label: b.name }))}
-            needsCertificate={cart.needsCertificate}
-            hasProtection={cart.hasProtection}
-            empty={cart.lines.length === 0}
-            sourcePath={checkoutPath(locale)}
-            privacyHref={fixedUrl('privacy', locale)}
-            termsHref={fixedUrl('terms', locale)}
-            shopHref={shopPath(locale)}
+            items={[
+              { name: t.cartTitle, url: cartPath(locale) },
+              { name: t.checkoutTitle, url: checkoutPath(locale) },
+            ]}
           />
-        </div>
-        {cart.lines.length > 0 && (
-          <div className="lg:col-span-4">
-            <OrderSummary
-              title={t.summary}
-              rows={cart.lines.map((l) => ({
-                label: [
-                  `${l.quantity} × ${l.name ?? l.sku}`,
-                  l.size && l.unit ? packLabel({ size: l.size, unit: l.unit }, locale) : null,
-                ]
-                  .filter(Boolean)
-                  .join(', '),
-                value: l.lineTotal === null ? '–' : money(l.lineTotal),
-              }))}
-              total={{ label: t.total, value: money(cart.total) }}
-              note={t.totalNote}
-            />
-          </div>
-        )}
-      </div>
+        }
+        sourcePath={checkoutPath(locale)}
+        privacyHref={fixedUrl('privacy', locale)}
+        termsHref={fixedUrl('terms', locale)}
+        shopHref={shopPath(locale)}
+        cartHref={cartPath(locale)}
+        contactHref={fixedUrl('contact', locale)}
+      />
     </SiteShell>
   )
 }

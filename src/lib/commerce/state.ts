@@ -45,6 +45,14 @@ export type CheckoutState = {
   attempt?: number
   reference?: string
   assignee?: { name: string; role?: string | null }
+  /** What the confirmation repeats back: who we call, where the proforma goes, what was ordered. */
+  order?: {
+    firstName?: string
+    phone?: string
+    email?: string
+    lines: { name: string; pack?: string; quantity: number; total: string }[]
+    total: string
+  }
 }
 
 export const initialCheckoutState: CheckoutState = { status: 'idle' }

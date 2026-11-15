@@ -116,42 +116,52 @@ const form = {
   privacyHref: '#privacy',
   termsHref: '#terms',
   shopHref: '#shop',
+  cartHref: '#cart',
+  contactHref: '#contact',
+  lines: [
+    { sku: 'AGR-1', name: 'Uree', pack: '50 kg', quantity: 10, total: '1.450 lei' },
+    { sku: 'AGR-2', name: 'Adengo', pack: '5 l', quantity: 2, total: '2.980 lei' },
+  ],
+  total: '4.430 lei',
 }
 
-/** One page, no JavaScript needed. Company and address fields hide with CSS alone. */
+/**
+ * One page, no JavaScript needed: buyer, delivery, payment, and a summary that stays in view.
+ * Online card payment is shown but disabled until a provider is chosen.
+ */
 export const Checkout: Story = {
   render: (_, { globals }) => (
-    <Page>
-      <div className="max-w-2xl">
-        <CheckoutForm
-          {...form}
-          locale={storyLocale(globals)}
-          needsCertificate
-          hasProtection
-          empty={false}
-        />
-      </div>
-    </Page>
+    <CheckoutForm
+      {...form}
+      locale={storyLocale(globals)}
+      needsCertificate
+      hasProtection
+      empty={false}
+    />
   ),
 }
 
+/** After sending: "we will call you back", the order number, who calls and what happens next. */
 export const CheckoutDone: Story = {
   render: (_, { globals }) => (
-    <Page>
-      <div className="max-w-2xl">
-        <CheckoutForm
-          {...form}
-          locale={storyLocale(globals)}
-          needsCertificate={false}
-          hasProtection={false}
-          empty
-          initialState={{
-            status: 'success',
-            reference: 'AGR-2611-7KQ2M',
-            assignee: { name: 'Biroul comercial' },
-          }}
-        />
-      </div>
-    </Page>
+    <CheckoutForm
+      {...form}
+      locale={storyLocale(globals)}
+      needsCertificate={false}
+      hasProtection={false}
+      empty
+      initialState={{
+        status: 'success',
+        reference: 'AGR-2611-7KQ2M',
+        assignee: { name: 'Agrinvest', role: 'Birou comercial' },
+        order: {
+          firstName: 'Ion',
+          phone: '0741 201 056',
+          email: 'ion@example.ro',
+          lines: form.lines,
+          total: form.total,
+        },
+      }}
+    />
   ),
 }

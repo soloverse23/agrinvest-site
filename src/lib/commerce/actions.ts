@@ -8,6 +8,7 @@ import { cartPath } from '@/i18n/routes'
 import { payloadClient } from '@/lib/content/payload'
 import { CONSENT_VERSION } from '@/lib/leads/state'
 import { allow } from '@/lib/leads/rate-limit'
+import { formatQuantity } from '@/lib/format'
 import { newReference } from '@/lib/reference'
 
 import { lookupCached } from './anaf'
@@ -245,10 +246,24 @@ export async function placeOrder(_prev: CheckoutState, form: FormData): Promise<
       console.error(`after order ${order.reference}`, error)
     }
     const person = typeof order.assignedTo === 'object' ? order.assignedTo : null
+    const money = (value: number | null) =>
+      value === null ? '–' : formatQuantity(value, 'lei', locale)
     return {
       status: 'success',
       reference: order.reference,
       assignee: person ? { name: person.name, role: person.role } : undefined,
+      order: {
+        firstName: v.name.split(/\s+/)[0],
+        phone: v.phone,
+        email: v.email,
+        lines: cart.lines.map((l) => ({
+          name: l.name ?? l.sku,
+          pack: l.size ? `${l.size} ${l.unit}` : undefined,
+          quantity: l.quantity,
+          total: money(l.lineTotal),
+        })),
+        total: money(cart.total),
+      },
     }
   } catch (error) {
     console.error('placeOrder failed', error)

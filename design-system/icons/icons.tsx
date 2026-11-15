@@ -146,4 +146,8 @@ export const DocumentIcon = icon(
   'DocumentIcon',
   <path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6" />,
 )
+export const CardIcon = icon(
+  'CardIcon',
+  <path d="M3.5 6.5a1.5 1.5 0 0 1 1.5-1.5h14a1.5 1.5 0 0 1 1.5 1.5v11a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5zM3.5 10h17M7 15h4" />,
+)
 export const PlayIcon = icon('PlayIcon', <path d="M8 5.5v13l10.5-6.5z" />)

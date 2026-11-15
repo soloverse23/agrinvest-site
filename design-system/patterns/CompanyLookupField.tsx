@@ -70,7 +70,7 @@ export function CompanyLookupField({
 
   return (
     <div ref={box} className="grid gap-2">
-      <div className="grid items-end gap-3 sm:grid-cols-[1fr_auto]">
+      <div className="grid items-end gap-3 md:grid-cols-[1fr_auto]">
         <TextField
           name="cui"
           label={labels.cui}

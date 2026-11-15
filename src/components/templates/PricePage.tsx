@@ -5,9 +5,9 @@ import { notFound } from 'next/navigation'
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { FinanceLinks } from '@ds/patterns/Finance'
 import { LineChart } from '@ds/patterns/LineChart'
+import { MarketTile } from '@ds/patterns/Markets'
 import { CropBadge } from '@ds/patterns/parts'
 import { SectionHeading } from '@ds/patterns/Sections'
-import { GrainPrices } from '@ds/patterns/widgets/GrainPrices'
 import type { WidgetState } from '@ds/patterns/widgets/types'
 import { Badge } from '@ds/primitives/Badge'
 import { Button } from '@ds/primitives/Button'
@@ -168,12 +168,45 @@ export async function PricesHubPage({ locale }: { locale: Locale }) {
   return (
     <MarketHub
       locale={locale}
-      afterGrain={
+      first={
         hasEu ? (
-          <div className="grid gap-3 lg:max-w-3xl">
-            <GrainPrices {...props} level={3} />
-            <p className="text-caption text-muted">{m.grainLocalLead}</p>
-          </div>
+          <section aria-labelledby="grupa-romania" className="grid gap-6">
+            <SectionHeading id="grupa-romania" title={m.grainLocal} lead={m.grainLocalLead} />
+            <ul className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+              {overview
+                .filter((c) => c.latest && c.lines[0])
+                .map((c) => {
+                  const line = c.lines[0]!
+                  const last = c.latest!
+                  const prev = last.value - last.change
+                  return (
+                    <li key={c.id}>
+                      <MarketTile
+                        locale={locale}
+                        name={c.name}
+                        href={c.href}
+                        value={last.value}
+                        decimals={0}
+                        unit={unitOfLine(line)}
+                        date={last.date}
+                        changePct={prev ? (last.change / prev) * 100 : null}
+                        spark={line.points.map((x) => x.value)}
+                        open={marketsUi[locale].ui.open}
+                      />
+                    </li>
+                  )
+                })}
+            </ul>
+            {props.source && (
+              <p className="text-caption text-muted">
+                {marketsUi[locale].hub.sources}:{' '}
+                <a href={props.source.url} className="text-accent">
+                  {props.source.name}
+                </a>
+                , {formatDate(props.source.date, locale)}
+              </p>
+            )}
+          </section>
         ) : null
       }
       after={

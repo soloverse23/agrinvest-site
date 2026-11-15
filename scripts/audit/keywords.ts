@@ -85,7 +85,8 @@ function target(row: Kw): { url: string; note: string } {
   if (page.startsWith('/cereale')) return { url: page, note: '' }
 
   // Storage
-  if (page === '/depozitare/[judet]') return { url: '/baze/{baza}', note: 'one page per silo base' }
+  if (page === '/depozitare/[judet]')
+    return { url: '/depozitare', note: 'bases on the storage map; no base pages (decision 0004)' }
   if (page.startsWith('/depozitare')) return { url: page, note: '' }
 
   // Shop

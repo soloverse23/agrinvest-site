@@ -3,12 +3,12 @@ import type { CollectionConfig } from 'payload'
 import { isStaff, publishedOrStaff } from '@/access'
 import { coordinates, factStatus, faq, seo, slug } from '@/fields'
 import { locales } from '@/i18n/config'
-import { basePath } from '@/i18n/routes'
+import { baseUrl } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
 
 /**
- * Silo bases and collection points (`/baze/{slug}`, `/en/bases/{slug}`; the slug is shared). Most details are not published yet
+ * Silo bases and collection points, shown on the storage page's map (`#baza-{slug}`; the slug is shared). Most details are not published yet
  * (figures register S4), so each group carries its own verification status and the page
  * shows only what exists.
  */
@@ -22,8 +22,9 @@ export const Bases: CollectionConfig = {
     afterChange: [
       ({ doc, req }) => {
         revalidate(tags.bases)
+        // The storage page shows the bases on its map.
         if (doc._status === 'published' && (!req.locale || req.locale === 'ro')) {
-          void pingIndexNow(locales.map((l) => basePath(doc.slug, l)))
+          void pingIndexNow(locales.map((l) => baseUrl(doc.slug, l).split('#')[0]!))
         }
       },
     ],

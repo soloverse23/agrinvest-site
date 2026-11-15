@@ -56,7 +56,7 @@ const reducedMotion = () => window.matchMedia(REDUCE).matches
 export function HeroCarousel({
   slides,
   labels,
-  interval = 7000,
+  interval = 4000,
   children,
   rail,
   still,

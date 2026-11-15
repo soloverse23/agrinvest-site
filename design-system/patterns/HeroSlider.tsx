@@ -87,7 +87,7 @@ export function HeroSlider({
   header,
   slides,
   labels,
-  seconds = 7,
+  seconds = 4,
   prices,
   needs,
   as = 'h1',

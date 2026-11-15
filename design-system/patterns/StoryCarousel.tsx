@@ -113,7 +113,7 @@ export function StoryCarousel({
       <div className={cx(wrap, 'flex flex-col gap-5 md:flex-row md:items-end md:justify-between')}>
         <div className="grid max-w-3xl gap-3">
           <Kicker>{kicker}</Kicker>
-          <h2 id={id} className="scroll-mt-24 text-h2 font-semibold text-balance">
+          <h2 id={id} className="text-h2 font-semibold text-balance">
             {title}
           </h2>
         </div>

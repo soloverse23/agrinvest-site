@@ -302,7 +302,7 @@ export async function FinanceProductPage({
       >
         <ProductTabs label={c.tabs.label} items={tabs} />
         {example?.title && (
-          <div id="exemplu" className="scroll-mt-16">
+          <div id="exemplu">
             <WorkedExample
               kicker={t.example}
               title={example.title}

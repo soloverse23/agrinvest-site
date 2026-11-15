@@ -688,7 +688,7 @@ export async function ProductPage({
             <ProductSection id="doze" title={t.doses} lead={rows.length ? t.doseNote : t.noDoses}>
               {rows.length > 0 && (
                 <>
-                  <div id="calculator" className="scroll-mt-16">
+                  <div id="calculator" className="scroll-mt-12">
                     <DoseCalculatorLazy
                       locale={locale}
                       uses={calcUses}

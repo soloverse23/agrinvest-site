@@ -607,7 +607,7 @@ function Product({
           <ProductTabs label={P.tabs} items={tabs} current="doze" />
 
           <ProductSection id="doze" title={t.doses} lead={t.doseNote}>
-            <div id="calculator" className="scroll-mt-16">
+            <div id="calculator" className="scroll-mt-12">
               <DoseCalculator
                 locale={locale}
                 uses={calcUses}

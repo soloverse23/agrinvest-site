@@ -13,7 +13,6 @@ const coreRo = [
   '/cereale/grau',
   '/depozitare',
   '/depozitare/uscare',
-  '/baze/pogoanele',
   '/finantare',
   '/logistica',
   '/parteneri',
@@ -30,7 +29,6 @@ const coreEn = [
   '/en/grain/wheat',
   '/en/storage',
   '/en/storage/drying',
-  '/en/bases/pogoanele',
   '/en/financing',
   '/en/logistics',
   '/en/partners',
@@ -166,12 +164,18 @@ test.describe('Language switch', () => {
     await expect(page).toHaveURL('/en/about')
   })
 
-  test('crop and base pages switch to their English twins', async ({ page }) => {
+  test('crop pages switch to their English twins', async ({ page }) => {
     const en = () => page.getByRole('group', { name: 'Limba' }).getByRole('link', { name: 'en' })
     await page.goto('/cereale/grau')
     await expect(en()).toHaveAttribute('href', '/en/grain/wheat')
+  })
+
+  test('old base pages redirect to the base on the storage map', async ({ page }) => {
     await page.goto('/baze/pogoanele')
-    await expect(en()).toHaveAttribute('href', '/en/bases/pogoanele')
+    await expect(page).toHaveURL('/depozitare#baza-pogoanele')
+    await expect(page.locator('#baze [aria-live]')).toContainText('Pogoanele')
+    await page.goto('/en/bases/pogoanele')
+    await expect(page).toHaveURL('/en/storage#baza-pogoanele')
   })
 })
 
@@ -280,18 +284,12 @@ test.describe('Core page content', () => {
     ).toHaveCount(1)
   })
 
-  test('a base page pre-selects its base in the delivery form', async ({ page }) => {
-    await page.goto('/baze/pogoanele')
-    await expect(page.getByLabel('Baza cea mai apropiată')).toHaveValue(/\d+/)
-    const selected = await page
-      .getByLabel('Baza cea mai apropiată')
-      .evaluate((el: HTMLSelectElement) => el.selectedOptions[0]?.textContent)
-    expect(selected).toBe('Pogoanele')
-  })
-
-  test('the base map lists every base with a link to its page', async ({ page }) => {
+  test('the base map marks every base and links to no base pages', async ({ page }) => {
     await page.goto('/depozitare')
-    await expect(page.locator('#baze nav a[href^="/baze/"]')).toHaveCount(17)
+    const map = page.locator('#baze svg[role=group]')
+    await expect(map.getByRole('button', { name: /^Buzău: Pogoanele/ })).toHaveCount(1)
+    await expect(map.locator('[id^="baza-"]')).toHaveCount(17)
+    await expect(page.locator('main a[href^="/baze/"]')).toHaveCount(0)
   })
 
   test('English pages have their own blocks, not Romanian fallbacks', async ({ page }) => {
@@ -319,15 +317,13 @@ test.describe('Interactions', () => {
     await expect(page).toHaveURL(/\/preturi\/porumb$/)
   })
 
-  test('the county map shades the counties with bases and names each on hover', async ({
-    page,
-  }) => {
+  test('a county on the base map opens a box with its bases', async ({ page }) => {
     await page.goto('/depozitare')
-    const map = page.locator('#baze figure svg[role=img]')
-    await expect(map).toHaveAttribute('aria-label', /Buzău/)
-    await expect(page.locator('#baze figure use[class*="fill-surface"]')).not.toHaveCount(0)
-    await expect(page.locator('#baze figure title', { hasText: /^Buzău: / })).toHaveCount(1)
-    await expect(page.locator('#baze figcaption')).toContainText('Capacitate pe județ')
+    await page
+      .locator('#baze')
+      .getByRole('button', { name: /^Buzău:/ })
+      .click()
+    await expect(page.locator('#baze [aria-live]')).toContainText('Pogoanele')
   })
 
   test('the live panel switches prices without JavaScript', async ({ browser }) => {
@@ -640,8 +636,8 @@ test.describe('Finance cross-selling', () => {
     await page.getByRole('button', { name: 'Șterge' }).click()
   })
 
-  test('crop and base pages link to stock financing', async ({ page }) => {
-    for (const url of ['/cereale/grau', '/baze/pogoanele', '/en/grain/wheat']) {
+  test('crop pages link to stock financing', async ({ page }) => {
+    for (const url of ['/cereale/grau', '/en/grain/wheat']) {
       await page.goto(url)
       await expect(
         page
@@ -837,7 +833,7 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     await page.goto('/cereale/grau')
     await expect(page.locator('main')).not.toContainText('Unde livrezi')
     await page.goto('/despre/cifre')
-    await expect(page.locator('#baze figure svg[role=img]')).toBeVisible()
+    await expect(page.locator('#baze svg[role=group]')).toBeVisible()
   })
 
   test('the menu and footer link the prices section', async ({ page }) => {

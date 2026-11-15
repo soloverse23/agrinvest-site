@@ -17,7 +17,7 @@ import * as cheerio from 'cheerio'
 
 import { crawl, type CrawledPage } from './lib/site-crawl'
 import { locales } from '../../src/i18n/config'
-import { basePath, financeRoutes, priceRoutes, sections, shopRoutes } from '../../src/i18n/routes'
+import { financeRoutes, priceRoutes, sections, shopRoutes } from '../../src/i18n/routes'
 
 const base = (process.argv[2] ?? 'http://localhost:3100').replace(/\/$/, '')
 const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? base).origin
@@ -42,9 +42,6 @@ const pathOf = (url: string) => {
 /** JSON-LD types every template must carry. */
 function expectedTypes(path: string): string[] {
   if (path === '/' || path === '/en') return ['Organization', 'WebSite', 'WebPage']
-  // Base pages in every language (src/i18n/routes.ts).
-  if (locales.some((l) => path.startsWith(`${basePath('', l)}`)))
-    return ['LocalBusiness', 'BreadcrumbList']
   for (const l of locales) {
     const pre = l === 'en' ? '/en' : ''
     // Price hub and crop prices carry a Dataset; the calculator is a plain tool page.

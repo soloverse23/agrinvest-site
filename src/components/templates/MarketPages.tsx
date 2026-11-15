@@ -414,14 +414,14 @@ export async function pricesHubMetadata(locale: Locale): Promise<Metadata> {
   })
 }
 
-/** The hub's tiles, one group at a time. `extra` goes after the grain tiles (EU weekly data). */
+/** The hub's tiles, one group at a time. `first` goes above all groups (Romania's own prices matter most). */
 export async function MarketHub({
   locale,
-  afterGrain,
+  first,
   after,
 }: {
   locale: Locale
-  afterGrain?: ReactNode
+  first?: ReactNode
   after?: ReactNode
 }) {
   const t = marketsUi[locale]
@@ -470,6 +470,7 @@ export async function MarketHub({
         crumbs={crumbs}
       />
       <div className="mx-auto mt-12 grid max-w-page gap-16 px-4 md:mt-16 md:px-8">
+        {first}
         {hubGroups.map((g, i) => (
           <section key={g.group} aria-labelledby={`grupa-${g.group}`} className="grid gap-6">
             <SectionHeading
@@ -500,7 +501,6 @@ export async function MarketHub({
             ) : (
               <p className="text-body text-muted">{t.ui.noData}</p>
             )}
-            {g.group === 'grain' && afterGrain}
             {groups[i]!.length > 0 && <SourceLine views={groups[i]!} locale={locale} />}
           </section>
         ))}

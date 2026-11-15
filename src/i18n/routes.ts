@@ -21,9 +21,13 @@ export const sections = {
 
 export type Section = keyof typeof sections
 
-/** Public URL of a base page: `/baze/pogoanele`, `/en/bases/pogoanele`. */
-export const basePath = (slug: string, locale: Locale) =>
-  localePath(`${sections.bases[locale]}/${slug}`, locale)
+/**
+ * Where a base is shown: its dot on the storage page's map, `/depozitare#baza-pogoanele`,
+ * `/en/storage#baza-pogoanele`. Bases have no pages of their own; the old `/baze/{slug}` and
+ * `/en/bases/{slug}` URLs redirect here.
+ */
+export const baseUrl = (slug: string, locale: Locale) =>
+  localePath(`${locale === 'ro' ? '/depozitare' : '/storage'}#baza-${slug}`, locale)
 
 /** Public URL of a crop page: `/cereale/grau`, `/en/grain/wheat`. */
 export const cropPath = (slug: string, locale: Locale) =>

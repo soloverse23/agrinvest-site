@@ -28,3 +28,10 @@ The owner found the map too tall and the list beside it unnecessary, and asked f
 - Every county reacts to hover, focus and tap with a card: name, **area** (official INS figures in km²), whether we work there, and Agrinvest's bases and capacity in it once their counties are known. A tap pins the card (with links to the bases); Escape or × closes it. From 768 px the card floats above the county; on phones it sits under the map.
 - `BaseMap` is now a small client component (state for hover and pin). The 17 base links stay as one compact row under the map, so every base page is still linked from the hubs, with or without JavaScript.
 - Area is the county's total surface; per-county farmland would need INS agricultural statistics, a later option.
+
+## Revision (2026-11-15, owner feedback): a plain map, and no base pages
+
+The owner found the interactive map (service filter, zoom, county panel, nearest bases) too complicated "like a puzzle", and questioned the base pages.
+
+- **No base pages.** Each base page repeated the same shared content under another name: no base has a confirmed address, phone, photos or hours (register S4). `/baze/{slug}` and `/en/bases/{slug}` now redirect (308) to `/depozitare#baza-{slug}` and `/en/storage#baza-{slug}`, where the map selects that base. They leave the sitemap, and `llms.txt` points at the storage page. Bring the pages back once each base has real local information.
+- **The map is plain.** It is cropped to the bases' extent. Counties with bases are tinted, and every base is a dot sized by its capacity. The only text on the map is the names of the counties with bases, in faint capitals; each name steps up or down to clear the dots and the other names. Hovering a county (or tapping or focusing it) lifts it with a soft shadow, makes its dots pulse, and opens a small box with the county's name and its bases with their capacity. The box glides from county to county and fades out. The dots arrive west to east the first time the map scrolls into view. The atlas version with printed names was tried first and rejected by the owner as still too busy.

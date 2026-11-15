@@ -78,7 +78,7 @@ export async function FinanceQuestionIndex({ locale }: { locale: Locale }) {
       <FinanceNav locale={locale} current="questions" />
       <div className="mx-auto mt-10 grid max-w-page gap-10 px-4 md:mt-14 md:px-8 lg:grid-cols-12 lg:gap-14">
         <nav aria-label={g.nav.questions} className="min-w-0 lg:col-span-3">
-          <ul className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] lg:sticky lg:top-6 lg:grid lg:gap-1 lg:overflow-visible">
+          <ul className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] lg:sticky lg:top-(--site-header-offset) lg:grid lg:gap-1 lg:overflow-visible">
             {groups.map(({ topic, items }) => (
               <li key={topic} className="shrink-0">
                 <a
@@ -95,7 +95,7 @@ export async function FinanceQuestionIndex({ locale }: { locale: Locale }) {
         <div className="grid min-w-0 content-start gap-12 lg:col-span-9">
           {groups.map(({ topic, items }) => (
             <section key={topic} data-topic={topic} aria-labelledby={topic} className="grid gap-3">
-              <h2 id={topic} className="scroll-mt-6 text-h3 font-semibold">
+              <h2 id={topic} className="text-h3 font-semibold">
                 {questionTopicLabels[topic][locale]}
               </h2>
               <ul className="grid divide-y divide-line border-y border-line">

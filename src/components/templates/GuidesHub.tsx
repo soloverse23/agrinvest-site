@@ -245,7 +245,7 @@ export async function PillarPage({ slug, locale }: { slug: string; locale: Local
           })}
         </div>
         <aside className="grid content-start gap-6 lg:col-span-4">
-          <div className="grid gap-6 lg:sticky lg:top-24">
+          <div className="grid gap-6 lg:sticky lg:top-(--site-header-offset)">
             <NextSteps title={t.pillar.next} links={pillar.links(locale)} />
             <NextSteps
               title={t.pillar.notes}

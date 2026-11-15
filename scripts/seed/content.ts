@@ -250,7 +250,7 @@ Agrinvest are capital {{C5}}. Credem că agricultura românească crește repede
             blockType: 'baseList',
             kicker: 'Baze',
             heading: 'Bazele de depozitare',
-            lead: 'Alege o bază ca să vezi capacitatea, serviciile și cum ajungi acolo.',
+            lead: 'Atinge un județ ca să vezi bazele din el.',
             showMap: true,
           },
           {

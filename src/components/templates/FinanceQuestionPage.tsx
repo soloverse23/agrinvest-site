@@ -159,7 +159,7 @@ export async function FinanceQuestionPage({ locale, slug }: { locale: Locale; sl
             </section>
           )}
         </article>
-        <aside className="grid content-start gap-5 lg:sticky lg:top-6 lg:col-span-4 lg:self-start">
+        <aside className="grid content-start gap-5 lg:sticky lg:top-(--site-header-offset) lg:col-span-4 lg:self-start">
           {credit && (
             <div className="grid gap-4 rounded-lg bg-raised p-5 shadow-soft ring-1 ring-line md:p-6">
               <p className="text-caption font-semibold tracking-wide text-accent uppercase">

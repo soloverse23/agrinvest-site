@@ -28,7 +28,7 @@ import {
 import { ArrowRightIcon } from '@ds/icons/icons'
 import { focusOf } from '@ds/lib/media'
 import { localePath, type Locale } from '@/i18n/config'
-import { basePath, cropPath } from '@/i18n/routes'
+import { cropPath } from '@/i18n/routes'
 import { isGrainKey } from '@/lib/crops'
 import { fixedUrl, sliderUi, ui } from '@/i18n/ui'
 import { slugify } from '@/lib/slugify'
@@ -67,7 +67,7 @@ const Section = ({
   narrow?: boolean
   id?: string
 }) => (
-  <section id={id} className="mx-auto w-full max-w-page scroll-mt-24 px-4 md:px-8">
+  <section id={id} className="mx-auto w-full max-w-page px-4 md:px-8">
     {narrow ? <div className="max-w-text">{children}</div> : children}
   </section>
 )
@@ -127,11 +127,7 @@ export function Prose({
       const node = args.node as { tag: string; children: unknown[] }
       if (node.tag !== 'h2') return rendered
       const Tag = 'h2'
-      return (
-        <Tag id={headingId(node)} className="scroll-mt-24">
-          {args.nodesToJSX({ nodes: args.node.children })}
-        </Tag>
-      )
+      return <Tag id={headingId(node)}>{args.nodesToJSX({ nodes: args.node.children })}</Tag>
     },
     text: (args) => {
       const node = args.node as SerializedTextNode
@@ -520,98 +516,73 @@ function FigureStripBlock({
 }
 
 /**
- * Bases: the county map shaded by storage capacity (when `showMap`), then a link to every base
- * page. Server-rendered, no script; on a base page its county is outlined and its link marked.
+ * Bases: the atlas map of the bases (when `showMap`), or their names as text without it.
+ * There are no base pages: a tap on the map shows a base's details under it.
  */
 export async function BaseListBlock({
   block,
   ctx,
   head,
-  current,
 }: {
   block: Pick<BlockOf<'baseList'>, 'counties' | 'showMap'>
   ctx: Pick<Ctx, 'locale'>
   head?: ReactNode
-  current?: string
 }) {
   const only = new Set((block.counties ?? []).map((c) => (typeof c === 'object' ? c.id : c)))
-  const bases = await listBases(ctx.locale)
-  const rows = bases.flatMap((b) => {
+  const bases = (await listBases(ctx.locale)).flatMap((b) => {
     const county = typeof b.county === 'object' && b.county ? b.county : null
     if (only.size && (!county || !only.has(county.id))) return []
-    return [{ base: b, href: basePath(b.slug, ctx.locale), county: county?.code ?? null }]
+    return [{ ...b, countyCode: county?.code ?? null }]
   })
-  const totals = new Map<string, number>()
-  for (const r of rows)
-    if (r.county) totals.set(r.county, (totals.get(r.county) ?? 0) + (r.base.capacity ?? 0))
   // One shared marker when every capacity has the same status.
-  const statuses = new Set(rows.map((r) => r.base.capacityStatus))
-  const shared = statuses.size === 1 ? rows[0]?.base.capacityStatus : undefined
+  const statuses = new Set(bases.map((b) => b.capacityStatus))
+  const shared = statuses.size === 1 ? bases[0]?.capacityStatus : undefined
   const mark = shared && (
     <FactMark
       figure={{ key: 'bases:capacity', label: '', value: '', status: shared }}
       locale={ctx.locale}
     />
   )
-  const sorted = [...rows].sort((a, b) => (b.base.capacity ?? 0) - (a.base.capacity ?? 0))
   const t = ui[ctx.locale]
   return (
     <Section id="baze">
       {head}
       <div className="mx-auto grid w-full max-w-page gap-5 px-4 md:px-8">
-        {block.showMap !== false && (
+        {block.showMap !== false ? (
           <BaseMapLazy
             locale={ctx.locale}
-            bases={rows.flatMap((r) => {
-              const { lat, lng } = r.base.geo ?? {}
+            bases={bases.flatMap((b) => {
+              const { lat, lng } = b.geo ?? {}
               if (lat == null || lng == null) return []
               const [x, y] = project(lng, lat)
               return [
                 {
-                  id: String(r.base.id),
-                  name: r.base.name,
-                  href: r.href,
-                  county: r.county,
-                  capacity: r.base.capacity ?? null,
-                  services: r.base.services ?? [],
+                  id: String(b.id),
+                  slug: b.slug,
+                  name: b.name,
+                  county: b.countyCode,
+                  capacity: b.capacity ?? null,
+                  services: b.services ?? [],
                   x,
                   y,
-                  lat,
-                  lng,
                 },
               ]
             })}
-            current={(() => {
-              const here = rows.find((r) => r.href === current)
-              return here ? String(here.base.id) : null
-            })()}
             note={mark}
           />
+        ) : (
+          <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line pt-4 text-small text-muted">
+            <span className="flex items-center gap-1 font-semibold text-ink">
+              {t.bases}
+              {mark}
+            </span>
+            {[...bases]
+              .sort((a, b) => (b.capacity ?? 0) - (a.capacity ?? 0))
+              .map((b) => (
+                <span key={b.id}>{b.name}</span>
+              ))}
+          </p>
         )}
-        <nav
-          aria-label={t.bases}
-          className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line pt-4"
-        >
-          <span className="flex items-center gap-1 text-small font-semibold text-ink">
-            {t.bases}
-            {block.showMap === false && mark}
-          </span>
-          {sorted.map((r) => (
-            <Link
-              key={r.href}
-              href={r.href}
-              prefetch={false}
-              aria-current={r.href === current ? 'page' : undefined}
-              className={
-                r.href === current
-                  ? 'text-small font-semibold text-accent no-underline hover:underline'
-                  : 'text-small text-muted no-underline hover:text-ink hover:underline'
-              }
-            >
-              {r.base.name}
-            </Link>
-          ))}
-        </nav>
       </div>
     </Section>
   )
@@ -711,7 +682,7 @@ export async function LeadFormBlock({
       ) : (
         <details
           id="cerere"
-          className="group mx-auto max-w-3xl scroll-mt-24 rounded-xl bg-raised shadow-raised ring-1 ring-line"
+          className="group mx-auto max-w-3xl rounded-xl bg-raised shadow-raised ring-1 ring-line"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 md:px-10 [&::-webkit-details-marker]:hidden">
             <span className="text-h4 font-semibold text-ink">{t.prompt}</span>

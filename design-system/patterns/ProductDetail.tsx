@@ -9,9 +9,9 @@ import { Photo } from './Photo'
 
 /**
  * The product page (Phase 7c.4), server side. Above the fold: the gallery and the buy box,
- * which stays on screen from `lg` while the visitor reads the sections beside it. Then an
- * anchored tab bar whose links jump to sections that are all in the HTML (nothing is hidden
- * behind a tab), and the sections themselves. The islands (buy form, calculator, zoom) are
+ * which stays on screen from `lg` while the visitor reads the sections beside it. Then a tab
+ * bar that shows one section at a time (all of them stay in the HTML, so nothing is hidden
+ * from search), and the sections themselves. The islands (buy form, calculator, zoom) are
  * passed in by the caller through `Lazy.tsx`.
  */
 
@@ -41,7 +41,7 @@ export function ProductLayout({
       <div className="md:col-span-2 lg:col-span-12">{breadcrumbs}</div>
       <div className="min-w-0 lg:col-span-7">{gallery}</div>
       <div className="min-w-0 lg:col-span-5 lg:row-span-2">
-        <div className="lg:sticky lg:top-6">{buy}</div>
+        <div className="lg:sticky lg:top-(--site-header-offset)">{buy}</div>
       </div>
       <div className="grid min-w-0 grid-cols-1 gap-14 md:col-span-2 md:gap-16 lg:col-span-7">
         {children}
@@ -345,7 +345,7 @@ export function BuyBox({
           {calcLink.label}
         </a>
       )}
-      <div id="cerere" className="scroll-mt-24 border-t border-line pt-5">
+      <div id="cerere" className="border-t border-line pt-5">
         {request}
       </div>
       {notes && <div className="grid gap-3 text-caption text-muted">{notes}</div>}
@@ -382,9 +382,43 @@ export function PackSummary({
 /* ------------------------------------------------------------------------------------------ */
 
 /**
- * The anchored tab bar: links to the sections below, sticky at the top of the screen. It
- * scrolls sideways on phones. Every section stays in the HTML, so nothing hides from search.
+ * The tab bar: real tabs, one section shown at a time, all of them still in the HTML so
+ * nothing hides from search. The switching is plain CSS on `:target` (a generated `<style>`),
+ * so it needs no client bundle (the product page sits at its 160 KB budget) and keeps working
+ * after a client-side navigation, when React does not run inline scripts. With no `#…` in the
+ * address the default section shows; a link to a section, or to anything inside one
+ * (`#calculator`, `#date-tehnice`, `#documente` from another page), opens that section. A
+ * small inline script keeps the page still when a tab is clicked; without it the click just
+ * scrolls the bar to the top of the screen.
  */
+const tabStyle = (ids: string[], first: string) => {
+  const hit = (id: string) => `#${id}:target,#${id} :target`
+  const anyOther = ids
+    .filter((id) => id !== first)
+    .map(hit)
+    .join(',')
+  /** Hides section `id` unless `when` holds, and lights its tab when it does. */
+  const panel = (id: string, when: string) =>
+    (when ? `body:not(${when}) #${id}{display:none}` : '') +
+    `body${when} [data-tab-link="${id}"]{color:var(--color-forest)}` +
+    `body${when} [data-tab-link="${id}"] [data-tab-mark]{opacity:1}`
+  return ids
+    .map((id) =>
+      id === first
+        ? anyOther
+          ? panel(id, `:not(:has(${anyOther}))`)
+          : panel(id, '')
+        : panel(id, `:has(${hit(id)})`),
+    )
+    .join('')
+}
+
+const tabScript = (navId: string) =>
+  `(function(){var n=document.getElementById(${JSON.stringify(navId)});if(!n)return;` +
+  `n.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a||e.metaKey||e.ctrlKey)return;` +
+  `e.preventDefault();var y=scrollY,t=n.getBoundingClientRect().top-(parseFloat(getComputedStyle(n).top)||0);location.replace(a.getAttribute('href'));` +
+  `scrollTo(0,t<0?y+t:y)})})()`
+
 export function ProductTabs({
   label,
   items,
@@ -392,32 +426,44 @@ export function ProductTabs({
 }: {
   label: string
   items: { id: string; label: string }[]
-  /** Story hook for the highlighted tab. */
+  /** The section shown when the address names none (default: the first). */
   current?: string
 }) {
+  const ids = items.map((i) => i.id)
+  const first = current ?? ids[0]
+  const navId = 'product-tabs'
   return (
     <nav
+      id={navId}
       aria-label={label}
-      className="sticky top-0 z-20 -mx-4 border-b border-line bg-paper/95 backdrop-blur md:mx-0"
+      className="sticky top-(--site-header) z-20 -mx-4 -mb-6 border-b border-line bg-paper/95 backdrop-blur md:mx-0 md:-mb-8"
     >
       <ul data-scroll-x className="flex gap-1 overflow-x-auto px-4 [scrollbar-width:none] md:px-0">
         {items.map((item) => (
           <li key={item.id} className="shrink-0">
             <a
               href={`#${item.id}`}
-              aria-current={item.id === current ? 'location' : undefined}
-              className="relative inline-flex h-12 items-center px-3 text-small font-semibold text-muted no-underline hover:text-ink aria-[current=location]:text-forest aria-[current=location]:after:absolute aria-[current=location]:after:inset-x-3 aria-[current=location]:after:bottom-0 aria-[current=location]:after:h-0.5 aria-[current=location]:after:rounded-full aria-[current=location]:after:bg-accent"
+              data-tab-link={item.id}
+              aria-controls={item.id}
+              className="relative inline-flex h-12 items-center px-3 text-small font-semibold text-muted no-underline hover:text-ink"
             >
               {item.label}
+              <span
+                data-tab-mark
+                aria-hidden
+                className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-accent opacity-0"
+              />
             </a>
           </li>
         ))}
       </ul>
+      {first && <style dangerouslySetInnerHTML={{ __html: tabStyle(ids, first) }} />}
+      <script dangerouslySetInnerHTML={{ __html: tabScript(navId) }} />
     </nav>
   )
 }
 
-/** A section the tab bar links to; the offset keeps its heading clear of the sticky bar. */
+/** A section the tab bar shows; the offset keeps its heading clear of the sticky bar. */
 export function ProductSection({
   id,
   title,
@@ -430,7 +476,7 @@ export function ProductSection({
   children: ReactNode
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="grid scroll-mt-16 gap-5">
+    <section id={id} aria-labelledby={`${id}-title`} className="grid scroll-mt-12 gap-5">
       <header className="grid gap-1">
         <h2 id={`${id}-title`} className="text-h3 font-semibold">
           {title}

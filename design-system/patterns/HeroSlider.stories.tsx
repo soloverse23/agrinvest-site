@@ -25,7 +25,7 @@ const header = (locale: Locale) => (
 )
 
 /**
- * Three slides over silent loops (after load and idle), ~7 s each. The bars are the tabs;
+ * Three slides over silent loops (after load and idle), ~4 s each. The bars are the tabs;
  * hover or keyboard focus holds the slide, the round button stops the rotation and the loop.
  * The rail of today's prices stays put; each price opens its own page.
  */

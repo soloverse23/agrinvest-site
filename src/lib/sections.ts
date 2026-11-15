@@ -29,15 +29,7 @@ const map: Record<Locale, Record<SectionId, Section>> = {
     },
     company: {
       label: 'În secțiunea Compania',
-      prefixes: [
-        '/despre',
-        '/depozitare',
-        '/logistica',
-        '/parteneri',
-        '/cariere',
-        '/contact',
-        '/baze',
-      ],
+      prefixes: ['/despre', '/depozitare', '/logistica', '/parteneri', '/cariere', '/contact'],
       items: [
         { label: 'Despre Agrinvest', href: '/despre' },
         { label: 'Cifre', href: '/despre/cifre' },

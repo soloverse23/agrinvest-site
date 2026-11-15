@@ -1,6 +1,5 @@
 import type { Locale } from '@/i18n/config'
 import {
-  basePath,
   categoryPath,
   cropPath,
   cropPricePath,
@@ -27,7 +26,7 @@ import {
   getFinancePage,
   listGuides,
 } from '@/lib/content/finance'
-import { listBases, listCrops } from '@/lib/content/locations'
+import { listCrops } from '@/lib/content/locations'
 import { allMarketNoteAlternates, listMarketNotes } from '@/lib/content/market'
 import { listHeadlines } from '@/lib/news/load'
 import { pillars } from '@/lib/articles/pillars'
@@ -70,18 +69,7 @@ export const segments = {
           alternates,
         }))
       }),
-  // Bases and crops exist in both languages (the base slug is shared, crop slugs are not).
-  bases: async (): Promise<SitemapEntry[]> =>
-    (await listBases('ro'))
-      .filter((b) => !b.seo?.noindex)
-      .flatMap((b) => {
-        const alternates = { ro: basePath(b.slug, 'ro'), en: basePath(b.slug, 'en') }
-        return Object.values(alternates).map((url) => ({
-          url,
-          lastModified: b.updatedAt,
-          alternates,
-        }))
-      }),
+  // Crops exist in both languages (crop slugs differ). Bases have no pages of their own.
   crops: async (): Promise<SitemapEntry[]> => {
     const [ro, en] = await Promise.all([listCrops('ro'), listCrops('en')])
     return ro

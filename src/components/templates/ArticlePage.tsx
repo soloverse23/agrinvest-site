@@ -211,7 +211,7 @@ export async function ArticlePage({ where, locale }: { where: Where; locale: Loc
 
       <div className="mx-auto mt-10 grid max-w-page gap-10 px-4 md:mt-14 md:px-8 lg:grid-cols-12">
         <aside className="lg:col-span-3">
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:sticky lg:top-(--site-header-offset)">
             <Toc label={t.article.contents} items={headings} />
           </div>
         </aside>
@@ -246,7 +246,7 @@ export async function ArticlePage({ where, locale }: { where: Where; locale: Loc
           )}
         </div>
         <aside className="grid content-start gap-6 lg:col-span-3">
-          <div className="grid gap-6 lg:sticky lg:top-24">
+          <div className="grid gap-6 lg:sticky lg:top-(--site-header-offset)">
             {tools.map((block) => (
               <ToolWidgetCard key={block.id ?? block.widget} block={block} locale={locale} />
             ))}

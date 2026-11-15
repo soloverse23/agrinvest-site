@@ -511,10 +511,7 @@ export async function DieselPage({ locale }: { locale: Locale }) {
           </p>
         </section>
       </div>
-      <section
-        id="cerere"
-        className="mx-auto mt-16 w-full max-w-page scroll-mt-24 px-4 md:mt-24 md:px-8"
-      >
+      <section id="cerere" className="mx-auto mt-16 w-full max-w-page px-4 md:mt-24 md:px-8">
         <div className="mx-auto max-w-3xl rounded-xl bg-raised p-6 shadow-raised ring-1 ring-line md:p-10">
           <LeadFormLazy
             locale={locale}

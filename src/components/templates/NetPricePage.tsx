@@ -264,7 +264,7 @@ export async function NetPricePage({ locale, params }: { locale: Locale; params:
         <section
           id="rezultat"
           aria-labelledby="rezultat-titlu"
-          className="grid scroll-mt-24 content-start gap-5 lg:col-span-7"
+          className="grid content-start gap-5 lg:col-span-7"
         >
           <h2 id="rezultat-titlu" className="text-h3 font-semibold text-ink">
             {t.resultTitle}

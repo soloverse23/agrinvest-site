@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { SiteFooter } from '@ds/patterns/SiteFooter'
-import { SiteHeader } from '@ds/patterns/SiteHeader'
+import { headerScript, SiteHeader } from '@ds/patterns/SiteHeader'
 import type { NavItem, ShopPanelData } from '@ds/patterns/SiteHeader'
 import { commerceUi } from '@/i18n/commerce'
 import { localePath, type Locale } from '@/i18n/config'
@@ -156,7 +156,8 @@ export async function SiteShell({
 
   return (
     <>
-      {overlay ? <div className="absolute inset-x-0 top-0 z-30">{header}</div> : header}
+      {header}
+      <script dangerouslySetInnerHTML={{ __html: headerScript }} />
       <main id="main">{children}</main>
       <SiteFooter
         homeHref={localePath('/', locale)}

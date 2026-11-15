@@ -1,6 +1,6 @@
 import { localePath } from '@/i18n/config'
 import {
-  basePath,
+  baseUrl,
   categoryPath,
   cropPath,
   financeProductPath,
@@ -130,7 +130,7 @@ export async function GET() {
     '## Baze de depozitare · Storage bases',
     ...bases.map(
       (b) =>
-        `- [Baza ${b.name}](${absoluteUrl(basePath(b.slug, 'ro'))}) · [${b.name} base](${absoluteUrl(basePath(b.slug, 'en'))})`,
+        `- [Baza ${b.name}](${absoluteUrl(baseUrl(b.slug, 'ro'))}) · [${b.name} base](${absoluteUrl(baseUrl(b.slug, 'en'))})`,
     ),
     '',
     '## Cereale · Grain',

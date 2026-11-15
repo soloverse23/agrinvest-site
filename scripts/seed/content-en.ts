@@ -254,7 +254,7 @@ Agrinvest is {{C5}} owned. We believe Romanian agriculture grows fast only throu
             blockType: 'baseList',
             kicker: 'Bases',
             heading: 'Our storage bases',
-            lead: 'Choose a base to see its capacity, its services and how to get there.',
+            lead: 'Tap a county to see its bases.',
             showMap: true,
           },
           {

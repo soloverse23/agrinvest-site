@@ -535,7 +535,7 @@ export function CreditLayout({
     <div className="mx-auto grid w-full max-w-page grid-cols-1 gap-x-8 gap-y-10 px-4 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14">
       <div className="lg:col-span-12">{breadcrumbs}</div>
       <div className="min-w-0 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-2">
-        <div className="lg:sticky lg:top-6">{box}</div>
+        <div className="lg:sticky lg:top-(--site-header-offset)">{box}</div>
       </div>
       <div className="grid min-w-0 content-start gap-8 lg:col-span-7 lg:row-start-2">{lead}</div>
       <div className="grid min-w-0 grid-cols-1 gap-14 md:gap-16 lg:col-span-7 lg:row-start-3">

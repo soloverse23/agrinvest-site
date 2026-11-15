@@ -120,7 +120,7 @@ export function SectionHeading({
     >
       <div className="grid max-w-3xl gap-3">
         {kicker && <Kicker>{kicker}</Kicker>}
-        <Heading id={id} className="scroll-mt-24 text-h2 font-semibold text-balance">
+        <Heading id={id} className="text-h2 font-semibold text-balance">
           {title}
         </Heading>
         {lead && <p className="text-lead text-muted">{lead}</p>}

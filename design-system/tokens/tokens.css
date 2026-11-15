@@ -186,6 +186,14 @@
       opacity: 0;
     }
   }
+  /* Base map: the chosen county lifts off the map (its resting lift is set inline). */
+  --animate-county-lift: county-lift 0.3s var(--ease-enter) both;
+  @keyframes county-lift {
+    from {
+      transform: translateY(0);
+      opacity: 0.4;
+    }
+  }
   --animate-halo: halo 2.4s var(--ease-exit) infinite;
   @keyframes halo {
     from {
@@ -227,9 +235,23 @@
 }
 
 @layer base {
+  /*
+   * The sticky site header's height (SiteHeader): the header alone on phones and tablets,
+   * the price strip plus the header from `lg`. Sticky sidebars and anchor jumps sit below it.
+   */
+  :root {
+    --site-header: 4rem;
+    --site-header-offset: calc(var(--site-header) + 1.5rem);
+  }
+  @media (width >= 1024px) {
+    :root {
+      --site-header: 7rem;
+    }
+  }
   html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    scroll-padding-top: var(--site-header-offset);
   }
   body {
     background: var(--color-paper);
@@ -277,7 +299,6 @@
     letter-spacing: var(--text-h2--letter-spacing);
     font-weight: 600;
     text-wrap: balance;
-    scroll-margin-top: 6rem;
   }
   .prose-agr :where(h3) {
     margin-top: 0.75rem;

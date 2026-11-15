@@ -116,7 +116,7 @@ export async function GuidePage({ locale, slug }: { locale: Locale; slug: string
       <FinanceNav locale={locale} current="library" need={need} />
       <div className="mx-auto mt-12 grid max-w-page gap-10 px-4 md:mt-16 md:px-8 lg:grid-cols-12">
         <aside className="lg:col-span-3 lg:row-start-1">
-          <div className="grid gap-6 lg:sticky lg:top-24">
+          <div className="grid gap-6 lg:sticky lg:top-(--site-header-offset)">
             <Toc label={t.contents} items={headings} />
             {(author || reviewer) && (
               <dl className="grid gap-2 text-small">

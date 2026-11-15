@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { localePath, type Locale } from '@/i18n/config'
 
 import type { CropKey } from '../fixtures/sample'
-import { ChevronDownIcon, MenuIcon, PhoneIcon } from '../icons/icons'
+import { ChevronDownIcon, CloseIcon, MenuIcon, PhoneIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button } from '../primitives/Button'
 import { CartLink } from './CartLink'
@@ -72,7 +72,14 @@ export type SiteHeaderProps = {
   }
 }
 
-/** Site header: logo, sections, language, one call to action. Mobile menu needs no JavaScript. */
+/**
+ * Site header: logo, sections, language, one call to action. It stays on screen while the
+ * page scrolls: from `lg` the price strip and the header together, below `lg` only the header
+ * (the strip scrolls away, so a phone keeps most of its screen). `--site-header` (tokens.css)
+ * holds that height for sticky sidebars and anchor jumps. Over a hero (`overlay`) the header
+ * is transparent at the top and turns forest green once the page scrolls (`html[data-scrolled]`,
+ * set by `headerScript`). The mobile menu needs no JavaScript; the script only closes it.
+ */
 export function SiteHeader({
   locale,
   nav,
@@ -127,10 +134,33 @@ export function SiteHeader({
       ) : undefined,
     }
   })
+  const languages = (className: string, size = 'h-8 px-3') => (
+    <div role="group" aria-label={labels.language} className={cx('rounded-md p-1', className)}>
+      {(['ro', 'en'] as const).map((l) => (
+        <Link
+          key={l}
+          href={alternates[l] ?? localePath('/', l)}
+          lang={l}
+          aria-current={l === locale ? 'true' : undefined}
+          className={cx(
+            'inline-flex items-center justify-center rounded-sm text-caption font-semibold uppercase no-underline',
+            size,
+            l === locale
+              ? 'bg-raised text-ink shadow-soft'
+              : overlay
+                ? 'text-on-forest/85 hover:text-on-forest'
+                : 'text-muted hover:text-ink',
+          )}
+        >
+          {l}
+        </Link>
+      ))}
+    </div>
+  )
   return (
-    <div className={cx(overlay && 'relative z-30')}>
+    <>
       {ticker && (
-        <div className="bg-forest text-caption text-on-forest">
+        <div className="z-40 bg-forest text-caption text-on-forest lg:sticky lg:top-0">
           <div className="mx-auto flex h-10 max-w-page items-center gap-4 px-4 md:gap-6 md:px-8">
             <QuoteStrip
               id="ticker-prices"
@@ -161,9 +191,16 @@ export function SiteHeader({
         </div>
       )}
       <header
-        className={overlay ? 'border-b border-on-forest/15' : 'border-b border-line bg-paper'}
+        className={cx(
+          'sticky top-0 z-40 border-b transition-[background-color,box-shadow] duration-200',
+          ticker && 'lg:top-10',
+          overlay
+            ? // Drawn over the hero: the page's first block slides up under it.
+              '-mb-16 border-on-forest/15 in-data-scrolled:border-transparent in-data-scrolled:bg-forest in-data-scrolled:shadow-floating lg:-mb-18'
+            : 'border-line bg-paper in-data-scrolled:shadow-soft',
+        )}
       >
-        <div className="relative mx-auto flex h-18 max-w-page items-center gap-6 px-4 md:px-8">
+        <div className="relative mx-auto flex h-16 max-w-page items-center gap-4 px-4 md:gap-6 md:px-8 lg:h-18">
           <Link href={localePath('/', locale)} className="no-underline" aria-label="Agrinvest">
             <Lockup tone={overlay ? 'light' : 'dark'} />
           </Link>
@@ -175,43 +212,17 @@ export function SiteHeader({
             initialOpen={openPanel}
           />
           <div className="ml-auto flex items-center gap-3">
-            <div
-              role="group"
-              aria-label={labels.language}
-              className={cx(
-                'hidden rounded-md p-1 md:flex',
-                overlay ? 'bg-on-forest/10' : 'bg-surface',
-              )}
-            >
-              {(['ro', 'en'] as const).map((l) => (
-                <Link
-                  key={l}
-                  href={alternates[l] ?? localePath('/', l)}
-                  lang={l}
-                  aria-current={l === locale ? 'true' : undefined}
-                  className={cx(
-                    'inline-flex h-8 items-center rounded-sm px-3 text-caption font-semibold uppercase no-underline',
-                    l === locale
-                      ? 'bg-raised text-ink shadow-soft'
-                      : overlay
-                        ? 'text-on-forest/85 hover:text-on-forest'
-                        : 'text-muted hover:text-ink',
-                  )}
-                >
-                  {l}
-                </Link>
-              ))}
-            </div>
+            {languages(cx('hidden md:flex', overlay ? 'bg-on-forest/10' : 'bg-surface'))}
             {cart && <CartLink href={cart.href} label={cart.label} overlay={overlay} />}
             <Button
               href={cta.href}
               size="sm"
               variant={overlay ? 'lime' : 'primary'}
-              className="hidden md:inline-flex"
+              className="max-[359px]:hidden"
             >
               {cta.label}
             </Button>
-            <details className="group lg:hidden">
+            <details data-site-menu className="group lg:hidden">
               <summary
                 className={cx(
                   'flex size-11 cursor-pointer list-none items-center justify-center rounded-md ring-1 ring-inset',
@@ -220,12 +231,13 @@ export function SiteHeader({
                     : 'bg-raised ring-line-strong',
                 )}
               >
-                <MenuIcon className="size-5" />
+                <MenuIcon className="size-5 group-open:hidden" />
+                <CloseIcon className="hidden size-5 group-open:block" />
                 <span className="sr-only">{labels.menu}</span>
               </summary>
               <nav
                 aria-label={labels.main}
-                className="absolute inset-x-4 top-full z-20 mt-2 max-h-[75dvh] overflow-y-auto rounded-lg bg-raised p-2 shadow-floating ring-1 ring-line md:left-auto md:w-80"
+                className="absolute inset-x-4 top-full z-20 mt-2 max-h-[calc(100dvh-var(--site-header)-1rem)] overflow-y-auto overscroll-contain rounded-lg bg-raised p-2 text-ink shadow-floating ring-1 ring-line md:left-auto md:w-80"
               >
                 <ul className="grid">
                   {nav.map((item) => {
@@ -303,14 +315,42 @@ export function SiteHeader({
                     )
                   })}
                 </ul>
-                <Button href={cta.href} fullWidth className="mt-2 md:hidden">
-                  {cta.label}
-                </Button>
+                <div className="mt-2 grid gap-2 border-t border-line pt-3 md:hidden">
+                  <div className="flex items-center justify-between gap-3 px-1.5">
+                    {phone ? (
+                      <a
+                        href={`tel:${phone.replace(/\s/g, '')}`}
+                        className="inline-flex h-11 items-center gap-2 text-small font-semibold text-ink no-underline"
+                      >
+                        <PhoneIcon className="size-4 text-accent" />
+                        <span className="tabular-nums">{phone}</span>
+                      </a>
+                    ) : (
+                      <span />
+                    )}
+                    {languages('flex bg-surface', 'h-9 min-w-11 px-3')}
+                  </div>
+                  <Button href={cta.href} fullWidth>
+                    {cta.label}
+                  </Button>
+                </div>
               </nav>
             </details>
           </div>
         </div>
       </header>
-    </div>
+    </>
   )
 }
+
+/**
+ * The header's one inline script (no client bundle): marks `html[data-scrolled]` once the page
+ * leaves the top, and closes the mobile menu on a link, a tap outside it or Escape. The header
+ * stays mounted across client navigations, so the menu would otherwise stay open.
+ */
+export const headerScript =
+  `(function(){var d=document,h=d.documentElement;` +
+  `function s(){h.toggleAttribute('data-scrolled',scrollY>8)}s();addEventListener('scroll',s,{passive:true});` +
+  `function c(f){d.querySelectorAll('details[data-site-menu][open]').forEach(function(m){m.open=false;if(f)m.querySelector('summary').focus()})}` +
+  `d.addEventListener('click',function(e){var t=e.target;if(!t.closest)return;if(t.closest('a')||!t.closest('details[data-site-menu]'))c()});` +
+  `d.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.querySelector('details[data-site-menu][open]'))c(1)})})()`

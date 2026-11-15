@@ -100,7 +100,7 @@ export const marketsUi: Record<Locale, Copy> = {
       },
       grain: {
         title: 'Cereale și oleaginoase',
-        lead: 'Cotațiile de referință de pe piața mondială, lunar, și prețurile UE pentru România, săptămânal.',
+        lead: 'Cotațiile de referință de pe piața mondială, lunar.',
       },
       fertiliser: {
         title: 'Îngrășăminte',
@@ -394,7 +394,7 @@ export const marketsUi: Record<Locale, Copy> = {
       },
       grain: {
         title: 'Grain and oilseeds',
-        lead: 'World benchmark prices, monthly, and the EU’s weekly prices for Romania.',
+        lead: 'World benchmark prices, monthly.',
       },
       fertiliser: {
         title: 'Fertilisers',

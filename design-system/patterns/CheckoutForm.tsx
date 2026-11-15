@@ -967,7 +967,7 @@ export function CheckoutForm({
       {/* Larger screens: the summary stays in view beside the form. */}
       <aside
         aria-label={t.summary}
-        className="hidden self-start rounded-lg bg-raised p-6 shadow-soft ring-1 ring-line lg:sticky lg:top-6 lg:col-span-5 lg:grid lg:gap-5 xl:col-span-4 xl:col-start-9"
+        className="hidden self-start rounded-lg bg-raised p-6 shadow-soft ring-1 ring-line lg:sticky lg:top-(--site-header-offset) lg:col-span-5 lg:grid lg:gap-5 xl:col-span-4 xl:col-start-9"
       >
         <h2 className="text-h4 font-semibold">{t.summary}</h2>
         {summary}

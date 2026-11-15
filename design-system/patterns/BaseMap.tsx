@@ -1,28 +1,18 @@
 'use client'
 
-import Link from 'next/link'
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type CSSProperties,
-  type KeyboardEvent,
-  type ReactNode,
-} from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 
 import type { Locale } from '@/i18n/config'
-import { formatNumber, formatQuantity } from '@/lib/format'
+import { formatQuantity } from '@/lib/format'
 
-import { ArrowRightIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
-import { COUNTIES, MAP_HEIGHT as H, MAP_SRC, MAP_WIDTH as W } from './map/counties'
-import { project } from './map/projection'
+import { COUNTIES, MAP_HEIGHT, MAP_SRC, MAP_WIDTH } from './map/counties'
 
 export type MapBase = {
   id: string
+  /** `#baza-{slug}` in the address opens the base's county (old base URLs land here). */
+  slug: string
   name: string
-  href: string
   /** County code (ISO 3166-2 without "RO-"). */
   county: string | null
   capacity: number | null
@@ -30,137 +20,78 @@ export type MapBase = {
   /** Map units (`project()` of the base's coordinates). */
   x: number
   y: number
-  lat: number
-  lng: number
 }
 
 export type BaseMapProps = {
   locale: Locale
   bases: MapBase[]
-  /** The base a page is about: the map opens zoomed on it, with the nearest bases listed. */
-  current?: string | null
-  /** Shown beside the legend, e.g. one "to confirm" marker for every capacity. */
+  /** Shown in the county box, e.g. one "to confirm" marker for every capacity. */
   note?: ReactNode
   className?: string
 }
 
 const copy = {
-  ro: {
-    label: 'Harta bazelor Agrinvest',
-    filter: 'Servicii',
-    all: 'Toate',
-    overview: (n: number, c: number) => `${n} baze în ${c} județe`,
-    hint: 'Alege un județ sau un cerc de pe hartă.',
-    back: 'Toate județele',
-    open: 'Pagina bazei',
-    here: 'Baza aceasta',
-    nearest: 'Cele mai apropiate',
-    unknown: 'capacitate în curs de confirmare',
-    zoomIn: 'Apropie',
-    zoomOut: 'Toată țara',
-    legend: 'Capacitatea bazei',
-    sea: 'Marea Neagră',
-    river: 'Dunărea',
-    capital: 'București',
-    bases: (n: number) => (n === 1 ? '1 bază' : `${n} baze`),
-    services: {
-      reception: 'Recepție',
-      weighing: 'Cântărire',
-      cleaning: 'Precurățare',
-      drying: 'Uscare',
-      storage: 'Depozitare',
-    } as Record<string, string>,
-  },
-  en: {
-    label: 'Map of the Agrinvest bases',
-    filter: 'Services',
-    all: 'All',
-    overview: (n: number, c: number) => `${n} bases in ${c} counties`,
-    hint: 'Pick a county or a circle on the map.',
-    back: 'All counties',
-    open: 'Base page',
-    here: 'This base',
-    nearest: 'Nearest',
-    unknown: 'capacity being confirmed',
-    zoomIn: 'Zoom in',
-    zoomOut: 'Whole country',
-    legend: 'Base capacity',
-    sea: 'Black Sea',
-    river: 'Danube',
-    capital: 'Bucharest',
-    bases: (n: number) => (n === 1 ? '1 base' : `${n} bases`),
-    services: {
-      reception: 'Reception',
-      weighing: 'Weighing',
-      cleaning: 'Cleaning',
-      drying: 'Drying',
-      storage: 'Storage',
-    } as Record<string, string>,
-  },
+  ro: { label: 'Harta bazelor Agrinvest' },
+  en: { label: 'Map of the Agrinvest bases' },
 }
 
-const SERVICE_ORDER = ['drying', 'cleaning', 'storage', 'reception', 'weighing']
-const ZOOM = 2
-/** Circle radius on screen (px) for the largest and the smallest base; area follows capacity. */
-const R_MAX = 18
-const R_MIN = 5
-/** Below this drawn width the map frames the bases instead of the whole country. */
-const NARROW = 640
+/** Dot radius on screen (px), by capacity. */
+const R_MIN = 3.5
+const R_MAX = 8
+/** How far the chosen county lifts (screen px). */
+const LIFT = 4
+/** County names: size on screen (px), and the steps (px) a name may move to clear the dots. */
+const NAME_PX = 10
+const NAME_STEPS = [0, 14, -14, 26, -26, 38]
 
-// Places for orientation only: the capital, the river and the sea.
-const CAPITAL = project(26.1, 44.43)
-const RIVER = project(24.4, 43.77)
-const SEA = project(29.65, 43.85)
-// 100 km at 46°N: one degree of latitude is 111.2 km.
-const KM100 = (project(25, 45)[1] - project(25, 46)[1]) * (100 / 111.2)
-
-/** Great-circle distance in km. */
-function km(a: MapBase, b: MapBase) {
-  const rad = Math.PI / 180
-  const dLat = (b.lat - a.lat) * rad
-  const dLng = (b.lng - a.lng) * rad
-  const h =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2
-  return 2 * 6371 * Math.asin(Math.sqrt(h))
+/** The bases' extent with a margin, inside the country's outline. */
+function frame(bases: MapBase[]) {
+  if (!bases.length) return { x: 0, y: 0, w: MAP_WIDTH, h: MAP_HEIGHT }
+  const xs = bases.map((b) => b.x)
+  const ys = bases.map((b) => b.y)
+  const x0 = Math.max(0, Math.min(...xs) - 50)
+  const x1 = Math.min(MAP_WIDTH, Math.max(...xs) + 50)
+  const y0 = Math.max(0, Math.min(...ys) - 40)
+  const y1 = Math.min(MAP_HEIGHT, Math.max(...ys) + 40)
+  return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }
 }
-
-/** A round value for the legend: 5.000, 10.000, 20.000, 25.000… */
-function roundStep(v: number) {
-  const p = 10 ** Math.floor(Math.log10(v))
-  return [1, 2, 2.5, 5, 10]
-    .map((m) => m * p)
-    .reduce((a, b) => (Math.abs(b - v) < Math.abs(a - v) ? b : a))
-}
-
-type Selection = { kind: 'county'; code: string } | { kind: 'base'; id: string } | null
 
 /**
- * Romania by county, drawn like a printed map: pale counties, the ones with Agrinvest bases
- * tinted, every base a circle sized by its capacity, and the capital, the Danube, the sea and a
- * 100 km bar for orientation. Choosing a county or a circle (hover, tap or keyboard) fills the
- * list beside the map; a service filter fades the bases without it. On a base page the map opens
- * zoomed on that base and lists the nearest ones. Circles settle in once.
+ * The bases on the map: counties with bases tinted and named, every base a dot sized by
+ * capacity. Hovering (or tapping) a county lifts it, makes its dots pulse and opens a small box
+ * with its bases and their capacity; the box glides from county to county. The dots arrive
+ * west to east the first time the map scrolls into view.
  */
-export function BaseMap({ locale, bases, current, note, className }: BaseMapProps) {
+export function BaseMap({ locale, bases, note, className }: BaseMapProps) {
   const t = copy[locale]
-  const here = bases.find((b) => b.id === current) ?? null
-  const [selection, setSelection] = useState<Selection>(here ? { kind: 'base', id: here.id } : null)
-  const [hovered, setHovered] = useState<string | null>(null)
-  const [service, setService] = useState<string | null>(null)
-  const [zoomed, setZoomed] = useState(!!here)
-  // Screen pixels per map unit, so circles and labels keep their size at any width.
+  const view = useMemo(() => frame(bases), [bases])
   const svg = useRef<SVGSVGElement>(null)
-  const [px, setPx] = useState(0.62)
+  // Screen px per map unit, so dots and names keep their size at any width.
+  const [px, setPx] = useState(1.2)
+  // null: not measured yet (no animation, so the dots show without JavaScript).
+  const [seen, setSeen] = useState<boolean | null>(null)
   useEffect(() => {
     const el = svg.current
     if (!el) return
-    const measure = () => el.clientWidth && setPx(el.clientWidth / W)
+    const measure = () => el.clientWidth && setPx(el.clientWidth / view.w)
     measure()
-    const observer = new ResizeObserver(measure)
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+    const resize = new ResizeObserver(measure)
+    resize.observe(el)
+    const visible = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setSeen(true)
+          visible.disconnect()
+        } else setSeen((s) => s ?? false)
+      },
+      { threshold: 0.35 },
+    )
+    visible.observe(el)
+    return () => {
+      resize.disconnect()
+      visible.disconnect()
+    }
+  }, [view.w])
   const u = (screen: number) => screen / px
 
   const byCounty = useMemo(() => {
@@ -170,459 +101,217 @@ export function BaseMap({ locale, bases, current, note, className }: BaseMapProp
     return m
   }, [bases])
   const max = Math.max(1, ...bases.map((b) => b.capacity ?? 0))
-  /** Radius in screen px. */
-  const radiusPx = (capacity: number | null) =>
-    capacity ? Math.max(R_MIN, R_MAX * Math.sqrt(capacity / max)) : R_MIN
-  const radius = (capacity: number | null) => u(radiusPx(capacity))
-  const legend = [...new Set([roundStep(max / 4), roundStep(max)])]
-  const services = SERVICE_ORDER.filter((s) => bases.some((b) => b.services.includes(s)))
-  const matches = (b: MapBase) => !service || b.services.includes(service)
-  const countyName = (code: string | null) => COUNTIES.find((c) => c.code === code)?.name ?? ''
-
-  // The view: zoomed on the page's base, framed on the bases on a narrow screen, or the whole
-  // country. It keeps its point in the middle without showing past the country's edges.
+  const radius = (c: number | null) => u(c ? Math.max(R_MIN, R_MAX * Math.sqrt(c / max)) : R_MIN)
   const xs = bases.map((b) => b.x)
-  const ys = bases.map((b) => b.y)
-  const narrow = W * px < NARROW && bases.length > 1
-  const view =
-    zoomed && here
-      ? { x: here.x, y: here.y, k: ZOOM }
-      : narrow
-        ? {
-            x: (Math.min(...xs) + Math.max(...xs)) / 2,
-            y: (Math.min(...ys) + Math.max(...ys)) / 2,
-            k: Math.min(
-              ZOOM,
-              W / (Math.max(...xs) - Math.min(...xs) + 160),
-              H / (Math.max(...ys) - Math.min(...ys) + 160),
-            ),
-          }
-        : null
-  const k = view ? Math.max(1, view.k) : 1
-  const tx = view ? Math.min(0, Math.max(W - W * k, W / 2 - view.x * k)) : 0
-  const ty = view ? Math.min(0, Math.max(H - H * k, H / 2 - view.y * k)) : 0
-  const move = { transition: 'transform 0.9s var(--ease-enter)' } as CSSProperties
-  const at = (x: number, y: number) => [x * k + tx, y * k + ty] as const
+  const west = Math.min(...xs)
+  const span = Math.max(1, Math.max(...xs) - west)
 
-  const selectedBase = selection?.kind === 'base' ? bases.find((b) => b.id === selection.id) : null
-  const selectedCounty =
-    selection?.kind === 'county' ? selection.code : (selectedBase?.county ?? null)
-  const choose = (s: Selection) => setSelection(s)
-  const onKey = (s: Selection) => (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      choose(s)
+  // Each named county's label: at its centre, or the nearest step up or down that clears the
+  // dots and the names already placed (the least crowded step when none is clear), kept
+  // inside the frame. Smaller on a narrow map.
+  const namePx = px * view.w < 560 ? 8.5 : NAME_PX
+  const placed: { x: number; y: number; half: number; tall: number }[] = []
+  const names = COUNTIES.filter((c) => byCounty.has(c.code)).map((c) => {
+    const half = u((c.name.length * namePx * 0.8) / 2 + 3)
+    const tall = u(namePx / 2 + 3)
+    const x = Math.min(view.x + view.w - half, Math.max(view.x + half, c.at[0]))
+    const crowd = (dy: number) => {
+      const y = c.at[1] + u(dy)
+      const dots = bases.filter((b) => {
+        const r = radius(b.capacity)
+        return Math.abs(b.x - x) < half + r && Math.abs(b.y - y) < tall + r
+      }).length
+      const words = placed.filter(
+        (n) => Math.abs(n.x - x) < n.half + half && Math.abs(n.y - y) < n.tall + tall,
+      ).length
+      return dots + words * 2
     }
-  }
-  const label = (hovered ? bases.find((b) => b.id === hovered) : null) ?? selectedBase
-  // Big circles under small ones, so every circle can be reached.
-  const drawn = [...bases].sort((a, b) => (b.capacity ?? 0) - (a.capacity ?? 0))
-  const [capX, capY] = at(...CAPITAL)
+    const step = NAME_STEPS.reduce((best, dy) => (crowd(dy) < crowd(best) ? dy : best))
+    const y = c.at[1] + u(step)
+    placed.push({ x, y, half, tall })
+    return { ...c, x, y }
+  })
 
-  const summary = `${t.label}: ${[...byCounty]
-    .map(([code, list]) => `${countyName(code)} (${list.map((b) => b.name).join(', ')})`)
-    .join('; ')}.`
-  const place = 'pointer-events-none fill-subtle italic'
+  const [active, setActive] = useState<string | null>(null)
+  // The last county shown, so the box can fade out where it was.
+  const [shown, setShown] = useState<string | null>(null)
+  if (active && active !== shown) setShown(active)
+  useEffect(() => {
+    const fromHash = () => {
+      const slug = decodeURIComponent(window.location.hash.replace(/^#baza-/, ''))
+      const hit = bases.find((b) => b.slug === slug)
+      if (hit?.county) setActive(hit.county)
+    }
+    fromHash()
+    window.addEventListener('hashchange', fromHash)
+    return () => window.removeEventListener('hashchange', fromHash)
+  }, [bases])
+
+  const county = COUNTIES.find((c) => c.code === shown)
+  const list = shown ? (byCounty.get(shown) ?? []) : []
+  // The box sits above the county's centre, or below it near the top edge.
+  const box = county && {
+    left: Math.min(80, Math.max(20, ((county.at[0] - view.x) / view.w) * 100)),
+    top: ((county.at[1] - view.y) / view.h) * 100,
+  }
+  const capacity = (c: number | null) => (c ? formatQuantity(c, 't', locale) : '—')
+  const lifted = {
+    transform: `translateY(${-u(LIFT)}px)`,
+    filter: `drop-shadow(0 ${u(6)}px ${u(8)}px color-mix(in srgb, var(--color-forest) 22%, transparent))`,
+  } satisfies CSSProperties
 
   return (
-    <div
-      className={cx(
-        'grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start lg:gap-10',
-        className,
-      )}
-    >
-      <figure className="grid gap-3">
-        {services.length > 1 && (
-          <div
-            role="group"
-            aria-label={t.filter}
-            className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-line pb-3 text-small"
-          >
-            <span className="text-caption font-semibold tracking-wide text-subtle uppercase">
-              {t.filter}
-            </span>
-            {[null, ...services].map((s) => (
-              <button
-                key={s ?? 'all'}
-                type="button"
-                aria-pressed={service === s}
-                onClick={() => setService(s)}
+    <div className={cx('relative mx-auto w-full max-w-4xl', className)}>
+      <svg
+        ref={svg}
+        viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
+        role="group"
+        aria-label={t.label}
+        className="block h-auto w-full select-none"
+        onPointerLeave={(e) => e.pointerType === 'mouse' && setActive(null)}
+      >
+        {COUNTIES.map((c) => {
+          const here = byCounty.get(c.code)
+          return (
+            <use
+              key={c.code}
+              href={`${MAP_SRC}#${c.code}`}
+              vectorEffect="non-scaling-stroke"
+              strokeWidth={here ? 0.9 : 0.6}
+              role={here ? 'button' : undefined}
+              tabIndex={here ? 0 : undefined}
+              aria-label={
+                here
+                  ? `${c.name}: ${here.map((b) => `${b.name} ${capacity(b.capacity)}`).join(', ')}`
+                  : undefined
+              }
+              aria-expanded={here ? active === c.code : undefined}
+              onPointerEnter={(e) => here && e.pointerType === 'mouse' && setActive(c.code)}
+              // A tap opens the county's box; a tap on another county closes it.
+              onClick={() => setActive(here ? c.code : null)}
+              onFocus={() => here && setActive(c.code)}
+              onBlur={() => setActive(null)}
+              className={cx(
+                'transition-[fill] duration-300 outline-none',
+                here
+                  ? 'cursor-pointer fill-lime-soft stroke-line-strong hover:fill-accent-soft'
+                  : 'fill-paper stroke-line',
+              )}
+            />
+          )
+        })}
+
+        {/* The chosen county, lifted above the others with a soft shadow. */}
+        {active && (
+          <use
+            key={active}
+            href={`${MAP_SRC}#${active}`}
+            vectorEffect="non-scaling-stroke"
+            strokeWidth={1.75}
+            style={lifted}
+            className="pointer-events-none animate-county-lift fill-accent-soft stroke-accent"
+          />
+        )}
+
+        {names.map((c) => {
+          const on = c.code === active
+          return (
+            <text
+              key={c.code}
+              x={c.x}
+              y={c.y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize={u(namePx)}
+              letterSpacing={u(1.4)}
+              strokeWidth={u(3)}
+              strokeLinejoin="round"
+              style={on ? { transform: lifted.transform } : undefined}
+              className={cx(
+                'pointer-events-none stroke-paper font-medium uppercase transition-[fill,transform] duration-300 [paint-order:stroke]',
+                on ? 'fill-accent' : 'fill-subtle',
+              )}
+            >
+              {c.name}
+            </text>
+          )
+        })}
+
+        {bases.map((b) => {
+          const on = b.county === active
+          const r = radius(b.capacity)
+          return (
+            <g
+              key={b.id}
+              id={`baza-${b.slug}`}
+              className="pointer-events-none transition-transform duration-300"
+              style={on ? { transform: lifted.transform } : undefined}
+            >
+              <g
                 className={cx(
-                  'py-1 underline-offset-[6px] transition-colors',
-                  service === s
-                    ? 'font-semibold text-ink underline decoration-accent decoration-2'
-                    : 'text-muted hover:text-ink',
+                  'origin-center [transform-box:fill-box]',
+                  seen === false && 'opacity-0',
+                  seen && 'animate-pin-drop',
                 )}
+                style={
+                  seen ? { animationDelay: `${150 + ((b.x - west) / span) * 700}ms` } : undefined
+                }
               >
-                {s ? t.services[s] : t.all}
-              </button>
-            ))}
+                {on && (
+                  <circle
+                    cx={b.x}
+                    cy={b.y}
+                    r={r}
+                    className="origin-center animate-halo fill-accent [transform-box:fill-box]"
+                  />
+                )}
+                <circle cx={b.x} cy={b.y} r={r * 2} className="fill-accent/10" />
+                <circle
+                  cx={b.x}
+                  cy={b.y}
+                  r={r}
+                  strokeWidth={u(1.5)}
+                  className={cx(
+                    'stroke-raised transition-colors duration-300',
+                    on ? 'fill-forest' : 'fill-accent',
+                  )}
+                />
+              </g>
+            </g>
+          )
+        })}
+      </svg>
+
+      <div aria-live="polite">
+        {county && box && list.length > 0 && (
+          <div
+            className={cx(
+              'pointer-events-none absolute z-10 w-56 -translate-x-1/2 rounded-lg bg-raised p-3.5 text-small shadow-raised ring-1 ring-line',
+              'transition-[left,top,opacity,scale,translate] duration-300 ease-move',
+              box.top < 35 ? 'mt-5' : '-mt-5 -translate-y-full',
+              active ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+            )}
+            style={{ left: `${box.left}%`, top: `${box.top}%` }}
+            aria-hidden={!active}
+          >
+            <p className="text-caption font-semibold tracking-wide text-accent uppercase">
+              {county.name}
+            </p>
+            <ul className="mt-2 grid gap-1.5">
+              {list.map((b) => (
+                <li key={b.id} className="flex items-center gap-2">
+                  <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-accent" />
+                  <span className="grow font-medium text-ink">{b.name}</span>
+                  <span className="text-caption text-muted tabular-nums">
+                    {capacity(b.capacity)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            {note && <div className="mt-2.5 text-caption">{note}</div>}
           </div>
         )}
-        <div className="relative overflow-hidden">
-          <svg
-            viewBox={`0 0 ${W} ${H}`}
-            role="group"
-            ref={svg}
-            aria-label={summary}
-            className="block h-auto w-full touch-manipulation select-none"
-            onPointerLeave={() => setHovered(null)}
-          >
-            <g style={{ ...move, transform: `translate(${tx}px, ${ty}px) scale(${k})` }}>
-              {COUNTIES.map((c) => {
-                const list = byCounty.get(c.code)
-                const active = selectedCounty === c.code
-                return (
-                  <use
-                    key={c.code}
-                    href={`${MAP_SRC}#${c.code}`}
-                    vectorEffect="non-scaling-stroke"
-                    strokeWidth={active ? 1.75 : 0.75}
-                    onClick={list ? () => choose({ kind: 'county', code: c.code }) : undefined}
-                    onPointerEnter={
-                      list
-                        ? (e) =>
-                            e.pointerType === 'mouse' && choose({ kind: 'county', code: c.code })
-                        : undefined
-                    }
-                    className={cx(
-                      'transition-[fill,stroke] duration-300',
-                      active
-                        ? 'fill-accent-soft stroke-accent'
-                        : list
-                          ? 'cursor-pointer fill-lime-soft stroke-line-strong hover:fill-accent-soft'
-                          : 'fill-paper stroke-line-strong',
-                    )}
-                  />
-                )
-              })}
-            </g>
-            <text
-              x={at(...SEA)[0]}
-              y={at(...SEA)[1]}
-              textAnchor="end"
-              fontSize={u(12)}
-              className={place}
-            >
-              {t.sea}
-            </text>
-            <text
-              x={at(...RIVER)[0]}
-              y={at(...RIVER)[1]}
-              textAnchor="middle"
-              fontSize={u(11)}
-              letterSpacing={u(2)}
-              className={place}
-            >
-              {t.river}
-            </text>
-            <g
-              style={{ ...move, transform: `translate(${capX}px, ${capY}px)` }}
-              className="pointer-events-none"
-            >
-              <rect
-                x={u(-3)}
-                y={u(-3)}
-                width={u(6)}
-                height={u(6)}
-                className="fill-ink"
-                transform="rotate(45)"
-              />
-              <text x={u(7)} y={u(-6)} fontSize={u(11)} className="fill-muted">
-                {t.capital}
-              </text>
-            </g>
-
-            {drawn.map((b, i) => {
-              const isHere = b.id === here?.id
-              const isSelected = selectedBase?.id === b.id
-              const on = matches(b)
-              const r = radius(b.capacity)
-              const [x, y] = at(b.x, b.y)
-              return (
-                <g key={b.id} style={{ ...move, transform: `translate(${x}px, ${y}px)` }}>
-                  <g
-                    role="button"
-                    tabIndex={on ? 0 : -1}
-                    aria-label={`${b.name}${b.county ? `, ${countyName(b.county)}` : ''}`}
-                    aria-pressed={isSelected}
-                    onClick={() => choose({ kind: 'base', id: b.id })}
-                    onKeyDown={onKey({ kind: 'base', id: b.id })}
-                    onPointerEnter={() => setHovered(b.id)}
-                    onPointerLeave={() => setHovered(null)}
-                    onFocus={() => setHovered(b.id)}
-                    onBlur={() => setHovered(null)}
-                    className={cx(
-                      'group/pin origin-center animate-pin-drop cursor-pointer transition-opacity duration-300 outline-none [transform-box:fill-box]',
-                      !on && 'pointer-events-none opacity-20',
-                    )}
-                    style={{ animationDelay: `${200 + i * 40}ms` }}
-                  >
-                    {isHere && (
-                      <circle
-                        r={r}
-                        className="origin-center animate-halo fill-accent [transform-box:fill-box] motion-reduce:hidden"
-                      />
-                    )}
-                    <circle r={Math.max(r, u(14))} className="fill-transparent" />
-                    <circle
-                      r={r}
-                      strokeWidth={u(isSelected ? 2 : 1)}
-                      className={cx(
-                        'transition-colors duration-200 group-focus-visible/pin:stroke-ink',
-                        isSelected || isHere
-                          ? 'fill-accent/45 stroke-forest'
-                          : 'fill-accent/15 stroke-accent group-hover/pin:fill-accent/30',
-                      )}
-                    />
-                    <circle r={u(1.75)} className={isHere ? 'fill-forest' : 'fill-accent'} />
-                  </g>
-                </g>
-              )
-            })}
-
-            {label && (
-              <text
-                x={at(label.x, label.y)[0]}
-                y={at(label.x, label.y)[1] - radius(label.capacity) - u(6)}
-                textAnchor="middle"
-                fontSize={u(13)}
-                strokeWidth={u(3.5)}
-                strokeLinejoin="round"
-                className="pointer-events-none fill-ink font-semibold [paint-order:stroke] stroke-paper"
-              >
-                {label.name}
-              </text>
-            )}
-
-            {/* Scale bar: it follows the zoom. */}
-            <g transform={`translate(${u(4)} ${u(14)})`} className="pointer-events-none">
-              <path
-                d={`M0 ${u(-4)}V0H${KM100 * k}V${u(-4)}`}
-                fill="none"
-                strokeWidth={u(1)}
-                className="stroke-muted"
-              />
-              <text x={KM100 * k + u(5)} y={u(1)} fontSize={u(10)} className="fill-muted">
-                100 km
-              </text>
-            </g>
-          </svg>
-          {here && (
-            <button
-              type="button"
-              onClick={() => setZoomed((z) => !z)}
-              className="absolute top-2 right-2 rounded-sm bg-paper/90 px-2 py-1 text-caption font-medium text-accent underline-offset-4 hover:underline"
-            >
-              {zoomed ? `− ${t.zoomOut}` : `+ ${t.zoomIn}`}
-            </button>
-          )}
-        </div>
-        <figcaption className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-3 text-caption text-muted">
-          <span className="font-semibold text-ink">{t.legend}</span>
-          {legend.map((v) => {
-            const r = radiusPx(v)
-            return (
-              <span key={v} className="flex items-center gap-2">
-                <svg width={r * 2 + 2} height={r * 2 + 2} aria-hidden="true">
-                  <circle
-                    cx={r + 1}
-                    cy={r + 1}
-                    r={r}
-                    strokeWidth={1}
-                    className="fill-accent/15 stroke-accent"
-                  />
-                </svg>
-                {formatQuantity(v, 't', locale)}
-              </span>
-            )
-          })}
-          {note}
-        </figcaption>
-      </figure>
-
-      <aside
-        aria-live="polite"
-        className="border-t border-line pt-5 lg:sticky lg:top-24 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
-      >
-        <div
-          key={selectedBase ? `b${selectedBase.id}` : selectedCounty ? `c${selectedCounty}` : 'all'}
-          className="grid animate-rise gap-1"
-        >
-          {selectedBase ? (
-            <BaseDetails
-              base={selectedBase}
-              isHere={selectedBase.id === here?.id}
-              nearest={bases
-                .filter((b) => b.id !== selectedBase.id && matches(b))
-                .map((b) => ({ b, d: km(selectedBase, b) }))
-                .sort((a, b) => a.d - b.d)
-                .slice(0, 3)}
-              county={countyName(selectedBase.county)}
-              onBack={() =>
-                choose(selectedBase.county ? { kind: 'county', code: selectedBase.county } : null)
-              }
-              onPick={(id) => choose({ kind: 'base', id })}
-              locale={locale}
-            />
-          ) : selectedCounty ? (
-            <>
-              <BackButton onClick={() => choose(null)}>{t.back}</BackButton>
-              <h3 className="text-h4 font-semibold">{countyName(selectedCounty)}</h3>
-              <p className="text-small text-muted">
-                {t.bases(byCounty.get(selectedCounty)?.length ?? 0)}
-              </p>
-              <BaseRows
-                rows={(byCounty.get(selectedCounty) ?? []).map((b) => ({
-                  id: b.id,
-                  name: b.name,
-                  meta: b.capacity ? formatQuantity(b.capacity, 't', locale) : '—',
-                  dim: !matches(b),
-                }))}
-                onPick={(id) => choose({ kind: 'base', id })}
-              />
-            </>
-          ) : (
-            <>
-              <h3 className="text-h4 font-semibold">{t.overview(bases.length, byCounty.size)}</h3>
-              <p className="text-small text-muted">{t.hint}</p>
-              <ul className="mt-3 grid divide-y divide-line border-y border-line">
-                {[...byCounty]
-                  .sort(
-                    (a, b) =>
-                      b[1].length - a[1].length ||
-                      countyName(a[0]).localeCompare(countyName(b[0]), locale),
-                  )
-                  .map(([code, list]) => (
-                    <li key={code}>
-                      <button
-                        type="button"
-                        onClick={() => choose({ kind: 'county', code })}
-                        className={cx(
-                          'group flex w-full items-baseline justify-between gap-3 py-2 text-left text-small',
-                          !list.some(matches) && 'opacity-40',
-                        )}
-                      >
-                        <span className="text-ink group-hover:text-accent group-hover:underline">
-                          {countyName(code)}
-                        </span>
-                        <span className="text-caption text-subtle tabular-nums">{list.length}</span>
-                      </button>
-                    </li>
-                  ))}
-              </ul>
-            </>
-          )}
-        </div>
-      </aside>
+      </div>
     </div>
-  )
-}
-
-function BackButton({ onClick, children }: { onClick: () => void; children: ReactNode }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="mb-2 justify-self-start text-caption font-medium text-accent hover:underline"
-    >
-      ← {children}
-    </button>
-  )
-}
-
-function BaseRows({
-  rows,
-  onPick,
-}: {
-  rows: { id: string; name: string; meta: string; dim?: boolean }[]
-  onPick: (id: string) => void
-}) {
-  return (
-    <ul className="mt-3 grid divide-y divide-line border-y border-line">
-      {rows.map((r) => (
-        <li key={r.id}>
-          <button
-            type="button"
-            onClick={() => onPick(r.id)}
-            className={cx(
-              'group flex w-full items-baseline justify-between gap-3 py-2 text-left text-small',
-              r.dim && 'opacity-40',
-            )}
-          >
-            <span className="font-medium text-ink group-hover:text-accent group-hover:underline">
-              {r.name}
-            </span>
-            <span className="text-caption text-subtle tabular-nums">{r.meta}</span>
-          </button>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-function BaseDetails({
-  base,
-  isHere,
-  nearest,
-  county,
-  onBack,
-  onPick,
-  locale,
-}: {
-  base: MapBase
-  isHere: boolean
-  nearest: { b: MapBase; d: number }[]
-  county: string
-  onBack: () => void
-  onPick: (id: string) => void
-  locale: Locale
-}) {
-  const t = copy[locale]
-  return (
-    <>
-      <BackButton onClick={onBack}>{county || t.back}</BackButton>
-      {isHere && (
-        <p className="text-caption font-semibold tracking-wide text-accent uppercase">{t.here}</p>
-      )}
-      <h3 className="text-h4 font-semibold">{base.name}</h3>
-      <p className="text-small text-muted">
-        {county}
-        {county && ' · '}
-        {base.capacity ? formatQuantity(base.capacity, 't', locale) : t.unknown}
-      </p>
-      {base.services.length > 0 && (
-        <p className="mt-2 text-small text-ink">
-          {SERVICE_ORDER.filter((s) => base.services.includes(s))
-            .map((s) => t.services[s] ?? s)
-            .join(' · ')}
-        </p>
-      )}
-      {!isHere && (
-        <Link
-          href={base.href}
-          prefetch={false}
-          className="group mt-3 inline-flex items-center gap-1.5 justify-self-start text-small font-semibold text-accent no-underline hover:underline"
-        >
-          {t.open}
-          <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      )}
-      {nearest.length > 0 && (
-        <div className="mt-5">
-          <p className="text-caption font-semibold tracking-wide text-subtle uppercase">
-            {t.nearest}
-          </p>
-          <BaseRows
-            rows={nearest.map(({ b, d }) => ({
-              id: b.id,
-              name: b.name,
-              meta: `${formatNumber(Math.round(d), locale)} km`,
-            }))}
-            onPick={onPick}
-          />
-        </div>
-      )}
-    </>
   )
 }

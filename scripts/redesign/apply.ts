@@ -66,6 +66,36 @@ export function withFiguresMap(layout: Block[]): Block[] {
   return at < 0 ? [...layout, block] : [...layout.slice(0, at + 1), block, ...layout.slice(at + 1)]
 }
 
+/** The first draft of the slide words: a slide still showing them gets the current copy. */
+const oldSlideTitles: Record<Locale, string[]> = {
+  ro: [
+    'Vinde cereale la prețul zilei',
+    'Semințe, protecție și nutriție, cu prețul pe ambalaj',
+    'Credit agricol cu rate după recoltă',
+  ],
+  en: [
+    'Sell your grain at today’s price',
+    'Seeds, crop protection and nutrition, priced per pack',
+    'Farm credit repaid after harvest',
+  ],
+}
+
+/** Replaces the first-draft words of a slide; an edited slide is left alone. */
+export function withCurrentCopy(layout: Block[], locale: Locale): Block[] {
+  let changed = false
+  const next = layout.map((b) => {
+    if (b.blockType !== 'hero' || !Array.isArray(b.slides)) return b
+    const slides = (b.slides as Block[]).map((s, i) => {
+      const copy = heroSlides[locale][i]
+      if (!copy || s.title !== oldSlideTitles[locale][i]) return s
+      changed = true
+      return { ...s, title: copy.title, accent: copy.accent, lead: copy.lead }
+    })
+    return { ...b, slides }
+  })
+  return changed ? next : layout
+}
+
 /** Fills the posters a slider lacks (written before cloud storage existed), by slide order. */
 export function withPosters(layout: Block[], locale: Locale, media: Record<string, number>) {
   let changed = false
@@ -172,6 +202,11 @@ async function applyHome(payload: Payload, media: Record<string, number>, log: L
     if (filled !== layout) {
       await savePage(payload, page, locale, { layout: filled })
       log(`redesign: home (${locale}) posters added`)
+    }
+    const worded = withCurrentCopy(filled, locale)
+    if (worded !== filled) {
+      await savePage(payload, page, locale, { layout: worded })
+      log(`redesign: home (${locale}) slide words updated`)
     }
   }
 }

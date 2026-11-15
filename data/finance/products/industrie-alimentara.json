@@ -82,24 +82,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Ce sectoare finanțați?",
-          "answer": "Finanțăm {{F12}}. Dacă ești în alt sector din lanțul agroalimentar, întreabă echipa."
-        },
-        {
-          "question": "Sunt fermier și vreau să procesez. Se poate?",
-          "answer": "Da, spune-ne proiectul. Contează clienții, autorizațiile și cât poate plăti firma."
-        },
-        {
-          "question": "Ratele sunt legate de recoltă?",
-          "answer": "Nu aici. Graficul urmează încasările firmei."
-        },
-        {
-          "question": "În ce monedă este creditul?",
-          "answer": "În lei."
-        }
-      ],
       "seo": {
         "title": "Credit pentru industria alimentară și procesare",
         "description": "Finanțare pentru producători de carne, lactate, panificație și nutrețuri, cu grafic după încasările firmei. Capital de lucru și investiții."
@@ -163,24 +145,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Which sectors do you finance?",
-          "answer": "We finance food producers {{F12}}. If you are elsewhere in the food chain, ask the team."
-        },
-        {
-          "question": "I am a farmer and want to process. Is that possible?",
-          "answer": "Yes, tell us the project. Customers, permits and what the company can pay all matter."
-        },
-        {
-          "question": "Are instalments tied to the harvest?",
-          "answer": "Not here. The schedule follows the company's income."
-        },
-        {
-          "question": "In which currency is the loan?",
-          "answer": "In lei."
         }
       ],
       "seo": {

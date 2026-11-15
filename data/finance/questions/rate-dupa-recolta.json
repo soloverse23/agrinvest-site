@@ -1,0 +1,53 @@
+{
+  "key": "rate-dupa-recolta",
+  "topic": "repayment",
+  "order": 10,
+  "popular": true,
+  "product": "credit-productie",
+  "related": [
+    "rate-lunare-credit-agricol",
+    "o-singura-rata",
+    "durata-maxima-credit"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cum funcționează ratele după recoltă?",
+      "slug": "rate-dupa-recolta",
+      "answer": "Ratele se pun atunci când ferma încasează banii pe recoltă, nu lunar: {{F5.instalments}}. Graficul se stabilește împreună cu tine, după culturile pe care le ai.",
+      "factors": [
+        "ce culturi ai și când le vinzi",
+        "dacă vinzi la recoltă sau stochezi",
+        "durata creditului",
+        "dacă ai și alte încasări, cum ar fi subvenția APIA"
+      ],
+      "seo": {
+        "title": "Credit agricol cu rate după recoltă",
+        "description": "Cum funcționează creditul cu rate după recolta de vară și de toamnă: când plătești, cât și cum se stabilește graficul."
+      },
+      "practice": "| Rata | Culturi | Perioadă |\n| --- | --- | --- |\n| după recolta de vară | grâu, orz, rapiță | iulie–august |\n| după recolta de toamnă | porumb, floarea-soarelui | octombrie–noiembrie |\n\nPoți vedea cum ar cădea ratele pe culturile tale în [simulator](/finantare/simulator)."
+    },
+    "en": {
+      "title": "How do instalments after harvest work?",
+      "slug": "instalments-after-harvest",
+      "answer": "Instalments fall when the farm is paid for its harvest, not monthly: {{F5.instalments}}. The schedule is set with you, based on the crops you grow.",
+      "factors": [
+        "which crops you grow and when you sell them",
+        "whether you sell at harvest or store",
+        "the term of the loan",
+        "whether you have other income, such as the APIA subsidy"
+      ],
+      "seo": {
+        "title": "Farm loan repaid after harvest",
+        "description": "How a loan repaid after the summer and autumn harvests works: when you pay, how much, and how the schedule is set."
+      },
+      "practice": "| Instalment | Crops | Period |\n| --- | --- | --- |\n| after the summer harvest | wheat, barley, rapeseed | July–August |\n| after the autumn harvest | maize, sunflower | October–November |\n\nSee how instalments would fall on your crops in the [simulator](/en/financing/simulator)."
+    }
+  }
+}

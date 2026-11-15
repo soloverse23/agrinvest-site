@@ -38,3 +38,7 @@ export const CarouselNavLazy = dynamic(() => import('./CarouselNav').then((m) =>
 export const MarketChartLazy = dynamic(() => import('./MarketChart').then((m) => m.MarketChart))
 /** The interactive map of the bases (storage page, base pages). */
 export const BaseMapLazy = dynamic(() => import('./BaseMap').then((m) => m.BaseMap))
+/** The finance consultant drawer's launcher (Phase 7g): the drawer itself loads on first click. */
+export const ConsultantLauncherLazy = dynamic(() =>
+  import('./ConsultantLauncher').then((m) => m.ConsultantLauncher),
+)

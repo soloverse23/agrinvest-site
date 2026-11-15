@@ -92,24 +92,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Este același lucru cu creditul pe adeverința APIA?",
-          "answer": "Nu neapărat. Schema pe adeverință are reguli publice și convenții cu APIA. Întreabă echipa cum se aplică la noi."
-        },
-        {
-          "question": "Cât pot primi?",
-          "answer": "Limita anunțată: {{F11}}. Suma exactă depinde de analiză."
-        },
-        {
-          "question": "Am nevoie de adeverință APIA?",
-          "answer": "Întreabă echipa. Îți spunem ce documente sunt necesare după prima discuție."
-        },
-        {
-          "question": "Pot lua finanțare dacă subvenția e deja la o bancă?",
-          "answer": "Spune-ne din start. Aceeași sumă nu poate garanta două credite."
-        }
-      ],
       "seo": {
         "title": "Finanțare pe subvenții APIA pentru fermieri",
         "description": "Cum funcționează subvențiile APIA ca garanție la Agrinvest Credit IFN și prin ce diferă de creditul pe adeverință. Când merită și ce riscuri are."
@@ -169,24 +151,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Is this the same as an APIA certificate loan?",
-          "answer": "Not necessarily. The certificate scheme has public rules and agreements with APIA. Ask the team how it applies with us."
-        },
-        {
-          "question": "How much can I get?",
-          "answer": "The announced limit: {{F11}}. The exact amount depends on the analysis."
-        },
-        {
-          "question": "Do I need an APIA certificate?",
-          "answer": "Ask the team. We tell you which documents are needed after the first conversation."
-        },
-        {
-          "question": "Can I get financing if the subsidy is already with a bank?",
-          "answer": "Tell us from the start. The same amount cannot guarantee two loans."
         }
       ],
       "seo": {

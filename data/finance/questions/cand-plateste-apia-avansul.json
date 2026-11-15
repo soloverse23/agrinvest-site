@@ -1,0 +1,54 @@
+{
+  "key": "cand-plateste-apia-avansul",
+  "topic": "apia",
+  "order": 40,
+  "popular": false,
+  "product": "subventii-apia",
+  "guide": "plata-subventii-apia",
+  "related": [
+    "bani-pe-subventia-apia",
+    "cat-din-subventie"
+  ],
+  "sources": [
+    {
+      "title": "APIA: Campania de plăți în avans 2026",
+      "url": "https://apia.org.ro/comunicat-de-presa/campania-de-plati-in-avans-apia-2026-incepe-maine-16-octombrie/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: Avans APIA 2026, calcul pe hectar",
+      "url": "https://agrointel.ro/359677/avans-apia-2026-calcul-pe-hectar-cati-bani-vor-intra-in-conturile-fermierilor-din-16-octombrie",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Când plătește APIA avansul în 2026?",
+      "slug": "cand-plateste-apia-avansul-2026",
+      "answer": "Campania de plăți în avans 2026 se desfășoară între 16 octombrie și 30 noiembrie. După 1 decembrie, APIA plătește diferența până la suma integrală, eșalonat.",
+      "factors": [
+        "centrul APIA și verificările din dosarul tău",
+        "schema de plată: BISS, CRISS sau altele",
+        "dacă datele bancare sunt corecte"
+      ],
+      "seo": {
+        "title": "Când plătește APIA avansul 2026",
+        "description": "Calendarul plăților APIA 2026: avansul din 16 octombrie, diferența după 1 decembrie și ce faci dacă banii întârzie."
+      }
+    },
+    "en": {
+      "title": "When does APIA pay the 2026 advance?",
+      "slug": "when-apia-pays-the-2026-advance",
+      "answer": "The 2026 advance campaign runs from 16 October to 30 November. After 1 December, APIA pays the balance up to the full amount, in stages.",
+      "factors": [
+        "your APIA centre and the checks on your file",
+        "the payment scheme: BISS, CRISS or others",
+        "whether your bank details are right"
+      ],
+      "seo": {
+        "title": "When APIA pays the 2026 advance",
+        "description": "The APIA 2026 payment calendar: the advance from 16 October, the balance after 1 December, and what to do if money is late."
+      }
+    }
+  }
+}

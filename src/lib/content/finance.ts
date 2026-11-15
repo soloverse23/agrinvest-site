@@ -1,9 +1,10 @@
 import { unstable_cache } from 'next/cache'
 
 import type { Locale } from '@/i18n/config'
-import { financeProductPath, guidePath } from '@/i18n/routes'
+import { financeProductPath, guidePath, questionPath } from '@/i18n/routes'
 import { tags } from '@/lib/revalidate'
-import type { FinanceProduct, Guide } from '@/payload-types'
+import type { QuestionTopic } from '@/lib/finance/topics'
+import type { FinanceProduct, FinanceQuestion, Guide } from '@/payload-types'
 
 import type { Alternates } from './pages'
 import { payloadClient } from './payload'
@@ -186,3 +187,94 @@ export const getFinanceProduct = unstable_cache(
   [`finance:product:${epoch}`],
   { tags: [tags.finance, tags.guides, tags.people] },
 )
+
+export type QuestionCard = {
+  id: number
+  key: string
+  slug: string
+  title: string
+  answer: string
+  topic: QuestionTopic
+  order: number
+  popular: boolean
+  /** The matching credit's id: a credit page lists the questions that point at it. */
+  product: number | null
+  /** The library guide on the same subject, by id: a guide lists the questions that point at it. */
+  guide: number | null
+  updatedAt: string
+}
+
+/** Every published question of one language, in topic order then by `order`. */
+export const listQuestions = unstable_cache(
+  async (locale: Locale): Promise<QuestionCard[]> => {
+    const payload = await payloadClient()
+    const { docs } = await payload.find({
+      collection: 'finance-questions',
+      ...read(locale),
+      depth: 0,
+      sort: 'order',
+      select: {
+        key: true,
+        slug: true,
+        title: true,
+        answer: true,
+        topic: true,
+        order: true,
+        popular: true,
+        product: true,
+        guide: true,
+        updatedAt: true,
+      },
+    })
+    return docs.flatMap((d) =>
+      d.slug && d.title && d.answer
+        ? [
+            {
+              id: d.id,
+              key: d.key,
+              slug: d.slug,
+              title: d.title,
+              answer: d.answer,
+              topic: d.topic,
+              order: d.order ?? 100,
+              popular: Boolean(d.popular),
+              product: typeof d.product === 'number' ? d.product : (d.product?.id ?? null),
+              guide: typeof d.guide === 'number' ? d.guide : (d.guide?.id ?? null),
+              updatedAt: d.updatedAt,
+            },
+          ]
+        : [],
+    )
+  },
+  [`finance:questions:v2:${epoch}`],
+  { tags: [tags.finance] },
+)
+
+export const getQuestion = unstable_cache(
+  async (slug: string, locale: Locale): Promise<FinanceQuestion | null> => {
+    const payload = await payloadClient()
+    const { docs } = await payload.find({
+      collection: 'finance-questions',
+      ...read(locale),
+      where: { slug: { equals: slug } },
+      depth: 1,
+      limit: 1,
+    })
+    return docs[0] ?? null
+  },
+  [`finance:question:${epoch}`],
+  { tags: [tags.finance, tags.guides] },
+)
+
+export async function questionAlternates(id: number): Promise<Alternates> {
+  const [ro, en] = await Promise.all([listQuestions('ro'), listQuestions('en')])
+  const a = ro.find((q) => q.id === id)
+  const b = en.find((q) => q.id === id)
+  return {
+    ...(a ? { ro: questionPath(a.slug, 'ro') } : {}),
+    ...(b ? { en: questionPath(b.slug, 'en') } : {}),
+  }
+}
+
+export const allQuestionAlternates = async () =>
+  Promise.all((await listQuestions('ro')).map((q) => questionAlternates(q.id)))

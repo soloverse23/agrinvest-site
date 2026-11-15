@@ -1,0 +1,53 @@
+{
+  "key": "credit-siloz",
+  "topic": "investment",
+  "order": 80,
+  "popular": false,
+  "product": "depozitare",
+  "related": [
+    "stoc-amana-vanzarea",
+    "avans-credit-investitii"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Merită să-mi fac siloz propriu cu credit?",
+      "slug": "credit-siloz-propriu",
+      "answer": "Depinde de cantitate și de cât de des stochezi. Compară rata creditului cu ce plătești pe depozitare la terți. Proiectul se discută cu tot ce ține de el, inclusiv uscătoare.",
+      "factors": [
+        "câte tone stochezi pe an și cât timp",
+        "cât plătești azi pe depozitare",
+        "stadiul autorizațiilor și terenul"
+      ],
+      "seo": {
+        "title": "Credit pentru siloz sau depozit propriu",
+        "description": "Când merită un siloz propriu finanțat cu credit și cum compari cu depozitarea la terți."
+      }
+    },
+    "en": {
+      "title": "Is my own silo worth building with a loan?",
+      "slug": "own-silo-with-a-loan",
+      "answer": "It depends on the quantity and how often you store. Compare the loan instalment with what you pay for storage elsewhere. The project is discussed with everything it includes, dryers too.",
+      "factors": [
+        "how many tonnes you store each year and for how long",
+        "what storage costs you today",
+        "the state of permits and the land"
+      ],
+      "seo": {
+        "title": "Loan for your own silo or grain store",
+        "description": "When a silo of your own, financed with a loan, is worth it, and how to compare with storing elsewhere."
+      }
+    }
+  }
+}

@@ -1,10 +1,17 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { ArrowRightIcon } from '@ds/icons/icons'
 import { ReviewNote, SourceList } from '@ds/patterns/Finance'
-import { CtaBand, Toc } from '@ds/patterns/Sections'
+import {
+  ConsultantBand,
+  ConsultantButton,
+  CreditCards,
+  QuestionLinks,
+} from '@ds/patterns/FinanceGuide'
+import { Toc } from '@ds/patterns/Sections'
 import { schemaFaq } from '@/components/FactText'
+import { FinanceConsultant } from '@/components/FinanceConsultant'
 import { FinanceNav } from '@/components/FinanceNav'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
@@ -12,10 +19,18 @@ import { headingsOf, Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
-import { financePath, financeProductPath, financeRoutePath, guidePath } from '@/i18n/routes'
+import { financeGuideUi } from '@/i18n/finance-guide'
+import {
+  financePath,
+  financeProductPath,
+  financeRoutePath,
+  guidePath,
+  questionPath,
+} from '@/i18n/routes'
 import { ui } from '@/i18n/ui'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
-import { getGuide, guideAlternates, listGuides } from '@/lib/content/finance'
+import { getGuide, guideAlternates, listGuides, listQuestions } from '@/lib/content/finance'
+import { needOfProduct } from '@/lib/finance/needs'
 import { formatDate } from '@/lib/format'
 import { article, breadcrumbs, definedTermSet, faqPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
@@ -50,17 +65,22 @@ export async function GuidePage({ locale, slug }: { locale: Locale; slug: string
   const guide = await getGuide(slug, locale)
   if (!guide) notFound()
   const t = financeUi[locale]
-  const figures = await getFigures(locale)
+  const g = financeGuideUi[locale]
+  const [figures, questions] = await Promise.all([getFigures(locale), listQuestions(locale)])
   const url = guidePath(guide.slug as string, locale)
   const crumbs = [
     { name: t.section, url: financePath(locale) },
-    { name: t.guides, url: financeRoutePath('guides', locale) },
+    { name: g.nav.library, url: financeRoutePath('guides', locale) },
     { name: guide.title, url },
   ]
+  // The short answers on this guide's subject: questions whose library guide this is.
+  const asked = questions.filter((q) => q.guide === guide.id).slice(0, 6)
   const author = named(guide.author)
   const reviewer = named(guide.reviewer)
   const related = guidesOf(guide.relatedGuides)
   const products = (guide.relatedProducts ?? []).flatMap((p) => (typeof p === 'object' ? [p] : []))
+  const need = needOfProduct(products[0]?.key)
+  const apply = financeRoutePath('apply', locale)
   const headings = headingsOf(guide.body)
   const terms = guide.terms ?? []
   const faq = schemaFaq(guide.faq, figures)
@@ -93,7 +113,7 @@ export async function GuidePage({ locale, slug }: { locale: Locale; slug: string
         crumbs={crumbs}
         kicker={t.guides}
       />
-      <FinanceNav locale={locale} current="guides" />
+      <FinanceNav locale={locale} current="library" need={need} />
       <div className="mx-auto mt-12 grid max-w-page gap-10 px-4 md:mt-16 md:px-8 lg:grid-cols-12">
         <aside className="lg:col-span-3 lg:row-start-1">
           <div className="grid gap-6 lg:sticky lg:top-24">
@@ -142,58 +162,61 @@ export async function GuidePage({ locale, slug }: { locale: Locale; slug: string
         </div>
       </div>
       <Faq locale={locale} items={guide.faq} />
-      {products.length > 0 && (
-        <section className="mx-auto mt-16 grid max-w-page gap-4 px-4 md:px-8">
-          <h2 className="text-h3 font-semibold text-ink">{t.relatedProducts}</h2>
-          <ul className="grid gap-4 md:grid-cols-3">
-            {products.map((p) => (
-              <li key={p.id} className="rounded-lg bg-raised p-5 ring-1 ring-line">
-                <Link
-                  href={financeProductPath(
-                    p.slug as string,
-                    locale,
-                    typeof p.parent === 'object' ? p.parent?.slug : null,
-                  )}
-                  className="font-semibold text-ink"
-                >
-                  {p.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      {related.length > 0 && (
-        <section className="mx-auto mt-16 grid max-w-page gap-4 px-4 md:px-8">
-          <h2 className="text-h3 font-semibold text-ink">{t.related}</h2>
-          <ul className="grid gap-4 md:grid-cols-3">
-            {related.map((g) => (
-              <li key={g.id} className="rounded-lg bg-raised p-5 ring-1 ring-line">
-                <Link href={guidePath(g.slug as string, locale)} className="font-semibold text-ink">
-                  {g.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      <div className="mx-auto mt-16 grid max-w-page gap-4 px-4 md:mt-20 md:px-8">
-        <CtaBand
-          kicker={t.tools.kicker}
-          title={t.tools.title}
-          body={t.tools.body}
-          primary={{ href: financeRoutePath('apply', locale), label: t.tools.apply }}
-          secondary={{ href: financeRoutePath('simulator', locale), label: t.tools.simulate }}
+      <div className="mx-auto mt-16 grid max-w-page gap-14 px-4 md:mt-20 md:px-8">
+        {asked.length > 0 && (
+          <section className="grid gap-4" aria-labelledby="pe-scurt">
+            <h2 id="pe-scurt" className="text-h3 font-semibold">
+              {g.question.related}
+            </h2>
+            <QuestionLinks
+              variant="cards"
+              items={asked.map((q) => ({ href: questionPath(q.slug, locale), title: q.title }))}
+            />
+          </section>
+        )}
+        {products.length > 0 && (
+          <section className="grid gap-4" aria-labelledby="solutii">
+            <h2 id="solutii" className="text-h3 font-semibold">
+              {t.relatedProducts}
+            </h2>
+            <CreditCards
+              items={products.map((p) => ({
+                href: financeProductPath(
+                  p.slug as string,
+                  locale,
+                  typeof p.parent === 'object' ? p.parent?.slug : null,
+                ),
+                title: p.title,
+              }))}
+            />
+          </section>
+        )}
+        {related.length > 0 && (
+          <section className="grid gap-4" aria-labelledby="citeste">
+            <h2 id="citeste" className="text-h3 font-semibold">
+              {t.related}
+            </h2>
+            <CreditCards
+              items={related.map((r) => ({
+                href: guidePath(r.slug as string, locale),
+                title: r.title,
+              }))}
+            />
+          </section>
+        )}
+        <ConsultantBand
+          kicker={g.credit.kicker}
+          title={g.question.bandTitle}
+          body={g.question.bandBody}
+          action={
+            <ConsultantButton href={apply} need={need} variant="lime" icon={<ArrowRightIcon />}>
+              {g.consultant}
+            </ConsultantButton>
+          }
+          secondary={{ href: financeRoutePath('guides', locale), label: g.hub.libraryAll }}
         />
-        <p className="text-small">
-          <Link
-            href={financeRoutePath('guides', locale)}
-            className="text-accent underline underline-offset-2"
-          >
-            {t.page.allGuides}
-          </Link>
-        </p>
       </div>
+      <FinanceConsultant locale={locale} sourcePath={url} need={need} />
     </SiteShell>
   )
 }

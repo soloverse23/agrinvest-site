@@ -1,0 +1,60 @@
+{
+  "key": "cat-din-subventie",
+  "topic": "apia",
+  "order": 30,
+  "popular": false,
+  "product": "subventii-apia",
+  "guide": "credit-adeverinta-apia",
+  "related": [
+    "credit-adeverinta-apia-ifn",
+    "bani-pe-subventia-apia",
+    "cand-plateste-apia-avansul"
+  ],
+  "sources": [
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De trei ori subvenția",
+      "url": "https://fgcr.ro/produse/de-trei-ori-subventia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De cinci ori subvenția",
+      "url": "https://fgcr.ro/produse/de-cinci-ori-subventia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cât din subvenția APIA pot primi în avans prin credit?",
+      "slug": "cat-din-subventie-avans-credit",
+      "answer": "Pe adeverința APIA, de regulă până la 90% din suma calculată. Produsele garantate de FGCR permit plafoane mai mari, calculate pe mai mulți ani de subvenție, iar la finanțarea Agrinvest pe subvenții limita anunțată este {{F11}}.",
+      "factors": [
+        "suma de pe adeverință",
+        "produsul ales: pe adeverință, cu FGCR sau pe subvenție",
+        "dacă ai încasat deja avansul APIA"
+      ],
+      "seo": {
+        "title": "Cât din subvenția APIA poți lua în avans",
+        "description": "De la 90% din adeverință la plafoanele FGCR de 3 sau 5 ori subvenția: cât poți lua în avans și de ce depinde."
+      }
+    },
+    "en": {
+      "title": "How much of my APIA subsidy can I get early through a loan?",
+      "slug": "how-much-of-the-subsidy-early",
+      "answer": "On the APIA certificate, usually up to 90% of the calculated amount. Products guaranteed by FGCR allow higher ceilings, worked out over several years of subsidy, and Agrinvest’s subsidy financing has an announced limit of {{F11}}.",
+      "factors": [
+        "the amount on the certificate",
+        "the product: certificate, FGCR-backed or subsidy financing",
+        "whether you have already received the APIA advance"
+      ],
+      "seo": {
+        "title": "How much of the APIA subsidy you can get early",
+        "description": "From 90% of the certificate to FGCR ceilings of 3 or 5 times the subsidy: how much you can get early and what decides it."
+      }
+    }
+  }
+}

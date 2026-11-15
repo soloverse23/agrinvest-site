@@ -41,6 +41,17 @@ describe('finance content gate', () => {
     expect(out).toMatch(/a rate is stated/)
   })
 
+  it('fails a credit that no question points at (Phase 7g)', () => {
+    const others = files.filter((f) => !(f.kind === 'question' && f.product === 'restructurare'))
+    expect(contentErrors(others).join()).toMatch(/restructurare: no question points at it/)
+  })
+
+  it('fails a question too thin to stand alone', () => {
+    const question = files.find((f) => f.kind === 'question')!
+    const thin = withRo(question, { answer: 'Da.', factors: ['unu', 'doi'], practice: undefined })
+    expect(contentErrors([thin]).join()).toMatch(/under 40 words/)
+  })
+
   it('fails two investment pages that read the same', () => {
     const page = files.find((f) => f.key === 'utilaje')!
     const twin = { ...page, key: 'utilaje-copie' }

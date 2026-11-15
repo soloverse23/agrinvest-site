@@ -104,24 +104,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Finanțați și ferme zootehnice?",
-          "answer": "Da, finanțăm atât ferme vegetale, cât și zootehnice. Spune-ne ce vrei să faci."
-        },
-        {
-          "question": "Pot avea rate lunare?",
-          "answer": "Discută cu echipa. Ratele sunt de regulă legate de recolte, dar fluxul banilor diferă la zootehnie."
-        },
-        {
-          "question": "Cumpărați și producția?",
-          "answer": "Agrinvest cumpără cereale. Pentru lapte sau carne ai nevoie de contractele tale de vânzare."
-        },
-        {
-          "question": "Pot folosi creditul pentru pierderi?",
-          "answer": "Nu este destinat acestui lucru. Vorbește cu noi despre situația fermei."
-        }
-      ],
       "seo": {
         "title": "Credit pentru ferme vegetale și zootehnice",
         "description": "Credit pe termen lung pentru grajduri, echipamente și dezvoltarea fermei, cu rate după fluxul de bani. Pentru ferme vegetale și zootehnice."
@@ -193,24 +175,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Do you finance livestock farms?",
-          "answer": "Yes, both crop and livestock farms. Tell us what you want to do."
-        },
-        {
-          "question": "Can I have monthly instalments?",
-          "answer": "Talk to the team. Instalments are usually tied to harvests, but the flow of money differs in livestock."
-        },
-        {
-          "question": "Do you also buy the output?",
-          "answer": "Agrinvest buys grain. For milk or meat you need your own sale contracts."
-        },
-        {
-          "question": "Can I use the loan for losses?",
-          "answer": "It is not meant for that. Talk to us about the farm's position."
         }
       ],
       "seo": {

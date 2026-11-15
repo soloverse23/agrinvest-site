@@ -80,6 +80,7 @@ export interface Config {
     carts: Cart;
     orders: Order;
     'finance-products': FinanceProduct;
+    'finance-questions': FinanceQuestion;
     guides: Guide;
     'finance-applications': FinanceApplication;
     'buy-prices': BuyPrice;
@@ -126,6 +127,7 @@ export interface Config {
     carts: CartsSelect<false> | CartsSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
     'finance-products': FinanceProductsSelect<false> | FinanceProductsSelect<true>;
+    'finance-questions': FinanceQuestionsSelect<false> | FinanceQuestionsSelect<true>;
     guides: GuidesSelect<false> | GuidesSelect<true>;
     'finance-applications': FinanceApplicationsSelect<false> | FinanceApplicationsSelect<true>;
     'buy-prices': BuyPricesSelect<false> | BuyPricesSelect<true>;
@@ -1704,13 +1706,6 @@ export interface FinanceProduct {
     amountMax?: number | null;
     termMonths?: number | null;
   };
-  faq?:
-    | {
-        question: string;
-        answer: string;
-        id?: string | null;
-      }[]
-    | null;
   advisor?: (number | null) | Person;
   relatedProducts?: (number | FinanceProduct)[] | null;
   relatedGuides?: (number | Guide)[] | null;
@@ -1874,6 +1869,111 @@ export interface Guide {
     faqIdeas?: string | null;
     expert?: (number | null) | Person;
     refreshBy?: string | null;
+  };
+  enrichment?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finance-questions".
+ */
+export interface FinanceQuestion {
+  id: number;
+  /**
+   * As a farmer would type it into a search box or an assistant.
+   */
+  title: string;
+  /**
+   * Stable key used by the reviewed files.
+   */
+  key: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  topic:
+    | 'eligibility'
+    | 'cost'
+    | 'guarantees'
+    | 'repayment'
+    | 'process'
+    | 'apia'
+    | 'investment'
+    | 'grain'
+    | 'hardship'
+    | 'ifn';
+  /**
+   * Position inside its topic and on the hub.
+   */
+  order?: number | null;
+  popular?: boolean | null;
+  /**
+   * Two or three sentences that answer on their own, even if quoted.
+   */
+  answer: string;
+  /**
+   * What changes the answer from one farm to another.
+   */
+  factors?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional: an example or a short table, only when sources allow.
+   */
+  practice?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  product: number | FinanceProduct;
+  guide?: (number | null) | Guide;
+  related?: (number | FinanceQuestion)[] | null;
+  sources?:
+    | {
+        title: string;
+        url: string;
+        retrieved: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Title 30–60 characters, description 70–160 (checked by check:seo).
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+    noindex?: boolean | null;
+  };
+  review: {
+    legalStatus: 'draft' | 'ifn-reviewed' | 'legal-approved';
+    status: 'to-confirm' | 'conflict' | 'confirmed';
+    reviewedAt?: string | null;
+    reviewedBy?: string | null;
   };
   enrichment?:
     | {
@@ -2438,6 +2538,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'finance-products';
         value: number | FinanceProduct;
+      } | null)
+    | ({
+        relationTo: 'finance-questions';
+        value: number | FinanceQuestion;
       } | null)
     | ({
         relationTo: 'guides';
@@ -3481,16 +3585,61 @@ export interface FinanceProductsSelect<T extends boolean = true> {
         amountMax?: T;
         termMonths?: T;
       };
-  faq?:
-    | T
-    | {
-        question?: T;
-        answer?: T;
-        id?: T;
-      };
   advisor?: T;
   relatedProducts?: T;
   relatedGuides?: T;
+  sources?:
+    | T
+    | {
+        title?: T;
+        url?: T;
+        retrieved?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        noindex?: T;
+      };
+  review?:
+    | T
+    | {
+        legalStatus?: T;
+        status?: T;
+        reviewedAt?: T;
+        reviewedBy?: T;
+      };
+  enrichment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finance-questions_select".
+ */
+export interface FinanceQuestionsSelect<T extends boolean = true> {
+  title?: T;
+  key?: T;
+  generateSlug?: T;
+  slug?: T;
+  topic?: T;
+  order?: T;
+  popular?: T;
+  answer?: T;
+  factors?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  practice?: T;
+  product?: T;
+  guide?: T;
+  related?: T;
   sources?:
     | T
     | {

@@ -7,9 +7,15 @@ import {
   financeRoutePath,
   financeRoutes,
   guidePath,
+  questionPath,
   productPath,
 } from '@/i18n/routes'
-import { getFinancePage, listFinanceProducts, listGuides } from '@/lib/content/finance'
+import {
+  getFinancePage,
+  listFinanceProducts,
+  listGuides,
+  listQuestions,
+} from '@/lib/content/finance'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listBases, listCrops } from '@/lib/content/locations'
 import { payloadClient } from '@/lib/content/payload'
@@ -54,14 +60,17 @@ export async function GET() {
           `- [${d.title}](${absoluteUrl(localePath(d.path as string, locale))})${d.summary ? `: ${d.summary}` : ''}`,
       )
   }
-  const [ro, en, guidesRo, guidesEn, productsRo, productsEn] = await Promise.all([
-    section('ro'),
-    section('en'),
-    listGuides('ro'),
-    listGuides('en'),
-    listFinanceProducts('ro'),
-    listFinanceProducts('en'),
-  ])
+  const [ro, en, guidesRo, guidesEn, productsRo, productsEn, questionsRo, questionsEn] =
+    await Promise.all([
+      section('ro'),
+      section('en'),
+      listGuides('ro'),
+      listGuides('en'),
+      listFinanceProducts('ro'),
+      listFinanceProducts('en'),
+      listQuestions('ro'),
+      listQuestions('en'),
+    ])
   /** The finance tools: their text pages, when published. */
   const tools = async (locale: 'ro' | 'en') =>
     (
@@ -79,6 +88,9 @@ export async function GET() {
   const [toolsRo, toolsEn] = await Promise.all([tools('ro'), tools('en')])
   const productLine = (locale: 'ro' | 'en') => (p: (typeof productsRo)[number]) =>
     `- [${p.title}](${absoluteUrl(financeProductPath(p.slug, locale, p.parentSlug))})`
+  // A question's line is its own title; its answer is on the page, with the facts marked.
+  const questionLine = (locale: 'ro' | 'en') => (q: (typeof questionsRo)[number]) =>
+    `- [${q.title}](${absoluteUrl(questionPath(q.slug, locale))})`
   const guideLine = (locale: 'ro' | 'en') => (g: (typeof guidesRo)[number]) =>
     `- [${g.title}](${absoluteUrl(guidePath(g.slug, locale))}): ${g.summary}`
 
@@ -102,6 +114,12 @@ export async function GET() {
     '## Credit products (Agrinvest Credit IFN)',
     ...productsEn.map(productLine('en')),
     ...toolsEn,
+    '',
+    '## Întrebări despre credit agricol',
+    ...questionsRo.map(questionLine('ro')),
+    '',
+    '## Farm loan questions',
+    ...questionsEn.map(questionLine('en')),
     '',
     '## Ghiduri de finanțare',
     ...guidesRo.map(guideLine('ro')),

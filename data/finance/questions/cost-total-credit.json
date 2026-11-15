@@ -1,0 +1,57 @@
+{
+  "key": "cost-total-credit",
+  "topic": "cost",
+  "order": 20,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "costul-real-al-creditului",
+  "related": [
+    "dobanda-credit-agricol",
+    "fgcr-garantie-cost",
+    "credit-firma-dae"
+  ],
+  "sources": [
+    {
+      "title": "FGCR: De trei ori subvenția",
+      "url": "https://fgcr.ro/produse/de-trei-ori-subventia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce intră în costul unui credit agricol, pe lângă dobândă?",
+      "slug": "cost-total-credit-agricol",
+      "answer": "Costul real este dobânda plus comisioanele, evaluarea garanțiilor, notarul, asigurările și, unde e cazul, costul unui fond de garantare. Compară ofertele pe aceeași sumă și durată, pe total, nu doar pe dobândă.",
+      "factors": [
+        "ce comisioane cere finanțatorul și când",
+        "ce garanții trebuie evaluate sau înscrise",
+        "dacă e nevoie de asigurare",
+        "dacă dobânda e fixă sau variabilă"
+      ],
+      "seo": {
+        "title": "Costul total al unui credit agricol",
+        "description": "Dobânda nu e singurul cost. Ce mai plătești la un credit agricol și cum compari două oferte pe total."
+      }
+    },
+    "en": {
+      "title": "What does a farm loan cost besides interest?",
+      "slug": "farm-loan-total-cost",
+      "answer": "The true cost is interest plus fees, the valuation of guarantees, the notary, insurance and, where used, a guarantee fund’s fee. Compare offers for the same amount and term, on the total, not just the rate.",
+      "factors": [
+        "which fees the lender charges, and when",
+        "which guarantees must be valued or registered",
+        "whether insurance is required",
+        "whether the rate is fixed or variable"
+      ],
+      "seo": {
+        "title": "The total cost of a farm loan in Romania",
+        "description": "Interest is not the only cost. What else you pay on a farm loan and how to compare two offers on the total."
+      }
+    }
+  }
+}

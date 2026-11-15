@@ -1,0 +1,52 @@
+{
+  "key": "credit-cu-alte-datorii",
+  "topic": "eligibility",
+  "order": 60,
+  "popular": false,
+  "product": "credit-investitii",
+  "guide": "ifn-sau-banca",
+  "related": [
+    "credit-dupa-refuz-banca",
+    "garantii-acceptate",
+    "restructurare-datorii-ferma"
+  ],
+  "sources": [
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua credit dacă am deja un credit la bancă?",
+      "slug": "credit-cu-alte-datorii",
+      "answer": "Da, dacă ferma poate plăti ambele și dacă garanțiile și contractele existente permit. Finanțatorul vede datoriile în evidențe, așa că spune-le pe toate de la început.",
+      "factors": [
+        "cât din încasările anuale merg deja pe rate",
+        "ce garanții sunt deja luate de bancă",
+        "când se termină creditele existente",
+        "pentru ce vrei banii noi"
+      ],
+      "seo": {
+        "title": "Credit agricol când ai deja un credit",
+        "description": "Poți avea credit la bancă și la un IFN în același timp. Ce verifică finanțatorul și de ce declari toate datoriile."
+      }
+    },
+    "en": {
+      "title": "Can I borrow if I already have a bank loan?",
+      "slug": "loan-with-an-existing-bank-loan",
+      "answer": "Yes, if the farm can pay both and the existing guarantees and contracts allow it. The lender sees your debts in the records, so list them all from the start.",
+      "factors": [
+        "how much of yearly income already goes on instalments",
+        "which guarantees the bank already holds",
+        "when the existing loans end",
+        "what the new money is for"
+      ],
+      "seo": {
+        "title": "Farm loan when you already have a bank loan",
+        "description": "You can borrow from a bank and an IFN at the same time. What the lender checks and why you declare every debt."
+      }
+    }
+  }
+}

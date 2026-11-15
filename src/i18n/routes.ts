@@ -69,13 +69,19 @@ export const financeRoutes = {
   eligibility: { ro: 'eligibilitate', en: 'eligibility' },
   documents: { ro: 'documente', en: 'documents' },
   apply: { ro: 'aplica', en: 'apply' },
+  /** Retired in Phase 7g: redirects to `questions`. Kept reserved so no product takes it. */
   faq: { ro: 'intrebari-frecvente', en: 'faq' },
+  questions: { ro: 'intrebari', en: 'questions' },
   about: { ro: 'despre-ifn', en: 'about-ifn' },
 } as const satisfies Record<string, Record<Locale, string>>
 
 export const reservedFinanceSlugs = new Set(
   Object.values(financeRoutes).flatMap((r) => Object.values(r) as string[]),
 )
+
+/** One finance question: `/finantare/intrebari/{slug}`, `/en/financing/questions/{slug}`. */
+export const questionPath = (slug: string, locale: Locale) =>
+  localePath(`${sections.finance[locale]}/${financeRoutes.questions[locale]}/${slug}`, locale)
 
 /** Finance section: `/finantare`, `/en/financing`. */
 export const financePath = (locale: Locale) => localePath(sections.finance[locale], locale)

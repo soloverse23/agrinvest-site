@@ -1,0 +1,53 @@
+{
+  "key": "credit-irigatii-sursa-apa",
+  "topic": "investment",
+  "order": 60,
+  "popular": false,
+  "product": "irigatii",
+  "related": [
+    "credit-cu-grant-afir",
+    "durata-maxima-credit"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce trebuie să am pregătit pentru un credit de irigații?",
+      "slug": "credit-irigatii-ce-pregatesti",
+      "answer": "În primul rând, să fie clar de unde vine apa. Proiectul se privește ca întreg, cu pompe, conducte și pivoți, iar durata pornește de la costul pe hectar și de la cât poate plăti ferma într-un an slab.",
+      "factors": [
+        "sursa de apă și avizele",
+        "suprafața irigată și costul pe hectar",
+        "dacă ai și un grant AFIR"
+      ],
+      "seo": {
+        "title": "Credit pentru irigații: ce pregătești",
+        "description": "Sursa de apă, proiectul complet și durata potrivită: ce contează la un credit pentru sistem de irigații."
+      }
+    },
+    "en": {
+      "title": "What do I need ready for an irrigation loan?",
+      "slug": "irrigation-loan-what-to-prepare",
+      "answer": "First, it must be clear where the water comes from. The project is looked at as a whole, with pumps, pipes and pivots, and the term starts from the cost per hectare and what the farm can pay in a weak year.",
+      "factors": [
+        "the water source and permits",
+        "the irrigated area and cost per hectare",
+        "whether you also have an AFIR grant"
+      ],
+      "seo": {
+        "title": "Irrigation loan: what to prepare",
+        "description": "The water source, the whole project and the right term: what matters for an irrigation system loan."
+      }
+    }
+  }
+}

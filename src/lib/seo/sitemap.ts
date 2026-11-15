@@ -23,6 +23,7 @@ import {
 import {
   allGuideAlternates,
   allProductAlternates,
+  allQuestionAlternates,
   getFinancePage,
   listGuides,
 } from '@/lib/content/finance'
@@ -99,16 +100,16 @@ export const segments = {
       })
   },
   finance: async (): Promise<SitemapEntry[]> => {
-    const [guides, list, products, about, faq, simulator, apply] = await Promise.all([
+    const [guides, list, products, questions, about, simulator, apply] = await Promise.all([
       allGuideAlternates(),
       listGuides('ro'),
       allProductAlternates(),
+      allQuestionAlternates(),
       getFinancePage(financeRoutes.about.ro, 'ro'),
-      getFinancePage(financeRoutes.faq.ro, 'ro'),
       getFinancePage(financeRoutes.simulator.ro, 'ro'),
       getFinancePage(financeRoutes.apply.ro, 'ro'),
     ])
-    const routeAlternates = (route: 'about' | 'faq' | 'simulator' | 'apply') => ({
+    const routeAlternates = (route: 'about' | 'questions' | 'simulator' | 'apply') => ({
       ro: financeRoutePath(route, 'ro'),
       en: financeRoutePath(route, 'en'),
     })
@@ -118,7 +119,9 @@ export const segments = {
       ...guides.flatMap((alternates) => entries(alternates)),
       ...products.flatMap((alternates) => entries(alternates)),
       ...(about ? entries(routeAlternates('about')) : []),
-      ...(faq ? entries(routeAlternates('faq')) : []),
+      // The questions (Phase 7g) replaced the FAQ page, whose URL now redirects.
+      ...(questions.length ? entries(routeAlternates('questions')) : []),
+      ...questions.flatMap((alternates) => entries(alternates)),
       ...(simulator ? entries(routeAlternates('simulator')) : []),
       ...(apply ? entries(routeAlternates('apply')) : []),
     ]

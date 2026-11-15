@@ -502,15 +502,17 @@ test.describe('Finance tools', () => {
     const context = await browser.newContext({ javaScriptEnabled: false })
     const page = await context.newPage()
     await page.goto('/finantare/aplica?produs=credit-productie')
-    await page.locator('[name=borrower]').selectOption('pfa')
-    await page.locator('[name=cui]').fill('14399840')
-    await page.locator('[name=company]').fill('Popescu Ion PFA')
-    await page.locator('[name=name]').fill('Test Cerere')
-    await page.locator('[name=phone]').fill('0741 201 056')
-    await page.locator('[name=email]').fill('test@example.ro')
-    await page.locator('[name=county]').selectOption({ index: 1 })
-    await page.locator('[name=amount]').fill('150000')
-    await page.locator('[name=consent]').check()
+    // The page also holds the consultant drawer's short form: work in the application.
+    const form = page.locator('form:has([name=borrower])')
+    await form.locator('[name=borrower]').selectOption('pfa')
+    await form.locator('[name=cui]').fill('14399840')
+    await form.locator('[name=company]').fill('Popescu Ion PFA')
+    await form.locator('[name=name]').fill('Test Cerere')
+    await form.locator('[name=phone]').fill('0741 201 056')
+    await form.locator('[name=email]').fill('test@example.ro')
+    await form.locator('[name=county]').selectOption({ index: 1 })
+    await form.locator('[name=amount]').fill('150000')
+    await form.locator('[name=consent]').check()
     await page.getByRole('button', { name: 'Trimite cererea' }).click()
     const reference = page.locator('[data-application-reference]')
     await expect(reference).toHaveText(/^CRD-\d{4}-[A-Z2-9]{5}$/)
@@ -528,19 +530,20 @@ test.describe('Finance tools', () => {
 
   test('a company applies in English and a bad tax ID keeps what was typed', async ({ page }) => {
     await page.goto('/en/financing/apply')
-    await page.locator('[name=borrower]').selectOption('srl')
-    await page.locator('[name=cui]').fill('123')
-    await page.locator('[name=company]').fill('Test Farm SRL')
-    await page.locator('[name=name]').fill('Test Application')
-    await page.locator('[name=phone]').fill('0741 201 056')
-    await page.locator('[name=email]').fill('test@example.ro')
-    await page.locator('[name=county]').selectOption({ index: 1 })
-    await page.locator('[name=amount]').fill('500000')
-    await page.locator('[name=consent]').check()
+    const form = page.locator('form:has([name=borrower])')
+    await form.locator('[name=borrower]').selectOption('srl')
+    await form.locator('[name=cui]').fill('123')
+    await form.locator('[name=company]').fill('Test Farm SRL')
+    await form.locator('[name=name]').fill('Test Application')
+    await form.locator('[name=phone]').fill('0741 201 056')
+    await form.locator('[name=email]').fill('test@example.ro')
+    await form.locator('[name=county]').selectOption({ index: 1 })
+    await form.locator('[name=amount]').fill('500000')
+    await form.locator('[name=consent]').check()
     await page.getByRole('button', { name: 'Send application' }).click()
     await expect(page.locator('form [role=alert]')).toContainText('tax ID')
     await expect(page.locator('[name=company]')).toHaveValue('Test Farm SRL')
-    await page.locator('[name=cui]').fill('14399840')
+    await form.locator('[name=cui]').fill('14399840')
     await page.getByRole('button', { name: 'Send application' }).click()
     const reference = page.locator('[data-application-reference]')
     await expect(reference).toBeVisible()
@@ -551,16 +554,61 @@ test.describe('Finance tools', () => {
     })
   })
 
-  test('product pages link to both tools', async ({ page }) => {
+  test('a credit page leads with the consultant, and the simulator knows the need', async ({
+    page,
+  }) => {
     await page.goto('/finantare/credit-productie')
-    await expect(page.getByRole('link', { name: 'Trimite o cerere' }).last()).toHaveAttribute(
+    await expect(page.locator('h1')).toHaveText('Credit pentru producție agricolă')
+    const consultant = page.locator('main [data-consultant]').first()
+    await expect(consultant).toHaveAttribute('href', '/finantare/aplica')
+    await expect(consultant).toHaveAttribute('data-need', 'season')
+    await expect(page.getByRole('link', { name: 'Vezi cum ar cădea ratele' })).toHaveAttribute(
       'href',
-      '/finantare/aplica?produs=credit-productie',
+      '/finantare/simulator?nevoie=season',
     )
-    await expect(page.getByRole('link', { name: 'Simulează ratele' }).first()).toHaveAttribute(
-      'href',
-      '/finantare/simulator',
-    )
+    // The long text stays in the page, closed.
+    await expect(page.locator('#detalii details')).not.toHaveAttribute('open', '')
+    await expect(page.locator('#detalii details')).toContainText('Riscuri')
+  })
+
+  test('the consultant drawer opens on the page and stores a financing lead', async ({ page }) => {
+    await page.goto('/finantare/credit-investitii/utilaje')
+    await page.locator('main [data-consultant]').first().click()
+    const dialog = page.getByRole('dialog', { name: 'Vorbește cu un consultant' })
+    await expect(dialog).toBeVisible()
+    await expect(dialog.getByLabel('Pentru ce ai nevoie de bani?')).toHaveValue('machinery')
+    await dialog.getByLabel('Nume și prenume').fill('Test Consultant')
+    await dialog.getByLabel('Telefon', { exact: true }).fill('0741 201 056')
+    await dialog.getByLabel('E-mail', { exact: true }).fill('e2e-consultant@example.ro')
+    await dialog.getByRole('checkbox').check()
+    await dialog.getByRole('button', { name: 'Cere să fiu sunat' }).click()
+    await expect(dialog.getByRole('status')).toContainText('Te sună un consultant')
+    const payload = await getPayload({ config })
+    const { docs } = await payload.find({
+      collection: 'leads',
+      where: { email: { equals: 'e2e-consultant@example.ro' } },
+    })
+    expect(docs[0]).toMatchObject({ type: 'finantare', phone: '0741201056' })
+    expect(docs[0].message).toContain('Un tractor sau alt utilaj')
+    await payload.delete({
+      collection: 'leads',
+      where: { email: { equals: 'e2e-consultant@example.ro' } },
+    })
+  })
+
+  test('the menu’s consultant link opens the drawer on the hub', async ({ page }) => {
+    await page.goto('/finantare#consultant')
+    await expect(page.getByRole('dialog', { name: 'Vorbește cu un consultant' })).toBeVisible()
+  })
+
+  test('without JavaScript the consultant action reaches the application', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/finantare/credit-productie')
+    await page.locator('main [data-consultant]').first().click()
+    await page.waitForURL(/\/finantare\/aplica$/)
+    await expect(page.locator('[name=borrower]')).toBeVisible()
+    await context.close()
   })
 })
 
@@ -607,7 +655,8 @@ test.describe('Finance cross-selling', () => {
     await page.goto('/')
     // The desktop panel and the mobile menu both carry it.
     await expect(page.locator('header a[href="/finantare/simulator"]').first()).toBeAttached()
-    await expect(page.locator('footer a[href="/finantare/aplica"]')).toHaveCount(1)
+    await expect(page.locator('footer a[href="/finantare/intrebari"]')).toHaveCount(1)
+    await expect(page.locator('footer a[href="/finantare#consultant"]')).toHaveCount(1)
   })
 })
 
@@ -889,15 +938,50 @@ test.describe('Inner pages are tidied (Phase 7d)', () => {
   test('a finance page links to the rest of the section', async ({ page }) => {
     await page.goto('/finantare/credit-productie')
     const nav = page.getByRole('navigation', { name: 'În secțiunea Finanțare' })
-    await expect(nav.getByRole('link', { name: 'Simulator de rate' })).toBeVisible()
-    await expect(nav.getByRole('link', { name: 'Despre IFN' })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Trimite o cerere' }).first()).toBeVisible()
+    for (const name of ['Credite', 'Întrebări', 'Simulator', 'Bibliotecă'])
+      await expect(nav.getByRole('link', { name, exact: true })).toBeVisible()
+    await expect(nav.getByRole('link', { name: 'Vorbește cu un consultant' })).toBeVisible()
   })
 
-  test('the finance hub groups its loans by need', async ({ page }) => {
+  test('the finance hub leads by need, each need to one credit', async ({ page }) => {
     await page.goto('/finantare')
-    for (const title of ['Bani pentru sezon', 'Investiții în fermă', 'Situații speciale'])
-      await expect(page.getByRole('heading', { name: title, level: 3 })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'De ce ai nevoie?', level: 2 })).toBeVisible()
+    const tile = page.getByRole('link', { name: 'Un tractor sau alt utilaj' })
+    await expect(tile).toHaveAttribute('href', '/finantare/credit-investitii/utilaje')
+    // Every credit appears once in the tiles: no second list of the same links.
+    await expect(page.locator('main a[href="/finantare/credit-productie"]')).toHaveCount(1)
+  })
+
+  test('the finder works without JavaScript and names the credit', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('/finantare')
+    await page.getByLabel('Pentru ce?').selectOption('season')
+    await page.getByLabel('Cam ce sumă?').fill('400000')
+    await page.getByText('Și vara, și toamna').click()
+    await page.getByRole('button', { name: 'Vezi ce ți se potrivește' }).click()
+    await page.waitForURL(/\/finantare\/simulator\?nevoie=season/)
+    await expect(page.locator('#rezultat')).toContainText('Credit pentru producție agricolă')
+    expect(await page.locator('#rezultat tbody tr').count()).toBe(2)
+    await context.close()
+  })
+
+  test('each question has its own page, and the old FAQ redirects to them', async ({ page }) => {
+    await page.goto('/finantare/intrebari-frecvente', { waitUntil: 'networkidle' })
+    await expect(page).toHaveURL(/\/finantare\/intrebari$/)
+    await page.getByLabel('Caută o întrebare').fill('pfa')
+    await expect(page.getByRole('link', { name: /ca PFA/ })).toBeVisible()
+    await expect(page.getByRole('link', { name: /IFN sau bancă/ })).toBeHidden()
+    await page.getByRole('link', { name: /ca PFA/ }).click()
+    await expect(page.locator('h1')).toContainText('PFA')
+    await expect(page.getByText('Răspunsul pe scurt')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Ce decide la tine' })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Vezi creditul' })).toHaveAttribute(
+      'href',
+      '/finantare/credit-productie',
+    )
+    const res = await page.goto('/en/financing/questions/farm-loan-for-a-pfa')
+    expect(res?.status()).toBe(200)
   })
 
   test('the price page no longer repeats the calculator', async ({ page }) => {

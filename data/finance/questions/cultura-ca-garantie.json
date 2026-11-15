@@ -1,0 +1,49 @@
+{
+  "key": "cultura-ca-garantie",
+  "topic": "guarantees",
+  "order": 30,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "credit-fara-ipoteca",
+    "recolta-slaba-credit",
+    "cand-sa-ceri-credit-campanie"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot garanta creditul cu cultura înființată?",
+      "slug": "cultura-garantie-credit",
+      "answer": "Da, cultura este una dintre garanțiile pe care Agrinvest Credit IFN le acceptă, de regulă la creditul de producție. Ea arată din ce bani se plătește rata după recoltă.",
+      "factors": [
+        "ce cultură, pe ce suprafață și cu ce producție estimată",
+        "dacă cultura e asigurată",
+        "dacă recolta e deja promisă altcuiva"
+      ],
+      "seo": {
+        "title": "Cultura ca garanție pentru credit",
+        "description": "Cultura înființată poate garanta un credit de producție cu rate după recoltă. Ce contează și ce riscuri ai."
+      }
+    },
+    "en": {
+      "title": "Can I secure a loan with my planted crop?",
+      "slug": "crop-as-loan-security",
+      "answer": "Yes, the crop is one of the guarantees Agrinvest Credit IFN accepts, usually for a production loan. It shows what money pays the instalment after harvest.",
+      "factors": [
+        "which crop, on what area and with what expected yield",
+        "whether the crop is insured",
+        "whether the harvest is already promised to someone else"
+      ],
+      "seo": {
+        "title": "Using a planted crop as loan security",
+        "description": "A planted crop can secure a production loan repaid after harvest. What matters and what the risks are."
+      }
+    }
+  }
+}

@@ -1,10 +1,13 @@
 import { notFound } from 'next/navigation'
 
+import { ArrowRightIcon } from '@ds/icons/icons'
 import { ApplicationForm } from '@ds/patterns/ApplicationForm'
+import { Button } from '@ds/primitives/Button'
 import { FactText } from '@/components/FactText'
 import type { Locale } from '@/i18n/config'
 import { applicationUi } from '@/i18n/finance-apply'
-import { financeRoutePath, financeRoutes } from '@/i18n/routes'
+import { financeGuideUi } from '@/i18n/finance-guide'
+import { financePath, financeRoutePath, financeRoutes } from '@/i18n/routes'
 import { fixedUrl } from '@/i18n/ui'
 import { lookupCompany } from '@/lib/commerce/actions'
 import { getFinancePage, listFinanceProducts } from '@/lib/content/finance'
@@ -42,7 +45,16 @@ export async function ApplicationPage({ locale, params }: { locale: Locale; para
   return (
     <ToolFrame locale={locale} tool="apply" page={page} figures={figures}>
       <div className="mx-auto mt-10 max-w-page px-4 md:px-8">
-        <div className="max-w-2xl">
+        <div className="grid max-w-2xl gap-8">
+          <div className="grid gap-4 rounded-lg bg-accent-soft p-5 md:flex md:items-center md:justify-between md:gap-6">
+            <div className="grid gap-1">
+              <p className="font-semibold text-forest">{financeGuideUi[locale].applyShort.title}</p>
+              <p className="text-small text-ink">{financeGuideUi[locale].applyShort.body}</p>
+            </div>
+            <Button href={`${financePath(locale)}#consultant`} size="sm" icon={<ArrowRightIcon />}>
+              {financeGuideUi[locale].consultantShort}
+            </Button>
+          </div>
           <ApplicationForm
             locale={locale}
             labels={applicationUi[locale]}

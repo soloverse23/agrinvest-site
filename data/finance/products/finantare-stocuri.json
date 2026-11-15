@@ -87,24 +87,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "De ce să nu vând la recoltă?",
-          "answer": "Uneori chiar merită să vinzi. Stocarea are sens doar dacă prețul viitor acoperă depozitarea, dobânda și pierderile."
-        },
-        {
-          "question": "Marfa trebuie să fie la Agrinvest?",
-          "answer": "Întreabă echipa. Contează unde este marfa și cum este păstrată."
-        },
-        {
-          "question": "Pot vinde stocul altcuiva?",
-          "answer": "Discută cu echipa. Condițiile depind de garanții."
-        },
-        {
-          "question": "Ce se întâmplă dacă prețul scade?",
-          "answer": "Creditul rămâne de plătit. De aceea e bine să ai un preț minim și o dată-limită."
-        }
-      ],
       "seo": {
         "title": "Finanțarea stocurilor de cereale pentru fermieri",
         "description": "Credit pe marfa din depozit, ca să nu vinzi la recoltă. Când merită, cum se rambursează și ce se întâmplă dacă prețul nu crește."
@@ -168,24 +150,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Why not sell at harvest?",
-          "answer": "Sometimes it does pay to sell. Storing makes sense only if the future price covers storage, interest and losses."
-        },
-        {
-          "question": "Must the grain be at Agrinvest?",
-          "answer": "Ask the team. Where the grain is and how it is kept both matter."
-        },
-        {
-          "question": "Can I sell the stock to someone else?",
-          "answer": "Talk to the team. The conditions depend on the guarantees."
-        },
-        {
-          "question": "What happens if the price falls?",
-          "answer": "The loan still has to be paid. That is why a minimum price and a deadline help."
         }
       ],
       "seo": {

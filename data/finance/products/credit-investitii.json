@@ -104,32 +104,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Pe ce perioadă pot lua creditul?",
-          "answer": "Durata ajunge {{F5.term}}. Cea potrivită depinde de investiție și de cât poate plăti ferma."
-        },
-        {
-          "question": "Cum funcționează reducerea de dobândă?",
-          "answer": "Reducerea este de {{F9}}. Se aplică marjei, nu dobânzii totale, în condițiile din contract."
-        },
-        {
-          "question": "Câte rate am pe an?",
-          "answer": "Ai {{F5.instalments}}."
-        },
-        {
-          "question": "Pot finanța două investiții într-un singur credit?",
-          "answer": "Spune-ne ce ai în plan și vedem împreună ce structură are sens."
-        },
-        {
-          "question": "Trebuie să am un avans?",
-          "answer": "Depinde de analiză și de garanții. Întreabă echipa."
-        },
-        {
-          "question": "Cât de repede primesc răspuns?",
-          "answer": "Răspunsul vine {{F4.reply}}."
-        }
-      ],
       "seo": {
         "title": "Credit de investiții agricole pe până la 10 ani",
         "description": "Credit pentru utilaje, irigații, depozitare, teren și ferme, cu rate după recoltă și reducere a marjei de dobândă pentru plata la timp."
@@ -201,32 +175,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "For how long can I borrow?",
-          "answer": "Loans run {{F5.term}}. The right term depends on the investment and on what the farm can pay."
-        },
-        {
-          "question": "How does the interest reduction work?",
-          "answer": "The reduction is {{F9}}. It applies to the margin, not the total interest, under the terms of the contract."
-        },
-        {
-          "question": "How many instalments a year?",
-          "answer": "You have {{F5.instalments}}."
-        },
-        {
-          "question": "Can I finance two investments in one loan?",
-          "answer": "Tell us your plans and we will see together which structure makes sense."
-        },
-        {
-          "question": "Do I need a deposit?",
-          "answer": "It depends on the analysis and the guarantees. Ask the team."
-        },
-        {
-          "question": "How fast do I get a reply?",
-          "answer": "You get a reply {{F4.reply}}."
         }
       ],
       "seo": {

@@ -1,0 +1,49 @@
+{
+  "key": "stoc-amana-vanzarea",
+  "topic": "grain",
+  "order": 40,
+  "popular": false,
+  "product": "finantare-stocuri",
+  "guide": "cand-vinzi-recolta",
+  "related": [
+    "credit-pe-contract-cereale",
+    "credit-siloz"
+  ],
+  "sources": [
+    {
+      "title": "Financial Intelligence: ING și Agrinvest Credit IFN, 27.01.2022",
+      "url": "https://financialintelligence.ro/ing-bank-romania-a-acordat-o-noua-finantare-de-10-milioane-lei-pentru-agrinvest-credit-ifn-pentru-a-sustine-fermierii-romani/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cum pot amâna vânzarea recoltei fără să rămân fără bani?",
+      "slug": "amana-vanzarea-recoltei",
+      "answer": "Prin finanțarea stocurilor: primești bani pe marfa din depozit, ca să nu fii obligat să vinzi la recoltă, și rambursezi când vinzi. Are sens doar dacă prețul viitor acoperă depozitarea, dobânda și pierderile.",
+      "factors": [
+        "unde e marfa și cum e păstrată",
+        "costul depozitării pe tonă și pe lună",
+        "un preț minim și o dată-limită de vânzare"
+      ],
+      "seo": {
+        "title": "Finanțare pe stocul de cereale",
+        "description": "Cum iei bani pe cerealele din depozit ca să vinzi mai târziu și când merită să amâni vânzarea."
+      }
+    },
+    "en": {
+      "title": "How can I hold my harvest without running out of cash?",
+      "slug": "hold-the-harvest-without-running-short",
+      "answer": "Through stock financing: you get money on grain in store, so you are not forced to sell at harvest, and repay when you sell. It only makes sense if the later price covers storage, interest and losses.",
+      "factors": [
+        "where the grain is and how it is kept",
+        "the storage cost per tonne per month",
+        "a minimum price and a selling deadline"
+      ],
+      "seo": {
+        "title": "Financing on grain held in store",
+        "description": "How to get money on grain in store so you can sell later, and when holding the harvest pays."
+      }
+    }
+  }
+}

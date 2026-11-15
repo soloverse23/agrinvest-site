@@ -1,0 +1,62 @@
+{
+  "key": "ifn-sau-banca-credit",
+  "topic": "ifn",
+  "order": 20,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "ifn-sau-banca",
+  "related": [
+    "de-ce-ifn-mai-scump",
+    "ce-este-un-ifn",
+    "credit-dupa-refuz-banca"
+  ],
+  "sources": [
+    {
+      "title": "Legea 93/2009 privind instituțiile financiare nebancare",
+      "url": "https://lawchat.ro/legislatie/text-complet-legea-93-2009-institutiile-financiare-nebancare-158903",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "IFN sau bancă: de unde iau credit agricol?",
+      "slug": "ifn-sau-banca-credit-agricol",
+      "answer": "Banca are de regulă costuri mai mici, dar standarde mai stricte. Un IFN specializat poate fi mai rapid și mai flexibil cu recolta și cu garanțiile agricole, la un cost adesea mai mare. Multe ferme lucrează cu amândouă.",
+      "factors": [
+        "cât de repede ai nevoie de bani",
+        "dacă îndeplinești condițiile băncii",
+        "garanțiile disponibile",
+        "costul total al fiecărei oferte"
+      ],
+      "seo": {
+        "title": "IFN sau bancă pentru credit agricol",
+        "description": "Când alegi o bancă și când un IFN agricol pentru creditul fermei: cost, viteză, garanții și flexibilitate."
+      }
+    },
+    "en": {
+      "title": "IFN or bank: where should I get a farm loan?",
+      "slug": "ifn-or-bank-farm-loan",
+      "answer": "A bank usually costs less but has stricter standards. A specialist IFN can be faster and more flexible with harvests and farm guarantees, often at a higher cost. Many farms use both.",
+      "factors": [
+        "how quickly you need the money",
+        "whether you meet the bank’s conditions",
+        "the guarantees available",
+        "the total cost of each offer"
+      ],
+      "seo": {
+        "title": "IFN or bank for a farm loan in Romania",
+        "description": "When to choose a bank and when a farm IFN for your farm loan: cost, speed, guarantees and flexibility."
+      }
+    }
+  }
+}

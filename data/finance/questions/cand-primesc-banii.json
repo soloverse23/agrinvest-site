@@ -1,0 +1,48 @@
+{
+  "key": "cand-primesc-banii",
+  "topic": "process",
+  "order": 20,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "cat-dureaza-raspunsul",
+    "cand-sa-ceri-credit-campanie"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Când primesc banii după aprobarea creditului?",
+      "slug": "cand-primesc-banii-credit",
+      "answer": "Banii ajung {{F4.money}}. Înainte de semnare se stabilesc împreună suma, garanțiile și graficul ratelor.",
+      "factors": [
+        "cât durează înscrierea garanțiilor",
+        "dacă banii merg la tine sau direct la furnizor",
+        "ce acte mai sunt de semnat"
+      ],
+      "seo": {
+        "title": "Când primești banii după aprobare",
+        "description": "Cât durează de la aprobare la bani în cont la un credit agricol Agrinvest Credit IFN și ce poate întârzia plata."
+      }
+    },
+    "en": {
+      "title": "When do I get the money after approval?",
+      "slug": "when-the-money-arrives",
+      "answer": "The money arrives {{F4.money}}. Before signing, the amount, the guarantees and the instalment schedule are agreed together.",
+      "factors": [
+        "how long registering the guarantees takes",
+        "whether the money goes to you or straight to a supplier",
+        "which papers are left to sign"
+      ],
+      "seo": {
+        "title": "When the loan money arrives after approval",
+        "description": "How long it takes from approval to money in the account with an Agrinvest Credit IFN farm loan, and what can delay it."
+      }
+    }
+  }
+}

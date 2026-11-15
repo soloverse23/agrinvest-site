@@ -1,0 +1,57 @@
+{
+  "key": "credit-fara-ipoteca",
+  "topic": "guarantees",
+  "order": 20,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "fonduri-garantare",
+  "related": [
+    "garantii-acceptate",
+    "cultura-ca-garantie",
+    "fgcr-garantie-cost"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: Creditul Fermierului",
+      "url": "https://fgcr.ro/produse/creditul-fermierului/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua credit agricol dacă nu am ce pune ipotecă?",
+      "slug": "credit-agricol-fara-ipoteca",
+      "answer": "Adesea da, mai ales pentru sezon. Creditul de producție se poate sprijini pe cultura înființată, pe subvenția APIA, pe un contract de vânzare a cerealelor sau pe un bilet la ordin. Pentru sume mari și investiții, de regulă e nevoie și de garanții reale.",
+      "factors": [
+        "suma față de producția estimată",
+        "dacă subvenția sau cultura sunt libere de alte garanții",
+        "dacă ai un contract de vânzare",
+        "dacă se poate folosi un fond de garantare"
+      ],
+      "seo": {
+        "title": "Credit agricol fără ipotecă: ce garanții merg",
+        "description": "Culturile, subvenția APIA sau un contract de cereale pot garanta un credit de sezon. Când e nevoie totuși de ipotecă."
+      }
+    },
+    "en": {
+      "title": "Can I get a farm loan with no property to mortgage?",
+      "slug": "farm-loan-without-a-mortgage",
+      "answer": "Often yes, especially for the season. A production loan can rest on the planted crop, the APIA subsidy, a grain sale contract or a promissory note. Large amounts and investments usually also need real guarantees.",
+      "factors": [
+        "the amount against the expected crop",
+        "whether the subsidy or crop are free of other pledges",
+        "whether you hold a sale contract",
+        "whether a guarantee fund can be used"
+      ],
+      "seo": {
+        "title": "Farm loan without a mortgage in Romania",
+        "description": "Crops, the APIA subsidy or a grain contract can secure a season loan. When a mortgage is still needed."
+      }
+    }
+  }
+}

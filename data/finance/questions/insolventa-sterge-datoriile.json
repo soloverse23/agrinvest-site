@@ -1,0 +1,54 @@
+{
+  "key": "insolventa-sterge-datoriile",
+  "topic": "hardship",
+  "order": 20,
+  "popular": false,
+  "product": "restructurare",
+  "guide": "insolventa-sau-restructurare",
+  "related": [
+    "restructurare-datorii-ferma",
+    "fidejusor-risc"
+  ],
+  "sources": [
+    {
+      "title": "Legea 85/2014, art. 75",
+      "url": "https://tribonian.ro/lege/legea-85-2014/art-75",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Platnic.ro: concordatul preventiv explicat",
+      "url": "https://platnic.ro/insolventa/concordatul-preventiv/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Insolvența îmi șterge datoriile fermei?",
+      "slug": "insolventa-sterge-datoriile",
+      "answer": "Nu. Procedura servește la plata creditorilor din averea firmei. Un plan de reorganizare poate reduce sau eșalona datorii, dar numai în condițiile votate și confirmate, iar fidejusorii rămân răspunzători.",
+      "factors": [
+        "dacă firma își mai poate plăti datoriile curente",
+        "cine a semnat garanții personale",
+        "dacă un concordat preventiv mai e posibil"
+      ],
+      "seo": {
+        "title": "Insolvența șterge datoriile fermei?",
+        "description": "Ce face și ce nu face insolvența pentru o fermă cu datorii și când e mai bun un concordat preventiv."
+      }
+    },
+    "en": {
+      "title": "Does insolvency wipe out my farm’s debts?",
+      "slug": "does-insolvency-wipe-out-debts",
+      "answer": "No. The procedure pays creditors from the company’s assets. A reorganisation plan can reduce or reschedule debts, but only on the terms voted and confirmed, and sureties stay liable.",
+      "factors": [
+        "whether the company can still pay its current debts",
+        "who signed personal guarantees",
+        "whether a preventive concordat is still possible"
+      ],
+      "seo": {
+        "title": "Does insolvency wipe out farm debts?",
+        "description": "What insolvency does and does not do for an indebted farm, and when a preventive concordat is the better route."
+      }
+    }
+  }
+}

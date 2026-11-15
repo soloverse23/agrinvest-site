@@ -1,0 +1,57 @@
+{
+  "key": "de-ce-ifn-mai-scump",
+  "topic": "cost",
+  "order": 40,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "ifn-sau-banca",
+  "related": [
+    "ifn-sau-banca-credit",
+    "dobanda-credit-agricol",
+    "ce-este-un-ifn"
+  ],
+  "sources": [
+    {
+      "title": "Legea 93/2009 privind instituțiile financiare nebancare",
+      "url": "https://lawchat.ro/legislatie/text-complet-legea-93-2009-institutiile-financiare-nebancare-158903",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "De ce are un IFN dobânzi mai mari decât o bancă?",
+      "slug": "de-ce-ifn-dobanda-mai-mare",
+      "answer": "Un IFN nu atrage depozite, se finanțează de regulă de la bănci și lucrează adesea cu riscuri mai mari, așa că banii îl costă mai mult. În schimb, poate fi mai rapid și mai flexibil cu recolta și cu garanțiile agricole.",
+      "factors": [
+        "cât de repede ai nevoie de bani",
+        "dacă ferma îndeplinește condițiile băncii",
+        "ce garanții poți aduce",
+        "costul total al celor două oferte"
+      ],
+      "seo": {
+        "title": "De ce un IFN are dobânzi mai mari",
+        "description": "Un IFN nu ia depozite și lucrează cu alt risc decât banca. Ce primești în schimb și când merită."
+      }
+    },
+    "en": {
+      "title": "Why does an IFN charge more than a bank?",
+      "slug": "why-an-ifn-charges-more",
+      "answer": "An IFN takes no deposits, usually borrows from banks and often works with higher risk, so its money costs more. In return it can be faster and more flexible with harvests and farm guarantees.",
+      "factors": [
+        "how quickly you need the money",
+        "whether the farm meets the bank’s conditions",
+        "which guarantees you can offer",
+        "the total cost of both offers"
+      ],
+      "seo": {
+        "title": "Why an IFN charges more than a bank",
+        "description": "An IFN takes no deposits and carries a different risk from a bank. What you get in return and when it is worth it."
+      }
+    }
+  }
+}

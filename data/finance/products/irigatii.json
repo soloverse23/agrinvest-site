@@ -100,24 +100,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Trebuie să am deja sursa de apă?",
-          "answer": "Da, trebuie să fie clar de unde vine apa înainte de investiție. Spune-ne cum ai rezolvat asta."
-        },
-        {
-          "question": "Finanțați și pompe sau doar pivoți?",
-          "answer": "Spune-ne din ce e format proiectul. Îl privim ca întreg, cu pompe și conducte."
-        },
-        {
-          "question": "Pot combina creditul cu fonduri europene?",
-          "answer": "Da, un credit poate acoperi partea pe care grantul nu o plătește. Vezi ghidul despre credit și grant AFIR."
-        },
-        {
-          "question": "Cum aleg durata?",
-          "answer": "Pornește de la costul pe hectar și de la cât poate plăti ferma într-un an slab."
-        }
-      ],
       "seo": {
         "title": "Credit pentru irigații: sisteme și pompe",
         "description": "Credit pe termen lung pentru sisteme de irigații, pompe și conducte, cu rate după recoltă. Ce să verifici înainte de investiție."
@@ -185,24 +167,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Must I already have the water source?",
-          "answer": "Yes, it must be clear where the water comes from before the investment. Tell us how you have settled this."
-        },
-        {
-          "question": "Do you finance pumps, or only pivots?",
-          "answer": "Tell us what the project consists of. We look at it as a whole, with pumps and pipes."
-        },
-        {
-          "question": "Can I combine the loan with EU funds?",
-          "answer": "Yes, a loan can cover the part the grant does not pay. See the guide to loans and AFIR grants."
-        },
-        {
-          "question": "How do I choose the term?",
-          "answer": "Start from the cost per hectare and what the farm can pay in a weak year."
         }
       ],
       "seo": {

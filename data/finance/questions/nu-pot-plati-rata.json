@@ -1,0 +1,50 @@
+{
+  "key": "nu-pot-plati-rata",
+  "topic": "repayment",
+  "order": 50,
+  "popular": false,
+  "product": "restructurare",
+  "guide": "insolventa-sau-restructurare",
+  "related": [
+    "recolta-slaba-credit",
+    "restructurare-datorii-ferma",
+    "insolventa-sterge-datoriile"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce fac dacă nu pot plăti o rată la creditul agricol?",
+      "slug": "nu-pot-plati-rata",
+      "answer": "Sună-ne înainte de scadență, nu după. Cu cât vorbim mai devreme, cu atât sunt mai multe variante, de la mutarea unei rate la o restructurare. Datoria rămâne, dar se poate căuta un plan realist.",
+      "factors": [
+        "cât lipsește și de ce: recoltă, preț sau o plată întârziată",
+        "când poți avea banii",
+        "ce alte datorii are ferma"
+      ],
+      "seo": {
+        "title": "Nu poți plăti rata la credit? Ce faci",
+        "description": "Ce faci când nu poți plăti o rată la creditul fermei: de ce suni înainte de scadență și ce variante există."
+      }
+    },
+    "en": {
+      "title": "What do I do if I cannot pay a farm loan instalment?",
+      "slug": "cannot-pay-an-instalment",
+      "answer": "Call us before the due date, not after. The earlier we talk, the more options there are, from moving an instalment to restructuring. The debt remains, but a realistic plan can be found.",
+      "factors": [
+        "how much is missing and why: harvest, price or a late payment",
+        "when you could have the money",
+        "what other debts the farm has"
+      ],
+      "seo": {
+        "title": "Cannot pay a farm loan instalment? What to do",
+        "description": "What to do when you cannot pay a farm loan instalment: why you call before the due date and what options exist."
+      }
+    }
+  }
+}

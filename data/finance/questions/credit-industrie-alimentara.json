@@ -1,0 +1,51 @@
+{
+  "key": "credit-industrie-alimentara",
+  "topic": "eligibility",
+  "order": 80,
+  "popular": false,
+  "product": "industrie-alimentara",
+  "related": [
+    "credit-ferma-zootehnica",
+    "cine-poate-lua-credit-agricol",
+    "rate-lunare-credit-agricol"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: Agrinvest Credit IFN își extinde portofoliul, 2025",
+      "url": "https://agrointel.ro/320343/agrinvest-credit-ifn-sa-isi-extinde-portofoliul-produselor-de-creditare",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Finanțați și firmele din industria alimentară?",
+      "slug": "credit-industrie-alimentara",
+      "answer": "Da. Agrinvest Credit IFN finanțează producători agroalimentari {{F12}}. Creditul poate susține activitatea curentă și investițiile, iar graficul urmează încasările firmei, nu recoltele.",
+      "factors": [
+        "sectorul și cât de stabile sunt vânzările",
+        "clienții și contractele firmei",
+        "autorizațiile necesare",
+        "cât poate plăti firma lunar sau pe sezon"
+      ],
+      "seo": {
+        "title": "Credit pentru industria alimentară",
+        "description": "Finanțare pentru carne, lapte, panificație și nutrețuri: activitate curentă și investiții, cu grafic după încasările firmei."
+      }
+    },
+    "en": {
+      "title": "Do you finance food-industry companies?",
+      "slug": "loans-for-food-companies",
+      "answer": "Yes. Agrinvest Credit IFN finances food producers {{F12}}. The loan can support day-to-day activity and investment, and the schedule follows the company’s income, not the harvests.",
+      "factors": [
+        "the sector and how steady sales are",
+        "the company’s customers and contracts",
+        "the permits it needs",
+        "what the company can pay monthly or by season"
+      ],
+      "seo": {
+        "title": "Loans for food-industry companies in Romania",
+        "description": "Financing for meat, dairy, bakery and feed producers: working capital and investment, with a schedule that follows company income."
+      }
+    }
+  }
+}

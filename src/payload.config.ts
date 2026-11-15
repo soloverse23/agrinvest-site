@@ -19,6 +19,7 @@ import { DieselPrices } from './collections/DieselPrices'
 import { Documents } from './collections/Documents'
 import { FinanceApplications } from './collections/FinanceApplications'
 import { FinanceProducts } from './collections/FinanceProducts'
+import { FinanceQuestions } from './collections/FinanceQuestions'
 import { Guides } from './collections/Guides'
 import { Leads } from './collections/Leads'
 import { MarketPrices } from './collections/MarketPrices'
@@ -90,6 +91,7 @@ export default buildConfig({
     Carts,
     Orders,
     FinanceProducts,
+    FinanceQuestions,
     Guides,
     FinanceApplications,
     BuyPrices,

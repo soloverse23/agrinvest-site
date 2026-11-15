@@ -7,7 +7,8 @@ import { join } from 'node:path'
 
 /** Rough floors, far under the natural length of every page today: they catch empty pages. */
 const MIN_WORDS = 150
-const MIN_PRODUCT_FAQ = 4
+/** A question page is short by design (Phase 7g): answer, factors, maybe an example. */
+const MIN_QUESTION_WORDS = 40
 const MIN_LINKS = 2
 /** Share of 6-word phrases two siblings may have in common. Today's highest pair is 0.18. */
 const MAX_SHARED = 0.3
@@ -20,8 +21,10 @@ const rate = /(dobând\w*|marj\w*|interest|margin)[^.%\n]{0,40}?\d+(?:[.,]\d+)?\
 export type Lang = 'ro' | 'en'
 export type File = {
   key: string
-  kind: 'product' | 'guide' | 'hub'
+  kind: 'product' | 'guide' | 'hub' | 'question'
   parent?: string
+  /** A question's matching credit, by key. */
+  product?: string
   section?: string
   related: number
   text: Record<Lang, Record<string, unknown>>
@@ -56,7 +59,11 @@ export function loadFinanceFiles(dir: string): File[] {
           kind,
           parent: d.parent,
           section: d.section,
-          related: (d.relatedProducts?.length ?? 0) + (d.relatedGuides?.length ?? 0),
+          product: d.product,
+          related:
+            kind === 'question'
+              ? 1 + (d.guide ? 1 : 0) + (d.related?.length ?? 0)
+              : (d.relatedProducts?.length ?? 0) + (d.relatedGuides?.length ?? 0),
           text: d.text,
         } as File
       })
@@ -64,6 +71,7 @@ export function loadFinanceFiles(dir: string): File[] {
   return [
     ...read('products', 'product'),
     ...read('guides', 'guide'),
+    ...read('questions', 'question'),
     { key: 'hub', kind: 'hub', related: 0, text: hub.text },
   ]
 }
@@ -74,12 +82,11 @@ export function contentErrors(files: File[]): string[] {
     for (const l of ['ro', 'en'] as const) {
       const text = body(f, l)
       const at = `${f.key} (${l})`
-      if (words(text).length < MIN_WORDS) errors.push(`${at}: under ${MIN_WORDS} words`)
-      const faq = (f.text[l].faq as unknown[] | undefined)?.length ?? 0
-      if (f.kind === 'product' && faq < MIN_PRODUCT_FAQ)
-        errors.push(`${at}: ${faq} FAQ, needs ${MIN_PRODUCT_FAQ}`)
+      // The hub is a title band since Phase 7g: its sections are code, not text.
+      const floor = f.kind === 'question' ? MIN_QUESTION_WORDS : MIN_WORDS
+      if (f.kind !== 'hub' && words(text).length < floor) errors.push(`${at}: under ${floor} words`)
       const links = (text.match(/\]\(\//g) ?? []).length + f.related
-      if (f.key !== 'glosar' && links < MIN_LINKS)
+      if (f.key !== 'glosar' && f.kind !== 'hub' && links < MIN_LINKS)
         errors.push(`${at}: ${links} internal link(s), needs ${MIN_LINKS}`)
       const claim = forbidden.exec(text)
       if (claim) errors.push(`${at}: forbidden claim "${claim[0]}"`)
@@ -89,10 +96,16 @@ export function contentErrors(files: File[]): string[] {
           if (!/ROBOR/i.test(m[0])) errors.push(`${at}: a rate is stated: "${m[0]}"`)
     }
 
-  // Siblings that could read as doorway pages: the investment pages, and the guides.
+  // Every credit page lists its questions, so each credit needs at least one.
+  const asked = new Set(files.filter((f) => f.kind === 'question').map((f) => f.product))
+  for (const f of files)
+    if (f.kind === 'product' && !asked.has(f.key)) errors.push(`${f.key}: no question points at it`)
+
+  // Siblings that could read as doorway pages: the investment pages, the guides, the questions.
   const groups = [
     files.filter((f) => f.parent === 'credit-investitii'),
     files.filter((f) => f.kind === 'guide' && (f.section ?? 'finantare') === 'finantare'),
+    files.filter((f) => f.kind === 'question'),
   ]
   for (const group of groups)
     for (const l of ['ro', 'en'] as const) {

@@ -99,24 +99,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Finanțați utilaje second-hand?",
-          "answer": "Discută cu echipa despre utilajul exact. Contează starea, vechimea și prețul lui."
-        },
-        {
-          "question": "Este mai bine credit sau leasing?",
-          "answer": "Depinde de ferma ta. La credit ești proprietar de la început, iar la leasing bunul rămâne al finanțatorului până la final. Compară costul total."
-        },
-        {
-          "question": "Pot cumpăra utilajul din străinătate?",
-          "answer": "Spune-ne de la cine cumperi și vedem ce documente sunt necesare."
-        },
-        {
-          "question": "Rămân cu utilajul dacă nu plătesc?",
-          "answer": "Utilajul pus în garanție poate fi folosit de finanțator pentru recuperarea datoriei. Vorbește cu noi din timp."
-        }
-      ],
       "seo": {
         "title": "Credit pentru utilaje agricole, rate după recoltă",
         "description": "Credit pentru tractoare, combine și alte utilaje agricole, pe termen lung, cu rate legate de recolte. Comparație cu leasingul."
@@ -184,24 +166,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Do you finance second-hand machinery?",
-          "answer": "Talk to the team about the exact machine. Its condition, age and price all matter."
-        },
-        {
-          "question": "Is a loan or a lease better?",
-          "answer": "It depends on your farm. With a loan you own it from the start; with a lease the asset stays the lender's until the end. Compare the total cost."
-        },
-        {
-          "question": "Can I buy the machine abroad?",
-          "answer": "Tell us who you are buying from and we will see which documents are needed."
-        },
-        {
-          "question": "Do I keep the machine if I do not pay?",
-          "answer": "A pledged machine can be used by the lender to recover the debt. Talk to us early."
         }
       ],
       "seo": {

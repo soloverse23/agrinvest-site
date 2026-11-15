@@ -1,0 +1,54 @@
+{
+  "key": "subventie-garantie-alta-banca",
+  "topic": "apia",
+  "order": 50,
+  "popular": false,
+  "product": "subventii-apia",
+  "related": [
+    "bani-pe-subventia-apia",
+    "credit-cu-alte-datorii",
+    "garantii-acceptate"
+  ],
+  "sources": [
+    {
+      "title": "Banking News: Agrinvest Credit IFN și BRD, 30.05.2022",
+      "url": "https://bankingnews.ro/agrinvest-credit-ifn-credit-brd-lei.html",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua finanțare dacă subvenția e deja garanție la o bancă?",
+      "slug": "subventie-garantie-alta-banca",
+      "answer": "Spune-ne din start. Aceeași sumă de la APIA nu poate garanta două credite, așa că discutăm alte garanții sau partea din subvenție rămasă liberă.",
+      "factors": [
+        "cât din subvenție e deja cesionat",
+        "ce alte garanții are ferma",
+        "când se termină creditul de la bancă"
+      ],
+      "seo": {
+        "title": "Subvenție APIA deja garanție la bancă",
+        "description": "Dacă subvenția APIA garantează deja un credit la bancă, ce variante ai pentru o nouă finanțare."
+      }
+    },
+    "en": {
+      "title": "Can I get financing if my subsidy already backs a bank loan?",
+      "slug": "subsidy-already-pledged-to-a-bank",
+      "answer": "Tell us from the start. The same APIA amount cannot back two loans, so we look at other guarantees or the part of the subsidy that is still free.",
+      "factors": [
+        "how much of the subsidy is already assigned",
+        "what other guarantees the farm has",
+        "when the bank loan ends"
+      ],
+      "seo": {
+        "title": "APIA subsidy already pledged to a bank",
+        "description": "If your APIA subsidy already backs a bank loan, the options you have for new financing."
+      }
+    }
+  }
+}

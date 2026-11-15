@@ -97,32 +97,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Când trebuie să cer creditul?",
-          "answer": "Înainte de campanie, ca să ai timp pentru analiză. Răspunsul vine {{F4.reply}}."
-        },
-        {
-          "question": "Pot plăti totul într-o singură rată?",
-          "answer": "Da, dacă ai o singură recoltă principală și asta se stabilește la semnare. Numărul maxim este de 2 rate pe an."
-        },
-        {
-          "question": "Trebuie să cumpăr inputurile de la Agrinvest?",
-          "answer": "Întreabă echipa, în funcție de ce vrei să cumperi."
-        },
-        {
-          "question": "În ce monedă primesc banii?",
-          "answer": "Finanțările se acordă în lei."
-        },
-        {
-          "question": "Ce se întâmplă dacă recolta e slabă?",
-          "answer": "Vorbește cu noi din timp. Căutăm împreună o soluție, dar datoria rămâne și trebuie plătită."
-        },
-        {
-          "question": "Cât este dobânda?",
-          "answer": "Costul depinde de analiza fiecărei ferme și de garanții. Nu publicăm o dobândă fixă."
-        }
-      ],
       "seo": {
         "title": "Credit pentru producție agricolă, rate după recoltă",
         "description": "Credit pentru semințe, îngrășăminte, motorină și lucrări, cu rate după recolta de vară și de toamnă. Pentru PFA, II, IF și societăți agricole."
@@ -190,32 +164,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "When should I apply?",
-          "answer": "Before the season, to leave time for the analysis. You get a reply {{F4.reply}}."
-        },
-        {
-          "question": "Can I pay everything in one instalment?",
-          "answer": "Yes, if you have one main harvest and this is agreed at signing. The most is 2 instalments a year."
-        },
-        {
-          "question": "Must I buy inputs from Agrinvest?",
-          "answer": "Ask the team, depending on what you want to buy."
-        },
-        {
-          "question": "In which currency is the loan?",
-          "answer": "Loans are in lei."
-        },
-        {
-          "question": "What happens if the harvest is poor?",
-          "answer": "Talk to us early. We look for a solution together, but the debt remains and has to be paid."
-        },
-        {
-          "question": "What is the interest rate?",
-          "answer": "The cost depends on the analysis of each farm and on the guarantees. We do not publish a fixed rate."
         }
       ],
       "seo": {

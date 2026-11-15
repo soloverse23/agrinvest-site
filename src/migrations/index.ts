@@ -14,6 +14,7 @@ import * as migration_20261110_183406_home_nav from './20261110_183406_home_nav'
 import * as migration_20261111_065829_home_slides from './20261111_065829_home_slides';
 import * as migration_20261111_155707_shop_foundations from './20261111_155707_shop_foundations';
 import * as migration_20261115_095627_market_sources from './20261115_095627_market_sources';
+import * as migration_20261115_100616_finance_questions from './20261115_100616_finance_questions';
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20261115_095627_market_sources.up,
     down: migration_20261115_095627_market_sources.down,
     name: '20261115_095627_market_sources'
+  },
+  {
+    up: migration_20261115_100616_finance_questions.up,
+    down: migration_20261115_100616_finance_questions.down,
+    name: '20261115_100616_finance_questions'
   },
 ];

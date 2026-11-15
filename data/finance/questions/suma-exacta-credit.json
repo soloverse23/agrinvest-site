@@ -1,0 +1,50 @@
+{
+  "key": "suma-exacta-credit",
+  "topic": "process",
+  "order": 50,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "cererea-ma-obliga",
+    "cand-sa-ceri-credit-campanie"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot cere credit fără să știu suma exactă?",
+      "slug": "credit-fara-suma-exacta",
+      "answer": "Da. Spune o estimare și pentru ce ai nevoie de bani, iar suma se stabilește împreună cu consultantul, după ce vedeți ce poate plăti ferma.",
+      "factors": [
+        "costul pe hectar sau oferta pentru investiție",
+        "ce poți acoperi din bani proprii",
+        "cât poate plăti ferma după recoltă"
+      ],
+      "seo": {
+        "title": "Cerere de credit fără suma exactă",
+        "description": "Nu trebuie să știi suma exactă ca să ceri un credit agricol. Cum se stabilește suma potrivită pentru ferma ta."
+      },
+      "practice": "Pentru o campanie, un calcul simplu este costul pe hectar înmulțit cu suprafața. De exemplu, 200 ha la circa 2.000 de lei pe hectar înseamnă în jur de 400.000 de lei. Cifrele sunt ilustrative."
+    },
+    "en": {
+      "title": "Can I ask for a loan without knowing the exact amount?",
+      "slug": "loan-without-an-exact-amount",
+      "answer": "Yes. Give an estimate and what you need the money for, and the amount is agreed with the consultant once you see what the farm can repay.",
+      "factors": [
+        "the cost per hectare or the quote for the investment",
+        "what you can cover from your own money",
+        "what the farm can pay after harvest"
+      ],
+      "seo": {
+        "title": "Asking for a farm loan without an exact amount",
+        "description": "You do not need the exact amount to ask for a farm loan. How the right amount for your farm is worked out."
+      },
+      "practice": "For a season, a simple estimate is the cost per hectare times the area. For example, 200 ha at about 2,000 lei a hectare comes to around 400,000 lei. The figures are illustrative."
+    }
+  }
+}

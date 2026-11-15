@@ -88,28 +88,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Pot plăti inputurile după recoltă?",
-          "answer": "Prin creditul de producție, da, dacă cererea este aprobată. Pentru alte variante întreabă echipa."
-        },
-        {
-          "question": "Pot plăti cu cereale?",
-          "answer": "Agrinvest are fermieri care își achită datoriile cu produse agricole, la recoltare. Întreabă echipa ce condiții se aplică."
-        },
-        {
-          "question": "La ce preț se calculează cerealele?",
-          "answer": "Prețul se stabilește în contract. Citește-l și compară cu prețul pieței."
-        },
-        {
-          "question": "Cine îmi dă finanțarea?",
-          "answer": "Creditele vin de la Agrinvest Credit IFN, iar inputurile de la Agrinvest SRL. Întreabă cu cine semnezi."
-        },
-        {
-          "question": "Pot comanda online și plăti la recoltă?",
-          "answer": "Nu din coșul de cumpărături. Vorbește cu un consultant înainte de comandă."
-        }
-      ],
       "seo": {
         "title": "Inputuri cu plata la recoltă: semințe și îngrășăminte",
         "description": "Cum poți cumpăra semințe, îngrășăminte și tratamente acum și plăti după recoltă, ce variante există și ce să verifici înainte să comanzi."
@@ -169,28 +147,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Can I pay for inputs after harvest?",
-          "answer": "Through the production loan, yes, if the request is approved. For other routes ask the team."
-        },
-        {
-          "question": "Can I pay in grain?",
-          "answer": "Agrinvest has farmers who settle their debts in farm produce at harvest. Ask the team which terms apply."
-        },
-        {
-          "question": "At what price is the grain valued?",
-          "answer": "The price is set in the contract. Read it and compare with the market price."
-        },
-        {
-          "question": "Who provides the finance?",
-          "answer": "Loans come from Agrinvest Credit IFN and inputs from Agrinvest SRL. Ask who you are signing with."
-        },
-        {
-          "question": "Can I order online and pay at harvest?",
-          "answer": "Not through the shopping cart. Talk to a consultant before you order."
         }
       ],
       "seo": {

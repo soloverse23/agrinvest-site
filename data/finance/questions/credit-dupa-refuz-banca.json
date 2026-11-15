@@ -1,0 +1,57 @@
+{
+  "key": "credit-dupa-refuz-banca",
+  "topic": "eligibility",
+  "order": 40,
+  "popular": true,
+  "product": "credit-productie",
+  "guide": "ifn-sau-banca",
+  "related": [
+    "credit-dupa-an-slab",
+    "credit-cu-alte-datorii",
+    "ifn-sau-banca-credit"
+  ],
+  "sources": [
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot primi credit agricol dacă banca m-a refuzat?",
+      "slug": "credit-dupa-refuz-banca",
+      "answer": "Merită să ne spui situația. Agrinvest Credit IFN analizează fiecare fermă separat, pornind de la cum lucrează și cum încasează, nu doar de la un scor. Nu putem promite aprobarea: contează de ce a refuzat banca.",
+      "factors": [
+        "motivul refuzului: istoric, datorii, garanții sau acte",
+        "cât de mult datorează ferma deja",
+        "din ce bani ar plăti ratele după recoltă",
+        "ce garanții poate aduce"
+      ],
+      "seo": {
+        "title": "Credit agricol după refuzul băncii",
+        "description": "Te-a refuzat banca? Un IFN agricol analizează altfel ferma. Ce contează, ce nu se schimbă și cum ceri o a doua părere."
+      }
+    },
+    "en": {
+      "title": "Can I get a farm loan if a bank turned me down?",
+      "slug": "farm-loan-after-a-bank-refusal",
+      "answer": "It is worth telling us your position. Agrinvest Credit IFN reviews each farm on its own, starting from how it works and how it is paid, not only from a score. We cannot promise approval: why the bank said no matters.",
+      "factors": [
+        "the reason for the refusal: history, debts, guarantees or paperwork",
+        "how much the farm already owes",
+        "what money would pay the instalments after harvest",
+        "which guarantees it can offer"
+      ],
+      "seo": {
+        "title": "Farm loan after a bank refusal in Romania",
+        "description": "Turned down by a bank? A farm IFN looks at the farm differently. What matters, what does not change and how to ask again."
+      }
+    }
+  }
+}

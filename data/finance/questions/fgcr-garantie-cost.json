@@ -1,0 +1,60 @@
+{
+  "key": "fgcr-garantie-cost",
+  "topic": "guarantees",
+  "order": 40,
+  "popular": false,
+  "product": "subventii-apia",
+  "guide": "fonduri-garantare",
+  "related": [
+    "credit-fara-ipoteca",
+    "credit-adeverinta-apia-ifn",
+    "fidejusor-risc"
+  ],
+  "sources": [
+    {
+      "title": "FGCR: De trei ori subvenția",
+      "url": "https://fgcr.ro/produse/de-trei-ori-subventia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De cinci ori subvenția",
+      "url": "https://fgcr.ro/produse/de-cinci-ori-subventia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: Creditul Fermierului",
+      "url": "https://fgcr.ro/produse/creditul-fermierului/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce este garanția FGCR și cât costă?",
+      "slug": "garantie-fgcr-cost",
+      "answer": "FGCR nu dă bani: garantează, de regulă până la 80%, creditul acordat de un finanțator cu care are convenție. Pentru garanțiile din OUG 43/2013, comisionul este de 1,6% pe an, aplicat doar sumei garantate.",
+      "factors": [
+        "dacă finanțatorul are convenție cu FGCR pentru acel produs",
+        "dacă ferma nu e în insolvență sau în dificultate",
+        "ce garanții proprii acoperă restul"
+      ],
+      "seo": {
+        "title": "Garanția FGCR pentru fermieri: cost",
+        "description": "FGCR garantează până la 80% din credit, cu un comision de 1,6% pe an pe suma garantată. Cum funcționează și cine o poate folosi."
+      }
+    },
+    "en": {
+      "title": "What is an FGCR guarantee and what does it cost?",
+      "slug": "fgcr-guarantee-cost",
+      "answer": "FGCR does not lend money: it guarantees, usually up to 80%, a loan from a lender it has an agreement with. For guarantees under OUG 43/2013 the fee is 1.6% a year, charged only on the guaranteed amount.",
+      "factors": [
+        "whether the lender has an FGCR agreement for that product",
+        "whether the farm is not insolvent or in difficulty",
+        "which of your own guarantees cover the rest"
+      ],
+      "seo": {
+        "title": "FGCR guarantee for farmers: what it costs",
+        "description": "FGCR guarantees up to 80% of a loan, for a 1.6% yearly fee on the guaranteed amount. How it works and who can use it."
+      }
+    }
+  }
+}

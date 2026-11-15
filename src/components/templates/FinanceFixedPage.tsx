@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { ReviewNote, SourceList } from '@ds/patterns/Finance'
 import { schemaFaq } from '@/components/FactText'
+import { FinanceConsultant } from '@/components/FinanceConsultant'
 import { FinanceNav } from '@/components/FinanceNav'
 import { JsonLd } from '@/components/JsonLd'
 import { Faq, PageTitle } from '@/components/PageParts'
@@ -10,6 +11,7 @@ import { Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
+import { financeGuideUi } from '@/i18n/finance-guide'
 import { financePath, financeRoutePath, financeRoutes } from '@/i18n/routes'
 import { ui } from '@/i18n/ui'
 import { getFinancePage } from '@/lib/content/finance'
@@ -18,8 +20,8 @@ import { formatDate } from '@/lib/format'
 import { breadcrumbs, faqPage, webPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
 
-/** Fixed pages of the finance section, kept in Guides: about the IFN and the FAQ. */
-type Route = 'about' | 'faq'
+/** Fixed pages of the finance section, kept in Guides: about the IFN (the FAQ became questions). */
+type Route = 'about'
 /** The tools have their text in Guides too (`FinanceToolPage`). */
 type TextRoute = Route | 'simulator' | 'apply'
 
@@ -58,6 +60,7 @@ export async function FinanceFixedPage({ locale, route }: { locale: Locale; rout
   const url = financeRoutePath(route, locale)
   const crumbs = [
     { name: t.section, url: financePath(locale) },
+    { name: financeGuideUi[locale].nav.library, url: financeRoutePath('guides', locale) },
     { name: page.title, url },
   ]
   const faq = schemaFaq(page.faq, figures)
@@ -85,7 +88,7 @@ export async function FinanceFixedPage({ locale, route }: { locale: Locale; rout
         crumbs={crumbs}
         kicker={t.section}
       />
-      <FinanceNav locale={locale} current={route} />
+      <FinanceNav locale={locale} current="library" />
       <div className="mx-auto mt-12 grid max-w-page gap-10 px-4 md:mt-16 md:px-8">
         {page.review?.legalStatus !== 'legal-approved' && (
           <div className="max-w-text">
@@ -109,6 +112,7 @@ export async function FinanceFixedPage({ locale, route }: { locale: Locale; rout
           />
         </div>
       )}
+      <FinanceConsultant locale={locale} sourcePath={url} />
     </SiteShell>
   )
 }

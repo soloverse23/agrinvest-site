@@ -7,8 +7,13 @@ import { FigureStrip, FinanceBand } from '@ds/patterns/Bands'
 import { FactTable } from '@ds/patterns/FactTable'
 import { Hero } from '@ds/patterns/Hero'
 import { HeroSlider, type HeroRailPrices } from '@ds/patterns/HeroSlider'
-import { CountyMap } from '@ds/patterns/CountyMap'
-import { LeadFormLazy as LeadForm, VideoEmbedLazy as VideoEmbed } from '@ds/patterns/Lazy'
+
+import { project } from '@ds/patterns/map/projection'
+import {
+  BaseMapLazy,
+  LeadFormLazy as LeadForm,
+  VideoEmbedLazy as VideoEmbed,
+} from '@ds/patterns/Lazy'
 import { CropBadge } from '@ds/patterns/parts'
 import { Photo } from '@ds/patterns/Photo'
 import {
@@ -553,12 +558,33 @@ export async function BaseListBlock({
   return (
     <Section id="baze">
       {head}
-      <div className="mx-auto grid w-full max-w-3xl gap-5">
+      <div className="mx-auto grid w-full max-w-page gap-5 px-4 md:px-8">
         {block.showMap !== false && (
-          <CountyMap
+          <BaseMapLazy
             locale={ctx.locale}
-            counties={[...totals].map(([code, capacity]) => ({ code, capacity }))}
-            current={rows.find((r) => r.href === current)?.county}
+            bases={rows.flatMap((r) => {
+              const { lat, lng } = r.base.geo ?? {}
+              if (lat == null || lng == null) return []
+              const [x, y] = project(lng, lat)
+              return [
+                {
+                  id: String(r.base.id),
+                  name: r.base.name,
+                  href: r.href,
+                  county: r.county,
+                  capacity: r.base.capacity ?? null,
+                  services: r.base.services ?? [],
+                  x,
+                  y,
+                  lat,
+                  lng,
+                },
+              ]
+            })}
+            current={(() => {
+              const here = rows.find((r) => r.href === current)
+              return here ? String(here.base.id) : null
+            })()}
             note={mark}
           />
         )}

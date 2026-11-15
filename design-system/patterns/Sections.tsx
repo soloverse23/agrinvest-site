@@ -191,6 +191,7 @@ export function PageHeader({
   updated,
   actions,
   aside,
+  align = 'end',
 }: {
   breadcrumbs?: ReactNode
   kicker?: string | null
@@ -199,10 +200,17 @@ export function PageHeader({
   updated?: ReactNode
   actions?: ReactNode
   aside?: ReactNode
+  /** How the text and the aside line up on wide screens: a tall aside reads better centred. */
+  align?: 'end' | 'center'
 }) {
   return (
     <header className="border-b border-line bg-surface">
-      <div className="mx-auto grid max-w-page gap-10 px-4 pt-8 pb-12 md:px-8 md:pt-10 md:pb-16 lg:grid-cols-12 lg:items-end">
+      <div
+        className={cx(
+          'mx-auto grid max-w-page gap-10 px-4 pt-8 pb-12 md:px-8 md:pt-10 md:pb-16 lg:grid-cols-12',
+          align === 'center' ? 'lg:items-center' : 'lg:items-end',
+        )}
+      >
         <div className={cx('grid gap-5', aside ? 'lg:col-span-7' : 'lg:col-span-9')}>
           {breadcrumbs}
           <div className="grid gap-4 pt-4 md:pt-8">

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import type { Thing, WithContext } from 'schema-dts'
 
 import { schemaFaq } from '@/components/FactText'
+import { CompanyNext, companyTitle } from '@/components/CompanyParts'
 import { Faq, PageTitle } from '@/components/PageParts'
 import { JsonLd } from '@/components/JsonLd'
 import { RenderBlocks } from '@/components/RenderBlocks'
@@ -106,6 +107,7 @@ export default async function CmsPage(props: Props) {
           summary={page.summary}
           updatedAt={page.updatedAt}
           crumbs={crumbs}
+          {...companyTitle(locale, url)}
         />
       )}
       {page.isHome && heroFirst ? (
@@ -132,6 +134,7 @@ export default async function CmsPage(props: Props) {
           <RenderBlocks blocks={page.layout} locale={locale} path={pagePath} />
         </div>
       )}
+      {!page.isHome && <CompanyNext locale={locale} url={url} />}
       <Faq locale={locale} items={page.faq} />
     </SiteShell>
   )

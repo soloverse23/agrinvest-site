@@ -31,3 +31,5 @@ export const DoseCalculatorLazy = dynamic(() =>
 )
 /** The home guides carousel's arrows: only the home page downloads them. */
 export const CarouselNavLazy = dynamic(() => import('./CarouselNav').then((m) => m.CarouselNav))
+/** The interactive map of the bases (storage page, base pages). */
+export const BaseMapLazy = dynamic(() => import('./BaseMap').then((m) => m.BaseMap))

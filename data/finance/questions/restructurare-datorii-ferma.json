@@ -1,0 +1,57 @@
+{
+  "key": "restructurare-datorii-ferma",
+  "topic": "hardship",
+  "order": 10,
+  "popular": true,
+  "product": "restructurare",
+  "guide": "insolventa-sau-restructurare",
+  "related": [
+    "nu-pot-plati-rata",
+    "insolventa-sterge-datoriile",
+    "fidejusor-risc"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Platnic.ro: concordatul preventiv explicat",
+      "url": "https://platnic.ro/insolventa/concordatul-preventiv/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce pot face dacă ferma are datorii greu de plătit?",
+      "slug": "datorii-ferma-ce-poti-face",
+      "answer": "Dacă ferma încă poate merge mai departe, se poate căuta o restructurare: rate mai mici pe o perioadă mai lungă și un plan realist. Vorbește cât mai devreme, înainte de scadențe și de orice procedură.",
+      "factors": [
+        "toate datoriile și scadențele lor",
+        "dacă ferma produce încă suficient",
+        "ce garanții și ce active are",
+        "dacă a început deja o executare"
+      ],
+      "seo": {
+        "title": "Restructurarea datoriilor unei ferme",
+        "description": "Ce variante are o fermă cu datorii greu de plătit și de ce contează să vorbești înainte de scadență."
+      }
+    },
+    "en": {
+      "title": "What can I do if the farm has debts it struggles to pay?",
+      "slug": "farm-debts-what-to-do",
+      "answer": "If the farm can still carry on, a restructuring can be looked for: smaller instalments over a longer period and a realistic plan. Talk as early as you can, before due dates and before any procedure.",
+      "factors": [
+        "all the debts and their due dates",
+        "whether the farm still produces enough",
+        "what guarantees and assets it has",
+        "whether enforcement has started"
+      ],
+      "seo": {
+        "title": "Restructuring a farm’s debts in Romania",
+        "description": "What a farm with hard-to-pay debts can do, and why it matters to talk before the due date."
+      }
+    }
+  }
+}

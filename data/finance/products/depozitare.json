@@ -99,24 +99,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Merită să îmi fac siloz propriu?",
-          "answer": "Depinde de cantitate și de cât de des stochezi. Compară cu tariful de depozitare."
-        },
-        {
-          "question": "Finanțați și uscătoare?",
-          "answer": "Spune-ne din ce e format proiectul. Echipamentele legate de depozitare se discută împreună cu el."
-        },
-        {
-          "question": "Pot depozita la Agrinvest până atunci?",
-          "answer": "Agrinvest are {{S1}} silozuri și depozite de cereale, cu o capacitate de {{S2}}. Vezi pagina de depozitare și bazele."
-        },
-        {
-          "question": "Trebuie să am autorizația de construire?",
-          "answer": "Spune-ne stadiul proiectului. Autorizațiile și terenul contează pentru analiză."
-        }
-      ],
       "seo": {
         "title": "Credit pentru silozuri și spații de depozitare",
         "description": "Credit pe termen lung pentru construcția sau cumpărarea de silozuri și magazii, cu rate după recoltă. Când merită un depozit propriu."
@@ -184,24 +166,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Is my own silo worth it?",
-          "answer": "It depends on the quantity and how often you store. Compare with the storage rate."
-        },
-        {
-          "question": "Do you finance dryers too?",
-          "answer": "Tell us what the project includes. Equipment linked to storage is discussed along with it."
-        },
-        {
-          "question": "Can I store with Agrinvest until then?",
-          "answer": "Agrinvest has {{S1}} silos and grain warehouses, with a capacity of {{S2}}. See the storage page and the bases."
-        },
-        {
-          "question": "Must I have the building permit?",
-          "answer": "Tell us how far the project has got. Permits and land matter for the analysis."
         }
       ],
       "seo": {

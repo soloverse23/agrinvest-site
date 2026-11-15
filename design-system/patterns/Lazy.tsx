@@ -31,3 +31,7 @@ export const DoseCalculatorLazy = dynamic(() =>
 )
 /** The home guides carousel's arrows: only the home page downloads them. */
 export const CarouselNavLazy = dynamic(() => import('./CarouselNav').then((m) => m.CarouselNav))
+/** The finance consultant drawer's launcher (Phase 7g): the drawer itself loads on first click. */
+export const ConsultantLauncherLazy = dynamic(() =>
+  import('./ConsultantLauncher').then((m) => m.ConsultantLauncher),
+)

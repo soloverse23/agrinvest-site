@@ -1,0 +1,56 @@
+{
+  "key": "credit-ferma-zootehnica",
+  "topic": "eligibility",
+  "order": 70,
+  "popular": false,
+  "product": "ferme",
+  "related": [
+    "rate-lunare-credit-agricol",
+    "avans-credit-investitii",
+    "credit-industrie-alimentara"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Finanțați și ferme zootehnice?",
+      "slug": "credit-ferma-zootehnica",
+      "answer": "Da. Agrinvest Credit IFN finanțează atât ferme vegetale, cât și zootehnice, de la grajduri la dezvoltarea fermei. La zootehnie, ratele se stabilesc după cum încasează ferma, nu neapărat după recolte.",
+      "factors": [
+        "ce vrei să construiești sau să cumperi",
+        "din ce încasează ferma: lapte, carne sau animale vii",
+        "contractele de vânzare pe care le ai",
+        "garanțiile: clădiri, teren sau utilaje"
+      ],
+      "seo": {
+        "title": "Credit pentru fermă zootehnică",
+        "description": "Finanțare pentru ferme zootehnice și vegetale: grajduri, dezvoltare, echipamente, cu rate după încasările fermei."
+      }
+    },
+    "en": {
+      "title": "Do you finance livestock farms?",
+      "slug": "loans-for-livestock-farms",
+      "answer": "Yes. Agrinvest Credit IFN finances both crop and livestock farms, from barns to growing the farm. For livestock, instalments follow how the farm is paid, not necessarily the harvests.",
+      "factors": [
+        "what you want to build or buy",
+        "what the farm earns from: milk, meat or live animals",
+        "the sale contracts you hold",
+        "the guarantees: buildings, land or machinery"
+      ],
+      "seo": {
+        "title": "Loans for livestock farms in Romania",
+        "description": "Financing for livestock and crop farms: barns, expansion and equipment, with instalments that follow the farm’s income."
+      }
+    }
+  }
+}

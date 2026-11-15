@@ -1,0 +1,52 @@
+{
+  "key": "credit-dupa-an-slab",
+  "topic": "eligibility",
+  "order": 50,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "cum-analizeaza-finantatorul-ferma",
+  "related": [
+    "credit-dupa-refuz-banca",
+    "recolta-slaba-credit",
+    "restructurare-datorii-ferma"
+  ],
+  "sources": [
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot primi credit după un an agricol slab?",
+      "slug": "credit-dupa-an-slab",
+      "answer": "Da, se poate discuta. Un an de secetă arată altfel decât o fermă în declin, așa că explicația contează. Analiza se uită și la datorii, la cash-flow și la planul pentru anul următor.",
+      "factors": [
+        "ce a cauzat anul slab: secetă, preț sau probleme ale fermei",
+        "datoriile rămase după acel an",
+        "asigurarea culturilor și contractele pentru anul următor",
+        "producția din anii buni"
+      ],
+      "seo": {
+        "title": "Credit agricol după un an slab",
+        "description": "Un an secetos nu închide automat ușa la finanțare. Ce se uită finanțatorul și ce să pregătești înainte de cerere."
+      }
+    },
+    "en": {
+      "title": "Can I get a loan after a poor farming year?",
+      "slug": "loan-after-a-poor-year",
+      "answer": "Yes, it can be discussed. A drought year looks different from a farm in decline, so the explanation matters. The review also looks at debts, cash flow and the plan for next year.",
+      "factors": [
+        "what caused the poor year: drought, price or the farm itself",
+        "the debts left after that year",
+        "crop insurance and contracts for next year",
+        "output in the good years"
+      ],
+      "seo": {
+        "title": "Farm loan after a poor harvest year",
+        "description": "A drought year does not close the door to financing. What lenders look at and what to prepare before you apply."
+      }
+    }
+  }
+}

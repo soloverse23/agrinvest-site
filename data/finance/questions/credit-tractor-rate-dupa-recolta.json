@@ -1,0 +1,57 @@
+{
+  "key": "credit-tractor-rate-dupa-recolta",
+  "topic": "investment",
+  "order": 10,
+  "popular": true,
+  "product": "utilaje",
+  "guide": "credit-sau-leasing-utilaje",
+  "related": [
+    "credit-sau-leasing",
+    "utilaje-second-hand",
+    "avans-credit-investitii"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cum finanțez un tractor cu rate după recoltă?",
+      "slug": "credit-tractor-rate-dupa-recolta",
+      "answer": "Prin creditul pentru utilaje: cumperi tractorul și plătești în rate legate de recoltele de vară și de toamnă, nu lunar, pe o durată de până la 10 ani. Utilajul este al tău de la început.",
+      "factors": [
+        "prețul și oferta de la dealer",
+        "câte hectare lucrezi cu el pe an",
+        "cât poate plăti ferma într-un an slab",
+        "dacă e nou sau second-hand"
+      ],
+      "seo": {
+        "title": "Credit pentru tractor cu rate după recoltă",
+        "description": "Cum cumperi un tractor sau o combină cu rate după recoltă, pe până la 10 ani, prin Agrinvest Credit IFN."
+      }
+    },
+    "en": {
+      "title": "How do I finance a tractor with instalments after harvest?",
+      "slug": "tractor-loan-after-harvest",
+      "answer": "Through the machinery loan: you buy the tractor and repay in instalments tied to the summer and autumn harvests, not monthly, over up to 10 years. The machine is yours from the start.",
+      "factors": [
+        "the price and the dealer’s quote",
+        "how many hectares a year you work with it",
+        "what the farm can pay in a weak year",
+        "whether it is new or second-hand"
+      ],
+      "seo": {
+        "title": "Tractor loan repaid after harvest",
+        "description": "How to buy a tractor or combine with instalments after harvest, over up to 10 years, with Agrinvest Credit IFN."
+      }
+    }
+  }
+}

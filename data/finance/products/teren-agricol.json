@@ -100,24 +100,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Pot cumpăra terenul pe care îl am în arendă?",
-          "answer": "Da, arendașii au și drept de preempțiune, în ordinea stabilită de Legea 17/2014. Verifică la notar."
-        },
-        {
-          "question": "Trebuie să am avans?",
-          "answer": "Depinde de analiză și de garanții. Întreabă echipa."
-        },
-        {
-          "question": "Cine poate cumpăra teren extravilan?",
-          "answer": "Legea 17/2014 stabilește o ordine de preemptori și condiții pentru ceilalți cumpărători. Verifică la notar înainte de semnare."
-        },
-        {
-          "question": "Pe ce durată pot lua creditul?",
-          "answer": "Durata ajunge {{F5.term}}."
-        }
-      ],
       "seo": {
         "title": "Credit pentru teren agricol pe termen lung",
         "description": "Credit pentru cumpărarea de teren arabil, cu rate după recoltă. Ce spune Legea 17/2014 și cum calculezi dacă terenul se poate plăti."
@@ -185,24 +167,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "Can I buy land I rent?",
-          "answer": "Yes, tenants also have a right of pre-emption, in the order set by Law 17/2014. Check with a notary."
-        },
-        {
-          "question": "Do I need a deposit?",
-          "answer": "It depends on the analysis and the guarantees. Ask the team."
-        },
-        {
-          "question": "Who can buy land outside built-up areas?",
-          "answer": "Law 17/2014 sets an order of pre-emption and conditions for other buyers. Check with a notary before signing."
-        },
-        {
-          "question": "For how long can I borrow?",
-          "answer": "Loans run {{F5.term}}."
         }
       ],
       "seo": {

@@ -1,0 +1,56 @@
+{
+  "key": "cine-poate-lua-credit-agricol",
+  "topic": "eligibility",
+  "order": 10,
+  "popular": true,
+  "product": "credit-productie",
+  "related": [
+    "credit-agricol-pfa",
+    "credit-dupa-refuz-banca",
+    "ce-documente-trebuie"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: Agrinvest Credit IFN își extinde portofoliul, 2025",
+      "url": "https://agrointel.ro/320343/agrinvest-credit-ifn-sa-isi-extinde-portofoliul-produselor-de-creditare",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cine poate lua un credit agricol la Agrinvest Credit IFN?",
+      "slug": "cine-poate-lua-credit-agricol",
+      "answer": "Pot cere credit persoanele fizice autorizate, întreprinderile individuale și familiale, societățile comerciale și societățile agricole. Lucrăm mai ales cu fermieri mici și mijlocii, iar fiecare cerere se analizează separat.",
+      "factors": [
+        "forma de organizare a fermei și de cât timp lucrează",
+        "suprafața, culturile sau animalele și cum încasează ferma",
+        "datoriile pe care le are deja",
+        "garanțiile pe care le poate aduce"
+      ],
+      "seo": {
+        "title": "Cine poate lua credit agricol la un IFN",
+        "description": "PFA, II, IF, SRL, SA și societăți agricole pot cere credit la Agrinvest Credit IFN. Vezi ce contează în analiza fermei tale."
+      }
+    },
+    "en": {
+      "title": "Who can get a farm loan from Agrinvest Credit IFN?",
+      "slug": "who-can-get-a-farm-loan",
+      "answer": "Authorised individuals (PFA), sole and family enterprises, companies and agricultural companies can apply. We work mostly with small and mid-sized farmers, and each application is reviewed on its own.",
+      "factors": [
+        "the legal form of the farm and how long it has been trading",
+        "the area, crops or livestock, and how the farm is paid",
+        "the debts it already has",
+        "the guarantees it can offer"
+      ],
+      "seo": {
+        "title": "Who can get a farm loan from an IFN in Romania",
+        "description": "PFAs, sole and family enterprises, companies and agricultural companies can apply to Agrinvest Credit IFN. See what the review looks at."
+      }
+    }
+  }
+}

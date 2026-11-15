@@ -1,0 +1,60 @@
+{
+  "key": "fidejusor-risc",
+  "topic": "guarantees",
+  "order": 50,
+  "popular": false,
+  "product": "restructurare",
+  "guide": "insolventa-sau-restructurare",
+  "related": [
+    "fgcr-garantie-cost",
+    "insolventa-sterge-datoriile",
+    "restructurare-datorii-ferma"
+  ],
+  "sources": [
+    {
+      "title": "Fideiusorul în insolvență",
+      "url": "https://www.zandomeni.ro/fideiusor-insolventa-urmarire-paralela-codebitori/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Legea 85/2014, art. 75",
+      "url": "https://tribonian.ro/lege/legea-85-2014/art-75",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: Creditul Fermierului",
+      "url": "https://fgcr.ro/produse/creditul-fermierului/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce risc am dacă semnez ca fidejusor pentru creditul fermei?",
+      "slug": "risc-fidejusor-credit-ferma",
+      "answer": "Fidejusorul răspunde cu averea lui dacă ferma nu plătește. Rămâne răspunzător și dacă un fond de garantare plătește banca, iar insolvența firmei nu oprește acțiunile împotriva lui.",
+      "factors": [
+        "suma pentru care garantezi și pe ce durată",
+        "dacă ferma are un plan realist de plată",
+        "ce alte garanții are creditul"
+      ],
+      "seo": {
+        "title": "Riscul fidejusorului la creditul fermei",
+        "description": "Ce înseamnă să semnezi ca fidejusor pentru creditul unei ferme: când plătești și de ce insolvența nu te protejează."
+      }
+    },
+    "en": {
+      "title": "What is my risk if I sign as surety for the farm loan?",
+      "slug": "surety-risk-farm-loan",
+      "answer": "A surety answers with their own assets if the farm does not pay. They stay liable even if a guarantee fund pays the bank, and the company’s insolvency does not stop claims against them.",
+      "factors": [
+        "the amount you guarantee and for how long",
+        "whether the farm has a realistic repayment plan",
+        "what other guarantees the loan has"
+      ],
+      "seo": {
+        "title": "Surety risk on a farm loan in Romania",
+        "description": "What signing as surety for a farm loan means: when you pay, and why insolvency does not protect you."
+      }
+    }
+  }
+}

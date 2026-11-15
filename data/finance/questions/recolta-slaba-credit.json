@@ -1,0 +1,50 @@
+{
+  "key": "recolta-slaba-credit",
+  "topic": "repayment",
+  "order": 60,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "cand-vinzi-recolta",
+  "related": [
+    "nu-pot-plati-rata",
+    "cultura-ca-garantie",
+    "credit-dupa-an-slab"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce se întâmplă cu creditul dacă recolta e slabă?",
+      "slug": "recolta-slaba-credit",
+      "answer": "Datoria rămâne și trebuie plătită, chiar dacă recolta e mai mică. De aceea e bine să calculezi rata pe o producție prudentă, să asiguri culturile și să ne suni din timp dacă vezi că nu ajung banii.",
+      "factors": [
+        "dacă ai asigurat culturile",
+        "cât ai vândut deja pe contract",
+        "ce rezerve sau alte încasări ai"
+      ],
+      "seo": {
+        "title": "Recoltă slabă și credit agricol",
+        "description": "Ce se întâmplă cu creditul de producție într-un an slab și ce poți face din timp ca să nu rămâi descoperit."
+      }
+    },
+    "en": {
+      "title": "What happens to my loan if the harvest is poor?",
+      "slug": "poor-harvest-and-the-loan",
+      "answer": "The debt remains and has to be paid, even with a smaller harvest. That is why it pays to plan the instalment on a cautious yield, insure the crops and call us early if you see the money will not cover it.",
+      "factors": [
+        "whether the crops are insured",
+        "how much you have already sold on contract",
+        "what reserves or other income you have"
+      ],
+      "seo": {
+        "title": "A poor harvest and your farm loan",
+        "description": "What happens to a production loan in a poor year, and what you can do early so you are not caught short."
+      }
+    }
+  }
+}

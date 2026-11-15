@@ -1,0 +1,48 @@
+{
+  "key": "o-singura-rata",
+  "topic": "repayment",
+  "order": 30,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "rate-dupa-recolta",
+    "cand-sa-ceri-credit-campanie"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot plăti creditul de campanie într-o singură rată?",
+      "slug": "credit-o-singura-rata",
+      "answer": "Da, dacă ai o singură recoltă principală și asta se stabilește la semnare. Numărul maxim este de două rate pe an, după recolta de vară și după cea de toamnă.",
+      "factors": [
+        "dacă ai culturi de vară, de toamnă sau ambele",
+        "când vrei să vinzi recolta",
+        "suma față de încasarea așteptată"
+      ],
+      "seo": {
+        "title": "Credit agricol cu o singură rată",
+        "description": "Un credit pentru cheltuielile unui sezon se poate plăti într-o singură rată, după recoltă. Când are sens."
+      }
+    },
+    "en": {
+      "title": "Can I repay a season loan in one instalment?",
+      "slug": "season-loan-single-instalment",
+      "answer": "Yes, if you have one main harvest and this is agreed at signing. The most is two instalments a year, after the summer and the autumn harvest.",
+      "factors": [
+        "whether you grow summer crops, autumn crops or both",
+        "when you plan to sell the harvest",
+        "the amount against the expected income"
+      ],
+      "seo": {
+        "title": "Farm loan repaid in a single instalment",
+        "description": "A loan for one season’s costs can be repaid in one instalment after harvest. When that makes sense."
+      }
+    }
+  }
+}

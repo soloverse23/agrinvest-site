@@ -1,0 +1,49 @@
+{
+  "key": "avans-credit-investitii",
+  "topic": "investment",
+  "order": 40,
+  "popular": false,
+  "product": "credit-investitii",
+  "related": [
+    "durata-maxima-credit",
+    "credit-cu-grant-afir",
+    "credit-tractor-rate-dupa-recolta"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Trebuie avans la un credit de investiții agricole?",
+      "slug": "avans-credit-investitii-agricole",
+      "answer": "Nu există o regulă unică: depinde de analiza fermei și de garanții. O contribuție proprie arată finanțatorului că investiția are sens și poate reduce garanțiile cerute.",
+      "factors": [
+        "valoarea investiției față de veniturile fermei",
+        "ce garanții poți aduce",
+        "dacă ai un grant AFIR care acoperă o parte"
+      ],
+      "seo": {
+        "title": "Avans la creditul de investiții agricole",
+        "description": "Când îți trebuie avans la un credit pentru utilaje, irigații, depozitare sau teren și ce îl poate înlocui."
+      }
+    },
+    "en": {
+      "title": "Do I need a deposit for a farm investment loan?",
+      "slug": "deposit-for-an-investment-loan",
+      "answer": "There is no single rule: it depends on the farm review and the guarantees. Some of your own money shows the lender the investment makes sense and can reduce the guarantees asked for.",
+      "factors": [
+        "the size of the investment against the farm’s income",
+        "which guarantees you can offer",
+        "whether an AFIR grant covers part of it"
+      ],
+      "seo": {
+        "title": "Deposit for a farm investment loan",
+        "description": "When a farm investment loan for machinery, irrigation, storage or land needs a deposit, and what can replace it."
+      }
+    }
+  }
+}

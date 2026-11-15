@@ -1,0 +1,51 @@
+{
+  "key": "credit-agricol-pfa",
+  "topic": "eligibility",
+  "order": 20,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "cine-poate-lua-credit-agricol",
+    "ce-documente-trebuie",
+    "credit-fara-istoric"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua credit agricol ca PFA sau întreprindere individuală?",
+      "slug": "credit-agricol-pfa",
+      "answer": "Da. Persoanele fizice autorizate și întreprinderile individuale și familiale pot cere credit, la fel ca societățile. Creditul se acordă fermei înregistrate, pe CUI-ul ei.",
+      "factors": [
+        "dacă ferma are deja CUI și de când",
+        "ce venituri și ce încasări din agricultură poate arăta",
+        "dacă subvenția APIA, cultura sau un contract pot susține creditul"
+      ],
+      "seo": {
+        "title": "Credit agricol pentru PFA, II sau IF",
+        "description": "PFA, întreprinderile individuale și familiale pot lua credit agricol cu rate după recoltă. Ce contează și cum ceri."
+      },
+      "practice": "Dacă lucrezi încă fără o formă de organizare, [scrie-ne](/contact) și îți spunem ce variante ai înainte de cerere."
+    },
+    "en": {
+      "title": "Can I get a farm loan as a PFA or sole enterprise?",
+      "slug": "farm-loan-for-a-pfa",
+      "answer": "Yes. Authorised individuals (PFA) and sole and family enterprises can apply, just as companies can. The loan goes to the registered farm, under its tax ID.",
+      "factors": [
+        "whether the farm already has a tax ID, and since when",
+        "the farm income it can show",
+        "whether an APIA subsidy, the crop or a contract can back the loan"
+      ],
+      "seo": {
+        "title": "Farm loan for a PFA or sole enterprise in Romania",
+        "description": "PFAs and sole and family enterprises can get a farm loan repaid after harvest. What matters and how to apply."
+      },
+      "practice": "If you farm without a registered form yet, [write to us](/en/contact) and we will tell you your options before you apply."
+    }
+  }
+}

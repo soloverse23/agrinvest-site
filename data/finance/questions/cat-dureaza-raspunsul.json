@@ -1,0 +1,54 @@
+{
+  "key": "cat-dureaza-raspunsul",
+  "topic": "process",
+  "order": 10,
+  "popular": true,
+  "product": "credit-productie",
+  "related": [
+    "cand-primesc-banii",
+    "ce-documente-trebuie",
+    "cererea-ma-obliga"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "În cât timp primesc răspuns la o cerere de credit agricol?",
+      "slug": "cat-dureaza-raspuns-credit",
+      "answer": "Răspunsul vine {{F4.reply}}. Primul pas este o discuție cu un consultant, care îți spune ce trebuie pregătit pentru ferma ta.",
+      "factors": [
+        "cât de repede trimiți actele cerute",
+        "cât de complexă e investiția sau garanția",
+        "dacă e nevoie de o evaluare"
+      ],
+      "seo": {
+        "title": "Cât durează răspunsul la credit agricol",
+        "description": "Agrinvest Credit IFN răspunde în 24 h de la dosarul complet. Cum ajungi repede la un dosar complet."
+      }
+    },
+    "en": {
+      "title": "How quickly do I get a reply to a farm loan application?",
+      "slug": "farm-loan-reply-time",
+      "answer": "You get a reply {{F4.reply}}. The first step is a conversation with a consultant, who tells you what to prepare for your farm.",
+      "factors": [
+        "how quickly you send the papers asked for",
+        "how complex the investment or guarantee is",
+        "whether a valuation is needed"
+      ],
+      "seo": {
+        "title": "How long a farm loan reply takes",
+        "description": "Agrinvest Credit IFN replies within 24 hours of a complete file. How to get to a complete file quickly."
+      }
+    }
+  }
+}

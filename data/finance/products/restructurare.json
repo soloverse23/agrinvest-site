@@ -92,24 +92,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Când trebuie să vă contactez?",
-          "answer": "Înainte de scadență și înainte de orice procedură. După ce începe executarea, variantele sunt mai puține."
-        },
-        {
-          "question": "Îmi plătiți datoriile la alți creditori?",
-          "answer": "Depinde de analiză. Spune-ne toate datoriile și vedem împreună ce se poate."
-        },
-        {
-          "question": "Dacă sunt în insolvență mai pot lua credit?",
-          "answer": "Discută cu administratorul judiciar. Condițiile sunt altele."
-        },
-        {
-          "question": "Este obligatoriu să fiu client Agrinvest?",
-          "answer": "Întreabă echipa și spune-ne situația ta."
-        }
-      ],
       "seo": {
         "title": "Restructurare datorii fermă: cum începi",
         "description": "Ce poți face când ferma are datorii greu de plătit: rate mai mici pe termen mai lung, un plan realist și când să vorbești cu creditorii."
@@ -173,24 +155,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "When should I contact you?",
-          "answer": "Before the due date and before any procedure. Once enforcement starts, there are fewer options."
-        },
-        {
-          "question": "Do you pay my debts to other creditors?",
-          "answer": "It depends on the analysis. Tell us all your debts and we will see together what can be done."
-        },
-        {
-          "question": "Can I get a loan if I am insolvent?",
-          "answer": "Talk to the judicial administrator. The conditions are different."
-        },
-        {
-          "question": "Must I be an Agrinvest client?",
-          "answer": "Ask the team and tell us your position."
         }
       ],
       "seo": {

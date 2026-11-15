@@ -1,0 +1,46 @@
+{
+  "key": "cererea-ma-obliga",
+  "topic": "process",
+  "order": 40,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "ce-documente-trebuie",
+    "suma-exacta-credit"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Mă obligă o cerere de credit la ceva?",
+      "slug": "cererea-de-credit-obligatii",
+      "answer": "Nu. Cererea sau o discuție cu un consultant doar pornesc analiza. Nu înseamnă că ai primit creditul și nu te obligă să-l iei: decizia vine după analiză, iar contractul îl semnezi doar dacă vrei.",
+      "factors": [
+        "ce date trimiți la început",
+        "dacă accepți o verificare la Biroul de Credit, cerută doar după discuție"
+      ],
+      "seo": {
+        "title": "Te obligă cererea de credit la ceva?",
+        "description": "Trimiterea unei cereri de credit agricol nu te obligă la nimic. Ce se întâmplă după și când semnezi."
+      }
+    },
+    "en": {
+      "title": "Does a loan request commit me to anything?",
+      "slug": "does-a-request-commit-me",
+      "answer": "No. A request, or a talk with a consultant, only starts the review. It does not mean you have the loan and does not bind you to take it: the decision follows the review, and you sign a contract only if you want to.",
+      "factors": [
+        "what details you send at first",
+        "whether you agree to a Credit Bureau check, asked only after the conversation"
+      ],
+      "seo": {
+        "title": "Does a farm loan request commit you?",
+        "description": "Sending a farm loan request does not commit you to anything. What happens next and when you sign."
+      }
+    }
+  }
+}

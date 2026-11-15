@@ -1,0 +1,54 @@
+{
+  "key": "inputuri-plata-dupa-recolta",
+  "topic": "grain",
+  "order": 10,
+  "popular": true,
+  "product": "inputuri-plata-la-recolta",
+  "related": [
+    "plata-cu-cereale",
+    "cand-sa-ceri-credit-campanie",
+    "rate-dupa-recolta"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Flota proprie (site-ul vechi)",
+      "url": "https://agrinvest.ro/flota-proprie/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot cumpăra inputuri acum și plăti după recoltă?",
+      "slug": "inputuri-acum-plata-dupa-recolta",
+      "answer": "Da, printr-un credit de producție, dacă cererea este aprobată: cumperi semințe, îngrășăminte și tratamente acum și plătești ratele după recoltă. Comanda și creditul sunt separate, așa că vorbește cu un consultant înainte de comandă.",
+      "factors": [
+        "ce inputuri cumperi și de la cine",
+        "suprafața și culturile",
+        "când vinzi recolta"
+      ],
+      "seo": {
+        "title": "Inputuri acum, plata după recoltă",
+        "description": "Cum cumperi semințe și îngrășăminte acum și plătești după recoltă, printr-un credit de producție Agrinvest Credit IFN."
+      }
+    },
+    "en": {
+      "title": "Can I buy inputs now and pay after harvest?",
+      "slug": "inputs-now-pay-after-harvest",
+      "answer": "Yes, through a production loan, if the request is approved: you buy seed, fertiliser and crop protection now and pay the instalments after harvest. The order and the loan are separate, so talk to a consultant before you order.",
+      "factors": [
+        "which inputs you buy and from whom",
+        "the area and crops",
+        "when you sell the harvest"
+      ],
+      "seo": {
+        "title": "Buy farm inputs now, pay after harvest",
+        "description": "How to buy seed and fertiliser now and pay after harvest, through an Agrinvest Credit IFN production loan."
+      }
+    }
+  }
+}

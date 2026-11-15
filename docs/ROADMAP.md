@@ -584,6 +584,17 @@ _Analytics_
 - Finance grouped by need (season · investments · special cases), with one path: Simulator → Cerere;
 - price and sell-grain pages given separate roles, with "Prețuri și vânzare" in the menu.
 
+## Phase 7g: Finance as a guide
+
+> Planned and built 2026-11-15 after the owner's review of the IFN section. See `docs/phases/07g-finance-guide.md` and decision `0012-finance-guide.md`. It replaces 7d's finance items (the Simulator → Cerere path).
+
+**Goal:** the finance section guides a farmer to the right credit and a consultant, and catches every search and assistant question:
+
+- the hub by need (eight tiles and a three-question finder);
+- credit pages built like shop product pages, with the long text closed under "Detalii";
+- one page per question (51 in each language), a library for the long guides;
+- one action everywhere, "Vorbește cu un consultant", a short drawer.
+
 ## Phase 8: Launch and migration
 
 **Goal:** switch over without losing any ranking or order.

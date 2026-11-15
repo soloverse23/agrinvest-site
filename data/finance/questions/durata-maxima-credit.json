@@ -1,0 +1,56 @@
+{
+  "key": "durata-maxima-credit",
+  "topic": "repayment",
+  "order": 40,
+  "popular": false,
+  "product": "credit-investitii",
+  "related": [
+    "rate-dupa-recolta",
+    "avans-credit-investitii",
+    "reducere-dobanda-plata-la-timp"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pe ce perioadă pot lua un credit agricol?",
+      "slug": "durata-credit-agricol",
+      "answer": "Creditul de producție acoperă de regulă un an agricol, iar creditele de investiții merg {{F5.term}}. Durata potrivită pornește de la cât poate plăti ferma într-un an slab, nu în unul bun.",
+      "factors": [
+        "ce finanțezi: un sezon sau o investiție",
+        "câți ani îți folosește investiția",
+        "cât poate plăti ferma pe an",
+        "garanțiile"
+      ],
+      "seo": {
+        "title": "Pe cât timp poți lua un credit agricol",
+        "description": "De la un sezon la 10 ani: cât poate dura un credit agricol la Agrinvest Credit IFN și cum alegi durata potrivită."
+      }
+    },
+    "en": {
+      "title": "For how long can I take a farm loan?",
+      "slug": "farm-loan-term",
+      "answer": "A production loan usually covers one farming year, and investment loans run {{F5.term}}. The right term starts from what the farm can pay in a weak year, not a good one.",
+      "factors": [
+        "what you finance: a season or an investment",
+        "how many years the investment serves you",
+        "what the farm can pay each year",
+        "the guarantees"
+      ],
+      "seo": {
+        "title": "How long a farm loan can run in Romania",
+        "description": "From one season to 10 years: how long a farm loan from Agrinvest Credit IFN can run and how to choose the term."
+      }
+    }
+  }
+}

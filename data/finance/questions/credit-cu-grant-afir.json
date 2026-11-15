@@ -1,0 +1,51 @@
+{
+  "key": "credit-cu-grant-afir",
+  "topic": "investment",
+  "order": 50,
+  "popular": false,
+  "product": "irigatii",
+  "guide": "credit-sau-grant-afir",
+  "related": [
+    "avans-credit-investitii",
+    "credit-irigatii-sursa-apa"
+  ],
+  "sources": [
+    {
+      "title": "Finanțare Agro: credite pentru cofinanțare",
+      "url": "https://finantareagro.ro/articol/credite-cofinantare-plantatie",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot combina un credit cu un grant AFIR?",
+      "slug": "credit-si-grant-afir",
+      "answer": "Da. Grantul acoperă o parte din cheltuielile eligibile, iar creditul poate acoperi cofinanțarea, cheltuielile neeligibile și banii plătiți până la decontare. Cofinanțarea se poate dovedi cu un contract de credit.",
+      "factors": [
+        "ce acoperă grantul și ce nu",
+        "când depui cererea de plată la AFIR",
+        "termenul pentru dovada cofinanțării"
+      ],
+      "seo": {
+        "title": "Credit și grant AFIR: cum le folosești împreună",
+        "description": "Cum folosești un credit pentru cofinanțarea unui proiect AFIR și pentru banii plătiți până la decontare."
+      },
+      "practice": "Ghidurile DR-14 și DR-12 acceptă extras de cont și/sau contract de credit pentru cofinanțare, în 3 luni pentru achiziții simple și 6 luni pentru achiziții complexe de la notificarea selectării. Mai multe în [credit sau grant AFIR](/finantare/ghiduri/credit-sau-grant-afir)."
+    },
+    "en": {
+      "title": "Can I combine a loan with an AFIR grant?",
+      "slug": "loan-with-an-afir-grant",
+      "answer": "Yes. The grant covers part of the eligible costs, and a loan can cover the cofinancing, the ineligible costs and the money paid until reimbursement. Cofinancing can be proved with a loan contract.",
+      "factors": [
+        "what the grant covers and what it does not",
+        "when you file the payment claim with AFIR",
+        "the deadline for proving cofinancing"
+      ],
+      "seo": {
+        "title": "Combining a farm loan with an AFIR grant",
+        "description": "How to use a loan for an AFIR project’s cofinancing and for the money paid until reimbursement."
+      },
+      "practice": "The DR-14 and DR-12 guides accept a bank statement and/or a loan contract as cofinancing, within 3 months for simple purchases and 6 months for complex ones from notice of selection. More in [loan or AFIR grant](/en/financing/guides/credit-or-afir-grant)."
+    }
+  }
+}

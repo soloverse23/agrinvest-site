@@ -1,0 +1,59 @@
+{
+  "key": "dobanda-credit-agricol",
+  "topic": "cost",
+  "order": 10,
+  "popular": true,
+  "product": "credit-productie",
+  "guide": "costul-real-al-creditului",
+  "related": [
+    "cost-total-credit",
+    "reducere-dobanda-plata-la-timp",
+    "de-ce-ifn-mai-scump"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce dobândă are un credit agricol la Agrinvest Credit IFN?",
+      "slug": "dobanda-credit-agricol",
+      "answer": "Agrinvest Credit IFN nu publică o dobândă fixă: costul se stabilește după analiza fiecărei ferme, a garanțiilor și a duratei. O afli de la consultant după prima discuție, împreună cu graficul complet.",
+      "factors": [
+        "durata creditului și numărul de rate",
+        "garanțiile aduse",
+        "istoricul și datoriile fermei",
+        "dacă produsul are reguli publice, cum e creditul pe adeverința APIA"
+      ],
+      "seo": {
+        "title": "Dobândă credit agricol la un IFN",
+        "description": "Cum se stabilește dobânda unui credit agricol la Agrinvest Credit IFN și ce trebuie să compari: costul total, nu doar rata."
+      },
+      "practice": "Când compari oferte, cere graficul complet și adună tot: dobânda, comisioanele, evaluarea, asigurările și costul garanțiilor. Detaliile sunt în [costul real al unui credit](/finantare/ghiduri/costul-real-al-creditului)."
+    },
+    "en": {
+      "title": "What interest does a farm loan from Agrinvest Credit IFN carry?",
+      "slug": "farm-loan-interest",
+      "answer": "Agrinvest Credit IFN does not publish a fixed rate: the cost is set after reviewing each farm, its guarantees and the term. A consultant tells you after the first conversation, along with the full schedule.",
+      "factors": [
+        "the term and number of instalments",
+        "the guarantees offered",
+        "the farm’s history and debts",
+        "whether the product has public rules, such as the APIA certificate loan"
+      ],
+      "seo": {
+        "title": "Farm loan interest at an IFN in Romania",
+        "description": "How the interest on a farm loan from Agrinvest Credit IFN is set, and what to compare: the total cost, not just the rate."
+      },
+      "practice": "When you compare offers, ask for the full schedule and add up everything: interest, fees, valuation, insurance and the cost of guarantees. The detail is in [the true cost of a loan](/en/financing/guides/true-cost-of-credit)."
+    }
+  }
+}

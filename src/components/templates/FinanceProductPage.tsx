@@ -3,39 +3,61 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
 
+import { needIcons } from '@ds/icons/finance'
+import { ArrowRightIcon } from '@ds/icons/icons'
+import { GuaranteeTable, RepaymentCalendar, SourceList, WorkedExample } from '@ds/patterns/Finance'
 import {
-  GuaranteeTable,
-  RepaymentCalendar,
-  ReviewNote,
-  SourceList,
-  WorkedExample,
-} from '@ds/patterns/Finance'
-import { CtaBand, SectionHeading, Steps, Toc } from '@ds/patterns/Sections'
-import { Button } from '@ds/primitives/Button'
-import { FactText, resolveFacts, schemaFaq } from '@/components/FactText'
+  ConsultantBand,
+  ConsultantButton,
+  CreditBox,
+  CreditCards,
+  CreditLayout,
+  FitPair,
+  MoreDetails,
+  QuestionLinks,
+} from '@ds/patterns/FinanceGuide'
+import { ProductSection, ProductTabs } from '@ds/patterns/ProductDetail'
+import { Steps } from '@ds/patterns/Sections'
+import { FactText, resolveFacts } from '@/components/FactText'
+import { FinanceConsultant } from '@/components/FinanceConsultant'
 import { FinanceNav } from '@/components/FinanceNav'
 import { JsonLd } from '@/components/JsonLd'
-import { Faq, PageTitle } from '@/components/PageParts'
+import { Crumbs } from '@/components/PageParts'
 import { Prose } from '@/components/RenderBlocks'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { financeUi } from '@/i18n/finance'
-import { financePath, financeProductPath, financeRoutePath, guidePath } from '@/i18n/routes'
-import { fixedUrl, ui } from '@/i18n/ui'
-import { getFigures, getSeoDefaults } from '@/lib/content/globals'
-import { getFinanceProduct, listFinanceProducts, productAlternates } from '@/lib/content/finance'
+import { financeGuideUi } from '@/i18n/finance-guide'
+import {
+  financePath,
+  financeProductPath,
+  financeRoutePath,
+  guidePath,
+  questionPath,
+} from '@/i18n/routes'
+import { ui } from '@/i18n/ui'
+import { getFigures, getSeoDefaults, type Figures } from '@/lib/content/globals'
+import {
+  getFinanceProduct,
+  listFinanceProducts,
+  listQuestions,
+  productAlternates,
+} from '@/lib/content/finance'
 import { calendarRows } from '@/lib/finance/calendar'
 import { byFinanceOrder, groupFor } from '@/lib/finance/groups'
-import { guaranteeLabels } from '@/lib/finance/options'
+import { needOfProduct, needs } from '@/lib/finance/needs'
+import { borrowerLabels, guaranteeLabels, type BorrowerKind } from '@/lib/finance/options'
 import { formatDate } from '@/lib/format'
-import { breadcrumbs, faqPage, loanOrCredit, webPage } from '@/lib/schema'
+import { breadcrumbs, loanOrCredit, webPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
 import type { FinanceProduct } from '@/payload-types'
 
 /**
- * One credit product: `/finantare/{slug}`, `/finantare/credit-investitii/{slug}` and the English
- * twins (route files in `src/app/(frontend)/[locale]/{finantare,financing}`). The sections are
- * fields, so every product answers the same questions.
+ * One credit: `/finantare/{slug}`, `/finantare/credit-investitii/{slug}` and the English twins
+ * (route files in `src/app/(frontend)/[locale]/{finantare,financing}`). Phase 7g: built like a
+ * shop product page. The credit box carries the H1, the key terms and the consultant; on the
+ * left the answer, who it fits and what it finances; then the example, the steps, the
+ * guarantees, the questions that point at it, and the long text closed under "Detalii".
  */
 const parentOf = (p: FinanceProduct) => (typeof p.parent === 'object' ? p.parent : null)
 
@@ -78,13 +100,43 @@ export async function financeProductMetadata(
   })
 }
 
-function Part({ id, title, children }: { id: string; title: string; children: ReactNode }) {
-  return (
-    <section id={id} className="grid scroll-mt-24 gap-4">
-      <SectionHeading title={title} />
-      {children}
-    </section>
-  )
+/** A card's line: the answer's first sentence, unless it holds a register fact (shown marked). */
+const firstSentence = (text?: string | null) => {
+  const first = text?.split(/(?<=\.)\s/)[0]
+  return first && !first.includes('{{') ? first : undefined
+}
+
+/** "PFA, II, IF, SRL, SA, societăți agricole": the abbreviation where a label has one. */
+function borrowersLine(kinds: BorrowerKind[], locale: Locale) {
+  return kinds
+    .map((k) => {
+      const label = borrowerLabels[k][locale]
+      return /\(([A-Z]+)\)/.exec(label)?.[1] ?? label.toLowerCase()
+    })
+    .join(', ')
+}
+
+function specRows(product: FinanceProduct, group: string, figures: Figures, locale: Locale) {
+  const s = financeGuideUi[locale].credit.specs
+  const rows: { label: string; value: ReactNode }[] = []
+  const borrowers = (product.borrowers ?? []) as BorrowerKind[]
+  if (borrowers.length) rows.push({ label: s.borrowers, value: borrowersLine(borrowers, locale) })
+  rows.push({
+    label: s.repayment,
+    value: product.harvestCalendar !== false ? s.repaymentHarvest : s.repaymentIncome,
+  })
+  const years = figures['F5.term']
+  if (group === 'invest' && years?.status === 'confirmed' && typeof years.number === 'number')
+    rows.push({ label: s.term, value: s.termInvest(years.number) })
+  else if (group === 'season') rows.push({ label: s.term, value: s.termSeason })
+  const guarantees = product.guarantees ?? []
+  if (guarantees.length)
+    rows.push({
+      label: s.guarantees,
+      value: guarantees.map((g) => guaranteeLabels[g.kind][locale]).join(', '),
+    })
+  rows.push({ label: s.currency, value: s.lei })
+  return rows
 }
 
 export async function FinanceProductPage({
@@ -100,8 +152,15 @@ export async function FinanceProductPage({
   if (!found) notFound()
   const { product, parent } = found
   const t = financeUi[locale]
-  const figures = await getFigures(locale)
+  const g = financeGuideUi[locale]
+  const c = g.credit
+  const [figures, products, questions] = await Promise.all([
+    getFigures(locale),
+    listFinanceProducts(locale),
+    listQuestions(locale),
+  ])
   const ctx = { figures, locale }
+  const key = product.key
   const url = financeProductPath(product.slug as string, locale, parent?.slug)
   const crumbs = [
     { name: t.section, url: financePath(locale) },
@@ -111,44 +170,66 @@ export async function FinanceProductPage({
     { name: product.title, url },
   ]
   const answer = resolveFacts(product.answer, figures)
-  const faq = schemaFaq(product.faq, figures)
-  const siblings = (await listFinanceProducts(locale)).filter(
-    (p) => p.parentSlug === (product.slug as string),
+  const group = groupFor(product.slug as string, parent?.slug)
+  const need = needOfProduct(key) ?? needOfProduct(parent?.key)
+  const apply = financeRoutePath('apply', locale)
+
+  // Sub-credits of a parent ("Alege ce finanțezi"), with the icon of their need.
+  const children = products
+    .filter((p) => p.parentSlug === (product.slug as string))
+    .map((p) => {
+      const n = needs.find((x) => x.product === p.key)
+      const Icon = n ? needIcons[n.icon] : null
+      return {
+        href: financeProductPath(p.slug, locale, product.slug as string),
+        title: p.title,
+        line: n?.line[locale],
+        icon: Icon ? <Icon /> : undefined,
+      }
+    })
+
+  const own = questions.filter((q) => q.product === product.id)
+  const fromChildren = questions.filter((q) =>
+    products.some((p) => p.id === q.product && p.parentSlug === (product.slug as string)),
   )
+  const asked = [...own, ...fromChildren].slice(0, 8)
+
   const relatedProducts = (product.relatedProducts ?? []).flatMap((r) =>
     typeof r === 'object' ? [r] : [],
   )
-  const relatedGuides = (product.relatedGuides ?? []).flatMap((g) =>
-    typeof g === 'object' ? [g] : [],
-  )
-  const group = groupFor(product.slug as string, parent?.slug)
   const peers = byFinanceOrder(
-    (await listFinanceProducts(locale)).filter(
+    products.filter(
       (p) =>
         !p.parentSlug && p.slug !== (parent?.slug ?? product.slug) && groupFor(p.slug) === group,
     ),
   )
-  const moreProducts = relatedProducts.length
-    ? relatedProducts.map((r) => ({
-        id: r.id,
-        title: r.title,
-        href: financeProductPath(r.slug as string, locale, parentOf(r)?.slug),
-      }))
-    : peers.map((p) => ({ id: p.id, title: p.title, href: financeProductPath(p.slug, locale) }))
+  const more = (
+    relatedProducts.length
+      ? relatedProducts.map((r) => ({
+          href: financeProductPath(r.slug as string, locale, parentOf(r)?.slug),
+          title: r.title,
+          line: firstSentence(r.answer),
+        }))
+      : peers.map((p) => ({
+          href: financeProductPath(p.slug, locale, p.parentSlug),
+          title: p.title,
+          line: firstSentence(p.answer),
+        }))
+  ).slice(0, 4)
+  const relatedGuides = (product.relatedGuides ?? []).flatMap((r) =>
+    typeof r === 'object' ? [r] : [],
+  )
   const sources = product.sources ?? []
   const example = product.example
-  const confirmed = product.review?.status === 'confirmed'
-  const contents = [
-    { id: 'fits', title: t.fits },
-    { id: 'not-for', title: t.notFor },
-    { id: 'finances', title: t.finances },
-    { id: 'repayment', title: t.repayment },
-    ...(example?.title ? [{ id: 'example', title: t.example }] : []),
-    ...((product.guarantees?.length ?? 0) > 0 ? [{ id: 'guarantees', title: t.guarantees }] : []),
-    { id: 'documents', title: t.documents },
-    { id: 'process', title: t.process },
-    { id: 'risks', title: t.risks },
+  const hasGuarantees = (product.guarantees?.length ?? 0) > 0
+  const tabs = [
+    ...(example?.title ? [{ id: 'exemplu', label: c.tabs.example }] : []),
+    { id: 'pasi', label: c.tabs.process },
+    ...(hasGuarantees ? [{ id: 'garantii', label: c.tabs.guarantees }] : []),
+    ...(asked.length ? [{ id: 'intrebari', label: c.tabs.questions }] : []),
+    { id: 'detalii', label: c.tabs.details },
   ]
+  const approved = product.review?.legalStatus === 'legal-approved'
 
   return (
     <SiteShell locale={locale} alternates={await productAlternates(product.id)}>
@@ -167,63 +248,61 @@ export async function FinanceProductPage({
             description: product.seo?.description,
             termMonths: product.limits?.termMonths,
             amountMax: product.limits?.amountMax,
-            confirmed,
+            confirmed: product.review?.status === 'confirmed',
           }),
           breadcrumbs(locale, ui[locale].home, crumbs),
-          ...(faq.length ? [faqPage(faq)] : []),
         ]}
       />
-      <PageTitle
-        locale={locale}
-        title={product.title}
-        summary={<FactText text={product.answer} figures={figures} locale={locale} />}
-        updatedAt={product.updatedAt}
-        crumbs={crumbs}
-        kicker={t.section}
-      />
-      <FinanceNav locale={locale} />
-      <div className="mx-auto mt-12 grid max-w-page gap-12 px-4 md:mt-16 md:px-8 lg:grid-cols-12">
-        <div className="grid min-w-0 gap-12 lg:col-span-8">
-          {product.review?.legalStatus !== 'legal-approved' && (
-            <ReviewNote title={t.reviewNote.title}>{t.reviewNote.body}</ReviewNote>
-          )}
-          <Part id="fits" title={t.fits}>
-            <Prose data={product.fits} ctx={ctx} />
-          </Part>
-          <Part id="not-for" title={t.notFor}>
-            <Prose data={product.notFor} ctx={ctx} />
-          </Part>
-          <Part id="finances" title={t.finances}>
-            <Prose data={product.finances} ctx={ctx} />
-          </Part>
-          {siblings.length > 0 && (
-            <nav aria-label={t.page.byType} className="grid gap-3">
-              <p className="font-semibold text-ink">{t.page.byType}</p>
-              <ul className="grid gap-3 md:grid-cols-2">
-                {siblings.map((c) => (
-                  <li key={c.id} className="rounded-lg bg-raised p-5 ring-1 ring-line">
-                    <Link
-                      href={financeProductPath(c.slug, locale, product.slug as string)}
-                      className="font-semibold text-ink"
-                    >
-                      {c.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
-          <Part id="repayment" title={t.repayment}>
-            <Prose data={product.repayment} ctx={ctx} />
-            {product.harvestCalendar !== false && (
-              <RepaymentCalendar
-                caption={t.calendar.title}
-                heads={[t.calendar.season, t.calendar.crops, t.calendar.when]}
-                rows={calendarRows(locale)}
-              />
+      <FinanceNav locale={locale} current="credits" need={need} />
+      <CreditLayout
+        breadcrumbs={<Crumbs locale={locale} items={crumbs} />}
+        box={
+          <CreditBox
+            kicker={c.kicker}
+            title={product.title}
+            specs={specRows(product, group, figures, locale)}
+            primary={
+              <ConsultantButton href={apply} need={need} icon={<ArrowRightIcon />} fullWidth>
+                {g.consultant}
+              </ConsultantButton>
+            }
+            secondary={{
+              href: `${financeRoutePath('simulator', locale)}${need ? `?nevoie=${need}` : ''}`,
+              label: c.simulate,
+            }}
+            note={approved ? g.terms : t.reviewNote.body}
+          />
+        }
+        lead={
+          <>
+            <p className="text-lead text-ink">
+              <FactText text={product.answer} figures={figures} locale={locale} />
+            </p>
+            <FitPair
+              fits={{ title: c.fits, body: <Prose data={product.fits} ctx={ctx} /> }}
+              notFor={{ title: c.notFor, body: <Prose data={product.notFor} ctx={ctx} /> }}
+            />
+            {children.length > 0 ? (
+              <section className="grid gap-4" aria-labelledby="alege">
+                <h2 id="alege" className="text-h3 font-semibold">
+                  {c.choose}
+                </h2>
+                <CreditCards items={children} />
+              </section>
+            ) : (
+              <section className="grid gap-3" aria-labelledby="finanteaza">
+                <h2 id="finanteaza" className="text-h3 font-semibold">
+                  {c.finances}
+                </h2>
+                <Prose data={product.finances} ctx={ctx} />
+              </section>
             )}
-          </Part>
-          <div id="example" className="scroll-mt-24">
+          </>
+        }
+      >
+        <ProductTabs label={c.tabs.label} items={tabs} />
+        {example?.title && (
+          <div id="exemplu" className="scroll-mt-16">
             <WorkedExample
               kicker={t.example}
               title={example.title}
@@ -236,115 +315,121 @@ export async function FinanceProductPage({
               <Prose data={example.scenario} ctx={ctx} />
             </WorkedExample>
           </div>
-          {(product.guarantees?.length ?? 0) > 0 && (
-            <Part id="guarantees" title={t.guarantees}>
-              <GuaranteeTable
-                caption={t.guarantees}
-                heads={[t.guarantee, t.guaranteeNote]}
-                rows={(product.guarantees ?? []).map((g) => ({
-                  kind: guaranteeLabels[g.kind][locale],
-                  note: g.note,
-                }))}
-              />
-            </Part>
-          )}
-          <Part id="documents" title={t.documents}>
-            <p className="max-w-text text-muted">{t.documentsBody}</p>
-          </Part>
-          <Part id="process" title={t.process}>
-            <Steps
-              items={(product.process ?? []).map((s) => ({
-                title: s.title,
-                body: <FactText text={s.body} figures={figures} locale={locale} />,
-              }))}
-            />
-          </Part>
-          <Part id="risks" title={t.risks}>
-            <Prose data={product.risks} ctx={ctx} />
-          </Part>
-          <SourceList
-            title={t.sources}
-            lead={t.sourcesLead}
-            retrieved={t.retrieved}
-            items={sources.map((s) => ({
+        )}
+        <ProductSection id="pasi" title={t.process}>
+          <Steps
+            items={(product.process ?? []).map((s) => ({
               title: s.title,
-              url: s.url,
-              date: formatDate(new Date(s.retrieved), locale),
+              body: <FactText text={s.body} figures={figures} locale={locale} />,
             }))}
           />
-        </div>
-        <aside className="grid content-start gap-6 lg:sticky lg:top-24 lg:col-span-3 lg:col-start-10 lg:self-start">
-          <div className="grid gap-3 rounded-lg bg-raised p-5 ring-1 ring-line">
-            <p className="font-semibold text-ink">{t.page.actionsTitle}</p>
-            <p className="text-small text-muted">{t.page.actionsBody}</p>
-            <Button href={financeRoutePath('simulator', locale)} variant="secondary" size="sm">
-              {t.tools.simulate}
-            </Button>
-            <Button
-              href={`${financeRoutePath('apply', locale)}?produs=${product.slug as string}`}
-              size="sm"
-            >
-              {t.tools.apply}
-            </Button>
-          </div>
-          <Toc label={t.page.contents} items={contents} />
-          {moreProducts.length > 0 && (
-            <nav
-              aria-label={relatedProducts.length ? t.relatedProducts : t.page.sameGroup}
-              className="grid gap-2 text-small"
-            >
-              <p className="font-semibold text-ink">
-                {relatedProducts.length ? t.relatedProducts : t.page.sameGroup}
-              </p>
-              {moreProducts.map((r) => (
-                <Link key={r.id} href={r.href} className="text-accent underline underline-offset-2">
-                  {r.title}
+        </ProductSection>
+        {hasGuarantees && (
+          <ProductSection id="garantii" title={t.guarantees}>
+            <GuaranteeTable
+              caption={t.guarantees}
+              heads={[t.guarantee, t.guaranteeNote]}
+              rows={(product.guarantees ?? []).map((gr) => ({
+                kind: guaranteeLabels[gr.kind][locale],
+                note: gr.note,
+              }))}
+            />
+          </ProductSection>
+        )}
+        {asked.length > 0 && (
+          <ProductSection id="intrebari" title={c.questionsTitle}>
+            <QuestionLinks
+              items={asked.map((q) => ({ href: questionPath(q.slug, locale), title: q.title }))}
+            />
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-small">
+              <Link
+                href={financeRoutePath('questions', locale)}
+                className="font-semibold text-accent underline-offset-2 hover:underline"
+              >
+                {c.questionsMore}
+              </Link>
+              {relatedGuides.map((rg) => (
+                <Link
+                  key={rg.id}
+                  href={guidePath(rg.slug as string, locale)}
+                  className="text-accent underline underline-offset-2"
+                >
+                  {rg.title}
                 </Link>
               ))}
-            </nav>
-          )}
-          <nav aria-label={t.guides} className="grid gap-2 text-small">
-            <p className="font-semibold text-ink">{t.guides}</p>
-            {relatedGuides.map((g) => (
-              <Link
-                key={g.id}
-                href={guidePath(g.slug as string, locale)}
-                className="text-accent underline underline-offset-2"
-              >
-                {g.title}
-              </Link>
-            ))}
-            <Link
-              href={financeRoutePath('guides', locale)}
-              className="text-accent underline underline-offset-2"
-            >
-              {t.page.allGuides}
-            </Link>
-          </nav>
-        </aside>
-      </div>
-      <Faq locale={locale} items={product.faq} />
-      <div className="mx-auto mt-20 grid max-w-page gap-4 px-4 md:mt-28 md:px-8">
-        <CtaBand
-          kicker={t.tools.kicker}
-          title={t.tools.title}
-          body={t.tools.body}
-          primary={{
-            href: `${financeRoutePath('apply', locale)}?produs=${product.slug as string}`,
-            label: t.tools.apply,
+            </div>
+          </ProductSection>
+        )}
+        <ProductSection id="detalii" title={c.detailsTitle} lead={c.detailsLead}>
+          <MoreDetails summary={c.detailsOpen}>
+            {children.length > 0 && (
+              <section className="grid gap-3">
+                <h3 className="text-h4 font-semibold">{t.finances}</h3>
+                <Prose data={product.finances} ctx={ctx} />
+              </section>
+            )}
+            <section className="grid gap-3">
+              <h3 className="text-h4 font-semibold">{t.repayment}</h3>
+              <Prose data={product.repayment} ctx={ctx} />
+              {product.harvestCalendar !== false && (
+                <RepaymentCalendar
+                  caption={t.calendar.title}
+                  heads={[t.calendar.season, t.calendar.crops, t.calendar.when]}
+                  rows={calendarRows(locale)}
+                />
+              )}
+            </section>
+            <section className="grid gap-3">
+              <h3 className="text-h4 font-semibold">{t.risks}</h3>
+              <Prose data={product.risks} ctx={ctx} />
+            </section>
+            {sources.length > 0 && (
+              <SourceList
+                title={t.sources}
+                lead={t.sourcesLead}
+                retrieved={t.retrieved}
+                items={sources.map((s) => ({
+                  title: s.title,
+                  url: s.url,
+                  date: formatDate(new Date(s.retrieved), locale),
+                }))}
+              />
+            )}
+          </MoreDetails>
+        </ProductSection>
+      </CreditLayout>
+
+      <div className="mx-auto mt-20 grid max-w-page gap-16 px-4 md:mt-28 md:px-8">
+        {more.length > 0 && (
+          <section className="grid gap-5" aria-labelledby="inrudite">
+            <h2 id="inrudite" className="text-h3 font-semibold">
+              {c.related}
+            </h2>
+            <CreditCards items={more} />
+          </section>
+        )}
+        <ConsultantBand
+          kicker={c.kicker}
+          title={c.bandTitle}
+          body={c.bandBody}
+          action={
+            <ConsultantButton href={apply} need={need} variant="lime" icon={<ArrowRightIcon />}>
+              {g.consultant}
+            </ConsultantButton>
+          }
+          secondary={{
+            href: `${financeRoutePath('simulator', locale)}${need ? `?nevoie=${need}` : ''}`,
+            label: g.nav.simulator,
           }}
-          secondary={{ href: financeRoutePath('simulator', locale), label: t.tools.simulate }}
         />
-        <p className="text-small text-muted">
-          {t.tools.talk}{' '}
-          <Link
-            href={fixedUrl('contact', locale)}
-            className="text-accent underline underline-offset-2"
-          >
-            {t.tools.talkLink}
-          </Link>
-        </p>
       </div>
+      <FinanceConsultant
+        locale={locale}
+        sourcePath={url}
+        need={need}
+        credit={key}
+        creditSlug={product.slug as string}
+      />
     </SiteShell>
   )
 }

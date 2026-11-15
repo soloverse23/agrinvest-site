@@ -1,0 +1,49 @@
+{
+  "key": "cand-sa-ceri-credit-campanie",
+  "topic": "process",
+  "order": 60,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "cat-dureaza-raspunsul",
+    "inputuri-plata-dupa-recolta",
+    "o-singura-rata"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Când trebuie să cer creditul pentru campania agricolă?",
+      "slug": "cand-ceri-credit-campanie",
+      "answer": "Înainte de campanie, ca să rămână timp pentru analiză și pentru actele de garanție. Răspunsul vine {{F4.reply}}, dar dosarul complet îți ia și ție câteva zile.",
+      "factors": [
+        "când trebuie să plătești inputurile",
+        "dacă ai deja oferta de la furnizor",
+        "ce garanții trebuie înscrise"
+      ],
+      "seo": {
+        "title": "Când ceri creditul pentru campanie",
+        "description": "Cât de devreme să ceri creditul pentru semințe, îngrășăminte și lucrări, ca banii să ajungă înainte de campanie."
+      }
+    },
+    "en": {
+      "title": "When should I apply for a season loan?",
+      "slug": "when-to-apply-for-a-season-loan",
+      "answer": "Before the season, to leave time for the review and the guarantee papers. You get a reply {{F4.reply}}, but a complete file takes you a few days too.",
+      "factors": [
+        "when the inputs have to be paid",
+        "whether you already have the supplier’s quote",
+        "which guarantees need registering"
+      ],
+      "seo": {
+        "title": "When to apply for a farm season loan",
+        "description": "How early to ask for the loan for seed, fertiliser and field work, so the money arrives before the season."
+      }
+    }
+  }
+}

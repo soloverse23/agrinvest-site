@@ -1,0 +1,56 @@
+{
+  "key": "ce-este-un-ifn",
+  "topic": "ifn",
+  "order": 10,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "ifn-sau-banca",
+  "related": [
+    "ifn-sau-banca-credit",
+    "de-ce-ifn-mai-scump"
+  ],
+  "sources": [
+    {
+      "title": "Legea 93/2009 privind instituțiile financiare nebancare",
+      "url": "https://lawchat.ro/legislatie/text-complet-legea-93-2009-institutiile-financiare-nebancare-158903",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce este un IFN și cum verific dacă e autorizat?",
+      "slug": "ce-este-un-ifn",
+      "answer": "Un IFN este o instituție financiară nebancară: acordă credite, dar nu atrage depozite de la public. IFN-urile sunt înscrise și supravegheate de BNR, iar Agrinvest Credit IFN se poate verifica în registrele BNR după număr și denumire.",
+      "factors": [
+        "numărul din Registrul Special BNR",
+        "denumirea exactă a firmei de pe contract",
+        "toate costurile din oferta scrisă"
+      ],
+      "seo": {
+        "title": "Ce este un IFN și cum îl verifici",
+        "description": "Ce înseamnă instituție financiară nebancară, cine o supraveghează și cum verifici Agrinvest Credit IFN în registrele BNR."
+      },
+      "practice": "Datele de identificare ale Agrinvest Credit IFN sunt pe pagina [Despre Agrinvest Credit IFN](/finantare/despre-ifn)."
+    },
+    "en": {
+      "title": "What is an IFN and how do I check it is authorised?",
+      "slug": "what-is-an-ifn",
+      "answer": "An IFN is a non-bank financial institution: it lends but does not take deposits from the public. IFNs are listed and supervised by BNR, and Agrinvest Credit IFN can be checked in the BNR registers by number and name.",
+      "factors": [
+        "the BNR Special Register number",
+        "the exact company name on the contract",
+        "every cost in the written offer"
+      ],
+      "seo": {
+        "title": "What an IFN is and how to check one",
+        "description": "What a non-bank financial institution is, who supervises it and how to check Agrinvest Credit IFN in the BNR registers."
+      },
+      "practice": "Agrinvest Credit IFN’s identification details are on the [About Agrinvest Credit IFN](/en/financing/about-ifn) page."
+    }
+  }
+}

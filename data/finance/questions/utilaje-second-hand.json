@@ -1,0 +1,54 @@
+{
+  "key": "utilaje-second-hand",
+  "topic": "investment",
+  "order": 30,
+  "popular": false,
+  "product": "utilaje",
+  "guide": "credit-sau-leasing-utilaje",
+  "related": [
+    "credit-sau-leasing",
+    "credit-tractor-rate-dupa-recolta"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "IPC: Making financial decisions, ghid pentru fermieri din România",
+      "url": "https://www.ipcgmbh.com/wp-content/uploads/2017/12/Booklet-on-agricultural-finance-Romania-English.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Finanțați utilaje agricole second-hand?",
+      "slug": "credit-utilaje-second-hand",
+      "answer": "Se poate discuta, pentru utilajul exact. Contează starea, vechimea și prețul lui. La second-hand, creditul este de regulă mai flexibil decât leasingul, unde opțiunile sunt mai puține și avansul mai mare.",
+      "factors": [
+        "vechimea, starea și prețul utilajului",
+        "de la cine cumperi: dealer, firmă sau persoană, din țară sau din străinătate",
+        "dacă utilajul devine garanție"
+      ],
+      "seo": {
+        "title": "Credit pentru utilaje agricole second-hand",
+        "description": "Finanțare pentru tractoare și combine second-hand: ce contează și de ce creditul e adesea mai flexibil decât leasingul."
+      }
+    },
+    "en": {
+      "title": "Do you finance second-hand farm machinery?",
+      "slug": "second-hand-machinery-loan",
+      "answer": "It can be discussed for the exact machine. Its condition, age and price matter. For second-hand, a loan is usually more flexible than a lease, where there are fewer options and a bigger deposit.",
+      "factors": [
+        "the machine’s age, condition and price",
+        "who you buy from: dealer, company or private seller, at home or abroad",
+        "whether the machine becomes the guarantee"
+      ],
+      "seo": {
+        "title": "Loan for second-hand farm machinery",
+        "description": "Financing for second-hand tractors and combines: what matters and why a loan is often more flexible than a lease."
+      }
+    }
+  }
+}

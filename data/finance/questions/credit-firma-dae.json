@@ -1,0 +1,47 @@
+{
+  "key": "credit-firma-dae",
+  "topic": "cost",
+  "order": 50,
+  "popular": false,
+  "product": "credit-investitii",
+  "guide": "costul-real-al-creditului",
+  "related": [
+    "cost-total-credit",
+    "dobanda-credit-agricol"
+  ],
+  "sources": [
+    {
+      "title": "IPC: Making financial decisions, ghid pentru fermieri din România",
+      "url": "https://www.ipcgmbh.com/wp-content/uploads/2017/12/Booklet-on-agricultural-finance-Romania-English.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Un credit agricol pentru firmă are DAE?",
+      "slug": "credit-firma-dae",
+      "answer": "Obligația de a afișa DAE vine din regulile pentru creditele de consum. La creditele pentru afaceri, inclusiv ferme, poți primi oferte fără DAE, așa că cere graficul complet și adună singur toate costurile.",
+      "factors": [
+        "dacă împrumuți ca persoană fizică sau ca fermă înregistrată",
+        "ce costuri sunt în grafic și ce sunt în afara lui"
+      ],
+      "seo": {
+        "title": "DAE la creditul agricol pentru firmă",
+        "description": "De ce un credit pentru fermă poate veni fără DAE și cum compari totuși costul a două oferte."
+      }
+    },
+    "en": {
+      "title": "Does a business farm loan show an APR (DAE)?",
+      "slug": "business-farm-loan-apr",
+      "answer": "The duty to show the APR (DAE) comes from consumer credit rules. With business loans, farms included, you may get offers without one, so ask for the full schedule and add up all the costs yourself.",
+      "factors": [
+        "whether you borrow as a private person or as a registered farm",
+        "which costs are in the schedule and which are outside it"
+      ],
+      "seo": {
+        "title": "APR (DAE) on a business farm loan",
+        "description": "Why a farm loan may come without an APR and how to compare the cost of two offers anyway."
+      }
+    }
+  }
+}

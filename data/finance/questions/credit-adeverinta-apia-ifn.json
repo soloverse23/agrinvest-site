@@ -1,0 +1,62 @@
+{
+  "key": "credit-adeverinta-apia-ifn",
+  "topic": "apia",
+  "order": 20,
+  "popular": false,
+  "product": "subventii-apia",
+  "guide": "credit-adeverinta-apia",
+  "related": [
+    "bani-pe-subventia-apia",
+    "cat-din-subventie",
+    "fgcr-garantie-cost"
+  ],
+  "sources": [
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: băncile cu convenții pentru adeverința APIA",
+      "url": "https://revista-ferma.ro/subventii-apia-2026-cum-luati-bani-mai-repede/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "FGCR: De cinci ori subvenția",
+      "url": "https://fgcr.ro/produse/de-cinci-ori-subventia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua credit pe adeverința APIA de la un IFN?",
+      "slug": "credit-adeverinta-apia-ifn",
+      "answer": "Da, dacă instituția are convenție cu APIA pentru anul respectiv. Regula APIA permite instituțiilor financiare nebancare o dobândă de cel mult ROBOR 6 luni + 8%, iar băncilor de cel mult ROBOR 6 luni + 2%.",
+      "factors": [
+        "dacă finanțatorul are convenție cu APIA în anul tău",
+        "suma calculată pe adeverință",
+        "dacă produsul are garanție FGCR"
+      ],
+      "seo": {
+        "title": "Credit pe adeverința APIA la un IFN",
+        "description": "Un IFN cu convenție APIA poate da credit pe adeverință. Ce plafon de dobândă are și cum îl compari cu banca."
+      },
+      "practice": "Lista instituțiilor cu convenție se publică pe site-ul APIA. Diferența dintre creditul pe adeverință și finanțarea Agrinvest pe subvenții e explicată în [ghidul despre adeverința APIA](/finantare/ghiduri/credit-adeverinta-apia)."
+    },
+    "en": {
+      "title": "Can I get an APIA certificate loan from an IFN?",
+      "slug": "apia-certificate-loan-from-an-ifn",
+      "answer": "Yes, if the institution has an agreement with APIA for that year. The APIA rule allows non-bank financial institutions an interest rate of at most 6-month ROBOR + 8%, and banks at most 6-month ROBOR + 2%.",
+      "factors": [
+        "whether the lender has an APIA agreement in your year",
+        "the amount calculated on the certificate",
+        "whether the product carries an FGCR guarantee"
+      ],
+      "seo": {
+        "title": "APIA certificate loan from an IFN",
+        "description": "An IFN with an APIA agreement can lend on the certificate. The interest cap it has and how to compare it with a bank."
+      },
+      "practice": "The list of institutions with an agreement is published on the APIA website. How the certificate loan differs from Agrinvest’s subsidy financing is explained in [the APIA certificate guide](/en/financing/guides/apia-certificate-credit)."
+    }
+  }
+}

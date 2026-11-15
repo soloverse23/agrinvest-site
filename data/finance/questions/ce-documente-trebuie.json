@@ -1,0 +1,49 @@
+{
+  "key": "ce-documente-trebuie",
+  "topic": "process",
+  "order": 30,
+  "popular": false,
+  "product": "credit-productie",
+  "related": [
+    "cat-dureaza-raspunsul",
+    "cererea-ma-obliga",
+    "credit-agricol-pfa"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce documente trebuie pentru un credit agricol?",
+      "slug": "documente-credit-agricol",
+      "answer": "Depinde de forma de organizare a fermei și de produs. Nu trebuie să le aduni de la început: după prima discuție, consultantul îți spune exact ce trebuie pentru cazul tău.",
+      "factors": [
+        "forma de organizare: PFA, II, IF sau societate",
+        "tipul de credit și suma",
+        "garanțiile alese"
+      ],
+      "seo": {
+        "title": "Documente pentru credit agricol",
+        "description": "Ce acte îți trebuie pentru un credit agricol depinde de fermă și de produs. Cum afli lista exactă pentru cazul tău."
+      }
+    },
+    "en": {
+      "title": "Which documents do I need for a farm loan?",
+      "slug": "farm-loan-documents",
+      "answer": "It depends on the farm’s legal form and the product. You do not need to gather them up front: after the first conversation, the consultant tells you exactly what your case needs.",
+      "factors": [
+        "the legal form: PFA, sole or family enterprise, or company",
+        "the kind of loan and the amount",
+        "the guarantees chosen"
+      ],
+      "seo": {
+        "title": "Documents for a farm loan in Romania",
+        "description": "Which papers a farm loan needs depends on the farm and the product. How to get the exact list for your case."
+      }
+    }
+  }
+}

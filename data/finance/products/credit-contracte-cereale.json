@@ -91,24 +91,6 @@
           "body": "Banii ajung {{F4.money}}."
         }
       ],
-      "faq": [
-        {
-          "question": "Cât pot primi pe un contract?",
-          "answer": "Limita anunțată: {{F10}}. Suma exactă depinde de analiză."
-        },
-        {
-          "question": "Contractul trebuie să fie cu Agrinvest?",
-          "answer": "Întreabă echipa. Contează cine este cumpărătorul și ce prevede contractul."
-        },
-        {
-          "question": "Ce se întâmplă dacă nu pot livra?",
-          "answer": "Vorbește cu noi și cu cumpărătorul din timp. Creditul rămâne de plătit, iar contractul poate avea penalități."
-        },
-        {
-          "question": "Pot folosi mai multe contracte?",
-          "answer": "Spune-ne ce contracte ai și vedem împreună."
-        }
-      ],
       "seo": {
         "title": "Credit pe contract de vânzare cereale",
         "description": "Credit garantat cu un contract de vânzare a cerealelor, plătit din banii încasați la livrare. Când se potrivește și ce riscuri are pentru fermieri."
@@ -172,24 +154,6 @@
         {
           "title": "You receive the money",
           "body": "The money arrives {{F4.money}}."
-        }
-      ],
-      "faq": [
-        {
-          "question": "How much can I get on a contract?",
-          "answer": "The announced limit: {{F10}}. The exact amount depends on the analysis."
-        },
-        {
-          "question": "Must the contract be with Agrinvest?",
-          "answer": "Ask the team. Who the buyer is and what the contract says both matter."
-        },
-        {
-          "question": "What happens if I cannot deliver?",
-          "answer": "Talk to us and the buyer early. The loan still has to be paid, and the contract may carry penalties."
-        },
-        {
-          "question": "Can I use several contracts?",
-          "answer": "Tell us which contracts you hold and we will look at them together."
         }
       ],
       "seo": {

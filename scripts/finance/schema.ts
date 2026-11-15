@@ -1,6 +1,7 @@
 /**
  * Shape of the reviewed finance files: `data/finance/products/{key}.json`,
- * `data/finance/guides/{key}.json` and `data/finance/hub.json`.
+ * `data/finance/guides/{key}.json`, `data/finance/questions/{key}.json` and
+ * `data/finance/hub.json`.
  *
  * What the shape enforces: every section exists in both languages, and a file can never say a
  * page is reviewed or approved. Only the IFN and its lawyer do that, in the admin. Text is
@@ -9,6 +10,7 @@
 import { z } from 'zod'
 
 import { borrowerKinds, documentAudiences, guaranteeKinds } from '../../src/lib/finance/options'
+import { questionTopics } from '../../src/lib/finance/topics'
 
 const text = z.string().trim().min(1)
 const key = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
@@ -42,7 +44,6 @@ const productText = z.strictObject({
   guarantees: z.array(z.strictObject({ kind: z.enum(guaranteeKinds), note: text })),
   documents: z.array(z.strictObject({ audience: z.enum(documentAudiences), label: text })),
   process: z.array(z.strictObject({ title: text, body: text })),
-  faq: z.array(faqRow),
   seo: seoText,
 })
 
@@ -79,12 +80,13 @@ export const guideFile = z.strictObject({
 })
 export type GuideFile = z.infer<typeof guideFile>
 
+/**
+ * The hub's title band and SEO. Its sections (need tiles, finder, steps, popular questions)
+ * are code since Phase 7g (`FinanceHubPage`), so the CMS page keeps no blocks or FAQ.
+ */
 const hubText = z.strictObject({
   title: text,
   summary: text,
-  /** Page blocks. `content` of a `richText` block is Markdown. */
-  layout: z.array(z.looseObject({ blockType: text })).min(1),
-  faq: z.array(faqRow).default([]),
   seo: seoText,
 })
 
@@ -92,3 +94,31 @@ export const hubFile = z.strictObject({
   text: z.strictObject({ ro: hubText, en: hubText }),
 })
 export type HubFile = z.infer<typeof hubFile>
+
+const questionText = z.strictObject({
+  /** The question as a farmer types it. */
+  title: text,
+  slug: key,
+  /** Two or three sentences that answer on their own. Plain text with `{{KEY}}` facts. */
+  answer: text,
+  /** What changes the answer from one farm to another. */
+  factors: z.array(text).min(2).max(6),
+  /** Optional Markdown: an example or a short table. */
+  practice: text.optional(),
+  seo: seoText,
+})
+
+export const questionFile = z.strictObject({
+  key,
+  topic: z.enum(questionTopics),
+  order: z.number().int().default(100),
+  popular: z.boolean().default(false),
+  /** The matching credit's key. */
+  product: key,
+  /** The library guide that explains the topic at length, by key. */
+  guide: key.optional(),
+  related: z.array(key).max(6).default([]),
+  sources: z.array(sourceRow).min(1),
+  text: z.strictObject({ ro: questionText, en: questionText }),
+})
+export type QuestionFile = z.infer<typeof questionFile>

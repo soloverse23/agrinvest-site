@@ -9,7 +9,12 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { applyFinance, richView } from '../../scripts/finance/apply'
 import { correct, keepUrl } from '../../scripts/finance/corrections'
 import { applyFigures } from '../../scripts/finance/figures'
-import { productFile, type ProductFile } from '../../scripts/finance/schema'
+import {
+  productFile,
+  questionFile,
+  type ProductFile,
+  type QuestionFile,
+} from '../../scripts/finance/schema'
 import { contentFor } from '../../scripts/seed/content'
 import { contentEn } from '../../scripts/seed/content-en'
 import { pages as seededPages } from '../../scripts/seed/pages'
@@ -37,7 +42,6 @@ const side = (l: string) => ({
   guarantees: [{ kind: 'machinery' as const, note: 'Utilajul.' }],
   documents: [{ audience: 'all' as const, label: 'Act de identitate' }],
   process: [{ title: 'Cerere', body: 'Trimiți cererea.' }],
-  faq: [{ question: 'Întrebare?', answer: 'Răspuns.' }],
   seo: { title: 'Titlu de test pentru pagină', description: 'Descriere de test.' },
 })
 
@@ -71,6 +75,7 @@ describe('finance', () => {
     ).docs[0] as unknown as Record<string, Record<string, unknown>> & { id: number }
 
   const cleanup = async () => {
+    await payload.delete({ collection: 'finance-questions', where: { key: { like: 'zz-fin' } } })
     await payload.delete({ collection: 'finance-products', where: { key: { like: 'zz-fin' } } })
     await payload.delete({ collection: 'finance-applications', where: { name: { equals: 'ZZ' } } })
     await payload.delete({ collection: 'users', where: { email: { like: 'zz-fin' } } })
@@ -258,13 +263,68 @@ describe('finance', () => {
     })
   })
 
+  describe('questions (Phase 7g)', () => {
+    const qside = (l: string, n: number) => ({
+      title: `Întrebare de test ${n} ${l}?`,
+      slug: `zz-fin-q${n}-${l}`,
+      answer: `Răspuns scurt ${l}.`,
+      factors: ['primul lucru', 'al doilea lucru'],
+      seo: { title: 'Titlu de test pentru întrebare', description: 'Descriere de test.' },
+    })
+    const question = (n: number, related: string[] = []): QuestionFile =>
+      questionFile.parse({
+        key: `zz-fin-q${n}`,
+        topic: 'cost',
+        product: key,
+        related,
+        sources: [{ title: 'Sursă', url: 'https://example.com/q', retrieved: '2026-11-05' }],
+        text: { ro: qside('ro', n), en: qside('en', n) },
+      })
+    const writeQ = (q: QuestionFile) => {
+      mkdirSync(join(dir, 'questions'), { recursive: true })
+      writeFileSync(join(dir, 'questions', `${q.key}.json`), JSON.stringify(q))
+    }
+    afterAll(() => rmSync(join(dir, 'questions'), { recursive: true, force: true }))
+
+    it('creates questions with their credit, then their links to each other', async () => {
+      writeQ(question(1, ['zz-fin-q2']))
+      writeQ(question(2, ['zz-fin-q1']))
+      const { questions } = await run()
+      expect(questions.map((q) => q.created)).toEqual([true, true])
+      expect(questions.flatMap((q) => q.conflicts)).toEqual([])
+      const { docs } = await payload.find({
+        collection: 'finance-questions',
+        where: { key: { equals: 'zz-fin-q1' } },
+        depth: 1,
+        draft: true,
+      })
+      const q = docs[0]
+      expect(typeof q.product === 'object' && q.product?.key).toBe(key)
+      expect((q.related ?? []).map((r) => (typeof r === 'object' ? r.key : r))).toEqual([
+        'zz-fin-q2',
+      ])
+      expect(q.review?.legalStatus).toBe('draft')
+    })
+
+    it('is stable on a second run', async () => {
+      const { questions } = await run()
+      for (const q of questions) expect(q).toMatchObject({ written: [], conflicts: [] })
+    })
+
+    it('rejects a question without a known credit', async () => {
+      const bad = question(3)
+      bad.product = 'zz-fin-missing'
+      writeQ(bad)
+      await expect(run()).rejects.toThrow(/Unknown product/)
+      rmSync(join(dir, 'questions', 'zz-fin-q3.json'))
+    })
+  })
+
   describe('the hub page', () => {
-    const blocks = (t: string) => [{ blockType: 'richText', content: `## ${t}\n\nText.` }]
+    // Since Phase 7g the hub page keeps only its title band and SEO; its sections are code.
     const hub = (t: string) => ({
       title: t,
       summary: 'Rezumat.',
-      layout: blocks(t),
-      faq: [],
       seo: { title: 'Titlu de test pentru hub', description: 'Descriere.' },
     })
     const page = async () =>

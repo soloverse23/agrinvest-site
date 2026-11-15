@@ -1,0 +1,53 @@
+{
+  "key": "plata-cu-cereale",
+  "topic": "grain",
+  "order": 20,
+  "popular": false,
+  "product": "inputuri-plata-la-recolta",
+  "related": [
+    "inputuri-plata-dupa-recolta",
+    "credit-pe-contract-cereale"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Flota proprie (site-ul vechi)",
+      "url": "https://agrinvest.ro/flota-proprie/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot plăti inputurile cu cereale la recoltă?",
+      "slug": "plata-inputuri-cu-cereale",
+      "answer": "În grupul Agrinvest există fermieri care își achită datoria cu produse agricole, la recoltare. Prețul cerealelor se stabilește în contract, iar condițiile le afli de la echipă.",
+      "factors": [
+        "prețul cerealelor din contract față de piață",
+        "cu cine semnezi: Agrinvest SRL sau Agrinvest Credit IFN",
+        "calitatea și cantitatea pe care o poți livra"
+      ],
+      "seo": {
+        "title": "Plata inputurilor cu cereale la recoltă",
+        "description": "Cum funcționează plata inputurilor cu cereale la recoltă și ce verifici în contract înainte de semnare."
+      }
+    },
+    "en": {
+      "title": "Can I pay for inputs in grain at harvest?",
+      "slug": "pay-for-inputs-in-grain",
+      "answer": "In the Agrinvest group there are farmers who settle their debt in farm produce at harvest. The grain price is set in the contract, and the team tells you the terms.",
+      "factors": [
+        "the contract grain price against the market",
+        "who you sign with: Agrinvest SRL or Agrinvest Credit IFN",
+        "the quality and quantity you can deliver"
+      ],
+      "seo": {
+        "title": "Paying for farm inputs in grain",
+        "description": "How paying for inputs in grain at harvest works, and what to check in the contract before you sign."
+      }
+    }
+  }
+}

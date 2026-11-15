@@ -1,0 +1,60 @@
+{
+  "key": "bani-pe-subventia-apia",
+  "topic": "apia",
+  "order": 10,
+  "popular": true,
+  "product": "subventii-apia",
+  "guide": "plata-subventii-apia",
+  "related": [
+    "credit-adeverinta-apia-ifn",
+    "subventie-garantie-alta-banca",
+    "cand-plateste-apia-avansul"
+  ],
+  "sources": [
+    {
+      "title": "Banking News: Agrinvest Credit IFN și BRD, 30.05.2022",
+      "url": "https://bankingnews.ro/agrinvest-credit-ifn-credit-brd-lei.html",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Revista Ferma: plăți APIA 2026 cu adeverință",
+      "url": "https://revista-ferma.ro/plati-apia-2026-pentru-care-puteti-lua-bani-in-avans-cu-adeverinta-apia/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua bani în avans pe subvenția APIA?",
+      "slug": "bani-avans-subventia-apia",
+      "answer": "Da, prin finanțarea pe subvenții APIA: subvenția de încasat susține creditul, iar banii vin înainte ca APIA să plătească. Limita anunțată este {{F11}}; suma exactă depinde de analiză.",
+      "factors": [
+        "suma calculată pe adeverința APIA",
+        "dacă subvenția e deja garanție la o bancă",
+        "pentru ce folosești banii"
+      ],
+      "seo": {
+        "title": "Bani în avans pe subvenția APIA",
+        "description": "Cum iei bani înainte de plata APIA, pe baza subvenției de încasat, și ce diferă față de creditul pe adeverință."
+      }
+    },
+    "en": {
+      "title": "Can I get money early on my APIA subsidy?",
+      "slug": "money-early-on-the-apia-subsidy",
+      "answer": "Yes, through financing on APIA subsidies: the subsidy you are due backs the loan, and the money comes before APIA pays. The announced limit is {{F11}}; the exact amount depends on the review.",
+      "factors": [
+        "the amount calculated on the APIA certificate",
+        "whether the subsidy is already pledged to a bank",
+        "what you use the money for"
+      ],
+      "seo": {
+        "title": "Money early on the APIA subsidy",
+        "description": "How to get money before APIA pays, backed by the subsidy you are due, and how it differs from the certificate loan."
+      }
+    }
+  }
+}

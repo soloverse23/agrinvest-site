@@ -30,7 +30,7 @@ describe('finance entry points', () => {
     expect(once[0].links?.map((l) => l.link?.href)).toEqual([
       '/finantare',
       '/finantare/simulator',
-      '/finantare/aplica',
+      '/finantare#consultant',
       '/x',
     ])
     expect(withFinanceFooter(once, 'ro')).toEqual(once)

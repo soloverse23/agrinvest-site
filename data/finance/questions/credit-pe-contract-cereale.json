@@ -1,0 +1,54 @@
+{
+  "key": "credit-pe-contract-cereale",
+  "topic": "grain",
+  "order": 30,
+  "popular": false,
+  "product": "credit-contracte-cereale",
+  "guide": "cand-vinzi-recolta",
+  "related": [
+    "stoc-amana-vanzarea",
+    "plata-cu-cereale"
+  ],
+  "sources": [
+    {
+      "title": "Financial Intelligence: ING și Agrinvest Credit IFN, 27.01.2022",
+      "url": "https://financialintelligence.ro/ing-bank-romania-a-acordat-o-noua-finantare-de-10-milioane-lei-pentru-agrinvest-credit-ifn-pentru-a-sustine-fermierii-romani/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Cât pot primi pe un contract de vânzare a cerealelor?",
+      "slug": "credit-pe-contract-cereale",
+      "answer": "Un contract de vânzare pentru recolta viitoare poate garanta un credit, iar limita anunțată este {{F10}}. Suma exactă depinde de analiză, iar creditul se plătește din banii încasați la livrare.",
+      "factors": [
+        "valoarea și cumpărătorul din contract",
+        "cât din producția estimată e deja vândut",
+        "ce penalități are contractul dacă nu livrezi"
+      ],
+      "seo": {
+        "title": "Cât primești pe un contract de vânzare cereale",
+        "description": "Cum iei bani înainte de livrare pe baza unui contract de vânzare a cerealelor și cât poți primi."
+      }
+    },
+    "en": {
+      "title": "How much can I get on a grain sale contract?",
+      "slug": "loan-on-a-grain-contract",
+      "answer": "A sale contract for the coming harvest can back a loan, with an announced limit of {{F10}}. The exact amount depends on the review, and the loan is repaid from the money you receive on delivery.",
+      "factors": [
+        "the contract’s value and buyer",
+        "how much of the expected crop is already sold",
+        "the contract’s penalties if you do not deliver"
+      ],
+      "seo": {
+        "title": "How much a grain sale contract can raise",
+        "description": "How to get money before delivery on a grain sale contract, and how much you can receive."
+      }
+    }
+  }
+}

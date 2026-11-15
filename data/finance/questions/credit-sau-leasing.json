@@ -1,0 +1,56 @@
+{
+  "key": "credit-sau-leasing",
+  "topic": "investment",
+  "order": 20,
+  "popular": false,
+  "product": "utilaje",
+  "guide": "credit-sau-leasing-utilaje",
+  "related": [
+    "credit-tractor-rate-dupa-recolta",
+    "utilaje-second-hand"
+  ],
+  "sources": [
+    {
+      "title": "OG 51/1997 privind operațiunile de leasing",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocumentAfis/20556",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "IPC: Making financial decisions, ghid pentru fermieri din România",
+      "url": "https://www.ipcgmbh.com/wp-content/uploads/2017/12/Booklet-on-agricultural-finance-Romania-English.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Credit sau leasing pentru utilaje agricole: ce e mai bine?",
+      "slug": "credit-sau-leasing-utilaje-agricole",
+      "answer": "Depinde de fermă. La credit ești proprietar de la început și ratele se pot lega de recoltă; la leasing bunul rămâne al finanțatorului până la final, cu rate de obicei lunare. Compară costul total, nu rata.",
+      "factors": [
+        "cât de regulate sunt încasările fermei",
+        "avansul cerut și valoarea reziduală",
+        "comisioanele și asigurările",
+        "dacă utilajul e nou sau second-hand"
+      ],
+      "seo": {
+        "title": "Credit sau leasing pentru utilaje agricole",
+        "description": "Diferențele dintre credit și leasing la utilaje agricole: proprietate, rate, avans și cum compari costul total."
+      }
+    },
+    "en": {
+      "title": "Loan or lease for farm machinery: which is better?",
+      "slug": "loan-or-lease-for-machinery",
+      "answer": "It depends on the farm. With a loan you own the machine from the start and instalments can follow the harvest; with a lease it stays the lender’s until the end, with usually monthly instalments. Compare the total cost, not the instalment.",
+      "factors": [
+        "how regular the farm’s income is",
+        "the deposit and the residual value",
+        "fees and insurance",
+        "whether the machine is new or second-hand"
+      ],
+      "seo": {
+        "title": "Loan or lease for farm machinery",
+        "description": "The differences between a loan and a lease for farm machinery: ownership, instalments, deposit and total cost."
+      }
+    }
+  }
+}

@@ -26,9 +26,11 @@ import {
   guideFile,
   hubFile,
   productFile,
+  questionFile,
   type GuideFile,
   type HubFile,
   type ProductFile,
+  type QuestionFile,
 } from './schema'
 
 const context = { skipChildren: true }
@@ -36,10 +38,15 @@ const locales = ['ro', 'en'] as const
 type Loc = (typeof locales)[number]
 type Obj = Record<string, unknown>
 type Ledger = { groups?: Record<string, string> }
-type Collection = 'finance-products' | 'guides'
+type Collection = 'finance-products' | 'guides' | 'finance-questions'
 
 export type DocReport = { key: string; created: boolean; written: string[]; conflicts: string[] }
-export type FinanceReport = { products: DocReport[]; guides: DocReport[]; hub: DocReport | null }
+export type FinanceReport = {
+  products: DocReport[]
+  guides: DocReport[]
+  questions: DocReport[]
+  hub: DocReport | null
+}
 
 // ───────────────────────── comparing rich text ─────────────────────────
 
@@ -109,6 +116,7 @@ type Names = {
   person: (id: unknown) => string | undefined
   product: (id: unknown) => string | undefined
   guide: (id: unknown) => string | undefined
+  question: (id: unknown) => string | undefined
 }
 const keysOf = (ids: unknown, to: (id: unknown) => string | undefined) =>
   ((ids ?? []) as unknown[])
@@ -136,7 +144,6 @@ function productDocView(doc: Obj, names: Names): Views {
     guarantees: pick(rowsAt(doc.guarantees, l), 'kind', 'note'),
     documents: pick(rowsAt(doc.documents, l), 'audience', 'label'),
     process: pick(rowsAt(doc.process, l), 'title', 'body'),
-    faq: pick(rowsAt(doc.faq, l), 'question', 'answer'),
     seo: { title: at(seo.title, l), description: at(seo.description, l) },
   })
   return {
@@ -229,6 +236,51 @@ function guideFileView(file: GuideFile): Views {
   }
 }
 
+function questionDocView(doc: Obj, names: Names): Views {
+  const seo = (doc.seo ?? {}) as Obj
+  const text = (l: Loc) => ({
+    title: at(doc.title, l),
+    slug: at(doc.slug, l),
+    answer: at(doc.answer, l),
+    factors: rowsAt(doc.factors, l).map((r) => r.text),
+    practice: rich(doc.practice, l) || undefined,
+    seo: { title: at(seo.title, l), description: at(seo.description, l) },
+  })
+  return {
+    'text.ro': text('ro'),
+    'text.en': text('en'),
+    // The credit is data, not a link: a question is created with it (it is required).
+    data: {
+      topic: doc.topic,
+      order: doc.order,
+      popular: Boolean(doc.popular),
+      product: names.product(doc.product),
+    },
+    links: {
+      guide: names.guide(doc.guide),
+      related: keysOf(doc.related, names.question),
+      sources: sourceRows(doc.sources),
+    },
+  }
+}
+
+function questionFileView(file: QuestionFile): Views {
+  const text = (l: Loc) => {
+    const t = file.text[l]
+    return { ...t, practice: t.practice ? md(t.practice) : undefined }
+  }
+  return {
+    'text.ro': text('ro'),
+    'text.en': text('en'),
+    data: { topic: file.topic, order: file.order, popular: file.popular, product: file.product },
+    links: {
+      guide: file.guide,
+      related: [...file.related].sort(),
+      sources: file.sources,
+    },
+  }
+}
+
 // ───────────────────────── what a group writes ─────────────────────────
 
 const productTextData = (file: ProductFile, l: Loc) => {
@@ -248,7 +300,6 @@ const productTextData = (file: ProductFile, l: Loc) => {
     guarantees: t.guarantees,
     documents: t.documents,
     process: t.process,
-    faq: t.faq,
     seo: t.seo,
   }
 }
@@ -263,6 +314,19 @@ const guideTextData = (file: GuideFile, l: Loc) => {
     body: rt(t.body),
     terms: t.terms,
     faq: t.faq,
+    seo: t.seo,
+  }
+}
+
+const questionTextData = (file: QuestionFile, l: Loc) => {
+  const t = file.text[l]
+  return {
+    title: t.title,
+    slug: t.slug,
+    generateSlug: false,
+    answer: t.answer,
+    factors: t.factors.map((text) => ({ text })),
+    practice: t.practice ? rt(t.practice) : null,
     seo: t.seo,
   }
 }
@@ -359,6 +423,10 @@ const blockView = (block: Obj) => {
   return block.blockType === 'richText' ? { ...rest, content: richView(block.content) } : rest
 }
 
+/**
+ * The hub page keeps only its title band and SEO: its sections are code (`FinanceHubPage`,
+ * Phase 7g), so the file wants no blocks and no FAQ, and a write empties both.
+ */
 const hubDocView = (doc: Obj): Views => {
   const seo = (doc.seo ?? {}) as Obj
   const text = (l: Loc) => ({
@@ -371,17 +439,8 @@ const hubDocView = (doc: Obj): Views => {
   return { 'text.ro': text('ro'), 'text.en': text('en') }
 }
 
-/** Markdown in `richText` blocks becomes rich text. */
-const hubBlocks = (layout: HubFile['text']['ro']['layout']) =>
-  layout.map((b) =>
-    b.blockType === 'richText' ? { ...b, content: rt(b.content as string) } : b,
-  ) as Obj[]
-
 const hubFileView = (file: HubFile): Views => {
-  const text = (l: Loc) => ({
-    ...file.text[l],
-    layout: hubBlocks(file.text[l].layout).map(blockView),
-  })
+  const text = (l: Loc) => ({ ...file.text[l], layout: [], faq: [] })
   return { 'text.ro': text('ro'), 'text.en': text('en') }
 }
 
@@ -447,8 +506,8 @@ async function applyHub(
         title: t.title,
         ...keepUrl(at(doc.path, l), at(doc.slug, l)),
         summary: t.summary,
-        layout: hubBlocks(t.layout),
-        faq: t.faq,
+        layout: [],
+        faq: [],
         seo: t.seo,
       } as never,
       context,
@@ -468,12 +527,39 @@ async function applyHub(
   return report
 }
 
+// ───────────────────────── retired pages ─────────────────────────
+
+/**
+ * Fixed finance pages that Phase 7g replaced: the FAQ page became the questions section
+ * (`/finantare/intrebari`, its old URL redirects there). Unpublished, not deleted.
+ */
+export const retiredGuides = ['intrebari-frecvente']
+
+async function retireGuides(payload: Payload, log: (s: string) => void) {
+  const { docs } = await payload.find({
+    collection: 'guides',
+    where: { key: { in: retiredGuides }, _status: { equals: 'published' } },
+    depth: 0,
+    pagination: false,
+  })
+  for (const doc of docs) {
+    await payload.update({
+      collection: 'guides',
+      id: doc.id,
+      data: { _status: 'draft' } as never,
+      context,
+    })
+    log(`finance: "${doc.key}" unpublished (replaced by the questions)`)
+  }
+}
+
 // ───────────────────────── everything ─────────────────────────
 
 type IdMaps = {
   people: Map<string, number>
   products: Map<string, number>
   guides: Map<string, number>
+  questions: Map<string, number>
 }
 
 async function idMaps(payload: Payload): Promise<{ ids: IdMaps; names: Names }> {
@@ -491,6 +577,7 @@ async function idMaps(payload: Payload): Promise<{ ids: IdMaps; names: Names }> 
     people: await read('people', 'name'),
     products: await read('finance-products', 'key'),
     guides: await read('guides', 'key'),
+    questions: await read('finance-questions', 'key'),
   }
   const reverse = (map: Map<string, number>) => {
     const byId = new Map([...map].map(([k, v]) => [v, k]))
@@ -502,6 +589,7 @@ async function idMaps(payload: Payload): Promise<{ ids: IdMaps; names: Names }> 
       person: reverse(ids.people),
       product: reverse(ids.products),
       guide: reverse(ids.guides),
+      question: reverse(ids.questions),
     },
   }
 }
@@ -522,11 +610,16 @@ export async function applyFinance(
 
   const products = readDir(resolve(dir, 'products'), productFile)
   const guides = readDir(resolve(dir, 'guides'), guideFile)
+  const questions = readDir(resolve(dir, 'questions'), questionFile)
 
   // Two passes: documents first, because relations may point at any of them.
   const place = async (withLinks: boolean) => {
     const { ids, names } = await idMaps(payload)
-    const out = { products: [] as DocReport[], guides: [] as DocReport[] }
+    const out = {
+      products: [] as DocReport[],
+      guides: [] as DocReport[],
+      questions: [] as DocReport[],
+    }
     for (const file of products) {
       const wanted = productFileView(file)
       out.products.push(
@@ -573,10 +666,34 @@ export async function applyFinance(
         }),
       )
     }
+    // A question needs its credit on create; products made above are in this fresh map.
+    const known = (await idMaps(payload)).ids
+    for (const file of questions) {
+      const wanted = questionFileView(file)
+      const product = idsOf([file.product], known.products, 'product')[0]
+      out.questions.push(
+        await applyDoc(payload, {
+          collection: 'finance-questions',
+          file,
+          wanted: withLinks ? wanted : withoutLinks(wanted),
+          textData: (l) => questionTextData(file, l),
+          data: { topic: file.topic, order: file.order, popular: file.popular, product },
+          links: () => ({
+            guide: file.guide ? idsOf([file.guide], known.guides, 'guide')[0] : null,
+            related: idsOf(file.related, known.questions, 'question'),
+            sources: file.sources,
+          }),
+          view: (doc) => questionDocView(doc, names),
+          log,
+        }),
+      )
+    }
     return out
   }
   const first = await place(false)
   const second = await place(true)
+
+  await retireGuides(payload, log)
 
   const hubPath = resolve(dir, 'hub.json')
   const hub = existsSync(hubPath)
@@ -592,12 +709,14 @@ export async function applyFinance(
   const report = {
     products: merge(first.products, second.products),
     guides: merge(first.guides, second.guides),
+    questions: merge(first.questions, second.questions),
     hub,
   }
   const count = (list: DocReport[]) => list.filter((r) => r.written.length).length
   log(
     `finance: ${products.length} products (${count(report.products)} written), ` +
       `${guides.length} guides (${count(report.guides)} written), ` +
+      `${questions.length} questions (${count(report.questions)} written), ` +
       `hub ${hub ? (hub.written.length ? 'written' : 'current') : 'none'}`,
   )
   return report

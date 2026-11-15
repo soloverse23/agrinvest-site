@@ -1,0 +1,57 @@
+{
+  "key": "credit-fara-istoric",
+  "topic": "eligibility",
+  "order": 30,
+  "popular": false,
+  "product": "credit-productie",
+  "guide": "cum-analizeaza-finantatorul-ferma",
+  "related": [
+    "credit-dupa-refuz-banca",
+    "credit-agricol-pfa",
+    "garantii-acceptate"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua credit dacă ferma e nouă sau nu are istoric de credit?",
+      "slug": "credit-ferma-noua-fara-istoric",
+      "answer": "Se poate discuta. Analiza pornește de la fermă, nu doar de la bilanț: ce lucrezi, cât produci și din ce bani plătești. Un istoric scurt înseamnă de regulă o sumă mai prudentă sau garanții în plus.",
+      "factors": [
+        "de câți ani lucrezi pământul, chiar dacă firma e nouă",
+        "suprafața în proprietate sau în arendă",
+        "contractele de vânzare sau subvenția pe care te poți baza",
+        "garanțiile disponibile"
+      ],
+      "seo": {
+        "title": "Credit agricol pentru fermă nouă",
+        "description": "O fermă nouă sau fără istoric de credit poate cere finanțare. Ce se uită finanțatorul și cum îți crești șansele."
+      }
+    },
+    "en": {
+      "title": "Can I get a loan if my farm is new or has no credit history?",
+      "slug": "loan-for-a-new-farm",
+      "answer": "It can be discussed. The review starts from the farm, not just the balance sheet: what you farm, what you produce and what money you repay from. A short history usually means a more cautious amount or extra guarantees.",
+      "factors": [
+        "how many years you have farmed the land, even if the company is new",
+        "land owned or rented",
+        "sale contracts or a subsidy you can rely on",
+        "the guarantees available"
+      ],
+      "seo": {
+        "title": "Farm loan for a new farm with no credit history",
+        "description": "A new farm, or one with no credit history, can still ask for financing. What lenders look at and how to improve your chances."
+      }
+    }
+  }
+}

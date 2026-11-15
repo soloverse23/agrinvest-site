@@ -1,7 +1,7 @@
 import { ValidationError, type CollectionConfig, type Field } from 'payload'
 
 import { isStaff, publishedOrStaff } from '@/access'
-import { faq, seo, slug } from '@/fields'
+import { seo, slug } from '@/fields'
 import { fileKey, financeGroup, review, sources } from '@/fields/finance'
 import { enrichmentLedger } from '@/fields/shop'
 import { reservedFinanceSlugs } from '@/i18n/routes'
@@ -221,9 +221,9 @@ export const FinanceProducts: CollectionConfig = {
           ],
         },
         {
-          label: label('Întrebări și legături', 'FAQ and links'),
+          // Questions about a credit are their own pages (`finance-questions`, Phase 7g).
+          label: label('Legături', 'Links'),
           fields: [
-            faq,
             {
               name: 'advisor',
               type: 'relationship',

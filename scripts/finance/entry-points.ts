@@ -45,24 +45,24 @@ export const financeMenu: Record<
         description: 'Până vinzi recolta',
       },
       {
+        label: 'Întrebări despre credit',
+        href: '/finantare/intrebari',
+        description: 'Răspunsuri scurte, pe teme',
+      },
+      {
         label: 'Simulator de rate',
         href: '/finantare/simulator',
         description: 'Ratele pe recoltele tale',
       },
       {
-        label: 'Cerere de credit',
-        href: '/finantare/aplica',
-        description: 'Trimite cererea online',
-      },
-      {
-        label: 'Ghiduri de finanțare',
+        label: 'Bibliotecă de finanțare',
         href: '/finantare/ghiduri',
-        description: 'Credit, subvenții, garanții',
+        description: 'Ghiduri pe larg, glosar, despre IFN',
       },
       {
-        label: 'Despre Agrinvest Credit IFN',
-        href: '/finantare/despre-ifn',
-        description: 'Cine suntem și cum lucrăm',
+        label: 'Vorbește cu un consultant',
+        href: '/finantare#consultant',
+        description: 'Te sunăm noi',
       },
     ],
   },
@@ -91,24 +91,24 @@ export const financeMenu: Record<
         description: 'Until you sell the harvest',
       },
       {
+        label: 'Loan questions',
+        href: '/en/financing/questions',
+        description: 'Short answers, by topic',
+      },
+      {
         label: 'Repayment simulator',
         href: '/en/financing/simulator',
         description: 'Instalments on your harvests',
       },
       {
-        label: 'Loan application',
-        href: '/en/financing/apply',
-        description: 'Apply online',
-      },
-      {
-        label: 'Financing guides',
+        label: 'Financing library',
         href: '/en/financing/guides',
-        description: 'Credit, subsidies, guarantees',
+        description: 'In-depth guides, glossary, about the IFN',
       },
       {
-        label: 'About Agrinvest Credit IFN',
-        href: '/en/financing/about-ifn',
-        description: 'Who we are and how we work',
+        label: 'Talk to a consultant',
+        href: '/en/financing#consultant',
+        description: 'We call you',
       },
     ],
   },
@@ -121,27 +121,73 @@ export const financeGroups: Record<Locale, [string, string]> = {
   en: ['Loans', 'Tools and information'],
 }
 
-/** The finance column of the footer (Phase 7d, finance tidy). */
+/** The finance column of the footer (Phase 7g: credits, questions, simulator, library, consultant). */
 export const financeFooterColumn: Record<Locale, Link[]> = {
   ro: [
     { label: 'Finanțare', href: '/finantare' },
     { label: 'Credit de producție', href: '/finantare/credit-productie' },
     { label: 'Credit de investiții', href: '/finantare/credit-investitii' },
+    { label: 'Întrebări despre credit', href: '/finantare/intrebari' },
     { label: 'Simulator de rate', href: '/finantare/simulator' },
-    { label: 'Cerere de credit', href: '/finantare/aplica' },
-    { label: 'Ghiduri de finanțare', href: '/finantare/ghiduri' },
+    { label: 'Bibliotecă de finanțare', href: '/finantare/ghiduri' },
     { label: 'Despre IFN', href: '/finantare/despre-ifn' },
-    { label: 'Întrebări frecvente', href: '/finantare/intrebari-frecvente' },
+    { label: 'Vorbește cu un consultant', href: '/finantare#consultant' },
   ],
   en: [
     { label: 'Financing', href: '/en/financing' },
     { label: 'Production credit', href: '/en/financing/production-credit' },
     { label: 'Investment credit', href: '/en/financing/investment-credit' },
+    { label: 'Loan questions', href: '/en/financing/questions' },
     { label: 'Repayment simulator', href: '/en/financing/simulator' },
-    { label: 'Loan application', href: '/en/financing/apply' },
-    { label: 'Financing guides', href: '/en/financing/guides' },
+    { label: 'Financing library', href: '/en/financing/guides' },
     { label: 'About the IFN', href: '/en/financing/about-ifn' },
-    { label: 'FAQ', href: '/en/financing/faq' },
+    { label: 'Talk to a consultant', href: '/en/financing#consultant' },
+  ],
+}
+
+/** The menu panel and footer column of the finance tidy (7d), which 7g replaces where untouched. */
+const tidyMenuHrefs: Record<Locale, string[]> = {
+  ro: [
+    '/finantare/credit-productie',
+    '/finantare/credit-investitii',
+    '/finantare/credit-contracte-cereale',
+    '/finantare/finantare-stocuri',
+    '/finantare/simulator',
+    '/finantare/aplica',
+    '/finantare/ghiduri',
+    '/finantare/despre-ifn',
+  ],
+  en: [
+    '/en/financing/production-credit',
+    '/en/financing/investment-credit',
+    '/en/financing/grain-contract-credit',
+    '/en/financing/stock-financing',
+    '/en/financing/simulator',
+    '/en/financing/apply',
+    '/en/financing/guides',
+    '/en/financing/about-ifn',
+  ],
+}
+const tidyFooterHrefs: Record<Locale, string[]> = {
+  ro: [
+    '/finantare',
+    '/finantare/credit-productie',
+    '/finantare/credit-investitii',
+    '/finantare/simulator',
+    '/finantare/aplica',
+    '/finantare/ghiduri',
+    '/finantare/despre-ifn',
+    '/finantare/intrebari-frecvente',
+  ],
+  en: [
+    '/en/financing',
+    '/en/financing/production-credit',
+    '/en/financing/investment-credit',
+    '/en/financing/simulator',
+    '/en/financing/apply',
+    '/en/financing/guides',
+    '/en/financing/about-ifn',
+    '/en/financing/faq',
   ],
 }
 
@@ -183,14 +229,14 @@ export const financeFooter: Record<Locale, { after: string; links: Link[] }> = {
     after: '/finantare',
     links: [
       { label: 'Simulator de rate', href: '/finantare/simulator' },
-      { label: 'Cerere de credit', href: '/finantare/aplica' },
+      { label: 'Vorbește cu un consultant', href: '/finantare#consultant' },
     ],
   },
   en: {
     after: '/en/financing',
     links: [
       { label: 'Repayment simulator', href: '/en/financing/simulator' },
-      { label: 'Loan application', href: '/en/financing/apply' },
+      { label: 'Talk to a consultant', href: '/en/financing#consultant' },
     ],
   },
 }
@@ -331,8 +377,9 @@ const sameHrefs = (have: (string | null | undefined)[], want: string[]) =>
   have.length === want.length && have.every((h, i) => h === want[i])
 
 /**
- * Brings the finance panel of the menu and the finance footer column to the tidied version,
- * only where they still have the 7b links exactly (so a panel staff edited is left alone).
+ * Brings the finance panel of the menu and the finance footer column to the 7g version, only
+ * where they still have the 7b or the 7d-tidy links exactly (so a panel staff edited is left
+ * alone).
  * Safe to repeat: once the new links are there, nothing matches the old set.
  */
 export async function refreshFinanceNav(payload: Payload, log: (s: string) => void = console.log) {
@@ -348,7 +395,8 @@ export async function refreshFinanceNav(payload: Payload, log: (s: string) => vo
     const nextItems = items.map((item) => {
       if (item.link?.href !== menu.href) return item
       const hrefs = (item.children ?? []).map((c) => c.link?.href)
-      if (!sameHrefs(hrefs, oldMenuHrefs[locale])) return item
+      if (!sameHrefs(hrefs, oldMenuHrefs[locale]) && !sameHrefs(hrefs, tidyMenuHrefs[locale]))
+        return item
       navChanged = true
       return {
         ...item,
@@ -373,7 +421,8 @@ export async function refreshFinanceNav(payload: Payload, log: (s: string) => vo
     let footerChanged = false
     const nextColumns = columns.map((col) => {
       const hrefs = (col.links ?? []).map((l) => l.link?.href)
-      if (!sameHrefs(hrefs, oldFooterHrefs[locale])) return col
+      if (!sameHrefs(hrefs, oldFooterHrefs[locale]) && !sameHrefs(hrefs, tidyFooterHrefs[locale]))
+        return col
       footerChanged = true
       return { ...col, links: financeFooterColumn[locale].map((link) => ({ link })) }
     })

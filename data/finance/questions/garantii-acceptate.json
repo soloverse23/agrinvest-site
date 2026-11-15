@@ -1,0 +1,49 @@
+{
+  "key": "garantii-acceptate",
+  "topic": "guarantees",
+  "order": 10,
+  "popular": true,
+  "product": "credit-productie",
+  "related": [
+    "credit-fara-ipoteca",
+    "cultura-ca-garantie",
+    "fgcr-garantie-cost"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Ce garanții acceptă Agrinvest Credit IFN?",
+      "slug": "garantii-acceptate",
+      "answer": "Bilete la ordin, culturi, utilaje agricole, subvenții APIA, contracte de vânzare a cerealelor și ipoteci imobiliare. Ce combinație se cere depinde de produs, de sumă și de analiza fermei.",
+      "factors": [
+        "suma și durata creditului",
+        "tipul de credit: producție sau investiții",
+        "ce bunuri sunt deja garanție la alt finanțator"
+      ],
+      "seo": {
+        "title": "Garanții acceptate pentru credit agricol",
+        "description": "Culturi, subvenții APIA, contracte de cereale, utilaje, ipoteci și bilete la ordin: ce garanții acceptă Agrinvest Credit IFN."
+      }
+    },
+    "en": {
+      "title": "Which guarantees does Agrinvest Credit IFN accept?",
+      "slug": "accepted-guarantees",
+      "answer": "Promissory notes, crops, farm machinery, APIA subsidies, grain sale contracts and real-estate mortgages. Which mix is needed depends on the product, the amount and the farm review.",
+      "factors": [
+        "the amount and term",
+        "the kind of loan: production or investment",
+        "which assets are already pledged to another lender"
+      ],
+      "seo": {
+        "title": "Guarantees accepted for a farm loan",
+        "description": "Crops, APIA subsidies, grain contracts, machinery, mortgages and promissory notes: the guarantees Agrinvest Credit IFN accepts."
+      }
+    }
+  }
+}

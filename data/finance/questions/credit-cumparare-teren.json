@@ -1,0 +1,53 @@
+{
+  "key": "credit-cumparare-teren",
+  "topic": "investment",
+  "order": 70,
+  "popular": false,
+  "product": "teren-agricol",
+  "related": [
+    "avans-credit-investitii",
+    "durata-maxima-credit"
+  ],
+  "sources": [
+    {
+      "title": "Juridice.ro: vânzarea terenurilor agricole și dreptul de preempțiune",
+      "url": "https://www.juridice.ro/783146/darea-in-plata-a-terenurilor-agricole.html",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot lua credit ca să cumpăr teren agricol?",
+      "slug": "credit-cumparare-teren-agricol",
+      "answer": "Da, prin creditul pentru teren agricol, pe termen lung. La terenul extravilan, Legea 17/2014 stabilește o ordine a preemptorilor, iar arendașii au drept de preempțiune, așa că verifică la notar înainte de semnare.",
+      "factors": [
+        "dacă ești arendaș sau vecin pe acel teren",
+        "prețul față de veniturile fermei",
+        "dacă terenul devine garanție"
+      ],
+      "seo": {
+        "title": "Credit pentru cumpărare teren agricol",
+        "description": "Cum finanțezi cumpărarea de teren agricol și ce trebuie să știi despre dreptul de preempțiune din Legea 17/2014."
+      }
+    },
+    "en": {
+      "title": "Can I get a loan to buy farmland?",
+      "slug": "loan-to-buy-farmland",
+      "answer": "Yes, through the farmland loan, over a long term. For land outside built-up areas, Law 17/2014 sets an order of pre-emption, and tenants have a pre-emption right, so check with a notary before you sign.",
+      "factors": [
+        "whether you rent or border that land",
+        "the price against the farm’s income",
+        "whether the land becomes the guarantee"
+      ],
+      "seo": {
+        "title": "Loan to buy farmland in Romania",
+        "description": "How to finance a farmland purchase and what to know about the pre-emption right under Law 17/2014."
+      }
+    }
+  }
+}

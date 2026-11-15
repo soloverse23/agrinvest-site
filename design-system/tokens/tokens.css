@@ -153,6 +153,22 @@
     }
   }
 
+  /* The consultant drawer (finance): a bottom sheet on phones, a side panel on wide screens. */
+  --animate-sheet-in: sheet-in 240ms var(--ease-enter) both;
+  --animate-panel-in: panel-in 240ms var(--ease-enter) both;
+  @keyframes sheet-in {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+    }
+  }
+  @keyframes panel-in {
+    from {
+      transform: translateX(32px);
+      opacity: 0;
+    }
+  }
+
   /* Cinematic only (home, brand and story heroes): a slow settle of the photo. */
   --animate-hero-settle: hero-settle 30s var(--ease-move) both;
   @keyframes hero-settle {

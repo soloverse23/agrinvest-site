@@ -1,0 +1,57 @@
+{
+  "key": "reducere-dobanda-plata-la-timp",
+  "topic": "cost",
+  "order": 30,
+  "popular": false,
+  "product": "credit-investitii",
+  "guide": "costul-real-al-creditului",
+  "related": [
+    "dobanda-credit-agricol",
+    "durata-maxima-credit",
+    "avans-credit-investitii"
+  ],
+  "sources": [
+    {
+      "title": "Agrointel: credit de investiții Agrinvest Credit IFN, 03.06.2026",
+      "url": "https://agrointel.ro/351887/agrinvest-credit-ifn-sa-schimba-regulile-in-agricultura-credite-pana-la-10-ani-si-reducere-a-dobanzii-de-pana-la-10-an-pentru-cei-disciplinati",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "title": "Agro TV: Agricultura la Raport, 16.06.2026",
+      "url": "https://www.youtube.com/watch?v=fQKJGx5ZAbU",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot plăti mai puțină dobândă dacă plătesc la timp?",
+      "slug": "reducere-dobanda-plata-la-timp",
+      "answer": "La creditul de investiții există o reducere: {{F9}}. Se aplică marjei, nu dobânzii totale, în condițiile din contract.",
+      "factors": [
+        "dacă ai creditul de investiții sau alt produs",
+        "dacă plătești fiecare rată la scadență",
+        "condițiile scrise în contract"
+      ],
+      "seo": {
+        "title": "Reducere de dobândă pentru plata la timp",
+        "description": "Cum funcționează reducerea din marja de dobândă la creditul de investiții Agrinvest Credit IFN, pentru plata la timp."
+      },
+      "practice": "O reducere din marjă este proporțională: scade marja, nu întreaga dobândă, și nu cu puncte procentuale întregi. Calculul pas cu pas este în [costul real al unui credit](/finantare/ghiduri/costul-real-al-creditului)."
+    },
+    "en": {
+      "title": "Can I pay less interest if I pay on time?",
+      "slug": "lower-interest-for-paying-on-time",
+      "answer": "The investment loan has a reduction: {{F9}}. It applies to the margin, not the total interest, under the terms of the contract.",
+      "factors": [
+        "whether you have the investment loan or another product",
+        "whether you pay every instalment on its due date",
+        "the terms written in the contract"
+      ],
+      "seo": {
+        "title": "Interest reduction for paying on time",
+        "description": "How the margin reduction on the Agrinvest Credit IFN investment loan works when you pay on time."
+      },
+      "practice": "A reduction of the margin is proportional: it lowers the margin, not the whole interest, and not by whole percentage points. The step-by-step sum is in [the true cost of a loan](/en/financing/guides/true-cost-of-credit)."
+    }
+  }
+}

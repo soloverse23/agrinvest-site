@@ -1,0 +1,49 @@
+{
+  "key": "rate-lunare-credit-agricol",
+  "topic": "repayment",
+  "order": 20,
+  "popular": false,
+  "product": "ferme",
+  "related": [
+    "rate-dupa-recolta",
+    "credit-ferma-zootehnica",
+    "credit-industrie-alimentara"
+  ],
+  "sources": [
+    {
+      "title": "Agrinvest: Servicii IFN (site-ul vechi)",
+      "url": "https://agrinvest.ro/servicii-ifn/",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "text": {
+    "ro": {
+      "title": "Pot avea rate lunare la un credit agricol?",
+      "slug": "rate-lunare-credit-agricol",
+      "answer": "De regulă ratele sunt legate de recolte, ca să plătești după ce încasezi. Unde ferma încasează altfel, de exemplu la zootehnie sau în industria alimentară, graficul urmează încasările ei și poate fi lunar.",
+      "factors": [
+        "din ce încasează ferma și cât de des",
+        "tipul de credit",
+        "ce îți convine în anii slabi"
+      ],
+      "seo": {
+        "title": "Credit agricol: rate lunare sau după recoltă",
+        "description": "Creditul agricol are de regulă rate după recoltă. Când se poate stabili un grafic lunar și ce alegi."
+      }
+    },
+    "en": {
+      "title": "Can a farm loan have monthly instalments?",
+      "slug": "monthly-instalments-farm-loan",
+      "answer": "Instalments are usually tied to harvests, so you pay after you are paid. Where the farm earns differently, for example livestock or food processing, the schedule follows its income and can be monthly.",
+      "factors": [
+        "what the farm earns from and how often",
+        "the kind of loan",
+        "what suits you in a weak year"
+      ],
+      "seo": {
+        "title": "Monthly or after-harvest instalments",
+        "description": "Farm loans are usually repaid after harvest. When a monthly schedule is possible and how to choose."
+      }
+    }
+  }
+}

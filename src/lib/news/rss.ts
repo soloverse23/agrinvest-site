@@ -17,9 +17,13 @@ const tag = (xml: string, name: string) => {
   return cdata ? cdata[1] : decodeXml(m[1])
 }
 
-/** Tags out, entities decoded, whitespace collapsed. */
+/** Zero-width characters some feeds (MADR) put in front of titles and paragraphs. */
+const INVISIBLE = /[​-‍⁠﻿]/g
+
+/** Tags out, entities decoded, invisible characters dropped, whitespace collapsed. */
 export const plainText = (html: string) =>
   decodeXml(html.replace(/<[^>]+>/g, ' '))
+    .replace(INVISIBLE, '')
     .replace(/\s*\[(?:…|&#8230;|\.\.\.)\]\s*$/, '')
     .replace(/\s+/g, ' ')
     .trim()
@@ -33,29 +37,63 @@ export function clip(text: string, max: number): string {
   return `${(space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,.;:–-]+$/, '')}…`
 }
 
+/** True when `host` is one of `allowed` or a subdomain of one. */
+export const hostAllowed = (host: string, allowed: string[]) => {
+  const h = host.replace(/^www\./, '')
+  return allowed.some((a) => h === a || h.endsWith(`.${a}`))
+}
+
 /**
  * Items of an RSS 2.0 feed: headline, link, date and, where the source allows it, a short
  * plain-text excerpt (`newsSources[source].excerptMax`). Items without a link or a valid date
- * are skipped. Full article text (`content:encoded`) is never read.
+ * are skipped, and so are links outside the source's hosts. Full article text
+ * (`content:encoded`) is never read.
+ *
+ * Google News items (Reuters) end their title with " - Reuters" and name the real publisher
+ * in `<source url>`; items from any other publisher are skipped.
  */
 export function parseRss(xml: string, source: NewsSource): FeedItem[] {
-  const max = newsSources[source].excerptMax
-  const host = new URL(newsSources[source].site).hostname.replace(/^www\./, '')
+  const info = newsSources[source]
+  const max = info.excerptMax
+  const publisherHost = new URL(info.site).hostname.replace(/^www\./, '')
+  const viaGoogle = info.linkHosts.includes('news.google.com')
   const items: FeedItem[] = []
   for (const [, item] of xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/g)) {
-    const title = plainText(tag(item, 'title'))
+    let title = plainText(tag(item, 'title'))
     const url = tag(item, 'link').trim()
     const publishedAt = new Date(tag(item, 'pubDate').trim())
     if (!title || !/^https:\/\//.test(url) || Number.isNaN(publishedAt.getTime())) continue
-    // Only links back to the publisher's own site.
-    if (new URL(url).hostname.replace(/^www\./, '') !== host) continue
+    if (!hostAllowed(new URL(url).hostname, info.linkHosts)) continue
+    if (viaGoogle) {
+      const publisher = /<source\s+url="([^"]+)"/.exec(item)?.[1]
+      if (!publisher || !hostAllowed(new URL(publisher).hostname, [publisherHost])) continue
+      title = title.replace(new RegExp(`\\s+-\\s+${info.name}$`), '')
+    }
     items.push({
       source,
       title: title.slice(0, 300),
       url,
       publishedAt,
-      excerpt: clip(plainText(tag(item, 'description')), max),
+      excerpt: viaGoogle ? '' : clip(plainText(tag(item, 'description')), max),
     })
   }
   return items
+}
+
+/** Why an item was refused before it was stored; `null` when it is fine. */
+export type Rejection = 'title' | 'future' | 'old' | null
+
+/** Items newer than this are kept; older ones are history the site never needs. */
+export const MAX_AGE_DAYS = 7
+
+/**
+ * Checks an item before it is stored: a headline of 10–300 characters, a date not in the
+ * future (a few minutes of clock skew allowed) and not older than `MAX_AGE_DAYS`.
+ */
+export function validate(item: FeedItem, now: Date): Rejection {
+  if (item.title.length < 10 || item.title.length > 300) return 'title'
+  const t = item.publishedAt.getTime()
+  if (t > now.getTime() + 10 * 60_000) return 'future'
+  if (t < now.getTime() - MAX_AGE_DAYS * 86_400_000) return 'old'
+  return null
 }

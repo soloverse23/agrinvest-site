@@ -2,6 +2,9 @@ import type { Access, CollectionConfig } from 'payload'
 
 import { isStaff, staffRequest } from '@/access'
 import { toolsGroup } from '@/fields/tools'
+import { topicLabels } from '@/i18n/news'
+import { topicKeys } from '@/lib/news/lexicon'
+import { REMOVING_STORY, removeItem } from '@/lib/news/remove'
 import { revalidate, tags } from '@/lib/revalidate'
 import { newsSourceKeys, newsSources } from '@/lib/sources'
 
@@ -10,9 +13,11 @@ const visibleOrStaff: Access = ({ req }) =>
   staffRequest(req) ? true : { status: { not_equals: 'ascuns' } }
 
 /**
- * Headlines from the partner feeds (`src/lib/sources.ts`). The `ingestNews` job adds them
- * as `nou` and they show at once; staff hide (`ascuns`) what does not belong on the site. We keep the
- * headline, date, link and, where the publisher allows it, a short excerpt from the feed.
+ * Headlines from the licence-checked feeds (`src/lib/sources.ts`, decision 0011). The hourly
+ * `ingestNews` job adds them as `nou`, groups them into `news-stories` and they show at once;
+ * staff hide (`ascuns`) what does not belong on the site, or delete it: a deleted headline's
+ * link is blocked so the next run does not bring it back. We keep the headline, date, link
+ * and, where the publisher allows it, a short excerpt from the feed.
  */
 export const NewsItems: CollectionConfig = {
   slug: 'news-items',
@@ -29,6 +34,19 @@ export const NewsItems: CollectionConfig = {
   access: { read: visibleOrStaff, create: () => false, update: isStaff, delete: isStaff },
   hooks: {
     afterChange: [() => revalidate(tags.news)],
+    beforeDelete: [
+      async ({ req, id, context }) => {
+        if (context?.[REMOVING_STORY]) return
+        const doc = await req.payload.findByID({
+          req,
+          collection: 'news-items',
+          id,
+          depth: 0,
+          disableErrors: true,
+        })
+        if (doc) await removeItem(req.payload, Number(id), doc.url, req)
+      },
+    ],
     afterDelete: [() => revalidate(tags.news)],
   },
   fields: [
@@ -59,6 +77,19 @@ export const NewsItems: CollectionConfig = {
       type: 'textarea',
       maxLength: 500,
       admin: { readOnly: true, description: 'From the feed, within the publisher’s limit.' },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'topics',
+          type: 'select',
+          hasMany: true,
+          options: topicKeys.map((value) => ({ value, label: topicLabels[value] })),
+          admin: { readOnly: true, description: 'From the agriculture lexicon.' },
+        },
+        { name: 'lang', type: 'select', options: ['ro', 'en'], admin: { readOnly: true } },
+      ],
     },
     {
       name: 'crops',

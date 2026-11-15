@@ -143,6 +143,9 @@ export const toolsHubPath = (locale: Locale) => localePath(sections.tools[locale
 
 /** News: `/stiri`, `/en/news`. */
 export const newsPath = (locale: Locale) => localePath(sections.news[locale], locale)
+/** A daily news edition (Phase 7e): `/stiri/zi/2026-11-15`, `/en/news/day/2026-11-15`. */
+export const newsDayPath = (date: string, locale: Locale) =>
+  localePath(`${sections.news[locale]}/${locale === 'ro' ? 'zi' : 'day'}/${date}`, locale)
 
 /** Farmer guides (Phase 6): `/ghiduri`, `/ghiduri/{pilon}`, `/ghiduri/{pilon}/{slug}`. */
 export const guidesHubPath = (locale: Locale) => localePath(sections.guides[locale], locale)

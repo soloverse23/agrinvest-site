@@ -1,6 +1,6 @@
 # Phase 7e: hourly news, ranked and published automatically
 
-Status (2026-11-15): planned. Not started. Branch `phase-7e/news`, cut from `main`. Decision record: `docs/decisions/0011-news-automation.md` (written in 7e.1).
+Status (2026-11-15): **7e.1–7e.5 built** on `final-edits` (all work now happens on that one branch). Decision record: `docs/decisions/0011-news-automation.md`. Waiting for the owner's review and two GitHub secrets (below).
 
 **Goal:** every hour, without anyone touching the admin, the site fetches the latest news that matters to Romanian farmers, groups stories about the same event, ranks them by importance, and publishes the news pages with a reference to every source. Staff can delete or hide anything in one click.
 
@@ -142,3 +142,29 @@ Run `generate:types`, `generate:importmap` and `migrate:create` after the change
 - `CRON_SECRET` and the site URL as GitHub Actions secrets (`CRON_SECRET`, `SITE_URL`).
 - Optional: written permission from Agrimedia, Agro TV or BRM; a Reuters or Agerpres licence later.
 - Optional: the topic weights, if the default order is wrong for Agrinvest.
+
+## Progress (2026-11-15)
+
+**Built:**
+
+- **7e.1 Sources.** Decision 0011 with the full source check. Kept: Agrointel, Revista Ferma, Reuters (Google News, owner exception), Ziarul Financiar, Mediafax, G4Media, Profit.ro, MADR, the Commission's DG AGRI newsroom. Dropped on their terms: HotNews, Digi24, Economica.net, FAO; USDA answers 403; APIA and AFIR have no feed. Fixtures: `tests/fixtures/feeds/news-*.xml`. Registry: `src/lib/sources.ts` (kind, filter, link hosts, language, excerpt limit).
+- **7e.2 Parse, group, rank.** `src/lib/news/rss.ts` (Google News items, zero-width characters, subdomain hosts, `validate`), `lexicon.ts` (8 topics, whole-word stems such as `afir$`, Romania and region relevance, an exclusion list for quote pages), `group.ts`, `score.ts`. Generic farming weighs 0.5 and the freshness half-life is 24 hours, so a real topic (prices, subsidies, weather…) leads.
+- **7e.3 Model and job.** Collections `news-stories`, `news-editions`, `news-runs`, `news-blocked`; global `news-settings`; `news-items` gains `topics` and `lang`. Migration `20261115_113857_news_automation` (additive). `ingestNews` is now `src/lib/news/pipeline.ts`: lock, conditional GET, 10 s timeout, breaker, validation, 50 per source, regroup of the last 7 days, today's edition, yesterday frozen, 03:00 clean-up, Outbox alert (`news-health`). `.github/workflows/news-hourly.yml` calls the cron route at minute 7.
+- **7e.4 Pages.** `src/components/templates/NewsPages.tsx`: `/stiri` and `/en/news` ("Important acum", Agrinvest's own news, the last 48 hours by topic, archive by day, market notes, newsletter), `/stiri/zi/{date}` and `/en/news/day/{date}`. Design-system pattern `NewsStories.tsx` (`TopicChip`, `StoryLead`, `StoryRow`, `ImportantNow`) with stories. **Home "În direct din câmp":** the right column is now the ranked "Important acum" list (the lead with its excerpt, every story with numbered sources), then "De la Agrinvest" for the site's own updates.
+- **Deleting:** deleting a story (one or many, from the admin list) deletes its headlines, blocks their links and drops it from the editions; deleting one headline blocks it and leaves its story; hiding a story drops it from the editions at once.
+- **7e.5 Gate.** `npm run check:news` (in CI): registered sources and hosts, excerpts within each publisher's limit, every visible story cites a headline, the last run under 2 hours old (an error once the site is indexable).
+
+**Verified:** typecheck, lint (0 errors), format, build, `test:int` 298/298 (20 new in `tests/int/news.int.spec.ts`), `check:news` 0 errors. Live runs on the local database: 9 sources, about 2–4 s a run; a quiet hour answers 304 from most feeds and writes nothing. The cron route answers 401 without the secret.
+
+**Changed from the plan:**
+
+- Deleted edition days answer 404 (the day is `removed` and never rebuilt), not 410.
+- `/stiri/subiect/{topic}` was not built (thin pages), as planned.
+- MADR sends an incomplete certificate chain. Its public intermediate is pinned in `src/lib/news/certs.ts` for that source only (expires 2035); TLS checks stay on.
+
+**Known limits:** grouping uses the headlines' words, so two outlets that word the same event very differently ("Peste 53.900 de fermieri…" and "Aproape 54.000 de fermieri…") stay two stories. English and Romanian headlines are never grouped. The general outlets usually contribute little: most of their items are not about farming and are refused.
+
+**Owner inputs:**
+
+- GitHub repository secrets `NEWS_SITE_URL` (the production URL) and `CRON_SECRET` (the same value as in Vercel). Until both exist the hourly workflow skips with a notice; the daily Vercel cron still runs.
+- Optional: `EDITORIAL_EMAIL` for the `news-health` alert; topic weights in `News settings`.

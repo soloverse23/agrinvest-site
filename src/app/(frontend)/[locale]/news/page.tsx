@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { NewsPage, newsMetadata } from '@/components/templates/ToolPages'
+import { NewsPage, newsMetadata } from '@/components/templates/NewsPages'
 
 /** `/en/news`. The other language has its own route folder. */
 type Props = { params: Promise<{ locale: string }> }

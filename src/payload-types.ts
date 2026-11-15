@@ -87,6 +87,10 @@ export interface Config {
     'market-prices': MarketPrice;
     'diesel-prices': DieselPrice;
     'news-items': NewsItem;
+    'news-stories': NewsStory;
+    'news-editions': NewsEdition;
+    'news-runs': NewsRun;
+    'news-blocked': NewsBlocked;
     'social-posts': SocialPost;
     subscriptions: Subscription;
     outbox: Outbox;
@@ -134,6 +138,10 @@ export interface Config {
     'market-prices': MarketPricesSelect<false> | MarketPricesSelect<true>;
     'diesel-prices': DieselPricesSelect<false> | DieselPricesSelect<true>;
     'news-items': NewsItemsSelect<false> | NewsItemsSelect<true>;
+    'news-stories': NewsStoriesSelect<false> | NewsStoriesSelect<true>;
+    'news-editions': NewsEditionsSelect<false> | NewsEditionsSelect<true>;
+    'news-runs': NewsRunsSelect<false> | NewsRunsSelect<true>;
+    'news-blocked': NewsBlockedSelect<false> | NewsBlockedSelect<true>;
     'social-posts': SocialPostsSelect<false> | SocialPostsSelect<true>;
     subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     outbox: OutboxSelect<false> | OutboxSelect<true>;
@@ -160,6 +168,7 @@ export interface Config {
     'seo-defaults': SeoDefault;
     'lead-routing': LeadRouting;
     'shop-home': ShopHome;
+    'news-settings': NewsSetting;
   };
   globalsSelect: {
     figures: FiguresSelect<false> | FiguresSelect<true>;
@@ -168,6 +177,7 @@ export interface Config {
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
     'lead-routing': LeadRoutingSelect<false> | LeadRoutingSelect<true>;
     'shop-home': ShopHomeSelect<false> | ShopHomeSelect<true>;
+    'news-settings': NewsSettingsSelect<false> | NewsSettingsSelect<true>;
   };
   locale: 'ro' | 'en';
   widgets: {
@@ -2121,17 +2131,136 @@ export interface NewsItem {
   id: number;
   title: string;
   url: string;
-  source: 'revista-ferma' | 'agrointel';
+  source: 'revista-ferma' | 'agrointel' | 'reuters' | 'zf' | 'mediafax' | 'g4media' | 'profit' | 'madr' | 'ec-agri';
   publishedAt: string;
   /**
    * From the feed, within the publisher’s limit.
    */
   excerpt?: string | null;
   /**
+   * From the agriculture lexicon.
+   */
+  topics?: ('preturi' | 'subventii' | 'vreme' | 'inputuri' | 'boli' | 'comert' | 'finantare' | 'ferma')[] | null;
+  lang?: ('ro' | 'en') | null;
+  /**
    * Shown on these crops’ price pages.
    */
   crops?: (number | Crop)[] | null;
   status: 'nou' | 'aprobat' | 'ascuns';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Grouped and ranked every hour. Hide a story to take it off the site; delete it to remove it and its headlines for good.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-stories".
+ */
+export interface NewsStory {
+  id: number;
+  /**
+   * The id of the story’s first headline.
+   */
+  key: string;
+  title: string;
+  /**
+   * Oldest first; the first is the lead.
+   */
+  items?: (number | NewsItem)[] | null;
+  topic: 'preturi' | 'subventii' | 'vreme' | 'inputuri' | 'boli' | 'comert' | 'finantare' | 'ferma';
+  topics?: ('preturi' | 'subventii' | 'vreme' | 'inputuri' | 'boli' | 'comert' | 'finantare' | 'ferma')[] | null;
+  sources?:
+    | ('revista-ferma' | 'agrointel' | 'reuters' | 'zf' | 'mediafax' | 'g4media' | 'profit' | 'madr' | 'ec-agri')[]
+    | null;
+  sourceCount?: number | null;
+  lang?: ('ro' | 'en') | null;
+  /**
+   * Topic × relevance × coverage × source. Pages multiply it by freshness.
+   */
+  baseScore?: number | null;
+  scoreParts?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  firstSeen: string;
+  lastSeen: string;
+  status: 'visible' | 'hidden';
+  /**
+   * Pinned at the top of “Important acum” until this time (at most 48 hours).
+   */
+  pinnedUntil?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-editions".
+ */
+export interface NewsEdition {
+  id: number;
+  /**
+   * yyyy-mm-dd, Bucharest time.
+   */
+  date: string;
+  count?: number | null;
+  entries:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * The day is over; the job no longer changes it.
+   */
+  frozen?: boolean | null;
+  /**
+   * Removed days are not rebuilt.
+   */
+  status: 'published' | 'removed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-runs".
+ */
+export interface NewsRun {
+  id: number;
+  startedAt: string;
+  finishedAt?: string | null;
+  status: 'running' | 'ok' | 'partial' | 'failed';
+  created?: number | null;
+  summary?: string | null;
+  /**
+   * Per source: state (ok, unchanged, failed, paused, off), HTTP status, items new / known / refused, error, ETag.
+   */
+  sources?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-blocked".
+ */
+export interface NewsBlocked {
+  id: number;
+  url: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -2202,7 +2331,7 @@ export interface Outbox {
   id: number;
   channel: 'email' | 'whatsapp';
   to: string;
-  template: 'price-alert' | 'frost-alert' | 'newsletter' | 'subscription-confirm' | 'editorial-digest';
+  template: 'price-alert' | 'frost-alert' | 'newsletter' | 'subscription-confirm' | 'editorial-digest' | 'news-health';
   subject: string;
   body: string;
   payload?:
@@ -2566,6 +2695,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news-items';
         value: number | NewsItem;
+      } | null)
+    | ({
+        relationTo: 'news-stories';
+        value: number | NewsStory;
+      } | null)
+    | ({
+        relationTo: 'news-editions';
+        value: number | NewsEdition;
+      } | null)
+    | ({
+        relationTo: 'news-runs';
+        value: number | NewsRun;
+      } | null)
+    | ({
+        relationTo: 'news-blocked';
+        value: number | NewsBlocked;
       } | null)
     | ({
         relationTo: 'social-posts';
@@ -3851,8 +3996,68 @@ export interface NewsItemsSelect<T extends boolean = true> {
   source?: T;
   publishedAt?: T;
   excerpt?: T;
+  topics?: T;
+  lang?: T;
   crops?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-stories_select".
+ */
+export interface NewsStoriesSelect<T extends boolean = true> {
+  key?: T;
+  title?: T;
+  items?: T;
+  topic?: T;
+  topics?: T;
+  sources?: T;
+  sourceCount?: T;
+  lang?: T;
+  baseScore?: T;
+  scoreParts?: T;
+  firstSeen?: T;
+  lastSeen?: T;
+  status?: T;
+  pinnedUntil?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-editions_select".
+ */
+export interface NewsEditionsSelect<T extends boolean = true> {
+  date?: T;
+  count?: T;
+  entries?: T;
+  frozen?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-runs_select".
+ */
+export interface NewsRunsSelect<T extends boolean = true> {
+  startedAt?: T;
+  finishedAt?: T;
+  status?: T;
+  created?: T;
+  summary?: T;
+  sources?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-blocked_select".
+ */
+export interface NewsBlockedSelect<T extends boolean = true> {
+  url?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -4348,6 +4553,34 @@ export interface ShopHome {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-settings".
+ */
+export interface NewsSetting {
+  id: number;
+  /**
+   * Not fetched while listed here. Their stored headlines stay.
+   */
+  disabledSources?:
+    | ('revista-ferma' | 'agrointel' | 'reuters' | 'zf' | 'mediafax' | 'g4media' | 'profit' | 'madr' | 'ec-agri')[]
+    | null;
+  /**
+   * Off by default: a page of other publishers’ headlines is thin content (decision 0011).
+   */
+  indexEditions?: boolean | null;
+  weights?: {
+    official?: number | null;
+    wire?: number | null;
+    farm?: number | null;
+    general?: number | null;
+    romania?: number | null;
+    region?: number | null;
+    halfLifeHours?: number | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "figures_select".
  */
 export interface FiguresSelect<T extends boolean = true> {
@@ -4524,6 +4757,28 @@ export interface ShopHomeSelect<T extends boolean = true> {
         image?: T;
       };
   featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-settings_select".
+ */
+export interface NewsSettingsSelect<T extends boolean = true> {
+  disabledSources?: T;
+  indexEditions?: T;
+  weights?:
+    | T
+    | {
+        official?: T;
+        wire?: T;
+        farm?: T;
+        general?: T;
+        romania?: T;
+        region?: T;
+        halfLifeHours?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

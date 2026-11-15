@@ -22,6 +22,7 @@ import { FuelIcon, TrendDownIcon, TrendFlatIcon, TrendUpIcon } from '../icons/se
 import { LinkedinIcon } from '../icons/social'
 import { cx } from '../lib/cx'
 import { LiveRotatorLazy } from './Lazy'
+import { StoryRow, type StoryCardData, type StoryLabels } from './NewsStories'
 import { PriceChart } from './PriceChart'
 
 export type LiveKey = CropKey | 'diesel'
@@ -64,6 +65,14 @@ export type LivePanelProps = {
   /** Latest data timestamp. */
   updated?: Date | null
   charts: LiveChart[]
+  /**
+   * The ranked news stories (Phase 7e): the column's lead. When there are none, `feed` fills the
+   * column alone, as before.
+   */
+  stories?: StoryCardData[]
+  /** How many sources answered on the last news run. */
+  storySources?: number
+  /** Agrinvest's own updates (notes, guides, posts, price moves), under the stories. */
   feed: FeedItem[]
   links: { news: { href: string; label: string }; prices: { href: string; label: string } }
   labels: {
@@ -72,6 +81,11 @@ export type LivePanelProps = {
     rotate: { pause: string; play: string }
     feed: string
     feedEmpty: string
+    /** "Important acum", "De la Agrinvest" and the story labels. */
+    important?: string
+    own?: string
+    sourcesLine?: (n: number) => string
+    story?: StoryLabels
     kinds: Record<FeedKind, string>
     chart: { date: string; empty: string; vs: string; since: string }
   }
@@ -157,12 +171,57 @@ function LiveTab({ c, id, first }: { c: LiveChart; id: string; first: boolean })
   )
 }
 
+/** Agrinvest's own updates: an icon per kind, the kind and time, then the title. */
+function OwnFeed({
+  feed,
+  locale,
+  labels,
+}: {
+  feed: FeedItem[]
+  locale: Locale
+  labels: LivePanelProps['labels']
+}) {
+  return (
+    <ol className="grid divide-y divide-line">
+      {feed.map((item) => (
+        <li key={item.id} className="flex gap-3 py-3.5 first:pt-0 last:pb-0">
+          <FeedIcon item={item} />
+          <div className="grid min-w-0 gap-0.5">
+            <p className="text-caption text-muted">
+              <span className="font-medium text-ink">{labels.kinds[item.kind]}</span>
+              {item.source && <> · {item.source}</>} ·{' '}
+              <time dateTime={item.date.toISOString()}>{formatWhen(item.date, locale)}</time>
+            </p>
+            {item.external ? (
+              <a
+                href={item.href}
+                rel="noopener"
+                className="line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent hover:underline"
+              >
+                {item.title}
+              </a>
+            ) : (
+              <Link
+                href={item.href}
+                className="line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent hover:underline"
+              >
+                {item.title}
+              </Link>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
 /**
  * "Live from the field": one panel with a chart per price (Agrinvest's per crop, and diesel).
  * The tabs are radio inputs named after each price, so switching needs no JavaScript; a
  * small island (`LiveRotator`) moves to the next tab every few seconds until the visitor
- * picks one, and holds while the pointer or focus is on the panel. Then a mixed feed of the
- * latest updates. Server-rendered; every link is in the HTML.
+ * picks one, and holds while the pointer or focus is on the panel. Beside it, the news ranked
+ * by the hourly job (Phase 7e: topic, sources, freshness), each story with its numbered
+ * sources, then Agrinvest's own latest updates. Server-rendered; every link is in the HTML.
  */
 export function LivePanel({
   locale,
@@ -170,11 +229,14 @@ export function LivePanel({
   title,
   updated,
   charts,
+  stories = [],
+  storySources,
   feed,
   links,
   labels,
   className,
 }: LivePanelProps) {
+  const ranked = stories.length > 0 && labels.story
   const rules = showWhen[id] ?? showWhen.live
   const headingId = `${id}-title`
   return (
@@ -242,42 +304,45 @@ export function LivePanel({
           </div>
 
           <div className="grid content-start gap-5 border-t border-line bg-surface p-5 md:p-8 lg:col-span-5 lg:border-t-0 lg:border-l">
-            <h3 className="text-h4 font-semibold">{labels.feed}</h3>
-            {feed.length > 0 ? (
-              <ol className="grid divide-y divide-line">
-                {feed.map((item) => (
-                  <li key={item.id} className="flex gap-3 py-3.5 first:pt-0 last:pb-0">
-                    <FeedIcon item={item} />
-                    <div className="grid min-w-0 gap-0.5">
-                      <p className="text-caption text-muted">
-                        <span className="font-medium text-ink">{labels.kinds[item.kind]}</span>
-                        {item.source && <> · {item.source}</>} ·{' '}
-                        <time dateTime={item.date.toISOString()}>
-                          {formatWhen(item.date, locale)}
-                        </time>
-                      </p>
-                      {item.external ? (
-                        <a
-                          href={item.href}
-                          rel="noopener"
-                          className="line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent hover:underline"
-                        >
-                          {item.title}
-                        </a>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          className="line-clamp-2 text-small leading-snug font-semibold text-ink no-underline hover:text-accent hover:underline"
-                        >
-                          {item.title}
-                        </Link>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ol>
+            {ranked ? (
+              <>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-h4 font-semibold">{labels.important}</h3>
+                  {storySources && labels.sourcesLine ? (
+                    <p className="text-caption text-muted">{labels.sourcesLine(storySources)}</p>
+                  ) : null}
+                </div>
+                <ol className="grid divide-y divide-line">
+                  {stories.map((s, i) => (
+                    <li key={s.key} className="py-4 first:pt-0 last:pb-0">
+                      <StoryRow
+                        story={s}
+                        locale={locale}
+                        labels={labels.story!}
+                        level={4}
+                        showExcerpt={i === 0}
+                      />
+                    </li>
+                  ))}
+                </ol>
+                {feed.length > 0 && (
+                  <div className="grid gap-3 border-t border-line pt-4">
+                    <h3 className="text-caption font-semibold tracking-wide text-subtle uppercase">
+                      {labels.own}
+                    </h3>
+                    <OwnFeed feed={feed.slice(0, 3)} locale={locale} labels={labels} />
+                  </div>
+                )}
+              </>
             ) : (
-              <p className="text-small text-muted">{labels.feedEmpty}</p>
+              <>
+                <h3 className="text-h4 font-semibold">{labels.feed}</h3>
+                {feed.length > 0 ? (
+                  <OwnFeed feed={feed} locale={locale} labels={labels} />
+                ) : (
+                  <p className="text-small text-muted">{labels.feedEmpty}</p>
+                )}
+              </>
             )}
             <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-4">
               {[links.news, links.prices].map((l) => (

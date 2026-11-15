@@ -24,7 +24,11 @@ import { Guides } from './collections/Guides'
 import { Leads } from './collections/Leads'
 import { MarketPrices } from './collections/MarketPrices'
 import { Media } from './collections/Media'
+import { NewsBlocked } from './collections/NewsBlocked'
+import { NewsEditions } from './collections/NewsEditions'
 import { NewsItems } from './collections/NewsItems'
+import { NewsRuns } from './collections/NewsRuns'
+import { NewsStories } from './collections/NewsStories'
 import { SocialPosts } from './collections/SocialPosts'
 import { Newsletters } from './collections/Newsletters'
 import { Outbox } from './collections/Outbox'
@@ -38,6 +42,7 @@ import { Subscriptions } from './collections/Subscriptions'
 import { Targets } from './collections/Targets'
 import { Users } from './collections/Users'
 import { Figures } from './globals/Figures'
+import { NewsSettings } from './globals/NewsSettings'
 import { Footer } from './globals/Footer'
 import { LeadRouting } from './globals/LeadRouting'
 import { Navigation } from './globals/Navigation'
@@ -98,6 +103,10 @@ export default buildConfig({
     MarketPrices,
     DieselPrices,
     NewsItems,
+    NewsStories,
+    NewsEditions,
+    NewsRuns,
+    NewsBlocked,
     SocialPosts,
     Subscriptions,
     Outbox,
@@ -118,7 +127,7 @@ export default buildConfig({
       admin: { ...defaultJobsCollection.admin, hidden: false, group: toolsGroup },
     }),
   },
-  globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting, ShopHome],
+  globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting, ShopHome, NewsSettings],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, EXPERIMENTAL_TableFeature()],
   }),

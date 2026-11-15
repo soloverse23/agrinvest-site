@@ -8,7 +8,9 @@ import { listMarketNotes } from '@/lib/content/market'
 import { listSocialPosts } from '@/lib/content/social'
 import { nationalDiesel } from '@/lib/diesel/load'
 import { formatSigned } from '@/lib/format'
-import { listHeadlines } from '@/lib/news/load'
+import { storyCard, storyLabels } from '@/components/NewsCards'
+import { newsUi } from '@/i18n/news'
+import { listRankedStories, newsStatus } from '@/lib/news/load'
 import { agrinvestRail, agrinvestSeries } from '@/lib/prices/overview'
 
 const FEED = 6
@@ -25,28 +27,18 @@ function postHeadline(text: string) {
 }
 
 /**
- * The latest updates from every source, newest first. Each source is capped, so a busy news
- * feed cannot push out Agrinvest's own updates.
+ * Agrinvest's own latest updates (its news, guides, market note, LinkedIn posts and price
+ * moves), newest first. Press headlines are not here: they come in as ranked stories.
  */
 async function homeFeed(locale: Locale, rail: Awaited<ReturnType<typeof agrinvestRail>>) {
   const t = homeUi[locale].live
-  const [headlines, news, guides, notes, posts] = await Promise.all([
-    listHeadlines(3),
+  const [news, guides, notes, posts] = await Promise.all([
     listArticles(locale, 'stiri'),
     listArticles(locale, 'ghid'),
     listMarketNotes(locale),
     listSocialPosts(2),
   ])
   const items: FeedItem[] = [
-    ...headlines.map((h) => ({
-      id: `news-${h.id}`,
-      kind: 'news' as const,
-      title: h.title,
-      href: h.url,
-      external: true,
-      source: h.source,
-      date: new Date(h.publishedAt),
-    })),
     ...news.slice(0, 2).map((a) => ({
       id: `agrinvest-${a.id}`,
       kind: 'agrinvest' as const,
@@ -97,10 +89,12 @@ async function homeFeed(locale: Locale, rail: Awaited<ReturnType<typeof agrinves
 /** Home "Live from the field": Agrinvest's price chart per crop, today's prices and the feed. */
 export async function HomeLive({ locale }: { locale: Locale }) {
   const t = homeUi[locale].live
-  const [series, rail, diesel] = await Promise.all([
+  const [series, rail, diesel, ranked, status] = await Promise.all([
     agrinvestSeries(locale),
     agrinvestRail(locale),
     nationalDiesel(),
+    listRankedStories(5),
+    newsStatus(),
   ])
   const feed = await homeFeed(locale, rail)
 
@@ -127,6 +121,7 @@ export async function HomeLive({ locale }: { locale: Locale }) {
     rail?.date.getTime(),
     ...charts.map((c) => c.points[c.points.length - 1]?.date.getTime()),
     feed[0]?.date.getTime(),
+    status.updated ? new Date(status.updated).getTime() : undefined,
   ].filter((n): n is number => typeof n === 'number' && !Number.isNaN(n))
 
   return (
@@ -135,6 +130,8 @@ export async function HomeLive({ locale }: { locale: Locale }) {
       title={t.title}
       updated={times.length ? new Date(Math.max(...times)) : null}
       charts={charts}
+      stories={ranked.map((r) => storyCard(r, r.rank, locale))}
+      storySources={status.sources}
       feed={feed}
       links={{
         news: { href: newsPath(locale), label: t.allNews },
@@ -146,6 +143,10 @@ export async function HomeLive({ locale }: { locale: Locale }) {
         rotate: t.rotate,
         feed: t.feed,
         feedEmpty: t.feedEmpty,
+        important: newsUi[locale].important,
+        own: t.own,
+        sourcesLine: t.sourcesLine,
+        story: storyLabels(locale),
         kinds: t.kinds,
         chart: t.chart,
       }}

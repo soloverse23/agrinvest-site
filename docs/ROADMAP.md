@@ -586,7 +586,7 @@ _Analytics_
 
 ## Phase 7e: Hourly news automation
 
-**Goal:** every hour, fetch agriculture news (Reuters headlines through Google News, licence-checked Romanian outlets, official sources), group stories about the same event, rank them with rules (no AI), and publish `/stiri` and a daily edition with references, with no staff step. Plan: `docs/phases/07e-news-automation.md`.
+**Goal:** every hour, fetch agriculture news (Reuters headlines through Google News, licence-checked Romanian outlets, official sources), group stories about the same event, rank them with rules (no AI), and publish `/stiri` and a daily edition with references, with no staff step. Plan: `docs/phases/07e-news-automation.md`. **Built 2026-11-15 on `final-edits`**; waiting for the owner's review and the GitHub secrets.
 
 ## Phase 7f: Prices become market data
 

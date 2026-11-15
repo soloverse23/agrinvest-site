@@ -65,6 +65,7 @@ jobs:
           npm run check:products
           npm run check:finance
           npm run check:tools
+          npm run check:news
           npm run check:budget
           kill %1
       # Lighthouse runs once per phase, by hand: .github/workflows/lighthouse.yml (decision 0003).

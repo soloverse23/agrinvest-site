@@ -116,7 +116,24 @@ export const endpoints = {
   worldBankPage: 'https://www.worldbank.org/en/research/commodity-markets',
 } as const
 
-export type NewsSource = 'revista-ferma' | 'agrointel'
+import type { IntermediateKey } from '@/lib/news/certs'
+
+export type NewsSource =
+  | 'revista-ferma'
+  | 'agrointel'
+  | 'reuters'
+  | 'zf'
+  | 'mediafax'
+  | 'g4media'
+  | 'profit'
+  | 'madr'
+  | 'ec-agri'
+
+/**
+ * How a source is treated by the ranking (`src/lib/news/score.ts`): official bodies and the
+ * wire weigh most, then the farm press, then general outlets.
+ */
+export type NewsSourceKind = 'official' | 'wire' | 'farm' | 'general'
 
 export type NewsSourceInfo = {
   name: string
@@ -125,12 +142,29 @@ export type NewsSourceInfo = {
   terms: string
   /**
    * Longest feed excerpt we may show, in characters; 0 means headline, date and link only.
-   * Agrointel allows quotes up to 500 characters with an active, followed link to the original.
-   * Revista Ferma's terms say nothing on reuse, so only the headline and link are shown.
+   * Each limit comes from the publisher's terms (decision 0011, source check).
    */
   excerptMax: number
+  kind: NewsSourceKind
+  /**
+   * General outlets (and the Reuters search) publish everything; only items that match the
+   * agriculture lexicon are kept. Farm and official sources keep every item.
+   */
+  filter: boolean
+  /** Hosts the item links may point to (subdomains included). Google News links to news.google.com. */
+  linkHosts: string[]
+  /** Item language, for grouping (stories are grouped within one language). */
+  lang: 'ro' | 'en'
+  /** Owner exception to decision 0008 (Reuters through Google News). */
+  exception?: string
+  /** A public intermediate certificate the server forgets to send (`src/lib/news/certs.ts`). */
+  extraCa?: IntermediateKey
 }
 
+const googleNewsQuery =
+  'site:reuters.com (wheat OR corn OR grain OR fertilizer OR farmers OR "Black Sea" OR Romania) when:3d'
+
+/** Every feed the site reads, as checked on 2026-11-15 (decision 0011). */
 export const newsSources: Record<NewsSource, NewsSourceInfo> = {
   'revista-ferma': {
     name: 'Revista Ferma',
@@ -138,6 +172,10 @@ export const newsSources: Record<NewsSource, NewsSourceInfo> = {
     feed: 'https://revista-ferma.ro/feed/',
     terms: 'https://revista-ferma.ro/termene-si-conditii/',
     excerptMax: 0,
+    kind: 'farm',
+    filter: false,
+    linkHosts: ['revista-ferma.ro'],
+    lang: 'ro',
   },
   agrointel: {
     name: 'Agrointel',
@@ -145,6 +183,89 @@ export const newsSources: Record<NewsSource, NewsSourceInfo> = {
     feed: 'https://agrointel.ro/feed',
     terms: 'https://agrointel.ro/conditii',
     excerptMax: 500,
+    kind: 'farm',
+    filter: false,
+    linkHosts: ['agrointel.ro'],
+    lang: 'ro',
+  },
+  reuters: {
+    name: 'Reuters',
+    site: 'https://www.reuters.com',
+    feed: `https://news.google.com/rss/search?q=${encodeURIComponent(googleNewsQuery)}&hl=en-US&gl=US&ceid=US:en`,
+    terms: 'https://www.reuters.com/info-pages/terms-of-use/',
+    excerptMax: 0,
+    kind: 'wire',
+    filter: true,
+    linkHosts: ['news.google.com', 'reuters.com'],
+    lang: 'en',
+    exception: 'Google News feed, headline and link only (owner exception, decision 0011)',
+  },
+  zf: {
+    name: 'Ziarul Financiar',
+    site: 'https://www.zf.ro',
+    feed: 'https://www.zf.ro/rss',
+    terms: 'https://www.zf.ro/termeni-si-conditii',
+    excerptMax: 250,
+    kind: 'general',
+    filter: true,
+    linkHosts: ['zf.ro'],
+    lang: 'ro',
+  },
+  mediafax: {
+    name: 'Mediafax',
+    site: 'https://www.mediafax.ro',
+    feed: 'https://www.mediafax.ro/rss',
+    terms: 'https://www.mediafax.ro/termeni-si-conditii',
+    excerptMax: 250,
+    kind: 'general',
+    filter: true,
+    linkHosts: ['mediafax.ro'],
+    lang: 'ro',
+  },
+  g4media: {
+    name: 'G4Media',
+    site: 'https://www.g4media.ro',
+    feed: 'https://www.g4media.ro/feed',
+    terms: 'https://www.g4media.ro/about',
+    excerptMax: 250,
+    kind: 'general',
+    filter: true,
+    linkHosts: ['g4media.ro'],
+    lang: 'ro',
+  },
+  profit: {
+    name: 'Profit.ro',
+    site: 'https://www.profit.ro',
+    feed: 'https://www.profit.ro/rss',
+    terms: 'https://www.profit.ro',
+    excerptMax: 0,
+    kind: 'general',
+    filter: true,
+    linkHosts: ['profit.ro'],
+    lang: 'ro',
+  },
+  madr: {
+    name: 'MADR',
+    site: 'https://www.madr.ro',
+    feed: 'https://www.madr.ro/comunicare.feed?type=rss',
+    terms: 'https://www.madr.ro',
+    excerptMax: 300,
+    kind: 'official',
+    filter: false,
+    linkHosts: ['madr.ro'],
+    lang: 'ro',
+    extraCa: 'gogetssl-rsa-dv-ssl-ca-2',
+  },
+  'ec-agri': {
+    name: 'Comisia Europeană (DG AGRI)',
+    site: 'https://agriculture.ec.europa.eu',
+    feed: 'https://ec.europa.eu/newsroom/agri/feed?item_type_id=&lang=en&orderby=item_date',
+    terms: 'https://commission.europa.eu/legal-notice_en',
+    excerptMax: 300,
+    kind: 'official',
+    filter: true,
+    linkHosts: ['europa.eu'],
+    lang: 'en',
   },
 }
 

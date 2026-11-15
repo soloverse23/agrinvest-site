@@ -10,7 +10,7 @@ import { parseOilBulletin } from '@/lib/diesel/oil-bulletin'
 import { daysAgo, fetchBrent, fetchEcbRates, fetchWorldBank } from '@/lib/markets/fetch'
 import { canSend, sendMessage } from '@/lib/messaging/send'
 import { buildIssue, weekStart } from '@/lib/news/newsletter'
-import { parseRss } from '@/lib/news/rss'
+import { ingestNews } from '@/lib/news/pipeline'
 import { fetchCerealPrices, fetchFertiliserPrices } from '@/lib/prices/eu-agrifood'
 import { cropLines, latestByBase, priceRange, type BuyPriceRow } from '@/lib/prices/grain'
 import { marketNoteDraft } from '@/lib/prices/market-note'
@@ -38,49 +38,6 @@ async function fetchOilBulletin(now: Date) {
   const res = await fetch(endpoints.oilBulletin, { headers: fetchHeaders, cache: 'no-store' })
   if (!res.ok) throw new Error(`Oil Bulletin answered ${res.status}`)
   return parseOilBulletin(Buffer.from(await res.arrayBuffer()), now)
-}
-
-export async function ingestNews(payload: Payload) {
-  let created = 0
-  const failed: string[] = []
-  for (const source of newsSourceKeys) {
-    try {
-      const res = await fetch(newsSources[source].feed, {
-        headers: fetchHeaders,
-        cache: 'no-store',
-      })
-      if (!res.ok) throw new Error(String(res.status))
-      const items = parseRss(await res.text(), source)
-      if (!items.length) throw new Error('no items')
-      const known = await payload.find({
-        collection: 'news-items',
-        where: { url: { in: items.map((i) => i.url) } },
-        pagination: false,
-        depth: 0,
-        select: { url: true },
-      })
-      const seen = new Set(known.docs.map((d) => d.url))
-      for (const item of items) {
-        if (seen.has(item.url)) continue
-        await payload.create({
-          collection: 'news-items',
-          depth: 0,
-          data: {
-            ...item,
-            publishedAt: item.publishedAt.toISOString(),
-            excerpt: item.excerpt || undefined,
-            status: 'nou',
-          },
-        })
-        created++
-      }
-    } catch (error) {
-      failed.push(`${source}: ${error instanceof Error ? error.message : String(error)}`)
-    }
-  }
-  if (created) revalidate(tags.news)
-  if (failed.length === newsSourceKeys.length) throw new Error(failed.join('; '))
-  return { created, failed }
 }
 
 /**

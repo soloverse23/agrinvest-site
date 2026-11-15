@@ -24,6 +24,9 @@ export const homeUi = {
         link: (crop: string) => `Prețul la ${crop.toLocaleLowerCase('ro')}, pe baze`,
       },
       feed: 'Ultimele noutăți',
+      own: 'De la Agrinvest',
+      sourcesLine: (n: number) =>
+        `Clasament din ${n} ${n === 1 ? 'sursă' : 'surse'}, în fiecare oră`,
       feedEmpty: 'Noutățile apar aici pe măsură ce le publicăm.',
       kinds: {
         news: 'Știri agricole',
@@ -110,6 +113,8 @@ export const homeUi = {
         link: (crop: string) => `${crop} prices by base`,
       },
       feed: 'Latest updates',
+      own: 'From Agrinvest',
+      sourcesLine: (n: number) => `Ranked hourly from ${n} ${n === 1 ? 'source' : 'sources'}`,
       feedEmpty: 'Updates show here as we publish them.',
       kinds: {
         news: 'Farm news',

@@ -89,9 +89,9 @@ export const toolsUi = {
       title: 'Știri agricole',
       seoTitle: 'Știri agricole: piață, prețuri și subvenții',
       description:
-        'Știrile agricole ale săptămânii din presa de specialitate, cu sursa și data, plus notele Agrinvest despre piață.',
+        'Știrile agricole importante, actualizate în fiecare oră: subvenții, prețuri, vreme și comerț, din presa agricolă, Reuters și MADR, cu sursele fiecăreia.',
       summary:
-        'Titlurile săptămânii din presa agricolă, fiecare cu sursa și link spre articolul original, și notele noastre despre ce înseamnă pentru fermier.',
+        'Știrile care contează pentru fermieri, adunate în fiecare oră din presa agricolă, Reuters, MADR și Comisia Europeană. Le ordonăm după subiect, câte surse le relatează și cât de noi sunt; fiecare are linkuri spre articolele originale.',
       own: 'De la Agrinvest',
       feed: 'Din presa agricolă',
       empty: 'Nu avem încă știri.',
@@ -234,9 +234,9 @@ export const toolsUi = {
       title: 'Farm news',
       seoTitle: 'Romanian farm news: markets, prices and subsidies',
       description:
-        'This week’s farm news from the Romanian agricultural press, with source and date, and Agrinvest’s own market notes.',
+        'The farm news that matters, updated every hour: subsidies, prices, weather and trade, from the Romanian farm press, Reuters and the ministry, with every source.',
       summary:
-        'This week’s headlines from the Romanian farm press, each with its source and a link to the original (in Romanian), and our notes on what they mean for farmers.',
+        'The news that matters to farmers, gathered every hour from the Romanian farm press, Reuters, the ministry and the European Commission. We rank it by topic, by how many sources report it and by how recent it is; each story links to the original articles (most in Romanian).',
       own: 'From Agrinvest',
       feed: 'From the farm press (in Romanian)',
       empty: 'There is no news yet.',

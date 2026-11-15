@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { ArticleCard } from '@ds/patterns/Articles'
-import { LeadFormLazy, SubscribeFormLazy } from '@ds/patterns/Lazy'
+import { LeadFormLazy } from '@ds/patterns/Lazy'
 import { LineChart } from '@ds/patterns/LineChart'
 import { Callout, SectionHeading } from '@ds/patterns/Sections'
 import { Button } from '@ds/primitives/Button'
@@ -16,35 +15,27 @@ import {
   categoryPath,
   dieselPath,
   fertiliserPricesPath,
-  marketNotePath,
   marketPagePath,
-  marketPath,
-  newsPath,
   pricesPath,
   productPath,
   sections,
 } from '@/i18n/routes'
-import { articlesUi } from '@/i18n/articles'
 import { toolsUi } from '@/i18n/tools'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listCounties } from '@/lib/content/locations'
-import { listArticles } from '@/lib/content/articles'
-import { listMarketNotes } from '@/lib/content/market'
 import type { Alternates } from '@/lib/content/pages'
 import { listCategories, listProducts } from '@/lib/content/shop'
 import { getDieselPrice, nationalDiesel } from '@/lib/diesel/load'
-import { formatDate, formatNumber, formatShortDate } from '@/lib/format'
+import { formatDate, formatNumber } from '@/lib/format'
 import { submitLead } from '@/lib/leads/actions'
-import { listHeadlines } from '@/lib/news/load'
 import { latestRates } from '@/lib/markets/load'
 import { listMarketPoints, yearAgo } from '@/lib/prices/load'
 import { seriesLabel } from '@/lib/prices/grain'
 import { showOwnPrices } from '@/lib/prices/visibility'
-import { breadcrumbs, dataset, faqPage, itemList, webPage } from '@/lib/schema'
+import { breadcrumbs, dataset, faqPage, webPage } from '@/lib/schema'
 import { buildMetadata } from '@/lib/seo/metadata'
 import { marketSources } from '@/lib/sources'
-import { subscribe } from '@/lib/subscriptions/actions'
 
 import { packLabel, PriceMark, unitPriceLabel } from './ShopParts'
 import {
@@ -61,7 +52,6 @@ import {
 } from './MarketPages'
 import { CC_BY } from './PricePage'
 import { ToolLinks } from '@/components/ToolLinks'
-import { innerUi } from '@/i18n/inner'
 
 /**
  * Fertiliser prices (5.3), diesel (5.4) and news (5.6): one page each, in both languages. Kept
@@ -547,188 +537,6 @@ export async function DieselPage({ locale }: { locale: Locale }) {
           {t.logistics}
         </Link>
       </p>
-      <ToolLinks locale={locale} current={url} />
-    </SiteShell>
-  )
-}
-
-/* ------------------------------------------------------------------ news */
-
-export const newsAlternates: Alternates = { ro: newsPath('ro'), en: newsPath('en') }
-
-export const newsMetadata = async (locale: Locale) => {
-  const [headlines, own] = await Promise.all([listHeadlines(1), listArticles(locale, 'stiri')])
-  return meta(locale, toolsUi[locale].news, newsAlternates, !headlines.length && !own.length)
-}
-
-/** The press feed shows this many headlines; the rest wait behind one button. */
-const FEED_FIRST = 12
-
-type Headline = Awaited<ReturnType<typeof listHeadlines>>[number]
-
-/** A compact list: date and source, then the headline. The summary stays on the source. */
-function HeadlineList({ headlines, locale }: { headlines: Headline[]; locale: Locale }) {
-  return (
-    <ol className="grid divide-y divide-line border-y border-line">
-      {headlines.map((h) => {
-        const date = new Date(h.publishedAt)
-        return (
-          <li key={h.id} className="grid gap-1 py-4 md:grid-cols-[9rem_1fr] md:gap-6">
-            <div className="flex items-baseline gap-2 text-caption text-subtle md:grid md:content-start md:gap-0.5">
-              <time dateTime={date.toISOString()} className="font-semibold text-ink">
-                {formatShortDate(date, locale)}
-              </time>
-              <span>{h.source}</span>
-            </div>
-            <a
-              href={h.url}
-              rel="noopener"
-              lang="ro"
-              className="text-body leading-snug font-semibold text-ink hover:text-accent"
-            >
-              {h.title}
-            </a>
-          </li>
-        )
-      })}
-    </ol>
-  )
-}
-
-/**
- * `/stiri`: Agrinvest's own news first (a lead story and a grid of cards, written in the
- * admin), then the farm-press headlines beside the market notes and the newsletter.
- */
-export async function NewsPage({ locale }: { locale: Locale }) {
-  const t = toolsUi[locale].news
-  const a = articlesUi[locale].news
-  const p = pricesUi[locale]
-  const url = newsPath(locale)
-  const [headlines, notes, own] = await Promise.all([
-    listHeadlines(40),
-    listMarketNotes(locale),
-    listArticles(locale, 'stiri'),
-  ])
-  const crumbs = [{ name: t.title, url }]
-  const [lead, ...more] = own
-  return (
-    <SiteShell locale={locale} alternates={newsAlternates}>
-      <JsonLd
-        data={[
-          webPage({ url, name: t.seoTitle, description: t.description, locale }),
-          breadcrumbs(locale, ui[locale].home, crumbs),
-          ...(headlines.length || own.length
-            ? [
-                itemList([
-                  ...own.map((n) => ({ name: n.title, url: n.href })),
-                  ...headlines.map((h) => ({ name: h.title, url: h.url })),
-                ]),
-              ]
-            : []),
-        ]}
-      />
-      <PageTitle locale={locale} title={t.title} summary={t.summary} crumbs={crumbs} />
-      {lead && (
-        <section
-          aria-labelledby="agrinvest"
-          className="mx-auto mt-12 grid max-w-page gap-8 px-4 md:mt-16 md:px-8"
-        >
-          <SectionHeading id="agrinvest" kicker={a.kicker} title={a.latest} />
-          <ArticleCard
-            variant="feature"
-            locale={locale}
-            href={lead.href}
-            title={lead.title}
-            summary={lead.summary}
-            date={lead.date}
-            image={lead.image}
-            priority
-          />
-          {more.length > 0 && (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {more.slice(0, 9).map((n) => (
-                <ArticleCard
-                  key={n.id}
-                  locale={locale}
-                  href={n.href}
-                  title={n.title}
-                  summary={n.summary}
-                  date={n.date}
-                  image={n.image}
-                />
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-      <div className="mx-auto mt-16 grid max-w-page gap-12 px-4 md:mt-20 md:px-8 lg:grid-cols-12">
-        <section aria-labelledby="flux" className="grid content-start gap-6 lg:col-span-8">
-          <h2 id="flux" className="text-h3 font-semibold">
-            {t.feed}
-          </h2>
-          {headlines.length ? (
-            <>
-              <HeadlineList headlines={headlines.slice(0, FEED_FIRST)} locale={locale} />
-              {headlines.length > FEED_FIRST && (
-                <details className="group">
-                  <summary className="inline-flex h-12 cursor-pointer list-none items-center rounded-md bg-raised px-6 font-semibold text-ink shadow-soft ring-1 ring-line-strong ring-inset group-open:hidden [&::-webkit-details-marker]:hidden">
-                    {innerUi[locale].moreNews(headlines.length - FEED_FIRST)}
-                  </summary>
-                  <HeadlineList headlines={headlines.slice(FEED_FIRST)} locale={locale} />
-                </details>
-              )}
-            </>
-          ) : (
-            <p className="text-body text-muted">{t.empty}</p>
-          )}
-        </section>
-        <aside className="grid content-start gap-8 lg:col-span-4">
-          <div className="grid gap-8 lg:sticky lg:top-24">
-            <section
-              aria-labelledby="note"
-              className="grid gap-3 rounded-xl bg-surface p-6 ring-1 ring-line"
-            >
-              <h2 id="note" className="text-h4 font-semibold">
-                {t.own}
-              </h2>
-              {notes.length ? (
-                <ul className="grid gap-2">
-                  {notes.slice(0, 5).map((n) => (
-                    <li key={n.id}>
-                      <Link
-                        href={marketNotePath(n.slug, locale)}
-                        className="text-small font-semibold text-ink hover:text-accent"
-                      >
-                        {n.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-small text-muted">{p.market.empty}</p>
-              )}
-              <Link href={marketPath(locale)} className="text-small font-semibold text-accent">
-                {p.hub.allNotes}
-              </Link>
-            </section>
-            <div
-              id="buletin"
-              className="scroll-mt-24 rounded-xl bg-raised p-6 shadow-soft ring-1 ring-line"
-            >
-              <SubscribeFormLazy
-                locale={locale}
-                action={subscribe}
-                topic="newsletter"
-                heading={t.newsletterTitle}
-                body={t.newsletterBody}
-                sourcePath={url}
-                privacyHref={fixedUrl('privacy', locale)}
-                labels={{ ...p.alert, submit: t.newsletterSubmit }}
-              />
-            </div>
-          </div>
-        </aside>
-      </div>
       <ToolLinks locale={locale} current={url} />
     </SiteShell>
   )

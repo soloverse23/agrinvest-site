@@ -123,6 +123,7 @@ export function NewsItem({
   size = 'md',
   level = 3,
   showExcerpt = false,
+  fill = false,
   className,
 }: {
   story: StoryCardData
@@ -131,10 +132,18 @@ export function NewsItem({
   size?: Size
   level?: 2 | 3 | 4
   showExcerpt?: boolean
+  /** Fills its card: the source line sits at the bottom, so a row of cards lines up. */
+  fill?: boolean
   className?: string
 }) {
   return (
-    <article className={cx('grid', size === 'lg' ? 'gap-3' : 'gap-1.5', className)}>
+    <article
+      className={cx(
+        fill ? 'flex h-full flex-col' : 'grid',
+        size === 'lg' ? 'gap-3' : 'gap-1.5',
+        className,
+      )}
+    >
       <Heading level={level} className={titleSize[size]}>
         <a
           href={story.href}
@@ -155,7 +164,9 @@ export function NewsItem({
           {story.excerpt.text}
         </p>
       )}
-      <SourceLine story={story} locale={locale} labels={labels} size={size} />
+      <div className={cx(fill && 'mt-auto pt-1')}>
+        <SourceLine story={story} locale={locale} labels={labels} size={size} />
+      </div>
     </article>
   )
 }

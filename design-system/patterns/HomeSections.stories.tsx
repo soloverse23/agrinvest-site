@@ -79,24 +79,14 @@ const faq = (locale: Locale) => (
 )
 
 /**
- * One panel: a tab per price (each crop's Agrinvest price, and diesel) that moves on every few
- * seconds until a tab is picked, the chart of the chosen price, and the six newest updates.
+ * The ranked news as one row of cards (swiped sideways on phones), then Agrinvest's own
+ * updates. No prices: the hero shows them.
  */
 export const Live: Story = {
   name: 'Live from the field',
   render: (_, { globals }) => (
     <Page>
       <LivePanel {...livePanelProps(storyLocale(globals))} />
-    </Page>
-  ),
-}
-
-/** Before Agrinvest publishes prices: the EU market lines per crop, no price moves in the feed. */
-export const LiveMarket: Story = {
-  name: 'Live from the field: market fallback',
-  render: (_, { globals }) => (
-    <Page>
-      <LivePanel {...livePanelProps(storyLocale(globals), { prices: false })} />
     </Page>
   ),
 }

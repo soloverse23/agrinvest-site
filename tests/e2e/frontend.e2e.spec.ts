@@ -792,7 +792,7 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     await expect(page.locator('main a[href="/magazin"]').first()).toBeAttached()
   })
 
-  test('the home page: slider, live prices and updates, shop, tools, company', async ({ page }) => {
+  test('the home page: slider, live news and updates, shop, tools, company', async ({ page }) => {
     await page.goto('/')
     await expect(page.locator('h1')).toHaveCount(1)
     // No ticker on home; the hero rail links each price to its own page.
@@ -802,7 +802,9 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     const live = page.locator('section[aria-labelledby="live-title"]')
     await expect(live.getByRole('heading', { name: 'În direct din câmp' })).toBeVisible()
     await expect(live.locator('a[href="/stiri"]')).toBeAttached()
-    await expect(live.locator('a[href="/preturi"]')).toBeAttached()
+    // Prices live in the hero only (owner, 2026-11-15): the panel is news and updates.
+    await expect(live.locator('a[href="/preturi"]')).toHaveCount(0)
+    await expect(live.locator('input[type="radio"]')).toHaveCount(0)
     const shop = page.locator('section[aria-labelledby="magazin"]')
     await expect(shop.locator('a[href="/magazin/seminte"]').first()).toBeAttached()
     await expect(shop.locator('a[href^="/magazin/cultura/"]').first()).toBeAttached()
@@ -818,7 +820,7 @@ test.describe('Tools: fertilisers, diesel, news, home', () => {
     await page.goto('/en')
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(
-      page.locator('section[aria-labelledby="live-title"] a[href="/en/prices"]'),
+      page.locator('section[aria-labelledby="live-title"] a[href="/en/news"]'),
     ).toBeAttached()
     await expect(
       page.locator('section[aria-labelledby="magazin"] a[href="/en/shop"]').first(),

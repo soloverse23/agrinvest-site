@@ -219,13 +219,13 @@ export function MarketTile({
 }: TileProps) {
   const body = (
     <>
-      <span className="flex items-start justify-between gap-3">
+      <span className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
         <span className="font-semibold text-ink">{name}</span>
         {changePct !== null && (
           <Delta value={Math.round(changePct * 100) / 100} unit="%" locale={locale} size="sm" />
         )}
       </span>
-      <span className="flex items-baseline gap-1.5">
+      <span className="flex flex-wrap items-baseline gap-x-1.5">
         <span className="text-h3 font-semibold text-ink tabular-nums">
           {formatFixed(value, locale, decimals)}
         </span>

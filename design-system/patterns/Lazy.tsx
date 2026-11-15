@@ -13,8 +13,6 @@ export const SubscribeFormLazy = dynamic(() =>
 )
 /** The home hero slider's island: only a page with a slider downloads it. */
 export const HeroCarouselLazy = dynamic(() => import('./HeroCarousel').then((m) => m.HeroCarousel))
-/** The home live panel's tab timer: only the home page downloads it. */
-export const LiveRotatorLazy = dynamic(() => import('./LiveRotator').then((m) => m.LiveRotator))
 /** The one-field quick request (decision 0010): only pages that offer it download it. */
 export const QuickRequestLazy = dynamic(() => import('./QuickRequest').then((m) => m.QuickRequest))
 /** A card's quick add to cart. */

@@ -11,41 +11,12 @@ import type {
   ShopShowcaseProps,
 } from '../patterns/HomeSections'
 import type { FeedItem, LivePanelProps } from '../patterns/LivePanel'
-import { crops, priceDate, weeklySeries } from './sample'
+import type { StoryCardData } from '../patterns/NewsStories'
+import { newsUi } from '@/i18n/news'
+import { priceDate } from './sample'
 
 const at = (hoursBefore: number) => new Date(priceDate.getTime() - hoursBefore * 3_600_000)
 const l = (locale: Locale, ro: string, en: string) => (locale === 'ro' ? ro : en)
-
-/** Illustrative weekly lines, one per crop, ending at each crop's sample price. */
-const lines: Record<string, [number, number, number]> = {
-  wheat: [905, 2.2, 18],
-  maize: [870, 1.2, 14],
-  sunflower: [1980, 3.1, 40],
-  rapeseed: [2150, 2.8, 30],
-  barley: [820, 1.4, 12],
-}
-
-/** A sample line that ends at the crop's sample price (Agrinvest) or a fifth of it (€/t). */
-function endAt(
-  c: (typeof crops)[number],
-  prices: boolean,
-  start: number,
-  drift: number,
-  swing: number,
-) {
-  const points = weeklySeries(start, drift, swing, prices ? 16 : 52)
-  const scale = prices ? 1 : 0.2
-  const target = prices ? c.prices[0] : Math.round(c.prices[0] / 5)
-  // With prices, the line runs to the price before and then steps by the sample change.
-  const end = prices ? target - c.change : target
-  const anchor = points[points.length - (prices ? 2 : 1)].value
-  const line = points.map((p) => ({
-    date: p.date,
-    value: Math.round((p.value - anchor) * scale + end),
-  }))
-  if (prices) line[line.length - 1].value = target
-  return line
-}
 
 const feed = (locale: Locale): FeedItem[] => [
   {
@@ -116,54 +87,60 @@ const feed = (locale: Locale): FeedItem[] => [
   },
 ]
 
+/** Made-up ranked stories for the panel's design; the links go nowhere. */
+const sampleStories = (locale: Locale): StoryCardData[] =>
+  [
+    [
+      'APIA începe plata în avans pentru fermieri de luni',
+      'Agrointel',
+      3,
+      'Fermierii care au depus cererile unice primesc avansul din subvenții începând de luni.',
+    ],
+    ['Ukraine hopes for grain exports breakthrough', 'Reuters', 6, ''],
+    ['Seceta lovește culturile de rapiță din Dobrogea', 'Revista Ferma', 9, ''],
+    ['Comisia Europeană propune noi cote pentru importurile din Ucraina', 'Mediafax', 12, ''],
+    ['Focar de pestă porcină africană confirmat în Tulcea', 'MADR', 20, ''],
+  ].map(([title, source, h, excerpt], i) => ({
+    key: String(i + 1),
+    rank: i + 1,
+    title: title as string,
+    href: '#',
+    topic: { label: '' },
+    lang: (source === 'Reuters' ? 'en' : 'ro') as 'ro' | 'en',
+    date: at(h as number),
+    excerpt: excerpt ? { text: excerpt as string, source: source as string } : null,
+    sources:
+      i === 0
+        ? [
+            { name: 'Agrointel', title: title as string, url: '#a' },
+            {
+              name: 'MADR',
+              title: l(locale, 'Plata în avans începe luni', 'Advance payment starts Monday'),
+              url: '#b',
+            },
+          ]
+        : [{ name: source as string, title: title as string, url: `#${i}` }],
+  }))
+
 export const livePanelProps = (
   locale: Locale,
-  { prices = true, empty = false }: { prices?: boolean; empty?: boolean } = {},
+  { empty = false }: { empty?: boolean } = {},
 ): LivePanelProps => {
   const t = homeUi[locale].live
   return {
     locale,
     title: t.title,
-    updated: empty ? null : at(2),
-    charts: empty
-      ? []
-      : [
-          ...crops.map((c) => {
-            const [start, drift, swing] = lines[c.key]
-            return {
-              key: c.key,
-              name: c.name[locale],
-              title: prices ? t.chart.agrinvest(c.name[locale]) : t.chart.market(c.name[locale]),
-              unit: prices ? 'lei/t' : '€/t',
-              points: endAt(c, prices, start, drift, swing),
-              link: { href: `/preturi/${c.key}`, label: t.chart.link(c.name[locale]) },
-            }
-          }),
-          {
-            key: 'diesel' as const,
-            name: l(locale, 'Motorină', 'Diesel'),
-            title: t.chart.diesel,
-            unit: '€/1000 l',
-            // Weekly Oil Bulletin average, illustrative.
-            points: weeklySeries(1_430, 1.1, 22, 26).map((p, i, all) =>
-              i === all.length - 1 ? { ...p, value: all[i - 1].value - 6 } : p,
-            ),
-            link: { href: '/motorina', label: t.chart.dieselLink },
-          },
-        ],
-    feed: empty ? [] : feed(locale).filter((i) => prices || i.kind !== 'price'),
-    links: {
-      news: { href: '/stiri', label: t.allNews },
-      prices: { href: '/preturi', label: t.allPrices },
-    },
+    updated: empty ? null : at(1),
+    storySources: 9,
+    stories: empty ? [] : sampleStories(locale),
+    feed: empty ? [] : feed(locale).filter((i) => i.kind !== 'price'),
+    links: { news: { href: '/stiri', label: t.allNews } },
     labels: {
-      updated: t.updated,
-      crops: t.crops,
-      rotate: t.rotate,
-      feed: t.feed,
-      feedEmpty: t.feedEmpty,
+      updated: newsUi[locale].updated,
+      own: t.own,
+      empty: t.feedEmpty,
       kinds: t.kinds,
-      chart: t.chart,
+      story: { more: newsUi[locale].more, via: newsUi[locale].via },
     },
   }
 }

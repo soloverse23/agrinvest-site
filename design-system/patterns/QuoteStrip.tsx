@@ -165,7 +165,9 @@ export function QuoteStrip({
         id={id}
         data-scroll-x
         className={cx(
-          'flex min-w-0 flex-1 snap-x overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+          // `relative`: the containing block of each quote's absolutely positioned `sr-only` text, so
+          // the scroller clips it. Without it the text escapes and the page scrolls sideways on phones.
+          'relative flex min-w-0 flex-1 snap-x overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
           // The bar has no buttons: a soft fade at the right edge says there is more to swipe.
           hero
             ? 'gap-1'

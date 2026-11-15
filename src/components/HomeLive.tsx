@@ -1,19 +1,16 @@
-import { LivePanel, type FeedItem, type LiveChart } from '@ds/patterns/LivePanel'
+import { LivePanel, type FeedItem } from '@ds/patterns/LivePanel'
+import { storyCard, storyLabels } from '@/components/NewsCards'
 import type { Locale } from '@/i18n/config'
 import { homeUi } from '@/i18n/home'
-import { cropPricePath, dieselPath, marketNotePath, newsPath, pricesPath } from '@/i18n/routes'
-import { toolsUi } from '@/i18n/tools'
+import { newsUi } from '@/i18n/news'
+import { marketNotePath, newsPath } from '@/i18n/routes'
 import { listArticles } from '@/lib/content/articles'
 import { listMarketNotes } from '@/lib/content/market'
 import { listSocialPosts } from '@/lib/content/social'
-import { nationalDiesel } from '@/lib/diesel/load'
-import { formatSigned } from '@/lib/format'
-import { storyCard, storyLabels } from '@/components/NewsCards'
-import { newsUi } from '@/i18n/news'
 import { listRankedStories, newsStatus } from '@/lib/news/load'
-import { agrinvestRail, agrinvestSeries } from '@/lib/prices/overview'
 
-const FEED = 6
+/** Agrinvest's own updates shown under the news. */
+const OWN = 3
 
 /** A LinkedIn post's first line, cut at a word near 110 characters. */
 function postHeadline(text: string) {
@@ -27,11 +24,10 @@ function postHeadline(text: string) {
 }
 
 /**
- * Agrinvest's own latest updates (its news, guides, market note, LinkedIn posts and price
- * moves), newest first. Press headlines are not here: they come in as ranked stories.
+ * Agrinvest's own latest updates (its news, guides, market note and LinkedIn posts), newest
+ * first. No prices: the hero shows them. Press headlines come in as ranked stories.
  */
-async function homeFeed(locale: Locale, rail: Awaited<ReturnType<typeof agrinvestRail>>) {
-  const t = homeUi[locale].live
+async function ownFeed(locale: Locale): Promise<FeedItem[]> {
   const [news, guides, notes, posts] = await Promise.all([
     listArticles(locale, 'stiri'),
     listArticles(locale, 'ghid'),
@@ -68,87 +64,36 @@ async function homeFeed(locale: Locale, rail: Awaited<ReturnType<typeof agrinves
       external: true,
       date: new Date(p.date),
     })),
-    ...(rail?.rows ?? [])
-      .filter((r) => r.change !== 0)
-      .slice(0, 2)
-      .map((r) => ({
-        id: `price-${r.crop}`,
-        kind: 'price' as const,
-        title: t.move(r.name, formatSigned(r.change, locale)),
-        href: cropPricePath(r.slug, locale),
-        date: rail!.date,
-        change: r.change,
-      })),
   ]
   return items
     .filter((i) => i.title && !Number.isNaN(i.date.getTime()))
     .sort((a, b) => b.date.getTime() - a.date.getTime())
-    .slice(0, FEED)
+    .slice(0, OWN)
 }
 
-/** Home "Live from the field": Agrinvest's price chart per crop, today's prices and the feed. */
+/** Home "Live from the field": the ranked news, then Agrinvest's own updates. */
 export async function HomeLive({ locale }: { locale: Locale }) {
   const t = homeUi[locale].live
-  const [series, rail, diesel, ranked, status] = await Promise.all([
-    agrinvestSeries(locale),
-    agrinvestRail(locale),
-    nationalDiesel(),
+  const [ranked, status, feed] = await Promise.all([
     listRankedStories(5),
     newsStatus(),
+    ownFeed(locale),
   ])
-  const feed = await homeFeed(locale, rail)
-
-  const charts: LiveChart[] = series.map((s) => ({
-    key: s.crop,
-    name: s.name,
-    title: s.source === 'agrinvest' ? t.chart.agrinvest(s.name) : t.chart.market(s.name),
-    unit: s.unit,
-    points: s.points,
-    link: { href: cropPricePath(s.slug, locale), label: t.chart.link(s.name) },
-  }))
-  const last = diesel[diesel.length - 1]
-  if (diesel.length > 1 && last)
-    charts.push({
-      key: 'diesel',
-      name: toolsUi[locale].today.diesel,
-      title: t.chart.diesel,
-      unit: `€/${last.unit}`,
-      points: diesel.map((p) => ({ date: p.date, value: p.value })),
-      link: { href: dieselPath(locale), label: t.chart.dieselLink },
-    })
-
-  const times = [
-    rail?.date.getTime(),
-    ...charts.map((c) => c.points[c.points.length - 1]?.date.getTime()),
-    feed[0]?.date.getTime(),
-    status.updated ? new Date(status.updated).getTime() : undefined,
-  ].filter((n): n is number => typeof n === 'number' && !Number.isNaN(n))
-
   return (
     <LivePanel
       locale={locale}
       title={t.title}
-      updated={times.length ? new Date(Math.max(...times)) : null}
-      charts={charts}
-      stories={ranked.map((r) => storyCard(r, r.rank, locale))}
+      updated={status.updated ? new Date(status.updated) : null}
       storySources={status.sources}
+      stories={ranked.map((r) => storyCard(r, r.rank, locale))}
       feed={feed}
-      links={{
-        news: { href: newsPath(locale), label: t.allNews },
-        prices: { href: pricesPath(locale), label: t.allPrices },
-      }}
+      links={{ news: { href: newsPath(locale), label: t.allNews } }}
       labels={{
-        updated: t.updated,
-        crops: t.crops,
-        rotate: t.rotate,
-        feed: t.feed,
-        feedEmpty: t.feedEmpty,
-        important: newsUi[locale].important,
+        updated: newsUi[locale].updated,
         own: t.own,
-        sourcesLine: t.sourcesLine,
-        story: storyLabels(locale),
+        empty: t.feedEmpty,
         kinds: t.kinds,
-        chart: t.chart,
+        story: storyLabels(locale),
       }}
     />
   )

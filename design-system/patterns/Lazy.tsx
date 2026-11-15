@@ -36,3 +36,5 @@ export const CarouselNavLazy = dynamic(() => import('./CarouselNav').then((m) =>
  * second, later import made only after the visitor interacts (see `MarketChart`).
  */
 export const MarketChartLazy = dynamic(() => import('./MarketChart').then((m) => m.MarketChart))
+/** The interactive map of the bases (storage page, base pages). */
+export const BaseMapLazy = dynamic(() => import('./BaseMap').then((m) => m.BaseMap))

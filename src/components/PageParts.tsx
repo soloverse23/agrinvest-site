@@ -34,6 +34,7 @@ export function PageTitle({
   kicker,
   actions,
   aside,
+  align,
 }: {
   locale: Locale
   title: ReactNode
@@ -43,6 +44,7 @@ export function PageTitle({
   kicker?: string | null
   actions?: ReactNode
   aside?: ReactNode
+  align?: 'end' | 'center'
 }) {
   return (
     <>
@@ -53,6 +55,7 @@ export function PageTitle({
         summary={summary}
         actions={actions}
         aside={aside}
+        align={align}
         updated={
           updatedAt && <Updated locale={locale} label={ui[locale].updated} date={updatedAt} />
         }

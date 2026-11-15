@@ -153,6 +153,51 @@
     }
   }
 
+  /* Company pages: steps and pins arrive once (delay set inline), the season chain's grain
+     travels its track, and "you are here" breathes. Reduced motion stills all of them. */
+  --animate-rise: rise 0.6s var(--ease-enter) both;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+  --animate-pin-drop: pin-drop 0.55s var(--ease-enter) both;
+  @keyframes pin-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-14px) scale(0.6);
+    }
+  }
+  --animate-travel: travel 7s var(--ease-move) infinite;
+  @keyframes travel {
+    0% {
+      top: 0%;
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    92% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+  --animate-halo: halo 2.4s var(--ease-exit) infinite;
+  @keyframes halo {
+    from {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.7);
+    }
+  }
+
   /* Cinematic only (home, brand and story heroes): a slow settle of the photo. */
   --animate-hero-settle: hero-settle 30s var(--ease-move) both;
   @keyframes hero-settle {

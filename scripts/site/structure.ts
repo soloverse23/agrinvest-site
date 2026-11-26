@@ -7,7 +7,6 @@
  */
 import type { Payload } from 'payload'
 
-import { withHarvestLinks } from './harvest-order'
 import { footerColumns, navigationItems, type Locale } from './navigation'
 
 type Row = { link?: { href?: string | null; label?: string | null } | null }
@@ -101,6 +100,8 @@ const hrefsOf = (rows?: Row[] | null) => (rows ?? []).map((r) => r.link?.href)
 const same = (a: (string | null | undefined)[], b: (string | null | undefined)[]) =>
   a.length === b.length && a.every((h, i) => h === b[i])
 
+const sorted = (hrefs: (string | null | undefined)[]) => [...hrefs].sort()
+
 /** The menu with each unchanged panel replaced, or the same array when none is. */
 export function withSimplePanels<T extends Item>(items: T[], locale: Locale): T[] {
   const fresh = navigationItems(locale)
@@ -110,9 +111,9 @@ export function withSimplePanels<T extends Item>(items: T[], locale: Locale): T[
     const old = previousPanels[locale][href]
     const target = fresh.find((f) => f.link.href === href)
     if (!old || !target || item.link?.label !== old.label) return item
-    // The crop links may still be in the order before `./harvest-order.ts`.
-    const have = hrefsOf(withHarvestLinks(item.children ?? [], locale))
-    if (!same(have, old.hrefs)) return item
+    // In any order: earlier steps and the harvest order moved links inside a panel.
+    const have = hrefsOf(item.children)
+    if (!same(sorted(have), sorted(old.hrefs))) return item
     changed = true
     return {
       ...item,

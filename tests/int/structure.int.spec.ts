@@ -17,7 +17,8 @@ describe('structure simplification on a live site', () => {
       const live = Object.entries(previousPanels[locale]).map(([href, old]) => ({
         id: href,
         link: { label: old.label, href },
-        children: rows(old.hrefs),
+        // The stored order differs from the one listed here.
+        children: rows([...old.hrefs].reverse()),
       }))
       const next = withSimplePanels(live, locale)
       for (const item of next) {

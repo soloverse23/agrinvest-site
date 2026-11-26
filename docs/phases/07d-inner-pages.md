@@ -177,3 +177,5 @@ Owner's request: fewer categories and subcategories, more intuitive navigation.
 - **Footer:** five columns that follow the menu, main pages only.
 - **Live site:** `scripts/site/structure.ts` (run from `apply:redesign`) replaces a panel or the footer only while it still links what the previous default linked. No URL changed.
 - `scripts/site/structure-local.ts` was a local preview helper and is not committed.
+
+**Demo content (2026-11-26):** `scripts/site/demo-cleanup.ts` (run from `apply:redesign`) hides the demo seed's invented emails and numbers of people and puts the three demo news back to draft. Nothing is deleted.

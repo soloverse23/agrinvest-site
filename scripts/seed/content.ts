@@ -368,8 +368,8 @@ Produsele noastre sunt gândite mai ales pentru fermierii mici și mijlocii, car
             primary: { label: 'Cere o ofertă', href: '/finantare#cerere' },
             secondary: { label: 'Contact', href: '/contact' },
             instalments: [
-              { when: 'Rata 1 · după recolta de vară', label: 'grâu, orz, rapiță' },
-              { when: 'Rata 2 · după recolta de toamnă', label: 'porumb, floarea-soarelui' },
+              { when: 'Rata 1 · după recolta de vară', label: 'orz, grâu, rapiță' },
+              { when: 'Rata 2 · după recolta de toamnă', label: 'floarea-soarelui, porumb' },
             ],
           },
           {
@@ -460,56 +460,6 @@ Produsele noastre sunt gândite mai ales pentru fermierii mici și mijlocii, car
               'Transportăm cereale de la fermă la bază și livrăm inputuri la fermă: semințe, îngrășăminte și produse de protecția plantelor.',
             ),
             q('Câte camioane are Agrinvest?', 'Flota proprie are {{L1}} camioane.'),
-          ],
-        },
-      }
-
-    case 'parteneri':
-      return {
-        ro: [
-          {
-            blockType: 'serviceGrid',
-            kicker: 'Parteneriate',
-            heading: 'Cu cine lucrăm',
-            lead: 'Agrinvest leagă fermierii de piață. Căutăm parteneri care vor să ajungă la fermieri sau să cumpere de la ei.',
-            columns: '2',
-            items: [
-              {
-                icon: 'leaf',
-                title: 'Producători de inputuri',
-                body: 'Semințe, îngrășăminte și produse de protecția plantelor, distribuite prin rețeaua noastră de vânzări și consultanță.',
-              },
-              {
-                icon: 'wheat',
-                title: 'Procesatori și traderi',
-                body: 'Cereale și plante tehnice din bazele noastre, cu logistică proprie.',
-              },
-              {
-                icon: 'coins',
-                title: 'Finanțatori',
-                body: 'Bănci și instituții care susțin finanțarea fermierilor prin Agrinvest Credit IFN.',
-              },
-              {
-                icon: 'handshake',
-                title: 'Fermieri',
-                body: 'Parteneriate pe termen lung.',
-              },
-            ],
-          },
-          {
-            blockType: 'leadForm',
-            leadType: 'parteneri',
-            extraFields: ['company'],
-            heading: 'Propune un parteneriat',
-            body: 'Spune-ne cine ești și ce propui. Te contactăm în câteva zile lucrătoare.',
-          },
-        ],
-        faq: {
-          ro: [
-            q(
-              'Cum devin partener Agrinvest?',
-              'Completează formularul de pe această pagină cu firma și propunerea ta. Te contactăm în câteva zile lucrătoare.',
-            ),
           ],
         },
       }

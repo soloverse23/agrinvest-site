@@ -283,7 +283,7 @@ export const hubGroups: { group: MarketGroup; markets: MarketKey[] }[] = [
   { group: 'energy', markets: ['brent', 'diesel-ro', 'petrol-ro', 'gas-eu'] },
   {
     group: 'grain',
-    markets: ['wheat-hrw', 'wheat-srw', 'maize', 'sunflower-oil', 'rapeseed-oil'],
+    markets: ['wheat-hrw', 'wheat-srw', 'rapeseed-oil', 'sunflower-oil', 'maize'],
   },
   { group: 'fertiliser', markets: ['urea', 'dap', 'potash', 'tsp'] },
   { group: 'fx', markets: ['eur-ron', 'eur-usd', 'usd-ron'] },

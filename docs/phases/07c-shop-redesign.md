@@ -648,3 +648,12 @@ Owner request: "make the checkout page and its form much better and simpler; nex
 - Confirmation ("we will call you back"): thanks by first name, "Te sunăm noi" with the buyer's phone, the order number, who will call, three next steps (call → proforma by email → delivery or pickup), what was ordered, and links to the shop and contact. `placeOrder` now returns these details (`CheckoutState.order`); order logic is unchanged.
 - Fixed in passing: `sm:` classes in the checkout and `CompanyLookupField` did nothing (the design system has no `sm` breakpoint).
 - Shots: `docs/design-review/shots/2026-11-15-checkout/`. The "Shop orders" e2e tests pass (6/6) against :3200.
+
+## ING WebPay compliance (2026-11-26)
+
+ING asks for these before it moves the card service from agrinvestshop.ro to the new site: products and prices; terms, delivery and returns; cookies, privacy and complaints; the seller's CUI, name, address, phone and email on every page and on the payment page; an ANPC link; the Visa and Mastercard logos.
+
+- Seller identity comes from the figures register: `C11.cui`, `C11.reg`, `C11.euid`, `C12` (commercial office), `C13.phone`/`C13.email` (orders), `C14` (returns address), plus `C3`. `src/components/Seller.tsx` renders it in the footer and in a "Vânzător" block under the checkout button.
+- `design-system/patterns/PaymentMarks.tsx`: Visa and Mastercard on white chips (footer, card tile), and the ANPC SAL pictogram linked to reclamatiisal.anpc.ro. SOL is left out because the EU ODR platform closed on 20 July 2025.
+- Legal texts are ported from agrinvestshop.ro into `data/pages.json`: terms, delivery, returns, privacy, plus the new `/cookie-uri` and `/reclamatii` pages (EN: `/cookies`, `/complaints`). `applyPages` now replaces a page only while it still opens with a draft notice, so staff edits are kept.
+- Card payment itself waits for ING's API documentation. We are a custom build (Next.js/Node), so ING sends PHP examples and we port them. The card tile stays "În curând".

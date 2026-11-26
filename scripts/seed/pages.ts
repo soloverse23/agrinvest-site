@@ -1,3 +1,5 @@
+import { aboutPage } from '../site/company-first'
+
 /**
  * Core pages for Phase 2 (their blocks and FAQ are in content.ts). Each page has its SEO title
  * (30–60 characters) and a summary that doubles as the meta description (70–160).
@@ -35,18 +37,16 @@ export const pages: PageSeed[] = [
   {
     key: 'despre',
     ro: {
-      title: 'Despre Agrinvest',
+      title: aboutPage.ro.next.title,
       slug: 'despre',
-      seoTitle: 'Despre Agrinvest: companie agricolă cu capital românesc',
-      summary:
-        'Agrinvest este o companie agricolă cu capital românesc, care lucrează direct cu fermierii: comerț cu cereale, depozitare, inputuri, consultanță și finanțare.',
+      seoTitle: aboutPage.ro.next.seoTitle,
+      summary: aboutPage.ro.next.summary,
     },
     en: {
-      title: 'About Agrinvest',
+      title: aboutPage.en.next.title,
       slug: 'about',
-      seoTitle: 'About Agrinvest: a Romanian-owned agribusiness',
-      summary:
-        'Agrinvest is a Romanian-owned agribusiness working directly with farmers: grain trading, storage, farm inputs, agronomic advice and financing.',
+      seoTitle: aboutPage.en.next.seoTitle,
+      summary: aboutPage.en.next.summary,
     },
   },
   {
@@ -72,16 +72,16 @@ export const pages: PageSeed[] = [
     ro: {
       title: 'Vinde cereale la Agrinvest',
       slug: 'cereale',
-      seoTitle: 'Vinde cereale: grâu, porumb, floarea-soarelui, rapiță',
+      seoTitle: 'Vinde cereale: grâu, rapiță, floarea-soarelui, porumb',
       summary:
-        'Cumpărăm grâu, porumb, floarea-soarelui, rapiță și orz direct de la fermieri, cu recepție în bazele noastre și transport cu flota proprie.',
+        'Cumpărăm orz, grâu, rapiță, floarea-soarelui și porumb direct de la fermieri, cu recepție în bazele noastre și transport cu flota proprie.',
     },
     en: {
       title: 'Grain at Agrinvest',
       slug: 'grain',
-      seoTitle: 'Romanian grain: wheat, corn, sunflower, rapeseed',
+      seoTitle: 'Romanian grain: wheat, rapeseed, sunflower, corn',
       summary:
-        'Agrinvest buys wheat, corn, sunflower, rapeseed and barley directly from Romanian farmers, receives it at its own bases and moves it with its own fleet.',
+        'Agrinvest buys barley, wheat, rapeseed, sunflower and corn directly from Romanian farmers, receives it at its own bases and moves it with its own fleet.',
     },
   },
   {
@@ -151,23 +151,6 @@ export const pages: PageSeed[] = [
       seoTitle: 'Grain and farm input transport, own fleet | Agrinvest',
       summary:
         'We move grain, seed, fertiliser and crop protection products with our own truck fleet, from the farm to the base and on to the customer.',
-    },
-  },
-  {
-    key: 'parteneri',
-    ro: {
-      title: 'Parteneri',
-      slug: 'parteneri',
-      seoTitle: 'Parteneri Agrinvest: producători, procesatori, traderi',
-      summary:
-        'Lucrăm cu producători de inputuri, procesatori, traderi și finanțatori. Află cum devii partener Agrinvest și ce oferim fiecărui tip de parteneriat.',
-    },
-    en: {
-      title: 'Partners',
-      slug: 'partners',
-      seoTitle: 'Partner with Agrinvest: inputs, processing, trade',
-      summary:
-        'Agrinvest works with input makers, processors, grain buyers and lenders. See how to partner with a Romanian agribusiness that works directly with farmers.',
     },
   },
   {

@@ -7,7 +7,7 @@ import { fileKey, review, sources } from '@/fields/finance'
 import { enrichmentLedger } from '@/fields/shop'
 import { localeOf } from '@/i18n/config'
 import { articlePath, newsArticlePath } from '@/i18n/routes'
-import { pillarByKey, pillars } from '@/lib/articles/pillars'
+import { pillarByKey, pillarOptions } from '@/lib/articles/pillars'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
 import { slugify } from '@/lib/slugify'
@@ -99,7 +99,7 @@ export const Guides: CollectionConfig = {
       name: 'pillar',
       type: 'select',
       label: label('Pilon', 'Pillar'),
-      options: pillars.map((p) => ({ value: p.key, label: p.name })),
+      options: pillarOptions,
       validate: (value: unknown, { data }: { data: Data }) =>
         data?.section !== 'ghid' || Boolean(value) || 'Un ghid are nevoie de un pilon.',
       admin: { position: 'sidebar', condition: (data) => data?.section === 'ghid' },
@@ -124,7 +124,7 @@ export const Guides: CollectionConfig = {
       relationTo: 'media',
       label: label('Imagine principală', 'Cover image'),
       admin: {
-        condition: isArticle,
+        condition: (data) => isArticle(data) || data?.section === 'finantare',
         description: label(
           'Opțional. Fotografie orizontală, minim 1600 px lățime.',
           'Optional. A landscape photo, at least 1600 px wide.',

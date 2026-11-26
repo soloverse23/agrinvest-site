@@ -4,16 +4,11 @@
  * entry-point helpers (`scripts/{finance,tools,articles}/entry-points.ts`) look for these
  * addresses at any depth and then leave the menu alone.
  *
- * Five items: Shop · Prices and tools · Financing · Company · News and guides. The shop
- * panel shows live categories with counts; the children listed here are what the mobile
- * menu and a crawler without the panel see.
+ * Five items: Products and services · Shop · Prices and tools · Financing · News and guides.
+ * The shop panel shows live categories with counts; the children listed here are what the
+ * mobile menu and a crawler without the panel see.
  */
-import {
-  financeFooterColumn,
-  financeGroups,
-  financeLoanCount,
-  financeMenu,
-} from '../finance/entry-points'
+import { financeGroups, financeMenu } from '../finance/entry-points'
 
 export type Locale = 'ro' | 'en'
 type Link = { label: string; href: string }
@@ -68,18 +63,18 @@ export function marketLinks(locale: Locale): NavChild[] {
 
 const cropNames: Record<Locale, [string, string][]> = {
   ro: [
-    ['grau', 'Grâu'],
-    ['porumb', 'Porumb'],
-    ['floarea-soarelui', 'Floarea-soarelui'],
-    ['rapita', 'Rapiță'],
     ['orz', 'Orz'],
+    ['grau', 'Grâu'],
+    ['rapita', 'Rapiță'],
+    ['floarea-soarelui', 'Floarea-soarelui'],
+    ['porumb', 'Porumb'],
   ],
   en: [
-    ['wheat', 'Wheat'],
-    ['corn', 'Corn'],
-    ['sunflower', 'Sunflower'],
-    ['rapeseed', 'Rapeseed'],
     ['barley', 'Barley'],
+    ['wheat', 'Wheat'],
+    ['rapeseed', 'Rapeseed'],
+    ['sunflower', 'Sunflower'],
+    ['corn', 'Corn'],
   ],
 }
 
@@ -98,8 +93,81 @@ function build(locale: Locale): NavEntry[] {
     storage: ro ? '/depozitare' : '/en/storage',
     about: ro ? '/despre' : '/en/about',
   }
+  const services = ro ? 'Servicii' : 'Services'
+  const company = ro ? 'Compania' : 'Company'
 
   return [
+    {
+      // The whole package, in the order of a season (the chain in `src/lib/company.ts`), then
+      // the company pages.
+      label: ro ? 'Produse și servicii' : 'Products and services',
+      href: path.about,
+      panel: 'links',
+      blurb: ro
+        ? 'Tot ce face Agrinvest pentru o fermă, de la inputuri la finanțarea sezonului următor.'
+        : 'Everything Agrinvest does for a farm, from inputs to financing the next season.',
+      children: [
+        {
+          label: ro ? 'Inputuri' : 'Inputs',
+          href: path.shop,
+          description: ro
+            ? 'Semințe, îngrășăminte, protecția plantelor'
+            : 'Seed, fertiliser, crop protection',
+          group: services,
+        },
+        {
+          label: ro ? 'Transport' : 'Transport',
+          href: ro ? '/logistica' : '/en/logistics',
+          description: ro ? 'Flota proprie, de la fermă la bază' : 'Our own fleet, farm to base',
+          group: services,
+        },
+        {
+          // Structure simplification (2026-11-26): reception and drying live on the storage
+          // page; `/depozitare/uscare` stays reachable from there.
+          label: ro ? 'Depozitare și uscare' : 'Storage and drying',
+          href: path.storage,
+          description: ro
+            ? 'Recepție, uscare și păstrare la bază'
+            : 'Reception, drying and storage at the base',
+          group: services,
+        },
+        {
+          label: ro ? 'Vânzare cereale' : 'Grain buying',
+          href: path.grain,
+          description: ro ? 'Cumpărăm recolta la prețul zilei' : 'We buy at the day’s price',
+          group: services,
+        },
+        {
+          // A delivery service, so it sits with the services, not under Prices.
+          label: ro ? 'Motorină la fermă' : 'Diesel to the farm',
+          href: ro ? '/motorina' : '/en/diesel',
+          description: ro ? 'Livrare și ofertă' : 'Delivery and a quote',
+          group: services,
+        },
+        {
+          label: ro ? 'Finanțare' : 'Financing',
+          href: ro ? '/finantare' : '/en/financing',
+          description: ro ? 'Prin Agrinvest Credit IFN' : 'Through Agrinvest Credit IFN',
+          group: services,
+        },
+        {
+          label: ro ? 'Despre Agrinvest' : 'About Agrinvest',
+          href: `${path.about}#compania`,
+          group: company,
+        },
+        {
+          label: ro ? 'Agrinvest în cifre' : 'Agrinvest in figures',
+          href: ro ? '/despre/cifre' : '/en/about/figures',
+          description: ro ? 'Cu sursa fiecărei valori' : 'With the source of every value',
+          group: company,
+        },
+        {
+          label: ro ? 'Cariere' : 'Careers',
+          href: ro ? '/cariere' : '/en/careers',
+          group: company,
+        },
+      ],
+    },
     {
       label: ro ? 'Magazin' : 'Shop',
       href: path.shop,
@@ -120,7 +188,7 @@ function build(locale: Locale): NavEntry[] {
           },
       children: ro
         ? [
-            { label: 'Semințe', href: '/magazin/seminte', description: 'Grâu, orz, rapiță, năut' },
+            { label: 'Semințe', href: '/magazin/seminte', description: 'Orz, grâu, rapiță, năut' },
             {
               label: 'Protecția plantelor',
               href: '/magazin/protectia-plantelor',
@@ -136,7 +204,7 @@ function build(locale: Locale): NavEntry[] {
             {
               label: 'Seeds',
               href: '/en/shop/seeds',
-              description: 'Wheat, barley, rapeseed, chickpea',
+              description: 'Barley, wheat, rapeseed, chickpea',
             },
             {
               label: 'Crop protection',
@@ -151,43 +219,30 @@ function build(locale: Locale): NavEntry[] {
           ],
     },
     {
-      label: ro ? 'Prețuri și unelte' : 'Prices and tools',
+      label: ro ? 'Prețuri' : 'Prices',
       href: path.prices,
       panel: 'links',
       blurb: ro
         ? 'Cereale, motorină, Brent, îngrășăminte și curs euro, cu sursa fiecărui număr.'
         : 'Grain, diesel, Brent, fertiliser and the euro rate, each with its source.',
+      // Structure simplification (2026-11-26): one link per kind of price. The crop pages
+      // and Brent / gas stay live, linked from `/preturi` and each market's "other markets".
       children: [
-        ...crops.map(([slug, label]) => ({
-          label,
-          href: `${path.prices}/${slug}`,
-          group: ro ? 'Prețuri la cereale' : 'Grain prices',
-        })),
         {
-          label: ro ? 'Vinde cereale' : 'Sell grain',
-          href: path.grain,
-          description: ro ? 'Oferta pentru toate culturile' : 'An offer for every crop',
-          group: ro ? 'Vinde cereale' : 'Sell grain',
+          label: ro ? 'Prețuri la cereale' : 'Grain prices',
+          href: path.prices,
+          description: crops.map(([, label]) => label).join(', '),
+          group: ro ? 'Prețuri' : 'Prices',
         },
-        ...marketLinks(locale),
-        {
-          label: ro ? 'Motorină la fermă' : 'Diesel to the farm',
-          href: ro ? '/motorina' : '/en/diesel',
-          description: ro ? 'Livrare și ofertă' : 'Delivery and a quote',
-          group: ro ? 'Vinde cereale' : 'Sell grain',
-        },
+        ...marketLinks(locale).filter(
+          (m) => !/petrol-brent|brent-crude|gaze-naturale|natural-gas/.test(m.href),
+        ),
         {
           label: ro ? 'Calculator preț net' : 'Net price calculator',
           href: ro ? '/preturi/calculator-pret-net' : '/en/prices/net-price-calculator',
           description: ro
             ? 'Scăzământ la umiditate și impurități'
             : 'Moisture and impurity deductions',
-          group: ro ? 'Unelte' : 'Tools',
-        },
-        {
-          label: ro ? 'Simulator de rate' : 'Repayment simulator',
-          href: ro ? '/finantare/simulator' : '/en/financing/simulator',
-          description: ro ? 'Ratele pe recoltele tale' : 'Instalments on your harvests',
           group: ro ? 'Unelte' : 'Tools',
         },
         {
@@ -202,50 +257,48 @@ function build(locale: Locale): NavEntry[] {
       href: finance.href,
       panel: 'links',
       blurb: finance.blurb,
-      children: finance.children.map((c, i) => ({
-        ...c,
-        group: i < financeLoanCount ? loans : instruments,
-      })),
-    },
-    {
-      label: ro ? 'Compania' : 'Company',
-      href: path.about,
-      panel: 'links',
-      blurb: ro
-        ? 'O companie agricolă cu capital românesc, care lucrează direct cu fermierii.'
-        : 'A Romanian-owned agribusiness that works directly with farmers.',
+      // Structure simplification (2026-11-26): the credits by need (the hub's three groups),
+      // then the two tools and the request. Each credit page stays linked from its group.
       children: [
         {
-          label: ro ? 'Depozitare și uscare' : 'Storage and drying',
-          href: path.storage,
-          description: ro ? 'Recepție, uscare, păstrare' : 'Reception, drying, storage',
-          group: ro ? 'Servicii' : 'Services',
+          label: ro ? 'Bani pentru sezon' : 'Money for the season',
+          href: `${finance.href}#grupa-season`,
+          description: ro
+            ? 'Inputuri, APIA, contracte de cereale'
+            : 'Inputs, APIA, grain contracts',
+          group: loans,
         },
         {
-          label: ro ? 'Logistică' : 'Logistics',
-          href: ro ? '/logistica' : '/en/logistics',
-          group: ro ? 'Servicii' : 'Services',
+          label: ro ? 'Investiții în fermă' : 'Investing in the farm',
+          href: `${finance.href}#grupa-invest`,
+          description: ro
+            ? 'Utilaje, irigații, depozite, teren'
+            : 'Machinery, irrigation, stores, land',
+          group: loans,
         },
         {
-          label: ro ? 'Despre Agrinvest' : 'About Agrinvest',
-          href: path.about,
-          group: ro ? 'Companie' : 'Company',
+          label: ro ? 'Situații speciale' : 'Special cases',
+          href: `${finance.href}#grupa-special`,
+          description: ro
+            ? 'Stocuri, procesare, restructurare'
+            : 'Stocks, processing, restructuring',
+          group: loans,
         },
         {
-          label: ro ? 'Agrinvest în cifre' : 'Agrinvest in figures',
-          href: ro ? '/despre/cifre' : '/en/about/figures',
-          description: ro ? 'Cu sursa fiecărei valori' : 'With the source of every value',
-          group: ro ? 'Companie' : 'Company',
+          label: ro ? 'Simulator de rate' : 'Repayment simulator',
+          href: ro ? '/finantare/simulator' : '/en/financing/simulator',
+          description: ro ? 'Ratele pe recoltele tale' : 'Instalments on your harvests',
+          group: instruments,
         },
         {
-          label: ro ? 'Parteneri' : 'Partners',
-          href: ro ? '/parteneri' : '/en/partners',
-          group: ro ? 'Companie' : 'Company',
+          label: ro ? 'Întrebări despre credit' : 'Loan questions',
+          href: ro ? '/finantare/intrebari' : '/en/financing/questions',
+          group: instruments,
         },
         {
-          label: ro ? 'Cariere' : 'Careers',
-          href: ro ? '/cariere' : '/en/careers',
-          group: ro ? 'Companie' : 'Company',
+          label: ro ? 'Cere finanțare' : 'Apply for financing',
+          href: ro ? '/finantare/aplica' : '/en/financing/apply',
+          group: instruments,
         },
       ],
     },
@@ -256,29 +309,23 @@ function build(locale: Locale): NavEntry[] {
       blurb: ro
         ? 'Răspunsuri verificate pentru fermieri: culturi, vânzare, depozitare și finanțare.'
         : 'Checked answers for farmers: crops, selling, storage and financing.',
+      // Structure simplification (2026-11-26): one guides entry (the hub lists the financing
+      // guides too) and one news entry (Agrinvest news and the farm press share `/stiri`).
       children: [
         {
-          label: ro ? 'Ghiduri pentru fermieri' : 'Guides for farmers',
+          label: ro ? 'Ghiduri' : 'Guides',
           href: path.guides,
-          description: ro ? 'Pe culturi și teme' : 'By crop and topic',
+          description: ro
+            ? 'Culturi, vânzare, depozitare, finanțare'
+            : 'Crops, selling, storage, financing',
           group: ro ? 'Ghiduri' : 'Guides',
         },
         {
-          label: ro ? 'Ghiduri de finanțare' : 'Financing guides',
-          href: ro ? '/finantare/ghiduri' : '/en/financing/guides',
-          description: ro ? 'Credit, APIA, garanții' : 'Credit, APIA, guarantees',
-          group: ro ? 'Ghiduri' : 'Guides',
-        },
-        {
-          label: ro ? 'Știri Agrinvest' : 'Agrinvest news',
+          label: ro ? 'Știri' : 'News',
           href: path.news,
-          description: ro ? 'Noutăți de la baze și din piață' : 'From our bases and the market',
-          group: ro ? 'Știri' : 'News',
-        },
-        {
-          label: ro ? 'Știri agricole' : 'Farm news',
-          href: `${path.news}#flux`,
-          description: ro ? 'Din presa agricolă' : 'From the farm press',
+          description: ro
+            ? 'De la baze și din presa agricolă'
+            : 'From our bases and the farm press',
           group: ro ? 'Știri' : 'News',
         },
         {
@@ -299,56 +346,59 @@ export const siteCta: Record<Locale, Link> = {
   en: { label: 'Contact', href: '/en/contact' },
 }
 
+/**
+ * Structure simplification (2026-11-26): the footer follows the menu, one column per menu item,
+ * the main pages only. Subcategories, single markets and the finance pages are on their hubs.
+ */
 export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: string }> = {
   ro: {
     columns: [
+      {
+        title: 'Produse și servicii',
+        links: [
+          { label: 'Produse și servicii', href: '/despre' },
+          { label: 'Logistică', href: '/logistica' },
+          { label: 'Depozitare și uscare', href: '/depozitare' },
+          { label: 'Vânzare cereale', href: '/cereale' },
+          { label: 'Motorină la fermă', href: '/motorina' },
+          { label: 'Agrinvest în cifre', href: '/despre/cifre' },
+          { label: 'Cariere', href: '/cariere' },
+        ],
+      },
       {
         title: 'Magazin',
         links: [
           { label: 'Toate produsele', href: '/magazin' },
           { label: 'Semințe', href: '/magazin/seminte' },
-          { label: 'Erbicide', href: '/magazin/erbicide' },
-          { label: 'Fungicide', href: '/magazin/fungicide' },
-          { label: 'Insecticide', href: '/magazin/insecticide' },
-          { label: 'Îngrășăminte', href: '/magazin/ingrasaminte' },
+          { label: 'Protecția plantelor', href: '/magazin/protectia-plantelor' },
+          { label: 'Nutriție', href: '/magazin/nutritie' },
         ],
       },
       {
-        title: 'Prețuri și unelte',
+        title: 'Prețuri',
         links: [
-          { label: 'Prețuri agricole', href: '/preturi' },
-          { label: 'Vinde cereale', href: '/cereale' },
-          { label: 'Calculator preț net', href: '/preturi/calculator-pret-net' },
-          { label: 'Prețuri îngrășăminte', href: '/preturi/ingrasaminte' },
-          { label: 'Petrol Brent', href: '/preturi/petrol-brent' },
+          { label: 'Prețuri la cereale', href: '/preturi' },
+          { label: 'Carburanți', href: '/preturi/carburanti' },
+          { label: 'Îngrășăminte', href: '/preturi/ingrasaminte' },
           { label: 'Curs euro-leu', href: '/preturi/curs-euro-leu' },
-          { label: 'Motorină', href: '/motorina' },
           { label: 'Toate uneltele', href: '/unelte' },
         ],
       },
       {
         title: 'Finanțare',
-        links: financeFooterColumn.ro,
-      },
-      {
-        title: 'Compania',
         links: [
-          { label: 'Depozitare', href: '/depozitare' },
-          { label: 'Uscare și precurățare', href: '/depozitare/uscare' },
-          { label: 'Logistică', href: '/logistica' },
-          { label: 'Despre Agrinvest', href: '/despre' },
-          { label: 'Agrinvest în cifre', href: '/despre/cifre' },
-          { label: 'Parteneri', href: '/parteneri' },
-          { label: 'Cariere', href: '/cariere' },
+          { label: 'Finanțare', href: '/finantare' },
+          { label: 'Simulator de rate', href: '/finantare/simulator' },
+          { label: 'Întrebări despre credit', href: '/finantare/intrebari' },
+          { label: 'Despre IFN', href: '/finantare/despre-ifn' },
+          { label: 'Cere finanțare', href: '/finantare/aplica' },
         ],
       },
       {
         title: 'Știri și ghiduri',
         links: [
-          { label: 'Ghiduri pentru fermieri', href: '/ghiduri' },
-          { label: 'Ghiduri de finanțare', href: '/finantare/ghiduri' },
-          { label: 'Știri Agrinvest', href: '/stiri' },
-          { label: 'Știri agricole', href: '/stiri#flux' },
+          { label: 'Ghiduri', href: '/ghiduri' },
+          { label: 'Știri', href: '/stiri' },
           { label: 'Nota de piață', href: '/piata' },
           { label: 'Buletin săptămânal', href: '/stiri#buletin' },
         ],
@@ -359,52 +409,51 @@ export const siteFooter: Record<Locale, { columns: FooterColumnData[]; legal: st
   en: {
     columns: [
       {
+        title: 'Products and services',
+        links: [
+          { label: 'Products and services', href: '/en/about' },
+          { label: 'Logistics', href: '/en/logistics' },
+          { label: 'Storage and drying', href: '/en/storage' },
+          { label: 'Grain buying', href: '/en/grain' },
+          { label: 'Diesel to the farm', href: '/en/diesel' },
+          { label: 'Agrinvest in figures', href: '/en/about/figures' },
+          { label: 'Careers', href: '/en/careers' },
+        ],
+      },
+      {
         title: 'Shop',
         links: [
           { label: 'All products', href: '/en/shop' },
           { label: 'Seeds', href: '/en/shop/seeds' },
-          { label: 'Herbicides', href: '/en/shop/herbicides' },
-          { label: 'Fungicides', href: '/en/shop/fungicides' },
-          { label: 'Insecticides', href: '/en/shop/insecticides' },
-          { label: 'Fertilisers', href: '/en/shop/fertilisers' },
+          { label: 'Crop protection', href: '/en/shop/crop-protection' },
+          { label: 'Plant nutrition', href: '/en/shop/plant-nutrition' },
         ],
       },
       {
-        title: 'Prices and tools',
+        title: 'Prices',
         links: [
-          { label: 'Farm market prices', href: '/en/prices' },
-          { label: 'Sell grain', href: '/en/grain' },
-          { label: 'Net price calculator', href: '/en/prices/net-price-calculator' },
-          { label: 'Fertiliser prices', href: '/en/prices/fertilisers' },
-          { label: 'Brent crude', href: '/en/prices/brent-crude-oil' },
+          { label: 'Grain prices', href: '/en/prices' },
+          { label: 'Fuel prices', href: '/en/prices/fuel-prices' },
+          { label: 'Fertilisers', href: '/en/prices/fertilisers' },
           { label: 'Euro to leu rate', href: '/en/prices/euro-leu-exchange-rate' },
-          { label: 'Diesel', href: '/en/diesel' },
           { label: 'All tools', href: '/en/tools' },
         ],
       },
       {
         title: 'Financing',
-        links: financeFooterColumn.en,
-      },
-      {
-        title: 'Company',
         links: [
-          { label: 'Storage', href: '/en/storage' },
-          { label: 'Drying and cleaning', href: '/en/storage/drying' },
-          { label: 'Logistics', href: '/en/logistics' },
-          { label: 'About Agrinvest', href: '/en/about' },
-          { label: 'Agrinvest in figures', href: '/en/about/figures' },
-          { label: 'Partners', href: '/en/partners' },
-          { label: 'Careers', href: '/en/careers' },
+          { label: 'Financing', href: '/en/financing' },
+          { label: 'Repayment simulator', href: '/en/financing/simulator' },
+          { label: 'Loan questions', href: '/en/financing/questions' },
+          { label: 'About the IFN', href: '/en/financing/about-ifn' },
+          { label: 'Apply for financing', href: '/en/financing/apply' },
         ],
       },
       {
         title: 'News and guides',
         links: [
-          { label: 'Guides for farmers', href: '/en/guides' },
-          { label: 'Financing guides', href: '/en/financing/guides' },
-          { label: 'Agrinvest news', href: '/en/news' },
-          { label: 'Farm news', href: '/en/news#flux' },
+          { label: 'Guides', href: '/en/guides' },
+          { label: 'News', href: '/en/news' },
           { label: 'Market note', href: '/en/market' },
           { label: 'Weekly newsletter', href: '/en/news#buletin' },
         ],

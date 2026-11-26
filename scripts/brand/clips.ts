@@ -5,20 +5,17 @@
  *   npm run brand:clips            all slides
  *   npm run brand:clips -- grain   one slide
  *
- * Sources are 1080p windows of x5wm8dXlJt4 (the 360p WebM in data/raw/video is too soft for a
- * full-screen hero). Download them once with yt-dlp, using the ffmpeg this package ships:
+ * Source: the full 1080p film of x5wm8dXlJt4 (the 360p WebM in data/raw/video is too soft for
+ * a full-screen hero). Download it once with yt-dlp, using the ffmpeg this package ships:
  *
  *   yt-dlp -f 137 --ffmpeg-location node_modules/ffmpeg-static/ffmpeg \
- *     --download-sections "*154-170" --download-sections "*262-278" \
- *     --download-sections "*322-348" --download-sections "*348-362" \
- *     -o "data/raw/video/hd/x5wm8dXlJt4-%(section_start)d.%(ext)s" \
- *     "https://www.youtube.com/watch?v=x5wm8dXlJt4"
+ *     -o "data/raw/video/hd/x5wm8dXlJt4-full.%(ext)s" "https://www.youtube.com/watch?v=x5wm8dXlJt4"
  *
- * Times below are seconds inside each downloaded window (the windows start on a keyframe, so
- * they are not exact video times).
+ * (Format 270, the HLS 1080p, is the same 4 Mbps stream.) Times below are seconds in the film.
  *
- * Output in public/media/hero/, per slide: `{slide}.webm|mp4|webp` (16:9, 1280w, poster
- * 1920w) and `{slide}-tall.webm|mp4|webp` (9:16, 540w, poster 608w) for phones held upright.
+ * Output in public/media/hero/, per slide: `{slide}.webm|mp4|webp` (16:9, 1920w, the source's
+ * own size, so nothing is scaled) and `{slide}-tall.webm|mp4|webp` (9:16, 608w, the crop's own
+ * width) for phones held upright.
  * Each poster is its loop's first frame, so the swap from poster to video does not jump. The
  * loop's seam is a crossfade into its own start.
  *
@@ -33,12 +30,11 @@ import { fileURLToPath } from 'node:url'
 import ffmpegPath from 'ffmpeg-static'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
-const srcDir = path.join(root, 'data/raw/video/hd')
+const source = path.join(root, 'data/raw/video/hd/x5wm8dXlJt4-full.mp4')
 const outDir = path.join(root, 'public/media/hero')
 const tmpDir = path.join(root, 'data/raw/video/hd/.work')
 
 type Shot = {
-  file: string
   from: number
   to: number
   /** Horizontal centre of the portrait cut, 0–1 of the frame width (default 0.5). */
@@ -54,24 +50,24 @@ const clips: Clip[] = [
   {
     slide: 'grain',
     note: 'Two combines harvesting wheat, one slow drone move.',
-    shots: [{ file: 'x5wm8dXlJt4-262.mp4', from: 4.3, to: 12.4, focus: 0.45 }],
+    shots: [{ from: 266.3, to: 274.4, focus: 0.45 }],
   },
   {
     slide: 'shop',
-    note: 'Agrinvest big bags, the Agrinvest spreader, a seeder at work: the products in use.',
+    note: 'Agrinvest big bags in stock, fertiliser loaded onto a truck, the truck side: "Semințe · Pesticide · Îngrășăminte".',
     shots: [
-      { file: 'x5wm8dXlJt4-154.mp4', from: 3.42, to: 4.62, speed: 1.6 },
-      { file: 'x5wm8dXlJt4-322.mp4', from: 16.3, to: 18.3, speed: 1.25 },
-      { file: 'x5wm8dXlJt4-322.mp4', from: 21.45, to: 24.0, speed: 1.25 },
+      { from: 157.45, to: 158.6, speed: 1.6 },
+      { from: 143.8, to: 145.8, speed: 1.25, focus: 0.58 },
+      { from: 177.85, to: 182.1, focus: 0.45 },
     ],
   },
   {
     slide: 'finance',
     note: 'Sowing, then the harvest going onto trucks: credit at sowing, repaid after harvest.',
     shots: [
-      { file: 'x5wm8dXlJt4-348.mp4', from: 2.1, to: 5.5, focus: 0.7 },
-      { file: 'x5wm8dXlJt4-348.mp4', from: 5.7, to: 7.45, focus: 0.55 },
-      { file: 'x5wm8dXlJt4-262.mp4', from: 0.3, to: 3.9, focus: 0.38 },
+      { from: 350.1, to: 353.5, focus: 0.7 },
+      { from: 353.7, to: 355.45, focus: 0.55 },
+      { from: 262.3, to: 265.9, focus: 0.38 },
     ],
   },
 ]
@@ -84,11 +80,12 @@ const FPS = 25
 /**
  * Two cuts per slide: `wide` (16:9) for landscape screens and `tall` (9:16, framed on each
  * shot's `focus`) for phones held upright, where a 16:9 frame would show only its middle.
- * Ceilings: the plan's ~1.2 MB for 1280w, half that for phones.
+ * Both keep the source's pixels (no downscale) so the loop stays sharp on a full-screen hero.
+ * A loop loads only once its slide shows, so the ceilings are generous: 4 MB wide, 1.5 MB tall.
  */
 const shapes = {
-  wide: { crop: null, width: 1280, max: 1_200_000, poster: 1920 },
-  tall: { crop: 608, width: 540, max: 600_000, poster: 608 },
+  wide: { crop: null, width: 1920, max: 4_000_000, poster: 1920 },
+  tall: { crop: 608, width: 608, max: 1_500_000, poster: 608 },
 } as const
 type Shape = keyof typeof shapes
 
@@ -118,7 +115,7 @@ function master(clip: Clip, shape: Shape): string {
     '-to',
     String(s.to),
     '-i',
-    path.join(srcDir, s.file),
+    source,
   ])
   const parts: string[] = clip.shots.map((shot, i) => {
     const frame = crop
@@ -203,7 +200,7 @@ function build(clip: Clip) {
     console.log(`  ${name}.webp: ${(size(still) / 1e3).toFixed(0)} KB`)
 
     const webm = path.join(outDir, `${name}.webm`)
-    fit(`${name}.webm`, max, 34, 3, (crf) => {
+    fit(`${name}.webm`, max, 26, 3, (crf) => {
       const pass = path.join(tmpDir, name)
       const vp9 = ['-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', String(crf)]
       const gop = ['-row-mt', '1', '-g', String(FPS * 4), '-passlogfile', pass]
@@ -225,7 +222,7 @@ function build(clip: Clip) {
     })
 
     const mp4 = path.join(outDir, `${name}.mp4`)
-    fit(`${name}.mp4`, max, 26, 2, (crf) => {
+    fit(`${name}.mp4`, max, 20, 2, (crf) => {
       ffmpeg([
         '-i',
         src,
@@ -244,13 +241,7 @@ function main() {
   const only = process.argv.slice(2)
   const todo = only.length ? clips.filter((c) => only.includes(c.slide)) : clips
   if (!todo.length) throw new Error(`unknown slide: ${only.join(', ')}`)
-  for (const clip of todo) {
-    for (const shot of clip.shots) {
-      if (!existsSync(path.join(srcDir, shot.file))) {
-        throw new Error(`missing ${shot.file}: download it first (see the note at the top)`)
-      }
-    }
-  }
+  if (!existsSync(source)) throw new Error('missing the source film: see the note at the top')
   mkdirSync(outDir, { recursive: true })
   mkdirSync(tmpDir, { recursive: true })
   try {

@@ -2,24 +2,21 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import type { LeadFormState } from '@/lib/leads/state'
 
-import { needIcons } from '../icons/finance'
 import { ArrowRightIcon } from '../icons/icons'
 import { storyLocale } from '../fixtures/story'
 import { ConsultantDialog, type ConsultantDialogProps } from './ConsultantDialog'
 import {
-  ChoicePills,
   ConsultantBand,
   ConsultantButton,
   CreditBox,
   CreditCards,
   FactorList,
   FitPair,
+  HeroPhoto,
   MoreDetails,
-  NeedFinder,
   NeedTiles,
   QuestionLinks,
   ShortAnswer,
-  TrustFacts,
 } from './FinanceGuide'
 import { QuestionSearch } from './QuestionSearch'
 
@@ -38,26 +35,26 @@ type Story = StoryObj
 const tiles = [
   {
     id: 'season',
-    icon: 'wheat' as const,
+    photo: '/media/finance/season.webp',
     label: 'Campania agricolă',
     line: 'Semințe, îngrășăminte, motorină și lucrări, plătite după recoltă.',
     also: { href: '#', label: 'Inputuri cu plata la recoltă' },
   },
   {
     id: 'machinery',
-    icon: 'tractor' as const,
+    photo: '/media/finance/machinery.webp',
     label: 'Un tractor sau alt utilaj',
     line: 'Tractoare, combine și echipamente, cu rate după recoltă.',
   },
   {
     id: 'irrigation',
-    icon: 'drop' as const,
+    photo: '/media/finance/irrigation.webp',
     label: 'Irigații',
     line: 'Pompe, conducte și pivoți.',
   },
   {
     id: 'debts',
-    icon: 'lifebuoy' as const,
+    photo: '/media/finance/debts.webp',
     label: 'Datorii greu de plătit',
     line: 'Rate mai mici, pe o perioadă mai lungă, și un plan realist.',
   },
@@ -66,40 +63,17 @@ const tiles = [
 export const Hub: Story = {
   render: () => (
     <div className="grid max-w-page gap-12">
-      <TrustFacts
-        items={[
+      <HeroPhoto
+        src="/media/finance/hero.webp"
+        alt="Combină care descarcă grâul în remorca unui tractor"
+        facts={[
           { value: '24 h', label: 'răspuns de la dosarul complet' },
           { value: '10 ani', label: 'durata maximă la investiții' },
           { value: '2 rate/an', label: 'după recoltele de vară și toamnă' },
           { value: '500+', label: 'fermieri finanțați' },
         ]}
       />
-      <NeedTiles
-        tiles={tiles.map(({ icon, ...t }) => {
-          const Icon = needIcons[icon]
-          return { ...t, icon: <Icon />, href: '#' }
-        })}
-      />
-      <NeedFinder
-        action="#"
-        kicker="Nu ești sigur?"
-        title="Află în trei întrebări"
-        lead="Spune-ne pentru ce ai nevoie de bani, cam cât și când vinzi recolta."
-        submit="Vezi ce ți se potrivește"
-        note="Un exemplu, nu o ofertă."
-      >
-        <ChoicePills
-          name="culturi"
-          legend="Când vinzi recolta?"
-          defaultValue="wheat,maize"
-          options={[
-            { value: 'wheat', label: 'Vara' },
-            { value: 'maize', label: 'Toamna' },
-            { value: 'wheat,maize', label: 'Și vara, și toamna' },
-            { value: 'none', label: 'Nu cultiv cereale' },
-          ]}
-        />
-      </NeedFinder>
+      <NeedTiles tiles={tiles.map((t) => ({ ...t, href: '#' }))} />
     </div>
   ),
 }

@@ -41,10 +41,15 @@ function enrichmentEpoch() {
   // The guides menu and footer column (`apply:articles`, Phase 6).
   hash.update(readFileSync(path.join(dirname, 'scripts/articles/entry-points.ts')))
   // The menu and footer, and the check the older steps use to leave them alone (Phase 7b).
-  for (const name of ['navigation.ts', 'hrefs.ts'])
-    hash.update(readFileSync(path.join(dirname, 'scripts/site', name)))
+  const site = ['navigation.ts', 'hrefs.ts', 'company-first.ts', 'harvest-order.ts', 'structure.ts']
+  for (const name of site) hash.update(readFileSync(path.join(dirname, 'scripts/site', name)))
+  // The article covers that `apply:redesign` assigns to guides and news.
+  hash.update(readFileSync(path.join(dirname, 'scripts/seed/covers.ts')))
   // The Prices panel and footer column with the market pages (`apply:markets`, Phase 7f).
   hash.update(readFileSync(path.join(dirname, 'scripts/markets/nav.ts')))
+  // And every deploy: the scripts that write to the database before a build cannot refresh the
+  // cache, so a file missing from the list above must not leave old pages live.
+  hash.update(process.env.VERCEL_GIT_COMMIT_SHA ?? '')
   return hash.digest('hex').slice(0, 12)
 }
 
@@ -52,6 +57,13 @@ const nextConfig: NextConfig = {
   // A second build next to a running dev server (rehearsals, shots) without sharing `.next`.
   ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   env: { ENRICHMENT_EPOCH: enrichmentEpoch() },
+  // The partners page was removed (owner, 2026-11-26): partnership enquiries go to Contact.
+  async redirects() {
+    return [
+      { source: '/parteneri', destination: '/contact', permanent: true },
+      { source: '/en/partners', destination: '/en/contact', permanent: true },
+    ]
+  },
   experimental: {
     // Tailwind's CSS is small: inlining it removes the render-blocking stylesheet request.
     inlineCss: true,
@@ -65,6 +77,8 @@ const nextConfig: NextConfig = {
       },
       // Agrinvest's topic photos for stories without a feed photo (Phase 7e).
       { pathname: '/news/**' },
+      // Stills from Agrinvest's film on the services page.
+      { pathname: '/media/company/**' },
     ],
     // News thumbnails from the publishers' own image hosts (decision 0011, owner exception):
     // resized here to a few KB, so visitors never load the full photo from the publisher.

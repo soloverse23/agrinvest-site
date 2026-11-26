@@ -66,11 +66,11 @@ export const homeSeo: Record<Locale, { title: string; description: string }> = {
   ro: {
     title: 'Agrinvest: vinde cereale, preț grâu azi, magazin agricol',
     description:
-      'Prețul zilei pentru grâu, porumb și floarea-soarelui, recepție în bazele Agrinvest, magazin agricol cu semințe și inputuri, credit cu rate după recoltă.',
+      'Prețul zilei pentru grâu, floarea-soarelui și porumb, recepție în bazele Agrinvest, magazin agricol cu semințe și inputuri, credit cu rate după recoltă.',
   },
   en: {
     title: 'Agrinvest: sell grain, today’s wheat price, farm shop',
     description:
-      'Today’s price for wheat, maize and sunflower, reception at Agrinvest’s bases, a farm shop for seeds and inputs, and credit repaid after harvest.',
+      'Today’s price for wheat, sunflower and maize, reception at Agrinvest’s bases, a farm shop for seeds and inputs, and credit repaid after harvest.',
   },
 }

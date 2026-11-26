@@ -30,6 +30,8 @@ if (!existsSync(film)) throw new Error(`missing ${film}: see the yt-dlp command 
 mkdirSync(outDir, { recursive: true })
 
 for (const [name, c] of Object.entries(covers)) {
+  // A photo cover is a file already in the folder, not a frame of the film.
+  if (c.at === undefined) continue
   const out = path.join(outDir, `${name}.webp`)
   // 1600×900 crop from the centre-top of 1920×1080 for `top`, else the whole frame.
   const crop = c.top ? 'crop=1600:900:160:0,' : ''

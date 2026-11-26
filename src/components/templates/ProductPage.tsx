@@ -45,6 +45,7 @@ import { financeLinks } from '@/lib/content/finance'
 import { getFigures, getSeoDefaults } from '@/lib/content/globals'
 import type { Alternates } from '@/lib/content/pages'
 import { getProduct, listCategories, listProducts } from '@/lib/content/shop'
+import { byHarvest } from '@/lib/crops'
 import { formatDate, formatNumber, formatQuantity } from '@/lib/format'
 import { submitQuickRequest } from '@/lib/leads/actions'
 import { breadcrumbs, faqPage, product as productSchema } from '@/lib/schema'
@@ -138,7 +139,7 @@ type Doc = Found['doc']
 type Row = { label: string; value: React.ReactNode }
 
 const named = (items: (number | Crop)[] | null | undefined) =>
-  (items ?? []).flatMap((c) => (typeof c === 'object' ? c.name : []))
+  byHarvest((items ?? []).filter((c): c is Crop => typeof c === 'object')).map((c) => c.name)
 
 const capitalise = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 

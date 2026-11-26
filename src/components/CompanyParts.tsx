@@ -1,9 +1,14 @@
+import Link from 'next/link'
+
 import { ArrowRightIcon } from '@ds/icons/icons'
-import { SeasonChain, SeasonNext } from '@ds/patterns/Company'
+import { SeasonChain, ServiceList } from '@ds/patterns/Company'
+import { Photo } from '@ds/patterns/Photo'
+import { SectionHeading } from '@ds/patterns/Sections'
 import { Button } from '@ds/primitives/Button'
 import type { Locale } from '@/i18n/config'
-import { companyChain, companyUi, nextStep } from '@/lib/company'
-import { sectionFor } from '@/lib/sections'
+import { companyChain, companyCover, companyServices, companyUi, servicesPage } from '@/lib/company'
+
+import { BaseListBlock } from './RenderBlocks'
 
 /**
  * The company pages' title-band parts (kicker, actions, the season chain) for a page address,
@@ -29,7 +34,19 @@ export function companyTitle(locale: Locale, url: string) {
         ))}
       </>
     ),
-    aside: (
+    // The services page lists the same steps in full right below, so its band has a photo.
+    aside: isServicesPage(locale, url) ? (
+      <div className="relative aspect-3/2 overflow-hidden rounded-xl shadow-raised">
+        <Photo
+          src={companyCover}
+          alt={companyServices(locale).cover}
+          fill
+          priority
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+    ) : (
       <SeasonChain
         title={chain.title}
         steps={chain.steps}
@@ -41,37 +58,54 @@ export function companyTitle(locale: Locale, url: string) {
   }
 }
 
-/** The end of a company page: the step it hands over to, and the pages around it. */
-export function CompanyNext({ locale, url }: { locale: Locale; url: string }) {
-  const section = sectionFor(locale, url)
-  if (section?.id !== 'company') return null
-  const t = companyUi[locale]
-  const at = section.items.findIndex((i) => i.href === section.current)
-  const around = (i: number, kicker: string) => {
-    const item = section.items[i]
-    return item && item.href !== url ? { kicker, label: item.label, href: item.href } : null
-  }
-  const step = nextStep(locale, url)
+const isServicesPage = (locale: Locale, url: string) =>
+  url.replace(/\/$/, '') === servicesPage[locale]
+
+/**
+ * The services page's lead: the whole package in season order, then the bases on the map. The
+ * CMS blocks (the company's story) follow under their own heading, which the menu's About link
+ * opens.
+ */
+export function CompanyServices({ locale, url }: { locale: Locale; url: string }) {
+  if (!isServicesPage(locale, url)) return null
+  const { services, kicker, title, intro, about, map } = companyServices(locale)
   return (
-    <SeasonNext
-      className="mt-20 md:mt-28"
-      next={
-        step && {
-          kicker: t.next,
-          number: step.number,
-          total: step.total,
-          label: step.label,
-          body: step.body,
-          href: step.href,
-          icon: step.icon,
-        }
-      }
-      pager={{
-        label: t.inSection,
-        // A sub-page (drying) goes back to its parent first.
-        prev: section.current !== url ? around(at, t.prev) : around(at - 1, t.prev),
-        next: around(at + 1, t.forward),
-      }}
-    />
+    <>
+      <ServiceList kicker={kicker} title={title} intro={intro} services={services} />
+      <div className="mt-20 grid gap-6 md:mt-28">
+        <BaseListBlock
+          block={{ showMap: true }}
+          ctx={{ locale }}
+          head={
+            <SectionHeading
+              kicker={map.kicker}
+              title={map.title}
+              lead={map.lead}
+              className="mb-10 md:mb-12"
+            />
+          }
+        />
+        <ul className="mx-auto flex w-full max-w-page flex-wrap justify-center gap-x-6 gap-y-2 px-4 md:px-8">
+          {map.links.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                prefetch={false}
+                className="inline-flex items-center gap-1 font-medium text-accent no-underline hover:underline"
+              >
+                {link.label}
+                <ArrowRightIcon className="size-4" aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <h2
+        id="compania"
+        className="mx-auto mt-20 w-full max-w-page scroll-mt-24 px-4 text-h1 font-semibold md:mt-28 md:px-8"
+      >
+        {about}
+      </h2>
+    </>
   )
 }

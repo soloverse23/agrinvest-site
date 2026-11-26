@@ -44,8 +44,8 @@ const sellingSteps = {
 }
 
 const instalments = [
-  { when: 'Instalment 1 · after the summer harvest', label: 'wheat, barley, rapeseed' },
-  { when: 'Instalment 2 · after the autumn harvest', label: 'corn, sunflower' },
+  { when: 'Instalment 1 · after the summer harvest', label: 'barley, wheat, rapeseed' },
+  { when: 'Instalment 2 · after the autumn harvest', label: 'sunflower, corn' },
 ]
 
 export function contentEn(
@@ -454,54 +454,6 @@ Our products are designed mainly for small and medium farmers who find it hard t
             'We move grain from the farm to the base and deliver inputs to the farm: seed, fertiliser and crop protection products.',
           ),
           q('How many trucks does Agrinvest have?', 'Our own fleet has {{L1}} trucks.'),
-        ],
-      }
-
-    case 'parteneri':
-      return {
-        blocks: [
-          {
-            blockType: 'serviceGrid',
-            kicker: 'Partnerships',
-            heading: 'Who we work with',
-            lead: 'Agrinvest connects farmers to the market. We look for partners who want to reach farmers or buy from them.',
-            columns: '2',
-            items: [
-              {
-                icon: 'leaf',
-                title: 'Input makers',
-                body: 'Seed, fertiliser and crop protection, distributed through our sales and agronomy network.',
-              },
-              {
-                icon: 'wheat',
-                title: 'Processors and grain buyers',
-                body: 'Grain and oilseeds from our bases, with our own logistics.',
-              },
-              {
-                icon: 'coins',
-                title: 'Lenders',
-                body: 'Banks and institutions that support farm lending through Agrinvest Credit IFN.',
-              },
-              {
-                icon: 'handshake',
-                title: 'Farmers',
-                body: 'Long-term partnerships.',
-              },
-            ],
-          },
-          {
-            blockType: 'leadForm',
-            leadType: 'parteneri',
-            extraFields: ['company'],
-            heading: 'Propose a partnership',
-            body: 'Tell us who you are and what you propose. We reply within a few working days.',
-          },
-        ],
-        faq: [
-          q(
-            'How do I become an Agrinvest partner?',
-            'Send the form on this page with your company and your proposal. We reply within a few working days.',
-          ),
         ],
       }
 

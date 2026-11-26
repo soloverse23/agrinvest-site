@@ -15,7 +15,6 @@ const coreRo = [
   '/depozitare/uscare',
   '/finantare',
   '/logistica',
-  '/parteneri',
   '/cariere',
   '/contact',
   '/confidentialitate',
@@ -31,7 +30,6 @@ const coreEn = [
   '/en/storage/drying',
   '/en/financing',
   '/en/logistics',
-  '/en/partners',
   '/en/careers',
   '/en/contact',
   '/en/privacy',
@@ -292,6 +290,15 @@ test.describe('Core page content', () => {
     await expect(page.locator('main a[href^="/baze/"]')).toHaveCount(0)
   })
 
+  test('the services page shows each service with a photo, then the base map', async ({ page }) => {
+    await page.goto('/despre')
+    await expect(page.locator('section[aria-labelledby="servicii"] img')).toHaveCount(6)
+    await expect(page.locator('#baze svg[role=group]')).toBeVisible()
+    await expect(page.locator('main a[href="/depozitare#cerere"]').first()).toBeVisible()
+    await page.goto('/logistica')
+    await expect(page.locator('main a[href="/despre#baze"]')).toBeVisible()
+  })
+
   test('English pages have their own blocks, not Romanian fallbacks', async ({ page }) => {
     await page.goto('/en/storage')
     await expect(page.getByRole('heading', { name: 'Our storage bases' })).toBeVisible()
@@ -304,17 +311,15 @@ test.describe('Interactions', () => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/despre')
     const nav = page.getByRole('navigation', { name: 'Navigație principală' }).first()
-    const item = await nav
-      .getByRole('link', { name: 'Prețuri și unelte', exact: true })
-      .boundingBox()
+    const item = await nav.getByRole('link', { name: 'Prețuri', exact: true }).boundingBox()
     await page.mouse.move(item!.x + item!.width / 2, item!.y + item!.height / 2)
-    const target = nav.locator('a[href="/preturi/porumb"]')
+    const target = nav.locator('a[href="/preturi/curs-euro-leu"]')
     await expect(target).toBeVisible()
     const box = await target.boundingBox()
     await page.mouse.move(box!.x + 20, box!.y + 10, { steps: 25 })
     await expect(target).toBeVisible()
     await target.click()
-    await expect(page).toHaveURL(/\/preturi\/porumb$/)
+    await expect(page).toHaveURL(/\/preturi\/curs-euro-leu$/)
   })
 
   test('a county on the base map opens a box with its bases', async ({ page }) => {
@@ -954,15 +959,18 @@ test.describe('Inner pages are tidied (Phase 7d)', () => {
     await expect(page.locator('main a[href="/finantare/credit-productie"]')).toHaveCount(1)
   })
 
-  test('the finder works without JavaScript and names the credit', async ({ browser }) => {
+  test('the finance hub is short, with a photo on each need', async ({ page }) => {
+    await page.goto('/finantare')
+    await expect(page.locator('main h2')).toHaveCount(3)
+    await expect(page.locator('main img[src^="/media/finance/"]')).toHaveCount(9)
+  })
+
+  test('the simulator takes the need from the address and names the credit', async ({
+    browser,
+  }) => {
     const context = await browser.newContext({ javaScriptEnabled: false })
     const page = await context.newPage()
-    await page.goto('/finantare')
-    await page.getByLabel('Pentru ce?').selectOption('season')
-    await page.getByLabel('Cam ce sumă?').fill('400000')
-    await page.getByText('Și vara, și toamna').click()
-    await page.getByRole('button', { name: 'Vezi ce ți se potrivește' }).click()
-    await page.waitForURL(/\/finantare\/simulator\?nevoie=season/)
+    await page.goto('/finantare/simulator?nevoie=season&suma=400000&culturi=wheat,maize#rezultat')
     await expect(page.locator('#rezultat')).toContainText('Credit pentru producție agricolă')
     expect(await page.locator('#rezultat tbody tr').count()).toBe(2)
     await context.close()

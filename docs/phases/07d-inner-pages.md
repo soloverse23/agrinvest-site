@@ -159,3 +159,21 @@ This comes from the audit of 40 inner pages at 1366 and 390 px on 2026-11-11. Ev
 
 - Is "Prețuri și vânzare" the right menu label?
 - Should the drawer promise a reply time? Until there is a figure for it, the text is "în curând".
+
+## Company pages, simplified (2026-11-26)
+
+Owner's request.
+
+- **No next-step cards.** The large "next step" card and the previous/next boxes at the foot of the company pages are removed. The section link row under each title stays.
+- **`/despre`:** a photo in the title band, a photo on each of the six services, then the base map with links to storage, drying and the storage request. The map links ("Bazele pe hartă", "Vezi bazele pe hartă") open `/despre#baze`; the storage page keeps its own map.
+- **Photos:** stills from Agrinvest's own film in `public/media/company/`, resized from `scripts/seed/assets`. No stock photos. Footage rights are pending like the other stills (`docs/audit/agrinvest-inputs.md`).
+- Drawn in code (`src/components/CompanyParts.tsx`), so a live site needs no database step.
+
+## Structure simplification (2026-11-26)
+
+Owner's request: fewer categories and subcategories, more intuitive navigation.
+
+- **Menu:** Prices (renamed from "Prices and tools") links one page per kind of price; Financing groups the credits by need; News and guides has one guides and one news entry. Reception and drying sit under "Storage and drying", and farm diesel under Products and services.
+- **Footer:** five columns that follow the menu, main pages only.
+- **Live site:** `scripts/site/structure.ts` (run from `apply:redesign`) replaces a panel or the footer only while it still links what the previous default linked. No URL changed.
+- `scripts/site/structure-local.ts` was a local preview helper and is not committed.

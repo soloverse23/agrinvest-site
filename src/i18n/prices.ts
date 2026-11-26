@@ -10,7 +10,7 @@ export const pricesUi = {
     section: 'Prețuri',
     hub: {
       title: 'Prețuri cereale azi',
-      seoTitle: 'Prețuri cereale azi: grâu, porumb, floarea-soarelui, rapiță',
+      seoTitle: 'Prețuri cereale azi: grâu, rapiță, floarea-soarelui, porumb',
       description:
         'Prețul de achiziție Agrinvest pe baze, când e publicat, și prețurile săptămânale ale Comisiei Europene pentru România, cu sursa și data fiecărui număr.',
       summary:
@@ -195,7 +195,7 @@ export const pricesUi = {
     section: 'Prices',
     hub: {
       title: 'Grain prices in Romania today',
-      seoTitle: 'Romanian grain prices: wheat, corn, sunflower, rapeseed',
+      seoTitle: 'Romanian grain prices: wheat, rapeseed, sunflower, corn',
       description:
         'Agrinvest’s buying price by base, once published, and the European Commission’s weekly prices for Romania, each with its source and date.',
       summary:

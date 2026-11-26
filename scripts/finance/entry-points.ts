@@ -310,12 +310,15 @@ export function withFinanceMenu(items: NavItem[], locale: Locale): NavItem[] {
 
 type FooterColumn = { links?: { link?: { href?: string | null } | null }[] | null }
 
-/** The footer with the tool links after the finance link, unless the footer has them. */
+/**
+ * The footer with the tool links after the finance link, unless it already links the simulator:
+ * later footers leave out the consultant link on purpose.
+ */
 export function withFinanceFooter<C extends FooterColumn>(columns: C[], locale: Locale): C[] {
   const { after, links } = financeFooter[locale]
   const hrefs = new Set(columns.flatMap((c) => (c.links ?? []).map((l) => l.link?.href)))
+  if (hrefs.has(links[0]!.href)) return columns
   const missing = links.filter((l) => !hrefs.has(l.href))
-  if (!missing.length) return columns
   return columns.map((c) => {
     const list = c.links ?? []
     const at = list.findIndex((l) => l.link?.href === after)

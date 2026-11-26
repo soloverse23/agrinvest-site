@@ -56,7 +56,7 @@ const names = {
   barley: { ro: 'Orz', en: 'Barley' },
 } satisfies Record<string, L<string>>
 
-export const pillars: Pillar[] = [
+const definitions: Pillar[] = [
   {
     key: 'grau',
     slug: { ro: 'grau', en: 'wheat' },
@@ -218,6 +218,22 @@ export const pillars: Pillar[] = [
           ],
   },
 ]
+
+/**
+ * The keys in the order the database stores them (`Guides.pillar` is an enum): changing it
+ * needs a migration, so it stays apart from the order the pages show.
+ */
+export const pillarOptions = definitions.map((p) => ({ value: p.key, label: p.name }))
+
+/** The crop pillars in the order of harvest. */
+const cropOrder = ['orz', 'grau', 'rapita', 'floarea-soarelui', 'porumb']
+const rank = (p: Pillar) => {
+  const at = cropOrder.indexOf(p.key)
+  return at < 0 ? cropOrder.length : at
+}
+
+/** Every pillar in display order: the crops by harvest, then the other topics. */
+export const pillars: Pillar[] = [...definitions].sort((a, b) => rank(a) - rank(b))
 
 export const pillarKeys = pillars.map((p) => p.key)
 

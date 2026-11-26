@@ -89,7 +89,7 @@ export async function uploadCovers(payload: Payload) {
     const filePath = resolve('scripts/seed/assets/covers', `${name}.webp`)
     if (!existsSync(filePath)) continue
     ids[name] = await uploadOnce(payload, filePath, name, c.alt, {
-      credit: 'Agrinvest (YouTube, 2022)',
+      credit: c.credit ?? 'Agrinvest (YouTube, 2022)',
       focalX: c.focalX,
       focalY: c.focalY,
     })
@@ -98,14 +98,14 @@ export async function uploadCovers(payload: Payload) {
 }
 
 /**
- * Gives each guide and news piece its topic cover (by Romanian slug) while it has no cover or
+ * Gives each guide, news piece and finance guide its topic cover (by Romanian slug) while it has no cover or
  * still shows one of the five generic stills. A cover an editor chose is never replaced.
  * Drafts stay drafts. Returns how many texts changed.
  */
 export async function assignCovers(payload: Payload, ids: Record<string, number>) {
   const { docs } = await payload.find({
     collection: 'guides',
-    where: { section: { in: ['ghid', 'stiri'] } },
+    where: { section: { in: ['ghid', 'stiri', 'finantare'] } },
     locale: 'ro',
     depth: 1,
     draft: true,

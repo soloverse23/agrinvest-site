@@ -97,6 +97,8 @@ export const fixedPaths = {
   terms: { ro: '/termeni-de-vanzare', en: '/terms-of-sale' },
   delivery: { ro: '/livrare', en: '/delivery' },
   returns: { ro: '/retur', en: '/returns' },
+  cookies: { ro: '/cookie-uri', en: '/cookies' },
+  complaints: { ro: '/reclamatii', en: '/complaints' },
   storage: { ro: '/depozitare', en: '/storage' },
   grain: { ro: '/cereale', en: '/grain' },
 } satisfies Record<string, Record<Locale, string>>

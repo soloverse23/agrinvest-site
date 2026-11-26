@@ -4,7 +4,8 @@ import type { CSSProperties } from 'react'
 import { ArrowRightIcon } from '../icons/icons'
 import type { SectionIcon } from '../icons/keys'
 import { cx } from '../lib/cx'
-import { sectionIcons } from './Sections'
+import { Photo } from './Photo'
+import { SectionHeading, sectionIcons } from './Sections'
 
 export type ChainStep = {
   id: string
@@ -151,89 +152,88 @@ export function SeasonChain({
   )
 }
 
+export type ServiceItem = ChainStep & {
+  more: { label: string; href: string }[]
+  photo: { src: string; alt: string }
+}
+
 /**
- * The end of a company page: the step it hands over to (a large link card) and the pages before
- * and after it in the section, so a visitor can walk the whole section in order.
+ * The whole package on one page: every service in the order of a season, numbered on its photo,
+ * each with its own page and a few direct links. No card boxes, so the list reads as one offer
+ * rather than a set of tiles. Server-rendered, no script.
  */
-export function SeasonNext({
-  next,
-  pager,
+export function ServiceList({
+  id = 'servicii',
+  kicker,
+  title,
+  intro,
+  services,
   className,
 }: {
-  next?: {
-    kicker: string
-    number: number
-    total: number
-    label: string
-    body: string
-    href: string
-    icon: SectionIcon
-  } | null
-  pager: {
-    label: string
-    prev?: { kicker: string; label: string; href: string } | null
-    next?: { kicker: string; label: string; href: string } | null
-  }
+  id?: string
+  kicker: string
+  title: string
+  intro: string
+  services: ServiceItem[]
   className?: string
 }) {
-  const Icon = next ? sectionIcons[next.icon] : null
   return (
-    <nav
-      aria-label={pager.label}
-      className={cx(
-        'mx-auto grid w-full max-w-page gap-4 px-4 md:px-8',
-        next && 'lg:grid-cols-[3fr_2fr]',
-        className,
-      )}
+    <section
+      aria-labelledby={id}
+      className={cx('mx-auto grid w-full max-w-page gap-10 px-4 md:px-8', className)}
     >
-      {next && Icon && (
-        <Link
-          href={next.href}
-          prefetch={false}
-          className="group relative grid gap-4 overflow-hidden rounded-xl bg-forest p-6 text-on-forest no-underline shadow-raised transition-transform duration-200 ease-move hover:-translate-y-0.5 md:grid-cols-[auto_1fr_auto] md:items-center md:p-8"
-        >
-          <span className="grid size-14 place-items-center rounded-full bg-lime text-forest">
-            <Icon className="size-7" />
-          </span>
-          <span className="grid gap-1">
-            <span className="text-caption font-medium text-on-forest-muted">
-              {next.kicker} · {next.number}/{next.total}
-            </span>
-            <span className="text-h3 font-semibold">{next.label}</span>
-            <span className="text-small text-on-forest-muted">{next.body}</span>
-          </span>
-          <span
-            aria-hidden="true"
-            className="grid size-11 place-items-center rounded-full bg-on-forest/10 text-lime transition-transform duration-200 ease-move group-hover:translate-x-1"
-          >
-            <ArrowRightIcon className="size-5" />
-          </span>
-        </Link>
-      )}
-      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-1">
-        {[pager.prev, pager.next].map((p, i) =>
-          p ? (
+      <SectionHeading id={id} kicker={kicker} title={title} lead={intro} />
+      <ol className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((s, i) => (
+          <li key={s.id} className="grid content-start gap-2">
+            {/* The heading is the link people hear and tab to; the photo repeats it. */}
             <Link
-              key={p.href}
-              href={p.href}
+              href={s.href}
               prefetch={false}
-              className={cx(
-                'group grid gap-0.5 rounded-xl bg-raised p-5 no-underline ring-1 ring-line transition-shadow hover:ring-accent',
-                i === 1 && 'text-right lg:text-left',
-              )}
+              tabIndex={-1}
+              aria-hidden="true"
+              className="group relative mb-2 block aspect-video overflow-hidden md:aspect-3/2 rounded-lg bg-surface"
             >
-              <span className="text-caption text-muted">
-                {i === 0 ? '← ' : ''}
-                {p.kicker}
-                {i === 1 ? ' →' : ''}
+              <Photo
+                src={s.photo.src}
+                alt={s.photo.alt}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-300 ease-move group-hover:scale-105 motion-reduce:transform-none"
+              />
+              <span className="absolute top-3 left-3 grid size-9 place-items-center rounded-full bg-lime text-small font-semibold text-forest tabular-nums">
+                {i + 1}
               </span>
-              <span className="font-semibold text-ink group-hover:text-accent">{p.label}</span>
             </Link>
-          ) : (
-            <span key={i} aria-hidden="true" className="hidden md:block" />
-          ),
-        )}
-      </div>
-    </nav>
+            <h3 className="text-h4 font-semibold">
+              <Link
+                href={s.href}
+                prefetch={false}
+                className="text-ink no-underline decoration-accent underline-offset-4 hover:underline"
+              >
+                {s.label}
+              </Link>
+            </h3>
+            <p className="text-small text-muted">{s.body}</p>
+            {s.more.length > 0 && (
+              <ul className="flex flex-wrap gap-x-4 gap-y-1 pt-1 text-small">
+                {s.more.map((m) => (
+                  <li key={m.href}>
+                    <Link
+                      href={m.href}
+                      prefetch={false}
+                      className="inline-flex items-center gap-1 font-medium text-accent no-underline hover:underline"
+                    >
+                      {m.label}
+                      <ArrowRightIcon className="size-3.5" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
   )
 }

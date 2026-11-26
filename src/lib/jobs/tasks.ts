@@ -5,7 +5,7 @@ import type { BuyPrice } from '@/payload-types'
 import type { Locale } from '@/i18n/config'
 import { locales } from '@/i18n/config'
 import { editorialDigest } from '@/lib/articles/digest'
-import { isGrainKey } from '@/lib/crops'
+import { byHarvest, isGrainKey } from '@/lib/crops'
 import { parseOilBulletin } from '@/lib/diesel/oil-bulletin'
 import { daysAgo, fetchBrent, fetchEcbRates, fetchWorldBank } from '@/lib/markets/fetch'
 import { canSend, sendMessage } from '@/lib/messaging/send'
@@ -218,7 +218,7 @@ export async function draftMarketNote(payload: Payload, now = new Date()) {
   const drafts = locales.map((locale) =>
     marketNoteDraft(
       week,
-      crops.docs.flatMap((c) =>
+      byHarvest(crops.docs).flatMap((c) =>
         isGrainKey(c.key)
           ? [
               {

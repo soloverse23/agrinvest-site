@@ -3,6 +3,8 @@ import { unstable_cache } from 'next/cache'
 import type { Locale } from '@/i18n/config'
 import { financeProductPath, guidePath, questionPath } from '@/i18n/routes'
 import { tags } from '@/lib/revalidate'
+
+import { imageOf } from './articles'
 import type { QuestionTopic } from '@/lib/finance/topics'
 import type { FinanceProduct, FinanceQuestion, Guide } from '@/payload-types'
 
@@ -27,7 +29,10 @@ export type GuideCard = {
   slug: string
   title: string
   summary: string
+  /** Publication date (the creation date before one is set). */
+  date: string
   updatedAt: string
+  image: ReturnType<typeof imageOf>
 }
 
 export const listGuides = unstable_cache(
@@ -36,14 +41,32 @@ export const listGuides = unstable_cache(
     const { docs } = await payload.find({
       collection: 'guides',
       ...read(locale),
-      depth: 0,
       where: { section: { equals: 'finantare' } },
       sort: 'title',
-      select: { slug: true, title: true, summary: true, updatedAt: true },
+      depth: 1,
+      select: {
+        cover: true,
+        slug: true,
+        title: true,
+        summary: true,
+        publishedAt: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     })
     return docs.flatMap((d) =>
       d.slug && d.title
-        ? [{ id: d.id, slug: d.slug, title: d.title, summary: d.summary, updatedAt: d.updatedAt }]
+        ? [
+            {
+              id: d.id,
+              slug: d.slug,
+              title: d.title,
+              summary: d.summary,
+              date: d.publishedAt ?? d.createdAt,
+              updatedAt: d.updatedAt,
+              image: imageOf(d.cover),
+            },
+          ]
         : [],
     )
   },

@@ -28,8 +28,8 @@ type PhotoProps = {
 /**
  * An optimised photo rendered entirely on the server. It writes the `/_next/image` srcset
  * itself because importing anything from `next/image`, even `getImageProps`, puts its client
- * component in the page's JavaScript. Only Payload media is optimised (`images.localPatterns`
- * in next.config.ts); any other source is served as it is.
+ * component in the page's JavaScript. Payload media and the company stills are optimised
+ * (`images.localPatterns` in next.config.ts); any other source is served as it is.
  */
 export function Photo({
   src,
@@ -44,7 +44,7 @@ export function Photo({
   focus,
   className,
 }: PhotoProps) {
-  const optimised = src.startsWith('/api/media/')
+  const optimised = src.startsWith('/api/media/') || src.startsWith('/media/company/')
   const url = (w: number) => `/_next/image?url=${encodeURIComponent(src)}&w=${w}&q=${quality}`
   const srcSet = optimised ? WIDTHS.map((w) => `${url(w)} ${w}w`).join(', ') : undefined
   const fallback = optimised ? url(WIDTHS[WIDTHS.length - 1]) : src

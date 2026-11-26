@@ -10,6 +10,9 @@ import type { Alternates } from './pages'
 import { payloadClient } from './payload'
 import { focusOf, type Focus } from '@ds/lib/media'
 
+/** Changes with every deploy (see `next.config.ts`): apply scripts cannot refresh the cache. */
+const epoch = process.env.ENRICHMENT_EPOCH ?? 'dev'
+
 /**
  * Farmer guides (`section: 'ghid'`) and Agrinvest news (`section: 'stiri'`), both `Guides`.
  * Published only, no language fallback: a text without an English version has no English page.
@@ -93,7 +96,7 @@ export const listArticles = unstable_cache(
       ]
     })
   },
-  ['articles:list'],
+  [`articles:list:${epoch}`],
   { tags: [tags.guides] },
 )
 
@@ -116,7 +119,7 @@ const articleSlugs = unstable_cache(
       slug: d.slug as unknown as Partial<Record<Locale, string | null>>,
     }))
   },
-  ['articles:slugs'],
+  [`articles:slugs:${epoch}`],
   { tags: [tags.guides] },
 )
 
@@ -147,7 +150,7 @@ export const getArticle = unstable_cache(
     })
     return docs[0] ?? null
   },
-  ['articles:one'],
+  [`articles:one:${epoch}`],
   { tags: [tags.guides, tags.people, tags.products] },
 )
 
@@ -164,7 +167,7 @@ export const listAuthors = unstable_cache(
     })
     return docs.filter((p) => p.slug)
   },
-  ['articles:authors'],
+  [`articles:authors:${epoch}`],
   { tags: [tags.people] },
 )
 
@@ -181,7 +184,7 @@ export const getAuthor = unstable_cache(
     })
     return docs[0] ?? null
   },
-  ['articles:author'],
+  [`articles:author:${epoch}`],
   { tags: [tags.people] },
 )
 
@@ -210,7 +213,7 @@ export const listByPerson = unstable_cache(
     })
     return docs
   },
-  ['articles:by-person'],
+  [`articles:by-person:${epoch}`],
   { tags: [tags.guides, tags.people] },
 )
 

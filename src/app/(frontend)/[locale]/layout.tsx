@@ -55,7 +55,9 @@ export default async function LocaleLayout({
   })
 
   return (
-    <html lang={locale}>
+    // The header's inline script sets `data-scrolled` before hydration when the page opens
+    // scrolled (an anchor such as #baze); only this element's own attributes are exempt.
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <a
           href="#main"

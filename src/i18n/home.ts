@@ -65,8 +65,8 @@ export const homeUi = {
       kicker: 'Agrinvest Credit IFN',
       title: 'Rate după recoltă',
       instalments: [
-        { when: 'Vara', label: 'după grâu, orz și rapiță' },
-        { when: 'Toamna', label: 'după porumb și floarea-soarelui' },
+        { when: 'Vara', label: 'după orz, grâu și rapiță' },
+        { when: 'Toamna', label: 'după floarea-soarelui și porumb' },
       ],
       cta: 'Vezi finanțarea',
     },
@@ -149,8 +149,8 @@ export const homeUi = {
       kicker: 'Agrinvest Credit IFN',
       title: 'Repay after harvest',
       instalments: [
-        { when: 'Summer', label: 'after wheat, barley and rapeseed' },
-        { when: 'Autumn', label: 'after maize and sunflower' },
+        { when: 'Summer', label: 'after barley, wheat and rapeseed' },
+        { when: 'Autumn', label: 'after sunflower and maize' },
       ],
       cta: 'See financing',
     },

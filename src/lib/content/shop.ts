@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache'
 
 import type { Locale } from '@/i18n/config'
+import { byHarvest, harvestRank } from '@/lib/crops'
 import { tags } from '@/lib/revalidate'
 import type { ProductCardData, Ref, ShopPromo } from '@/lib/shop/catalogue'
 import { doseSummary } from '@/lib/shop/dose'
@@ -57,10 +58,12 @@ function toCard(p: Product): ProductCardData | null {
     category: { ...ref(category), parent: object<Category>(category.parent)?.id ?? null },
     secondary: (p.secondaryCategories ?? []).flatMap((c) => object<Category>(c)?.id ?? []),
     brand: brand?.slug ? ref(brand) : null,
-    crops: (p.crops ?? []).flatMap((c) => {
-      const crop = object<Crop>(c)
-      return crop?.slug ? [ref(crop)] : []
-    }),
+    crops: byHarvest(
+      (p.crops ?? []).flatMap((c) => {
+        const crop = object<Crop>(c)
+        return crop?.slug ? [{ ...ref(crop), key: crop.key }] : []
+      }),
+    ),
     ingredients: (p.protection?.activeIngredients ?? []).flatMap((row) => {
       const ingredient = object<ActiveIngredient>(row.ingredient)
       return ingredient?.slug
@@ -145,7 +148,7 @@ export const listProducts = unstable_cache(
       populate: {
         categories: { slug: true, name: true, parent: true },
         brands: { slug: true, name: true },
-        crops: { slug: true, name: true },
+        crops: { slug: true, name: true, key: true },
         'active-ingredients': { slug: true, name: true },
         // `url` is computed from the filename, so it needs it selected too.
         media: { url: true, alt: true, filename: true },
@@ -153,7 +156,7 @@ export const listProducts = unstable_cache(
     })
     return docs.flatMap((p) => toCard(p as Product) ?? [])
   },
-  [`shop:products:v2:${epoch}`],
+  [`shop:products:v3:${epoch}`],
   { tags: shopTags },
 )
 
@@ -219,9 +222,9 @@ export const listShopCrops = unstable_cache(
       limit: 100,
       sort: 'createdAt',
     })
-    return docs
+    return byHarvest(docs)
   },
-  [`shop:crops:${epoch}`],
+  [`shop:crops:harvest:${epoch}`],
   { tags: shopTags },
 )
 
@@ -282,7 +285,7 @@ export type ShopMenu = {
   total: number
   /** Top-level categories with their non-empty subcategories. */
   categories: (MenuCount & { children: MenuCount[] })[]
-  /** Crops with products, most products first. */
+  /** Crops with products: the grains in harvest order, then the rest, most products first. */
   crops: MenuCount[]
   /** Brands with products, most products first. */
   brands: MenuCount[]
@@ -324,12 +327,14 @@ export const getShopMenu = unstable_cache(
       crops: crops
         .filter((c) => c.slug && c.name)
         .map((c) => ({
+          key: c.key,
           slug: c.slug,
           name: c.name,
           count: products.filter((p) => p.crops.some((pc) => pc.id === c.id)).length,
         }))
         .filter((c) => c.count > 0)
-        .sort(byCount),
+        .sort((a, b) => harvestRank(a.key) - harvestRank(b.key) || byCount(a, b))
+        .map(({ slug, name, count }) => ({ slug, name, count })),
       brands: brands
         .filter((b) => b.slug && b.name)
         .map((b) => ({
@@ -341,7 +346,7 @@ export const getShopMenu = unstable_cache(
         .sort(byCount),
     }
   },
-  [`shop:menu:${epoch}`],
+  [`shop:menu:harvest:${epoch}`],
   { tags: shopTags },
 )
 

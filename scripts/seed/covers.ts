@@ -8,14 +8,18 @@
  * the old generic stills): the 20 Phase 6 briefs, the demo guides and the demo news.
  */
 export type Cover = {
-  /** Second in the 1080p film. */
-  at: number
+  /** Second in the 1080p film. A cover without one is a photo file (see `credit`). */
+  at?: number
   /** Keep the top of the frame: the film burns its logo into the bottom of some shots. */
   top?: boolean
   alt: { ro: string; en: string }
   focalX: number
   focalY: number
   for: string[]
+  /** Media credit for a photo that is not from the film, with its licence. */
+  credit?: string
+  /** Where the photo was found, to check its licence again. */
+  source?: string
 }
 
 export const covers: Record<string, Cover> = {
@@ -224,6 +228,119 @@ export const covers: Record<string, Cover> = {
     focalX: 55,
     focalY: 55,
     for: ['demo-receptie'],
+  },
+  // Finance guides: CC0 photos found through Openverse (2026-11-26), not film stills.
+  'cover-farm-storm': {
+    alt: {
+      ro: 'Hambar vechi lângă un lan verde, sub cer de furtună',
+      en: 'An old barn by a green field under a stormy sky',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['insolventa-sau-restructurare'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/6079005/old-barn-stormy-skies-green-field-oregon',
+  },
+  'cover-paper-review': {
+    alt: {
+      ro: 'Două persoane citesc un contract la masă',
+      en: 'Two people reading a contract at a table',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['ifn-sau-banca'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/5962416/free-public-domain-cc0-photo',
+  },
+  'cover-notebook': {
+    alt: {
+      ro: 'Caiet deschis și stilou pe o masă de lemn',
+      en: 'An open notebook and a fountain pen on a wooden table',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['glosar'],
+    credit: 'Lia Leslie (StockSnap, CC0)',
+    source: 'https://stocksnap.io/photo/notebook-notepad-2FS8R15QYN',
+  },
+  'cover-fields-roads': {
+    alt: {
+      ro: 'Parcele agricole și drumuri de câmp, văzute de sus',
+      en: 'Farm plots and field roads seen from above',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['cum-analizeaza-finantatorul-ferma'],
+    credit: 'Ricardo Gomez Angel (StockSnap, CC0)',
+    source: 'https://stocksnap.io/photo/green-field-U9C7YSOCO4',
+  },
+  'cover-new-combine': {
+    alt: {
+      ro: 'Combină într-un lan de păioase recoltat',
+      en: 'A combine in a harvested cereal field',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['credit-sau-leasing-utilaje'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/6112660/photo-image-public-domain-plant-blue',
+  },
+  'cover-red-barn': {
+    alt: { ro: 'Hambar de fermă roșu, toamna', en: 'A red farm barn in autumn' },
+    focalX: 50,
+    focalY: 50,
+    for: ['credit-sau-grant-afir'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/5935396/photo-image-nature-red-construction',
+  },
+  'cover-calculator': {
+    alt: {
+      ro: 'Calcul cu calculatorul și registrul pe birou',
+      en: 'Working figures with a calculator and a ledger on a desk',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['costul-real-al-creditului'],
+    credit: 'Tevarak (StockSnap, CC0)',
+    source: 'https://stocksnap.io/photo/calculator-calendar-RFVHCUGML3',
+  },
+  'cover-combine-unload': {
+    alt: {
+      ro: 'Combina descarcă grâul în remorca unui tractor',
+      en: 'A combine unloading wheat into a tractor trailer',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['cand-vinzi-recolta'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/6112940/photo-image-public-domain-plant-nature',
+  },
+  'cover-farmland-aerial': {
+    alt: {
+      ro: 'Câmpie cu parcele agricole, văzută din avion',
+      en: 'A plain of farm plots seen from the air',
+    },
+    focalX: 50,
+    focalY: 50,
+    for: ['plata-subventii-apia'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/3293778/free-photo-image-aerial-view-aircraft',
+  },
+  'cover-contract-sign': {
+    alt: { ro: 'Semnarea unui contract', en: 'Signing a contract' },
+    focalX: 50,
+    focalY: 50,
+    for: ['fonduri-garantare'],
+    credit: 'rawpixel (CC0)',
+    source: 'https://www.rawpixel.com/image/5904897/photo-image-public-domain-hand-person',
+  },
+  'cover-sunflower-field': {
+    alt: { ro: 'Lan de floarea-soarelui în floare', en: 'A sunflower field in bloom' },
+    focalX: 50,
+    focalY: 50,
+    for: ['credit-adeverinta-apia'],
+    credit: 'Designecologist (StockSnap, CC0)',
+    source: 'https://stocksnap.io/photo/sunflower-field-WLBC00ACIK',
   },
 }
 

@@ -47,8 +47,8 @@ export const figures: FigureSeed[] = [
     key: 'C7',
     label: { ro: 'Cereale achiziționate', en: 'Grain we buy' },
     value: {
-      ro: 'grâu, orz, rapiță, floarea-soarelui, porumb, triticale, soia, mazăre',
-      en: 'wheat, barley, rapeseed, sunflower, corn, triticale, soy, peas',
+      ro: 'orz, grâu, rapiță, floarea-soarelui, porumb, triticale, soia, mazăre',
+      en: 'barley, wheat, rapeseed, sunflower, corn, triticale, soy, peas',
     },
     source: 'trading-cereale',
   },
@@ -63,6 +63,55 @@ export const figures: FigureSeed[] = [
     label: { ro: 'E-mail', en: 'Email' },
     value: { ro: 'office@agrinvest.ro', en: 'office@agrinvest.ro' },
     source: 'site header/footer',
+  },
+  // Seller identity for the shop (ING WebPay asks for it on every page and the payment page).
+  {
+    key: 'C11.cui',
+    label: { ro: 'CUI Agrinvest SRL', en: 'Agrinvest SRL tax ID' },
+    value: { ro: '15991548', en: '15991548' },
+    source: 'agrinvestshop.ro footer',
+  },
+  {
+    key: 'C11.reg',
+    label: { ro: 'Nr. Registrul Comerțului', en: 'Trade register no.' },
+    value: { ro: 'J10/1085/2004', en: 'J10/1085/2004' },
+    source: 'agrinvestshop.ro footer',
+  },
+  {
+    key: 'C11.euid',
+    label: { ro: 'EUID', en: 'EUID' },
+    value: { ro: 'ROONRC.J10/1085/2004', en: 'ROONRC.J10/1085/2004' },
+    source: 'agrinvestshop.ro footer',
+  },
+  {
+    key: 'C12',
+    label: { ro: 'Sediul comercial', en: 'Commercial office' },
+    value: {
+      ro: 'Bd. Pipera nr. 1/I, Voluntari, Ilfov',
+      en: 'Bd. Pipera nr. 1/I, Voluntari, Ilfov',
+    },
+    source: 'agrinvestshop.ro footer',
+  },
+  {
+    key: 'C13.phone',
+    label: { ro: 'Telefon comenzi', en: 'Orders phone' },
+    value: { ro: '+40 786 222 377', en: '+40 786 222 377' },
+    source: 'agrinvestshop.ro footer',
+  },
+  {
+    key: 'C13.email',
+    label: { ro: 'E-mail comenzi', en: 'Orders email' },
+    value: { ro: 'comenzi@agrinvest.ro', en: 'comenzi@agrinvest.ro' },
+    source: 'agrinvestshop.ro footer',
+  },
+  {
+    key: 'C14',
+    label: { ro: 'Adresa pentru retur', en: 'Returns address' },
+    value: {
+      ro: 'Mihăilești, com. Mihăilești, jud. Buzău, 127375',
+      en: 'Mihăilești, Mihăilești commune, Buzău county, 127375',
+    },
+    source: 'agrinvestshop.ro/refund_returns',
   },
   {
     key: 'S1',
@@ -359,8 +408,8 @@ export const categories = [
     role: 'category',
     icon: 'seed',
     intro: {
-      ro: 'Sămânță certificată de grâu, orz, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.',
-      en: 'Certified wheat, barley, rapeseed and chickpea seed, with the variety, seed class and pack of each product.',
+      ro: 'Sămânță certificată de orz, grâu, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.',
+      en: 'Certified barley, wheat, rapeseed and chickpea seed, with the variety, seed class and pack of each product.',
     },
   },
   {
@@ -380,8 +429,8 @@ export const categories = [
     icon: 'herbicide',
     parent: 'protectia-plantelor',
     intro: {
-      ro: 'Erbicide pentru cereale, porumb, floarea-soarelui și rapiță. Alege după cultură, substanța activă și momentul aplicării.',
-      en: 'Herbicides for cereals, maize, sunflower and rapeseed. Choose by crop, active ingredient and application timing.',
+      ro: 'Erbicide pentru cereale, rapiță, floarea-soarelui și porumb. Alege după cultură, substanța activă și momentul aplicării.',
+      en: 'Herbicides for cereals, rapeseed, sunflower and maize. Choose by crop, active ingredient and application timing.',
     },
   },
   {

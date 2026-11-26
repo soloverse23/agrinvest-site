@@ -15,6 +15,10 @@ export type SiteFooterProps = {
   social?: { href: string; label: string }[]
   /** Small print: legal names, registrations. */
   legal?: string | null
+  /** The seller's identity lines (name, CUI, register, offices), shown above the small print. */
+  company?: ReactNode[]
+  /** Card acceptance and ANPC marks, at the very bottom. */
+  marks?: ReactNode
   bottomLinks?: { href: string; label: string }[]
   /** Extra controls next to the bottom links, e.g. the cookie settings button. */
   extra?: ReactNode
@@ -34,6 +38,8 @@ export function SiteFooter({
   columns,
   social = [],
   legal,
+  company = [],
+  marks,
   bottomLinks = [],
   extra,
   labels,
@@ -114,7 +120,16 @@ export function SiteFooter({
 
       <div className="border-t border-on-forest/15">
         <div className="mx-auto grid max-w-page gap-4 px-4 py-6 text-caption text-on-forest-muted md:px-8 lg:grid-cols-12 lg:items-center">
-          {legal && <p className="lg:col-span-7">{legal}</p>}
+          <div className="grid gap-1 lg:col-span-7">
+            {company.length > 0 && (
+              <p className="flex flex-wrap gap-x-3 gap-y-1 text-on-forest">
+                {company.map((line, i) => (
+                  <span key={i}>{line}</span>
+                ))}
+              </p>
+            )}
+            {legal && <p>{legal}</p>}
+          </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:col-span-5 lg:justify-end">
             {bottomLinks.map((l) =>
               isInternal(l.href) ? (
@@ -134,6 +149,7 @@ export function SiteFooter({
             )}
             {extra}
           </div>
+          {marks && <div className="flex flex-wrap items-center gap-4 lg:col-span-12">{marks}</div>}
         </div>
       </div>
     </footer>

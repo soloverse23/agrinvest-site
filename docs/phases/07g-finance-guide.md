@@ -185,3 +185,9 @@ Each sub-phase ends with screenshots at 1366 and 390 px and the checks passing. 
 - The dev server keeps stale data after DB writes; restart it before shots.
 - `check:finance` currently counts guide/product pairs; update it in the same sub-phase as the content change, or CI fails.
 - Golden Relationship: publish nothing about it.
+
+## Update 2026-11-26: a shorter hub with photos
+
+Owner request: simplify the financing main page, with real photos found by search. The hub is now a title band (photo and four facts), the eight needs as photo tiles, three steps and the closing band. The finder, the question cards and the library cards are gone; Întrebări, Simulator and Bibliotecă stay in the section links.
+
+The nine photos are CC0 or public domain, found through Openverse, cropped into `public/media/finance`, with credit and source in `src/lib/finance/photos.ts`. They are not Agrinvest's own farms, equipment or people, so the owner's own photos should replace them when they arrive (`docs/audit/agrinvest-inputs.md`).

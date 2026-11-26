@@ -1,4 +1,5 @@
 import type { Locale } from '@/i18n/config'
+import { grainKeys } from '@/lib/crops'
 
 /**
  * When instalments fall (figures register `F5.instalments`, confirmed by the owner): at most two
@@ -8,16 +9,16 @@ import type { Locale } from '@/i18n/config'
 export const instalmentSeasons = {
   summer: {
     month: 8,
-    cropKeys: ['wheat', 'barley', 'rapeseed'],
+    cropKeys: ['barley', 'wheat', 'rapeseed'],
     label: { ro: 'După recolta de vară', en: 'After the summer harvest' },
-    crops: { ro: 'grâu, orz, rapiță', en: 'wheat, barley, rapeseed' },
+    crops: { ro: 'orz, grâu, rapiță', en: 'barley, wheat, rapeseed' },
     when: { ro: 'iulie–august', en: 'July–August' },
   },
   autumn: {
     month: 11,
-    cropKeys: ['maize', 'sunflower'],
+    cropKeys: ['sunflower', 'maize'],
     label: { ro: 'După recolta de toamnă', en: 'After the autumn harvest' },
-    crops: { ro: 'porumb, floarea-soarelui', en: 'maize, sunflower' },
+    crops: { ro: 'floarea-soarelui, porumb', en: 'sunflower, maize' },
     when: { ro: 'octombrie–noiembrie', en: 'October–November' },
   },
 } as const
@@ -25,15 +26,15 @@ export const instalmentSeasons = {
 export type Season = keyof typeof instalmentSeasons
 export type HarvestCrop = (typeof instalmentSeasons)[Season]['cropKeys'][number]
 
-/** The crops whose harvest an instalment can follow, in display order. */
-export const harvestCrops: HarvestCrop[] = ['wheat', 'barley', 'rapeseed', 'maize', 'sunflower']
+/** The crops whose harvest an instalment can follow, in the order of harvest. */
+export const harvestCrops: HarvestCrop[] = [...grainKeys]
 
 export const harvestCropLabels: Record<HarvestCrop, Record<Locale, string>> = {
-  wheat: { ro: 'Grâu', en: 'Wheat' },
   barley: { ro: 'Orz', en: 'Barley' },
+  wheat: { ro: 'Grâu', en: 'Wheat' },
   rapeseed: { ro: 'Rapiță', en: 'Rapeseed' },
-  maize: { ro: 'Porumb', en: 'Maize' },
   sunflower: { ro: 'Floarea-soarelui', en: 'Sunflower' },
+  maize: { ro: 'Porumb', en: 'Maize' },
 }
 
 export const seasonOf = (crop: HarvestCrop): Season =>

@@ -2,8 +2,8 @@
   {
     "slug": "erbicide",
     "intro": {
-      "ro": "Erbicide pentru porumb, cereale, floarea-soarelui și rapiță, cu substanța activă, numărul omologării și, unde le-am verificat, dozele din registrul ANF sau de pe etichetă.",
-      "en": "Herbicides for maize, cereals, sunflower and rapeseed, with the active substance, the registration number and, where we checked them, the rates from the ANF register or the label."
+      "ro": "Erbicide pentru cereale, rapiță, floarea-soarelui și porumb, cu substanța activă, numărul omologării și, unde le-am verificat, dozele din registrul ANF sau de pe etichetă.",
+      "en": "Herbicides for cereals, rapeseed, sunflower and maize, with the active substance, the registration number and, where we checked them, the rates from the ANF register or the label."
     },
     "buyingAdvice": {
       "ro": "### Cum alegi un erbicid\n- **Cultura și momentul**: unele produse se aplică înainte de răsărirea culturii (preemergent), altele după (postemergent). Eticheta spune la ce stadiu al culturii și al buruienilor.\n- **Buruienile din parcelă**: ia o listă a speciilor dominante și verifică-o în lista de buruieni a produsului; speciile perene și unele anuale nu sunt acoperite de toate erbicidele.\n- **Solul**: la multe produse doza depinde de conținutul de humus și de gradul de îmburuienare.\n- **Rezistența**: alternează grupele de acțiune (HRAC) de la un an la altul; produsele afișează grupa lor.\n- **Rotația**: citește la ce culturi poți semăna după erbicid și după cât timp.",
@@ -34,11 +34,11 @@
     "seo": {
       "ro": {
         "title": "Erbicide pentru culturile de câmp",
-        "description": "Erbicide la Agrinvest pentru porumb, cereale, floarea-soarelui și rapiță: substanță activă, omologare ANF și doze verificate. Cere ofertă."
+        "description": "Erbicide la Agrinvest pentru cereale, rapiță, floarea-soarelui și porumb: substanță activă, omologare ANF și doze verificate. Cere ofertă."
       },
       "en": {
         "title": "Herbicides for field crops: maize, cereals",
-        "description": "Herbicides at Agrinvest for maize, cereals, sunflower and rapeseed: active substance, ANF registration and checked rates. Ask for a quote."
+        "description": "Herbicides at Agrinvest for cereals, rapeseed, sunflower and maize: active substance, ANF registration and checked rates. Ask for a quote."
       }
     },
     "indexable": true
@@ -90,8 +90,8 @@
   {
     "slug": "insecticide",
     "intro": {
-      "ro": "Insecticide pentru cereale, porumb, rapiță, cartof, legume și pomi, cu substanța activă, grupa IRAC și numărul omologării.",
-      "en": "Insecticides for cereals, maize, rapeseed, potato, vegetables and orchards, with the active substance, the IRAC group and the registration number."
+      "ro": "Insecticide pentru cereale, rapiță, porumb, cartof, legume și pomi, cu substanța activă, grupa IRAC și numărul omologării.",
+      "en": "Insecticides for cereals, rapeseed, maize, potato, vegetables and orchards, with the active substance, the IRAC group and the registration number."
     },
     "buyingAdvice": {
       "ro": "### Cum alegi un insecticid\n- **Dăunătorul**: identifică specia și stadiul (adult, larvă) și verifică dacă produsul are acea specie în lista lui.\n- **Pragul de dăunare**: tratează la avertizare sau când se atinge pragul economic, nu preventiv.\n- **Albinele**: multe insecticide sunt periculoase pentru albine; nu trata în perioada de zbor și respectă restricțiile de pe etichetă.\n- **Grupa IRAC**: alternează grupele de la un tratament la altul.\n- **Timpul de pauză și numărul de tratamente**: sunt pe etichetă, pe cultură.",
@@ -122,11 +122,11 @@
     "seo": {
       "ro": {
         "title": "Insecticide pentru culturile de câmp",
-        "description": "Insecticide la Agrinvest pentru cereale, porumb, rapiță, cartof, legume și pomi: substanță activă, grupa IRAC, omologare ANF. Cere ofertă."
+        "description": "Insecticide la Agrinvest pentru cereale, rapiță, porumb, cartof, legume și pomi: substanță activă, grupa IRAC, omologare ANF. Cere ofertă."
       },
       "en": {
         "title": "Insecticides for field crops and orchards",
-        "description": "Insecticides at Agrinvest for cereals, maize, rapeseed, potato, vegetables and orchards: active substance, IRAC group, ANF registration. Ask for a quote."
+        "description": "Insecticides at Agrinvest for cereals, rapeseed, maize, potato, vegetables and orchards: active substance, IRAC group, ANF registration. Ask for a quote."
       }
     },
     "indexable": true
@@ -178,8 +178,8 @@
   {
     "slug": "seminte",
     "intro": {
-      "ro": "Sămânță certificată de grâu, orz, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.",
-      "en": "Certified wheat, barley, rapeseed and chickpea seed, with the variety, seed class and pack of each product."
+      "ro": "Sămânță certificată de orz, grâu, rapiță și năut, cu soiul, clasa biologică și ambalajul fiecărui produs.",
+      "en": "Certified barley, wheat, rapeseed and chickpea seed, with the variety, seed class and pack of each product."
     },
     "buyingAdvice": {
       "ro": "### Cum alegi sămânța\n- **Soiul**: alege după zonă, epoca de semănat, rezistența la iernare, la secetă și la boli, nu după preț.\n- **Clasa biologică**: C1 este sămânță certificată din prima generație; „Bază” este sămânța din care se înmulțește cea certificată.\n- **Norma de semănat**: se calculează în boabe germinabile pe metru pătrat, după masa a 1000 de boabe și germinație.\n- **Eticheta lotului**: cere germinația, puritatea și masa a 1000 de boabe.\n- **Tratamentul**: verifică dacă sămânța este tratată și cu ce.\n\nVezi tot ce avem pentru [grâu](/magazin/cultura/grau) și pentru [orz](/magazin/cultura/orz).",
@@ -209,12 +209,12 @@
     },
     "seo": {
       "ro": {
-        "title": "Sămânță certificată: grâu, orz, rapiță, năut",
-        "description": "Sămânță certificată la Agrinvest: grâu, orz, rapiță și năut. Vezi soiul, clasa biologică și ambalajul și cere sfatul unui consultant."
+        "title": "Sămânță certificată: orz, grâu, rapiță, năut",
+        "description": "Sămânță certificată la Agrinvest: orz, grâu, rapiță și năut. Vezi soiul, clasa biologică și ambalajul și cere sfatul unui consultant."
       },
       "en": {
-        "title": "Certified seed: wheat, barley, rapeseed, chickpea",
-        "description": "Certified seed at Agrinvest: wheat, barley, rapeseed and chickpea. See the variety, seed class and pack, and ask a consultant for advice."
+        "title": "Certified seed: barley, wheat, rapeseed, chickpea",
+        "description": "Certified seed at Agrinvest: barley, wheat, rapeseed and chickpea. See the variety, seed class and pack, and ask a consultant for advice."
       }
     },
     "indexable": true

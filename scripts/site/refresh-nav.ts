@@ -45,6 +45,8 @@ export async function refreshSectionNav(payload: Payload, log: (s: string) => vo
       const fresh = target.find((t) => t.link?.href === href)
       if (!fresh) return item
       const wanted = hrefsOf(fresh.children as Row[])
+      // A later menu without "Sell grain" in Prices (2026-11-26) leaves nothing to move.
+      if (href === home[locale].prices && !wanted.includes(g.sell)) return item
       const have = hrefsOf(item.children)
       const oldFor =
         href === home[locale].prices
@@ -79,6 +81,7 @@ export async function refreshSectionNav(payload: Payload, log: (s: string) => vo
       let fresh: Column | undefined
       if (
         freshPrices &&
+        pricesWanted.includes(g.sell) &&
         same(
           have,
           pricesWanted.filter((h) => h !== g.sell),

@@ -31,7 +31,7 @@
         "title": "Credit agricol cu rate după recoltă",
         "description": "Cum funcționează creditul cu rate după recolta de vară și de toamnă: când plătești, cât și cum se stabilește graficul."
       },
-      "practice": "| Rata | Culturi | Perioadă |\n| --- | --- | --- |\n| după recolta de vară | grâu, orz, rapiță | iulie–august |\n| după recolta de toamnă | porumb, floarea-soarelui | octombrie–noiembrie |\n\nPoți vedea cum ar cădea ratele pe culturile tale în [simulator](/finantare/simulator)."
+      "practice": "| Rata | Culturi | Perioadă |\n| --- | --- | --- |\n| după recolta de vară | orz, grâu, rapiță | iulie–august |\n| după recolta de toamnă | floarea-soarelui, porumb | octombrie–noiembrie |\n\nPoți vedea cum ar cădea ratele pe culturile tale în [simulator](/finantare/simulator)."
     },
     "en": {
       "title": "How do instalments after harvest work?",
@@ -47,7 +47,7 @@
         "title": "Farm loan repaid after harvest",
         "description": "How a loan repaid after the summer and autumn harvests works: when you pay, how much, and how the schedule is set."
       },
-      "practice": "| Instalment | Crops | Period |\n| --- | --- | --- |\n| after the summer harvest | wheat, barley, rapeseed | July–August |\n| after the autumn harvest | maize, sunflower | October–November |\n\nSee how instalments would fall on your crops in the [simulator](/en/financing/simulator)."
+      "practice": "| Instalment | Crops | Period |\n| --- | --- | --- |\n| after the summer harvest | barley, wheat, rapeseed | July–August |\n| after the autumn harvest | sunflower, maize | October–November |\n\nSee how instalments would fall on your crops in the [simulator](/en/financing/simulator)."
     }
   }
 }

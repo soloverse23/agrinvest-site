@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { companyChain, nextStep } from '@/lib/company'
+import { companyChain, companyServices } from '@/lib/company'
 
 import { storyLocale } from '../fixtures/story'
 import { BaseMap, type MapBase } from './BaseMap'
-import { SeasonChain, SeasonNext } from './Company'
+import { SeasonChain, ServiceList } from './Company'
 import { project } from './map/projection'
 
 const meta: Meta = { title: 'Patterns/Company', parameters: { layout: 'fullscreen' } }
@@ -90,22 +90,14 @@ export const Chain: Story = {
   },
 }
 
-/** The end of a company page: the next step and the pages around it. */
-export const Next: Story = {
-  name: 'Season next step',
+/** The services page (/despre): the whole package in season order. */
+export const Services: Story = {
   render: (_, { globals }) => {
     const locale = storyLocale(globals)
-    const step = nextStep(locale, storage(locale))!
+    const { services, kicker, title, intro } = companyServices(locale)
     return (
       <div className="py-8">
-        <SeasonNext
-          next={{ ...step, kicker: locale === 'ro' ? 'Pasul următor' : 'Next step' }}
-          pager={{
-            label: 'Company',
-            prev: { kicker: '←', label: locale === 'ro' ? 'Cifre' : 'Figures', href: '#' },
-            next: { kicker: '→', label: locale === 'ro' ? 'Logistică' : 'Logistics', href: '#' },
-          }}
-        />
+        <ServiceList kicker={kicker} title={title} intro={intro} services={services} />
       </div>
     )
   },

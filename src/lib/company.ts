@@ -4,7 +4,7 @@ import type { SectionIcon } from '@ds/icons/keys'
 /**
  * The company section told as one season: what Agrinvest does for a farmer, step by step, from
  * inputs to the money for next year. Every company page shows this chain in its title band with
- * its own steps marked, and ends with the next step, so the pages read as one flow.
+ * its own steps marked, so the pages read as one flow.
  */
 export type StepId = 'inputs' | 'transport' | 'reception' | 'storage' | 'sale' | 'finance'
 
@@ -113,15 +113,12 @@ type PageChain = {
   /** A line under a step, for pages that read the chain their own way (partners, careers). */
   notes?: Partial<Record<StepId, string>>
   actions: [Action, ...Action[]]
-  /** The step the page hands over to, shown at its end. */
-  next?: StepId
 }
 
 const pages: Record<Locale, Record<string, PageChain>> = {
   ro: {
     '/despre': {
-      next: 'inputs',
-      kicker: 'Compania',
+      kicker: 'Agrinvest',
       title: 'Un sezon cu Agrinvest',
       actions: [
         { label: 'Agrinvest în cifre', href: '/despre/cifre' },
@@ -138,12 +135,11 @@ const pages: Record<Locale, Record<string, PageChain>> = {
       },
       current: ['transport', 'storage', 'finance'],
       actions: [
-        { label: 'Vezi bazele pe hartă', href: '/depozitare#baze' },
+        { label: 'Vezi bazele pe hartă', href: '/despre#baze' },
         { label: 'Despre Agrinvest', href: '/despre' },
       ],
     },
     '/depozitare': {
-      next: 'sale',
       kicker: 'Recepție și depozitare',
       title: 'Unde intră depozitarea',
       current: ['reception', 'storage'],
@@ -153,17 +149,15 @@ const pages: Record<Locale, Record<string, PageChain>> = {
       ],
     },
     '/depozitare/uscare': {
-      next: 'storage',
       kicker: 'Recepție și depozitare',
       title: 'Unde intră uscarea',
       current: ['reception'],
       actions: [
         { label: 'Întreabă de uscare', href: '#cerere' },
-        { label: 'Vezi bazele pe hartă', href: '/depozitare#baze' },
+        { label: 'Vezi bazele pe hartă', href: '/despre#baze' },
       ],
     },
     '/logistica': {
-      next: 'reception',
       kicker: 'Flota proprie',
       title: 'Unde intră transportul',
       current: ['transport'],
@@ -173,19 +167,8 @@ const pages: Record<Locale, Record<string, PageChain>> = {
       },
       actions: [
         { label: 'Cere transport', href: '#cerere' },
-        { label: 'Vezi bazele pe hartă', href: '/depozitare#baze' },
+        { label: 'Vezi bazele pe hartă', href: '/despre#baze' },
       ],
-    },
-    '/parteneri': {
-      kicker: 'Parteneriate',
-      title: 'Unde intră partenerii',
-      current: ['inputs', 'sale', 'finance'],
-      notes: {
-        inputs: 'Producători de inputuri',
-        sale: 'Procesatori și traderi',
-        finance: 'Finanțatori',
-      },
-      actions: [{ label: 'Propune un parteneriat', href: '#cerere' }],
     },
     '/cariere': {
       kicker: 'Echipa',
@@ -207,8 +190,7 @@ const pages: Record<Locale, Record<string, PageChain>> = {
   },
   en: {
     '/en/about': {
-      next: 'inputs',
-      kicker: 'The company',
+      kicker: 'Agrinvest',
       title: 'A season with Agrinvest',
       actions: [
         { label: 'Agrinvest in figures', href: '/en/about/figures' },
@@ -225,12 +207,11 @@ const pages: Record<Locale, Record<string, PageChain>> = {
       },
       current: ['transport', 'storage', 'finance'],
       actions: [
-        { label: 'See the bases on the map', href: '/en/storage#baze' },
+        { label: 'See the bases on the map', href: '/en/about#baze' },
         { label: 'About Agrinvest', href: '/en/about' },
       ],
     },
     '/en/storage': {
-      next: 'sale',
       kicker: 'Reception and storage',
       title: 'Where storage fits',
       current: ['reception', 'storage'],
@@ -240,17 +221,15 @@ const pages: Record<Locale, Record<string, PageChain>> = {
       ],
     },
     '/en/storage/drying': {
-      next: 'storage',
       kicker: 'Reception and storage',
       title: 'Where drying fits',
       current: ['reception'],
       actions: [
         { label: 'Ask about drying', href: '#cerere' },
-        { label: 'See the bases on the map', href: '/en/storage#baze' },
+        { label: 'See the bases on the map', href: '/en/about#baze' },
       ],
     },
     '/en/logistics': {
-      next: 'reception',
       kicker: 'Our own fleet',
       title: 'Where transport fits',
       current: ['transport'],
@@ -260,19 +239,8 @@ const pages: Record<Locale, Record<string, PageChain>> = {
       },
       actions: [
         { label: 'Ask for transport', href: '#cerere' },
-        { label: 'See the bases on the map', href: '/en/storage#baze' },
+        { label: 'See the bases on the map', href: '/en/about#baze' },
       ],
-    },
-    '/en/partners': {
-      kicker: 'Partnerships',
-      title: 'Where partners fit',
-      current: ['inputs', 'sale', 'finance'],
-      notes: {
-        inputs: 'Input makers',
-        sale: 'Processors and grain buyers',
-        finance: 'Lenders',
-      },
-      actions: [{ label: 'Propose a partnership', href: '#cerere' }],
     },
     '/en/careers': {
       kicker: 'The team',
@@ -295,22 +263,8 @@ const pages: Record<Locale, Record<string, PageChain>> = {
 }
 
 const ui = {
-  ro: {
-    here: 'Pagina aceasta',
-    again: 'Și sezonul următor începe din nou.',
-    next: 'Pasul următor',
-    prev: 'Înapoi',
-    forward: 'Mai departe',
-    inSection: 'În secțiunea Compania',
-  },
-  en: {
-    here: 'This page',
-    again: 'And the next season starts again.',
-    next: 'Next step',
-    prev: 'Back',
-    forward: 'Next',
-    inSection: 'In the Company section',
-  },
+  ro: { here: 'Pagina aceasta', again: 'Și sezonul următor începe din nou.' },
+  en: { here: 'This page', again: 'And the next season starts again.' },
 }
 
 export const companyUi = ui
@@ -330,10 +284,132 @@ export function companyChain(locale: Locale, url: string) {
   }
 }
 
-/** The step a page hands over to, with its number in the season, or null. */
-export function nextStep(locale: Locale, url: string) {
-  const chain = companyChain(locale, url)
-  if (!chain?.next) return null
-  const index = steps[locale].findIndex((s) => s.id === chain.next)
-  return { ...steps[locale][index], number: index + 1, total: steps[locale].length }
+/** The page that lists the whole package: /despre leads with it and shows a photo, not the chain. */
+export const servicesPage: Record<Locale, string> = { ro: '/despre', en: '/en/about' }
+
+/** The links under each service on the services page, beyond the service's own page. */
+const more: Record<Locale, Record<StepId, Action[]>> = {
+  ro: {
+    inputs: [
+      { label: 'Semințe', href: '/magazin/seminte' },
+      { label: 'Îngrășăminte', href: '/magazin/ingrasaminte' },
+      { label: 'Erbicide', href: '/magazin/erbicide' },
+      { label: 'Motorină la fermă', href: '/motorina' },
+    ],
+    transport: [{ label: 'Cere transport', href: '/logistica#cerere' }],
+    reception: [{ label: 'Întreabă de uscare', href: '/depozitare/uscare#cerere' }],
+    storage: [
+      { label: 'Bazele pe hartă', href: '/despre#baze' },
+      { label: 'Rezervă loc', href: '/depozitare#cerere' },
+    ],
+    sale: [
+      { label: 'Prețuri agricole', href: '/preturi' },
+      { label: 'Calculator preț net', href: '/preturi/calculator-pret-net' },
+    ],
+    finance: [
+      { label: 'Simulator', href: '/finantare/simulator' },
+      { label: 'Ghiduri de finanțare', href: '/finantare/ghiduri' },
+    ],
+  },
+  en: {
+    inputs: [
+      { label: 'Seeds', href: '/en/shop/seeds' },
+      { label: 'Fertilisers', href: '/en/shop/fertilisers' },
+      { label: 'Herbicides', href: '/en/shop/herbicides' },
+      { label: 'Diesel to the farm', href: '/en/diesel' },
+    ],
+    transport: [{ label: 'Ask for transport', href: '/en/logistics#cerere' }],
+    reception: [{ label: 'Ask about drying', href: '/en/storage/drying#cerere' }],
+    storage: [
+      { label: 'The bases on the map', href: '/en/about#baze' },
+      { label: 'Ask about storage', href: '/en/storage#cerere' },
+    ],
+    sale: [
+      { label: 'Farm prices', href: '/en/prices' },
+      { label: 'Net price calculator', href: '/en/prices/net-price-calculator' },
+    ],
+    finance: [
+      { label: 'Simulator', href: '/en/financing/simulator' },
+      { label: 'Financing guides', href: '/en/financing/guides' },
+    ],
+  },
+}
+
+const servicesUi = {
+  ro: {
+    kicker: 'Pachetul complet',
+    title: 'Tot ce facem pentru o fermă',
+    intro:
+      'Șase servicii, în ordinea unui sezon. Poți lucra cu noi pentru unul singur sau pentru tot sezonul.',
+    about: 'Despre Agrinvest',
+    cover: 'Recoltarea florii-soarelui cu camioanele Agrinvest, văzută de sus',
+    map: {
+      kicker: 'Baze',
+      title: 'Unde ne găsești',
+      lead: 'Atinge un județ ca să vezi bazele din el.',
+      links: [
+        { label: 'Depozitare cereale', href: '/depozitare' },
+        { label: 'Uscare', href: '/depozitare/uscare' },
+        { label: 'Rezervă loc de depozitare', href: '/depozitare#cerere' },
+      ],
+    },
+  },
+  en: {
+    kicker: 'The whole package',
+    title: 'Everything we do for a farm',
+    intro:
+      'Six services, in the order of a season. Work with us for one of them or for the whole season.',
+    about: 'About Agrinvest',
+    cover: 'Sunflower harvest with Agrinvest trucks, seen from above',
+    map: {
+      kicker: 'Bases',
+      title: 'Where to find us',
+      lead: 'Tap a county to see its bases.',
+      links: [
+        { label: 'Grain storage', href: '/en/storage' },
+        { label: 'Drying', href: '/en/storage/drying' },
+        { label: 'Ask about storage', href: '/en/storage#cerere' },
+      ],
+    },
+  },
+}
+
+/** Stills from Agrinvest's own film (`public/media/company`), one per service. */
+const photos: Record<StepId, Record<Locale, string>> = {
+  inputs: {
+    ro: 'Saci mari cu sigla Agrinvest, stivuiți în depozit',
+    en: 'Agrinvest big bags stacked in a warehouse',
+  },
+  transport: { ro: 'Camioane din flota Agrinvest', en: 'Trucks from the Agrinvest fleet' },
+  reception: {
+    ro: 'Camion Agrinvest pe cântarul unei baze, lângă silozuri',
+    en: 'An Agrinvest truck on a base weighbridge, by the silos',
+  },
+  storage: {
+    ro: 'Silozurile unei baze Agrinvest, cu camioane în față',
+    en: 'Silos at an Agrinvest base, with trucks in front',
+  },
+  sale: { ro: 'Boabe de cereale, de aproape', en: 'Cereal grains, close up' },
+  finance: {
+    ro: 'Sigla Agrinvest Credit pe peretele biroului',
+    en: 'The Agrinvest Credit sign on an office wall',
+  },
+}
+
+/** The photo at the top of the services page. */
+export const companyCover = '/media/company/harvest.webp'
+
+/** The services page: every step of the season with its photo and links, then the bases map. */
+export function companyServices(locale: Locale) {
+  return {
+    ...servicesUi[locale],
+    services: steps[locale].map((s) => ({
+      ...s,
+      more: more[locale][s.id],
+      photo: {
+        src: `/media/company/${s.id === 'finance' ? 'credit-sign' : s.id}.webp`,
+        alt: photos[s.id][locale],
+      },
+    })),
+  }
 }

@@ -12,6 +12,7 @@
  * 3. Bases: off the home page and /cereale, onto /despre/cifre under "Baze și capacitate".
  * 4. Article covers: one still per topic (`scripts/seed/covers.ts`) on guides and news that have
  *    none or a generic still (cloud storage only).
+ * 5. Crops in the order of harvest in the menu and saved texts (`scripts/site/harvest-order.ts`).
  */
 import type { Payload } from 'payload'
 
@@ -19,6 +20,7 @@ import { canUploadPhotos } from '../import/woo'
 import { keepUrl } from '../finance/corrections'
 import { homeFaqFor, homeLayout, posterKey } from '../seed/home'
 import { assignCovers, findUploads, stillFocus, uploadCovers, uploadPosters } from '../seed/media'
+import { applyHarvestOrder } from '../site/harvest-order'
 import { heroSlides } from '../site/hero'
 import { homeSeo } from '../site/home'
 import { footerColumns, navigationItems, siteCta, siteFooter } from '../site/navigation'
@@ -237,6 +239,7 @@ export async function applyRedesign(payload: Payload, log: Log = console.log) {
   await applyHome(payload, media, log)
   await applyBases(payload, log)
   await applyCovers(payload, log)
+  await applyHarvestOrder(payload, log)
 }
 
 async function applyCovers(payload: Payload, log: Log) {

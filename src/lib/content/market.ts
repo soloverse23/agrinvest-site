@@ -8,6 +8,9 @@ import type { Guide } from '@/payload-types'
 import type { Alternates } from './pages'
 import { payloadClient } from './payload'
 
+/** Changes with every deploy (see `next.config.ts`): apply scripts cannot refresh the cache. */
+const epoch = process.env.ENRICHMENT_EPOCH ?? 'dev'
+
 /**
  * Weekly market notes: `Guides` with `section: 'piata'`. Published notes only, no language
  * fallback, so a note without an English text has no English page.
@@ -39,7 +42,7 @@ export const listMarketNotes = unstable_cache(
         : [],
     )
   },
-  ['market:notes'],
+  [`market:notes:${epoch}`],
   { tags: [tags.guides] },
 )
 
@@ -57,7 +60,7 @@ const noteSlugs = unstable_cache(
     })
     return docs.map((d) => ({ id: d.id, slug: d.slug as unknown as Record<Locale, string> }))
   },
-  ['market:note-slugs'],
+  [`market:note-slugs:${epoch}`],
   { tags: [tags.guides] },
 )
 
@@ -84,6 +87,6 @@ export const getMarketNote = unstable_cache(
     })
     return docs[0] ?? null
   },
-  ['market:note'],
+  [`market:note:${epoch}`],
   { tags: [tags.guides, tags.people] },
 )

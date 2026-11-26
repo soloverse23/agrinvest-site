@@ -57,6 +57,10 @@ export type CheckoutFormProps = {
   shopHref: string
   cartHref?: string
   contactHref?: string
+  /** The seller's identity (name, CUI, register, offices), under the order button. */
+  seller?: ReactNode
+  /** Card acceptance marks, on the card payment tile. */
+  cardMarks?: ReactNode
   /** Story and test hook; real forms start empty. */
   initialState?: CheckoutState
 }
@@ -108,7 +112,8 @@ const copy = {
     callbackNote:
       'Un consultant confirmă stocul, prețul și livrarea. Plătești apoi prin transfer bancar, pe baza proformei.',
     card: 'Plată online cu cardul',
-    cardNote: 'Plătești sigur, direct pe site.',
+    cardNote: 'Visa sau Mastercard, pe pagina securizată ING WebPay.',
+    seller: 'Vânzător',
     soon: 'În curând',
     message: 'Adaugă un mesaj (opțional)',
     messageLabel: 'Mesaj',
@@ -210,7 +215,8 @@ const copy = {
     callbackNote:
       'A consultant confirms stock, price and delivery. You then pay by bank transfer, against a proforma invoice.',
     card: 'Online card payment',
-    cardNote: 'Pay securely, right on the site.',
+    cardNote: 'Visa or Mastercard, on the secure ING WebPay page.',
+    seller: 'Seller',
     soon: 'Coming soon',
     message: 'Add a message (optional)',
     messageLabel: 'Message',
@@ -335,6 +341,7 @@ function Tile({
   note,
   badge,
   disabled,
+  extra,
 }: {
   name: string
   value: string
@@ -344,6 +351,7 @@ function Tile({
   note?: string
   badge?: string
   disabled?: boolean
+  extra?: ReactNode
 }) {
   return (
     <label className="group/tile flex cursor-pointer items-start gap-3 rounded-md border border-field-line bg-raised p-4 transition duration-150 ease-move hover:border-ink has-checked:border-accent has-checked:bg-accent-soft has-checked:ring-1 has-checked:ring-accent has-focus-visible:ring-4 has-focus-visible:ring-accent/15 has-disabled:cursor-not-allowed has-disabled:border-dashed has-disabled:bg-surface has-disabled:hover:border-field-line">
@@ -359,6 +367,7 @@ function Tile({
           {badge && <Badge tone="lime">{badge}</Badge>}
         </span>
         {note && <span className="text-caption text-muted">{note}</span>}
+        {extra && <span className="mt-1.5">{extra}</span>}
       </span>
       <input
         type="radio"
@@ -619,6 +628,8 @@ export function CheckoutForm({
   shopHref,
   cartHref,
   contactHref,
+  seller,
+  cardMarks,
   initialState = initialCheckoutState,
 }: CheckoutFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState, sourcePath)
@@ -899,6 +910,7 @@ export function CheckoutForm({
               note={t.cardNote}
               badge={t.soon}
               disabled
+              extra={cardMarks}
             />
           </fieldset>
 
@@ -962,6 +974,16 @@ export function CheckoutForm({
           </p>
           <p className="text-center text-caption text-subtle">{t.required}</p>
         </div>
+
+        {seller && (
+          <section
+            aria-label={t.seller}
+            className="grid gap-1 border-t border-line pt-6 text-caption text-muted"
+          >
+            <h2 className="font-semibold text-ink">{t.seller}</h2>
+            {seller}
+          </section>
+        )}
       </form>
 
       {/* Larger screens: the summary stays in view beside the form. */}

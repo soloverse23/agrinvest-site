@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache'
 
 import type { Locale } from '@/i18n/config'
+import { byHarvest } from '@/lib/crops'
 import { tags } from '@/lib/revalidate'
 
 import { payloadClient } from './payload'
@@ -44,9 +45,10 @@ export const listCrops = unstable_cache(
       sort: 'createdAt',
       overrideAccess: false,
     })
-    return docs
+    return byHarvest(docs)
   },
-  ['crops:list'],
+  // A new key: Vercel's data cache outlives deploys and holds the list in its old order.
+  ['crops:list:harvest'],
   { tags: [tags.crops] },
 )
 

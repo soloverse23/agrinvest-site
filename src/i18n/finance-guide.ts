@@ -28,30 +28,9 @@ export const financeGuideUi = {
       clientsLabel: 'fermieri finanțați',
     },
     hub: {
-      needsKicker: 'Ce finanțăm',
       needsTitle: 'De ce ai nevoie?',
-      needsLead:
-        'Alege situația ta. Fiecare variantă duce la creditul potrivit, explicat pe scurt, cu un exemplu.',
       more: 'Mai finanțăm și',
-      finder: {
-        kicker: 'Nu ești sigur?',
-        title: 'Află în trei întrebări',
-        lead: 'Spune-ne pentru ce ai nevoie de bani, cam cât și când vinzi recolta. Îți arătăm creditul potrivit și cum ar putea cădea ratele.',
-        need: 'Pentru ce?',
-        needChoose: 'Alege',
-        amount: 'Cam ce sumă?',
-        sell: 'Când vinzi recolta?',
-        sellOptions: {
-          wheat: 'Vara',
-          maize: 'Toamna',
-          'wheat,maize': 'Și vara, și toamna',
-          none: 'Nu cultiv cereale',
-        },
-        submit: 'Vezi ce ți se potrivește',
-        note: 'Un exemplu, nu o ofertă. Nu ne trimiți nicio dată personală.',
-      },
       how: {
-        kicker: 'Cum funcționează',
         title: 'Trei pași până la bani',
         steps: [
           {
@@ -68,13 +47,7 @@ export const financeGuideUi = {
           },
         ],
       },
-      questionsKicker: 'Întrebări',
-      questionsTitle: 'Ce întreabă fermierii',
       questionsAll: 'Toate întrebările',
-      libraryKicker: 'Bibliotecă',
-      libraryTitle: 'Vrei să înțelegi în detaliu?',
-      libraryLead:
-        'Ghiduri despre costul unui credit, garanții, APIA, leasing și fonduri europene, cu sursele fiecărei informații.',
       libraryAll: 'Toată biblioteca',
       bandTitle: 'Nu știi de unde să începi?',
       bandBody:
@@ -189,30 +162,9 @@ export const financeGuideUi = {
       clientsLabel: 'farmers financed',
     },
     hub: {
-      needsKicker: 'What we finance',
       needsTitle: 'What do you need?',
-      needsLead:
-        'Pick your situation. Each one leads to the right loan, explained briefly, with an example.',
       more: 'We also finance',
-      finder: {
-        kicker: 'Not sure?',
-        title: 'Find out in three questions',
-        lead: 'Tell us what you need the money for, roughly how much, and when you sell your harvest. We show you the right loan and how instalments could fall.',
-        need: 'What for?',
-        needChoose: 'Choose',
-        amount: 'Roughly how much?',
-        sell: 'When do you sell your harvest?',
-        sellOptions: {
-          wheat: 'Summer',
-          maize: 'Autumn',
-          'wheat,maize': 'Summer and autumn',
-          none: 'I do not grow grain',
-        },
-        submit: 'See what fits',
-        note: 'An example, not an offer. You send us no personal details.',
-      },
       how: {
-        kicker: 'How it works',
         title: 'Three steps to the money',
         steps: [
           {
@@ -229,13 +181,7 @@ export const financeGuideUi = {
           },
         ],
       },
-      questionsKicker: 'Questions',
-      questionsTitle: 'What farmers ask',
       questionsAll: 'All questions',
-      libraryKicker: 'Library',
-      libraryTitle: 'Want the detail?',
-      libraryLead:
-        'Guides to the cost of a loan, guarantees, APIA, leasing and EU funds, with the source of every fact.',
       libraryAll: 'The whole library',
       bandTitle: 'Not sure where to start?',
       bandBody:

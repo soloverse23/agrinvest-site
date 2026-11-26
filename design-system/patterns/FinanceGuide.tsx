@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { ArrowRightIcon, CheckIcon } from '../icons/icons'
 import { cx } from '../lib/cx'
 import { Button, type ButtonProps } from '../primitives/Button'
+import { Photo } from './Photo'
 import { Kicker } from './Sections'
 
 /**
@@ -38,20 +39,36 @@ export function ConsultantButton({
 
 /* ------------------------------------------------------------------------------------------ */
 
-/** Four short facts under a title: the figure, then what it means. */
-export function TrustFacts({ items }: { items: { value: ReactNode; label: string }[] }) {
+/** The hub's title-band picture: a photo, with up to four short facts attached under it. */
+export function HeroPhoto({
+  src,
+  alt,
+  facts,
+}: {
+  src: string
+  alt: string
+  /** The figure, then what it means. */
+  facts: { value: ReactNode; label: string }[]
+}) {
   return (
-    <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-lg bg-line ring-1 ring-line md:grid-cols-4">
-      {items.map((item) => (
-        <div
-          key={item.label}
-          className="flex flex-col-reverse justify-end gap-1 bg-raised px-4 py-3.5"
-        >
-          <dt className="text-caption text-muted">{item.label}</dt>
-          <dd className="text-h4 font-semibold text-forest tabular-nums">{item.value}</dd>
-        </div>
-      ))}
-    </dl>
+    <div className="grid gap-px overflow-hidden rounded-xl bg-line shadow-soft ring-1 ring-line">
+      <div className="relative aspect-3/2 bg-surface">
+        <Photo src={src} alt={alt} fill priority className="object-cover" />
+      </div>
+      {facts.length > 0 && (
+        <dl className="grid grid-cols-2 gap-px md:grid-cols-4">
+          {facts.map((fact) => (
+            <div
+              key={fact.label}
+              className="flex flex-col-reverse justify-end gap-1 bg-raised px-4 py-3.5"
+            >
+              <dt className="text-caption text-muted">{fact.label}</dt>
+              <dd className="text-h4 font-semibold text-forest tabular-nums">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
   )
 }
 
@@ -59,142 +76,59 @@ export function TrustFacts({ items }: { items: { value: ReactNode; label: string
 
 export type NeedTile = {
   id: string
-  icon: ReactNode
+  /** A 3:2 photo of the need. Decorative: the label says what it is. */
+  photo: string
   label: string
   line: string
   href: string
   also?: { href: string; label: string }
 }
 
-/** "De ce ai nevoie?": one tile per need, each leading to one credit. The whole tile is a link. */
+/**
+ * "De ce ai nevoie?": one photo tile per need, each leading to one credit. The whole tile is
+ * a link. On phones the photo sits beside the text, so the eight needs stay a short list.
+ */
 export function NeedTiles({ tiles }: { tiles: NeedTile[] }) {
   return (
-    <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+    <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-4">
       {tiles.map((tile) => (
         <li
           key={tile.id}
           className={cx(
             card,
-            'group relative grid content-start gap-3 p-5 transition duration-150 ease-move hover:-translate-y-0.5 hover:shadow-raised hover:ring-accent/50',
+            'group relative grid grid-cols-[7rem_1fr] overflow-hidden transition duration-150 ease-move hover:-translate-y-0.5 hover:shadow-raised hover:ring-accent/50 md:grid-cols-1 md:content-start',
           )}
         >
-          <div className="flex items-center justify-between">
-            <span
-              className="grid size-12 place-items-center rounded-lg bg-accent-soft text-accent transition duration-150 ease-move group-hover:bg-accent group-hover:text-on-accent"
-              aria-hidden="true"
-            >
-              <span className="size-6 *:size-full">{tile.icon}</span>
-            </span>
-            <ArrowRightIcon
-              className="size-5 text-subtle transition duration-150 ease-move group-hover:translate-x-0.5 group-hover:text-accent"
-              aria-hidden="true"
+          <div className="relative min-h-28 overflow-hidden bg-surface md:aspect-3/2 md:min-h-0">
+            <Photo
+              src={tile.photo}
+              alt=""
+              fill
+              className="object-cover transition duration-150 ease-move group-hover:scale-105"
             />
           </div>
-          <h3 className="text-h4 font-semibold text-balance">
-            <Link
-              href={tile.href}
-              className="text-ink no-underline after:absolute after:inset-0 after:rounded-lg"
-            >
-              {tile.label}
-            </Link>
-          </h3>
-          <p className="text-small text-muted">{tile.line}</p>
-          {tile.also && (
-            <Link
-              href={tile.also.href}
-              className="relative z-10 justify-self-start text-caption font-semibold text-accent underline-offset-2 hover:underline"
-            >
-              {tile.also.label}
-            </Link>
-          )}
+          <div className="grid content-start gap-1.5 p-4 md:gap-2 md:p-5">
+            <h3 className="text-h4 font-semibold text-balance">
+              <Link
+                href={tile.href}
+                className="text-ink no-underline after:absolute after:inset-0 after:rounded-lg group-hover:text-accent"
+              >
+                {tile.label}
+              </Link>
+            </h3>
+            <p className="text-small text-muted">{tile.line}</p>
+            {tile.also && (
+              <Link
+                href={tile.also.href}
+                className="relative z-10 justify-self-start text-caption font-semibold text-accent underline-offset-2 hover:underline"
+              >
+                {tile.also.label}
+              </Link>
+            )}
+          </div>
         </li>
       ))}
     </ul>
-  )
-}
-
-/* ------------------------------------------------------------------------------------------ */
-
-/** A row of radio pills: native radios, styled by `:has(:checked)`, no JavaScript. */
-export function ChoicePills({
-  name,
-  legend,
-  options,
-  defaultValue,
-}: {
-  name: string
-  legend: string
-  options: { value: string; label: string }[]
-  defaultValue?: string
-}) {
-  return (
-    <fieldset className="grid gap-2">
-      <legend className="mb-1.5 text-small font-medium text-ink">{legend}</legend>
-      <div className="flex flex-wrap gap-2">
-        {options.map((o) => (
-          <label
-            key={o.value}
-            className="inline-flex h-11 cursor-pointer items-center rounded-full bg-raised px-4 text-small font-medium text-ink ring-1 ring-field-line transition duration-150 ease-move hover:ring-ink has-checked:bg-forest has-checked:text-on-forest has-checked:ring-forest has-focus-visible:ring-4 has-focus-visible:ring-accent/25"
-          >
-            <input
-              type="radio"
-              name={name}
-              value={o.value}
-              defaultChecked={o.value === defaultValue}
-              className="sr-only"
-            />
-            {o.label}
-          </label>
-        ))}
-      </div>
-    </fieldset>
-  )
-}
-
-/**
- * "Nu ești sigur?": three questions in a plain GET form. It sends the farmer to the
- * simulator, which names the matching credit and shows how instalments could fall.
- */
-export function NeedFinder({
-  action,
-  kicker,
-  title,
-  lead,
-  children,
-  submit,
-  note,
-}: {
-  action: string
-  kicker: string
-  title: string
-  lead: string
-  /** The fields: need, amount, when you sell. */
-  children: ReactNode
-  submit: string
-  note: string
-}) {
-  return (
-    <section className="grid gap-8 rounded-xl bg-surface p-6 ring-1 ring-line md:p-10 lg:grid-cols-12 lg:gap-12">
-      <div className="grid content-start gap-4 lg:col-span-5">
-        <Kicker>{kicker}</Kicker>
-        <h2 className="text-h2 font-semibold text-balance">{title}</h2>
-        <p className="text-lead text-muted">{lead}</p>
-      </div>
-      <form
-        method="get"
-        action={`${action}#rezultat`}
-        noValidate
-        className="grid content-start gap-5 lg:col-span-7"
-      >
-        {children}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
-          <Button type="submit" icon={<ArrowRightIcon />}>
-            {submit}
-          </Button>
-          <p className="max-w-sm text-caption text-muted">{note}</p>
-        </div>
-      </form>
-    </section>
   )
 }
 

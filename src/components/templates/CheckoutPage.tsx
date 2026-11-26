@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 
 import { CheckoutForm } from '@ds/patterns/CheckoutForm'
+import { CardMarks } from '@ds/patterns/PaymentMarks'
 import { JsonLd } from '@/components/JsonLd'
 import { Crumbs } from '@/components/PageParts'
+import { sellerContacts, sellerLines } from '@/components/Seller'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { commerceUi } from '@/i18n/commerce'
@@ -10,6 +12,7 @@ import { cartPath, checkoutPath, shopPath } from '@/i18n/routes'
 import { fixedUrl, ui } from '@/i18n/ui'
 import { lookupCompany, placeOrder } from '@/lib/commerce/actions'
 import { pricedCart } from '@/lib/commerce/cart'
+import { getFigures } from '@/lib/content/globals'
 import { listBases, listCounties } from '@/lib/content/locations'
 import { formatQuantity } from '@/lib/format'
 import { breadcrumbs, webPage } from '@/lib/schema'
@@ -37,10 +40,11 @@ export function checkoutMetadata(locale: Locale): Metadata {
  */
 export async function CheckoutPage({ locale }: { locale: Locale }) {
   const t = commerceUi[locale]
-  const [cart, counties, bases] = await Promise.all([
+  const [cart, counties, bases, figures] = await Promise.all([
     pricedCart(locale),
     listCounties(),
     listBases(locale),
+    getFigures(locale),
   ])
   const money = (value: number) => formatQuantity(value, 'lei', locale)
   return (
@@ -94,6 +98,28 @@ export async function CheckoutPage({ locale }: { locale: Locale }) {
         shopHref={shopPath(locale)}
         cartHref={cartPath(locale)}
         contactHref={fixedUrl('contact', locale)}
+        cardMarks={<CardMarks label={t.cards} />}
+        seller={
+          <>
+            {sellerLines(figures, locale).map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
+            <p className="flex flex-wrap gap-x-3">
+              {sellerContacts(figures, locale).map((c) => (
+                <a key={c.href} href={c.href} className="font-medium text-accent">
+                  <span className="sr-only">{c.label}: </span>
+                  {c.value}
+                </a>
+              ))}
+            </p>
+            <p className="flex flex-wrap gap-x-3">
+              <a href={fixedUrl('terms', locale)}>{t.terms}</a>
+              <a href={fixedUrl('returns', locale)}>{t.returns}</a>
+              <a href={fixedUrl('complaints', locale)}>{t.complaints}</a>
+              <a href="https://anpc.ro/">{t.anpc}</a>
+            </p>
+          </>
+        }
       />
     </SiteShell>
   )

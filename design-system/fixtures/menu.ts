@@ -165,11 +165,6 @@ export const menuNav = (locale: Locale): NavItem[] => {
           group: l(locale, 'Companie', 'Company'),
         },
         {
-          href: '/parteneri',
-          label: l(locale, 'Parteneri', 'Partners'),
-          group: l(locale, 'Companie', 'Company'),
-        },
-        {
           href: '/cariere',
           label: l(locale, 'Cariere', 'Careers'),
           group: l(locale, 'Companie', 'Company'),
@@ -314,7 +309,6 @@ export const footerColumns = (locale: Locale): SiteFooterProps['columns'] => {
       [ro ? 'Logistică' : 'Logistics', '/logistica'],
       [ro ? 'Despre Agrinvest' : 'About Agrinvest', '/despre'],
       [ro ? 'Agrinvest în cifre' : 'Agrinvest in figures', '/despre/cifre'],
-      [ro ? 'Parteneri' : 'Partners', '/parteneri'],
       [ro ? 'Cariere' : 'Careers', '/cariere'],
     ]),
     col(ro ? 'Știri și ghiduri' : 'News and guides', [

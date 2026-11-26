@@ -9,11 +9,17 @@ import { PageTitle } from '@/components/PageParts'
 import { SiteShell } from '@/components/SiteShell'
 import type { Locale } from '@/i18n/config'
 import { articlesUi } from '@/i18n/articles'
-import { financeRoutePath, guidesHubPath, marketNotePath, pillarPath } from '@/i18n/routes'
+import {
+  financeRoutePath,
+  guidePath,
+  guidesHubPath,
+  marketNotePath,
+  pillarPath,
+} from '@/i18n/routes'
 import { ui } from '@/i18n/ui'
 import { pillarBySlug, pillars, type Pillar } from '@/lib/articles/pillars'
-import { listArticles } from '@/lib/content/articles'
-import { listGuides } from '@/lib/content/finance'
+import { listArticles, type ArticleCardData } from '@/lib/content/articles'
+import { listGuides, type GuideCard } from '@/lib/content/finance'
 import { getSeoDefaults } from '@/lib/content/globals'
 import { listMarketNotes } from '@/lib/content/market'
 import type { Alternates } from '@/lib/content/pages'
@@ -47,13 +53,46 @@ export async function hubMetadata(locale: Locale): Promise<Metadata> {
   })
 }
 
+/**
+ * Every published piece, newest first: farmer guides, Agrinvest news and finance guides, each
+ * labelled with where it belongs.
+ */
+async function latest(locale: Locale, guides: ArticleCardData[], finance: GuideCard[]) {
+  const t = articlesUi[locale].hub
+  const news = await listArticles(locale, 'stiri')
+  return [
+    ...[...guides, ...news].map((a) => ({
+      key: `a${a.id}`,
+      href: a.href,
+      title: a.title,
+      summary: a.summary,
+      date: a.date,
+      image: a.image,
+      kicker:
+        a.section === 'stiri' ? t.news : pillars.find((p) => p.key === a.pillar)?.name[locale],
+    })),
+    ...finance.map((g) => ({
+      key: `f${g.id}`,
+      href: guidePath(g.slug, locale),
+      title: g.title,
+      summary: g.summary,
+      date: g.date,
+      image: g.image,
+      kicker: t.finance.title,
+    })),
+  ].sort((a, b) => b.date.localeCompare(a.date))
+}
+
 export async function GuidesHubPage({ locale }: { locale: Locale }) {
   const t = articlesUi[locale].hub
   const url = guidesHubPath(locale)
   const { guides, finance, by } = await counts(locale)
   const live = pillars.filter((p) => by(p).length)
   const crumbs = [{ name: t.title, url }]
-  const [lead, ...rest] = guides
+  const all = await latest(locale, guides, finance)
+  // The feature card opens on a photo when any piece has one.
+  const lead = all.find((a) => a.image) ?? all[0]
+  const rest = all.filter((a) => a !== lead)
   return (
     <SiteShell locale={locale} alternates={hubAlternates}>
       <JsonLd
@@ -124,20 +163,20 @@ export async function GuidesHubPage({ locale }: { locale: Locale }) {
               summary={lead.summary}
               date={lead.date}
               image={lead.image}
-              kicker={pillars.find((p) => p.key === lead.pillar)?.name[locale]}
+              kicker={lead.kicker}
             />
             {rest.length > 0 && (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {rest.slice(0, 9).map((a) => (
+                {rest.map((a) => (
                   <ArticleCard
-                    key={a.id}
+                    key={a.key}
                     locale={locale}
                     href={a.href}
                     title={a.title}
                     summary={a.summary}
                     date={a.date}
                     image={a.image}
-                    kicker={pillars.find((p) => p.key === a.pillar)?.name[locale]}
+                    kicker={a.kicker}
                   />
                 ))}
               </div>

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+import { AnpcMarks, CardMarks } from '@ds/patterns/PaymentMarks'
 import { SiteFooter } from '@ds/patterns/SiteFooter'
 import { headerScript, SiteHeader } from '@ds/patterns/SiteHeader'
 import type { NavItem, ShopPanelData } from '@ds/patterns/SiteHeader'
@@ -17,6 +18,7 @@ import { marketTicker } from '@/lib/markets/ticker'
 
 import { CookieSettings } from './CookieSettings'
 import { FactMark } from './Fact'
+import { sellerContacts, sellerLines } from './Seller'
 
 /** Social profiles by host, for the footer labels. */
 const socialName = (url: string) =>
@@ -39,11 +41,9 @@ async function shopPanel(locale: Locale): Promise<ShopPanelData | undefined> {
       href: categoryPath(c.slug, locale),
       label: c.name,
       count: c.count,
-      children: c.children.map((s) => ({
-        href: categoryPath(s.slug, locale),
-        label: s.name,
-        count: s.count,
-      })),
+      // Structure simplification (2026-11-26): the menu shows the three main categories only;
+      // their types (herbicides, fungicides…) are the tiles and chips on the category page.
+      children: [],
     })),
     crops: menu.crops.slice(0, 8).map((c) => ({
       href: hubPath('crop', c.slug, locale),
@@ -164,6 +164,8 @@ export async function SiteShell({
         about={t.about}
         labels={{ contact: t.contactUs, social: t.social, footer: t.footer }}
         contact={[
+          // The shop's order line and email first: ING WebPay asks for them on every page.
+          ...sellerContacts(figures, locale),
           ...(phone
             ? [
                 {
@@ -202,11 +204,20 @@ export async function SiteShell({
           label: socialName(s.url),
         }))}
         legal={footer.legal}
+        company={sellerLines(figures, locale)}
+        marks={
+          <>
+            <CardMarks label={commerceUi[locale].cards} />
+            <AnpcMarks salLabel={commerceUi[locale].sal} />
+          </>
+        }
         bottomLinks={[
           { href: fixedUrl('privacy', locale), label: t.privacy },
           { href: fixedUrl('terms', locale), label: commerceUi[locale].terms },
           { href: fixedUrl('delivery', locale), label: commerceUi[locale].deliveryPage },
           { href: fixedUrl('returns', locale), label: commerceUi[locale].returns },
+          { href: fixedUrl('cookies', locale), label: commerceUi[locale].cookiesPage },
+          { href: fixedUrl('complaints', locale), label: commerceUi[locale].complaints },
           { href: 'https://anpc.ro/', label: commerceUi[locale].anpc },
         ]}
         extra={seo.analytics?.ga4 ? <CookieSettings label={t.cookies} /> : undefined}

@@ -7,12 +7,13 @@ export const articlesUi = {
       title: 'Ghiduri pentru fermieri',
       seoTitle: 'Ghiduri pentru fermieri: culturi, vânzare, depozitare',
       description:
-        'Răspunsuri scurte și verificate pentru fermieri: grâu, porumb, floarea-soarelui, rapiță, vânzarea recoltei, depozitare, fertilizare și finanțare.',
+        'Răspunsuri scurte și verificate pentru fermieri: grâu, rapiță, floarea-soarelui, porumb, vânzarea recoltei, depozitare, fertilizare și finanțare.',
       summary:
         'Întrebările pe care ni le pun fermierii, cu răspunsuri scrise și verificate de oameni care lucrează în câmp, la recepție și în finanțare.',
       kicker: 'Ghiduri',
       pillars: 'Pe teme',
-      latest: 'Cele mai noi ghiduri',
+      latest: 'Cele mai noi articole',
+      news: 'Știri Agrinvest',
       finance: {
         title: 'Finanțare',
         intro: 'Credit agricol, APIA, garanții și costul real al creditului.',
@@ -71,12 +72,13 @@ export const articlesUi = {
       title: 'Guides for farmers',
       seoTitle: 'Guides for farmers in Romania: crops, selling, storage',
       description:
-        'Short, checked answers for farmers: wheat, corn, sunflower, rapeseed, selling the harvest, storage, fertilisation and financing.',
+        'Short, checked answers for farmers: wheat, rapeseed, sunflower, corn, selling the harvest, storage, fertilisation and financing.',
       summary:
         'The questions farmers ask us, answered and checked by people who work in the field, at grain intake and in financing.',
       kicker: 'Guides',
       pillars: 'By topic',
-      latest: 'Latest guides',
+      latest: 'Latest articles',
+      news: 'Agrinvest news',
       finance: {
         title: 'Financing',
         intro: 'Farm credit, APIA, guarantees and the real cost of credit.',

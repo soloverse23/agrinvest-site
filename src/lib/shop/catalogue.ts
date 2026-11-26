@@ -1,4 +1,5 @@
 import type { Locale } from '@/i18n/config'
+import { harvestRank } from '@/lib/crops'
 
 import { orderBlock, type OrderBlock } from './rules'
 
@@ -18,7 +19,8 @@ export type ProductCardData = {
   category: Ref & { parent?: number | null }
   secondary: number[]
   brand?: Ref | null
-  crops: Ref[]
+  /** In harvest order; `key` is the crop's stable key. */
+  crops: (Ref & { key?: string })[]
   ingredients: (Ref & { concentration?: number | null; unit?: string | null })[]
   formulation?: string | null
   /** Fertiliser composition (N, P2O5…), for the card's line under the name. */
@@ -296,8 +298,11 @@ export function sortListing(products: ProductCardData[], sort: SortKey, locale: 
   }
 }
 
-const optionsOf = (p: ProductCardData, key: FacetKey): { value: string; label: string }[] => {
-  if (key === 'crop') return p.crops.map((c) => ({ value: c.slug, label: c.name }))
+type Option = { value: string; label: string; rank?: number }
+
+const optionsOf = (p: ProductCardData, key: FacetKey): Option[] => {
+  if (key === 'crop')
+    return p.crops.map((c) => ({ value: c.slug, label: c.name, rank: harvestRank(c.key ?? '') }))
   if (key === 'brand') return p.brand ? [{ value: p.brand.slug, label: p.brand.name }] : []
   if (key === 'ingredient') return p.ingredients.map((i) => ({ value: i.slug, label: i.name }))
   if (key === 'formulation')
@@ -311,19 +316,24 @@ const optionsOf = (p: ProductCardData, key: FacetKey): { value: string; label: s
 
 /**
  * Options of one filter with their counts. Each count respects the other active filters, so
- * no option leads to an empty page.
+ * no option leads to an empty page. Most products first; the grain crops lead in harvest order.
  */
 export function facetOptions(products: ProductCardData[], key: FacetKey, filters: Filters) {
   const others = { ...filters }
   delete others[key]
-  const counts = new Map<string, { value: string; label: string; count: number }>()
+  const counts = new Map<string, Option & { count: number }>()
   for (const product of applyFilters(products, others))
     for (const option of optionsOf(product, key)) {
       const found = counts.get(option.value)
       if (found) found.count++
       else counts.set(option.value, { ...option, count: 1 })
     }
-  return [...counts.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+  return [...counts.values()]
+    .sort(
+      (a, b) =>
+        (a.rank ?? 0) - (b.rank ?? 0) || b.count - a.count || a.label.localeCompare(b.label),
+    )
+    .map(({ value, label, count }) => ({ value, label, count }))
 }
 
 const fold = (s: string) =>

@@ -10,6 +10,8 @@ import {
   sectionsFor,
 } from '@/access/departments'
 import { parseLink } from '@/lib/panel/find'
+import { editLinksFor } from '@/lib/panel/here'
+import { targetsFor } from '@/lib/panel/onPage'
 import config from '@/payload.config'
 
 const as = (roles: string[], id = 990001) =>
@@ -129,6 +131,27 @@ describe('staff panel departments', () => {
     })
     expect(after.roles).toEqual(['preturi'])
   })
+
+  it('offers "edit this page" only to the department that owns it', async () => {
+    const page = await payload.create({
+      collection: 'pages',
+      data: { title: 'ZZ panel here', slug: 'zz-panel-here' } as never,
+    })
+    created.push({ collection: 'pages', id: page.id })
+    const req = (roles: string[]) =>
+      ({ payload, user: as(roles), i18n: { language: 'ro' } }) as never
+
+    const content = await editLinksFor(req(['continut']), '/zz-panel-here')
+    expect(content).toEqual([
+      { label: 'Editează pagina', href: `/admin/collections/pages/${page.id}` },
+    ])
+    expect(await editLinksFor(req(['magazin']), '/zz-panel-here')).toEqual([])
+    expect(await editLinksFor(req(['magazin']), '/magazin')).toEqual([
+      { label: 'Editează pagina', href: '/admin/globals/shop-home' },
+    ])
+    const prices = await editLinksFor(req(['preturi']), '/en/prices/wheat')
+    expect(prices.map((l) => l.href)).toEqual(['/admin/collections/buy-prices'])
+  })
 })
 
 describe('page finder links', () => {
@@ -144,5 +167,43 @@ describe('page finder links', () => {
     expect(parseLink('/ro/despre')).toEqual({ locale: 'ro', path: '/despre' })
     expect(parseLink('agrinvest.ro/')).toEqual({ locale: 'ro', path: '/' })
     expect(parseLink('ghid erbicidare')).toBeNull()
+  })
+})
+
+describe('edit this page: what a public path shows', () => {
+  it('follows the site routes in both languages', () => {
+    expect(targetsFor('ro', '/')).toEqual([{ kind: 'page', path: '/' }])
+    expect(targetsFor('ro', '/depozitare/uscare')).toEqual([
+      { kind: 'page', path: '/depozitare/uscare' },
+    ])
+    expect(targetsFor('ro', '/magazin')).toEqual([{ kind: 'global', global: 'shop-home' }])
+    expect(targetsFor('ro', '/magazin/erbicide')).toEqual([
+      { kind: 'doc', collection: 'categories', slug: 'erbicide' },
+    ])
+    expect(targetsFor('en', '/shop/herbicides/wing-p')).toEqual([
+      { kind: 'doc', collection: 'products', slug: 'wing-p' },
+    ])
+    expect(targetsFor('ro', '/magazin/producator/bayer')).toEqual([
+      { kind: 'doc', collection: 'brands', slug: 'bayer' },
+    ])
+    expect(targetsFor('ro', '/magazin/cautare')).toEqual([])
+    expect(targetsFor('ro', '/finantare/credit-investitii/utilaje')).toEqual([
+      { kind: 'doc', collection: 'finance-products', slug: 'utilaje' },
+    ])
+    expect(targetsFor('en', '/financing/about-ifn')).toEqual([
+      { kind: 'doc', collection: 'guides', slug: 'about-ifn', section: 'pagina-finantare' },
+    ])
+    expect(targetsFor('ro', '/finantare/ghiduri/glosar')).toEqual([
+      { kind: 'doc', collection: 'guides', slug: 'glosar', section: 'finantare' },
+    ])
+    expect(targetsFor('ro', '/finantare/intrebari/dobanda')).toEqual([
+      { kind: 'doc', collection: 'finance-questions', slug: 'dobanda' },
+    ])
+    expect(targetsFor('ro', '/ghiduri/protectia-plantelor/rapita')).toEqual([
+      { kind: 'doc', collection: 'guides', slug: 'rapita', section: 'ghid' },
+    ])
+    expect(targetsFor('ro', '/stiri/zi/2026-11-15')).toEqual([])
+    expect(targetsFor('ro', '/preturi/petrol-brent')).toEqual([])
+    expect(targetsFor('ro', '/motorina')).toEqual([{ kind: 'list', collection: 'diesel-prices' }])
   })
 })

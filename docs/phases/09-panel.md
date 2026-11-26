@@ -29,3 +29,13 @@ Departments update and change status; only the admin creates and deletes, except
 ## Checks
 
 `tests/int/panel.int.spec.ts` (department access, self-only accounts, link parsing); `tests/e2e/admin.e2e.spec.ts` (admin still sees everything). Migration `20261126_212358_panel_departments` adds the four roles and the account name.
+
+## Edit this page (9.2)
+
+Built 2026-11-26. A staff account signed in to the panel sees an **"Editează pagina"** button (bottom right) on the public site, on every page its department may change; it opens that document's edit screen directly (English pages open the English version).
+
+- **Which document**: `src/lib/panel/onPage.ts` maps a public path to what it shows, following `src/i18n/routes.ts`: CMS pages by path, shop categories, products, brands and active ingredients by slug, the shop home global, finance products, questions, guides and fixed finance pages, farmer guides, news and market notes (Guides by section and slug), authors and crops. Price pages and diesel link to their price lists ("Editează: prețuri de achiziție").
+- **Who sees it**: `GET /api/panel/here?path=` (`src/lib/panel/here.ts`) answers staff only, with the same department rules as the panel; pages a department does not own show no button.
+- **Visitors pay nothing**: the panel cookie is httpOnly, so the proxy keeps a readable `ag-staff=1` flag in step with it. Without the flag the page never calls the endpoint and never loads the bar's code. The flag grants nothing; the endpoint checks the real session.
+- Pieces: `src/components/staff/StaffEdit.tsx` (loader in the locale layout), `design-system/patterns/StaffEditBar.tsx` (with story). Tests in `tests/int/panel.int.spec.ts`.
+- **Sign-in from the site**: the footer's last bottom link, "Autentificare echipă" / "Staff sign-in", goes to `/next/staff`, which opens `/admin/login?redirect=<the page>`; after signing in the person is back on that page with the edit button. A plain, `nofollow` link (`plain` in `SiteFooter`'s `bottomLinks`), no client code.

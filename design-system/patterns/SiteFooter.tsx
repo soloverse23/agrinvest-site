@@ -19,7 +19,8 @@ export type SiteFooterProps = {
   company?: ReactNode[]
   /** Card acceptance and ANPC marks, at the very bottom. */
   marks?: ReactNode
-  bottomLinks?: { href: string; label: string }[]
+  /** `plain`: a full page load (a server redirect, such as the staff sign-in), never followed by robots. */
+  bottomLinks?: { href: string; label: string; plain?: boolean }[]
   /** Extra controls next to the bottom links, e.g. the cookie settings button. */
   extra?: ReactNode
   labels: { contact: string; social: string; footer: string }
@@ -132,7 +133,7 @@ export function SiteFooter({
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:col-span-5 lg:justify-end">
             {bottomLinks.map((l) =>
-              isInternal(l.href) ? (
+              isInternal(l.href) && !l.plain ? (
                 <Link
                   key={l.href}
                   href={l.href}
@@ -142,7 +143,12 @@ export function SiteFooter({
                   {l.label}
                 </Link>
               ) : (
-                <a key={l.href} href={l.href} className="text-on-forest-muted hover:text-on-forest">
+                <a
+                  key={l.href}
+                  href={l.href}
+                  rel={l.plain ? 'nofollow' : undefined}
+                  className="text-on-forest-muted hover:text-on-forest"
+                >
                   {l.label}
                 </a>
               ),

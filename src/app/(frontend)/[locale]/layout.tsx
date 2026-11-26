@@ -4,6 +4,7 @@ import React from 'react'
 import { preload } from 'react-dom'
 
 import { AnalyticsLazy } from '@/components/AnalyticsLazy'
+import { StaffEdit } from '@/components/staff/StaffEdit'
 import { isLocale, locales } from '@/i18n/config'
 import { fixedUrl } from '@/i18n/ui'
 import { getSeoDefaults } from '@/lib/content/globals'
@@ -66,6 +67,7 @@ export default async function LocaleLayout({
           {skip[locale]}
         </a>
         {children}
+        <StaffEdit locale={locale} />
         {gaId && (
           <AnalyticsLazy gaId={gaId} locale={locale} privacyHref={fixedUrl('privacy', locale)} />
         )}

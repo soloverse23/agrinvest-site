@@ -10,6 +10,26 @@ import { defaultLocale, locales } from './i18n/config'
  * - Every other path is rewritten internally to `/ro/...`.
  */
 export function proxy(request: NextRequest) {
+  return withStaffHint(request, route(request))
+}
+
+/**
+ * The panel session cookie is httpOnly, so pages cannot see it. A readable `ag-staff=1` flag,
+ * kept in step with it, tells the page to ask `/api/panel/here` for its edit links; visitors
+ * never send that request. The flag grants nothing: the endpoint checks the real session.
+ */
+export const STAFF_HINT = 'ag-staff'
+
+function withStaffHint(request: NextRequest, response: NextResponse): NextResponse {
+  const signedIn = request.cookies.has('payload-token')
+  const hinted = request.cookies.get(STAFF_HINT)?.value === '1'
+  if (signedIn && !hinted)
+    response.cookies.set(STAFF_HINT, '1', { path: '/', sameSite: 'lax', maxAge: 60 * 60 * 24 * 7 })
+  else if (!signedIn && request.cookies.has(STAFF_HINT)) response.cookies.delete(STAFF_HINT)
+  return response
+}
+
+function route(request: NextRequest): NextResponse {
   const { pathname, search } = request.nextUrl
   const [, first] = pathname.split('/')
 

@@ -43,6 +43,7 @@ import { Targets } from './collections/Targets'
 import { Users } from './collections/Users'
 import { hiddenUnlessAdmin } from './access/departments'
 import { panelFindEndpoint } from './lib/panel/find'
+import { panelHereEndpoint } from './lib/panel/here'
 import { Figures } from './globals/Figures'
 import { NewsSettings } from './globals/NewsSettings'
 import { Footer } from './globals/Footer'
@@ -98,7 +99,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  endpoints: [panelFindEndpoint],
+  endpoints: [panelFindEndpoint, panelHereEndpoint],
   collections: [
     Pages,
     Bases,

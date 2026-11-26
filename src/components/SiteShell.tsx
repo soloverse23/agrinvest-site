@@ -219,6 +219,7 @@ export async function SiteShell({
           { href: fixedUrl('cookies', locale), label: commerceUi[locale].cookiesPage },
           { href: fixedUrl('complaints', locale), label: commerceUi[locale].complaints },
           { href: 'https://anpc.ro/', label: commerceUi[locale].anpc },
+          { href: '/next/staff', label: t.staffLogin, plain: true },
         ]}
         extra={seo.analytics?.ga4 ? <CookieSettings label={t.cookies} /> : undefined}
       />

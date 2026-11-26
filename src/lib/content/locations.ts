@@ -19,7 +19,10 @@ export const listBases = unstable_cache(
     })
     return docs
   },
-  ['bases:list'],
+  // The deploy's commit in the key: deploy scripts (apply:*, seed:demo) write bases outside
+  // Next, where revalidateTag does nothing, and Vercel's data cache outlives deploys. Without
+  // it the live map kept a list from before the bases had coordinates and showed no bases.
+  ['bases:list', process.env.VERCEL_GIT_COMMIT_SHA ?? ''],
   { tags: [tags.bases, tags.counties, tags.people] },
 )
 

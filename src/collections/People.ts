@@ -1,9 +1,10 @@
 import type { CollectionConfig, FieldAccess } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { slug } from '@/fields'
 import { slugify } from '@/lib/slugify'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** Phone and email are public only when the person has agreed (`publishPhone`, `publishEmail`). */
 const publishedContact =
@@ -18,8 +19,17 @@ const publishedContact =
 export const People: CollectionConfig = {
   slug: 'people',
   labels: { singular: { ro: 'Persoană', en: 'Person' }, plural: { ro: 'Persoane', en: 'People' } },
-  admin: { useAsTitle: 'name', defaultColumns: ['name', 'role', 'isAuthor'] },
-  access: { read: anyone, create: isStaff, update: isStaff, delete: isStaff },
+  admin: {
+    hidden: hiddenUnlessOwner('people'),
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'role', 'isAuthor'],
+  },
+  access: {
+    read: anyone,
+    create: creators('people'),
+    update: editors('people'),
+    delete: adminOnly,
+  },
   hooks: {
     // A person created by a script (the seed) has no slug yet: take it from the name, so the
     // required check passes. Editors can still change it in the admin.

@@ -2453,10 +2453,11 @@ export interface Lead {
  */
 export interface User {
   id: number;
+  name?: string | null;
   /**
-   * ifn: reads credit applications. admin: changes roles.
+   * Each department sees only its own sections. The admin sees everything; credit applications only Finance (IFN).
    */
-  roles?: ('admin' | 'ifn')[] | null;
+  roles?: ('admin' | 'continut' | 'magazin' | 'ifn' | 'preturi' | 'vanzari')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -4263,6 +4264,7 @@ export interface DocumentsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   roles?: T;
   updatedAt?: T;
   createdAt?: T;

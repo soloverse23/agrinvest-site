@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, isStaffField } from '@/access'
+import { isStaffField } from '@/access'
 import { toolsGroup } from '@/fields/tools'
 import { locales } from '@/i18n/config'
 import { alertRules, subscriptionTopics, topicLabels } from '@/lib/subscriptions/topics'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * Alert and newsletter sign-ups. Created only by the `subscribe` server action (Local API).
@@ -18,11 +19,12 @@ export const Subscriptions: CollectionConfig = {
     plural: { ro: 'Abonări', en: 'Subscriptions' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'email',
     defaultColumns: ['email', 'phone', 'channel', 'status', 'createdAt'],
   },
-  access: { read: isStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: { read: adminOnly, create: () => false, update: adminOnly, delete: adminOnly },
   fields: [
     {
       type: 'row',

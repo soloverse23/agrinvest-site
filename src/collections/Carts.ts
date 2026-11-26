@@ -1,7 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { shopGroup } from '@/fields/shop'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * Anonymous carts, found by the token in a cookie. A cart holds only SKUs and quantities:
@@ -11,8 +12,13 @@ import { shopGroup } from '@/fields/shop'
 export const Carts: CollectionConfig = {
   slug: 'carts',
   labels: { singular: { ro: 'Coș', en: 'Cart' }, plural: { ro: 'Coșuri', en: 'Carts' } },
-  admin: { group: shopGroup, useAsTitle: 'token', defaultColumns: ['token', 'updatedAt'] },
-  access: { read: isStaff, create: () => false, update: () => false, delete: isStaff },
+  admin: {
+    hidden: hiddenUnlessAdmin,
+    group: shopGroup,
+    useAsTitle: 'token',
+    defaultColumns: ['token', 'updatedAt'],
+  },
+  access: { read: adminOnly, create: () => false, update: () => false, delete: adminOnly },
   fields: [
     { name: 'token', type: 'text', required: true, unique: true, index: true },
     {

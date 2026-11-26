@@ -1,8 +1,9 @@
 import type { GlobalConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { factStatus } from '@/fields'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * The figures register: every fact or number the site states about Agrinvest.
@@ -12,7 +13,8 @@ import { revalidate, tags } from '@/lib/revalidate'
 export const Figures: GlobalConfig = {
   slug: 'figures',
   label: { ro: 'Registrul de cifre', en: 'Figures register' },
-  access: { read: anyone, update: isStaff },
+  access: { read: anyone, update: adminOnly },
+  admin: { hidden: hiddenUnlessAdmin },
   hooks: { afterChange: [() => revalidate(tags.global('figures'))] },
   fields: [
     {

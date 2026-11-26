@@ -1,13 +1,15 @@
 import type { GlobalConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { link } from '@/fields'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
   label: { ro: 'Subsol', en: 'Footer' },
-  access: { read: anyone, update: isStaff },
+  access: { read: anyone, update: adminOnly },
+  admin: { hidden: hiddenUnlessAdmin },
   hooks: { afterChange: [() => revalidate(tags.global('footer'))] },
   fields: [
     {

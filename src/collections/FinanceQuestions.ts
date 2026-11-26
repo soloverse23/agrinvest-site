@@ -1,11 +1,12 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { seo, slug } from '@/fields'
 import { fileKey, financeGroup, review, sources } from '@/fields/finance'
 import { enrichmentLedger } from '@/fields/shop'
 import { questionTopicLabels, questionTopics } from '@/lib/finance/topics'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 const label = (ro: string, en: string) => ({ ro, en })
 
@@ -22,12 +23,18 @@ export const FinanceQuestions: CollectionConfig = {
     plural: label('Întrebări de finanțare', 'Finance questions'),
   },
   admin: {
+    hidden: hiddenUnlessOwner('finance-questions'),
     group: financeGroup,
     useAsTitle: 'title',
     defaultColumns: ['title', 'topic', 'product', 'review.legalStatus', '_status', 'updatedAt'],
     listSearchableFields: ['title', 'slug', 'key'],
   },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('finance-questions'),
+    update: editors('finance-questions'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [() => revalidate(tags.finance)],

@@ -41,6 +41,8 @@ import { Products } from './collections/Products'
 import { Subscriptions } from './collections/Subscriptions'
 import { Targets } from './collections/Targets'
 import { Users } from './collections/Users'
+import { hiddenUnlessAdmin } from './access/departments'
+import { panelFindEndpoint } from './lib/panel/find'
 import { Figures } from './globals/Figures'
 import { NewsSettings } from './globals/NewsSettings'
 import { Footer } from './globals/Footer'
@@ -78,10 +80,25 @@ const r2 = process.env.R2_BUCKET
 export default buildConfig({
   admin: {
     user: Users.slug,
+    // The staff panel is light only: people here edit text, a second theme is one more option.
+    theme: 'light',
+    meta: { titleSuffix: ' · Agrinvest panou' },
+    components: {
+      graphics: {
+        Logo: '@/components/admin/panel/Brand#PanelLogo',
+        Icon: '@/components/admin/panel/Brand#PanelIcon',
+      },
+      providers: ['@/components/admin/panel/PanelMode#PanelMode'],
+      views: {
+        // One screen per department: the page finder and its own sections (Phase 9).
+        dashboard: { Component: '@/components/admin/panel/PanelDashboard#PanelDashboard' },
+      },
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+  endpoints: [panelFindEndpoint],
   collections: [
     Pages,
     Bases,
@@ -124,7 +141,7 @@ export default buildConfig({
     deleteJobOnComplete: true,
     jobsCollectionOverrides: ({ defaultJobsCollection }) => ({
       ...defaultJobsCollection,
-      admin: { ...defaultJobsCollection.admin, hidden: false, group: toolsGroup },
+      admin: { ...defaultJobsCollection.admin, hidden: hiddenUnlessAdmin, group: toolsGroup },
     }),
   },
   globals: [Figures, Navigation, Footer, SeoDefaults, LeadRouting, ShopHome, NewsSettings],
@@ -144,6 +161,21 @@ export default buildConfig({
   i18n: {
     fallbackLanguage: 'ro',
     supportedLanguages: { ro, en },
+    // Plainer Romanian for the buttons staff press every day.
+    translations: {
+      ro: {
+        version: {
+          draft: 'Ciornă',
+          saveDraft: 'Salvează ciorna',
+          publish: 'Publică',
+          publishChanges: 'Publică pe site',
+          unpublish: 'Retrage de pe site',
+          unpublishing: 'Se retrage…',
+          status: 'Stare',
+          schedulePublish: 'Programează publicarea',
+        },
+      },
+    },
   },
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

@@ -1,8 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { toolsGroup } from '@/fields/tools'
 import { messageChannels, messageTemplates } from '@/lib/messaging/types'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * Every message the site would send (alerts, newsletters, confirmations), written by
@@ -16,12 +17,13 @@ export const Outbox: CollectionConfig = {
     plural: { ro: 'Mesaje de trimis', en: 'Outbox' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'subject',
     defaultColumns: ['subject', 'to', 'template', 'channel', 'status', 'createdAt'],
   },
   defaultSort: '-createdAt',
-  access: { read: isStaff, create: () => false, update: () => false, delete: isStaff },
+  access: { read: adminOnly, create: () => false, update: () => false, delete: adminOnly },
   fields: [
     {
       type: 'row',

@@ -1,9 +1,10 @@
 import type { GlobalConfig, RelationshipField } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { link } from '@/fields'
 import { featuredProducts, shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
+import { editors, hiddenUnlessOwner } from '@/access/departments'
 
 /**
  * The shop landing's editable parts (Phase 7c): the seasonal promo card in the hero and the
@@ -13,8 +14,11 @@ import { revalidate, tags } from '@/lib/revalidate'
 export const ShopHome: GlobalConfig = {
   slug: 'shop-home',
   label: { ro: 'Pagina magazinului', en: 'Shop landing' },
-  admin: { group: shopGroup },
-  access: { read: anyone, update: isStaff },
+  admin: {
+    hidden: hiddenUnlessOwner('shop-home'),
+    group: shopGroup,
+  },
+  access: { read: anyone, update: editors('shop-home') },
   hooks: { afterChange: [() => revalidate(tags.global('shop-home'))] },
   fields: [
     {

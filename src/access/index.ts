@@ -2,9 +2,8 @@ import type { Access, FieldAccess, PayloadRequest } from 'payload'
 
 /**
  * Staff are the accounts of the `users` collection, never any other signed-in account, so
- * adding customer logins later cannot open staff data. The full set of roles comes with the
- * panel (Phase 9); `admin` and `ifn` exist now because credit applications must not be readable
- * by every staff account.
+ * adding customer logins later cannot open staff data. `admin` sees the whole panel; every
+ * other role is a department that sees only its own sections (`./departments.ts`).
  */
 export const staffRequest = (req: Pick<PayloadRequest, 'user'>): boolean =>
   req.user?.collection === 'users'
@@ -19,7 +18,7 @@ export const publishedOrStaff: Access = ({ req }) =>
 
 export const anyone: Access = () => true
 
-export const userRoles = ['admin', 'ifn'] as const
+export const userRoles = ['admin', 'continut', 'magazin', 'ifn', 'preturi', 'vanzari'] as const
 export type UserRole = (typeof userRoles)[number]
 
 const hasRole = (req: Pick<PayloadRequest, 'user'>, role: UserRole): boolean => {

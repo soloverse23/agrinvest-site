@@ -1,6 +1,7 @@
-import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
+import type { Access, CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
 import { isAdminField, userRoles } from '@/access'
+import { adminOnly, adminRequest, hiddenUnlessAdmin, roleLabels } from '@/access/departments'
 
 /** The first account on an empty site is the admin, or nobody could ever hand out a role. */
 const firstUserIsAdmin: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
@@ -10,26 +11,45 @@ const firstUserIsAdmin: CollectionBeforeChangeHook = async ({ data, operation, r
   return data
 }
 
+/** The admin manages every account; anyone else reads and changes only their own. */
+const adminOrSelf: Access = ({ req }) => {
+  if (adminRequest(req)) return true
+  if (req.user?.collection !== 'users') return false
+  return { id: { equals: req.user.id } }
+}
+
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    singular: { ro: 'Cont', en: 'Account' },
+    plural: { ro: 'Conturi', en: 'Accounts' },
+  },
   admin: {
     useAsTitle: 'email',
+    hidden: hiddenUnlessAdmin,
+    defaultColumns: ['email', 'name', 'roles', 'updatedAt'],
   },
   auth: true,
+  access: { read: adminOrSelf, create: adminOnly, update: adminOrSelf, delete: adminOnly },
   hooks: { beforeChange: [firstUserIsAdmin] },
   fields: [
     // Email added by default
+    { name: 'name', type: 'text', label: { ro: 'Nume', en: 'Name' } },
     {
       name: 'roles',
       type: 'select',
       hasMany: true,
+      label: { ro: 'Departament', en: 'Department' },
       // Saved in the session token, so access rules can read it without a query.
       saveToJWT: true,
-      options: userRoles.map((value) => ({ value, label: value })),
+      options: userRoles.map((value) => ({ value, label: roleLabels[value] })),
       access: { create: isAdminField, update: isAdminField },
       admin: {
         position: 'sidebar',
-        description: 'ifn: reads credit applications. admin: changes roles.',
+        description: {
+          ro: 'Fiecare departament vede doar secțiunile lui. Administratorul vede tot; cererile de credit le vede doar Finanțare (IFN).',
+          en: 'Each department sees only its own sections. The admin sees everything; credit applications only Finance (IFN).',
+        },
       },
     },
   ],

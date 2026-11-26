@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { slug } from '@/fields'
 import { shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /** What a product acts on: weeds, diseases, pests and deficiencies. A shop filter. */
 export const Targets: CollectionConfig = {
@@ -12,8 +13,13 @@ export const Targets: CollectionConfig = {
     singular: { ro: 'Țintă', en: 'Target' },
     plural: { ro: 'Ținte (buruieni, boli, dăunători)', en: 'Targets' },
   },
-  admin: { group: shopGroup, useAsTitle: 'name', defaultColumns: ['name', 'kind', 'slug'] },
-  access: { read: anyone, create: isStaff, update: isStaff, delete: isStaff },
+  admin: {
+    hidden: hiddenUnlessAdmin,
+    group: shopGroup,
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'kind', 'slug'],
+  },
+  access: { read: anyone, create: adminOnly, update: adminOnly, delete: adminOnly },
   hooks: {
     afterChange: [() => revalidate(tags.targets, tags.products)],
     afterDelete: [() => revalidate(tags.targets, tags.products)],

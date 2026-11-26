@@ -1,10 +1,11 @@
 import type { CollectionAfterChangeHook, CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { dayOnly, toolsGroup } from '@/fields/tools'
 import { locales } from '@/i18n/config'
 import { queueNewsletter } from '@/lib/news/queue'
 import type { Newsletter } from '@/payload-types'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /** Approving an issue puts it in the Outbox once, then marks it queued. */
 const queueOnApprove: CollectionAfterChangeHook<Newsletter> = async ({ doc, previousDoc, req }) => {
@@ -31,12 +32,13 @@ export const Newsletters: CollectionConfig = {
     plural: { ro: 'Buletine săptămânale', en: 'Newsletter' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'subject',
     defaultColumns: ['subject', 'week', 'locale', 'status'],
   },
   defaultSort: '-week',
-  access: { read: isStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: { read: adminOnly, create: adminOnly, update: adminOnly, delete: adminOnly },
   hooks: { afterChange: [queueOnApprove] },
   fields: [
     {

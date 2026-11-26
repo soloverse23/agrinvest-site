@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
 import { enrichmentLedger, featuredProducts, hubFields, shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** Active substances (`/magazin/substanta-activa/{slug}`), linked from crop protection products. */
 export const ActiveIngredients: CollectionConfig = {
@@ -13,11 +14,17 @@ export const ActiveIngredients: CollectionConfig = {
     plural: { ro: 'Substanțe active', en: 'Active ingredients' },
   },
   admin: {
+    hidden: hiddenUnlessOwner('active-ingredients'),
     group: shopGroup,
     useAsTitle: 'name',
     defaultColumns: ['name', 'chemicalGroup', 'resistanceGroup', 'products', '_status'],
   },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('active-ingredients'),
+    update: editors('active-ingredients'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [() => revalidate(tags.ingredients, tags.products)],

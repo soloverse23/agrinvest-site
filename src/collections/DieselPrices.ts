@@ -1,8 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { dayOnly, publishedRowsOrStaff, publishStatus, toolsGroup } from '@/fields/tools'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** Agrinvest's diesel price, typed in by staff. Without a published row, pages say "on request". */
 export const DieselPrices: CollectionConfig = {
@@ -12,12 +13,18 @@ export const DieselPrices: CollectionConfig = {
     plural: { ro: 'Prețuri motorină', en: 'Diesel prices' },
   },
   admin: {
+    hidden: hiddenUnlessOwner('diesel-prices'),
     group: toolsGroup,
     useAsTitle: 'price',
     defaultColumns: ['price', 'vat', 'minimumLitres', 'validFrom', 'status'],
   },
   defaultSort: '-validFrom',
-  access: { read: publishedRowsOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedRowsOrStaff,
+    create: creators('diesel-prices'),
+    update: editors('diesel-prices'),
+    delete: adminOnly,
+  },
   hooks: {
     afterChange: [() => revalidate(tags.diesel)],
     afterDelete: [() => revalidate(tags.diesel)],

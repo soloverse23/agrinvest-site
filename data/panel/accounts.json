@@ -1,0 +1,47 @@
+[
+  {
+    "email": "panou.continut@agrinvest.ro",
+    "name": "Conținut",
+    "roles": [
+      "continut"
+    ],
+    "salt": "05aef0351dc79ab18c7cdb4c356a8ad0259649b8ef9b627d5fdabc0e056a23c2",
+    "hash": "pbkdf2-sha256-v1:1a629e6c4b4ff14ae7354b8780ad5f0f3294e6aab25b2c4875a9f65189959a7f"
+  },
+  {
+    "email": "panou.magazin@agrinvest.ro",
+    "name": "Magazin",
+    "roles": [
+      "magazin"
+    ],
+    "salt": "ed9a16d83e51e5f9247f61c5c753b71e196b95b0ad4a8281f1f15ad93c5ff5be",
+    "hash": "pbkdf2-sha256-v1:69b2a1c9d8eb938ba19050ba70870ec21e3733afb5ed9ee6ae0a4e551d46251c"
+  },
+  {
+    "email": "panou.finantare@agrinvest.ro",
+    "name": "Finanțare",
+    "roles": [
+      "ifn"
+    ],
+    "salt": "fbfa822bca49bffdffeb689f8ba504bdc37d4829bfb17152a60144ac1798703d",
+    "hash": "pbkdf2-sha256-v1:6531a3605cf2b1eea4cd4991cff902ddfe03909c530768780b300208a1dbfe0c"
+  },
+  {
+    "email": "panou.preturi@agrinvest.ro",
+    "name": "Prețuri",
+    "roles": [
+      "preturi"
+    ],
+    "salt": "08a0ca76c479a6e40e0047e695b58030645bcde4414d454deaad4ff679217dda",
+    "hash": "pbkdf2-sha256-v1:8c770bddfd9195e0e8858c49e3c7eea0730d9a434a8dd3cfa6ce60aa1125ccf4"
+  },
+  {
+    "email": "panou.vanzari@agrinvest.ro",
+    "name": "Vânzări",
+    "roles": [
+      "vanzari"
+    ],
+    "salt": "889c12b64b83b15d58b7db86e671be92c887fa8d5e7d3217a3726b0b20392537",
+    "hash": "pbkdf2-sha256-v1:72db88db4eebd0a477006168bbc22e801ec7200492b233c6085c25fee0716fc4"
+  }
+]

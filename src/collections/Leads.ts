@@ -5,10 +5,11 @@ import {
   type CollectionConfig,
 } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { locales } from '@/i18n/config'
 import { routedPerson } from '@/lib/leads/routing'
 import { leadTypeOptions } from '@/lib/leads/types'
+import { adminOnly, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** Assigns a new lead to the person set for its type in the Lead routing global. */
 const assign: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
@@ -52,10 +53,16 @@ export const Leads: CollectionConfig = {
   slug: 'leads',
   labels: { singular: { ro: 'Cerere', en: 'Lead' }, plural: { ro: 'Cereri', en: 'Leads' } },
   admin: {
+    hidden: hiddenUnlessOwner('leads'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'phone', 'email', 'assignedTo', 'status', 'createdAt'],
   },
-  access: { read: isStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: {
+    read: editors('leads'),
+    create: () => false,
+    update: editors('leads'),
+    delete: adminOnly,
+  },
   hooks: { beforeValidate: [contactRules], beforeChange: [assign] },
   fields: [
     {

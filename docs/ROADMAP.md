@@ -620,7 +620,7 @@ _Analytics_
 
 - Stable for 2 weeks; no unresolved 404s from old URLs; orders and leads flowing.
 
-## Phase 9: Admin panel for staff (next phase, planned later)
+## Phase 9: Admin panel for staff (9.1 departments built 2026-11-26, `docs/phases/09-panel.md`)
 
 - A custom Payload dashboard and roles (editor, sales, prices, shop, IFN).
 - A finance-application inbox with status tracking.

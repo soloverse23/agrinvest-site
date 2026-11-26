@@ -1,13 +1,15 @@
 import type { GlobalConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { leadTypeOptions } from '@/lib/leads/types'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /** Who owns each type of lead. `general` is the fallback for types without a route. */
 export const LeadRouting: GlobalConfig = {
   slug: 'lead-routing',
   label: { ro: 'Rutarea cererilor', en: 'Lead routing' },
-  access: { read: isStaff, update: isStaff },
+  access: { read: adminOnly, update: adminOnly },
+  admin: { hidden: hiddenUnlessAdmin },
   fields: [
     {
       name: 'routes',

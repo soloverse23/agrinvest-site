@@ -1,12 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
 import { enrichmentLedger, hubFields } from '@/fields/shop'
 import { localeOf } from '@/i18n/config'
 import { cropPath } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * Crops. `isGrain` marks the ones Agrinvest buys: only those get grain pages, sitemap entries
@@ -15,8 +16,12 @@ import { pingIndexNow } from '@/lib/seo/indexnow'
 export const Crops: CollectionConfig = {
   slug: 'crops',
   labels: { singular: { ro: 'Cultură', en: 'Crop' }, plural: { ro: 'Culturi', en: 'Crops' } },
-  admin: { useAsTitle: 'name', defaultColumns: ['name', 'slug', 'key', '_status'] },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  admin: {
+    hidden: hiddenUnlessAdmin,
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'slug', 'key', '_status'],
+  },
+  access: { read: publishedOrStaff, create: adminOnly, update: adminOnly, delete: adminOnly },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [

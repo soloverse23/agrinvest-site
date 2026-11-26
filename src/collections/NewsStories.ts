@@ -1,12 +1,13 @@
 import type { Access, CollectionConfig } from 'payload'
 
-import { isStaff, staffRequest } from '@/access'
+import { staffRequest } from '@/access'
 import { toolsGroup } from '@/fields/tools'
 import { topicLabels } from '@/i18n/news'
 import { topicKeys } from '@/lib/news/lexicon'
 import { dropFromEditions, REMOVING_STORY, removeStory } from '@/lib/news/remove'
 import { revalidate, tags } from '@/lib/revalidate'
 import { newsSourceKeys, newsSources } from '@/lib/sources'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 const visibleOrStaff: Access = ({ req }) =>
   staffRequest(req) ? true : { status: { equals: 'visible' } }
@@ -25,6 +26,7 @@ export const NewsStories: CollectionConfig = {
     plural: { ro: 'Subiecte de știri', en: 'News stories' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'title',
     defaultColumns: ['title', 'topic', 'sourceCount', 'baseScore', 'lastSeen', 'status'],
@@ -32,7 +34,7 @@ export const NewsStories: CollectionConfig = {
       'Grouped and ranked every hour. Hide a story to take it off the site; delete it to remove it and its headlines for good.',
   },
   defaultSort: '-lastSeen',
-  access: { read: visibleOrStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: { read: visibleOrStaff, create: () => false, update: adminOnly, delete: adminOnly },
   hooks: {
     afterChange: [
       async ({ doc, previousDoc, req }) => {

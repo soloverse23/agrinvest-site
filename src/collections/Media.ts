@@ -1,11 +1,15 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  access: { read: anyone, create: isStaff, update: isStaff, delete: isStaff },
-  admin: { defaultColumns: ['filename', 'alt', 'rights', 'updatedAt'] },
+  access: { read: anyone, create: creators('media'), update: editors('media'), delete: adminOnly },
+  admin: {
+    hidden: hiddenUnlessOwner('media'),
+    defaultColumns: ['filename', 'alt', 'rights', 'updatedAt'],
+  },
   fields: [
     {
       name: 'alt',

@@ -1,12 +1,13 @@
 import type { Access, CollectionConfig } from 'payload'
 
-import { isStaff, staffRequest } from '@/access'
+import { staffRequest } from '@/access'
 import { toolsGroup } from '@/fields/tools'
 import { topicLabels } from '@/i18n/news'
 import { topicKeys } from '@/lib/news/lexicon'
 import { REMOVING_STORY, removeItem } from '@/lib/news/remove'
 import { revalidate, tags } from '@/lib/revalidate'
 import { newsSourceKeys, newsSources } from '@/lib/sources'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /** Visitors see every headline staff have not hidden (5.6: shown unless hidden). */
 const visibleOrStaff: Access = ({ req }) =>
@@ -26,12 +27,13 @@ export const NewsItems: CollectionConfig = {
     plural: { ro: 'Știri din presă', en: 'News headlines' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'title',
     defaultColumns: ['title', 'source', 'publishedAt', 'status'],
   },
   defaultSort: '-publishedAt',
-  access: { read: visibleOrStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: { read: visibleOrStaff, create: () => false, update: adminOnly, delete: adminOnly },
   hooks: {
     afterChange: [() => revalidate(tags.news)],
     beforeDelete: [

@@ -1,14 +1,16 @@
 import type { GlobalConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { link } from '@/fields'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /** Main menu, organised by need. Localized as a whole: the English menu is business-led. */
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
   label: { ro: 'Navigație', en: 'Navigation' },
-  access: { read: anyone, update: isStaff },
+  access: { read: anyone, update: adminOnly },
+  admin: { hidden: hiddenUnlessAdmin },
   hooks: { afterChange: [() => revalidate(tags.global('navigation'))] },
   fields: [
     {

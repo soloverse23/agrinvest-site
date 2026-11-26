@@ -1,7 +1,8 @@
 import type { Access, CollectionConfig } from 'payload'
 
-import { isStaff, staffRequest } from '@/access'
+import { staffRequest } from '@/access'
 import { shopGroup, urlField } from '@/fields/shop'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** Files whose reuse is not yet allowed stay private: the public sees approved ones only. */
 const readApproved: Access = ({ req }) =>
@@ -17,11 +18,17 @@ export const Documents: CollectionConfig = {
     plural: { ro: 'Documente', en: 'Documents' },
   },
   admin: {
+    hidden: hiddenUnlessOwner('documents'),
     group: shopGroup,
     useAsTitle: 'title',
     defaultColumns: ['title', 'kind', 'language', 'rights', 'updatedAt'],
   },
-  access: { read: readApproved, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: readApproved,
+    create: creators('documents'),
+    update: editors('documents'),
+    delete: adminOnly,
+  },
   upload: { staticDir: 'media/documents', mimeTypes: ['application/pdf'] },
   fields: [
     { name: 'title', type: 'text', localized: true, required: true },

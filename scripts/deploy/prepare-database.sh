@@ -21,6 +21,8 @@ npm run apply:redesign
 npm run apply:shop
 # Phase 7f: market history (Brent, ECB rates, World Bank, fuel) once; the cron jobs keep it.
 npm run apply:markets
+# Phase 9: the department accounts of the staff panel, only those not there yet.
+npm run apply:panel
 # One-time demo data on the test domain (owner's request, 2026-11-10). Runs only in the
 # production build and only while DEMO_PASSWORD is set in Vercel; skips itself once applied.
 # A failure must not stop the deploy. Remove DEMO_PASSWORD afterwards to switch it off.

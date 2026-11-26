@@ -17,6 +17,7 @@ import * as migration_20261115_095627_market_sources from './20261115_095627_mar
 import * as migration_20261115_100616_finance_questions from './20261115_100616_finance_questions';
 import * as migration_20261115_113857_news_automation from './20261115_113857_news_automation';
 import * as migration_20261115_160912_news_images from './20261115_160912_news_images';
+import * as migration_20261126_212358_panel_departments from './20261126_212358_panel_departments';
 
 export const migrations = [
   {
@@ -112,6 +113,11 @@ export const migrations = [
   {
     up: migration_20261115_160912_news_images.up,
     down: migration_20261115_160912_news_images.down,
-    name: '20261115_160912_news_images'
+    name: '20261115_160912_news_images',
+  },
+  {
+    up: migration_20261126_212358_panel_departments.up,
+    down: migration_20261126_212358_panel_departments.down,
+    name: '20261126_212358_panel_departments'
   },
 ];

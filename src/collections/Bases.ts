@@ -1,11 +1,12 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { coordinates, factStatus, faq, seo, slug } from '@/fields'
 import { locales } from '@/i18n/config'
 import { baseUrl } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /**
  * Silo bases and collection points, shown on the storage page's map (`#baza-{slug}`; the slug is shared). Most details are not published yet
@@ -15,8 +16,17 @@ import { pingIndexNow } from '@/lib/seo/indexnow'
 export const Bases: CollectionConfig = {
   slug: 'bases',
   labels: { singular: { ro: 'Bază', en: 'Base' }, plural: { ro: 'Baze', en: 'Bases' } },
-  admin: { useAsTitle: 'name', defaultColumns: ['name', 'county', 'capacity', '_status'] },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  admin: {
+    hidden: hiddenUnlessOwner('bases'),
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'county', 'capacity', '_status'],
+  },
+  access: {
+    read: publishedOrStaff,
+    create: creators('bases'),
+    update: editors('bases'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [

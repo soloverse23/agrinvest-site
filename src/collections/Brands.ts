@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
 import { enrichmentLedger, featuredProducts, hubFields, shopGroup, urlField } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** Manufacturers (`/magazin/producator/{slug}`). The slug is shared by both languages. */
 export const Brands: CollectionConfig = {
@@ -13,11 +14,17 @@ export const Brands: CollectionConfig = {
     plural: { ro: 'Producători', en: 'Brands' },
   },
   admin: {
+    hidden: hiddenUnlessOwner('brands'),
     group: shopGroup,
     useAsTitle: 'name',
     defaultColumns: ['name', 'country', 'products', 'indexable', '_status'],
   },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('brands'),
+    update: editors('brands'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [() => revalidate(tags.brands, tags.products)],

@@ -1,7 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { toolsGroup } from '@/fields/tools'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * One row per hourly news run: what each source answered, what was added or refused, and
@@ -15,12 +16,13 @@ export const NewsRuns: CollectionConfig = {
     plural: { ro: 'Rulări știri', en: 'News runs' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'startedAt',
     defaultColumns: ['startedAt', 'status', 'created', 'summary'],
   },
   defaultSort: '-startedAt',
-  access: { read: isStaff, create: () => false, update: () => false, delete: isStaff },
+  access: { read: adminOnly, create: () => false, update: () => false, delete: adminOnly },
   fields: [
     { name: 'startedAt', type: 'date', required: true, index: true, admin: { readOnly: true } },
     { name: 'finishedAt', type: 'date', admin: { readOnly: true } },

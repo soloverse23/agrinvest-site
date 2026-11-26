@@ -1,9 +1,10 @@
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { shopGroup } from '@/fields/shop'
 import { locales } from '@/i18n/config'
 import { routedPerson } from '@/lib/leads/routing'
+import { adminOnly, editors, hiddenUnlessOwner } from '@/access/departments'
 
 const label = (ro: string, en: string) => ({ ro, en })
 
@@ -24,13 +25,19 @@ export const Orders: CollectionConfig = {
   slug: 'orders',
   labels: { singular: label('Comandă', 'Order'), plural: label('Comenzi', 'Orders') },
   admin: {
+    hidden: hiddenUnlessOwner('orders'),
     group: shopGroup,
     useAsTitle: 'reference',
     defaultColumns: ['reference', 'buyer.name', 'status', 'total', 'assignedTo', 'createdAt'],
     listSearchableFields: ['reference', 'buyer.name', 'buyer.phone', 'buyer.email'],
   },
   defaultSort: '-createdAt',
-  access: { read: isStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: {
+    read: editors('orders'),
+    create: () => false,
+    update: editors('orders'),
+    delete: adminOnly,
+  },
   hooks: { beforeChange: [assign] },
   fields: [
     {

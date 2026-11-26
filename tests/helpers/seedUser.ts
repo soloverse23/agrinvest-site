@@ -25,7 +25,8 @@ export async function seedTestUser(): Promise<void> {
   // Create fresh test user
   await payload.create({
     collection: 'users',
-    data: testUser,
+    // The admin sees every section; department accounts are tested in panel.int.spec.ts.
+    data: { ...testUser, roles: ['admin'] },
   })
 }
 

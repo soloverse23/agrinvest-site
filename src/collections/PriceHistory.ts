@@ -1,7 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { shopGroup } from '@/fields/shop'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * One row each time a published pack size changes price, written by the Products hook. It
@@ -15,12 +16,13 @@ export const PriceHistory: CollectionConfig = {
     plural: { ro: 'Istoric prețuri', en: 'Price history' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: shopGroup,
     useAsTitle: 'sku',
     defaultColumns: ['sku', 'product', 'price', 'date'],
   },
   defaultSort: '-date',
-  access: { read: isStaff, create: () => false, update: () => false, delete: () => false },
+  access: { read: adminOnly, create: () => false, update: () => false, delete: () => false },
   fields: [
     { name: 'product', type: 'relationship', relationTo: 'products', index: true },
     { name: 'sku', type: 'text', required: true, index: true },

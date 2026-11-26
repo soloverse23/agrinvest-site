@@ -6,6 +6,7 @@ import {
   type SelectField,
 } from 'payload'
 
+import { isAdminField } from '@/access'
 import { slugify } from '@/lib/slugify'
 
 /** Verification state of a fact, the same three states as `docs/audit/figures-register.md`. */
@@ -27,14 +28,26 @@ export const factStatus = (name = 'status', overrides: Partial<SelectField> = {}
     ...overrides,
   }) as SelectField
 
-/** Slug without diacritics, generated from `useAsSlug` until an editor changes it. */
-export const slug = (useAsSlug = 'title', localized = false): RowField =>
-  slugField({
+/**
+ * Slug without diacritics, generated from `useAsSlug` until an editor changes it. Only the admin
+ * changes a saved slug: it is the live URL, and department accounts only edit text.
+ */
+export const slug = (useAsSlug = 'title', localized = false): RowField => {
+  const row = slugField({
     useAsSlug,
     localized,
     slugify: ({ valueToSlugify }) =>
       typeof valueToSlugify === 'string' ? slugify(valueToSlugify) : undefined,
   })
+  return {
+    ...row,
+    fields: row.fields.map((field) =>
+      field.type === 'text' && field.name === 'slug'
+        ? { ...field, access: { ...field.access, update: isAdminField } }
+        : field,
+    ),
+  }
+}
 
 /** An internal path (`/contact`) or an absolute https URL. */
 const validateHref = (value: unknown) =>

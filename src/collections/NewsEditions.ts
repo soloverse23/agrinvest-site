@@ -1,8 +1,9 @@
 import type { Access, CollectionConfig } from 'payload'
 
-import { isStaff, staffRequest } from '@/access'
+import { staffRequest } from '@/access'
 import { toolsGroup } from '@/fields/tools'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 const publishedOrStaff: Access = ({ req }) =>
   staffRequest(req) ? true : { status: { equals: 'published' } }
@@ -20,12 +21,13 @@ export const NewsEditions: CollectionConfig = {
     plural: { ro: 'Ediții zilnice', en: 'Daily editions' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'date',
     defaultColumns: ['date', 'count', 'frozen', 'status'],
   },
   defaultSort: '-date',
-  access: { read: publishedOrStaff, create: () => false, update: isStaff, delete: isStaff },
+  access: { read: publishedOrStaff, create: () => false, update: adminOnly, delete: adminOnly },
   hooks: {
     afterChange: [() => revalidate(tags.news)],
     afterDelete: [() => revalidate(tags.news)],

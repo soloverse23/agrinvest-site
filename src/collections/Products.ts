@@ -1,6 +1,6 @@
 import type { ArrayField, CollectionAfterChangeHook, CollectionConfig, Field } from 'payload'
 
-import { isStaff, isStaffField, publishedOrStaff } from '@/access'
+import { isStaffField, publishedOrStaff } from '@/access'
 import { faq, seo, slug } from '@/fields'
 import { enrichmentLedger, shopGroup, verified } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
@@ -12,6 +12,7 @@ import {
   unitPriceOf,
 } from '@/lib/shop/rules'
 import type { Product } from '@/payload-types'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 const ofType = (type: Product['productType']) => (data: Partial<Product>) =>
   data?.productType === type
@@ -410,12 +411,18 @@ export const Products: CollectionConfig = {
   slug: 'products',
   labels: { singular: { ro: 'Produs', en: 'Product' }, plural: { ro: 'Produse', en: 'Products' } },
   admin: {
+    hidden: hiddenUnlessOwner('products'),
     group: shopGroup,
     useAsTitle: 'name',
     defaultColumns: ['name', 'productType', 'commerceStatus', 'primaryCategory', 'brand', 'gaps'],
     listSearchableFields: ['name', 'slug', 'variants.sku'],
   },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('products'),
+    update: editors('products'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [

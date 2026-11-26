@@ -1,8 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { dayOnly, toolsGroup } from '@/fields/tools'
 import { marketSourceKeys, marketSources } from '@/lib/sources'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /**
  * Public market series (EU cereal, fertiliser and diesel prices), one row per source, series,
@@ -16,12 +17,13 @@ export const MarketPrices: CollectionConfig = {
     plural: { ro: 'Prețuri de piață', en: 'Market prices' },
   },
   admin: {
+    hidden: hiddenUnlessAdmin,
     group: toolsGroup,
     useAsTitle: 'key',
     defaultColumns: ['source', 'series', 'market', 'period', 'price', 'unit'],
   },
   defaultSort: '-period',
-  access: { read: anyone, create: () => false, update: () => false, delete: isStaff },
+  access: { read: anyone, create: () => false, update: () => false, delete: adminOnly },
   fields: [
     {
       name: 'key',

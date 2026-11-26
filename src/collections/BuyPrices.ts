@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { dayOnly, publishedRowsOrStaff, publishStatus, toolsGroup } from '@/fields/tools'
 import { evaluateAlerts } from '@/lib/jobs/tasks'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /**
  * Agrinvest's own buy prices, typed in by staff (decision 0008). Pages show only published
@@ -17,12 +18,18 @@ export const BuyPrices: CollectionConfig = {
     plural: { ro: 'Prețuri de achiziție', en: 'Buy prices' },
   },
   admin: {
+    hidden: hiddenUnlessOwner('buy-prices'),
     group: toolsGroup,
     useAsTitle: 'crop',
     defaultColumns: ['crop', 'base', 'price', 'basis', 'validFrom', 'status'],
   },
   defaultSort: '-validFrom',
-  access: { read: publishedRowsOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedRowsOrStaff,
+    create: creators('buy-prices'),
+    update: editors('buy-prices'),
+    delete: adminOnly,
+  },
   hooks: {
     afterChange: [
       async ({ doc, previousDoc, req, context }) => {

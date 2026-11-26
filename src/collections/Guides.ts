@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff, isStaffField, publishedOrStaff } from '@/access'
+import { isStaffField, publishedOrStaff } from '@/access'
 import { ToolWidgetBlock } from '@/blocks'
 import { faq, seo, slug } from '@/fields'
 import { fileKey, review, sources } from '@/fields/finance'
@@ -11,6 +11,7 @@ import { pillarByKey, pillarOptions } from '@/lib/articles/pillars'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
 import { slugify } from '@/lib/slugify'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 const label = (ro: string, en: string) => ({ ro, en })
 
@@ -39,6 +40,7 @@ export const briefStatuses = [
 export const Guides: CollectionConfig = {
   slug: 'guides',
   admin: {
+    hidden: hiddenUnlessOwner('guides'),
     group: label('Conținut', 'Content'),
     useAsTitle: 'title',
     defaultColumns: ['title', 'section', 'pillar', 'brief.status', '_status', 'updatedAt'],
@@ -52,7 +54,12 @@ export const Guides: CollectionConfig = {
     singular: label('Articol', 'Article'),
     plural: label('Articole și ghiduri', 'Articles and guides'),
   },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('guides'),
+    update: editors('guides'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     // Editors writing news never see the key: it follows the slug (keys stay stable after).

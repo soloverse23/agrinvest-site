@@ -1,13 +1,15 @@
 import type { GlobalConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 /** Site-wide SEO settings and the organisation data behind the Organization JSON-LD. */
 export const SeoDefaults: GlobalConfig = {
   slug: 'seo-defaults',
   label: { ro: 'SEO implicit', en: 'SEO defaults' },
-  access: { read: anyone, update: isStaff },
+  access: { read: anyone, update: adminOnly },
+  admin: { hidden: hiddenUnlessAdmin },
   hooks: { afterChange: [() => revalidate(tags.global('seo-defaults'))] },
   fields: [
     {

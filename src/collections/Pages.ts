@@ -5,13 +5,14 @@ import type {
   PayloadRequest,
 } from 'payload'
 
-import { publishedOrStaff, isStaff } from '@/access'
+import { isAdminField, publishedOrStaff } from '@/access'
 import { pageBlocks } from '@/blocks'
 import { faq, seo, slug } from '@/fields'
 import { enrichmentLedger } from '@/fields/shop'
 import { localePath, locales, type Locale } from '@/i18n/config'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /** The request's content locale, or undefined for `all` (then Payload uses the default). */
 const localeOf = (req: PayloadRequest) =>
@@ -82,6 +83,7 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   labels: { singular: { ro: 'Pagină', en: 'Page' }, plural: { ro: 'Pagini', en: 'Pages' } },
   admin: {
+    hidden: hiddenUnlessOwner('pages'),
     useAsTitle: 'title',
     defaultColumns: ['title', 'path', 'languages', '_status', 'updatedAt'],
     preview: (doc, { locale }) =>
@@ -91,9 +93,9 @@ export const Pages: CollectionConfig = {
   },
   access: {
     read: publishedOrStaff,
-    create: isStaff,
-    update: isStaff,
-    delete: isStaff,
+    create: creators('pages'),
+    update: editors('pages'),
+    delete: adminOnly,
   },
   versions: { drafts: true, maxPerDoc: 50 },
   hooks: {
@@ -141,12 +143,15 @@ export const Pages: CollectionConfig = {
       name: 'isHome',
       type: 'checkbox',
       defaultValue: false,
+      access: { update: isAdminField },
       admin: { position: 'sidebar' },
     },
     {
       name: 'parent',
       type: 'relationship',
       relationTo: 'pages',
+      // Parent, slug and languages make the URL: the admin changes them, departments edit text.
+      access: { update: isAdminField },
       admin: { position: 'sidebar', condition: (data) => !data?.isHome },
       filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
     },
@@ -155,6 +160,7 @@ export const Pages: CollectionConfig = {
       type: 'select',
       hasMany: true,
       required: true,
+      access: { update: isAdminField },
       defaultValue: ['ro'],
       options: locales.map((value) => ({ value, label: value.toUpperCase() })),
       admin: {

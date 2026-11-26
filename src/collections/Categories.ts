@@ -1,10 +1,11 @@
 import { ValidationError, type CollectionConfig } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { faq, slug } from '@/fields'
 import { enrichmentLedger, featuredProducts, hubFields, shopGroup } from '@/fields/shop'
 import { revalidate, tags } from '@/lib/revalidate'
 import { categoryIconOptions, reservedCategorySlugs } from '@/lib/shop/rules'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /**
  * Shop categories, two levels deep. Every category has a one-segment URL
@@ -17,12 +18,18 @@ export const Categories: CollectionConfig = {
     plural: { ro: 'Categorii', en: 'Categories' },
   },
   admin: {
+    hidden: hiddenUnlessOwner('categories'),
     group: shopGroup,
     useAsTitle: 'name',
     defaultColumns: ['name', 'role', 'parent', 'order', 'products', 'indexable', '_status'],
   },
   defaultSort: 'order',
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('categories'),
+    update: editors('categories'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     beforeValidate: [

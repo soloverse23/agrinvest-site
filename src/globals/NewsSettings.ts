@@ -1,10 +1,11 @@
 import type { GlobalConfig } from 'payload'
 
-import { anyone, isStaff } from '@/access'
+import { anyone } from '@/access'
 import { toolsGroup } from '@/fields/tools'
 import { defaultWeights } from '@/lib/news/score'
 import { revalidate, tags } from '@/lib/revalidate'
 import { newsSourceKeys, newsSources } from '@/lib/sources'
+import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
 
 const weight = (name: string, label: string, defaultValue: number) => ({
   name,
@@ -23,8 +24,11 @@ const weight = (name: string, label: string, defaultValue: number) => ({
 export const NewsSettings: GlobalConfig = {
   slug: 'news-settings',
   label: { ro: 'Setări știri', en: 'News settings' },
-  admin: { group: toolsGroup },
-  access: { read: anyone, update: isStaff },
+  admin: {
+    hidden: hiddenUnlessAdmin,
+    group: toolsGroup,
+  },
+  access: { read: anyone, update: adminOnly },
   hooks: { afterChange: [() => revalidate(tags.news, tags.global('news-settings'))] },
   fields: [
     {

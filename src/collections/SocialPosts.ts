@@ -1,7 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaff } from '@/access'
+import {} from '@/access'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 const label = (ro: string, en: string) => ({ ro, en })
 
@@ -17,6 +18,7 @@ export const SocialPosts: CollectionConfig = {
     plural: label('Postări LinkedIn', 'LinkedIn posts'),
   },
   admin: {
+    hidden: hiddenUnlessOwner('social-posts'),
     group: label('Conținut', 'Content'),
     useAsTitle: 'text',
     defaultColumns: ['text', 'postedAt', 'visible'],
@@ -28,9 +30,9 @@ export const SocialPosts: CollectionConfig = {
   defaultSort: '-postedAt',
   access: {
     read: ({ req }) => (req.user?.collection === 'users' ? true : { visible: { equals: true } }),
-    create: isStaff,
-    update: isStaff,
-    delete: isStaff,
+    create: creators('social-posts'),
+    update: editors('social-posts'),
+    delete: adminOnly,
   },
   hooks: {
     afterChange: [() => revalidate(tags.social)],

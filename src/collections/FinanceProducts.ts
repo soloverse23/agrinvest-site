@@ -1,6 +1,6 @@
 import { ValidationError, type CollectionConfig, type Field } from 'payload'
 
-import { isStaff, publishedOrStaff } from '@/access'
+import { publishedOrStaff } from '@/access'
 import { seo, slug } from '@/fields'
 import { fileKey, financeGroup, review, sources } from '@/fields/finance'
 import { enrichmentLedger } from '@/fields/shop'
@@ -15,6 +15,7 @@ import {
   optionsOf,
 } from '@/lib/finance/options'
 import { revalidate, tags } from '@/lib/revalidate'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 const label = (ro: string, en: string) => ({ ro, en })
 
@@ -41,11 +42,17 @@ export const FinanceProducts: CollectionConfig = {
     plural: label('Produse de finanțare', 'Finance products'),
   },
   admin: {
+    hidden: hiddenUnlessOwner('finance-products'),
     group: financeGroup,
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'parent', 'review.legalStatus', '_status', 'updatedAt'],
   },
-  access: { read: publishedOrStaff, create: isStaff, update: isStaff, delete: isStaff },
+  access: {
+    read: publishedOrStaff,
+    create: creators('finance-products'),
+    update: editors('finance-products'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     beforeValidate: [

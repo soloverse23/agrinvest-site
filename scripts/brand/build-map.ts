@@ -3,22 +3,29 @@
  * projects each Romanian county and simplifies it (Douglas–Peucker). Writes
  * - public/maps/romania-counties.svg: the outlines, one <path id="BZ"> per county inside
  *   <g id="all">, without fill or stroke so the page styles them through <use>;
+ * - public/maps/romania-context.svg: the neighbouring countries (one <path> each inside
+ *   <g id="near">) and Romania's outline (<path id="RO">), from Natural Earth admin-0, cut to
+ *   CONTEXT so the map can show the country among its neighbours and the Black Sea;
  * - design-system/patterns/map/counties.ts: codes, names and centroids for the component.
  *
- * Run: npm run brand:map. Downloads the source (~40 MB) to .cache/geo/ the first time.
+ * Run: npm run brand:map. Downloads the sources (~40 + 13 MB) to .cache/geo/ the first time.
  */
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { HEIGHT, WIDTH, project } from '../../design-system/patterns/map/projection'
+import { CONTEXT, HEIGHT, WIDTH, project } from '../../design-system/patterns/map/projection'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const cached = path.join(root, '.cache/geo/ne_admin1.geojson')
 const out = path.join(root, 'design-system/patterns/map/counties.ts')
 const svgOut = path.join(root, 'public/maps/romania-counties.svg')
+const contextOut = path.join(root, 'public/maps/romania-context.svg')
 const SOURCE =
   'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson'
+const COUNTRIES_SOURCE =
+  'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson'
+const countriesCached = path.join(root, '.cache/geo/ne_admin0.geojson')
 /** Simplification tolerance in map units (1000 wide; shown at most ~700 px, so about 1 px). */
 const TOLERANCE = 1.4
 
@@ -74,13 +81,13 @@ type Feature = {
   geometry: { type: 'Polygon' | 'MultiPolygon'; coordinates: number[][][] | number[][][][] }
 }
 
-async function source(): Promise<{ features: Feature[] }> {
-  const text = await fs.readFile(cached, 'utf8').catch(async () => {
-    const res = await fetch(SOURCE)
+async function source<F = Feature>(file = cached, url = SOURCE): Promise<{ features: F[] }> {
+  const text = await fs.readFile(file, 'utf8').catch(async () => {
+    const res = await fetch(url)
     if (!res.ok) throw new Error(`Natural Earth download failed: ${res.status}`)
     const body = await res.text()
-    await fs.mkdir(path.dirname(cached), { recursive: true })
-    await fs.writeFile(cached, body)
+    await fs.mkdir(path.dirname(file), { recursive: true })
+    await fs.writeFile(file, body)
     return body
   })
   return JSON.parse(text)
@@ -105,8 +112,10 @@ function simplify(points: Point[]): Point[] {
 }
 
 /** Simplified ring as an SVG path, in integer units with relative steps (shorter output). */
-const ring = (coords: number[][]) => {
-  const pts = simplify(coords.map(([lng, lat]) => project(lng, lat)))
+const ring = (coords: number[][]) => projected(coords.map(([lng, lat]) => project(lng, lat)))
+
+const projected = (points: Point[]) => {
+  const pts = simplify(points)
     .map(([x, y]): Point => [Math.round(x), Math.round(y)])
     .filter(([x, y], i, all) => i === 0 || x !== all[i - 1][0] || y !== all[i - 1][1])
   if (pts.length < 3) return ''
@@ -177,6 +186,60 @@ const AREAS: Record<string, number> = {
   VN: 4857,
 }
 
+/** A projected ring cut to the CONTEXT rectangle (Sutherland–Hodgman, one edge at a time). */
+function clip(points: Point[]): Point[] {
+  const { x0, y0, x1, y1 } = CONTEXT
+  const edges: [(p: Point) => boolean, (a: Point, b: Point) => Point][] = [
+    [(p) => p[0] >= x0, (a, b) => [x0, a[1] + ((b[1] - a[1]) * (x0 - a[0])) / (b[0] - a[0])]],
+    [(p) => p[0] <= x1, (a, b) => [x1, a[1] + ((b[1] - a[1]) * (x1 - a[0])) / (b[0] - a[0])]],
+    [(p) => p[1] >= y0, (a, b) => [a[0] + ((b[0] - a[0]) * (y0 - a[1])) / (b[1] - a[1]), y0]],
+    [(p) => p[1] <= y1, (a, b) => [a[0] + ((b[0] - a[0]) * (y1 - a[1])) / (b[1] - a[1]), y1]],
+  ]
+  let out = points
+  for (const [inside, cross] of edges) {
+    const input = out
+    out = []
+    input.forEach((p, i) => {
+      const prev = input[(i + input.length - 1) % input.length]
+      if (inside(p)) {
+        if (!inside(prev)) out.push(cross(prev, p))
+        out.push(p)
+      } else if (inside(prev)) out.push(cross(prev, p))
+    })
+    if (!out.length) break
+  }
+  return out
+}
+
+type Country = {
+  properties: { ADM0_A3: string }
+  geometry: Feature['geometry']
+}
+const polygonsOf = (g: Feature['geometry']) =>
+  (g.type === 'Polygon' ? [g.coordinates] : g.coordinates) as number[][][][]
+const countryPath = (c: Country) =>
+  polygonsOf(c.geometry)
+    .map((p) => {
+      const cut = clip(p[0].map(([lng, lat]) => project(lng, lat)))
+      return cut.length < 3 ? '' : projected([...cut, cut[0]])
+    })
+    .join('')
+
+const { features: countries } = await source<Country>(countriesCached, COUNTRIES_SOURCE)
+const near = countries
+  .filter((c) => c.properties.ADM0_A3 !== 'ROU')
+  .map((c) => ({ code: c.properties.ADM0_A3, d: countryPath(c) }))
+  .filter((c) => c.d)
+  .sort((a, b) => a.code.localeCompare(b.code))
+const romania = countries.find((c) => c.properties.ADM0_A3 === 'ROU')
+if (!romania) throw new Error('Romania missing from admin-0')
+const contextSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${CONTEXT.x0} ${CONTEXT.y0} ${CONTEXT.x1 - CONTEXT.x0} ${CONTEXT.y1 - CONTEXT.y0}"><g id="near" stroke-linejoin="round">${near
+  .map((c) => `<path id="${c.code}" d="${c.d}" vector-effect="non-scaling-stroke"/>`)
+  .join(
+    '',
+  )}</g><path id="RO" d="${countryPath(romania)}" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+`
+
 const { features } = await source()
 const counties = features
   .filter((f) => f.properties.adm0_a3 === 'ROU')
@@ -201,6 +264,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEI
 `
 await fs.mkdir(path.dirname(svgOut), { recursive: true })
 await fs.writeFile(svgOut, svg)
+await fs.writeFile(contextOut, contextSvg)
 
 const body = `/* Generated by scripts/brand/build-map.ts (npm run brand:map) from Natural Earth admin-1
    (public domain). Do not edit. Outlines: public/maps/romania-counties.svg. */
@@ -208,6 +272,8 @@ const body = `/* Generated by scripts/brand/build-map.ts (npm run brand:map) fro
 export const MAP_WIDTH = ${WIDTH}
 export const MAP_HEIGHT = ${HEIGHT}
 export const MAP_SRC = '/maps/romania-counties.svg'
+/** Neighbouring countries (<g id="near">) and Romania's outline (#RO), cut to CONTEXT. */
+export const CONTEXT_SRC = '/maps/romania-context.svg'
 
 /** Romanian counties (ISO 3166-2 code without "RO-"; B = Bucharest): centroid, area (INS). */
 export const COUNTIES: readonly { code: string; name: string; at: [number, number]; km2: number }[] = ${JSON.stringify(counties.map(({ code, name, at, km2 }) => ({ code, name, at, km2 })))}
@@ -215,4 +281,7 @@ export const COUNTIES: readonly { code: string; name: string; at: [number, numbe
 await fs.writeFile(out, body)
 console.log(
   `${path.relative(root, svgOut)}: ${counties.length} counties, ${(svg.length / 1024).toFixed(1)} KB`,
+)
+console.log(
+  `${path.relative(root, contextOut)}: ${near.map((c) => c.code).join(' ')}, ${(contextSvg.length / 1024).toFixed(1)} KB`,
 )

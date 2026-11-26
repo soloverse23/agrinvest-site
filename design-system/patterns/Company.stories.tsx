@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { companyChain, companyServices } from '@/lib/company'
 
 import { storyLocale } from '../fixtures/story'
-import { BaseMap, type MapBase } from './BaseMap'
+import { BaseMap, type MapBase, type MapOffice } from './BaseMap'
 import { SeasonChain, ServiceList } from './Company'
 import { project } from './map/projection'
 
@@ -25,7 +25,7 @@ const sample: [string, string, number, number, number | null, string[]][] = [
   ['Cetate', 'DJ', 23.7569, 44.2478, 7000, ['reception', 'drying']],
   ['Foltești', 'GL', 28.1098, 45.4354, 10000, ['reception', 'storage']],
   ['Vedea', 'GR', 26.07, 43.9, 17500, ['reception', 'storage']],
-  ['Mihăilești', 'GR', 26.0699, 43.904, 13500, ['reception', 'storage']],
+  ['Mihăilești', 'BZ', 26.9199, 45.154, 13500, ['reception', 'storage']],
   ['Sărățuica', 'IL', 27.3066, 44.6277, 18000, ['reception', 'drying', 'storage']],
   ['Fulga', 'PH', 25.9754, 44.8684, 13000, ['reception', 'storage']],
   ['Strejnicu', 'PH', 26.12, 44.9413, 8000, ['reception', 'storage']],
@@ -40,13 +40,21 @@ const bases: MapBase[] = sample.map(([name, county, lng, lat, capacity, services
   const slug = name.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/\s+/g, '-')
   return { id: String(i), slug, name, county, capacity, services, x, y }
 })
+const [ox, oy] = project(26.12, 44.49)
+/** The head office in Voluntari (Ilfov), shown with București as one region. */
+const office: MapOffice = {
+  counties: ['B', 'IF'],
+  x: ox,
+  y: oy,
+  address: 'Bd. Pipera nr. 1/I, Voluntari, Ilfov',
+}
 
 /** The storage page: the bases as dots; a county's box on hover or tap. */
 export const Map: Story = {
   name: 'Base map',
   render: (_, { globals }) => (
     <Page>
-      <BaseMap locale={storyLocale(globals)} bases={bases} />
+      <BaseMap locale={storyLocale(globals)} bases={bases} office={office} />
     </Page>
   ),
 }
@@ -57,7 +65,7 @@ export const MapNarrow: Story = {
   parameters: { viewport: { defaultViewport: 'mobile1' } },
   render: (_, { globals }) => (
     <div className="max-w-sm px-4 py-8">
-      <BaseMap locale={storyLocale(globals)} bases={bases} />
+      <BaseMap locale={storyLocale(globals)} bases={bases} office={office} />
     </div>
   ),
 }

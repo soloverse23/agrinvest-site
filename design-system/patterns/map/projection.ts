@@ -17,3 +17,9 @@ export function project(lng: number, lat: number): [number, number] {
   const y = (BOUNDS.north - lat) * scale
   return [Math.round(x * 10) / 10, Math.round(y * 10) / 10]
 }
+
+/**
+ * The neighbourhood drawn around the country (map units): a margin of neighbouring land and
+ * the Black Sea on every side, so the map reads as Romania among its neighbours.
+ */
+export const CONTEXT = { x0: -150, y0: -120, x1: WIDTH + 150, y1: HEIGHT + 120 } as const

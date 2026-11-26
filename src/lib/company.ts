@@ -413,3 +413,15 @@ export function companyServices(locale: Locale) {
     })),
   }
 }
+
+/**
+ * The head office on the base map: Bd. Pipera, Voluntari (Ilfov), shown with București as one
+ * region. The address comes from the figures register (`figure`); the point is only for the
+ * map (about 1 km per map unit), so street-level precision does not matter.
+ */
+export const headOffice = {
+  figure: 'C12',
+  counties: ['B', 'IF'],
+  lng: 26.12,
+  lat: 44.49,
+} as const

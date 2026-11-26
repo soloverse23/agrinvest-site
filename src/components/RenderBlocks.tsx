@@ -39,11 +39,12 @@ import { byFinanceOrder, financeGroupIds, groupFor } from '@/lib/finance/groups'
 import { listFinanceProducts } from '@/lib/content/finance'
 import { getFigures, type Figures } from '@/lib/content/globals'
 import { listBases, listCounties, listCrops } from '@/lib/content/locations'
+import { headOffice } from '@/lib/company'
 import { submitLead } from '@/lib/leads/actions'
 import { videoObject } from '@/lib/schema'
 import type { Media, Page, Person } from '@/payload-types'
 
-import { FactMark } from './Fact'
+import { Fact, FactMark } from './Fact'
 import { FactText } from './FactText'
 import { JsonLd } from './JsonLd'
 import { ToolWidget } from './ToolWidget'
@@ -544,6 +545,7 @@ export async function BaseListBlock({
     />
   )
   const t = ui[ctx.locale]
+  const officeAt = project(headOffice.lng, headOffice.lat)
   return (
     <Section id="baze">
       {head}
@@ -569,6 +571,12 @@ export async function BaseListBlock({
               ]
             })}
             note={mark}
+            office={{
+              counties: [...headOffice.counties],
+              x: officeAt[0],
+              y: officeAt[1],
+              address: <Fact k={headOffice.figure} locale={ctx.locale} />,
+            }}
           />
         ) : (
           <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line pt-4 text-small text-muted">

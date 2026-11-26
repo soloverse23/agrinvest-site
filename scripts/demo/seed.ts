@@ -164,7 +164,7 @@ const placement: Record<string, [string, string]> = {
   Foltești: ['Galați', 'Foltești'],
   Fulga: ['Prahova', 'Fulga'],
   Grădiștea: ['Brăila', 'Grădiștea'],
-  Mihăilești: ['Giurgiu', 'Mihăilești'],
+  Mihăilești: ['Buzău', 'Mihăilești'], // confirmed: C14 returns address, jud. Buzău
   Pogoanele: ['Buzău', 'Pogoanele'],
   Sărățuica: ['Ialomița', 'Sărățuica'],
   'Slobozia Mândră': ['Teleorman', 'Slobozia Mândră'],

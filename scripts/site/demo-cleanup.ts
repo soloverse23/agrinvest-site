@@ -1,8 +1,9 @@
 /**
  * Takes the demo seed's visible test content off a live site (owner, 2026-11-26): the
  * invented `@agrinvest.test` addresses and `+40 700 000 …` numbers of people stop being
- * public, and the three demo news go back to draft. Nothing is deleted. Only the demo seed's
- * own values and keys match, so real contacts and news stay. Safe to repeat.
+ * public, and the three demo news and the market notes marked "text demonstrativ" go back to
+ * draft. Nothing is deleted. Only the demo seed's own values, keys and words match, so real
+ * contacts, news and notes stay. Safe to repeat.
  */
 import type { Payload } from 'payload'
 
@@ -21,6 +22,10 @@ export function hiddenContact(person: Contact & Record<string, unknown>) {
       : {}),
   }
 }
+
+/** A market note the demo seed published: its Romanian text says it is a demo. */
+export const isDemoNote = (body: unknown) =>
+  JSON.stringify(body ?? null).includes('(text demonstrativ)')
 
 export async function hideDemoContent(payload: Payload, log: (s: string) => void = console.log) {
   const people = await payload.find({ collection: 'people', pagination: false, depth: 0 })
@@ -45,5 +50,22 @@ export async function hideDemoContent(payload: Payload, log: (s: string) => void
       context,
     })
     log(`demo cleanup: ${doc.key} is a draft again`)
+  }
+  const notes = await payload.find({
+    collection: 'guides',
+    locale: 'ro',
+    pagination: false,
+    depth: 0,
+    where: { section: { equals: 'piata' }, _status: { equals: 'published' } },
+  })
+  for (const doc of notes.docs) {
+    if (!isDemoNote(doc.body)) continue
+    await payload.update({
+      collection: 'guides',
+      id: doc.id,
+      data: { _status: 'draft' },
+      context,
+    })
+    log(`demo cleanup: market note ${doc.key} is a draft again`)
   }
 }

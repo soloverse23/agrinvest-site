@@ -179,3 +179,4 @@ Owner's request: fewer categories and subcategories, more intuitive navigation.
 - `scripts/site/structure-local.ts` was a local preview helper and is not committed.
 
 **Demo content (2026-11-26):** `scripts/site/demo-cleanup.ts` (run from `apply:redesign`) hides the demo seed's invented emails and numbers of people and puts the three demo news back to draft. Nothing is deleted.
+The market notes whose text says "text demonstrativ" go back to draft the same way.

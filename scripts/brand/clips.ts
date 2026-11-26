@@ -106,6 +106,14 @@ function ffmpeg(args: string[]) {
 
 const size = (file: string) => statSync(file).size
 
+/** A file's real length: frame rounding makes it differ from the sum of the shot lengths. */
+function seconds(file: string) {
+  const info = spawnSync(ffmpegPath!, ['-hide_banner', '-i', file], { encoding: 'utf8' }).stderr
+  const [, h, m, s] = /Duration: (\d+):(\d+):([\d.]+)/.exec(info) ?? []
+  if (!s) throw new Error(`no duration for ${file}`)
+  return Number(h) * 3600 + Number(m) * 60 + Number(s)
+}
+
 /** One 1080p master per slide and shape: shots joined with short crossfades, a seamless loop. */
 function master(clip: Clip, shape: Shape): string {
   const crop = shapes[shape].crop
@@ -137,27 +145,31 @@ function master(clip: Clip, shape: Shape): string {
     last = out
   }
   // Seamless loop: play from SEAM to the end, then crossfade into the first SEAM seconds. The
-  // last frame then leads straight back into the first.
-  parts.push(
-    `[${last}]split[a][b]`,
-    `[a]trim=start=${SEAM},setpts=PTS-STARTPTS[body]`,
-    `[b]trim=end=${SEAM},setpts=PTS-STARTPTS[head]`,
-    `[body][head]xfade=transition=fade:duration=${SEAM}:offset=${(length - 2 * SEAM).toFixed(3)}[out]`,
-  )
+  // last frame then leads straight back into the first. The shots are joined into a file of
+  // their own first, so the crossfade can be timed on its real length: when the body outlasts
+  // the crossfade, ffmpeg stalls instead of ending.
+  const encode = ['-an', '-c:v', 'libx264', '-crf', '12', '-preset', 'veryfast']
+  const joined = path.join(tmpDir, `${clip.slide}-${shape}-joined.mp4`)
+  // A single shot needs a filter to carry the `j` label, so `null` passes it through.
+  parts.push(`[${last}]null[out]`)
+  ffmpeg([...inputs, '-filter_complex', parts.join(';'), '-map', '[out]', ...encode, joined])
+  const from = (cut: string) => `${cut},setpts=PTS-STARTPTS,fps=${FPS},settb=AVTB`
+  const loop = [
+    `[0:v]${from(`trim=start=${SEAM}`)}[body]`,
+    `[1:v]${from(`trim=end=${SEAM}`)}[head]`,
+    `[body][head]xfade=transition=fade:duration=${SEAM}:offset=${(seconds(joined) - 2 * SEAM).toFixed(3)}[out]`,
+  ]
   const file = path.join(tmpDir, `${clip.slide}-${shape}-master.mp4`)
   ffmpeg([
-    ...inputs,
+    '-i',
+    joined,
+    '-i',
+    joined,
     '-filter_complex',
-    parts.join(';'),
+    loop.join(';'),
     '-map',
     '[out]',
-    '-an',
-    '-c:v',
-    'libx264',
-    '-crf',
-    '12',
-    '-preset',
-    'veryfast',
+    ...encode,
     file,
   ])
   return file

@@ -25,15 +25,19 @@ export const Users: CollectionConfig = {
     plural: { ro: 'Conturi', en: 'Accounts' },
   },
   admin: {
-    useAsTitle: 'email',
+    useAsTitle: 'name',
     hidden: hiddenUnlessAdmin,
-    defaultColumns: ['email', 'name', 'roles', 'updatedAt'],
+    defaultColumns: ['name', 'username', 'email', 'roles', 'updatedAt'],
   },
-  auth: true,
+  // Department accounts sign in with a username (no shared mailbox needed); the owner's
+  // personal accounts keep signing in with their email.
+  auth: {
+    loginWithUsername: { allowEmailLogin: true, requireEmail: false, requireUsername: false },
+  },
   access: { read: adminOrSelf, create: adminOnly, update: adminOrSelf, delete: adminOnly },
   hooks: { beforeChange: [firstUserIsAdmin] },
   fields: [
-    // Email added by default
+    // Email and username added by auth
     { name: 'name', type: 'text', label: { ro: 'Nume', en: 'Name' } },
     {
       name: 'roles',
@@ -47,8 +51,8 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: {
-          ro: 'Fiecare departament vede doar secțiunile lui. Administratorul vede tot; cererile de credit le vede doar Finanțare (IFN).',
-          en: 'Each department sees only its own sections. The admin sees everything; credit applications only Finance (IFN).',
+          ro: 'Fiecare departament vede doar secțiunile și paginile lui. Administratorul general vede tot; cererile de credit le vede doar Financiar (IFN).',
+          en: 'Each department sees only its own sections and pages. The general admin sees everything; credit applications only Finance (IFN).',
         },
       },
     },

@@ -1,7 +1,7 @@
 import type { CollectionSlug, Endpoint, PayloadRequest, Where } from 'payload'
 
 import { staffRequest } from '@/access'
-import { adminRequest, ownersOf, rolesOf } from '@/access/departments'
+import { adminRequest, ownersOf, rolesOf, rowsFor } from '@/access/departments'
 
 import { parseLink } from './find'
 import { targetsFor, type PageTarget } from './onPage'
@@ -46,10 +46,13 @@ async function linkFor(req: PayloadRequest, target: PageTarget, locale: 'ro' | '
           slug: { equals: target.slug },
           ...(target.section ? { section: { equals: target.section } } : {}),
         }
+  // Shared sections: the button shows only on the department's own pages and articles.
+  const rows = rowsFor(req, collection)
+  if (rows === false) return null
   const { docs } = await req.payload
     .find({
       collection: collection as CollectionSlug,
-      where,
+      where: typeof rows === 'object' ? { and: [where, rows] } : where,
       limit: 1,
       depth: 0,
       draft: true,

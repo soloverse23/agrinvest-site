@@ -18,6 +18,7 @@ import * as migration_20261115_100616_finance_questions from './20261115_100616_
 import * as migration_20261115_113857_news_automation from './20261115_113857_news_automation';
 import * as migration_20261115_160912_news_images from './20261115_160912_news_images';
 import * as migration_20261126_212358_panel_departments from './20261126_212358_panel_departments';
+import * as migration_20261126_220937_panel_org_chart from './20261126_220937_panel_org_chart';
 
 export const migrations = [
   {
@@ -118,6 +119,11 @@ export const migrations = [
   {
     up: migration_20261126_212358_panel_departments.up,
     down: migration_20261126_212358_panel_departments.down,
-    name: '20261126_212358_panel_departments'
+    name: '20261126_212358_panel_departments',
+  },
+  {
+    up: migration_20261126_220937_panel_org_chart.up,
+    down: migration_20261126_220937_panel_org_chart.down,
+    name: '20261126_220937_panel_org_chart'
   },
 ];

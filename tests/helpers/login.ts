@@ -16,7 +16,8 @@ export interface LoginOptions {
 export async function login({ page, serverURL = '', user }: LoginOptions): Promise<void> {
   await page.goto(`${serverURL}/admin/login`)
 
-  await page.fill('#field-email', user.email)
+  // With username sign-in the field takes an email or a username (`#field-username`).
+  await page.locator('#field-username, #field-email').first().fill(user.email)
   await page.fill('#field-password', user.password)
   await page.click('button[type="submit"]')
 

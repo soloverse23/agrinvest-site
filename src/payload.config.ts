@@ -90,6 +90,14 @@ export default buildConfig({
         Icon: '@/components/admin/panel/Brand#PanelIcon',
       },
       providers: ['@/components/admin/panel/PanelMode#PanelMode'],
+      // Login: the brand panel on the left, a heading over the form and a help line under it.
+      beforeLogin: [
+        '@/components/admin/panel/LoginParts#LoginAside',
+        '@/components/admin/panel/LoginParts#LoginIntro',
+      ],
+      afterLogin: ['@/components/admin/panel/LoginParts#LoginHelp'],
+      // The sidebar in work categories per department; Payload's own list is hidden (custom.scss).
+      beforeNavLinks: ['@/components/admin/panel/PanelNav#PanelNav'],
       views: {
         // One screen per department: the page finder and its own sections (Phase 9).
         dashboard: { Component: '@/components/admin/panel/PanelDashboard#PanelDashboard' },
@@ -165,7 +173,21 @@ export default buildConfig({
     // Plainer Romanian for the buttons staff press every day.
     translations: {
       ro: {
+        general: {
+          dashboard: 'Acasă',
+          locale: 'Limba',
+          locales: 'Limbi',
+          createNew: 'Adaugă',
+        },
         version: {
+          changed: 'Modificat, nepublicat',
+          currentDraft: 'Ciorna actuală',
+          draftHasPublishedVersion: 'Ciornă (are versiune publicată)',
+          draftSavedSuccessfully: 'Ciorna a fost salvată.',
+          previouslyDraft: 'Ciornă anterioară',
+          restoreAsDraft: 'Readu ca ciornă',
+          restoreThisVersion: 'Readu această versiune',
+          revertToPublished: 'Renunță la modificări',
           draft: 'Ciornă',
           saveDraft: 'Salvează ciorna',
           publish: 'Publică',

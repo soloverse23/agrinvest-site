@@ -7,7 +7,7 @@ import { localeOf } from '@/i18n/config'
 import { cropPath } from '@/i18n/routes'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
-import { adminOnly, hiddenUnlessAdmin } from '@/access/departments'
+import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
 
 /**
  * Crops. `isGrain` marks the ones Agrinvest buys: only those get grain pages, sitemap entries
@@ -17,11 +17,16 @@ export const Crops: CollectionConfig = {
   slug: 'crops',
   labels: { singular: { ro: 'Cultură', en: 'Crop' }, plural: { ro: 'Culturi', en: 'Crops' } },
   admin: {
-    hidden: hiddenUnlessAdmin,
+    hidden: hiddenUnlessOwner('crops'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', 'key', '_status'],
   },
-  access: { read: publishedOrStaff, create: adminOnly, update: adminOnly, delete: adminOnly },
+  access: {
+    read: publishedOrStaff,
+    create: creators('crops'),
+    update: editors('crops'),
+    delete: adminOnly,
+  },
   versions: { drafts: true, maxPerDoc: 20 },
   hooks: {
     afterChange: [

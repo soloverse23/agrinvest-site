@@ -1,4 +1,4 @@
-import type { Access, PayloadRequest } from 'payload'
+import type { Access, PayloadRequest, Where } from 'payload'
 
 import { staffRequest, type UserRole } from './index'
 
@@ -6,71 +6,120 @@ type Label = { ro: string; en: string }
 type Department = { label: Label; hint: Label; sections: readonly string[] }
 
 /**
- * The staff panel by department (Phase 9). Each department sees and edits only its own
- * sections: they open a page, change the text, save it and set its status. Creating new
- * documents and deleting stay with the admin, except new price rows. An admin sees everything.
- * The order of `sections` is the order of the cards on the panel's home screen.
+ * The staff panel by department, following Agrinvest's organisation chart (Phase 9). Each
+ * department sees and edits only its own sections, and in shared sections (pages, articles,
+ * requests) only its own documents (`rowRules`). They open a page, change the text, save it and
+ * set its status. Creating new documents and deleting stay with the admin, except new price
+ * rows and images. The admin (Administrator general) sees everything. The order of `sections`
+ * is the order of the cards on the panel's home screen.
  */
 export const departments = {
-  continut: {
-    label: { ro: 'Conținut', en: 'Content' },
+  cereale: {
+    label: { ro: 'Cereale', en: 'Grain' },
     hint: {
-      ro: 'Paginile site-ului, ghidurile și articolele, bazele și echipa.',
-      en: 'Site pages, guides and articles, bases and the team.',
+      ro: 'Prețurile de achiziție, cererile de vânzare și depozitare, paginile de cereale și bazele.',
+      en: 'Grain buy prices, selling and storage requests, the grain pages and the bases.',
     },
-    sections: ['pages', 'guides', 'bases', 'people', 'social-posts', 'media'],
+    sections: ['buy-prices', 'leads', 'pages', 'bases', 'crops', 'media'],
   },
-  magazin: {
-    label: { ro: 'Magazin', en: 'Shop' },
+  comercial: {
+    label: { ro: 'Comercial (magazin)', en: 'Commercial (shop)' },
     hint: {
-      ro: 'Produsele, categoriile, mărcile și comenzile magazinului.',
-      en: 'Shop products, categories, brands and orders.',
+      ro: 'Magazinul: produsele și prețurile lor, categoriile, mărcile, comenzile și cererile de inputuri.',
+      en: 'The shop: products and their prices, categories, brands, orders and input requests.',
     },
     sections: [
+      'orders',
+      'leads',
       'products',
       'categories',
       'brands',
       'active-ingredients',
       'documents',
-      'orders',
       'shop-home',
+      'pages',
       'media',
     ],
   },
   ifn: {
-    label: { ro: 'Finanțare (IFN)', en: 'Finance (IFN)' },
+    label: { ro: 'Financiar (IFN)', en: 'Finance (IFN)' },
     hint: {
-      ro: 'Cererile de credit, produsele de finanțare și întrebările.',
-      en: 'Credit applications, finance products and questions.',
+      ro: 'Cererile de credit, produsele de finanțare și dobânzile lor, ghidurile și întrebările.',
+      en: 'Credit applications, finance products and their rates, finance guides and questions.',
     },
-    sections: ['finance-applications', 'finance-products', 'finance-questions', 'media'],
+    sections: [
+      'finance-applications',
+      'leads',
+      'finance-products',
+      'finance-questions',
+      'guides',
+      'pages',
+      'media',
+    ],
   },
-  preturi: {
-    label: { ro: 'Prețuri', en: 'Prices' },
+  logistica: {
+    label: { ro: 'Logistică', en: 'Logistics' },
     hint: {
-      ro: 'Prețurile de achiziție pentru cereale și prețul motorinei.',
-      en: 'Grain buy prices and the diesel price.',
+      ro: 'Cererile de transport și paginile de logistică și livrare.',
+      en: 'Transport requests and the logistics and delivery pages.',
     },
-    sections: ['buy-prices', 'diesel-prices'],
+    sections: ['leads', 'pages', 'media'],
   },
-  vanzari: {
-    label: { ro: 'Vânzări', en: 'Sales' },
+  motorina: {
+    label: { ro: 'Motorină', en: 'Diesel' },
     hint: {
-      ro: 'Cererile primite de pe site și comenzile.',
-      en: 'Requests from the site and orders.',
+      ro: 'Prețul motorinei și cererile de motorină.',
+      en: 'The diesel price and diesel requests.',
     },
-    sections: ['leads', 'orders'],
+    sections: ['diesel-prices', 'leads', 'media'],
+  },
+  continut: {
+    label: { ro: 'Conținut', en: 'Content' },
+    hint: {
+      ro: 'Pagina principală și paginile despre companie, articolele și știrile, echipa și postările.',
+      en: 'The home page and company pages, articles and news, the team and social posts.',
+    },
+    sections: ['pages', 'guides', 'people', 'social-posts', 'media'],
   },
 } as const satisfies Record<string, Department>
 
 export type DepartmentRole = keyof typeof departments
 export const departmentRoles = Object.keys(departments) as DepartmentRole[]
 
+/**
+ * Shared sections, split by document: the field that says whose a document is, and the values
+ * each department owns. A document with no owner (e.g. the legal pages) is the admin's.
+ */
+type RowRule = { field: string; values: Partial<Record<DepartmentRole, readonly string[]>> }
+
+export const rowRules: Record<string, RowRule> = {
+  // Each page names its department in the sidebar (admin only).
+  pages: {
+    field: 'department',
+    values: Object.fromEntries(departmentRoles.map((r) => [r, [r]])),
+  },
+  guides: {
+    field: 'section',
+    values: { ifn: ['finantare', 'pagina-finantare'], continut: ['ghid', 'stiri', 'piata'] },
+  },
+  // Requests from the site by lead type; partnership and careers requests stay with the admin.
+  leads: {
+    field: 'type',
+    values: {
+      cereale: ['vanzare-cereale', 'depozitare'],
+      comercial: ['inputuri', 'general', 'quick'],
+      ifn: ['finantare'],
+      logistica: ['logistica'],
+      motorina: ['motorina'],
+    },
+  },
+}
+
 /** Sections where a department may also add new documents (a newer price replaces the old). */
 const creatable: Partial<Record<string, readonly DepartmentRole[]>> = {
-  'buy-prices': ['preturi'],
-  'diesel-prices': ['preturi'],
-  media: ['continut', 'magazin', 'ifn'],
+  'buy-prices': ['cereale'],
+  'diesel-prices': ['motorina'],
+  media: departmentRoles,
 }
 
 type WithUser = Pick<PayloadRequest, 'user'>
@@ -94,11 +143,31 @@ export const ownersOf = (slug: string): DepartmentRole[] =>
 export const sectionsFor = (req: WithUser): DepartmentRole[] =>
   adminRequest(req) ? departmentRoles : departmentRoles.filter((r) => rolesOf(req).includes(r))
 
-/** Admin, or a department that owns the section. */
+/**
+ * What of a section an account may change: everything (`true`), nothing (`false`), or only
+ * its own documents of a shared section (a query).
+ */
+export function rowsFor(req: WithUser, slug: string): boolean | Where {
+  if (adminRequest(req)) return true
+  const own = ownersOf(slug).filter((role) => rolesOf(req).includes(role))
+  if (!own.length) return false
+  const rule = rowRules[slug]
+  if (!rule) return true
+  const values = [...new Set(own.flatMap((role) => rule.values[role] ?? []))]
+  return values.length ? { [rule.field]: { in: values } } : false
+}
+
+/** One department's documents of a shared section, or `null` for a section it owns whole. */
+export function departmentRows(role: DepartmentRole, slug: string): Where | null {
+  const rule = rowRules[slug]
+  return rule ? { [rule.field]: { in: [...(rule.values[role] ?? [])] } } : null
+}
+
+/** Admin, or a department that owns the section (in a shared section, its own documents). */
 export const editors =
   (slug: string): Access =>
   ({ req }) =>
-    hasAny(req, ownersOf(slug))
+    rowsFor(req, slug)
 
 /** Admin, or a department allowed to add documents to the section. */
 export const creators =
@@ -107,6 +176,15 @@ export const creators =
     hasAny(req, creatable[slug] ?? [])
 
 export const adminOnly: Access = ({ req }) => adminRequest(req)
+
+/** `admin.baseListFilter`: a department's list of a shared section shows only its documents. */
+export const ownRowsOnly =
+  (slug: string) =>
+  ({ req }: { req: PayloadRequest }): Where | null => {
+    const rows = rowsFor(req, slug)
+    if (rows === false) return { id: { equals: -1 } }
+    return typeof rows === 'object' ? rows : null
+  }
 
 /** `admin.hidden`: the section shows only to its departments and the admin. */
 export const hiddenUnlessOwner =
@@ -128,6 +206,12 @@ export const sectionAccess = (slug: string, read?: Access) => ({
 
 /** Labels of roles for the users screen. */
 export const roleLabels: Record<UserRole, Label> = {
-  admin: { ro: 'Administrator (tot panoul)', en: 'Administrator (whole panel)' },
+  admin: { ro: 'Administrator general (tot panoul)', en: 'General administrator (whole panel)' },
   ...Object.fromEntries(departmentRoles.map((r) => [r, departments[r].label])),
 } as Record<UserRole, Label>
+
+/** The department options of a page's sidebar field. */
+export const departmentOptions = departmentRoles.map((value) => ({
+  value,
+  label: departments[value].label,
+}))

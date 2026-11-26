@@ -12,7 +12,15 @@ import { enrichmentLedger } from '@/fields/shop'
 import { localePath, locales, type Locale } from '@/i18n/config'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
-import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
+import {
+  adminOnly,
+  creators,
+  departmentOptions,
+  type DepartmentRole,
+  editors,
+  hiddenUnlessOwner,
+  ownRowsOnly,
+} from '@/access/departments'
 
 /** The request's content locale, or undefined for `all` (then Payload uses the default). */
 const localeOf = (req: PayloadRequest) =>
@@ -46,6 +54,35 @@ const buildPath: CollectionBeforeChangeHook = async ({ data, req, originalDoc })
     prefix = parent?.path && parent.path !== '/' ? parent.path : ''
   }
   data.path = `${prefix}/${own}`
+  return data
+}
+
+/**
+ * A new page gets the department of its Romanian path's first segment (organisation chart):
+ * grain and storage for Cereale, the shop's terms for Comercial, and so on. The legal pages
+ * stay the admin's; any other page is Conținut's. The admin can change it in the sidebar.
+ */
+const departmentBySegment: Record<string, DepartmentRole | null> = {
+  cereale: 'cereale',
+  depozitare: 'cereale',
+  'termeni-de-vanzare': 'comercial',
+  retur: 'comercial',
+  reclamatii: 'comercial',
+  finantare: 'ifn',
+  logistica: 'logistica',
+  livrare: 'logistica',
+  confidentialitate: null,
+  'cookie-uri': null,
+}
+
+export const defaultDepartment = (path: string): DepartmentRole | null => {
+  const first = path.split('/').filter(Boolean)[0] ?? ''
+  return first in departmentBySegment ? departmentBySegment[first] : 'continut'
+}
+
+const setDepartment: CollectionBeforeChangeHook = ({ data, operation, req }) => {
+  if (operation !== 'create' || data.department || typeof data.path !== 'string') return data
+  if ((localeOf(req) ?? 'ro') === 'ro') data.department = defaultDepartment(data.path)
   return data
 }
 
@@ -84,8 +121,10 @@ export const Pages: CollectionConfig = {
   labels: { singular: { ro: 'Pagină', en: 'Page' }, plural: { ro: 'Pagini', en: 'Pages' } },
   admin: {
     hidden: hiddenUnlessOwner('pages'),
+    // A department's list shows its own pages; the admin sees them all.
+    baseListFilter: ownRowsOnly('pages'),
     useAsTitle: 'title',
-    defaultColumns: ['title', 'path', 'languages', '_status', 'updatedAt'],
+    defaultColumns: ['title', 'path', 'department', '_status', 'updatedAt'],
     preview: (doc, { locale }) =>
       typeof doc?.path === 'string'
         ? `/next/preview?path=${encodeURIComponent(doc.path)}&locale=${locale}`
@@ -99,7 +138,7 @@ export const Pages: CollectionConfig = {
   },
   versions: { drafts: true, maxPerDoc: 50 },
   hooks: {
-    beforeChange: [buildPath],
+    beforeChange: [buildPath, setDepartment],
     afterChange: [updateChildren],
     afterDelete: [() => revalidate(tags.pages)],
   },
@@ -137,6 +176,21 @@ export const Pages: CollectionConfig = {
         readOnly: true,
         position: 'sidebar',
         description: 'Built from the parent and slug.',
+      },
+    },
+    {
+      name: 'department',
+      type: 'select',
+      label: { ro: 'Departament', en: 'Department' },
+      options: departmentOptions,
+      index: true,
+      access: { update: isAdminField },
+      admin: {
+        position: 'sidebar',
+        description: {
+          ro: 'Departamentul care editează pagina. Gol: doar administratorul.',
+          en: 'The department that edits this page. Empty: the admin only.',
+        },
       },
     },
     {

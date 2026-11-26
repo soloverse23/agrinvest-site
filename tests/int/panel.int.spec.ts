@@ -9,6 +9,7 @@ import {
   ownersOf,
   sectionsFor,
 } from '@/access/departments'
+import { defaultDepartment } from '@/collections/Pages'
 import { parseLink } from '@/lib/panel/find'
 import { editLinksFor } from '@/lib/panel/here'
 import { targetsFor } from '@/lib/panel/onPage'
@@ -19,7 +20,7 @@ const as = (roles: string[], id = 990001) =>
 
 describe('staff panel departments', () => {
   let payload: Payload
-  const created: { collection: 'pages' | 'users'; id: number }[] = []
+  const created: { collection: 'pages' | 'users' | 'leads'; id: number }[] = []
 
   beforeAll(async () => {
     payload = await getPayload({ config: await config })
@@ -35,19 +36,46 @@ describe('staff panel departments', () => {
         expect(
           payload.collections[slug as never] || payload.config.globals.find((g) => g.slug === slug),
         ).toBeTruthy()
-    expect(ownersOf('pages')).toEqual(['continut'])
-    expect(ownersOf('orders')).toEqual(['magazin', 'vanzari'])
+    expect(ownersOf('orders')).toEqual(['comercial'])
+    expect(ownersOf('buy-prices')).toEqual(['cereale'])
+    expect(ownersOf('diesel-prices')).toEqual(['motorina'])
+    expect(ownersOf('pages')).toEqual(['cereale', 'comercial', 'ifn', 'logistica', 'continut'])
   })
 
   it('shows a department only its own sections', () => {
-    const shop = { user: as(['magazin']) }
+    const shop = { user: as(['comercial']) }
     expect(hiddenUnlessOwner('products')(shop)).toBe(false)
-    expect(hiddenUnlessOwner('pages')(shop)).toBe(true)
+    expect(hiddenUnlessOwner('buy-prices')(shop)).toBe(true)
     expect(hiddenUnlessAdmin(shop)).toBe(true)
     expect(hiddenUnlessOwner('pages')({ user: as(['admin']) })).toBe(false)
     expect(hiddenUnlessOwner('pages')({ user: as([]) })).toBe(true)
-    expect(sectionsFor({ user: as(['preturi']) })).toEqual(['preturi'])
+    expect(hiddenUnlessOwner('pages')({ user: as(['motorina']) })).toBe(true)
+    expect(sectionsFor({ user: as(['motorina']) })).toEqual(['motorina'])
     expect(sectionsFor({ user: as(['admin']) })).toEqual(Object.keys(departments))
+  })
+
+  it('splits shared sections by document', () => {
+    const req = (roles: string[]) => ({ req: { user: as(roles) } }) as never
+    expect(editors('pages')(req(['admin']))).toBe(true)
+    expect(editors('pages')(req(['cereale']))).toEqual({ department: { in: ['cereale'] } })
+    expect(editors('guides')(req(['ifn']))).toEqual({
+      section: { in: ['finantare', 'pagina-finantare'] },
+    })
+    expect(editors('leads')(req(['logistica']))).toEqual({ type: { in: ['logistica'] } })
+    expect(editors('leads')(req(['cereale', 'motorina']))).toEqual({
+      type: { in: ['vanzare-cereale', 'depozitare', 'motorina'] },
+    })
+    expect(editors('products')(req(['comercial']))).toBe(true)
+    expect(editors('guides')(req(['comercial']))).toBe(false)
+  })
+
+  it('gives a new page the department of its path', () => {
+    expect(defaultDepartment('/')).toBe('continut')
+    expect(defaultDepartment('/depozitare/uscare')).toBe('cereale')
+    expect(defaultDepartment('/retur')).toBe('comercial')
+    expect(defaultDepartment('/livrare')).toBe('logistica')
+    expect(defaultDepartment('/finantare')).toBe('ifn')
+    expect(defaultDepartment('/cookie-uri')).toBeNull()
   })
 
   it('never trusts a role on an account of another collection', () => {
@@ -55,10 +83,10 @@ describe('staff panel departments', () => {
     expect(editors('pages')({ req: { user } } as never)).toBe(false)
   })
 
-  it('lets content edit a page but not delete it, and keeps the shop out', async () => {
+  it('lets a department edit its own page only, and never delete or create one', async () => {
     const page = await payload.create({
       collection: 'pages',
-      data: { title: 'ZZ panel page', slug: 'zz-panel-page' } as never,
+      data: { title: 'ZZ panel page', slug: 'zz-panel-page', department: 'logistica' } as never,
       draft: true,
     })
     created.push({ collection: 'pages', id: page.id })
@@ -66,19 +94,21 @@ describe('staff panel departments', () => {
     const updated = await payload.update({
       collection: 'pages',
       id: page.id,
-      data: { title: 'ZZ panel page edited' },
+      data: { title: 'ZZ panel page edited', department: 'cereale' } as never,
       draft: true,
       overrideAccess: false,
-      user: as(['continut']),
+      user: as(['logistica']),
     })
     expect(updated.title).toBe('ZZ panel page edited')
+    // Only the admin moves a page to another department.
+    expect((updated as { department?: string }).department).toBe('logistica')
 
     await expect(
       payload.delete({
         collection: 'pages',
         id: page.id,
         overrideAccess: false,
-        user: as(['continut']),
+        user: as(['logistica']),
       }),
     ).rejects.toThrow()
     await expect(
@@ -87,7 +117,7 @@ describe('staff panel departments', () => {
         id: page.id,
         data: { title: 'no' },
         overrideAccess: false,
-        user: as(['magazin']),
+        user: as(['continut']),
       }),
     ).rejects.toThrow()
     await expect(
@@ -100,23 +130,60 @@ describe('staff panel departments', () => {
     ).rejects.toThrow()
   })
 
-  it('keeps leads away from departments other than sales', async () => {
+  it('shows each department only its own requests', async () => {
+    const lead = await payload.create({
+      collection: 'leads',
+      data: {
+        type: 'motorina',
+        name: 'ZZ panel lead',
+        phone: '0700000000',
+        email: 'zz-panel-lead@example.com',
+        consent: true,
+      } as never,
+    })
+    created.push({ collection: 'leads', id: lead.id })
+    const ids = async (roles: string[]) =>
+      (
+        await payload.find({
+          collection: 'leads',
+          where: { id: { equals: lead.id } },
+          overrideAccess: false,
+          user: as(roles),
+        })
+      ).docs.map((d) => d.id)
+    expect(await ids(['motorina'])).toEqual([lead.id])
+    expect(await ids(['cereale'])).toEqual([])
+    expect(await ids(['admin'])).toEqual([lead.id])
     await expect(
       payload.find({ collection: 'leads', overrideAccess: false, user: as(['continut']) }),
     ).rejects.toThrow()
-    const { docs } = await payload.find({
-      collection: 'leads',
-      limit: 1,
-      overrideAccess: false,
-      user: as(['vanzari']),
+  })
+
+  it('keeps a department account to a username, with no email', async () => {
+    // Signing in itself is checked against a real database in the deploy rehearsal: the
+    // test environment cannot sign Payload's session token.
+    const user = await payload.create({
+      collection: 'users',
+      data: { username: 'zz-panel-user', password: 'zz-panel-pass-1', roles: ['cereale'] } as never,
     })
-    expect(Array.isArray(docs)).toBe(true)
+    created.push({ collection: 'users', id: user.id })
+    expect(user.email ?? null).toBeNull()
+    await expect(
+      payload.create({
+        collection: 'users',
+        data: { username: 'zz-panel-user', password: 'zz-panel-pass-2' } as never,
+      }),
+    ).rejects.toThrow()
   })
 
   it('lets an account read only itself, and only the admin hand out roles', async () => {
     const user = await payload.create({
       collection: 'users',
-      data: { email: 'zz-panel-self@example.com', password: 'zz-panel-pass-1', roles: ['preturi'] },
+      data: {
+        email: 'zz-panel-self@example.com',
+        password: 'zz-panel-pass-1',
+        roles: ['motorina'],
+      },
     })
     created.push({ collection: 'users', id: user.id })
     const self = { ...user, collection: 'users' } as never
@@ -129,7 +196,7 @@ describe('staff panel departments', () => {
       overrideAccess: false,
       user: self,
     })
-    expect(after.roles).toEqual(['preturi'])
+    expect(after.roles).toEqual(['motorina'])
   })
 
   it('offers "edit this page" only to the department that owns it', async () => {
@@ -141,16 +208,18 @@ describe('staff panel departments', () => {
     const req = (roles: string[]) =>
       ({ payload, user: as(roles), i18n: { language: 'ro' } }) as never
 
+    // A new page outside the chart's segments is Conținut's.
     const content = await editLinksFor(req(['continut']), '/zz-panel-here')
     expect(content).toEqual([
       { label: 'Editează pagina', href: `/admin/collections/pages/${page.id}` },
     ])
-    expect(await editLinksFor(req(['magazin']), '/zz-panel-here')).toEqual([])
-    expect(await editLinksFor(req(['magazin']), '/magazin')).toEqual([
+    expect(await editLinksFor(req(['cereale']), '/zz-panel-here')).toEqual([])
+    expect(await editLinksFor(req(['comercial']), '/magazin')).toEqual([
       { label: 'Editează pagina', href: '/admin/globals/shop-home' },
     ])
-    const prices = await editLinksFor(req(['preturi']), '/en/prices/wheat')
+    const prices = await editLinksFor(req(['cereale']), '/en/prices/wheat')
     expect(prices.map((l) => l.href)).toEqual(['/admin/collections/buy-prices'])
+    expect(await editLinksFor(req(['comercial']), '/en/prices/wheat')).toEqual([])
   })
 })
 

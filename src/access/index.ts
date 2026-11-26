@@ -18,7 +18,15 @@ export const publishedOrStaff: Access = ({ req }) =>
 
 export const anyone: Access = () => true
 
-export const userRoles = ['admin', 'continut', 'magazin', 'ifn', 'preturi', 'vanzari'] as const
+export const userRoles = [
+  'admin',
+  'cereale',
+  'comercial',
+  'ifn',
+  'logistica',
+  'motorina',
+  'continut',
+] as const
 export type UserRole = (typeof userRoles)[number]
 
 const hasRole = (req: Pick<PayloadRequest, 'user'>, role: UserRole): boolean => {

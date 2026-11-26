@@ -1,6 +1,7 @@
 import type { CollectionSlug, Endpoint, PayloadRequest, Where } from 'payload'
 
 import { staffRequest } from '@/access'
+import { rowsFor } from '@/access/departments'
 import {
   collectionsFor,
   configOf,
@@ -63,6 +64,10 @@ export async function findForPanel(req: PayloadRequest, query: string): Promise<
       if (title !== 'id') where = { [title]: { like: query.trim() } }
     }
     if (!where) continue
+    // Shared sections: only the department's own pages, articles and requests.
+    const own = rowsFor(req, slug)
+    if (own === false) continue
+    if (typeof own === 'object') where = { and: [where, own] }
     const locale = link?.locale ?? 'ro'
     const { docs } = await req.payload
       .find({

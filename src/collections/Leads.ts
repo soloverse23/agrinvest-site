@@ -5,11 +5,11 @@ import {
   type CollectionConfig,
 } from 'payload'
 
-import {} from '@/access'
+import { isAdminField } from '@/access'
 import { locales } from '@/i18n/config'
 import { routedPerson } from '@/lib/leads/routing'
 import { leadTypeOptions } from '@/lib/leads/types'
-import { adminOnly, editors, hiddenUnlessOwner } from '@/access/departments'
+import { adminOnly, editors, hiddenUnlessOwner, ownRowsOnly } from '@/access/departments'
 
 /** Assigns a new lead to the person set for its type in the Lead routing global. */
 const assign: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
@@ -54,6 +54,8 @@ export const Leads: CollectionConfig = {
   labels: { singular: { ro: 'Cerere', en: 'Lead' }, plural: { ro: 'Cereri', en: 'Leads' } },
   admin: {
     hidden: hiddenUnlessOwner('leads'),
+    // Each department reads only the request types it handles (`rowRules` in departments.ts).
+    baseListFilter: ownRowsOnly('leads'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'phone', 'email', 'assignedTo', 'status', 'createdAt'],
   },
@@ -68,7 +70,14 @@ export const Leads: CollectionConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'type', type: 'select', required: true, options: leadTypeOptions },
+        {
+          name: 'type',
+          type: 'select',
+          required: true,
+          options: leadTypeOptions,
+          // The type decides the department that handles the request, so only the admin changes it.
+          access: { update: isAdminField },
+        },
         {
           name: 'status',
           type: 'select',

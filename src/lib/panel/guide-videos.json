@@ -1,0 +1,168 @@
+{
+  "cereale": {
+    "title": "Cereale",
+    "chapters": [
+      {
+        "at": 4,
+        "label": "Secțiunile tale"
+      },
+      {
+        "at": 10,
+        "label": "Prețul zilei"
+      },
+      {
+        "at": 18,
+        "label": "Îl pui pe site"
+      },
+      {
+        "at": 27,
+        "label": "Un preț nou"
+      },
+      {
+        "at": 33,
+        "label": "Cererile fermierilor"
+      },
+      {
+        "at": 50,
+        "label": "Paginile de cereale"
+      }
+    ]
+  },
+  "comercial": {
+    "title": "Comercial (magazin)",
+    "chapters": [
+      {
+        "at": 5,
+        "label": "Secțiunile tale"
+      },
+      {
+        "at": 10,
+        "label": "Ajungi la produs"
+      },
+      {
+        "at": 20,
+        "label": "Schimbi textul"
+      },
+      {
+        "at": 24,
+        "label": "Salvezi și publici"
+      },
+      {
+        "at": 34,
+        "label": "O comandă"
+      },
+      {
+        "at": 43,
+        "label": "Notița și salvarea"
+      }
+    ]
+  },
+  "ifn": {
+    "title": "Financiar (IFN)",
+    "chapters": [
+      {
+        "at": 5,
+        "label": "Secțiunile tale"
+      },
+      {
+        "at": 9,
+        "label": "O cerere de credit"
+      },
+      {
+        "at": 19,
+        "label": "Notița și salvarea"
+      },
+      {
+        "at": 28,
+        "label": "Textul unui produs"
+      },
+      {
+        "at": 37,
+        "label": "Salvezi și publici"
+      }
+    ]
+  },
+  "logistica": {
+    "title": "Logistică",
+    "chapters": [
+      {
+        "at": 5,
+        "label": "Secțiunile tale"
+      },
+      {
+        "at": 8,
+        "label": "O cerere de transport"
+      },
+      {
+        "at": 17,
+        "label": "Notița și salvarea"
+      },
+      {
+        "at": 26,
+        "label": "Paginile de logistică"
+      },
+      {
+        "at": 35,
+        "label": "Salvezi și publici"
+      }
+    ]
+  },
+  "motorina": {
+    "title": "Motorină",
+    "chapters": [
+      {
+        "at": 5,
+        "label": "Secțiunile tale"
+      },
+      {
+        "at": 8,
+        "label": "Prețul motorinei"
+      },
+      {
+        "at": 16,
+        "label": "Îl pui pe site"
+      },
+      {
+        "at": 25,
+        "label": "Un preț nou"
+      },
+      {
+        "at": 31,
+        "label": "Cererile de motorină"
+      }
+    ]
+  },
+  "continut": {
+    "title": "Conținut",
+    "chapters": [
+      {
+        "at": 5,
+        "label": "Secțiunile tale"
+      },
+      {
+        "at": 9,
+        "label": "Ajungi la articol"
+      },
+      {
+        "at": 20,
+        "label": "Schimbi textul"
+      },
+      {
+        "at": 24,
+        "label": "Salvezi ciorna"
+      },
+      {
+        "at": 30,
+        "label": "Publici pe site"
+      },
+      {
+        "at": 35,
+        "label": "Versiunea în engleză"
+      },
+      {
+        "at": 44,
+        "label": "Mai rapid: linkul de pe site"
+      }
+    ]
+  }
+}

@@ -206,22 +206,34 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
+  forgotPassword:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
+  login:
+    | {
+        email: string;
+        password: string;
+      }
+    | {
+        password: string;
+        username: string;
+      };
   registerFirstUser: {
-    email: string;
     password: string;
+    username?: string;
+    email?: string;
   };
-  unlock: {
-    email: string;
-    password: string;
-  };
+  unlock:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -280,6 +292,10 @@ export interface Page {
    * Built from the parent and slug.
    */
   path?: string | null;
+  /**
+   * The department that edits this page. Empty: the admin only.
+   */
+  department?: ('cereale' | 'comercial' | 'ifn' | 'logistica' | 'motorina' | 'continut') | null;
   isHome?: boolean | null;
   parent?: (number | null) | Page;
   /**
@@ -2455,12 +2471,13 @@ export interface User {
   id: number;
   name?: string | null;
   /**
-   * Each department sees only its own sections. The admin sees everything; credit applications only Finance (IFN).
+   * Each department sees only its own sections and pages. The general admin sees everything; credit applications only Finance (IFN).
    */
-  roles?: ('admin' | 'continut' | 'magazin' | 'ifn' | 'preturi' | 'vanzari')[] | null;
+  roles?: ('admin' | 'cereale' | 'comercial' | 'ifn' | 'logistica' | 'motorina' | 'continut')[] | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
+  email?: string | null;
+  username?: string | null;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
   salt?: string | null;
@@ -2841,6 +2858,7 @@ export interface PagesSelect<T extends boolean = true> {
   generateSlug?: T;
   slug?: T;
   path?: T;
+  department?: T;
   isHome?: T;
   parent?: T;
   languages?: T;
@@ -4269,6 +4287,7 @@ export interface UsersSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   email?: T;
+  username?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
   salt?: T;

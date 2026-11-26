@@ -2,7 +2,13 @@ import type { AdminViewServerProps, CollectionSlug } from 'payload'
 import { Gutter } from '@payloadcms/ui'
 import React from 'react'
 
-import { adminRequest, departments, rolesOf, sectionsFor } from '@/access/departments'
+import {
+  adminRequest,
+  departmentRows,
+  departments,
+  rolesOf,
+  sectionsFor,
+} from '@/access/departments'
 import {
   configOf,
   editHref,
@@ -14,7 +20,11 @@ import {
   type PanelLang,
 } from '@/lib/panel/sections'
 
+import { sectionIcon } from '@/lib/panel/nav'
+
 import { PageFinder } from './PageFinder'
+import { PanelGuide } from './PanelGuide'
+import { SectionIcon } from './PanelIcons'
 
 const text = {
   hello: { ro: 'Bună', en: 'Hello' },
@@ -43,6 +53,7 @@ const text = {
     en: 'Your account has no department yet. Ask the administrator to choose one.',
   },
   settings: { ro: 'Setări pagină', en: 'Page settings' },
+  guide: { ro: 'Vezi ghidul video (1 minut)', en: 'Watch the video guide (1 minute)' },
 } as const
 
 type Row = { title: string; href: string; status: ReturnType<typeof statusOf> }
@@ -66,7 +77,9 @@ export async function PanelDashboard(props: AdminViewServerProps) {
     roles.map(async (role) => {
       const sections: Section[] = []
       for (const slug of departments[role].sections) {
-        if (adminRequest(req) && shown.has(slug)) continue
+        // Shared sections (pages, articles, requests) show each department's own documents.
+        const own = departmentRows(role, slug)
+        if (adminRequest(req) && !own && shown.has(slug)) continue
         shown.add(slug)
         const global = payload.config.globals.find((g) => g.slug === slug)
         if (global) {
@@ -83,6 +96,7 @@ export async function PanelDashboard(props: AdminViewServerProps) {
           .find({
             collection: slug as CollectionSlug,
             sort: '-updatedAt',
+            ...(own ? { where: own } : {}),
             limit: config.upload ? 0 : 4,
             depth: 0,
             draft: true,
@@ -113,16 +127,31 @@ export async function PanelDashboard(props: AdminViewServerProps) {
 
   return (
     <Gutter className="panel">
-      <header className="panel__head">
-        <h1 className="panel__title">
-          {text.hello[lang]}
-          {name ? `, ${name}` : ''}
-        </h1>
-        <p className="panel__intro">{text.intro[lang]}</p>
-        {rolesOf(req).length > 0 && (
-          <p className="panel__roles">
-            {roles.map((r) => pick(departments[r].label, lang)).join(' · ')}
-          </p>
+      <header className="panel-hero">
+        <div className="panel-hero__text">
+          {rolesOf(req).length > 0 && (
+            <p className="panel-hero__roles">
+              {roles.map((r) => pick(departments[r].label, lang)).join(' · ')}
+            </p>
+          )}
+          <h1 className="panel-hero__title">
+            {text.hello[lang]}
+            {name ? `, ${name}` : ''}
+          </h1>
+          <p className="panel-hero__intro">{text.intro[lang]}</p>
+        </div>
+        {roles.length > 0 && (
+          <div className="panel-hero__find">
+            <PageFinder lang={lang} />
+            <ol className="panel__steps">
+              {text.steps[lang].map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <a className="panel-hero__guide" href="#ghid">
+              ▶ {text.guide[lang]}
+            </a>
+          </div>
         )}
       </header>
 
@@ -130,15 +159,7 @@ export async function PanelDashboard(props: AdminViewServerProps) {
         <p className="panel__notice">{text.noRole[lang]}</p>
       ) : (
         <>
-          <section className="panel__find">
-            <PageFinder lang={lang} />
-            <ol className="panel__steps">
-              {text.steps[lang].map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-          </section>
-
+          <PanelGuide lang={lang} roles={roles} />
           {blocks.map(({ role, sections }) =>
             sections.length === 0 ? null : (
               <section key={role} className="panel__dept">
@@ -164,6 +185,9 @@ function SectionCard({ section, lang }: { section: Section; lang: PanelLang }) {
   return (
     <article className="panel-card">
       <a className="panel-card__head" href={section.href}>
+        <span className="panel-card__chip">
+          <SectionIcon name={sectionIcon[section.slug]} />
+        </span>
         <span className="panel-card__name">{section.label}</span>
         {section.count !== undefined ? (
           <span className="panel-card__count">{section.count}</span>

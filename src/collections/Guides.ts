@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { isStaffField, publishedOrStaff } from '@/access'
+import { isAdminField, isStaffField, publishedOrStaff } from '@/access'
 import { ToolWidgetBlock } from '@/blocks'
 import { faq, seo, slug } from '@/fields'
 import { fileKey, review, sources } from '@/fields/finance'
@@ -11,7 +11,7 @@ import { pillarByKey, pillarOptions } from '@/lib/articles/pillars'
 import { revalidate, tags } from '@/lib/revalidate'
 import { pingIndexNow } from '@/lib/seo/indexnow'
 import { slugify } from '@/lib/slugify'
-import { adminOnly, creators, editors, hiddenUnlessOwner } from '@/access/departments'
+import { adminOnly, creators, editors, hiddenUnlessOwner, ownRowsOnly } from '@/access/departments'
 
 const label = (ro: string, en: string) => ({ ro, en })
 
@@ -41,6 +41,8 @@ export const Guides: CollectionConfig = {
   slug: 'guides',
   admin: {
     hidden: hiddenUnlessOwner('guides'),
+    // Finance texts for Financiar (IFN), articles, news and market notes for Conținut.
+    baseListFilter: ownRowsOnly('guides'),
     group: label('Conținut', 'Content'),
     useAsTitle: 'title',
     defaultColumns: ['title', 'section', 'pillar', 'brief.status', '_status', 'updatedAt'],
@@ -100,6 +102,8 @@ export const Guides: CollectionConfig = {
         { value: 'piata', label: label('Nota de piață', 'Market note') },
         { value: 'ghid', label: label('Ghid pentru fermieri', 'Farmer guide') },
       ],
+      // The section decides the department that edits the text (departments.ts), so only the admin moves it.
+      access: { update: isAdminField },
       admin: { position: 'sidebar' },
     },
     {
